@@ -9,11 +9,6 @@ const config: UserConfig = {
   plugins: [
     react(),
     ssr({
-      /*
-      prerender: {
-        noExtraDir: true
-      },
-      */
       extensions: [
         {
           npmPackageName: 'restack',

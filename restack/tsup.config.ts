@@ -5,7 +5,7 @@ export default defineConfig({
     './renderer/_default.page.client.tsx',
     './renderer/_default.page.server.tsx',
     './renderer/index.ts',
-    './cli/bin.ts'
+    './cli/index.ts'
   ],
   format: 'esm',
   clean: true

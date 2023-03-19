@@ -1,11 +1,12 @@
 {
   "name": "restack",
   "version": "0.0.1",
-  "types": "./dist/renderer/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/renderer/index.js",
+    ".": "./dist/index.js",
     "./renderer/_default.page.client.js": "./dist/renderer/_default.page.client.js",
-    "./renderer/_default.page.server.js": "./dist/renderer/_default.page.server.js"
+    "./renderer/_default.page.server.js": "./dist/renderer/_default.page.server.js",
+    "./usePageContext": "./dist/components/usePageContext.js"
   },
   "scripts": {
     "dev": "tsup --watch",

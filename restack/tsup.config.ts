@@ -4,13 +4,12 @@ export default defineConfig({
   entry: [
     './renderer/_default.page.client.tsx',
     './renderer/_default.page.server.tsx',
-    './renderer/index.ts',
-    './cli/index.ts'
+    './components/usePageContext.tsx',
+    './cli/index.ts',
+    './index.ts'
   ],
   format: 'esm',
-  clean: true
-  /*
-  sourcemap: true,
+  clean: true,
+  // sourcemap: true,
   dts: true
-  */
 })

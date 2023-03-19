@@ -1,6 +1,6 @@
 export { Link }
 
-import { usePageContext } from 'restack'
+import { usePageContext } from 'restack/usePageContext'
 import React from 'react'
 
 function Link({ href, children }: { href: string; children: string }) {

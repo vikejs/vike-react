@@ -5,7 +5,7 @@ import React, { useContext } from 'react'
 import { PageContext } from './types'
 import { getGlobalObject } from './utils/getGlobalObject'
 
-const { Context } = getGlobalObject('usePageContext.ts', {
+const { Context } = getGlobalObject('PageContextProvider.ts', {
   Context: React.createContext<PageContext>(undefined as never)
 })
 

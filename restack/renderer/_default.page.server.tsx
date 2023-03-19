@@ -6,7 +6,7 @@ import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr'
 import { getTitle } from './getTitle'
 import { getPageElement } from './getPageElement'
 import type { PageContextServer } from './types'
-import { PageContextProvider } from './usePageContext'
+import { PageContextProvider } from './PageContextProvider'
 import React from 'react'
 
 const passToClient = ['pageProps', 'title']

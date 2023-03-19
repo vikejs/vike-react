@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "dev": "cd restack/ && pnpm run dev",
+    "build": "cd restack/ && pnpm run build",
+    "release": "cd restack/ && pnpm run release",
+    "========= Clean": "",
+    "clean": "git clean -Xdf",
+    "reset": "pnpm run clean && pnpm install && pnpm run build",
+    "========= Only allow pnpm; forbid yarn & npm": "",
+    "preinstall": "npx only-allow pnpm"
+  },
+  "pnpm": {
+    "overrides": {
+      "restack": "link:./restack/"
+    }
+  },
+  "packageManager": "pnpm@7.9.5"
+}

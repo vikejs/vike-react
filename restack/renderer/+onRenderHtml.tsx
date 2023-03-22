@@ -1,5 +1,4 @@
-export { render }
-export { passToClient }
+export default onRenderHtml
 
 import { renderToString } from 'react-dom/server'
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr'
@@ -9,9 +8,7 @@ import type { PageContextServer } from './types'
 import { PageContextProvider } from './PageContextProvider'
 import React from 'react'
 
-const passToClient = ['pageProps', 'title']
-
-async function render(pageContext: PageContextServer) {
+async function onRenderHtml(pageContext: PageContextServer) {
   const page = getPageElement(pageContext)
   const pageHtml = renderToString(page)
 

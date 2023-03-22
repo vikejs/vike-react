@@ -1,24 +1,9 @@
-import React from 'react'
+export default onBeforeRender
+
 import fetch from 'cross-fetch'
-import { filterMovieData } from './filterMovieData'
+import { filterMovieData } from '../filterMovieData'
 import type { PageContextBuiltIn } from 'restack'
-import type { MovieDetails } from './types'
-
-export { Page }
-export { onBeforeRender }
-
-function Page({ movie }: { movie: MovieDetails }) {
-  return (
-    <>
-      <h1>{movie.title}</h1>
-      Release Date: {movie.release_date}
-      <br />
-      Director: {movie.director}
-      <br />
-      Producer: {movie.producer}
-    </>
-  )
-}
+import type { MovieDetails } from '../types'
 
 async function onBeforeRender(pageContext: PageContextBuiltIn) {
   const response = await fetch(`https://star-wars.brillout.com/api/films/${pageContext.routeParams.id}.json`)

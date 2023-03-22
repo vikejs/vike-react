@@ -1,7 +1,8 @@
-export { Head }
+// Default <head> (can be overriden by pages)
+export default Head
 
 import React from 'react'
-import logoUrl from './logo.svg'
+import logoUrl from '../assets/logo.svg'
 
 const description = 'Playing with Restack'
 

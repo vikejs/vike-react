@@ -2,8 +2,12 @@ import { defineConfig } from 'tsup'
 
 export default defineConfig({
   entry: [
-    './renderer/_default.page.client.tsx',
-    './renderer/_default.page.server.tsx',
+    './renderer/+onRenderHtml.tsx',
+    './renderer/+onRenderClient.tsx',
+    './renderer/+config.ts',
+    './renderer/+passToClient.ts',
+    './renderer/+onPageTransitionStart.ts',
+    './renderer/+onPageTransitionEnd.ts',
     './components/usePageContext.tsx',
     './cli/index.ts',
     './index.ts'

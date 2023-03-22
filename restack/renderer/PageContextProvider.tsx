@@ -14,6 +14,7 @@ function PageContextProvider({ pageContext, children }: { pageContext: PageConte
   return <Context.Provider value={pageContext}>{children}</Context.Provider>
 }
 
+/** Access the pageContext from any React component */
 function usePageContext() {
   const pageContext = useContext(Context)
   if (!pageContext) throw new Error('<PageContextProvider> is needed for being able to use usePageContext()')

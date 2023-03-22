@@ -1,9 +1,10 @@
+export default onBeforeRender
+
 import fetch from 'node-fetch'
-import { filterMovieData } from '../filterMovieData'
+//import { filterMovieData } from '../filterMovieData'
 import type { Movie, MovieDetails } from '../types'
 
-export { onBeforeRender }
-export { prerender }
+// export { prerender }
 
 async function onBeforeRender() {
   const movies = await getStarWarsMovies()
@@ -37,6 +38,7 @@ function filterMoviesData(movies: MovieDetails[]): Movie[] {
   })
 }
 
+/*
 async function prerender() {
   const movies = await getStarWarsMovies()
 
@@ -71,6 +73,7 @@ async function prerender() {
     })
   ]
 }
+*/
 
 function getTitle(movies: Movie[] | MovieDetails[]): string {
   const title = `${movies.length} Star Wars Movies`

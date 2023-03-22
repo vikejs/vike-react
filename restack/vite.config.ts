@@ -12,7 +12,14 @@ const config: UserConfig = {
       extensions: [
         {
           npmPackageName: 'restack',
-          pageFilesDist: ['restack/renderer/_default.page.server.js', 'restack/renderer/_default.page.client.js']
+          pageConfigsDistFiles: [
+            'restack/renderer/+onRenderHtml.js',
+            'restack/renderer/+onRenderClient.js',
+            'restack/renderer/+config.js',
+            'restack/renderer/+passToClient.js',
+            'restack/renderer/+onPageTransitionStart.js',
+            'restack/renderer/+onPageTransitionEnd.js'
+          ]
         }
       ],
       disableAutoFullBuild: true

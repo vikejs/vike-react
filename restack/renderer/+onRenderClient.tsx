@@ -1,8 +1,4 @@
-export { render }
-export { onPageTransitionStart }
-export { onPageTransitionEnd }
-export const clientRouting = true
-export const hydrationCanBeAborted = true
+export default onRenderClient
 
 import ReactDOM from 'react-dom/client'
 import { getTitle } from './getTitle'
@@ -10,7 +6,7 @@ import type { PageContextClient } from './types'
 import { getPageElement } from './getPageElement'
 
 let root: ReactDOM.Root
-async function render(pageContext: PageContextClient) {
+async function onRenderClient(pageContext: PageContextClient) {
   const page = getPageElement(pageContext)
 
   const container = document.getElementById('page-view')!
@@ -26,11 +22,4 @@ async function render(pageContext: PageContextClient) {
   if (title !== null) {
     document.title = title
   }
-}
-
-function onPageTransitionStart() {
-  document.querySelector('body')!.classList.add('page-is-transitioning')
-}
-function onPageTransitionEnd() {
-  document.querySelector('body')!.classList.remove('page-is-transitioning')
 }

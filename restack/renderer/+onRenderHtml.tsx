@@ -1,7 +1,7 @@
 export default onRenderHtml
 
 import { renderToString } from 'react-dom/server'
-import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr'
+import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server'
 import { getTitle } from './getTitle'
 import { getPageElement } from './getPageElement'
 import type { PageContextServer } from './types'

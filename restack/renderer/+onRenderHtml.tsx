@@ -13,7 +13,10 @@ async function onRenderHtml(pageContext: PageContextServer) {
   const pageHtml = renderToString(page)
 
   const title = getTitle(pageContext)
-  const titleTag = title === null ? '' : escapeInject`<title>${title}</title>`
+  const titleTag = !title ? '' : escapeInject`<title>${title}</title>`
+
+  const { description } = pageContext.exports
+  const descriptionTag = !description ? '' : escapeInject`<meta name="description" content="${description}" />`
 
   const Head = pageContext.exports.Head || (() => <></>)
   const head = (
@@ -25,10 +28,14 @@ async function onRenderHtml(pageContext: PageContextServer) {
   )
   const headHtml = renderToString(head)
 
+  const lang = pageContext.exports.lang || 'en'
+
   const documentHtml = escapeInject`<!DOCTYPE html>
-    <html>
+    <html lang='${lang}'>
       <head>
+        <meta charset="UTF-8" />
         ${titleTag}
+        ${descriptionTag}
         ${dangerouslySkipEscape(headHtml)}
       </head>
       <body>

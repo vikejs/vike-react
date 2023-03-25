@@ -3,13 +3,20 @@ export type { PageContextClient }
 export type { PageContext }
 export type { PageProps }
 export type { Page }
+export type { Component }
 
-import type { PageContextBuiltIn } from 'vite-plugin-ssr'
-import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client/router'
+import type {
+  PageContextBuiltIn,
+  PageContextBuiltInClientWithClientRouting as PageContextBuiltInClient
+} from 'vite-plugin-ssr'
+import type { RestackConfig } from './+config'
+import type { ReactElement } from 'react'
 
-type Page = (pageProps: PageProps) => React.ReactElement
+type Component = (props: Record<string, unknown>) => ReactElement
+
+type Page = (pageProps: PageProps) => ReactElement
 type PageProps = Record<string, unknown>
-type WrapperComponent = ({ children }: { children: any }) => React.ReactElement
+type WrapperComponent = ({ children }: { children: any }) => ReactElement
 
 export type PageContextCommon = {
   Page: Page
@@ -22,9 +29,7 @@ export type PageContextCommon = {
 
 type PageContextServer = PageContextBuiltIn<Page> &
   PageContextCommon & {
-    exports: {
-      Head?: () => React.ReactElement
-    }
+    exports: Partial<RestackConfig>
   }
 type PageContextClient = PageContextBuiltInClient<Page> & PageContextCommon
 type PageContext = PageContextClient | PageContextServer

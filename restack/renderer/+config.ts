@@ -11,8 +11,6 @@ export type RestackConfig = {
   title: string
   /** &lt;meta name="description" content="${description}" /> */
   description: string
-  /** &lt;link rel="icon" href="${favicon}" /> */
-  favicon: string
   /** &lt;html lang="${lang}">
    *
    *  @default 'en'
@@ -35,9 +33,6 @@ export default {
       env: 'server-and-client'
     },
     description: {
-      env: 'server-only'
-    },
-    favicon: {
       env: 'server-only'
     },
     lang: {

@@ -18,9 +18,6 @@ async function onRenderHtml(pageContext: PageContextServer) {
   const { description } = pageContext.exports
   const descriptionTag = !description ? '' : escapeInject`<meta name="description" content="${description}" />`
 
-  const { favicon } = pageContext.exports
-  const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
-
   const Head = pageContext.exports.Head || (() => <></>)
   const head = (
     <React.StrictMode>
@@ -37,7 +34,6 @@ async function onRenderHtml(pageContext: PageContextServer) {
     <html lang='${lang}'>
       <head>
         <meta charset="UTF-8" />
-        ${faviconTag}
         ${titleTag}
         ${descriptionTag}
         ${dangerouslySkipEscape(headHtml)}

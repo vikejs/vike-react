@@ -1,6 +1,6 @@
 Restack is a demo showcasing a React framework built using [vite-plugin-ssr](https://vite-plugin-ssr.com/).
 
-It uses VPS's [V1 design](https://github.com/brillout/vite-plugin-ssr/issues/578) which is work-in-progress.
+It uses VPS's [V1 design](https://vite-plugin-ssr.com/v1-design).
 
 To run the example:
 

@@ -12,7 +12,8 @@ import type {
 import type { RestackConfig } from './+config'
 import type { ReactElement } from 'react'
 
-type Component = (props: Record<string, unknown>) => ReactElement
+// type Component = (props: Record<string, unknown>) => ReactElement
+type Component = (props: any) => ReactElement
 
 type Page = (pageProps: PageProps) => ReactElement
 type PageProps = Record<string, unknown>
@@ -21,7 +22,7 @@ type WrapperComponent = ({ children }: { children: any }) => ReactElement
 export type PageContextCommon = {
   Page: Page
   pageProps?: PageProps
-  exports: {
+  config: {
     Layout?: WrapperComponent
     Wrapper?: WrapperComponent
   }
@@ -29,7 +30,7 @@ export type PageContextCommon = {
 
 type PageContextServer = PageContextBuiltIn<Page> &
   PageContextCommon & {
-    exports: Partial<RestackConfig>
+    config: Partial<RestackConfig>
   }
 type PageContextClient = PageContextBuiltInClient<Page> & PageContextCommon
 type PageContext = PageContextClient | PageContextServer

@@ -5,8 +5,8 @@ import React from 'react'
 import { PageContextProvider } from './PageContextProvider'
 
 function getPageElement(pageContext: PageContext): JSX.Element {
-  const Layout = pageContext.exports.Layout ?? PassThrough
-  const Wrapper = pageContext.exports.Wrapper ?? PassThrough
+  const Layout = pageContext.config.Layout ?? PassThrough
+  const Wrapper = pageContext.config.Wrapper ?? PassThrough
   const { Page, pageProps } = pageContext
   const page = (
     <React.StrictMode>

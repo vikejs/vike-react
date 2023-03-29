@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "^3.0.0",
-    "vite": "^4.0.3",
-    "vite-plugin-ssr": "^0.4.102"
+    "vite": "^4.2.0",
+    "vite-plugin-ssr": "^0.4.107"
   },
   "scripts": {
     "dev": "tsup --watch",

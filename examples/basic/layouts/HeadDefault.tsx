@@ -1,9 +1,8 @@
-// Default <head> (can be overriden by pages)
-export default Head
+export default HeadDefault
 
 import React from 'react'
 
-function Head() {
+function HeadDefault() {
   return (
     <>
       <meta name="viewport" content="width=device-width, initial-scale=1" />

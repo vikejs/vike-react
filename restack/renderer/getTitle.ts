@@ -1,34 +1,38 @@
 export { getTitle }
 
+import type { ConfigEntries } from 'vite-plugin-ssr'
 import { isCallable } from './utils/isCallable'
 
 function getTitle(pageContext: {
   title?: unknown
   config: Record<string, unknown>
-  configList: Record<string, undefined | { configOrigin: string }[]>
+  configEntries: ConfigEntries
 }): null | string {
-  if (typeof pageContext.title === 'string') {
-    return pageContext.title
-  }
   if (pageContext.title) {
-    throw new Error('pageContext.title should be a string')
-  }
-  const { title } = pageContext.config
-  if (typeof title === 'string') {
-    return title
-  }
-  if (!title) {
-    return null
-  }
-  const { configOrigin } = pageContext.configList.title![0]!
-  if (isCallable(title)) {
-    const val = title(pageContext)
-    if (typeof val === 'string') {
+    if (typeof pageContext.title !== 'string') {
+      throw new Error('pageContext.title should be a string')
+    }
+    return pageContext.title
+  } else {
+    const titleConfig = pageContext.configEntries.title?.[0]
+    if (!titleConfig) {
+      return null
+    }
+    const title = titleConfig.configValue
+    if (typeof title === 'string') {
+      return title
+    }
+    if (!title) {
+      return null
+    }
+    const { configDefinedAt } = titleConfig
+    if (isCallable(title)) {
+      const val = title(pageContext)
+      if (typeof val !== 'string') {
+        throw new Error(configDefinedAt + ' should return a string')
+      }
       return val
     }
-    if (val) {
-      throw new Error(configOrigin + ' `export { title }` should return a string')
-    }
+    throw new Error(configDefinedAt + ' should be a string or a function returning a string')
   }
-  throw new Error(configOrigin + ' `export { title }` should be a string or a function returning a string')
 }

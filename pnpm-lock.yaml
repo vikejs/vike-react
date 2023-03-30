@@ -40,11 +40,11 @@ importers:
       tsup: ^6.7.0
       typescript: ^5.0.2
       vite: ^4.2.0
-      vite-plugin-ssr: ^0.4.107
+      vite-plugin-ssr: 0.4.108-draft.39859
     dependencies:
       '@vitejs/plugin-react': 3.1.0_vite@4.2.1
       vite: 4.2.1_@types+node@18.15.3
-      vite-plugin-ssr: 0.4.107_vite@4.2.1
+      vite-plugin-ssr: 0.4.108-draft.39859_vite@4.2.1
     devDependencies:
       '@brillout/release-me': 0.1.3
       '@types/node': 18.15.3
@@ -2317,8 +2317,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite-plugin-ssr/0.4.107_vite@4.2.1:
-    resolution: {integrity: sha512-0COIb2FaJhDP+a8zFsC7e2uFZfZ17utlGEtMu6jNAcxNhQZpuwfUVPMUDwZuow6YvmSDoSadSQGajK5F1l66fg==}
+  /vite-plugin-ssr/0.4.108-draft.39859_vite@4.2.1:
+    resolution: {integrity: sha512-1U0q3Gaw+65DoQ7wt5xtuBj+sKBZMB/9qZlxQ3aGvutWQbVsuX3/9HahnoqakfRmNXhSCgl00spe+gNzzQ2Opg==}
     engines: {node: '>=12.19.0'}
     hasBin: true
     peerDependencies:

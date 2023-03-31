@@ -8,7 +8,7 @@ export type { Component }
 import type {
   PageContextBuiltIn,
   PageContextBuiltInClientWithClientRouting as PageContextBuiltInClient
-} from 'vite-plugin-ssr'
+} from 'vite-plugin-ssr/types'
 import type { RestackConfig } from './+config'
 import type { ReactElement } from 'react'
 

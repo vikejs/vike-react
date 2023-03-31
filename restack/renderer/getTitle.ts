@@ -1,6 +1,6 @@
 export { getTitle }
 
-import type { ConfigEntries } from 'vite-plugin-ssr'
+import type { ConfigEntries } from 'vite-plugin-ssr/types'
 import { isCallable } from './utils/isCallable'
 
 function getTitle(pageContext: {

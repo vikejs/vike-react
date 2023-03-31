@@ -1,4 +1,4 @@
-import type { Config } from 'vite-plugin-ssr'
+import type { Config } from 'vite-plugin-ssr/types'
 import type { Component } from './types'
 
 export type UserConfig = Partial<RestackConfig & { Page: Component } & Pick<Config, 'route' | 'prerender' | 'isErrorPage' | 'iKnowThePerformanceRisksOfAsyncRouteFunctions'>>

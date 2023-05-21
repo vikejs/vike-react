@@ -45,7 +45,7 @@ async function prerender() {
   return [
     {
       url: '/star-wars',
-      // We already provide `pageContext` here so that Restack
+      // We already provide `pageContext` here so that Vike
       // will *not* have to call the `onBeforeRender()` hook defined
       // above in this file.
       pageContext: {
@@ -60,7 +60,7 @@ async function prerender() {
       return {
         url,
         // Note that we can also provide the `pageContext` of other pages.
-        // This means that Restack will not call any
+        // This means that Vike will not call any
         // `onBeforeRender()` hook and the Star Wars API will be called
         // only once (in this `prerender()` hook).
         pageContext: {

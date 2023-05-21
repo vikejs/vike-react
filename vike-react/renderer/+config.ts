@@ -1,14 +1,18 @@
 import type { Config } from 'vite-plugin-ssr/types'
 import type { Component } from './types'
+//*
+// @ts-ignore
+import onRenderHtml from 'vike-react/renderer/onRenderHtml'
+// @ts-ignore
+import onRenderClient from 'vike-react/renderer/onRenderClient'
+/*/
+import onRenderHtml from './onRenderHtml'
+import onRenderClient from './onRenderClient'
+//*/
 
-export type UserConfig = Partial<
-  RestackConfig & { Page: Component } & Pick<
-      Config,
-      'route' | 'prerender' | 'iKnowThePerformanceRisksOfAsyncRouteFunctions'
-    >
->
+export type ConfigEnhanced = Config & Partial<VikeReactConfig & { Page: Component }>
 
-export type RestackConfig = {
+export type VikeReactConfig = {
   /** React element renderer and appended into &lt;head>&lt;/head> */
   Head: Component
   Layout: Component
@@ -27,6 +31,9 @@ export type RestackConfig = {
 }
 
 export default {
+  onRenderHtml,
+  onRenderClient,
+  passToClient: ['pageProps', 'title'],
   clientRouting: true,
   hydrationCanBeAborted: true,
   meta: {

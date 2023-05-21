@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "dev": "cd restack/ && pnpm run dev",
-    "build": "cd restack/ && pnpm run build",
-    "release": "cd restack/ && pnpm run release",
+    "dev": "cd vike-react/ && pnpm run dev",
+    "build": "cd vike-react/ && pnpm run build",
+    "release": "cd vike-react/ && pnpm run release",
     "========= Clean": "",
     "clean": "git clean -Xdf",
     "reset": "pnpm run clean && pnpm install && pnpm run build",
@@ -11,8 +11,7 @@
   },
   "pnpm": {
     "overrides": {
-      "restack": "link:./restack/"
+      "vike-react": "link:./vike-react/"
     }
-  },
-  "packageManager": "pnpm@7.9.5"
+  }
 }

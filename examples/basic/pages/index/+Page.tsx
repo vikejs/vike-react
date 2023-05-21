@@ -6,7 +6,7 @@ import { Counter } from './Counter'
 function Page() {
   return (
     <>
-      <h1>My Restack app</h1>
+      <h1>My Vike + React app</h1>
       This page is:
       <ul>
         <li>Rendered to HTML.</li>

@@ -1,3 +1,3 @@
 packages:
-  - 'restack/'
+  - 'vike-react/'
   - 'examples/*'

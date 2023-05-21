@@ -1,6 +1,6 @@
 export { Link }
 
-import { usePageContext } from 'restack/usePageContext'
+import { usePageContext } from 'vike-react/usePageContext'
 import React from 'react'
 
 function Link({ href, children }: { href: string; children: string }) {

@@ -1,14 +1,5 @@
-import type { Config } from 'vite-plugin-ssr/types'
+import type { Config, ConfigNonHeaderFile } from 'vite-plugin-ssr/types'
 import type { Component } from './types'
-//*
-// @ts-ignore
-import onRenderHtml from 'vike-react/renderer/onRenderHtml'
-// @ts-ignore
-import onRenderClient from 'vike-react/renderer/onRenderClient'
-/*/
-import onRenderHtml from './onRenderHtml'
-import onRenderClient from './onRenderClient'
-//*/
 
 export type ConfigEnhanced = Config & Partial<VikeReactConfig & { Page: Component }>
 
@@ -31,8 +22,8 @@ export type VikeReactConfig = {
 }
 
 export default {
-  onRenderHtml,
-  onRenderClient,
+  onRenderHtmlPath: 'vike-react/renderer/onRenderHtml',
+  onRenderClientPath: 'vike-react/renderer/onRenderClient',
   passToClient: ['pageProps', 'title'],
   clientRouting: true,
   hydrationCanBeAborted: true,
@@ -56,4 +47,4 @@ export default {
       env: 'server-only'
     }
   }
-} satisfies Config
+} satisfies ConfigNonHeaderFile

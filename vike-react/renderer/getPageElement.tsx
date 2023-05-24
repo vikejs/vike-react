@@ -2,7 +2,7 @@ export { getPageElement }
 
 import type { PageContext } from './types'
 import React from 'react'
-import { PageContextProvider } from './PageContextProvider'
+import { PageContextProvider } from './PageContextProvider.js'
 
 function getPageElement(pageContext: PageContext): JSX.Element {
   const Layout = pageContext.config.Layout ?? PassThrough

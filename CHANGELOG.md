@@ -1,3 +1,12 @@
+## [0.1.3](https://github.com/brillout/vike-react/compare/v0.1.2...v0.1.3) (2023-05-24)
+
+
+### Bug Fixes
+
+* fix type pointer ([c7841f2](https://github.com/brillout/vike-react/commit/c7841f2a3385aede9dccdb7aefa338a0274fc7fc))
+
+
+
 ## [0.1.2](https://github.com/brillout/vike-react/compare/v0.1.1...v0.1.2) (2023-05-24)
 
 

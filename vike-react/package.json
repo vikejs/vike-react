@@ -1,6 +1,6 @@
 {
   "name": "vike-react",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "module",
   "main": "./dist/renderer/+config.js",
   "types": "./dist/renderer/+config.d.ts",

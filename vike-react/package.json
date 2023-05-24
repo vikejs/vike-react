@@ -33,13 +33,24 @@
   },
   "typesVersions": {
     "*": {
-      ".": ["./dist/renderer/+config.d.ts"],
-      "usePageContext": ["./dist/components/usePageContext.d.ts"],
-      "renderer/onRenderHtml": ["./dist/renderer/onRenderHtml.d.ts"],
-      "renderer/onRenderClient": ["./dist/renderer/onRenderClient.d.ts"]
+      ".": [
+        "./dist/renderer/+config.d.ts"
+      ],
+      "usePageContext": [
+        "./dist/components/usePageContext.d.ts"
+      ],
+      "renderer/onRenderHtml": [
+        "./dist/renderer/onRenderHtml.d.ts"
+      ],
+      "renderer/onRenderClient": [
+        "./dist/renderer/onRenderClient.d.ts"
+      ]
     }
   },
-  "files": ["dist/", "types.d.ts"],
+  "files": [
+    "dist/",
+    "types.d.ts"
+  ],
   "repository": "github:brillout/vike-react",
   "license": "MIT"
 }

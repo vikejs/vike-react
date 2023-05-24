@@ -13,7 +13,7 @@
   "dependencies": {},
   "scripts": {
     "dev": "tsc --watch",
-    "build": "tsc",
+    "build": "rm -rf dist/ && tsc",
     "release": "release-me patch"
   },
   "peerDependencies": {

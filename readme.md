@@ -1,6 +1,6 @@
-`vike-react` integrates Vike with React.
+React integration for Vike.
 
-To run the example:
+Run the demo:
 
 - Clone the repo: `git clone git@github.com:brillout/vike-react`
 - Install dependencies: `cd vike-react/ && pnpm install`

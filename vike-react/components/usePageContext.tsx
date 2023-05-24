@@ -1,1 +1,1 @@
-export { usePageContext } from '../renderer/PageContextProvider'
+export { usePageContext } from '../renderer/PageContextProvider.js'

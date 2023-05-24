@@ -3,7 +3,7 @@
   "version": "0.1.2",
   "type": "module",
   "main": "./dist/renderer/+config.js",
-  "types": "./dist/renderer/_config.d.ts",
+  "types": "./dist/renderer/+config.d.ts",
   "exports": {
     ".": "./dist/renderer/+config.js",
     "./renderer/onRenderHtml": "./dist/renderer/onRenderHtml.js",

@@ -22,8 +22,8 @@ export type VikeReactConfig = {
 }
 
 export default {
-  onRenderHtmlPath: 'vike-react/renderer/onRenderHtml',
-  onRenderClientPath: 'vike-react/renderer/onRenderClient',
+  onRenderHtml: 'import:vike-react/renderer/onRenderHtml',
+  onRenderClient: 'import:vike-react/renderer/onRenderClient',
   passToClient: ['pageProps', 'title'],
   clientRouting: true,
   hydrationCanBeAborted: true,

@@ -1,3 +1,12 @@
+## [0.1.4](https://github.com/brillout/vike-react/compare/v0.1.3...v0.1.4) (2023-05-26)
+
+
+### Bug Fixes
+
+* use latest vps commit ([d08e03d](https://github.com/brillout/vike-react/commit/d08e03dd07e47014fe00a879761c676fad813ef7))
+
+
+
 ## [0.1.3](https://github.com/brillout/vike-react/compare/v0.1.2...v0.1.3) (2023-05-24)
 
 

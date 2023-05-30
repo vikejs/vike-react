@@ -21,7 +21,7 @@ export type VikeReactConfig = {
   lang: string
 }
 
-export default {
+const config: ConfigNonHeaderFile = {
   onRenderHtml: 'import:vike-react/renderer/onRenderHtml',
   onRenderClient: 'import:vike-react/renderer/onRenderClient',
   passToClient: ['pageProps', 'title'],
@@ -47,4 +47,7 @@ export default {
       env: 'server-only'
     }
   }
-} satisfies ConfigNonHeaderFile
+}
+
+// If the user imports 'vike-react' then this means that the user is using a `.h.js` file
+export default config as Config

@@ -40,8 +40,8 @@ importers:
         specifier: ^4.3.8
         version: 4.3.8(@types/node@18.15.3)
       vite-plugin-ssr:
-        specifier: ^0.4.130
-        version: 0.4.130(vite@4.3.8)
+        specifier: 0.4.130-commit-fa1833156
+        version: 0.4.130-commit-fa1833156(vite@4.3.8)
 
   vike-react:
     dependencies:
@@ -49,8 +49,8 @@ importers:
         specifier: ^4.3.8
         version: 4.3.8(@types/node@18.15.3)
       vite-plugin-ssr:
-        specifier: ^0.4.130
-        version: 0.4.130(vite@4.3.8)
+        specifier: 0.4.130-commit-fa1833156
+        version: 0.4.130-commit-fa1833156(vite@4.3.8)
     devDependencies:
       '@brillout/release-me':
         specifier: ^0.1.3
@@ -2082,8 +2082,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite-plugin-ssr@0.4.130(vite@4.3.8):
-    resolution: {integrity: sha512-EYyTeOviS6P7bFod1FxV+mglRckEh+jWdFYMMnoT7zz2MQyCSQQs/mZ/EXPyeqPY4PwvwAY3MzPbb0bPdUA+PA==}
+  /vite-plugin-ssr@0.4.130-commit-fa1833156(vite@4.3.8):
+    resolution: {integrity: sha512-V94XvyBJYOjuuUa/tMdyQg0uXPoyC3wpyR+xhuPjU5YW6PCobhCcRdMunoKeJEXOSg5bwa8FAGqc3liyvIQnXg==}
     engines: {node: '>=12.19.0'}
     hasBin: true
     peerDependencies:

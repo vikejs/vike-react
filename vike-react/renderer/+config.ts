@@ -1,4 +1,4 @@
-import type { Config, ConfigNonHeaderFile } from 'vite-plugin-ssr/types'
+import type { Config, ConfigNonHeaderFile, ConvertConfigNonHeaderFileToConfig } from 'vite-plugin-ssr/types'
 import type { Component } from './types'
 
 export type ConfigEnhanced = Config & Partial<VikeReactConfig & { Page: Component }>
@@ -21,7 +21,7 @@ export type VikeReactConfig = {
   lang: string
 }
 
-const config: ConfigNonHeaderFile = {
+const config = {
   onRenderHtml: 'import:vike-react/renderer/onRenderHtml',
   onRenderClient: 'import:vike-react/renderer/onRenderClient',
   passToClient: ['pageProps', 'title'],
@@ -47,7 +47,8 @@ const config: ConfigNonHeaderFile = {
       env: 'server-only'
     }
   }
-}
+} satisfies ConfigNonHeaderFile
 
 // If the user imports 'vike-react' then this means that the user is using a `.h.js` file
-export default config as Config
+type ConfigTypeForUser = ConvertConfigNonHeaderFileToConfig<typeof config>
+export default config as any as ConfigTypeForUser

@@ -9,7 +9,7 @@ import type {
   PageContextBuiltIn,
   PageContextBuiltInClientWithClientRouting as PageContextBuiltInClient
 } from 'vite-plugin-ssr/types'
-import type { ConfigEnhanced } from './+config'
+import type { Config } from './+config'
 import type { ReactElement } from 'react'
 
 // type Component = (props: Record<string, unknown>) => ReactElement
@@ -30,7 +30,7 @@ export type PageContextCommon = {
 
 type PageContextServer = PageContextBuiltIn<Page> &
   PageContextCommon & {
-    config: Partial<ConfigEnhanced>
+    config: Config
   }
 type PageContextClient = PageContextBuiltInClient<Page> & PageContextCommon
 type PageContext = PageContextClient | PageContextServer

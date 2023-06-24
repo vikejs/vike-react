@@ -1,4 +1,4 @@
-React integration for Vike.
+React integration for Vike. See [`vike-*` packages](https://vite-plugin-ssr.com/vike-packages).
 
 Run the demo:
 

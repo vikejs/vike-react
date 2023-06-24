@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 overrides:
   vike-react: link:./vike-react/
 
@@ -40,8 +44,8 @@ importers:
         specifier: ^4.3.8
         version: 4.3.8(@types/node@18.15.3)
       vite-plugin-ssr:
-        specifier: ^0.4.131
-        version: 0.4.131(vite@4.3.8)
+        specifier: ^0.4.132
+        version: 0.4.132(vite@4.3.8)
 
   vike-react:
     dependencies:
@@ -49,8 +53,8 @@ importers:
         specifier: ^4.3.8
         version: 4.3.8(@types/node@18.15.3)
       vite-plugin-ssr:
-        specifier: ^0.4.131
-        version: 0.4.131(vite@4.3.8)
+        specifier: ^0.4.132
+        version: 0.4.132(vite@4.3.8)
     devDependencies:
       '@brillout/release-me':
         specifier: ^0.1.3
@@ -332,8 +336,8 @@ packages:
       semver: 7.3.8
     dev: true
 
-  /@brillout/vite-plugin-import-build@0.2.16:
-    resolution: {integrity: sha512-3rbNIgOUIPf8JrV3lozG3lpIe+xnujUANpMaf9aPVGnZV5SVKOSrvLk83+2Y8/nhHgLYTBplNZTW3DTD6J29ag==}
+  /@brillout/vite-plugin-import-build@0.2.18:
+    resolution: {integrity: sha512-sedZNrqIboHCeSnN7hwo34xRyP8egfMHcifixQ2YGNnQVb93884drTVE3b0vlSGz7LWumVDochKuHdWQljup9A==}
     dependencies:
       '@brillout/import': 0.2.3
     dev: false
@@ -709,6 +713,10 @@ packages:
       electron-to-chromium: 1.4.402
       node-releases: 2.0.11
       update-browserslist-db: 1.0.11(browserslist@4.21.5)
+    dev: false
+
+  /buffer-from@1.1.2:
+    resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
     dev: false
 
   /cac@6.7.14:
@@ -1889,10 +1897,16 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
+  /source-map-support@0.5.21:
+    resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
+    dependencies:
+      buffer-from: 1.1.2
+      source-map: 0.6.1
+    dev: false
+
   /source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /spdx-correct@3.2.0:
     resolution: {integrity: sha512-kN9dJbvnySHULIluDHy32WHRUu3Og7B9sbY7tsFLctQkIqnMh3hErYgdMjTYuqmcXX+lK5T1lnUt3G7zNswmZA==}
@@ -2082,8 +2096,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite-plugin-ssr@0.4.131(vite@4.3.8):
-    resolution: {integrity: sha512-M8ay5UuQUEMBHhg87BVhXGjPV+/xO3PZWzZ63S8J8rX4Xv+sQbnDswGYm/TJ+Ga/9NTgrFDAKqUfEb3pEpd+Aw==}
+  /vite-plugin-ssr@0.4.132(vite@4.3.8):
+    resolution: {integrity: sha512-+77qu4YWBLwc3sgh418q2cLmqBSZMaDCe0YNkptoy6JxZiF9KKNrS848Emg42Xoapte2S99i1OiqSAXw8bzvyQ==}
     engines: {node: '>=12.19.0'}
     hasBin: true
     peerDependencies:
@@ -2096,13 +2110,14 @@ packages:
       '@brillout/import': 0.2.3
       '@brillout/json-serializer': 0.5.3
       '@brillout/picocolors': 1.0.4
-      '@brillout/vite-plugin-import-build': 0.2.16
+      '@brillout/vite-plugin-import-build': 0.2.18
       acorn: 8.8.2
       cac: 6.7.14
       es-module-lexer: 0.10.5
       esbuild: 0.17.19
       fast-glob: 3.2.12
       sirv: 2.0.2
+      source-map-support: 0.5.21
       vite: 4.3.8(@types/node@18.15.3)
     dev: false
 

@@ -1,3 +1,14 @@
+## [0.1.6](https://github.com/brillout/vike-react/compare/v0.1.5...v0.1.6) (2023-06-24)
+
+
+### Bug Fixes
+
+* fix 'vike-react' type ([9fe6825](https://github.com/brillout/vike-react/commit/9fe68251585646a6233465bc8ba5bed58b941439))
+* keep concrete types of vike-react config ([07a811f](https://github.com/brillout/vike-react/commit/07a811fc885a8b13b97818dc35902de33dcd8d0f))
+* simplify type `Config` ([2fe1dcc](https://github.com/brillout/vike-react/commit/2fe1dcca47a6ee16c1623280a21e91941b100850))
+
+
+
 ## [0.1.5](https://github.com/brillout/vike-react/compare/v0.1.4...v0.1.5) (2023-05-26)
 
 

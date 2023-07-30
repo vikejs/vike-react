@@ -17,10 +17,15 @@ export type Config = ConfigCore & {
    *
    */
   lang?: string
-  /** If true, render mode is SSR. If false, render mode is SPA. See
-   * https://vite-plugin-ssr.com/render-modes
+  /**
+   * If true, render mode is SSR or pre-rendering (aka SSG). In other words, the
+   * page's HTML will be rendered at build-time or request-time.
+   * If false, render mode is SPA. In other words, the page will only be
+   * rendered in the browser.
    *
-   *  @default true
+   * See https://vite-plugin-ssr.com/render-modes
+   *
+   * @default true
    *
    */
   ssr?: boolean

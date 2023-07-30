@@ -53,7 +53,7 @@ export default {
       env: 'server-only'
     },
     ssr: {
-      env: 'server-only'
+      env: 'server-and-client'
     }
   }
 } satisfies ConfigCore

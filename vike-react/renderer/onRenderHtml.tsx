@@ -2,6 +2,7 @@ export default onRenderHtml
 
 import { renderToString } from 'react-dom/server'
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server'
+import { getSsr } from './getSsr.js'
 import { getTitle } from './getTitle.js'
 import { getPageElement } from './getPageElement.js'
 import type { PageContextServer } from './types'
@@ -9,7 +10,7 @@ import { PageContextProvider } from './PageContextProvider.js'
 import React from 'react'
 
 async function onRenderHtml(pageContext: PageContextServer) {
-  const ssr = pageContext.config.ssr === false ? false : true
+  const ssr = getSsr(pageContext)
   let pageHtml = ''
   if ( ssr ) {
     const page = getPageElement(pageContext)

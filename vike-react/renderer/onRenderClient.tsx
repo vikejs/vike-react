@@ -9,8 +9,10 @@ let root: ReactDOM.Root
 async function onRenderClient(pageContext: PageContextClient) {
   const page = getPageElement(pageContext)
 
+  const ssr = pageContext.config.ssr === false ? false : true
+
   const container = document.getElementById('page-view')!
-  if (pageContext.isHydration) {
+  if (ssr && pageContext.isHydration) {
     root = ReactDOM.hydrateRoot(container, page)
   } else {
     if (!root) {

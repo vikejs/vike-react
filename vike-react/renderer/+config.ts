@@ -17,6 +17,13 @@ export type Config = ConfigCore & {
    *
    */
   lang?: string
+  /** If true, render mode is SSR. If false, render mode is SPA. See
+   * https://vite-plugin-ssr.com/render-modes
+   *
+   *  @default true
+   *
+   */
+  ssr?: boolean
   Page?: Component
 }
 
@@ -43,6 +50,9 @@ export default {
       env: 'server-only'
     },
     lang: {
+      env: 'server-only'
+    },
+    ssr: {
       env: 'server-only'
     }
   }

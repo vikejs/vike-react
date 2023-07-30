@@ -9,8 +9,12 @@ import { PageContextProvider } from './PageContextProvider.js'
 import React from 'react'
 
 async function onRenderHtml(pageContext: PageContextServer) {
-  const page = getPageElement(pageContext)
-  const pageHtml = renderToString(page)
+  const ssr = pageContext.config.ssr === false ? false : true
+  let pageHtml = ''
+  if ( ssr ) {
+    const page = getPageElement(pageContext)
+    pageHtml = renderToString(page)
+  }
 
   const title = getTitle(pageContext)
   const titleTag = !title ? '' : escapeInject`<title>${title}</title>`

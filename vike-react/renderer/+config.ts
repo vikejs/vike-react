@@ -1,6 +1,8 @@
 import type { Config as ConfigCore } from 'vite-plugin-ssr/types'
 import type { Component } from './types'
 
+import type { Effect } from 'vite-plugin-ssr/types'
+
 export type Config = ConfigCore & {
   /** React element renderer and appended into &lt;head>&lt;/head> */
   Head?: Component
@@ -32,6 +34,22 @@ export type Config = ConfigCore & {
   Page?: Component
 }
 
+// See https://vite-plugin-ssr.com/meta#modify-existing-configurations
+const toggleOnBeforeRenderEnv: Effect = ({ configDefinedAt, configValue }) => {
+  if (typeof configValue !== 'boolean') {
+    throw new Error(`${configDefinedAt} should be a boolean`)
+  }
+  if (configValue === false) {
+    return {
+      meta: {
+        onBeforeRender: {
+          env: 'server-and-client'
+        }
+      }
+    }
+  }
+}
+
 export default {
   onRenderHtml: 'import:vike-react/renderer/onRenderHtml',
   onRenderClient: 'import:vike-react/renderer/onRenderClient',
@@ -58,7 +76,8 @@ export default {
       env: 'server-only'
     },
     ssr: {
-      env: 'server-and-client'
+      env: 'server-and-client',
+      effect: toggleOnBeforeRenderEnv
     }
   }
 } satisfies ConfigCore

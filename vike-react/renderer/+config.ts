@@ -34,7 +34,7 @@ export type Config = ConfigCore & {
   Page?: Component
 }
 
-// Depending on the value of `config.meta.ssr`, set config options' `env`
+// Depending on the value of `config.meta.ssr`, set other config options' `env`
 // accordingly.
 // See https://vite-plugin-ssr.com/meta#modify-existing-configurations
 const toggleSsrRelatedConfig: Effect = ({ configDefinedAt, configValue }) => {
@@ -42,26 +42,25 @@ const toggleSsrRelatedConfig: Effect = ({ configDefinedAt, configValue }) => {
     throw new Error(`${configDefinedAt} should be a boolean`)
   }
 
-  const result = {
+  return {
     meta: {
-      // We want this config available in onRenderClient and onRenderHtml in
-      // any case.
-      ssr: {
-        env: 'server-and-client'
+      // When the SSR flag is false, we want to render the page only in the
+      // browser. We achieve this by then making the `Page` implementation
+      // accessible only in the client's renderer, and by making sure
+      // `onBeforeRender` is also run in the browser and not only in the
+      // server.
+      Page: {
+        env: configValue
+          ? 'server-and-client' // default
+          : 'client-only'
       },
-    } as Record<string, any>
-  }
-
-  if (configValue === false) {
-    // The SSR flag is false, so we want to render the page only in the browser.
-    // Let's make sure onBeforeRender is also run in the browser and not only
-    // in the server (which is the default).
-    result.meta['onBeforeRender'] = {
-      env: 'server-and-client'
+      onBeforeRender: {
+        env: configValue
+          ? 'server-only' // default
+          : 'server-and-client'
+      },
     }
   }
-
-  return result
 }
 
 export default {
@@ -90,11 +89,6 @@ export default {
       env: 'server-only'
     },
     ssr: {
-      // Note: we need an effect in order to toggle `onBeforeRender.env`.
-      // Effects are only supported with `env: 'config-only'`. However we need
-      // to be able to read this config in onRenderClient and onRenderHtml. This
-      // is why we also toggle `ssr.env` back to `server-and-client` in the
-      // effect.
       env: 'config-only',
       effect: toggleSsrRelatedConfig
     },

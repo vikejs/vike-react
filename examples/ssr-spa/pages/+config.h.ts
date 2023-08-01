@@ -14,5 +14,6 @@ export default {
   description: 'Demo showcasing Vike + React',
   // <link rel="icon" href="${favicon}" />
   favicon: logoUrl,
+  ssr: true, // can be removed, this is the default anyway
   extends: vikeReact
 } satisfies Config

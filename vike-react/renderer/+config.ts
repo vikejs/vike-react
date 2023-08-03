@@ -46,18 +46,11 @@ const toggleSsrRelatedConfig: Effect = ({ configDefinedAt, configValue }) => {
     meta: {
       // When the SSR flag is false, we want to render the page only in the
       // browser. We achieve this by then making the `Page` implementation
-      // accessible only in the client's renderer, and by making sure
-      // `onBeforeRender` is also run in the browser and not only in the
-      // server.
+      // accessible only in the client's renderer.
       Page: {
         env: configValue
           ? 'server-and-client' // default
           : 'client-only'
-      },
-      onBeforeRender: {
-        env: configValue
-          ? 'server-only' // default
-          : 'server-and-client'
       },
     }
   }

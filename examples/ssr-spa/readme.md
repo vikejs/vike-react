@@ -3,7 +3,7 @@ Example of selecting SPA or SSR on a per-page basis. See
 
 ```bash
 git clone git@github.com:vikejs/vike-react
-cd vike-react/examples/basic/
+cd vike-react/examples/ssr-spa/
 pnpm install
 pnpm run dev
 ```

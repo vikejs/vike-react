@@ -10,7 +10,7 @@ import React from 'react'
 
 async function onRenderHtml(pageContext: PageContextServer) {
   let pageHtml = ''
-  if ( !!pageContext.Page ) {
+  if (!!pageContext.Page) {
     const page = getPageElement(pageContext)
     pageHtml = renderToString(page)
   }

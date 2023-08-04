@@ -51,7 +51,7 @@ const toggleSsrRelatedConfig: Effect = ({ configDefinedAt, configValue }) => {
         env: configValue
           ? 'server-and-client' // default
           : 'client-only'
-      },
+      }
     }
   }
 }
@@ -84,6 +84,6 @@ export default {
     ssr: {
       env: 'config-only',
       effect: toggleSsrRelatedConfig
-    },
+    }
   }
 } satisfies ConfigCore

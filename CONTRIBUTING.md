@@ -1,7 +1,7 @@
 Build `vike-react`:
 
 ```bash
-git clone git@github.com:brillout/vike-react
+git clone git@github.com:vikejs/vike-react
 cd vike-react/ && pnpm install
 pnpm build
 ```

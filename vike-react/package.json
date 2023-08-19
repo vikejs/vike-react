@@ -51,6 +51,6 @@
     "dist/",
     "types.d.ts"
   ],
-  "repository": "github:brillout/vike-react",
+  "repository": "github:vikejs/vike-react",
   "license": "MIT"
 }

@@ -4,7 +4,7 @@ import type { Component } from './types'
 import type { Effect } from 'vite-plugin-ssr/types'
 
 export type Config = ConfigCore & {
-  /** React element renderer and appended into &lt;head>&lt;/head> */
+  /** React element rendered and appended into &lt;head>&lt;/head> */
   Head?: Component
   Layout?: Component
   /** &lt;title>${title}&lt;/title> */

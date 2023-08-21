@@ -2,21 +2,26 @@ export default onBeforeRender
 
 import fetch from 'node-fetch'
 //import { filterMovieData } from '../filterMovieData'
-import type { Movie, MovieDetails } from '../types'
+import type { AdditionalPageContext, Movie, MovieDetails } from '../types'
 
 // export { prerender }
 
-async function onBeforeRender() {
+async function onBeforeRender(): Promise<AdditionalPageContext<{ movies: Movie[] }, { title: string }>> {
   const movies = await getStarWarsMovies()
   return {
     pageContext: {
+      // Will be passed as properties to the page's root React component.
       pageProps: {
         // We remove data we don't need because we pass `pageContext.movies` to
         // the client; we want to minimize what is sent over the network.
         movies: filterMoviesData(movies)
       },
-      // The page's <title>
-      title: getTitle(movies)
+
+      // Will be available in onRenderClient() and onRenderHtml().
+      additionalData: {
+        // The renderers will use this data as page's <title>
+        title: getTitle(movies)
+      }
     }
   }
 }

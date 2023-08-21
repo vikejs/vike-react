@@ -3,9 +3,11 @@ export default onBeforeRender
 import fetch from 'cross-fetch'
 import { filterMovieData } from '../filterMovieData'
 import type { PageContextBuiltIn } from 'vike-react/types'
-import type { MovieDetails } from '../types'
+import type { AdditionalPageContext, MovieDetails } from '../types'
 
-async function onBeforeRender(pageContext: PageContextBuiltIn) {
+async function onBeforeRender(
+  pageContext: PageContextBuiltIn
+): Promise<AdditionalPageContext<{ movie: MovieDetails }, { title: string }>> {
   const response = await fetch(`https://star-wars.brillout.com/api/films/${pageContext.routeParams.id}.json`)
   let movie = (await response.json()) as MovieDetails
 
@@ -17,11 +19,16 @@ async function onBeforeRender(pageContext: PageContextBuiltIn) {
 
   return {
     pageContext: {
+      // Will be passed as properties to the page's root React component.
       pageProps: {
         movie
       },
-      // The page's <title>
-      title
+
+      // Will be available in onRenderClient() and onRenderHtml().
+      additionalData: {
+        // The renderers will use this data as page's <title>
+        title
+      }
     }
   }
 }

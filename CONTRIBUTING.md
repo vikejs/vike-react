@@ -11,12 +11,9 @@ pnpm build
 cd ../
 ```
 
-> Note that:
+> Note that you'll need [pnpm](https://pnpm.io/) for development, which you can install with `$ npm install -g pnpm`.
 >
-> - You'll need [pnpm](https://pnpm.io/) which you can install with `$ npm install -g pnpm`.
-> - Windows may or may not work.
->
-> These requirements only hold for developing `vike-react`: the npm package `vike-react` can be used with Windows and any package manager.
+> However pnpm isn't needed for simply making use of the npm package `vike-react`: any package manager will do.
 
 ## Validating
 

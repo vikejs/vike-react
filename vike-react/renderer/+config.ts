@@ -4,16 +4,16 @@ import type { Component } from './types'
 import type { Effect } from 'vite-plugin-ssr/types'
 
 export type Config = ConfigCore & {
-  /** React element rendered and appended into &lt;head>&lt;/head> */
+  /** React element rendered and appended into <head></head> */
   Head?: Component
   Layout?: Component
-  /** &lt;title>${title}&lt;/title> */
+  /** <title>${title}</title> */
   title?: string
-  /** &lt;meta name="description" content="${description}" /> */
+  /** <meta name="description" content="${description}" /> */
   description?: string
-  /** &lt;link rel="icon" href="${favicon}" /> */
+  /** <link rel="icon" href="${favicon}" /> */
   favicon?: string
-  /** &lt;html lang="${lang}">
+  /** <html lang="${lang}">
    *
    *  @default 'en'
    *

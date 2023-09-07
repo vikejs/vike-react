@@ -7,6 +7,7 @@ export type { Component }
 
 import type {
   PageContextBuiltIn,
+  PageContextBuiltInServer,
   PageContextBuiltInClientWithClientRouting as PageContextBuiltInClient
 } from 'vite-plugin-ssr/types'
 import type { Config } from './+config'
@@ -28,7 +29,7 @@ export type PageContextCommon = {
   }
 }
 
-type PageContextServer = PageContextBuiltIn<Page> &
+type PageContextServer = PageContextBuiltInServer<Page> &
   PageContextCommon & {
     config: Config
   }

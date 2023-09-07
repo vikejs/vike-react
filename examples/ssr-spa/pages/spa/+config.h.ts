@@ -1,4 +1,4 @@
-import type { Config } from 'vike-react/types'
+import type { Config } from 'vite-plugin-ssr/types'
 
 export default {
   ssr: false // SPA

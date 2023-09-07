@@ -1,43 +1,9 @@
-import type { Config as ConfigCore } from 'vite-plugin-ssr/types'
-import type { Component } from './types'
-
-import type { Effect } from 'vite-plugin-ssr/types'
-
-export type Config = ConfigCore & {
-  /** React element rendered and appended into <head></head> */
-  Head?: Component
-  Layout?: Component
-  /** <title>${title}</title> */
-  title?: string
-  /** <meta name="description" content="${description}" /> */
-  description?: string
-  /** <link rel="icon" href="${favicon}" /> */
-  favicon?: string
-  /** <html lang="${lang}">
-   *
-   *  @default 'en'
-   *
-   */
-  lang?: string
-  /**
-   * If true, render mode is SSR or pre-rendering (aka SSG). In other words, the
-   * page's HTML will be rendered at build-time or request-time.
-   * If false, render mode is SPA. In other words, the page will only be
-   * rendered in the browser.
-   *
-   * See https://vite-plugin-ssr.com/render-modes
-   *
-   * @default true
-   *
-   */
-  ssr?: boolean
-  Page?: Component
-}
+import type { Config, ConfigEffect, ConfigVikeReact } from 'vite-plugin-ssr/types'
 
 // Depending on the value of `config.meta.ssr`, set other config options' `env`
 // accordingly.
 // See https://vite-plugin-ssr.com/meta#modify-existing-configurations
-const toggleSsrRelatedConfig: Effect = ({ configDefinedAt, configValue }) => {
+const toggleSsrRelatedConfig: ConfigEffect = ({ configDefinedAt, configValue }) => {
   if (typeof configValue !== 'boolean') {
     throw new Error(`${configDefinedAt} should be a boolean`)
   }
@@ -86,4 +52,39 @@ export default {
       effect: toggleSsrRelatedConfig
     }
   }
-} satisfies ConfigCore
+} satisfies Config & ConfigVikeReact
+
+// We purposely define the ConfigVikeReact interface in this file: that way we ensure it's always applied whenever the user `import vikeReact from 'vike-react'`
+import type { Component } from './types'
+declare module 'vite-plugin-ssr/types' {
+  export interface ConfigVikeReact {
+    /** React element rendered and appended into &lt;head>&lt;/head> */
+    Head?: Component
+    /** A component, usually common to several pages, that wraps the root component `Page` */
+    Layout?: Component
+    /** &lt;title>${title}&lt;/title> */
+    title?: string
+    /** &lt;meta name="description" content="${description}" /> */
+    description?: string
+    /** &lt;link rel="icon" href="${favicon}" /> */
+    favicon?: string
+    /** &lt;html lang="${lang}">
+     *
+     *  @default 'en'
+     *
+     */
+    lang?: string
+    /**
+     * If true, render mode is SSR or pre-rendering (aka SSG). In other words, the
+     * page's HTML will be rendered at build-time or request-time.
+     * If false, render mode is SPA. In other words, the page will only be
+     * rendered in the browser.
+     *
+     * See https://vite-plugin-ssr.com/render-modes
+     *
+     * @default true
+     *
+     */
+    ssr?: boolean
+  }
+}

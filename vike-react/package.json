@@ -20,7 +20,7 @@
     "react": "18.x.x",
     "react-dom": "18.x.x",
     "vite": "^4.3.8",
-    "vite-plugin-ssr": "^0.4.140"
+    "vite-plugin-ssr": "0.4.140-commit-894c039"
   },
   "devDependencies": {
     "@brillout/release-me": "^0.1.3",

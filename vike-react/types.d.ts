@@ -3,4 +3,4 @@ export type {
   PageContextBuiltInServer,
   PageContextBuiltInClientWithClientRouting as PageContextBuiltInClient
 } from 'vite-plugin-ssr/types'
-export type { ConfigEnhanced as Config } from './renderer/+config'
+import type { Component } from './renderer/types'

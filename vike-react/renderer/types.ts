@@ -9,8 +9,10 @@ import type {
   PageContextBuiltInServer,
   PageContextBuiltInClientWithClientRouting as PageContextBuiltInClient,
   Config,
-  ConfigVikeReact
 } from 'vite-plugin-ssr/types'
+import type {
+  ConfigVikeReact
+} from './+config'
 import type { ReactElement } from 'react'
 
 // type Component = (props: Record<string, unknown>) => ReactElement

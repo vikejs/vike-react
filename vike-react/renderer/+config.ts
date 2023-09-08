@@ -1,4 +1,4 @@
-import type { Config, ConfigEffect, ConfigVikeReact } from 'vite-plugin-ssr/types'
+import type { Config, ConfigEffect, } from 'vite-plugin-ssr/types'
 
 // Depending on the value of `config.meta.ssr`, set other config options' `env`
 // accordingly.
@@ -54,9 +54,7 @@ export default {
   }
 } satisfies Config & ConfigVikeReact
 
-// We purposely define the ConfigVikeReact interface in this file: that way we ensure it's always applied whenever the user `import vikeReact from 'vike-react'`
 import type { Component } from './types'
-declare module 'vite-plugin-ssr/types' {
   export interface ConfigVikeReact {
     /** React element rendered and appended into &lt;head>&lt;/head> */
     Head?: Component
@@ -87,4 +85,3 @@ declare module 'vite-plugin-ssr/types' {
      */
     ssr?: boolean
   }
-}

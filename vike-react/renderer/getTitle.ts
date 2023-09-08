@@ -5,7 +5,6 @@ import { isCallable } from './utils/isCallable.js'
 
 function getTitle(pageContext: {
   title?: unknown
-  config: Record<string, unknown>
   configEntries: ConfigEntries
 }): null | string {
   if (pageContext.title) {

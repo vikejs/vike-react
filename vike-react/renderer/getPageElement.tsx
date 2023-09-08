@@ -6,7 +6,8 @@ import { PageContextProvider } from './PageContextProvider.js'
 
 function getPageElement(pageContext: PageContext): JSX.Element {
   const Layout = pageContext.config.Layout ?? PassThrough
-  const Wrapper = pageContext.config.Wrapper ?? PassThrough
+  //const Wrapper = pageContext.config.Wrapper ?? PassThrough
+  const Wrapper = PassThrough
   const { Page, pageProps } = pageContext
   const page = (
     <React.StrictMode>

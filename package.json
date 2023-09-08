@@ -13,5 +13,6 @@
     "overrides": {
       "vike-react": "link:./vike-react/"
     }
-  }
+  },
+  "packageManager": "pnpm@8.6.12"
 }

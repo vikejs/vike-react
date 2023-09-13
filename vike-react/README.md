@@ -3,12 +3,9 @@
 
 # `vike-react`
 
-React integration for Vike, for building a React web framework. Vike is the upcoming
-major version of [vite-plugin-ssr](https://vite-plugin-ssr.com/), a fast and
-modular Vite-based web framework.
+React integration for [Vike](https://github.com/brillout/vite-plugin-ssr/issues/736).
 
-> **NOTE:** For Vike integrations with other UI frameworks (e.g. Vue), see
-> [`vike-*` packages](https://vite-plugin-ssr.com/vike-packages).
+> For integrations with Vue and Solid, see the other [`vike-*` packages](https://vite-plugin-ssr.com/vike-packages).
 
 To run the example:
 

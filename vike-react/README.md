@@ -7,9 +7,4 @@ React integration for [Vike](https://github.com/brillout/vite-plugin-ssr/issues/
 
 > For integrations with Vue and Solid, see the other [`vike-*` packages](https://vite-plugin-ssr.com/vike-packages).
 
-To run the example:
-
-- Clone the repo: `git clone git@github.com:vikejs/vike-react`
-- Install dependencies: `pnpm install`
-- Build vike-react: `pnpm run build`
-- Run the example: `cd examples/basic/ && pnpm run dev`
+See [examples/](/examples/).

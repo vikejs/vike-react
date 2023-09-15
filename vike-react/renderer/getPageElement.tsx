@@ -6,8 +6,11 @@ import { PageContextProvider } from './PageContextProvider.js'
 
 function getPageElement(pageContext: PageContext): JSX.Element {
   const Layout = pageContext.config.Layout ?? PassThrough
-  //const Wrapper = pageContext.config.Wrapper ?? PassThrough
-  const Wrapper = PassThrough
+  const Wrapper =
+    /* Should we implement this? Enabling users to defined a wrapper that is used across all layouts.
+    pageContext.config.Wrapper ??
+    */
+    PassThrough
   const { Page, pageProps } = pageContext
   const page = (
     <React.StrictMode>

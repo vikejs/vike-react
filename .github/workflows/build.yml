@@ -28,8 +28,8 @@ jobs:
         working-directory: ./examples/ssr-spa
 
       - name: Test TypeScript examples/basic
-        run: pnpm exec tsc --noEmit
+        run: pnpm run test
         working-directory: ./examples/basic
       - name: Test TypeScript examples/ssr-spa
-        run: pnpm exec tsc --noEmit
+        run: pnpm run test
         working-directory: ./examples/ssr-spa

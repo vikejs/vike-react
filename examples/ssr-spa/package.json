@@ -2,7 +2,8 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "tsc --noEmit"
   },
   "dependencies": {
     "@types/react": "^18.0.8",

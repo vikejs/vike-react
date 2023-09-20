@@ -9,8 +9,11 @@
 
 ### BREAKING CHANGES
 
-* use `import type { Config } from 'vite-plugin-ssr/types'`
-instead of `import type  { Config } from 'vike-react'`
+* Import `Config` from `vite-plugin-ssr` instead of `vike-react`.
+  ```diff
+  - import type { Config } from 'vike-react'
+  + import type { Config } from 'vite-plugin-ssr/types'
+  ```
 
 
 

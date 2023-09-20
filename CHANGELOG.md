@@ -1,3 +1,19 @@
+# [0.2.0](https://github.com/vikejs/vike-react/compare/v0.1.6...v0.2.0) (2023-09-20)
+
+
+### Bug Fixes
+
+* remove now useless type re-exports ([93b8383](https://github.com/vikejs/vike-react/commit/93b83833338db424ad0f0d82b63364ee4e6298c6))
+* use interface merging ([2db9bbd](https://github.com/vikejs/vike-react/commit/2db9bbd5819baddcc37848c6336a01738fdd5a6c))
+
+
+### BREAKING CHANGES
+
+* use `import type { Config } from 'vite-plugin-ssr/types'`
+instead of `import type  { Config } from 'vike-react'`
+
+
+
 ## [0.1.6](https://github.com/vikejs/vike-react/compare/v0.1.5...v0.1.6) (2023-06-24)
 
 ### Bug Fixes

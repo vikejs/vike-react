@@ -1,21 +1,24 @@
-export default onBeforeRender
+// https://vike.dev/onBeforeRender
+export { onBeforeRender }
 
 import fetch from 'node-fetch'
 //import { filterMovieData } from '../filterMovieData'
 import type { Movie, MovieDetails } from '../types'
+import type { OnBeforeRenderAsync } from 'vike/types'
 
 // export { prerender }
 
-async function onBeforeRender() {
+const onBeforeRender: OnBeforeRenderAsync = async (pageContext): ReturnType<OnBeforeRenderAsync> => {
   const movies = await getStarWarsMovies()
   return {
     pageContext: {
+      // Will be passed as properties to the page's root React component.
       pageProps: {
         // We remove data we don't need because we pass `pageContext.movies` to
         // the client; we want to minimize what is sent over the network.
         movies: filterMoviesData(movies)
       },
-      // The page's <title>
+      // vike-react's renderer will use this data as page's <title>
       title: getTitle(movies)
     }
   }

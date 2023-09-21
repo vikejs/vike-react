@@ -17,7 +17,7 @@ function getPageElement(pageContext: PageContext): JSX.Element {
       <PageContextProvider pageContext={pageContext}>
         <Wrapper>
           <Layout>
-            <Page {...pageProps} />
+            { Page ? <Page {...pageProps} /> : null }
           </Layout>
         </Wrapper>
       </PageContextProvider>

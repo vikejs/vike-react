@@ -14,7 +14,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "^5.2.2",
-    "vike": "^0.4.142",
+    "vike": "^0.4.144",
     "vike-react": "link:../../vike-react",
     "vite": "^4.4.9"
   },

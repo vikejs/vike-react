@@ -5,8 +5,8 @@
 
 # `vike-react`
 
-React integration for [Vike](https://github.com/brillout/vite-plugin-ssr/issues/736) following the
-[V1 design](https://vite-plugin-ssr.com/migration/v1-design).
+React integration for [Vike](https://github.com/brillout/vite-plugin-ssr/issues/736) (using the
+[V1 design](https://vite-plugin-ssr.com/migration/v1-design)).
 
 > For integrations with Vue and Solid, see the other [`vike-*` packages](https://vite-plugin-ssr.com/vike-packages).
 

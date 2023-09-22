@@ -14,7 +14,8 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "rm -rf dist/ && tsc",
-    "release": "release-me patch"
+    "release": "release-me patch",
+    "release:commit": "release-me commit"
   },
   "peerDependencies": {
     "react": "18.x.x",

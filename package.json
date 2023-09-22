@@ -2,10 +2,12 @@
   "scripts": {
     "dev": "cd vike-react/ && pnpm run dev",
     "build": "cd vike-react/ && pnpm run build",
-    "release": "cd vike-react/ && pnpm run release",
     "========= Clean": "",
     "clean": "git clean -Xdf",
     "reset": "pnpm run clean && pnpm install && pnpm run build",
+    "========= Release": "",
+    "release": "cd vike-react/ && pnpm run release",
+    "release:commit": "cd vike-react/ && pnpm run release:commit",
     "========= Only allow pnpm; forbid yarn & npm": "",
     "preinstall": "npx only-allow pnpm"
   },

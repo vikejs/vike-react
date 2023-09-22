@@ -58,7 +58,9 @@ export default {
 import type { Component } from './types'
 declare global {
   namespace VikePackages {
-    export interface ConfigVikeReact {
+    interface ConfigVikeReact {
+      /** The page's root React component */
+      Page?: Component
       /** React element rendered and appended into &lt;head>&lt;/head> */
       Head?: Component
       /** A component, usually common to several pages, that wraps the root component `Page` */

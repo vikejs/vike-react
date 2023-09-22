@@ -2,7 +2,7 @@ export default onRenderClient
 
 import ReactDOM from 'react-dom/client'
 import { getTitle } from './getTitle.js'
-import type { PageContextClient } from './types'
+import type { PageContextClient } from 'vite-plugin-ssr/types'
 import { getPageElement } from './getPageElement.js'
 
 let root: ReactDOM.Root

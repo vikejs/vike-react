@@ -1,8 +1,8 @@
 export { getPageElement }
 
-import type { PageContext } from './types'
 import React from 'react'
 import { PageContextProvider } from './PageContextProvider.js'
+import type { PageContext } from 'vite-plugin-ssr/types'
 
 function getPageElement(pageContext: PageContext): JSX.Element {
   const Layout = pageContext.config.Layout ?? PassThrough

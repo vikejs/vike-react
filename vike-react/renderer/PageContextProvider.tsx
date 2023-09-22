@@ -2,8 +2,8 @@ export { PageContextProvider }
 export { usePageContext }
 
 import React, { useContext } from 'react'
-import { PageContext } from './types'
 import { getGlobalObject } from './utils/getGlobalObject.js'
+import type { PageContext } from 'vite-plugin-ssr/types'
 
 const { Context } = getGlobalObject('PageContextProvider.ts', {
   Context: React.createContext<PageContext>(undefined as never)

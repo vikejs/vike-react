@@ -1,3 +1,12 @@
+## [0.2.1](https://github.com/vikejs/vike-react/compare/v0.2.0...v0.2.1) (2023-09-22)
+
+
+### Bug Fixes
+
+* use Vike.PageContext ([33a8be1](https://github.com/vikejs/vike-react/commit/33a8be12bb62f885108cc0e6d8870cfe060a946b))
+
+
+
 # [0.2.0](https://github.com/vikejs/vike-react/compare/v0.1.6...v0.2.0) (2023-09-20)
 
 

@@ -2,7 +2,7 @@ import type { Config, ConfigEffect } from 'vite-plugin-ssr/types'
 
 // Depending on the value of `config.meta.ssr`, set other config options' `env`
 // accordingly.
-// See https://vite-plugin-ssr.com/meta#modify-existing-configurations
+// See https://vike.dev/meta#modify-existing-configurations
 const toggleSsrRelatedConfig: ConfigEffect = ({ configDefinedAt, configValue }) => {
   if (typeof configValue !== 'boolean') {
     throw new Error(`${configDefinedAt} should be a boolean`)
@@ -83,7 +83,7 @@ declare global {
        * If false, render mode is SPA. In other words, the page will only be
        * rendered in the browser.
        *
-       * See https://vite-plugin-ssr.com/render-modes
+       * See https://vike.dev/render-modes
        *
        * @default true
        *

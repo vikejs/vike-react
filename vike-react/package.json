@@ -10,7 +10,6 @@
     "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js",
     "./usePageContext": "./dist/components/usePageContext.js"
   },
-  "dependencies": {},
   "scripts": {
     "dev": "tsc --watch",
     "build": "rm -rf dist/ && tsc",
@@ -20,17 +19,17 @@
   "peerDependencies": {
     "react": "18.x.x",
     "react-dom": "18.x.x",
-    "vite": "^4.3.8",
-    "vike": "^0.4.142"
+    "vike": "^0.4.142",
+    "vite": "^4.3.8"
   },
   "devDependencies": {
     "@brillout/release-me": "^0.1.7",
-    "@types/node": "^18.15.3",
-    "@types/react": "^18.0.8",
-    "@types/react-dom": "^18.0.3",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "typescript": "^5.0.2",
+    "@types/node": "^18.17.18",
+    "@types/react": "^18.2.22",
+    "@types/react-dom": "^18.2.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.2.2",
     "vike": "^0.4.142"
   },
   "typesVersions": {

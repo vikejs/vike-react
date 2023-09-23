@@ -1,8 +1,8 @@
 export default onRenderHtml
 
 import { renderToString } from 'react-dom/server'
-import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server'
-import type { PageContext } from 'vite-plugin-ssr/types'
+import { escapeInject, dangerouslySkipEscape } from 'vike/server'
+import type { PageContext } from 'vike/types'
 import { getTitle } from './getTitle.js'
 import { getPageElement } from './getPageElement.js'
 import { PageContextProvider } from './PageContextProvider.js'

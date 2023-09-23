@@ -1,4 +1,4 @@
-import type { Config, ConfigEffect } from 'vite-plugin-ssr/types'
+import type { Config, ConfigEffect } from 'vike/types'
 
 // Depending on the value of `config.meta.ssr`, set other config options' `env`
 // accordingly.

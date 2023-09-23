@@ -43,7 +43,7 @@ importers:
       vite:
         specifier: ^4.3.8
         version: 4.3.8(@types/node@18.15.3)
-      vite-plugin-ssr:
+      vike:
         specifier: ^0.4.142
         version: 0.4.142(vite@4.3.8)
 
@@ -73,7 +73,7 @@ importers:
       vite:
         specifier: ^4.3.8
         version: 4.3.8(@types/node@18.15.3)
-      vite-plugin-ssr:
+      vike:
         specifier: ^0.4.142
         version: 0.4.142(vite@4.3.8)
 
@@ -104,7 +104,7 @@ importers:
       typescript:
         specifier: ^5.0.2
         version: 5.0.2
-      vite-plugin-ssr:
+      vike:
         specifier: ^0.4.142
         version: 0.4.142(vite@4.3.8)
 
@@ -2062,7 +2062,7 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite-plugin-ssr@0.4.142(vite@4.3.8):
+  /vike@0.4.142(vite@4.3.8):
     resolution: {integrity: sha512-ZDgpocnTEUmhYxGgMah8ZNK1Sfy5CFVcdXu+Ll3zRtGIPyWT5vYvASs2BLYEneqantHpde2b31Khzb0hxmP62w==}
     engines: {node: '>=16.0.0'}
     hasBin: true

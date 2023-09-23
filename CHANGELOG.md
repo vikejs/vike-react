@@ -1,3 +1,18 @@
+# [0.3.0](https://github.com/vikejs/vike-react/compare/v0.2.1...v0.3.0) (2023-09-23)
+
+
+### Bug Fixes
+
+* migrate to `vike` ([d82713b](https://github.com/vikejs/vike-react/commit/d82713b5de0c28abfc58adb81b282b4a18f292d0))
+
+
+### BREAKING CHANGES
+
+* use npm package `vike` instead of `vite-plugin-ssr`,
+see https://vite-plugin-ssr.com/vike
+
+
+
 ## [0.2.1](https://github.com/vikejs/vike-react/compare/v0.2.0...v0.2.1) (2023-09-22)
 
 

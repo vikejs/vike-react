@@ -13,15 +13,11 @@ async function onBeforeRender(pageContext: PageContextBuiltInServer) {
   // the client; we want to minimize what is sent over the network.
   movie = filterMovieData(movie)
 
-  const { title } = movie
-
   return {
     pageContext: {
       pageProps: {
         movie
-      },
-      // The page's <title>
-      title
+      }
     }
   }
 }

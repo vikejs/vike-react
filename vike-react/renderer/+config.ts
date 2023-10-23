@@ -23,8 +23,8 @@ const toggleSsrRelatedConfig: ConfigEffect = ({ configDefinedAt, configValue }) 
 }
 
 export default {
-  onRenderHtml: 'import:vike-react/renderer/onRenderHtml',
-  onRenderClient: 'import:vike-react/renderer/onRenderClient',
+  onRenderHtml: 'import:vike-react/renderer/onRenderHtml:onRenderHtml',
+  onRenderClient: 'import:vike-react/renderer/onRenderClient:onRenderClient',
 
   // A page can define an onBeforeRender() hook to be run on the server, which
   // can fetch data and return it as additional page context. Typically it will

@@ -1,14 +1,15 @@
-export default onRenderHtml
+// https://vike.dev/onRenderHtml
+export { onRenderHtml }
 
 import { renderToString } from 'react-dom/server'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
-import type { PageContext } from 'vike/types'
+import type { OnRenderHtmlAsync } from 'vike/types'
 import { getTitle } from './getTitle.js'
 import { getPageElement } from './getPageElement.js'
 import { PageContextProvider } from './PageContextProvider.js'
 import React from 'react'
 
-async function onRenderHtml(pageContext: PageContext) {
+const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
   let pageHtml = ''
   if (!!pageContext.Page) {
     const page = getPageElement(pageContext)
@@ -50,7 +51,5 @@ async function onRenderHtml(pageContext: PageContext) {
       </body>
     </html>`
 
-  return {
-    documentHtml
-  }
+  return documentHtml
 }

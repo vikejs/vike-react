@@ -1,12 +1,13 @@
-export default onRenderClient
+// https://vike.dev/onRenderClient
+export { onRenderClient }
 
 import ReactDOM from 'react-dom/client'
 import { getTitle } from './getTitle.js'
-import type { PageContextClient } from 'vike/types'
+import type { OnRenderClientAsync } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
 
 let root: ReactDOM.Root
-async function onRenderClient(pageContext: PageContextClient) {
+const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRenderClientAsync> => {
   const page = getPageElement(pageContext)
 
   const container = document.getElementById('page-view')!

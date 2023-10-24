@@ -1,6 +1,6 @@
 export { getTitle }
 
-import type { ConfigEntries, PageContext } from 'vike/types'
+import type { PageContext } from 'vike/types'
 import { isCallable } from './utils/isCallable.js'
 
 /**

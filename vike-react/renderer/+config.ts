@@ -29,7 +29,7 @@ export default {
   // A page can define an onBeforeRender() hook to be run on the server, which
   // can fetch data and return it as additional page context. Typically it will
   // return the page's root React component's props and additional data that can
-  // be used by the renderers. See /examples/basic/pages/star-wars/types.ts
+  // be used by the renderers.
   // It is a cumulative config option, so a web app using vike-react can extend
   // this list.
   passToClient: ['pageProps', 'title'],

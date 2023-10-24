@@ -12,15 +12,23 @@ const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRe
 
   const container = document.getElementById('page-view')!
   if (container.innerHTML !== '' && pageContext.isHydration) {
+    // Hydration
     root = ReactDOM.hydrateRoot(container, page)
   } else {
     if (!root) {
+      // First rendering
       root = ReactDOM.createRoot(container)
+    } else {
+      // Client routing
+      // See https://vike.dev/server-routing-vs-client-routing
+
+      // Get the page's `title` config value, which may be different from the
+      // previous page. It can even be null, in which case we should unset the
+      // document title.
+      const title = getTitle(pageContext)
+      document.title = title || ''
     }
+
     root.render(page)
-  }
-  const title = getTitle(pageContext)
-  if (title !== null) {
-    document.title = title
   }
 }

@@ -49,6 +49,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
       <body>
         <div id="page-view">${dangerouslySkipEscape(pageHtml)}</div>
       </body>
+      <!-- built with https://github.com/vikejs/vike-react -->
     </html>`
 
   return documentHtml

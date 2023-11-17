@@ -1,12 +1,14 @@
 export default onRenderHtml
 
 import { renderToString } from 'react-dom/server'
-import { escapeInject, dangerouslySkipEscape } from 'vike/server'
+import { escapeInject, dangerouslySkipEscape, version } from 'vike/server'
 import type { PageContext } from 'vike/types'
 import { getTitle } from './getTitle.js'
 import { getPageElement } from './getPageElement.js'
 import { PageContextProvider } from './PageContextProvider.js'
 import React from 'react'
+
+checkVikeVersion()
 
 async function onRenderHtml(pageContext: PageContext) {
   let pageHtml = ''
@@ -53,4 +55,14 @@ async function onRenderHtml(pageContext: PageContext) {
   return {
     documentHtml
   }
+}
+
+function checkVikeVersion() {
+  if (version) {
+    const versionParts = version.split('.').map((s) => parseInt(s, 10)) as [number, number, number]
+    if (versionParts[0] > 0) return
+    if (versionParts[1] > 4) return
+    if (versionParts[2] >= 147) return
+  }
+  throw new Error('Update Vike to its latest version (or vike@0.4.147 and any version above)')
 }

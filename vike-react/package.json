@@ -19,7 +19,7 @@
   "peerDependencies": {
     "react": "18.x.x",
     "react-dom": "18.x.x",
-    "vike": "^0.4.142",
+    "vike": "^0.4.147",
     "vite": "^4.3.8"
   },
   "devDependencies": {
@@ -30,7 +30,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.2.2",
-    "vike": "^0.4.142"
+    "vike": "^0.4.147"
   },
   "typesVersions": {
     "*": {

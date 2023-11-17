@@ -15,8 +15,8 @@ const toggleSsrRelatedConfig: ConfigEffect = ({ configDefinedAt, configValue }) 
       // accessible only in the client's renderer.
       Page: {
         env: configValue
-          ? { server: true, client: true } // default
-          : { client: true }
+          ? 'server-and-client' // default
+          : 'client-only'
       }
     }
   }
@@ -30,25 +30,25 @@ export default {
   hydrationCanBeAborted: true,
   meta: {
     Head: {
-      env: { server: true }
+      env: 'server-only'
     },
     Layout: {
-      env: { server: true, client: true }
+      env: 'server-and-client'
     },
     title: {
-      env: { server: true, client: true }
+      env: 'server-and-client'
     },
     description: {
-      env: { server: true }
+      env: 'server-only'
     },
     favicon: {
-      env: { server: true }
+      env: 'server-only'
     },
     lang: {
-      env: { server: true }
+      env: 'server-only'
     },
     ssr: {
-      env: { config: true },
+      env: 'config-only',
       effect: toggleSsrRelatedConfig
     }
   }

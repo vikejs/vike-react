@@ -1,3 +1,12 @@
+## [0.3.3](https://github.com/vikejs/vike-react/compare/v0.3.2...v0.3.3) (2023-11-17)
+
+
+### Features
+
+* support HTML streaming ([e349788](https://github.com/vikejs/vike-react/commit/e349788627cdb3e6cae0b40daca5b283f5b4f5ea))
+
+
+
 ## [0.3.2](https://github.com/vikejs/vike-react/compare/v0.3.1...v0.3.2) (2023-11-17)
 
 

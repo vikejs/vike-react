@@ -1,3 +1,12 @@
+## [0.3.1](https://github.com/vikejs/vike-react/compare/v0.3.0...v0.3.1) (2023-11-17)
+
+
+### Bug Fixes
+
+* use latest version of the Vike V1 design ([3ddf5e2](https://github.com/vikejs/vike-react/commit/3ddf5e2dd5b4cb072af3e774f9f29d7a5fa99344))
+
+
+
 # [0.3.0](https://github.com/vikejs/vike-react/compare/v0.2.1...v0.3.0) (2023-09-23)
 
 

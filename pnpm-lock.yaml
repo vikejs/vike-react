@@ -38,8 +38,8 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
       vike:
-        specifier: ^0.4.144
-        version: 0.4.144(vite@4.4.9)
+        specifier: ^0.4.147
+        version: 0.4.147(vite@4.4.9)
       vike-react:
         specifier: link:../../vike-react
         version: link:../../vike-react
@@ -68,8 +68,8 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
       vike:
-        specifier: ^0.4.144
-        version: 0.4.144(vite@4.4.9)
+        specifier: ^0.4.147
+        version: 0.4.147(vite@4.4.9)
       vike-react:
         specifier: link:../../vike-react
         version: link:../../vike-react
@@ -105,8 +105,8 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
       vike:
-        specifier: ^0.4.144
-        version: 0.4.144(vite@4.4.9)
+        specifier: ^0.4.147
+        version: 0.4.147(vite@4.4.9)
 
 packages:
 
@@ -334,8 +334,8 @@ packages:
   /@brillout/import@0.2.3:
     resolution: {integrity: sha512-1T8WlD75eeFSMrptGy8jiLHmfHgMmSjWvLOIUvHmSVZt+6k0eQqYUoK4KbmE4T9pVLIfxvZSOm2D68VEqKRHRw==}
 
-  /@brillout/json-serializer@0.5.6:
-    resolution: {integrity: sha512-48u+Wthh0muDueyooi/Or59DDFCPitnuCN9OkMWoj7MQAbDn5pS/cVBB7ds6ENmtC1Qb0spI4PfKZxQSBEkubg==}
+  /@brillout/json-serializer@0.5.8:
+    resolution: {integrity: sha512-vEuXw30ok+mJfJutOxXKBb4lBJ0HymA7lev9PcYK6W/hzjhCTPk9Bdk85HrcNcKZWRQiwoWtw0F2Di4TRJ7ssQ==}
 
   /@brillout/picocolors@1.0.9:
     resolution: {integrity: sha512-Lt/W5JsA75hcDJ2cOAlE4TqSMl6c9K+rXGRo/cU2fApnmhbRcNdkR4UHQDAwtWfZyUKWaxdwSui+jp+74J1pZg==}
@@ -2259,8 +2259,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vike@0.4.144(vite@4.4.9):
-    resolution: {integrity: sha512-smvBXv33IhP5FHOvoBYZuir/Zip93AoBGqiIdmWHva1RYeQDFlXQMbs/YZ5HqFc7OrL8cL3K7iUsEC6t/pF+/Q==}
+  /vike@0.4.147(vite@4.4.9):
+    resolution: {integrity: sha512-TNkIJY+jydz3cL4UGT58annjIAH7a5Rv0hu5clMMuBnC39S5ArsCF0mAZrHKsMa5mV6HwlW6j3mmVWw2kKVcBw==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     peerDependencies:
@@ -2271,7 +2271,7 @@ packages:
         optional: true
     dependencies:
       '@brillout/import': 0.2.3
-      '@brillout/json-serializer': 0.5.6
+      '@brillout/json-serializer': 0.5.8
       '@brillout/picocolors': 1.0.9
       '@brillout/require-shim': 0.1.2
       '@brillout/vite-plugin-import-build': 0.2.20

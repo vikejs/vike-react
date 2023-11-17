@@ -1,3 +1,18 @@
+## [0.3.2](https://github.com/vikejs/vike-react/compare/v0.3.1...v0.3.2) (2023-11-17)
+
+
+### Bug Fixes
+
+* merge conflict ([9440f22](https://github.com/vikejs/vike-react/commit/9440f22cfe3e0f5aebf098c6f7ce80c26456a8ec))
+* possibly unset document title on client routing ([dc12493](https://github.com/vikejs/vike-react/commit/dc12493e1e6fc034edbdb58598439ca67518c40c))
+
+
+### Features
+
+* add link to repo to SSR shell ([d53c74d](https://github.com/vikejs/vike-react/commit/d53c74dd361979587149c29fbbdb3f299713235f))
+
+
+
 ## [0.3.1](https://github.com/vikejs/vike-react/compare/v0.3.0...v0.3.1) (2023-11-17)
 
 

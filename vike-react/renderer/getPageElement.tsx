@@ -5,6 +5,10 @@ import { PageContextProvider } from './PageContextProvider.js'
 import type { PageContext } from 'vike/types'
 
 function getPageElement(pageContext: PageContext): JSX.Element {
+  if (!pageContext.Page) {
+    return <></>
+  }
+
   const Layout = pageContext.config.Layout ?? PassThrough
   const Wrapper =
     /* Should we implement this? Enabling users to defined a wrapper that is used across all layouts.

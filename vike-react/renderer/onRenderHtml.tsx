@@ -1,8 +1,8 @@
 // https://vike.dev/onRenderHtml
 export { onRenderHtml }
 
-import { renderToString } from 'react-dom/server'
-import { escapeInject, dangerouslySkipEscape, version } from 'vike/server'
+import { renderToStream } from 'react-streaming/server'
+import { escapeInject, version } from 'vike/server'
 import type { OnRenderHtmlAsync } from 'vike/types'
 import { getTitle } from './getTitle.js'
 import { getPageElement } from './getPageElement.js'
@@ -12,20 +12,16 @@ import React from 'react'
 checkVikeVersion()
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
-  let pageHtml = ''
-  if (!!pageContext.Page) {
-    const page = getPageElement(pageContext)
-    pageHtml = renderToString(page)
-  }
-
-  const title = getTitle(pageContext)
-  const titleTag = !title ? '' : escapeInject`<title>${title}</title>`
-
-  const { description } = pageContext.config
-  const descriptionTag = !description ? '' : escapeInject`<meta name="description" content="${description}" />`
+  const lang = pageContext.config.lang || 'en'
 
   const { favicon } = pageContext.config
-  const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
+  const faviconTag = !favicon ? '' : <link rel="icon" href={favicon} />
+
+  const title = getTitle(pageContext)
+  const titleTag = !title ? '' : <title>{title}</title>
+
+  const { description } = pageContext.config
+  const descriptionTag = !description ? '' : <meta name="description" content={description} />
 
   const Head = pageContext.config.Head || (() => <></>)
   const head = (
@@ -35,24 +31,30 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
       </PageContextProvider>
     </React.StrictMode>
   )
-  const headHtml = renderToString(head)
 
-  const lang = pageContext.config.lang || 'en'
+  const page = getPageElement(pageContext)
 
-  const documentHtml = escapeInject`<!DOCTYPE html>
-    <html lang='${lang}'>
+  const stream = await renderToStream(
+    <>
       <head>
-        <meta charset="UTF-8" />
-        ${faviconTag}
-        ${titleTag}
-        ${descriptionTag}
-        ${dangerouslySkipEscape(headHtml)}
+        <meta charSet="UTF-8" />
+        {faviconTag}
+        {titleTag}
+        {descriptionTag}
+        {head}
       </head>
       <body>
-        <div id="page-view">${dangerouslySkipEscape(pageHtml)}</div>
+        <div id="page-view">{page}</div>
       </body>
-      <!-- built with https://github.com/vikejs/vike-react -->
-    </html>`
+    </>,
+    { userAgent: pageContext.userAgent }
+  )
+
+  const documentHtml = escapeInject`<!DOCTYPE html>
+  <html lang='${lang}'>
+    ${stream}
+    <!-- built with https://github.com/vikejs/vike-react -->
+  </html>`
 
   return documentHtml
 }

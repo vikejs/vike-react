@@ -1,8 +1,9 @@
 // https://vike.dev/onRenderHtml
 export { onRenderHtml }
 
+import { renderToString } from 'react-dom/server'
 import { renderToStream } from 'react-streaming/server'
-import { escapeInject, version } from 'vike/server'
+import { escapeInject, dangerouslySkipEscape, version } from 'vike/server'
 import type { OnRenderHtmlAsync } from 'vike/types'
 import { getTitle } from './getTitle.js'
 import { getPageElement } from './getPageElement.js'
@@ -32,9 +33,9 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
     </React.StrictMode>
   )
 
-  const page = getPageElement(pageContext)
-
-  const stream = await renderToStream(
+  const isSsrDisabled = !pageContext.Page
+  const page = isSsrDisabled ? <></> : getPageElement(pageContext)
+  const htmlContent = (
     <>
       <head>
         <meta charSet="UTF-8" />
@@ -46,13 +47,16 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
       <body>
         <div id="page-view">{page}</div>
       </body>
-    </>,
-    { userAgent: pageContext.userAgent }
+    </>
   )
+
+  const streamOrString = isSsrDisabled
+    ? dangerouslySkipEscape(renderToString(htmlContent))
+    : await renderToStream(htmlContent, { userAgent: pageContext.userAgent })
 
   const documentHtml = escapeInject`<!DOCTYPE html>
   <html lang='${lang}'>
-    ${stream}
+    ${streamOrString}
     <!-- built with https://github.com/vikejs/vike-react -->
   </html>`
 

@@ -1,3 +1,12 @@
+## [0.3.4](https://github.com/vikejs/vike-react/compare/v0.3.3...v0.3.4) (2023-11-18)
+
+
+### Bug Fixes
+
+* don't use react-streaming when SSR is disabled ([#34](https://github.com/vikejs/vike-react/issues/34)) ([6c7c38a](https://github.com/vikejs/vike-react/commit/6c7c38a462ed1348676a61b60a0e25f30d2e8ffe))
+
+
+
 ## [0.3.3](https://github.com/vikejs/vike-react/compare/v0.3.2...v0.3.3) (2023-11-17)
 
 

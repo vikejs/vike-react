@@ -1,15 +1,14 @@
 export { ClientOnly }
 
-import React, { ComponentType } from 'react'
-import { ReactNode, Suspense, lazy, useEffect, useState } from 'react'
+import React, { ComponentType, ReactNode, Suspense, lazy, useEffect, useState } from 'react'
 
-type ClientOnlyProps<T extends {}> = {
+type ClientOnlyProps<T> = {
   component: () => Promise<{ default: React.ComponentType<T> }>
-  componentProps: T
+  componentRenderer: (Component: React.ComponentType<T>) => ReactNode
   fallback: ReactNode
 }
 
-function ClientOnly<T extends {}>({ component, componentProps, fallback }: ClientOnlyProps<T>) {
+function ClientOnly<T>({ component, componentRenderer, fallback }: ClientOnlyProps<T>) {
   const [Component, setComponent] = useState<ComponentType<any> | null>(null)
 
   useEffect(() => {
@@ -17,7 +16,7 @@ function ClientOnly<T extends {}>({ component, componentProps, fallback }: Clien
       const Component = lazy(() =>
         component()
           .then((LoadedComponent) => {
-            return { default: () => <LoadedComponent.default {...componentProps} /> }
+            return { default: () => componentRenderer(LoadedComponent.default) }
           })
           .catch((error) => {
             console.error('Component loading failed:', error)
@@ -28,7 +27,7 @@ function ClientOnly<T extends {}>({ component, componentProps, fallback }: Clien
     }
 
     loadComponent()
-  }, [component])
+  }, [component, componentRenderer])
 
   return <Suspense fallback={fallback}>{Component ? <Component /> : null}</Suspense>
 }

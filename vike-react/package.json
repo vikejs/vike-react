@@ -8,7 +8,8 @@
     ".": "./dist/renderer/+config.js",
     "./renderer/onRenderHtml": "./dist/renderer/onRenderHtml.js",
     "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js",
-    "./usePageContext": "./dist/components/usePageContext.js"
+    "./usePageContext": "./dist/components/usePageContext.js",
+    "./ClientOnly": "./dist/components/ClientOnly.js"
   },
   "scripts": {
     "dev": "tsc --watch",

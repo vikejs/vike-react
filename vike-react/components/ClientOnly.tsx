@@ -29,7 +29,7 @@ function ClientOnly<T>({
     }
 
     loadComponent()
-  }, [load, children])
+  }, [])
 
   return <Suspense fallback={fallback}>{Component ? <Component /> : null}</Suspense>
 }

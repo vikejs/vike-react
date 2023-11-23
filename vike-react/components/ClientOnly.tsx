@@ -5,11 +5,13 @@ import React, { ComponentType, ReactNode, Suspense, lazy, useEffect, useState } 
 function ClientOnly<T>({
   load,
   children,
-  fallback
+  fallback,
+  refreshKey
 }: {
   load: () => Promise<{ default: React.ComponentType<T> } | React.ComponentType<T>>
   children: (Component: React.ComponentType<T>) => ReactNode
   fallback: ReactNode
+  refreshKey?: string | number
 }) {
   const [Component, setComponent] = useState<ComponentType<unknown> | null>(null)
 
@@ -29,7 +31,7 @@ function ClientOnly<T>({
     }
 
     loadComponent()
-  }, [])
+  }, [refreshKey])
 
   return <Suspense fallback={fallback}>{Component ? <Component /> : null}</Suspense>
 }

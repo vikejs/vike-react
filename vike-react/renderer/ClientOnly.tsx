@@ -9,7 +9,7 @@ type ClientOnlyProps<T> = {
 }
 
 function ClientOnly<T>({ load, children, fallback }: ClientOnlyProps<T>) {
-  const [Component, setComponent] = useState<ComponentType<any> | null>(null)
+  const [Component, setComponent] = useState<ComponentType<unknown> | null>(null)
 
   useEffect(() => {
     const loadComponent = () => {
@@ -20,7 +20,7 @@ function ClientOnly<T>({ load, children, fallback }: ClientOnlyProps<T>) {
           })
           .catch((error) => {
             console.error('Component loading failed:', error)
-            return { default: () => <p>Error loading component</p> }
+            return { default: () => <p>Error loading component.</p> }
           })
       )
       setComponent(Component)

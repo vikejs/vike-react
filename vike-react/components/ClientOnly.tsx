@@ -7,7 +7,7 @@ function ClientOnly<T>({
   children,
   fallback
 }: {
-  load: () => Promise<{ default: React.ComponentType<T> }>
+  load: () => Promise<{ default: React.ComponentType<T> } | React.ComponentType<T>>
   children: (Component: React.ComponentType<T>) => ReactNode
   fallback: ReactNode
 }) {
@@ -18,7 +18,7 @@ function ClientOnly<T>({
       const Component = lazy(() =>
         load()
           .then((LoadedComponent) => {
-            return { default: () => children(LoadedComponent.default) }
+            return { default: () => children('default' in LoadedComponent ? LoadedComponent.default : LoadedComponent) }
           })
           .catch((error) => {
             console.error('Component loading failed:', error)

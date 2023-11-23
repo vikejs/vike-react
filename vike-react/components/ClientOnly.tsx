@@ -1,17 +1,18 @@
 export { ClientOnly }
 
-import React, { ComponentType, ReactNode, Suspense, lazy, useEffect, useState } from 'react'
+import React, { Suspense, lazy, useEffect, useState } from 'react'
+import type { ComponentType, ReactNode } from 'react'
 
 function ClientOnly<T>({
   load,
   children,
   fallback,
-  refreshKey
+  deps
 }: {
   load: () => Promise<{ default: React.ComponentType<T> } | React.ComponentType<T>>
   children: (Component: React.ComponentType<T>) => ReactNode
   fallback: ReactNode
-  refreshKey?: string | number
+  deps?: Parameters<typeof useEffect>[1]
 }) {
   const [Component, setComponent] = useState<ComponentType<unknown> | null>(null)
 
@@ -31,7 +32,7 @@ function ClientOnly<T>({
     }
 
     loadComponent()
-  }, [refreshKey])
+  }, deps)
 
   return <Suspense fallback={fallback}>{Component ? <Component /> : null}</Suspense>
 }

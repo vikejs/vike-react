@@ -2,13 +2,15 @@ export { ClientOnly }
 
 import React, { ComponentType, ReactNode, Suspense, lazy, useEffect, useState } from 'react'
 
-type ClientOnlyProps<T> = {
+function ClientOnly<T>({
+  load,
+  children,
+  fallback
+}: {
   load: () => Promise<{ default: React.ComponentType<T> }>
   children: (Component: React.ComponentType<T>) => ReactNode
   fallback: ReactNode
-}
-
-function ClientOnly<T>({ load, children, fallback }: ClientOnlyProps<T>) {
+}) {
   const [Component, setComponent] = useState<ComponentType<unknown> | null>(null)
 
   useEffect(() => {

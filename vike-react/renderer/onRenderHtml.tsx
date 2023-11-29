@@ -16,13 +16,13 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
   const lang = pageContext.config.lang || 'en'
 
   const { favicon } = pageContext.config
-  const faviconTag = !favicon ? '' : <link rel="icon" href={favicon} />
+  const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
 
   const title = getTitle(pageContext)
-  const titleTag = !title ? '' : <title>{title}</title>
+  const titleTag = !title ? '' : escapeInject`<title>${title}</title>`
 
   const { description } = pageContext.config
-  const descriptionTag = !description ? '' : <meta name="description" content={description} />
+  const descriptionTag = !description ? '' : escapeInject`<meta name="description" content="${description}" />`
 
   const Head = pageContext.config.Head || (() => <></>)
   const head = (
@@ -33,32 +33,33 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
     </React.StrictMode>
   )
 
+  const headHtml = dangerouslySkipEscape(renderToString(head))
+
   const isSsrDisabled = !pageContext.Page
   const page = isSsrDisabled ? <></> : getPageElement(pageContext)
-  const htmlContent = (
-    <>
-      <head>
-        <meta charSet="UTF-8" />
-        {faviconTag}
-        {titleTag}
-        {descriptionTag}
-        {head}
-      </head>
-      <body>
-        <div id="page-view">{page}</div>
-      </body>
-    </>
-  )
 
-  const streamOrString = isSsrDisabled
-    ? dangerouslySkipEscape(renderToString(htmlContent))
-    : await renderToStream(htmlContent, { userAgent: pageContext.userAgent })
+  // Which one is better ?
+  // This :
+  const streamOrString = await renderToStream(page, { userAgent: pageContext.userAgent, disable: isSsrDisabled })
+  /**
+   * Or This ?
+  const streamOrString = isSsrDisabled ? dangerouslySkipEscape(renderToString(page)) : await renderToStream(page, { userAgent: pageContext.userAgent })
+   */
 
   const documentHtml = escapeInject`<!DOCTYPE html>
-  <html lang='${lang}'>
-    ${streamOrString}
-    <!-- built with https://github.com/vikejs/vike-react -->
-  </html>`
+    <html lang='${lang}'>
+      <head>
+        <meta charset="UTF-8" />
+        ${faviconTag}
+        ${titleTag}
+        ${descriptionTag}
+        ${headHtml}
+      </head>
+      <body>
+        <div id="page-view">${streamOrString}</div>
+      </body>
+      <!-- built with https://github.com/vikejs/vike-react -->
+    </html>`
 
   return documentHtml
 }

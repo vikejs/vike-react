@@ -38,13 +38,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
   const isSsrDisabled = !pageContext.Page
   const page = isSsrDisabled ? <></> : getPageElement(pageContext)
 
-  // Which one is better ?
-  // This :
-  const streamOrString = await renderToStream(page, { userAgent: pageContext.userAgent, disable: isSsrDisabled })
-  /**
-   * Or This ?
   const streamOrString = isSsrDisabled ? dangerouslySkipEscape(renderToString(page)) : await renderToStream(page, { userAgent: pageContext.userAgent })
-   */
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang='${lang}'>

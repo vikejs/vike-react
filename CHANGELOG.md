@@ -1,6 +1,16 @@
 ## [0.3.5](https://github.com/vikejs/vike-react/compare/v0.3.4...v0.3.5) (2023-11-30)
 
 
+### Bug Fixes
+
+* fix `useId()` when using SSR ([#36](https://github.com/vikejs/vike-react/issues/36))
+
+
+### Features
+
+* add `<ClientOnly>` component ([#35](https://github.com/vikejs/vike-react/pull/35))
+
+
 
 ## [0.3.4](https://github.com/vikejs/vike-react/compare/v0.3.3...v0.3.4) (2023-11-18)
 

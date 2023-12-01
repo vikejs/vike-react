@@ -39,7 +39,7 @@ const Movie = suspense(
     <>
       <div>Loading movie {id} failed</div>
       <div>{error.message}</div>
-      <button onClick={retry}>Try again</button>
+      <button onClick={() => retry()}>Try again</button>
     </>
   )
 )

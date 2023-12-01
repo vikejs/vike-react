@@ -2,9 +2,12 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import React, { ComponentType, ReactNode, Suspense } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 
+type RetryOptions = { retryQuery?: boolean }
+type RetryFn = (options?: RetryOptions) => void
+
 type ErrorFallbackProps = {
   error: { message: string }
-  retry: (options?: { retryQuery?: boolean } & Record<any, any>) => void
+  retry: RetryFn
 }
 
 export function suspense<T extends object = Record<string, never>>(
@@ -13,58 +16,61 @@ export function suspense<T extends object = Record<string, never>>(
   ErrorFallback?: ComponentType<T & ErrorFallbackProps> | ReactNode
 ) {
   const ComponentWithSuspense = (componentProps: T) => {
-    let Wrapped = (
-      <Suspense fallback={typeof Fallback === 'function' ? <Fallback {...componentProps} /> : Fallback}>
-        <Component {...componentProps} />
-      </Suspense>
-    )
-
     if (ErrorFallback) {
-      const CurrentWrapped = Wrapped
+      if (typeof ErrorFallback !== 'function') {
+        const CurrentErrorFallback = ErrorFallback
+        ErrorFallback = () => <>{CurrentErrorFallback}</>
+      }
 
-      Wrapped = (
-        <QueryErrorResetBoundary>
-          {({ reset }) => {
-            if (typeof ErrorFallback === 'function') {
-              const CurrentErrorFallback = ErrorFallback
-              //@ts-ignore
-              ErrorFallback = ({ error: originalError, resetErrorBoundary, retry }: FallbackProps) => {
-                if (retry) {
-                  return CurrentErrorFallback
-                }
-                const onRetry = ({ retryQuery = true }) => {
+      return (
+        <Suspense fallback={typeof Fallback === 'function' ? <Fallback {...componentProps} /> : Fallback}>
+          <QueryErrorResetBoundary>
+            {({ reset }) => {
+              const createRetry =
+                (resetErrorBoundary: FallbackProps['resetErrorBoundary']): RetryFn =>
+                (options = {}) => {
+                  const { retryQuery = true } = options
                   if (retryQuery) {
                     reset()
                   }
                   resetErrorBoundary()
                 }
-
+              const createError = (originalError: FallbackProps['error']) => {
                 const message = getErrorMessage(originalError)
                 const error = { message }
                 if (typeof originalError === 'object') {
                   Object.assign(error, originalError)
                 }
-
-                //@ts-ignore
-                return <CurrentErrorFallback {...componentProps} retry={onRetry} error={error} />
+                return error
               }
-            }
-
-            const errorBoundaryProps =
-              typeof ErrorFallback === 'function'
-                ? { FallbackComponent: ErrorFallback }
-                : { fallback: ErrorFallback || <></> }
-
-            return (
-              //@ts-ignore
-              <ErrorBoundary {...errorBoundaryProps}>{CurrentWrapped}</ErrorBoundary>
-            )
-          }}
-        </QueryErrorResetBoundary>
+              if (ErrorFallback === undefined) {
+                return
+              }
+              return (
+                <ErrorBoundary
+                  fallbackRender={({ error: originalError, resetErrorBoundary }) => (
+                    //@ts-ignore
+                    <ErrorFallback
+                      {...componentProps}
+                      retry={createRetry(resetErrorBoundary)}
+                      error={createError(originalError)}
+                    />
+                  )}
+                >
+                  <Component {...componentProps} />
+                </ErrorBoundary>
+              )
+            }}
+          </QueryErrorResetBoundary>
+        </Suspense>
       )
     }
 
-    return Wrapped
+    return (
+      <Suspense fallback={typeof Fallback === 'function' ? <Fallback {...componentProps} /> : Fallback}>
+        <Component {...componentProps} />
+      </Suspense>
+    )
   }
 
   ComponentWithSuspense.displayName = `suspense(${Component.displayName || Component.name})`

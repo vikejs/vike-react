@@ -26,7 +26,14 @@ const Movie = suspense(
     return (
       <>
         <h1>Star Wars Movies</h1>
-        <a href={`/star-wars/${id}`}>{title}</a> ({release_date})
+        <ul>
+          <li>
+            Title: <b>{title}</b>
+          </li>
+          <li>
+            Release date: <b>{release_date}</b>
+          </li>
+        </ul>
         <p>
           Source: <a href="https://star-wars.brillout.com">star-wars.brillout.com</a>.
         </p>

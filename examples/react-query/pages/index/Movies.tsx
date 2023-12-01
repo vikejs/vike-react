@@ -7,7 +7,7 @@ import { MovieDetails } from './types'
 
 const Movies = suspense(() => {
   const result = useSuspenseQuery({
-    queryKey: ['key'],
+    queryKey: ['movies'],
     queryFn: getStarWarsMovies
   })
 

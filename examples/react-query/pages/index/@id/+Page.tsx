@@ -15,7 +15,7 @@ function Page() {
 const Movie = suspense(
   ({ id }: { id: string }) => {
     const result = useSuspenseQuery({
-      queryKey: ['movies', id],
+      queryKey: ['movie', id],
       queryFn: () => getStarWarsMovie(id),
       // Disabled to showcase error fallback
       retry: false

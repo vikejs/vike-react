@@ -4,5 +4,9 @@ import { UserConfig } from 'vite'
 
 export default {
   plugins: [react(), vike()],
-  optimizeDeps: { include: ['cross-fetch', 'react/jsx-runtime', 'vike-react/renderer/onRenderClient'] }
+  optimizeDeps: {
+    include: ['cross-fetch', 'react/jsx-runtime', 'vike-react/renderer/onRenderClient'],
+    // Workaround until Vike patch is released
+    exclude: ['react-streaming']
+  }
 } satisfies UserConfig

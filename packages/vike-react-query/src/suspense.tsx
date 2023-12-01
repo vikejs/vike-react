@@ -43,9 +43,7 @@ export function suspense<T extends object = Record<string, never>>(
                 }
                 return error
               }
-              if (ErrorFallback === undefined) {
-                return
-              }
+
               return (
                 <ErrorBoundary
                   fallbackRender={({ error: originalError, resetErrorBoundary }) => (

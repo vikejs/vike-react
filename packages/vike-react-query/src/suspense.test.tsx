@@ -1,7 +1,8 @@
-import { cleanup, render } from '@testing-library/react'
+import { cleanup, render, waitFor } from '@testing-library/react'
 import React, { ReactNode, useEffect } from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { suspense } from './suspense'
+import { QueryClient, QueryClientProvider, useSuspenseQuery } from '@tanstack/react-query'
 
 const Component = suspense(
   ({ count, onMount }: { count?: number; onMount?: () => void }) => {
@@ -12,6 +13,28 @@ const Component = suspense(
     return count
   },
   ({ count }) => `loading${count}`,
+  ({ count }) => `error${count}`
+)
+
+const ComponentThatSuspends = suspense(
+  ({ count, onMount }: { count?: number; onMount?: () => void; onFallbackMount?: () => void }) => {
+    useSuspenseQuery({
+      queryFn: () => new Promise((r) => setTimeout(() => r('some value'), 50)),
+      queryKey: ['ComponentThatSuspends']
+    })
+
+    useEffect(() => {
+      onMount?.()
+    }, [])
+
+    return count
+  },
+  ({ count, onFallbackMount }) => {
+    useEffect(() => {
+      onFallbackMount?.()
+    }, [])
+    return `loading${count}`
+  },
   ({ count }) => `error${count}`
 )
 
@@ -29,6 +52,17 @@ const ComponentThatThrows = suspense(
     }, [])
     return `error${error.message}${count}`
   }
+)
+
+const ComponentThatThrows2 = suspense(
+  ({ count, onMount }: { count?: number; onMount?: () => void; onErrorFallbackMount?: () => void }) => {
+    useEffect(() => {
+      onMount?.()
+    }, [])
+    throw new Error('some message')
+  },
+  ({ count }) => `loading${count}`,
+  `error fallback string`
 )
 
 const OuterComponent = suspense(
@@ -62,10 +96,56 @@ describe('suspense', () => {
     expect(onMount).toBeCalledTimes(1)
   })
 
-  it('shows error fallback', () => {
+  it('shows loading fallback', async () => {
+    const queryClient = new QueryClient()
+    const onMount = vi.fn()
+    let result = render(
+      <QueryClientProvider client={queryClient}>
+        <ComponentThatSuspends count={123} onMount={onMount} />
+      </QueryClientProvider>
+    )
+    expect(result.container.innerHTML).toBe(`loading${123}`)
+    await waitFor(() => expect(onMount).toBeCalledTimes(1))
+    expect(result.container.innerHTML).toBe('123')
+  })
+
+  it('updates props inside the fallback, without remounting the fallback component', async () => {
+    const queryClient = new QueryClient()
+    const onMount = vi.fn()
+    const onFallbackMount = vi.fn()
+    let result = render(
+      <QueryClientProvider client={queryClient}>
+        <ComponentThatSuspends count={123} onMount={onMount} onFallbackMount={onFallbackMount} />
+      </QueryClientProvider>
+    )
+    expect(result.container.innerHTML).toBe(`loading${123}`)
+    expect(onFallbackMount).toBeCalledTimes(1)
+    result = render(
+      <QueryClientProvider client={queryClient}>
+        <ComponentThatSuspends count={456} onMount={onMount} onFallbackMount={onFallbackMount} />
+      </QueryClientProvider>,
+      {
+        container: result.container
+      }
+    )
+    expect(result.container.innerHTML).toBe(`loading${456}`)
+    expect(onFallbackMount).toBeCalledTimes(1)
+
+    await waitFor(() => expect(onMount).toBeCalledTimes(1))
+    expect(result.container.innerHTML).toBe('456')
+  })
+
+  it('shows error fallback component', () => {
     const onMount = vi.fn()
     let result = render(<ComponentThatThrows count={456} onMount={onMount} />)
     expect(result.container.innerHTML).toBe(`errorsome message${456}`)
+    expect(onMount).toBeCalledTimes(0)
+  })
+
+  it('shows error fallback string', () => {
+    const onMount = vi.fn()
+    let result = render(<ComponentThatThrows2 count={456} onMount={onMount} />)
+    expect(result.container.innerHTML).toBe(`error fallback string`)
     expect(onMount).toBeCalledTimes(0)
   })
 

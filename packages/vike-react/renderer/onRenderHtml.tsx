@@ -13,6 +13,8 @@ import React from 'react'
 checkVikeVersion()
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
+  await pageContext.config.__internalOnBeforeRenderAll?.(pageContext)
+
   const lang = pageContext.config.lang || 'en'
 
   const { favicon } = pageContext.config

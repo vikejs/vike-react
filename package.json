@@ -1,20 +1,20 @@
 {
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
     "dev": "cd vike-react/ && pnpm run dev",
-    "build": "cd vike-react/ && pnpm run build",
+    "build": "pnpm --recursive --filter {packages/*} run build",
     "========= Clean": "",
     "clean": "git clean -Xdf",
     "reset": "pnpm run clean && pnpm install && pnpm run build",
     "========= Release": "",
-    "release": "cd vike-react/ && pnpm run release",
-    "release:commit": "cd vike-react/ && pnpm run release:commit",
+    "vike-react:release": "cd ./packages/vike-react/ && pnpm run release",
+    "vike-react:release:commit": "cd ./packages/vike-react/ && pnpm run release:commit",
     "========= Only allow pnpm; forbid yarn & npm": "",
     "preinstall": "npx only-allow pnpm"
   },
-  "pnpm": {
-    "overrides": {
-      "vike-react": "link:./vike-react/"
-    }
-  },
-  "packageManager": "pnpm@8.6.12"
+  "packageManager": "pnpm@8.6.12",
+  "devDependencies": {
+    "prettier": "^3.1.0"
+  }
 }

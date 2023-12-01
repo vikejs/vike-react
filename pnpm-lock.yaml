@@ -4,12 +4,13 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  vike-react: link:./vike-react/
-
 importers:
 
-  .: {}
+  .:
+    devDependencies:
+      prettier:
+        specifier: ^3.1.0
+        version: 3.1.0
 
   examples/basic:
     dependencies:
@@ -41,8 +42,47 @@ importers:
         specifier: ^0.4.147
         version: 0.4.147(react-streaming@0.3.16)(vite@4.5.0)
       vike-react:
-        specifier: link:../../vike-react
-        version: link:../../vike-react
+        specifier: workspace:*
+        version: link:../../packages/vike-react
+      vite:
+        specifier: ^4.4.9
+        version: 4.5.0(@types/node@18.18.9)
+
+  examples/react-query:
+    dependencies:
+      '@types/react':
+        specifier: ^18.2.22
+        version: 18.2.37
+      '@types/react-dom':
+        specifier: ^18.2.7
+        version: 18.2.15
+      '@vitejs/plugin-react':
+        specifier: ^4.0.4
+        version: 4.2.0(vite@4.5.0)
+      cross-fetch:
+        specifier: ^3.1.8
+        version: 3.1.8
+      node-fetch:
+        specifier: ^3.3.2
+        version: 3.3.2
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+      vike:
+        specifier: ^0.4.147
+        version: 0.4.147(react-streaming@0.3.16)(vite@4.5.0)
+      vike-react:
+        specifier: workspace:*
+        version: link:../../packages/vike-react
+      vike-react-query:
+        specifier: workspace:*
+        version: link:../../packages/vike-react-query
       vite:
         specifier: ^4.4.9
         version: 4.5.0(@types/node@18.18.9)
@@ -71,13 +111,13 @@ importers:
         specifier: ^0.4.147
         version: 0.4.147(react-streaming@0.3.16)(vite@4.5.0)
       vike-react:
-        specifier: link:../../vike-react
-        version: link:../../vike-react
+        specifier: workspace:*
+        version: link:../../packages/vike-react
       vite:
         specifier: ^4.4.9
         version: 4.5.0(@types/node@18.18.9)
 
-  vike-react:
+  packages/vike-react:
     dependencies:
       react-streaming:
         specifier: ^0.3.16
@@ -110,6 +150,55 @@ importers:
       vike:
         specifier: ^0.4.147
         version: 0.4.147(react-streaming@0.3.16)(vite@4.5.0)
+
+  packages/vike-react-query:
+    dependencies:
+      '@brillout/json-serializer':
+        specifier: ^0.5.1
+        version: 0.5.8
+      '@tanstack/react-query':
+        specifier: ^5.8.4
+        version: 5.10.0(react@18.2.0)
+      devalue:
+        specifier: ^4.3.2
+        version: 4.3.2
+      react-error-boundary:
+        specifier: ^4.0.11
+        version: 4.0.11(react@18.2.0)
+      vite:
+        specifier: ^4.3.8
+        version: 4.5.0(@types/node@18.18.9)
+    devDependencies:
+      '@brillout/release-me':
+        specifier: ^0.1.9
+        version: 0.1.9
+      '@types/node':
+        specifier: ^18.17.18
+        version: 18.18.9
+      '@types/react':
+        specifier: ^18.2.22
+        version: 18.2.37
+      '@types/react-dom':
+        specifier: ^18.2.7
+        version: 18.2.15
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-streaming:
+        specifier: ^0.3.16
+        version: 0.3.16(react-dom@18.2.0)(react@18.2.0)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+      vike:
+        specifier: ^0.4.147
+        version: 0.4.147(react-streaming@0.3.16)(vite@4.5.0)
+      vike-react:
+        specifier: ^0.3.5
+        version: link:../vike-react
 
 packages:
 
@@ -296,6 +385,13 @@ packages:
     dependencies:
       '@babel/core': 7.23.3
       '@babel/helper-plugin-utils': 7.22.5
+    dev: false
+
+  /@babel/runtime@7.23.5:
+    resolution: {integrity: sha512-NdUTHcPe4C99WxPub+K9l9tK5/lV4UXIoaHSYgzco9BCyjKAAwzdBI+wWtYqHt7LJdbo74ZjRPJgzVweq1sz0w==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.0
     dev: false
 
   /@babel/template@7.22.15:
@@ -770,6 +866,19 @@ packages:
   /@polka/url@1.0.0-next.23:
     resolution: {integrity: sha512-C16M+IYz0rgRhWZdCmK+h58JMv8vijAA61gmz2rspCSwKwzBebpdcsiUmwrtJRdphuY30i6BSLEOP8ppbNLyLg==}
 
+  /@tanstack/query-core@5.10.0:
+    resolution: {integrity: sha512-wlw/l2E+U70iABaJnOtZIJN/5VMhuj4RPViafwUYiIGoqw1VqqqaxBnBL90qLhWswoOaK8RAj3+NiG0duk+cRg==}
+    dev: false
+
+  /@tanstack/react-query@5.10.0(react@18.2.0):
+    resolution: {integrity: sha512-LeJsyXUvhq1TBsEbt3SSEaxP2Att1sv/qW588GL/bvjxPxsLUBWKGuFJ5Z1YP+/nJqVmcXJE8AtvZaaxE9rsKQ==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@tanstack/query-core': 5.10.0
+      react: 18.2.0
+    dev: false
+
   /@types/babel__core@7.20.4:
     resolution: {integrity: sha512-mLnSC22IC4vcWiuObSRjrLd9XcBTGf59vUSoq2jkQDJ/QQ8PMI9rSuzE+aEV8karUMbskw07bKYoUJCKTUaygg==}
     dependencies:
@@ -1086,6 +1195,10 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.2
+    dev: false
+
+  /devalue@4.3.2:
+    resolution: {integrity: sha512-KqFl6pOgOW+Y6wJgu80rHpo2/3H07vr8ntR9rkkFIRETewbf5GaYYcakYfiKz89K+sLsuPkQIZaXDMjUObZwWg==}
     dev: false
 
   /dot-prop@5.3.0:
@@ -1594,6 +1707,12 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
 
+  /prettier@3.1.0:
+    resolution: {integrity: sha512-TQLvXjq5IAibjh8EpBIkNKxO749UEWABoiIZehEPiY4GNpVdhaFKqSTu+QrlU6D2dPAfubRmtJTi4K4YkQ5eXw==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
+
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
@@ -1605,6 +1724,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+
+  /react-error-boundary@4.0.11(react@18.2.0):
+    resolution: {integrity: sha512-U13ul67aP5DOSPNSCWQ/eO0AQEYzEFkVljULQIjMV0KlffTAhxuDoBKdO0pb/JZ8mDhMKFZ9NZi0BmLGUiNphw==}
+    peerDependencies:
+      react: '>=16.13.1'
+    dependencies:
+      '@babel/runtime': 7.23.5
+      react: 18.2.0
+    dev: false
 
   /react-refresh@0.14.0:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
@@ -1647,6 +1775,10 @@ packages:
       parse-json: 7.1.1
       type-fest: 4.8.1
     dev: true
+
+  /regenerator-runtime@0.14.0:
+    resolution: {integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==}
+    dev: false
 
   /reusify@1.0.4:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}

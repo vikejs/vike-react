@@ -18,11 +18,11 @@ export default ({ children }: { children: ReactElement }) =>
 const Fallback = ({ resetErrorBoundary, error }: FallbackProps) => {
   return (
     <div style={pageStyle}>
-      <div style={textStyle}>Oops! There was an error.</div>
+      <div style={textStyle}>There was an error.</div>
       <button style={buttonStyle} onClick={() => resetErrorBoundary()}>
         Try again
       </button>
-      <pre>{getErrorStack(error)}</pre>
+      {import.meta.env.DEV && <pre>{getErrorStack(error)}</pre>}
     </div>
   )
 }

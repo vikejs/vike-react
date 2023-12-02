@@ -1,7 +1,8 @@
 export default Page
 
 import React from 'react'
-import { suspense, useSuspenseQuery } from 'vike-react-query'
+import { suspense } from 'vike-react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { usePageContext } from 'vike-react/usePageContext'
 import { MovieDetails } from '../types'
 

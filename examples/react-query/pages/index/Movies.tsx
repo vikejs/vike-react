@@ -1,7 +1,8 @@
 export { Movies }
 
 import React from 'react'
-import { suspense, useSuspenseQuery } from 'vike-react-query'
+import { suspense } from 'vike-react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { navigate } from 'vike/client/router'
 import { MovieDetails } from './types'
 

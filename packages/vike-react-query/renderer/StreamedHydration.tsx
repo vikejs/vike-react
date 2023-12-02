@@ -8,7 +8,7 @@ import { useStream } from 'react-streaming'
 
 declare global {
   interface Window {
-    _rqd_?: { push: (entry: DehydratedState) => void } | string[]
+    _rqd_?: { push: (entry: DehydratedState) => void } | DehydratedState[]
     _rqc_?: () => void
   }
 }

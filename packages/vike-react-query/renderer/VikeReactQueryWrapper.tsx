@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import React, { ReactNode, useMemo } from 'react'
+import React, { ReactNode, useState } from 'react'
 import 'vike-react'
 import type { PageContext } from 'vike/types'
 import { StreamedHydration } from './StreamedHydration'
@@ -11,7 +11,7 @@ type VikeReactQueryWrapperProps = {
 
 export default function VikeReactQueryWrapper({ pageContext, children }: VikeReactQueryWrapperProps) {
   const { queryClientConfig, FallbackErrorBoundary = PassThrough } = pageContext.config
-  const queryClient = useMemo(() => new QueryClient(queryClientConfig), [])
+  const [queryClient] = useState(() => new QueryClient(queryClientConfig))
 
   return (
     <QueryClientProvider client={queryClient}>

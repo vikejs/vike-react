@@ -20,12 +20,11 @@ export default function VikeReactQueryWrapper({ pageContext, children }: VikeRea
   const queryClient = __queryClientGlobal ?? new QueryClient(queryClientConfig)
 
   return (
-    <>
-      <StreamedHydration client={queryClient} />
-      <QueryClientProvider client={queryClient}>
-        <FallbackErrorBoundary>{children}</FallbackErrorBoundary>
-      </QueryClientProvider>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <FallbackErrorBoundary>
+        <StreamedHydration client={queryClient}>{children}</StreamedHydration>
+      </FallbackErrorBoundary>
+    </QueryClientProvider>
   )
 }
 

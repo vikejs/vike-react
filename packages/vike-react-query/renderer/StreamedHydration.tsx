@@ -3,6 +3,7 @@ export { StreamedHydration }
 import type { QueryClient } from '@tanstack/react-query'
 import { dehydrate, hydrate, DehydratedState } from '@tanstack/react-query'
 import { uneval } from 'devalue'
+import type { ReactNode } from 'react'
 import { useStream } from 'react-streaming'
 
 declare global {
@@ -18,7 +19,7 @@ declare global {
  * - hydrating the query client on the client
  * - if react-streaming is not used, it doesn't do anything
  */
-function StreamedHydration({ client }: { client: QueryClient }) {
+function StreamedHydration({ client, children }: { client: QueryClient; children: ReactNode }) {
   const stream = useStream()
 
   if (import.meta.env.SSR && stream) {
@@ -48,5 +49,5 @@ function StreamedHydration({ client }: { client: QueryClient }) {
     }
     window._rqd_ = { push: onEntry }
   }
-  return null
+  return children
 }

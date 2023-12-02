@@ -17,11 +17,6 @@ export function suspense<T extends object = Record<string, never>>(
 ) {
   const ComponentWithSuspense = (componentProps: T) => {
     if (ErrorFallback) {
-      if (typeof ErrorFallback !== 'function') {
-        const CurrentErrorFallback = ErrorFallback
-        ErrorFallback = () => <>{CurrentErrorFallback}</>
-      }
-
       return (
         <Suspense fallback={typeof Fallback === 'function' ? <Fallback {...componentProps} /> : Fallback}>
           <QueryErrorResetBoundary>
@@ -46,14 +41,17 @@ export function suspense<T extends object = Record<string, never>>(
 
               return (
                 <ErrorBoundary
-                  fallbackRender={({ error: originalError, resetErrorBoundary }) => (
-                    //@ts-ignore
-                    <ErrorFallback
-                      {...componentProps}
-                      retry={createRetry(resetErrorBoundary)}
-                      error={createError(originalError)}
-                    />
-                  )}
+                  fallbackRender={({ error: originalError, resetErrorBoundary }) =>
+                    typeof ErrorFallback === 'function' ? (
+                      <ErrorFallback
+                        {...componentProps}
+                        retry={createRetry(resetErrorBoundary)}
+                        error={createError(originalError)}
+                      />
+                    ) : (
+                      ErrorFallback
+                    )
+                  }
                 >
                   <Component {...componentProps} />
                 </ErrorBoundary>

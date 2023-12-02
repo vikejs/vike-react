@@ -8,8 +8,6 @@ import { getPageElement } from './getPageElement.js'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRenderClientAsync> => {
-  await pageContext.config.__internalOnBeforeRenderAll?.(pageContext)
-
   const page = getPageElement(pageContext)
 
   const container = document.getElementById('page-view')!

@@ -13,8 +13,6 @@ import React from 'react'
 checkVikeVersion()
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
-  await pageContext.config.__internalOnBeforeRenderAll?.(pageContext)
-
   const lang = pageContext.config.lang || 'en'
 
   const { favicon } = pageContext.config
@@ -40,7 +38,9 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
   const isSsrDisabled = !pageContext.Page
   const page = isSsrDisabled ? <></> : getPageElement(pageContext)
 
-  const streamOrString = isSsrDisabled ? dangerouslySkipEscape(renderToString(page)) : await renderToStream(page, { userAgent: pageContext.userAgent })
+  const streamOrString = isSsrDisabled
+    ? dangerouslySkipEscape(renderToString(page))
+    : await renderToStream(page, { userAgent: pageContext.userAgent })
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang='${lang}'>

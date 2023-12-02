@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 
 export default {
   queryClientConfig: undefined,
-  __internalOnBeforeRenderAll: 'import:vike-react-query/renderer/__internalOnBeforeRenderAll:default',
+  VikeReactQueryWrapper: 'import:vike-react-query/renderer/VikeReactQueryWrapper:default',
   FallbackErrorBoundary: 'import:vike-react-query/renderer/FallbackErrorBoundary:default',
   meta: {
     queryClientConfig: {

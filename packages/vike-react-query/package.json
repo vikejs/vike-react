@@ -7,7 +7,7 @@
   "exports": {
     ".": "./dist/src/index.js",
     "./config": "./dist/renderer/+config.h.js",
-    "./renderer/__internalOnBeforeRenderAll": "./dist/renderer/__internalOnBeforeRenderAll.js",
+    "./renderer/VikeReactQueryWrapper": "./dist/renderer/VikeReactQueryWrapper.js",
     "./renderer/FallbackErrorBoundary": "./dist/renderer/FallbackErrorBoundary.js"
   },
   "scripts": {
@@ -50,8 +50,8 @@
       "config": [
         "dist/renderer/+config.h.d.ts"
       ],
-      "renderer/__internalOnBeforeRenderAll": [
-        "dist/renderer/__internalOnBeforeRenderAll.d.ts"
+      "renderer/VikeReactQueryWrapper": [
+        "dist/renderer/VikeReactQueryWrapper.d.ts"
       ]
     }
   },

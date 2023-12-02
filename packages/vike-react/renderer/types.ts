@@ -17,7 +17,7 @@ declare global {
 
       /** &lt;title>${title}&lt;/title> - has precedence over the config */
       title?: string
-      userAgent? :string;
+      userAgent?: string
     }
   }
 }

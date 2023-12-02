@@ -59,7 +59,7 @@ export default {
       env: { config: true },
       effect: toggleSsrRelatedConfig
     },
-    __internalOnBeforeRenderAll: {
+    VikeReactQueryWrapper: {
       env: { client: true, server: true }
     }
   }
@@ -101,7 +101,7 @@ declare global {
        */
       ssr?: boolean
 
-      __internalOnBeforeRenderAll?: (pageContext: PageContext) => void | Promise<void>
+      VikeReactQueryWrapper?: Component
     }
   }
 }

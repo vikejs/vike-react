@@ -1,8 +1,8 @@
 export { getPageElement }
 
 import React from 'react'
-import { PageContextProvider } from './PageContextProvider.js'
 import type { PageContext } from 'vike/types'
+import { PageContextProvider } from './PageContextProvider.js'
 
 function getPageElement(pageContext: PageContext): JSX.Element {
   const Layout = pageContext.config.Layout ?? PassThrough
@@ -11,15 +11,16 @@ function getPageElement(pageContext: PageContext): JSX.Element {
     pageContext.config.Wrapper ??
     */
     PassThrough
+  const VikeReactQueryWrapper = pageContext.config.VikeReactQueryWrapper ?? PassThrough
   const { Page, pageProps } = pageContext
   const page = (
     <React.StrictMode>
       <PageContextProvider pageContext={pageContext}>
-        <Wrapper>
-          <Layout>
-            { Page ? <Page {...pageProps} /> : null }
-          </Layout>
-        </Wrapper>
+        <VikeReactQueryWrapper pageContext={pageContext}>
+          <Wrapper>
+            <Layout>{Page ? <Page {...pageProps} /> : null}</Layout>
+          </Wrapper>
+        </VikeReactQueryWrapper>
       </PageContextProvider>
     </React.StrictMode>
   )

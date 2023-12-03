@@ -1,1 +1,1 @@
-vike-react/README.md
+packages/vike-react/README.md

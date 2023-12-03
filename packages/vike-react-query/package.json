@@ -1,0 +1,64 @@
+{
+  "name": "vike-react-query",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "typings": "dist/src/index.js",
+  "exports": {
+    ".": "./dist/src/index.js",
+    "./config": "./dist/renderer/+config.h.js",
+    "./renderer/VikeReactQueryWrapper": "./dist/renderer/VikeReactQueryWrapper.js",
+    "./renderer/FallbackErrorBoundary": "./dist/renderer/FallbackErrorBoundary.js"
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "rm -rf dist/ && tsc",
+    "release": "release-me patch",
+    "release:commit": "release-me commit",
+    "test": "vitest"
+  },
+  "peerDependencies": {
+    "react": "18.x.x",
+    "react-dom": "18.x.x",
+    "vike": "^0.4.147",
+    "vike-react": "^0.3.5",
+    "react-streaming": "^0.3.16",
+    "vite": "^4.3.8",
+    "@tanstack/react-query": "5.x.x"
+  },
+  "devDependencies": {
+    "@brillout/release-me": "^0.1.9",
+    "@types/node": "^18.17.18",
+    "@types/react": "^18.2.22",
+    "@types/react-dom": "^18.2.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.2.2",
+    "vike": "^0.4.147",
+    "vike-react": "^0.3.5",
+    "react-streaming": "^0.3.16",
+    "vitest": "^0.34.6",
+    "@testing-library/react": "^14.1.2",
+    "jsdom": "^23.0.1",
+    "@tanstack/react-query": "^5.12.1"
+  },
+  "dependencies": {
+    "devalue": "^4.3.2",
+    "react-error-boundary": "^4.0.11"
+  },
+  "typesVersions": {
+    "*": {
+      "config": [
+        "dist/renderer/+config.h.d.ts"
+      ],
+      "renderer/VikeReactQueryWrapper": [
+        "dist/renderer/VikeReactQueryWrapper.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": "github:vikejs/vike-react",
+  "license": "MIT"
+}

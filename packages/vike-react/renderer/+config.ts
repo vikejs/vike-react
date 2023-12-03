@@ -1,4 +1,4 @@
-import type { Config, ConfigEffect } from 'vike/types'
+import type { Config, ConfigEffect, PageContext } from 'vike/types'
 
 // Depending on the value of `config.meta.ssr`, set other config options' `env`
 // accordingly.
@@ -58,6 +58,9 @@ export default {
     ssr: {
       env: { config: true },
       effect: toggleSsrRelatedConfig
+    },
+    VikeReactQueryWrapper: {
+      env: { client: true, server: true }
     }
   }
 } satisfies Config
@@ -97,6 +100,8 @@ declare global {
        *
        */
       ssr?: boolean
+
+      VikeReactQueryWrapper?: Component
     }
   }
 }

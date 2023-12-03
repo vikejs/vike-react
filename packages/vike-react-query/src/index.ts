@@ -1,0 +1,1 @@
+export { suspense } from './suspense'

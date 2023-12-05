@@ -11,25 +11,23 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+        example:
+          - examples/basic
+          - examples/react-query
+          - examples/ssr-spa
 
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
       - run: pnpm install
 
-      - name: Build vike-react
+      - name: Build packages
         run: pnpm run build
 
-      - name: Test building examples/basic
+      - name: Test building example
         run: pnpm run build
-        working-directory: ./examples/basic
-      - name: Test building examples/ssr-spa
-        run: pnpm run build
-        working-directory: ./examples/ssr-spa
+        working-directory: ./${{ matrix.example }}
 
-      - name: Test TypeScript examples/basic
+      - name: Test TypeScript example
         run: pnpm run test
-        working-directory: ./examples/basic
-      - name: Test TypeScript examples/ssr-spa
-        run: pnpm run test
-        working-directory: ./examples/ssr-spa
+        working-directory: ./${{ matrix.example }}

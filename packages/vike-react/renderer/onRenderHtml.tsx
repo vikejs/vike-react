@@ -15,14 +15,12 @@ checkVikeVersion()
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
   const lang = pageContext.config.lang || 'en'
 
-  const { favicon } = pageContext.config
+  const { stream, favicon, description } = pageContext.config
   const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
+  const descriptionTag = !description ? '' : escapeInject`<meta name="description" content="${description}" />`
 
   const title = getTitle(pageContext)
   const titleTag = !title ? '' : escapeInject`<title>${title}</title>`
-
-  const { description } = pageContext.config
-  const descriptionTag = !description ? '' : escapeInject`<meta name="description" content="${description}" />`
 
   const Head = pageContext.config.Head || (() => <></>)
   const head = (
@@ -35,10 +33,9 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
 
   const headHtml = dangerouslySkipEscape(renderToString(head))
 
-  const isSsrDisabled = !pageContext.Page
-  const page = isSsrDisabled ? <></> : getPageElement(pageContext)
+  const page = !!pageContext.Page ? getPageElement(pageContext) : <></>
 
-  const streamOrString = isSsrDisabled
+  const streamOrString = !stream
     ? dangerouslySkipEscape(renderToString(page))
     : await renderToStream(page, { userAgent: pageContext.userAgent })
 

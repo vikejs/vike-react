@@ -163,8 +163,8 @@ importers:
         version: 4.5.0(@types/node@18.18.9)
     devDependencies:
       '@brillout/release-me':
-        specifier: ^0.1.9
-        version: 0.1.9
+        specifier: ^0.1.11
+        version: 0.1.11
       '@types/node':
         specifier: ^18.17.18
         version: 18.18.9
@@ -200,8 +200,8 @@ importers:
         version: 4.5.0(@types/node@18.18.9)
     devDependencies:
       '@brillout/release-me':
-        specifier: ^0.1.9
-        version: 0.1.9
+        specifier: ^0.1.11
+        version: 0.1.11
       '@tanstack/react-query':
         specifier: ^5.12.1
         version: 5.12.1(react@18.2.0)
@@ -480,10 +480,11 @@ packages:
   /@brillout/picocolors@1.0.10:
     resolution: {integrity: sha512-dh+JJlsBf3QYX+91Ezma8RLKNOjGDoBBmORv/NzRpQuasdyzwQCMXGGjsDu12ZhGz92TqQbL9pv79rvbheI21A==}
 
-  /@brillout/release-me@0.1.9:
-    resolution: {integrity: sha512-PG42NBN+EBLWMxnngpTikNd/pOjovXEMti8S9H+1u9Dldj2UGK+nrJxBQkDLhpFcGojBDy4XnLjyxWSHjESm/g==}
+  /@brillout/release-me@0.1.11:
+    resolution: {integrity: sha512-lDih32OeTkHBGhO/V2Q6oywyjhfK9CGVxX9cBHMEYdD5cBuuA+TkOrOGjjKz0n55caQRnsFyHRCx6L+TSnFJsg==}
     hasBin: true
     dependencies:
+      commander: 11.1.0
       conventional-changelog: 5.1.0
       execa: 5.1.1
       js-yaml: 4.1.0
@@ -1263,6 +1264,11 @@ packages:
     engines: {node: '>= 0.8'}
     dependencies:
       delayed-stream: 1.0.0
+    dev: true
+
+  /commander@11.1.0:
+    resolution: {integrity: sha512-yPVavfyCcRhmorC7rWlkHn15b4wDVgVmBA7kV4QVBsF7kv/9TKJAbAXVTxvTnwP8HHKjRCJDClKbciiYS7p0DQ==}
+    engines: {node: '>=16'}
     dev: true
 
   /compare-func@2.0.0:

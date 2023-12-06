@@ -14,8 +14,8 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "rm -rf dist/ && tsc",
-    "release": "release-me patch",
-    "release:commit": "release-me commit"
+    "release": "release-me --git-prefix vike-react patch",
+    "release:commit": "release-me --git-prefix vike-react commit"
   },
   "peerDependencies": {
     "react": "18.x.x",
@@ -24,7 +24,7 @@
     "vite": "^4.3.8"
   },
   "devDependencies": {
-    "@brillout/release-me": "^0.1.9",
+    "@brillout/release-me": "^0.1.11",
     "@types/node": "^18.17.18",
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",

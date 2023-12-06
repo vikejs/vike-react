@@ -13,8 +13,8 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "rm -rf dist/ && tsc",
-    "release": "release-me patch",
-    "release:commit": "release-me commit",
+    "release": "release-me --git-prefix vike-react-query patch",
+    "release:commit": "release-me --git-prefix vike-react-query commit",
     "test": "vitest"
   },
   "peerDependencies": {
@@ -27,7 +27,7 @@
     "@tanstack/react-query": "5.x.x"
   },
   "devDependencies": {
-    "@brillout/release-me": "^0.1.9",
+    "@brillout/release-me": "^0.1.11",
     "@types/node": "^18.17.18",
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",

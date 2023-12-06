@@ -28,13 +28,11 @@ cd ../../
 
 ## Releasing
 
-Choose the next version number according to the rules of
-[Semantic Versioning](https://semver.org/). Let's assume you are releasing
-version `1.2.3`, run:
+In order to release the next patch version (`MAJOR.MINOR.PATCH`, see [Semantic Versioning](https://semver.org/)), run:
 
 ```bash
 cd packages/vike-react/
-pnpm exec release-me v1.2.3
+pnpm release
 cd ../../
 ```
 
@@ -43,8 +41,8 @@ This will:
 - update the version number and dependencies in `package.json`,
 - extend [`CHANGELOG.md`](CHANGELOG.md),
 - update the `pnpm-lock.yaml` file,
-- create a `release: v1.2.3` git commit and push it,
-- create a `v1.2.3` git tag and push it,
+- create a `release: vike-react@1.2.3` git commit and push it,
+- create a `vike-react@1.2.3` git tag and push it,
 - build the package and publish it to npm.
 
 Extend [`CHANGELOG.md`](CHANGELOG.md) if anything is missing, as the release

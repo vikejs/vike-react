@@ -1,11 +1,10 @@
-export type { Component, PageView }
+export type { Component }
 
 import type { ReactElement } from 'react'
 import { renderToStream } from 'react-streaming/server'
 
 // type Component = (props: Record<string, unknown>) => ReactElement
 type Component = (props: any) => ReactElement
-type PageView = string | { _escaped: string } | Awaited<ReturnType<typeof renderToStream>>
 
 declare global {
   namespace Vike {

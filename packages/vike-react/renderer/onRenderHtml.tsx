@@ -9,13 +9,10 @@ import { getPageElement } from './getPageElement.js'
 import { PageContextProvider } from './PageContextProvider.js'
 import React from 'react'
 import type { OnRenderHtmlAsync } from 'vike/types'
-import type { PageView } from './types.js'
 
 checkVikeVersion()
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
-  let pageView: PageView
-
   const lang = pageContext.config.lang || 'en'
 
   const { stream, favicon, description } = pageContext.config
@@ -36,6 +33,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
 
   const headHtml = dangerouslySkipEscape(renderToString(head))
 
+  let pageView: string | ReturnType<typeof dangerouslySkipEscape> | Awaited<ReturnType<typeof renderToStream>>
   if (!pageContext.Page) {
     pageView = ''
   } else {

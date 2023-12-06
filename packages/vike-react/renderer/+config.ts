@@ -17,9 +17,6 @@ const toggleSsrRelatedConfig: ConfigEffect = ({ configDefinedAt, configValue }) 
         env: configValue
           ? { server: true, client: true } // default
           : { client: true }
-      },
-      stream: {
-        env: configValue ? { server: true } : { server: false }
       }
     }
   }
@@ -63,7 +60,7 @@ export default {
       effect: toggleSsrRelatedConfig
     },
     stream: {
-      env: { server: true },
+      env: { server: true }
     },
     VikeReactQueryWrapper: {
       env: { client: true, server: true }
@@ -108,6 +105,7 @@ declare global {
       ssr?: boolean
       /**
        * If true, render mode is SSR & Stream. Required SSR Config to be true.
+       * When the SSR Config is false, stream should have no effect
        *
        * @default false
        *

@@ -6,9 +6,8 @@ Build `vike-react`:
 
 ```bash
 git clone git@github.com:vikejs/vike-react
-cd vike-react/ && pnpm install
+pnpm install
 pnpm build
-cd ../
 ```
 
 > Note that you'll need [pnpm](https://pnpm.io/) for development, which you can install with `$ npm install -g pnpm`.
@@ -34,9 +33,9 @@ Choose the next version number according to the rules of
 version `1.2.3`, run:
 
 ```bash
-cd vike-react/
+cd packages/vike-react/
 pnpm exec release-me v1.2.3
-cd ../
+cd ../../
 ```
 
 This will:

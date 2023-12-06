@@ -39,8 +39,8 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
       vike:
-        specifier: ^0.4.147
-        version: 0.4.147(react-streaming@0.3.16)(vite@4.5.0)
+        specifier: ^0.4.149
+        version: 0.4.149(react-streaming@0.3.16)(vite@4.5.0)
       vike-react:
         specifier: workspace:*
         version: link:../../packages/vike-react
@@ -78,8 +78,8 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
       vike:
-        specifier: ^0.4.147
-        version: 0.4.147(react-streaming@0.3.16)(vite@4.5.0)
+        specifier: ^0.4.149
+        version: 0.4.149(react-streaming@0.3.16)(vite@4.5.0)
       vike-react:
         specifier: workspace:*
         version: link:../../packages/vike-react
@@ -111,8 +111,8 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
       vike:
-        specifier: ^0.4.147
-        version: 0.4.147(react-streaming@0.3.16)(vite@4.5.0)
+        specifier: ^0.4.149
+        version: 0.4.149(react-streaming@0.3.16)(vite@4.5.0)
       vike-react:
         specifier: workspace:*
         version: link:../../packages/vike-react
@@ -151,8 +151,8 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
       vike:
-        specifier: ^0.4.147
-        version: 0.4.147(react-streaming@0.3.16)(vite@4.5.0)
+        specifier: ^0.4.149
+        version: 0.4.149(react-streaming@0.3.16)(vite@4.5.0)
 
   packages/vike-react-query:
     dependencies:
@@ -200,8 +200,8 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
       vike:
-        specifier: ^0.4.147
-        version: 0.4.147(react-streaming@0.3.16)(vite@4.5.0)
+        specifier: ^0.4.149
+        version: 0.4.149(react-streaming@0.3.16)(vite@4.5.0)
       vike-react:
         specifier: ^0.3.5
         version: link:../vike-react
@@ -444,8 +444,8 @@ packages:
   /@brillout/json-serializer@0.5.8:
     resolution: {integrity: sha512-vEuXw30ok+mJfJutOxXKBb4lBJ0HymA7lev9PcYK6W/hzjhCTPk9Bdk85HrcNcKZWRQiwoWtw0F2Di4TRJ7ssQ==}
 
-  /@brillout/picocolors@1.0.9:
-    resolution: {integrity: sha512-Lt/W5JsA75hcDJ2cOAlE4TqSMl6c9K+rXGRo/cU2fApnmhbRcNdkR4UHQDAwtWfZyUKWaxdwSui+jp+74J1pZg==}
+  /@brillout/picocolors@1.0.10:
+    resolution: {integrity: sha512-dh+JJlsBf3QYX+91Ezma8RLKNOjGDoBBmORv/NzRpQuasdyzwQCMXGGjsDu12ZhGz92TqQbL9pv79rvbheI21A==}
 
   /@brillout/release-me@0.1.9:
     resolution: {integrity: sha512-PG42NBN+EBLWMxnngpTikNd/pOjovXEMti8S9H+1u9Dldj2UGK+nrJxBQkDLhpFcGojBDy4XnLjyxWSHjESm/g==}
@@ -2809,8 +2809,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vike@0.4.147(react-streaming@0.3.16)(vite@4.5.0):
-    resolution: {integrity: sha512-TNkIJY+jydz3cL4UGT58annjIAH7a5Rv0hu5clMMuBnC39S5ArsCF0mAZrHKsMa5mV6HwlW6j3mmVWw2kKVcBw==}
+  /vike@0.4.149(react-streaming@0.3.16)(vite@4.5.0):
+    resolution: {integrity: sha512-5eB0obgc9rmYbVkWRSbADGZGwjaYF+JLScgj9Q86zFSGOnQzb+kDZ2OS7nG1PSOmnpnVqHQIjTYv2BAm6j2IOg==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     peerDependencies:
@@ -2822,7 +2822,7 @@ packages:
     dependencies:
       '@brillout/import': 0.2.3
       '@brillout/json-serializer': 0.5.8
-      '@brillout/picocolors': 1.0.9
+      '@brillout/picocolors': 1.0.10
       '@brillout/require-shim': 0.1.2
       '@brillout/vite-plugin-import-build': 0.2.20
       acorn: 8.11.2

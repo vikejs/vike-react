@@ -1,6 +1,6 @@
 export { ClientOnly }
 
-import React, { Suspense, lazy, useEffect, useState, startTransition } from 'react'
+import React, { lazy, useEffect, useState, startTransition } from 'react'
 import type { ComponentType, ReactNode } from 'react'
 
 function ClientOnly<T>({
@@ -38,5 +38,5 @@ function ClientOnly<T>({
     })
   }, deps)
 
-  return <Suspense fallback={fallback}>{Component ? <Component /> : fallback}</Suspense>
+  return Component ? <Component /> : fallback
 }

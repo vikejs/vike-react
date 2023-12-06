@@ -17,23 +17,23 @@ function ClientOnly<T>({
   const [Component, setComponent] = useState<ComponentType<unknown> | null>(null)
 
   useEffect(() => {
-    startTransition(() => {
-      const loadComponent = () => {
-        const Component = lazy(() =>
-          load()
-            .then((LoadedComponent) => {
-              return {
-                default: () => children('default' in LoadedComponent ? LoadedComponent.default : LoadedComponent)
-              }
-            })
-            .catch((error) => {
-              console.error('Component loading failed:', error)
-              return { default: () => <p>Error loading component.</p> }
-            })
-        )
-        setComponent(Component)
-      }
+    const loadComponent = () => {
+      const Component = lazy(() =>
+        load()
+          .then((LoadedComponent) => {
+            return {
+              default: () => children('default' in LoadedComponent ? LoadedComponent.default : LoadedComponent)
+            }
+          })
+          .catch((error) => {
+            console.error('Component loading failed:', error)
+            return { default: () => <p>Error loading component.</p> }
+          })
+      )
+      setComponent(Component)
+    }
 
+    startTransition(() => {
       loadComponent()
     })
   }, deps)

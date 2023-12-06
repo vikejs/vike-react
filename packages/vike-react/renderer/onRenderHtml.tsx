@@ -9,10 +9,13 @@ import { getTitle } from './getTitle.js'
 import { getPageElement } from './getPageElement.js'
 import { PageContextProvider } from './PageContextProvider.js'
 import React from 'react'
+import { PageView } from './types.js'
 
 checkVikeVersion()
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
+  let pageView: PageView
+
   const lang = pageContext.config.lang || 'en'
 
   const { stream, favicon, description } = pageContext.config
@@ -33,11 +36,14 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
 
   const headHtml = dangerouslySkipEscape(renderToString(head))
 
-  const page = !!pageContext.Page ? getPageElement(pageContext) : <></>
-
-  const streamOrString = !stream
-    ? dangerouslySkipEscape(renderToString(page))
-    : await renderToStream(page, { userAgent: pageContext.userAgent })
+  if (!pageContext.Page) {
+    pageView = ''
+  } else {
+    const page = getPageElement(pageContext)
+    pageView = !stream
+      ? dangerouslySkipEscape(renderToString(page))
+      : await renderToStream(page, { userAgent: pageContext.userAgent })
+  }
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang='${lang}'>
@@ -49,7 +55,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
         ${headHtml}
       </head>
       <body>
-        <div id="page-view">${streamOrString}</div>
+        <div id="page-view">${pageView}</div>
       </body>
       <!-- built with https://github.com/vikejs/vike-react -->
     </html>`

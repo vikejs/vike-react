@@ -5,7 +5,7 @@
 
 # `vike-react`
 
-React integration for [Vike](https://vike.dev) (using the [V1 design](https://vike.dev/migration/v1-design)).
+React integration for [Vike](https://vike.dev).
 
 > For integrations with Vue and Solid, see the other [`vike-*` packages](https://vike.dev/vike-packages).
 

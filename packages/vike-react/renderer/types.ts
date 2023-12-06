@@ -1,9 +1,26 @@
-export type { Component }
+export type { Component, PageView }
 
 import type { ReactElement } from 'react'
+import type { Pipe } from 'react-streaming/dist/cjs/server/renderToStream/createPipeWrapper'
 
 // type Component = (props: Record<string, unknown>) => ReactElement
 type Component = (props: any) => ReactElement
+type PageView = string | { _escaped: string } | StreamResult
+
+type StreamResult = (
+  | {
+      pipe: Pipe
+      readable: null
+    }
+  | {
+      pipe: null
+      readable: ReadableStream
+    }
+) & {
+  streamEnd: Promise<boolean>
+  disabled: boolean
+  injectToStream: (chunk: unknown) => void
+}
 
 declare global {
   namespace Vike {

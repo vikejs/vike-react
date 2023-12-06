@@ -1,4 +1,4 @@
-Example of vike-react with ssr & streaming
+Example of streaming the page's HTML.
 
 ```bash
 git clone git@github.com:vikejs/vike-react

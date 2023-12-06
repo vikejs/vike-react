@@ -7,7 +7,7 @@ function ClientOnly<T>({
   load,
   children,
   fallback,
-  deps
+  deps = []
 }: {
   load: () => Promise<{ default: React.ComponentType<T> } | React.ComponentType<T>>
   children: (Component: React.ComponentType<T>) => ReactNode

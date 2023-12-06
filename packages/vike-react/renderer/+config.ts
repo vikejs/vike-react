@@ -104,8 +104,7 @@ declare global {
        */
       ssr?: boolean
       /**
-       * If true, render mode is SSR & Stream. Required SSR Config to be true.
-       * When the SSR Config is false, stream should have no effect
+       * Whether to stream the page's HTML. Requires Server-Side Rendering (`ssr: true`).
        *
        * @default false
        *

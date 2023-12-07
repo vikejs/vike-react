@@ -236,7 +236,7 @@ importers:
         specifier: ^0.4.149
         version: 0.4.149(react-streaming@0.3.16)(vite@4.5.0)
       vike-react:
-        specifier: ^0.3.6
+        specifier: ^0.3.7
         version: link:../vike-react
       vitest:
         specifier: ^0.34.6

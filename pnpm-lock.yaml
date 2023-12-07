@@ -144,7 +144,7 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
       vike:
-        specifier: ^0.4.147
+        specifier: ^0.4.149
         version: 0.4.149(react-streaming@0.3.16)(vite@4.5.0)
       vike-react:
         specifier: workspace:*

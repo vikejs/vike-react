@@ -1,12 +1,12 @@
 export { Movies }
 
 import React from 'react'
-import { suspense } from 'vike-react-query'
+import { withFallback } from 'vike-react-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { navigate } from 'vike/client/router'
 import { MovieDetails } from './types'
 
-const Movies = suspense(() => {
+const Movies = withFallback(() => {
   const result = useSuspenseQuery({
     queryKey: ['movies'],
     queryFn: getStarWarsMovies

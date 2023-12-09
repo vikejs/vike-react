@@ -1,7 +1,7 @@
 export default Page
 
 import React from 'react'
-import { suspense } from 'vike-react-query'
+import { withFallback } from 'vike-react-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { usePageContext } from 'vike-react/usePageContext'
 import { MovieDetails } from '../types'
@@ -13,7 +13,7 @@ function Page() {
   return <Movie id={id} />
 }
 
-const Movie = suspense(
+const Movie = withFallback(
   ({ id }: { id: string }) => {
     const result = useSuspenseQuery({
       queryKey: ['movie', id],
@@ -41,15 +41,17 @@ const Movie = suspense(
       </>
     )
   },
-  ({ id }) => `Loading movie ${id}`,
-  // Try commenting out the error fallback
-  ({ id, error, retry }) => (
-    <>
-      <div>Loading movie {id} failed</div>
-      <div>{error.message}</div>
-      <button onClick={() => retry()}>Try again</button>
-    </>
-  )
+  {
+    Fallback: ({ id }) => `Loading movie ${id}`,
+    // Try commenting out the error fallback
+    FallbackError: ({ id, error, retry }) => (
+      <>
+        <div>Loading movie {id} failed</div>
+        <div>{error.message}</div>
+        <button onClick={() => retry()}>Try again</button>
+      </>
+    )
+  }
 )
 
 async function getStarWarsMovie(id: string): Promise<MovieDetails> {

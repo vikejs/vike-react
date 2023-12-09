@@ -1,10 +1,10 @@
 import { cleanup, render, waitFor } from '@testing-library/react'
 import React, { ReactNode, useEffect } from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { suspense } from './suspense'
+import { withFallback } from './withFallback'
 import { QueryClient, QueryClientProvider, useSuspenseQuery } from '@tanstack/react-query'
 
-const Component = suspense(
+const Component = withFallback(
   ({ count, onMount }: { count?: number; onMount?: () => void }) => {
     useEffect(() => {
       onMount?.()
@@ -16,7 +16,7 @@ const Component = suspense(
   ({ count }) => `error${count}`
 )
 
-const ComponentThatSuspends = suspense(
+const ComponentThatSuspends = withFallback(
   ({ count, onMount }: { count?: number; onMount?: () => void; onFallbackMount?: () => void }) => {
     useSuspenseQuery({
       queryFn: () => new Promise((r) => setTimeout(() => r('some value'), 50)),
@@ -38,23 +38,25 @@ const ComponentThatSuspends = suspense(
   ({ count }) => `error${count}`
 )
 
-const ComponentThatThrows = suspense(
+const ComponentThatThrows = withFallback(
   ({ count, onMount }: { count?: number; onMount?: () => void; onErrorFallbackMount?: () => void }) => {
     useEffect(() => {
       onMount?.()
     }, [])
     throw new Error('some message')
   },
-  ({ count }) => `loading${count}`,
-  ({ count, error, onErrorFallbackMount }) => {
-    useEffect(() => {
-      onErrorFallbackMount?.()
-    }, [])
-    return `error${error.message}${count}`
+  {
+    Fallback: ({ count }) => `loading${count}`,
+    FallbackError: ({ count, error, onErrorFallbackMount }) => {
+      useEffect(() => {
+        onErrorFallbackMount?.()
+      }, [])
+      return `error${error.message}${count}`
+    }
   }
 )
 
-const ComponentThatThrows2 = suspense(
+const ComponentThatThrows2 = withFallback(
   ({ count, onMount }: { count?: number; onMount?: () => void; onErrorFallbackMount?: () => void }) => {
     useEffect(() => {
       onMount?.()
@@ -65,7 +67,7 @@ const ComponentThatThrows2 = suspense(
   `error fallback string`
 )
 
-const OuterComponent = suspense(
+const OuterComponent = withFallback(
   ({ children }: { children: ReactNode }) => {
     return children
   },

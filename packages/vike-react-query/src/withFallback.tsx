@@ -43,7 +43,7 @@ export function withFallback<T extends object = Record<string, never>>(
     FallbackError = FallbackError_
   }
 
-  const ComponentWithSuspense = (componentProps: T) => {
+  const ComponentWithFallback = (componentProps: T) => {
     if (FallbackError) {
       return (
         <Suspense fallback={typeof Fallback === 'function' ? <Fallback {...componentProps} /> : Fallback}>
@@ -97,8 +97,8 @@ export function withFallback<T extends object = Record<string, never>>(
     )
   }
 
-  ComponentWithSuspense.displayName = `suspense(${Component.displayName || Component.name})`
-  return ComponentWithSuspense
+  ComponentWithFallback.displayName = `withFallback(${Component.displayName || Component.name})`
+  return ComponentWithFallback
 }
 
 function getErrorMessage(error: unknown) {

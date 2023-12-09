@@ -10,13 +10,41 @@ type ErrorFallbackProps = {
   retry: RetryFn
 }
 
-export function suspense<T extends object = Record<string, never>>(
+type Fallback<T> = ComponentType<T> | ReactNode
+type FallbackError<T> = ComponentType<T & ErrorFallbackProps> | ReactNode
+
+type WithFallbackOptions<T> = {
+  Fallback?: Fallback<T>
+  FallbackError?: FallbackError<T>
+}
+
+export function withFallback<T extends object = Record<string, never>>(
   Component: ComponentType<T>,
-  Fallback?: ComponentType<T> | ReactNode,
-  ErrorFallback?: ComponentType<T & ErrorFallbackProps> | ReactNode
-) {
+  options?: WithFallbackOptions<T>
+): ComponentType<T>
+export function withFallback<T extends object = Record<string, never>>(
+  Component: ComponentType<T>,
+  Fallback?: Fallback<T>,
+  FallbackError?: FallbackError<T>
+): ComponentType<T>
+export function withFallback<T extends object = Record<string, never>>(
+  Component: ComponentType<T>,
+  options?: Fallback<T> | WithFallbackOptions<T>,
+  FallbackError_?: FallbackError<T>
+): ComponentType<T> {
+  let Fallback: Fallback<T>
+  let FallbackError: ComponentType<T & ErrorFallbackProps> | ReactNode
+
+  if (options && typeof options === 'object' && ('Fallback' in options || 'FallbackError' in options)) {
+    Fallback = options.Fallback
+    FallbackError = options.FallbackError
+  } else if (options && typeof options !== 'object') {
+    Fallback = options
+    FallbackError = FallbackError_
+  }
+
   const ComponentWithSuspense = (componentProps: T) => {
-    if (ErrorFallback) {
+    if (FallbackError) {
       return (
         <Suspense fallback={typeof Fallback === 'function' ? <Fallback {...componentProps} /> : Fallback}>
           <QueryErrorResetBoundary>
@@ -42,14 +70,14 @@ export function suspense<T extends object = Record<string, never>>(
               return (
                 <ErrorBoundary
                   fallbackRender={({ error: originalError, resetErrorBoundary }) =>
-                    typeof ErrorFallback === 'function' ? (
-                      <ErrorFallback
+                    typeof FallbackError === 'function' ? (
+                      <FallbackError
                         {...componentProps}
                         retry={createRetry(resetErrorBoundary)}
                         error={createError(originalError)}
                       />
                     ) : (
-                      ErrorFallback
+                      FallbackError
                     )
                   }
                 >

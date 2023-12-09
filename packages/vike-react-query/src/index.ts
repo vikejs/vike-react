@@ -1,1 +1,1 @@
-export { suspense } from './suspense'
+export { withFallback } from './withFallback'

@@ -7,10 +7,12 @@ function ClientOnly<T>({
   load,
   children,
   fallback,
+  props,
   deps = []
 }: {
   load: () => Promise<{ default: React.ComponentType<T> } | React.ComponentType<T>>
   children: (Component: React.ComponentType<T>) => ReactNode
+  props?: T
   fallback: ReactNode
   deps?: Parameters<typeof useEffect>[1]
 }) {
@@ -38,5 +40,13 @@ function ClientOnly<T>({
     })
   }, deps)
 
-  return Component ? <Component /> : fallback
+  if (!Component) {
+    return fallback
+  }
+
+  if (props) {
+    return <Component {...props} />
+  }
+
+  return <Component />
 }

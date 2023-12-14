@@ -1,4 +1,4 @@
-## [0.0.2](https://github.com/vikejs/vike-react/compare/vike-react-query%400.0.1...vike-react-query%400.0.2) (2023-12-14)
+## [0.0.2](https://github.com/vikejs/vike-react/compare/vike-react-query@0.0.1...vike-react-query@0.0.2) (2023-12-14)
 
 
 ### Bug Fixes
@@ -8,4 +8,4 @@
 
 
 
-## [0.0.1](https://github.com/vikejs/vike-react/releases/tag/vike-react-query%400.0.1) (2023-12-12)
+## [0.0.1](https://github.com/vikejs/vike-react/releases/tag/vike-react-query@0.0.1) (2023-12-12)

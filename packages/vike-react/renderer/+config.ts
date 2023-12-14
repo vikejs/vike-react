@@ -69,7 +69,7 @@ export default {
 } satisfies Config
 
 // We purposely define the ConfigVikeReact interface in this file: that way we ensure it's always applied whenever the user `import vikeReact from 'vike-react'`
-import type { Component } from './types'
+import type { Component } from './types.d.ts'
 declare global {
   namespace VikePackages {
     interface ConfigVikeReact {

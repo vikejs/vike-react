@@ -1,1 +1,1 @@
-export { withFallback } from './withFallback'
+export { withFallback } from './withFallback.js'

@@ -1,7 +1,7 @@
 import { cleanup, render, waitFor } from '@testing-library/react'
 import React, { ReactNode, useEffect } from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { withFallback } from './withFallback'
+import { withFallback } from './withFallback.js'
 import { QueryClient, QueryClientProvider, useSuspenseQuery } from '@tanstack/react-query'
 
 const Component = withFallback(

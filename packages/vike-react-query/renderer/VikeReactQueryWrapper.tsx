@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import React, { ReactNode, useState } from 'react'
 import type { PageContext } from 'vike/types'
-import { StreamedHydration } from './StreamedHydration'
+import { StreamedHydration } from './StreamedHydration.js'
 
 type VikeReactQueryWrapperProps = {
   pageContext: PageContext

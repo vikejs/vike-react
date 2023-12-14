@@ -22,7 +22,10 @@ declare global {
 function StreamedHydration({ client, children }: { client: QueryClient; children: ReactNode }) {
   const stream = useStream()
 
-  if (import.meta.env.SSR && stream) {
+  // stream is only avaiable in SSR
+  const isSSR = !!stream
+
+  if (isSSR) {
     stream.injectToStream(
       `<script class="_rqd_">_rqd_=[];_rqc_=()=>{Array.from(
         document.getElementsByClassName("_rqd_")
@@ -40,7 +43,7 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
     })
   }
 
-  if (!import.meta.env.SSR && Array.isArray(window._rqd_)) {
+  if (!isSSR && Array.isArray(window._rqd_)) {
     const onEntry = (entry: DehydratedState) => {
       hydrate(client, entry)
     }

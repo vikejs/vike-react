@@ -1,3 +1,3 @@
 export default (pageContext: any) => {
-  return pageContext.pageProps.movie.title
+  return pageContext.data.movie.title
 }

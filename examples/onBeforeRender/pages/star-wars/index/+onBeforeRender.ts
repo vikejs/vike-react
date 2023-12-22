@@ -55,7 +55,7 @@ async function prerender() {
         pageProps: {
           movies: filterMoviesData(movies)
         },
-        documentProps: { title: getTitle(movies) }
+        title: getTitle(movies)
       }
     },
     ...movies.map((movie) => {
@@ -70,7 +70,7 @@ async function prerender() {
           pageProps: {
             movie: filterMovieData(movie)
           },
-          documentProps: { title: movie.title }
+          title: movie.title
         }
       }
     })

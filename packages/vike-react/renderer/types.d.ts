@@ -12,12 +12,19 @@ declare global {
       // to `false` (SPA mode).
       Page?: Component
 
-      /** Properties of the page's root React component. */
+      /** Properties of the page's root React component - e.g. set by onBeforeRender() hook */
       pageProps?: Record<string, unknown>
 
-      /** &lt;title>${title}&lt;/title> - has precedence over the config */
+      /** &lt;title>${title}&lt;/title> - set by onBeforeRender() hook, has precedence over the config */
       title?: string
+
       userAgent?: string
+
+      // Needed by getTitle()
+      data?: {
+        /** &lt;title>${title}&lt;/title> - set by data() hook, has precedence over the onBeforeRender() hook */
+        title?: string
+      }
     }
   }
 }

@@ -1,11 +1,9 @@
 export default Page
 
 import React from 'react'
-import type { Data } from './+data'
-import { useData } from 'vike-react/useData'
+import type { MovieDetails } from '../types'
 
-function Page() {
-  const { movie } = useData<Data>()
+function Page({ movie }: { movie: MovieDetails }) {
   return (
     <>
       <h1>{movie.title}</h1>

@@ -13,6 +13,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         example:
           - examples/basic
+          - examples/onBeforeRender
           - examples/react-query
           - examples/ssr-spa
           - examples/streaming

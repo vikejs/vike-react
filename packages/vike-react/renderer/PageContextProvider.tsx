@@ -1,5 +1,6 @@
 export { PageContextProvider }
 export { usePageContext }
+export { useData }
 
 import React, { useContext } from 'react'
 import { getGlobalObject } from './utils/getGlobalObject.js'
@@ -19,4 +20,8 @@ function usePageContext() {
   const pageContext = useContext(Context)
   if (!pageContext) throw new Error('<PageContextProvider> is needed for being able to use usePageContext()')
   return pageContext
+}
+function useData<Data>() {
+  const { data } = usePageContext() as any
+  return data as Data
 }

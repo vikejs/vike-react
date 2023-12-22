@@ -2,7 +2,7 @@ Basic example of using `vike-react`, showcasing:
 
 * [layouts](https://vike.dev/layouts)
 * rendering to `<head>`
-* fetching data with [`data()`](https://vike.dev/data) hooks
+* fetching data with [`onBeforeRender()`](https://vike.dev/onBeforeRender) hooks
 * [configs](https://vike.dev/config)
 * [error pages](https://vike.dev/error-page)
 

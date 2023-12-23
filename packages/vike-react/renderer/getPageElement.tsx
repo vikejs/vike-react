@@ -12,6 +12,7 @@ function getPageElement(pageContext: PageContext): JSX.Element {
     */
     PassThrough
   const VikeReactQueryWrapper = pageContext.config.VikeReactQueryWrapper ?? PassThrough
+  // TODO/next-major-release: remove pageProps (i.e. tell users to use data() instead of onBeforeRender() to fetch data)
   const { Page, pageProps } = pageContext
   const page = (
     <React.StrictMode>

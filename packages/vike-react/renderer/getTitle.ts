@@ -13,6 +13,7 @@ function getTitle(pageContext: PageContext): null | string {
     return pageContext.data.title
   }
 
+  // TODO/next-major-release: remove support for setting title over onBeforeRender()
   // from onBeforeRender() hook
   if (pageContext.title !== undefined) {
     return pageContext.title

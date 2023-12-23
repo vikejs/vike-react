@@ -8,7 +8,7 @@ Basic example of using `vike-react`, showcasing:
 
 ```bash
 git clone git@github.com:vikejs/vike-react
-cd vike-react/examples/basic/
+cd vike-react/examples/onBeforeRender/
 npm install
 npm run dev
 ```

@@ -21,7 +21,7 @@ function usePageContext() {
   if (!pageContext) throw new Error('<PageContextProvider> is needed for being able to use usePageContext()')
   return pageContext
 }
-function useData<Data>() {
+function useData<Data>(): Data {
   const { data } = usePageContext() as any
-  return data as Data
+  return data
 }

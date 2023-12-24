@@ -26,16 +26,16 @@
   },
   "devDependencies": {
     "@brillout/release-me": "^0.1.13",
-    "@types/node": "^18.17.18",
-    "@types/react": "^18.2.22",
-    "@types/react-dom": "^18.2.7",
+    "@types/node": "^18.19.3",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "^5.2.2",
+    "typescript": "^5.3.3",
     "vike": "^0.4.151"
   },
   "dependencies": {
-    "react-streaming": "^0.3.16"
+    "react-streaming": "^0.3.18"
   },
   "typesVersions": {
     "*": {

@@ -3,7 +3,7 @@
   // See https://docs.renovatebot.com/configuration-options/
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
-    'schedule:weekly',
+    // 'schedule:weekly',
     'group:allNonMajor',
 
     // peerDependencies ranges should be left untouched/wide.

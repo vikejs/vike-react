@@ -35,7 +35,7 @@
     "react-dom": "^18.2.0",
     "typescript": "^5.3.3",
     "vike": "^0.4.151",
-    "vike-react": "^0.3.7",
+    "vike-react": "^0.3.8",
     "react-streaming": "^0.3.18",
     "vitest": "^0.34.6",
     "@testing-library/react": "^14.1.2",

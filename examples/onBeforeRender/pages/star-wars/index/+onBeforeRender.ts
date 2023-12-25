@@ -14,8 +14,8 @@ const onBeforeRender: OnBeforeRenderAsync = async (pageContext): ReturnType<OnBe
     pageContext: {
       // Will be passed as properties to the page's root React component.
       pageProps: {
-        // We remove data we don't need because we pass `pageContext.movies` to
-        // the client; we want to minimize what is sent over the network.
+        // We remove data we don't need because the data is passed to the client; we should
+        // minimize what is sent over the network.
         movies: filterMoviesData(movies)
       },
       // vike-react's renderer will use this data as page's <title>

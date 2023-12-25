@@ -13,8 +13,8 @@ type Data = Awaited<ReturnType<typeof data>>
 const data = async () => {
   const movies = await getStarWarsMovies()
   return {
-    // We remove data we don't need because this will be passed to the client;
-    // we want to minimize what is sent over the network.
+    // We remove data we don't need because the data is passed to the client; we should
+    // minimize what is sent over the network.
     movies: filterMoviesData(movies),
     // vike-react's renderer will use this data as page's <title>
     title: getTitle(movies)

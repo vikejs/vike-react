@@ -22,7 +22,7 @@ importers:
         version: 18.2.18
       '@vitejs/plugin-react':
         specifier: ^4.2.1
-        version: 4.2.1(vite@4.5.1)
+        version: 4.2.1(vite@5.0.10)
       cross-fetch:
         specifier: ^4.0.0
         version: 4.0.0
@@ -40,13 +40,13 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.151
-        version: 0.4.151(react-streaming@0.3.18)(vite@4.5.1)
+        version: 0.4.151(react-streaming@0.3.18)(vite@5.0.10)
       vike-react:
         specifier: workspace:*
         version: link:../../packages/vike-react
       vite:
-        specifier: ^4.5.1
-        version: 4.5.1
+        specifier: ^5.0.10
+        version: 5.0.10(@types/node@20.10.5)
 
   examples/onBeforeRender:
     dependencies:
@@ -58,7 +58,7 @@ importers:
         version: 18.2.18
       '@vitejs/plugin-react':
         specifier: ^4.2.1
-        version: 4.2.1(vite@4.5.1)
+        version: 4.2.1(vite@5.0.10)
       cross-fetch:
         specifier: ^4.0.0
         version: 4.0.0
@@ -76,13 +76,13 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.151
-        version: 0.4.151(react-streaming@0.3.18)(vite@4.5.1)
+        version: 0.4.151(react-streaming@0.3.18)(vite@5.0.10)
       vike-react:
         specifier: workspace:*
         version: link:../../packages/vike-react
       vite:
-        specifier: ^4.5.1
-        version: 4.5.1
+        specifier: ^5.0.10
+        version: 5.0.10(@types/node@20.10.5)
 
   examples/react-query:
     dependencies:
@@ -97,7 +97,7 @@ importers:
         version: 18.2.18
       '@vitejs/plugin-react':
         specifier: ^4.2.1
-        version: 4.2.1(vite@4.5.1)
+        version: 4.2.1(vite@5.0.10)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -109,7 +109,7 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.151
-        version: 0.4.151(react-streaming@0.3.18)(vite@4.5.1)
+        version: 0.4.151(react-streaming@0.3.18)(vite@5.0.10)
       vike-react:
         specifier: workspace:*
         version: link:../../packages/vike-react
@@ -117,8 +117,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/vike-react-query
       vite:
-        specifier: ^4.5.1
-        version: 4.5.1
+        specifier: ^5.0.10
+        version: 5.0.10(@types/node@20.10.5)
 
   examples/ssr-spa:
     dependencies:
@@ -130,7 +130,7 @@ importers:
         version: 18.2.18
       '@vitejs/plugin-react':
         specifier: ^4.2.1
-        version: 4.2.1(vite@4.5.1)
+        version: 4.2.1(vite@5.0.10)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -142,13 +142,13 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.151
-        version: 0.4.151(react-streaming@0.3.18)(vite@4.5.1)
+        version: 0.4.151(react-streaming@0.3.18)(vite@5.0.10)
       vike-react:
         specifier: workspace:*
         version: link:../../packages/vike-react
       vite:
-        specifier: ^4.5.1
-        version: 4.5.1
+        specifier: ^5.0.10
+        version: 5.0.10(@types/node@20.10.5)
 
   examples/streaming:
     dependencies:
@@ -160,7 +160,7 @@ importers:
         version: 18.2.18
       '@vitejs/plugin-react':
         specifier: ^4.2.1
-        version: 4.2.1(vite@4.5.1)
+        version: 4.2.1(vite@5.0.10)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -175,13 +175,13 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.151
-        version: 0.4.151(react-streaming@0.3.18)(vite@4.5.1)
+        version: 0.4.151(react-streaming@0.3.18)(vite@5.0.10)
       vike-react:
         specifier: workspace:*
         version: link:../../packages/vike-react
       vite:
-        specifier: ^4.5.1
-        version: 4.5.1
+        specifier: ^5.0.10
+        version: 5.0.10(@types/node@20.10.5)
 
   packages/vike-react:
     dependencies:
@@ -577,7 +577,6 @@ packages:
     cpu: [ppc64]
     os: [aix]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/android-arm64@0.17.19:
@@ -602,7 +601,6 @@ packages:
     cpu: [arm64]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/android-arm@0.17.19:
@@ -627,7 +625,6 @@ packages:
     cpu: [arm]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/android-x64@0.17.19:
@@ -652,7 +649,6 @@ packages:
     cpu: [x64]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/darwin-arm64@0.17.19:
@@ -677,7 +673,6 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/darwin-x64@0.17.19:
@@ -702,7 +697,6 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/freebsd-arm64@0.17.19:
@@ -727,7 +721,6 @@ packages:
     cpu: [arm64]
     os: [freebsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/freebsd-x64@0.17.19:
@@ -752,7 +745,6 @@ packages:
     cpu: [x64]
     os: [freebsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-arm64@0.17.19:
@@ -777,7 +769,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-arm@0.17.19:
@@ -802,7 +793,6 @@ packages:
     cpu: [arm]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-ia32@0.17.19:
@@ -827,7 +817,6 @@ packages:
     cpu: [ia32]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-loong64@0.17.19:
@@ -852,7 +841,6 @@ packages:
     cpu: [loong64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-mips64el@0.17.19:
@@ -877,7 +865,6 @@ packages:
     cpu: [mips64el]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-ppc64@0.17.19:
@@ -902,7 +889,6 @@ packages:
     cpu: [ppc64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-riscv64@0.17.19:
@@ -927,7 +913,6 @@ packages:
     cpu: [riscv64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-s390x@0.17.19:
@@ -952,7 +937,6 @@ packages:
     cpu: [s390x]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-x64@0.17.19:
@@ -977,7 +961,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/netbsd-x64@0.17.19:
@@ -1002,7 +985,6 @@ packages:
     cpu: [x64]
     os: [netbsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/openbsd-x64@0.17.19:
@@ -1027,7 +1009,6 @@ packages:
     cpu: [x64]
     os: [openbsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/sunos-x64@0.17.19:
@@ -1052,7 +1033,6 @@ packages:
     cpu: [x64]
     os: [sunos]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/win32-arm64@0.17.19:
@@ -1077,7 +1057,6 @@ packages:
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/win32-ia32@0.17.19:
@@ -1102,7 +1081,6 @@ packages:
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/win32-x64@0.17.19:
@@ -1127,7 +1105,6 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@hutson/parse-repository-url@5.0.0:
@@ -1197,7 +1174,6 @@ packages:
     cpu: [arm]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-android-arm64@4.9.1:
@@ -1205,7 +1181,6 @@ packages:
     cpu: [arm64]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-darwin-arm64@4.9.1:
@@ -1213,7 +1188,6 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-darwin-x64@4.9.1:
@@ -1221,7 +1195,6 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-arm-gnueabihf@4.9.1:
@@ -1229,7 +1202,6 @@ packages:
     cpu: [arm]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-arm64-gnu@4.9.1:
@@ -1237,7 +1209,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-arm64-musl@4.9.1:
@@ -1245,7 +1216,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-riscv64-gnu@4.9.1:
@@ -1253,7 +1223,6 @@ packages:
     cpu: [riscv64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-x64-gnu@4.9.1:
@@ -1261,7 +1230,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-x64-musl@4.9.1:
@@ -1269,7 +1237,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-win32-arm64-msvc@4.9.1:
@@ -1277,7 +1244,6 @@ packages:
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-win32-ia32-msvc@4.9.1:
@@ -1285,7 +1251,6 @@ packages:
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-win32-x64-msvc@4.9.1:
@@ -1293,7 +1258,6 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@sinclair/typebox@0.27.8:
@@ -1399,7 +1363,7 @@ packages:
   /@types/scheduler@0.16.6:
     resolution: {integrity: sha512-Vlktnchmkylvc9SnwwwozTv04L/e1NykF5vgoQ0XTmI8DD+wxfjQuHuvHS3p0r2jz2x2ghPs2h1FVeDirIteWA==}
 
-  /@vitejs/plugin-react@4.2.1(vite@4.5.1):
+  /@vitejs/plugin-react@4.2.1(vite@5.0.10):
     resolution: {integrity: sha512-oojO9IDc4nCUUi8qIR11KoQm0XFFLIwsRBwHRR4d/88IWghn1y6ckz/bJ8GHDCsYEJee8mDzqtJxh15/cisJNQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -1410,7 +1374,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.23.3(@babel/core@7.23.6)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.0
-      vite: 4.5.1
+      vite: 5.0.10(@types/node@20.10.5)
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -2025,7 +1989,6 @@ packages:
       '@esbuild/win32-arm64': 0.19.10
       '@esbuild/win32-ia32': 0.19.10
       '@esbuild/win32-x64': 0.19.10
-    dev: true
 
   /escalade@3.1.1:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
@@ -2871,14 +2834,6 @@ packages:
       pathe: 1.1.1
     dev: true
 
-  /postcss@8.4.31:
-    resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
-    engines: {node: ^10 || ^12 || >=14}
-    dependencies:
-      nanoid: 3.3.7
-      picocolors: 1.0.0
-      source-map-js: 1.0.2
-
   /postcss@8.4.32:
     resolution: {integrity: sha512-D/kj5JNu6oo2EIy+XL/26JEDTlIbB8hw85G8StOE6L74RQAVVP5rej6wxCNqyMbR4RkPfqvezVbPw81Ngd6Kcw==}
     engines: {node: ^10 || ^12 || >=14}
@@ -3041,7 +2996,6 @@ packages:
       '@rollup/rollup-win32-ia32-msvc': 4.9.1
       '@rollup/rollup-win32-x64-msvc': 4.9.1
       fsevents: 2.3.3
-    dev: true
 
   /rrweb-cssom@0.6.0:
     resolution: {integrity: sha512-APM0Gt1KoXBz0iIkkdB/kfvGOwC4UuJFeG/c+yV7wSc7q96cG/kJ0HiYCnzivD9SB53cLV1MlHFNfOuPaadYSw==}
@@ -3378,7 +3332,35 @@ packages:
       react-streaming: 0.3.18(react-dom@18.2.0)(react@18.2.0)
       sirv: 2.0.3
       source-map-support: 0.5.21
-      vite: 4.5.1
+      vite: 4.5.1(@types/node@20.10.5)
+    dev: true
+
+  /vike@0.4.151(react-streaming@0.3.18)(vite@5.0.10):
+    resolution: {integrity: sha512-Jq71YsW3QWdWAQQt5mZfDoeBNVOG4gbQecNZT3wV/a2Sp9s5v8YTK5wLlCSmh/mzioRo1rEo5q7jXPIfWtG7FA==}
+    engines: {node: '>=16.0.0'}
+    hasBin: true
+    peerDependencies:
+      react-streaming: '>=0.3.5'
+      vite: '>=3.1.0'
+    peerDependenciesMeta:
+      react-streaming:
+        optional: true
+    dependencies:
+      '@brillout/import': 0.2.3
+      '@brillout/json-serializer': 0.5.8
+      '@brillout/picocolors': 1.0.10
+      '@brillout/require-shim': 0.1.2
+      '@brillout/vite-plugin-import-build': 0.3.1
+      acorn: 8.11.2
+      cac: 6.7.14
+      es-module-lexer: 1.4.1
+      esbuild: 0.17.19
+      fast-glob: 3.3.2
+      react-streaming: 0.3.18(react-dom@18.2.0)(react@18.2.0)
+      sirv: 2.0.3
+      source-map-support: 0.5.21
+      vite: 5.0.10(@types/node@20.10.5)
+    dev: false
 
   /vite-node@1.1.0(@types/node@20.10.5):
     resolution: {integrity: sha512-jV48DDUxGLEBdHCQvxL1mEh7+naVy+nhUUUaPAZLd3FJgXuxQiewHcfeZebbJ6onDqNGkP4r3MhQ342PRlG81Q==}
@@ -3400,40 +3382,6 @@ packages:
       - supports-color
       - terser
     dev: true
-
-  /vite@4.5.1:
-    resolution: {integrity: sha512-AXXFaAJ8yebyqzoNB9fu2pHoo/nWX+xZlaRwoeYUxEqBO+Zj4msE5G+BhGBll9lYEKv9Hfks52PAF2X7qDYXQA==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      esbuild: 0.18.20
-      postcss: 8.4.31
-      rollup: 3.29.4
-    optionalDependencies:
-      fsevents: 2.3.3
 
   /vite@4.5.1(@types/node@20.10.5):
     resolution: {integrity: sha512-AXXFaAJ8yebyqzoNB9fu2pHoo/nWX+xZlaRwoeYUxEqBO+Zj4msE5G+BhGBll9lYEKv9Hfks52PAF2X7qDYXQA==}
@@ -3469,7 +3417,6 @@ packages:
       rollup: 3.29.4
     optionalDependencies:
       fsevents: 2.3.3
-    dev: false
 
   /vite@5.0.10(@types/node@20.10.5):
     resolution: {integrity: sha512-2P8J7WWgmc355HUMlFrwofacvr98DAjoE52BfdbwQtyLH06XKwaL/FMnmKM2crF0iX4MpmMKoDlNCB1ok7zHCw==}
@@ -3505,7 +3452,6 @@ packages:
       rollup: 4.9.1
     optionalDependencies:
       fsevents: 2.3.3
-    dev: true
 
   /vitest@1.1.0(@types/node@20.10.5)(jsdom@23.0.1):
     resolution: {integrity: sha512-oDFiCrw7dd3Jf06HoMtSRARivvyjHJaTxikFxuqJjO76U436PqlVw1uLn7a8OSPrhSfMGVaRakKpA2lePdw79A==}

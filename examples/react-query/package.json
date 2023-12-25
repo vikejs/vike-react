@@ -16,7 +16,7 @@
     "vike-react": "workspace:*",
     "vike-react-query": "workspace:*",
     "@tanstack/react-query": "^5.14.6",
-    "vite": "^4.5.1"
+    "vite": "^5.0.10"
   },
   "type": "module"
 }

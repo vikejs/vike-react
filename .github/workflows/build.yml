@@ -26,6 +26,9 @@ jobs:
       - name: Build packages
         run: pnpm run build
 
+      - name: Test packages
+        run: pnpm run test
+
       - name: Test building example
         run: pnpm run build
         working-directory: ./${{ matrix.example }}

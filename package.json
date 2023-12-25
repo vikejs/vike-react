@@ -3,8 +3,9 @@
   "private": true,
   "scripts": {
     "========= Basics": "",
-    "dev": "cd vike-react/ && pnpm run dev",
+    "dev": "cd ./packages/vike-react/ && pnpm run dev",
     "build": "pnpm --recursive --filter {packages/*} run build",
+    "test": "cd ./packages/vike-react-query/ && pnpm run test",
     "========= Release": "",
     "release": "cd ./packages/vike-react/ && pnpm run release",
     "release:commit": "cd ./packages/vike-react/ && pnpm run release:commit",

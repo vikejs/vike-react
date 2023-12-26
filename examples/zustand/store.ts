@@ -1,3 +1,5 @@
+export { useStore }
+
 import { createUseStore } from 'vike-react-zustand'
 import { PageContext } from 'vike/types'
 import { create } from 'zustand'
@@ -7,12 +9,11 @@ interface Store {
   setCounter: (value: number) => void
 }
 
-const createStore = (pageContext: PageContext) =>
+const useStore = createUseStore((pageContext: PageContext) =>
   create<Store>()((set, get) => ({
     counter: 0,
     setCounter(value) {
       set({ counter: value })
     }
   }))
-
-export const useStore = createUseStore(createStore)
+)

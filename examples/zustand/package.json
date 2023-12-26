@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "^5.3.3",
+    "vike": "^0.4.151",
+    "vike-react": "workspace:*",
+    "vike-react-zustand": "workspace:*",
+    "zustand": "^4.4.7",
+    "vite": "^4.5.1"
+  },
+  "type": "module"
+}

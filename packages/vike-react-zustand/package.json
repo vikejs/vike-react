@@ -1,0 +1,59 @@
+{
+  "name": "vike-react-zustand",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "typings": "dist/src/index.js",
+  "exports": {
+    ".": "./dist/src/index.js",
+    "./config": "./dist/renderer/+config.h.js",
+    "./renderer/VikeReactZustandWrapper": "./dist/renderer/VikeReactZustandWrapper.js"
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "rm -rf dist/ && tsc",
+    "release": "release-me --git-prefix vike-react-query --changelog-dir packages/vike-react-query/ patch",
+    "release:commit": "release-me --git-prefix vike-react-query --changelog-dir packages/vike-react-query/ commit",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "react": "18.x.x",
+    "react-dom": "18.x.x",
+    "vike": "^0.4.151",
+    "vike-react": "^0.3.5",
+    "react-streaming": "^0.3.16",
+    "vite": "^4.3.8",
+    "zustand": "4.x.x"
+  },
+  "devDependencies": {
+    "@brillout/release-me": "^0.1.13",
+    "@types/node": "^20.10.5",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.3.3",
+    "vike": "^0.4.151",
+    "vike-react": "^0.3.8",
+    "react-streaming": "^0.3.18",
+    "zustand": "^4.4.7"
+  },
+  "dependencies": {
+    "devalue": "^4.3.2"
+  },
+  "typesVersions": {
+    "*": {
+      "config": [
+        "dist/renderer/+config.h.d.ts"
+      ],
+      "renderer/VikeReactZustandWrapper": [
+        "dist/renderer/VikeReactZustandWrapper.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": "github:vikejs/vike-react",
+  "license": "MIT"
+}

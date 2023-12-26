@@ -1,6 +1,6 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useMemo } from 'react'
 import type { PageContext } from 'vike/types'
-import { getContext, getCreateStore } from './ZustandServerSide.js'
+import { getContext, getCreateStore } from './context.js'
 
 type VikeReactZustandWrapperProps = {
   pageContext: PageContext
@@ -8,9 +8,12 @@ type VikeReactZustandWrapperProps = {
 }
 
 export default function VikeReactZustandWrapper({ pageContext, children }: VikeReactZustandWrapperProps) {
-  const zustandContext = getContext()
   const createStore = getCreateStore()
-  const [store] = useState(() => createStore(pageContext))
+  const store = useMemo(() => createStore?.(pageContext), [createStore])
+  if (!store) {
+    return children
+  }
 
-  return <zustandContext.Provider value={store}>{children}</zustandContext.Provider>
+  const context = getContext()
+  return <context.Provider value={store}>{children}</context.Provider>
 }

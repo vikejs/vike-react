@@ -2,7 +2,6 @@ export default Page
 
 import React from 'react'
 import { Counter } from './Counter'
-import { useStore } from '../../store'
 
 function Page() {
   return (

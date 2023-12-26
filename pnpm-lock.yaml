@@ -148,6 +148,42 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1(@types/node@20.11.17)
 
+  examples/zustand:
+    dependencies:
+      '@types/react':
+        specifier: ^18.2.45
+        version: 18.2.45
+      '@types/react-dom':
+        specifier: ^18.2.18
+        version: 18.2.18
+      '@vitejs/plugin-react':
+        specifier: ^4.2.1
+        version: 4.2.1(vite@4.5.1)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+      vike:
+        specifier: ^0.4.151
+        version: 0.4.151(react-streaming@0.3.18)(vite@4.5.1)
+      vike-react:
+        specifier: workspace:*
+        version: link:../../packages/vike-react
+      vike-react-zustand:
+        specifier: workspace:*
+        version: link:../../packages/vike-react-zustand
+      vite:
+        specifier: ^4.5.1
+        version: 4.5.1
+      zustand:
+        specifier: ^4.4.7
+        version: 4.4.7(@types/react@18.2.45)(react@18.2.0)
+
   packages/vike-react:
     dependencies:
       react-streaming:
@@ -236,6 +272,49 @@ importers:
       vitest:
         specifier: ^1.2.2
         version: 1.2.2(@types/node@20.11.17)(jsdom@24.0.0)
+
+  packages/vike-react-zustand:
+    dependencies:
+      devalue:
+        specifier: ^4.3.2
+        version: 4.3.2
+      vite:
+        specifier: ^4.3.8
+        version: 4.5.1(@types/node@20.10.5)
+    devDependencies:
+      '@brillout/release-me':
+        specifier: ^0.1.13
+        version: 0.1.13
+      '@types/node':
+        specifier: ^20.10.5
+        version: 20.10.5
+      '@types/react':
+        specifier: ^18.2.45
+        version: 18.2.45
+      '@types/react-dom':
+        specifier: ^18.2.18
+        version: 18.2.18
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-streaming:
+        specifier: ^0.3.18
+        version: 0.3.18(react-dom@18.2.0)(react@18.2.0)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+      vike:
+        specifier: ^0.4.151
+        version: 0.4.151(react-streaming@0.3.18)(vite@4.5.1)
+      vike-react:
+        specifier: ^0.3.8
+        version: link:../vike-react
+      zustand:
+        specifier: ^4.4.7
+        version: 4.4.7(@types/react@18.2.45)(react@18.2.0)
 
 packages:
 
@@ -3037,6 +3116,13 @@ packages:
       requires-port: 1.0.0
     dev: true
 
+  /use-sync-external-store@1.2.0(react@18.2.0):
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+
   /validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
     dependencies:
@@ -3369,3 +3455,22 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
+
+  /zustand@4.4.7(@types/react@18.2.45)(react@18.2.0):
+    resolution: {integrity: sha512-QFJWJMdlETcI69paJwhSMJz7PPWjVP8Sjhclxmxmxv/RYI7ZOvR5BHX+ktH0we9gTWQMxcne8q1OY8xxz604gw==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      '@types/react': '>=16.8'
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      '@types/react': 18.2.45
+      react: 18.2.0
+      use-sync-external-store: 1.2.0(react@18.2.0)

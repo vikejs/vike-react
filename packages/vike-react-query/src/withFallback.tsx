@@ -10,12 +10,12 @@ type ErrorFallbackProps = {
   retry: RetryFn
 }
 
-type Fallback<T> = ComponentType<T> | ReactNode
-type FallbackError<T> = ComponentType<T & ErrorFallbackProps> | ReactNode
+type Loading<T> = ComponentType<T> | ReactNode
+type Error<T> = ComponentType<T & ErrorFallbackProps> | ReactNode
 
 type WithFallbackOptions<T> = {
-  Fallback?: Fallback<T>
-  FallbackError?: FallbackError<T>
+  Loading?: Loading<T>
+  Error?: Error<T>
 }
 
 export function withFallback<T extends object = Record<string, never>>(
@@ -24,29 +24,29 @@ export function withFallback<T extends object = Record<string, never>>(
 ): ComponentType<T>
 export function withFallback<T extends object = Record<string, never>>(
   Component: ComponentType<T>,
-  Fallback?: Fallback<T>,
-  FallbackError?: FallbackError<T>
+  Loading?: Loading<T>,
+  Error?: Error<T>
 ): ComponentType<T>
 export function withFallback<T extends object = Record<string, never>>(
   Component: ComponentType<T>,
-  options?: Fallback<T> | WithFallbackOptions<T>,
-  FallbackError_?: FallbackError<T>
+  options?: Loading<T> | WithFallbackOptions<T>,
+  Error_?: Error<T>
 ): ComponentType<T> {
-  let Fallback: Fallback<T>
-  let FallbackError: ComponentType<T & ErrorFallbackProps> | ReactNode
+  let Loading: Loading<T>
+  let Error: Error<T>
 
-  if (options && typeof options === 'object' && ('Fallback' in options || 'FallbackError' in options)) {
-    Fallback = options.Fallback
-    FallbackError = options.FallbackError
+  if (options && typeof options === 'object' && ('Loading' in options || 'Error' in options)) {
+    Loading = options.Loading
+    Error = options.Error
   } else if (options && typeof options !== 'object') {
-    Fallback = options
-    FallbackError = FallbackError_
+    Loading = options
+    Error = Error_
   }
 
   const ComponentWithFallback = (componentProps: T) => {
-    if (FallbackError) {
+    if (Error) {
       return (
-        <Suspense fallback={typeof Fallback === 'function' ? <Fallback {...componentProps} /> : Fallback}>
+        <Suspense fallback={typeof Loading === 'function' ? <Loading {...componentProps} /> : Loading}>
           <QueryErrorResetBoundary>
             {({ reset }) => {
               const createRetry =
@@ -70,14 +70,14 @@ export function withFallback<T extends object = Record<string, never>>(
               return (
                 <ErrorBoundary
                   fallbackRender={({ error: originalError, resetErrorBoundary }) =>
-                    typeof FallbackError === 'function' ? (
-                      <FallbackError
+                    typeof Error === 'function' ? (
+                      <Error
                         {...componentProps}
                         retry={createRetry(resetErrorBoundary)}
                         error={createError(originalError)}
                       />
                     ) : (
-                      FallbackError
+                      Error
                     )
                   }
                 >
@@ -91,7 +91,7 @@ export function withFallback<T extends object = Record<string, never>>(
     }
 
     return (
-      <Suspense fallback={typeof Fallback === 'function' ? <Fallback {...componentProps} /> : Fallback}>
+      <Suspense fallback={typeof Loading === 'function' ? <Loading {...componentProps} /> : Loading}>
         <Component {...componentProps} />
       </Suspense>
     )

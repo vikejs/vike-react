@@ -42,9 +42,9 @@ const Movie = withFallback(
     )
   },
   {
-    Fallback: ({ id }) => `Loading movie ${id}`,
+    Loading: ({ id }) => `Loading movie ${id}`,
     // Try commenting out the error fallback
-    FallbackError: ({ id, error, retry }) => (
+    Error: ({ id, error, retry }) => (
       <>
         <div>Loading movie {id} failed</div>
         <div>{error.message}</div>

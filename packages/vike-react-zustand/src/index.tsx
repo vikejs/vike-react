@@ -1,19 +1,19 @@
 import { useContext } from 'react'
 import { PageContext } from 'vike/types'
-import { StoreApi, useStore as useZustandStore } from 'zustand'
-import { getContext, setCreateStore } from '../renderer/ZustandServerSide.js'
+import { useStore as useZustandStore } from 'zustand'
+import { getContext, setCreateStore } from '../renderer/context.js'
+import { ExtractState, StoreApi } from './types.js'
 
-export const createUseStore = <TStore, TStoreApi extends StoreApi<any> = StoreApi<any>>(
-  createStore: (pageContext: PageContext) => TStoreApi
-) => {
+export function createUseStore<S extends StoreApi>(createStore: (pageContext: PageContext) => S) {
   setCreateStore(createStore)
 
-  const useStore = <TSelection = TStore,>(selector?: (state: TStore) => TSelection) => {
-    const zustandContext = getContext()
-    selector ??= (state) => state as unknown as TSelection
-    const store = useContext<TStoreApi>(zustandContext)
+  function useStore(): ExtractState<S>
+  function useStore<TSelection>(selector: (state: ExtractState<S>) => TSelection): TSelection
+  function useStore<TSelection>(selector?: (state: ExtractState<S>) => TSelection) {
+    const zustandContext = getContext<S>()
+    const store = useContext(zustandContext)
     if (!store) throw new Error('Store is missing the provider')
-    return useZustandStore(store, selector)
+    return useZustandStore(store, selector ?? store.getState)
   }
 
   return useStore

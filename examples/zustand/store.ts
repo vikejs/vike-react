@@ -7,7 +7,7 @@ interface Store {
   setCounter: (value: number) => void
 }
 
-const crateStore = (pageContext: PageContext) =>
+const createStore = (pageContext: PageContext) =>
   create<Store>()((set, get) => ({
     counter: 0,
     setCounter(value) {
@@ -15,4 +15,4 @@ const crateStore = (pageContext: PageContext) =>
     }
   }))
 
-export const useStore = createUseStore<Store>(crateStore)
+export const useStore = createUseStore(createStore)

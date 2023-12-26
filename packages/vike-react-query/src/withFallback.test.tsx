@@ -46,8 +46,8 @@ const ComponentThatThrows = withFallback(
     throw new Error('some message')
   },
   {
-    Fallback: ({ count }) => `loading${count}`,
-    FallbackError: ({ count, error, onErrorFallbackMount }) => {
+    Loading: ({ count }) => `loading${count}`,
+    Error: ({ count, error, onErrorFallbackMount }) => {
       useEffect(() => {
         onErrorFallbackMount?.()
       }, [])

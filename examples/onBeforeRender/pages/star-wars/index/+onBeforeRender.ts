@@ -6,7 +6,7 @@ import fetch from 'node-fetch'
 import type { Movie, MovieDetails } from '../types'
 import type { OnBeforeRenderAsync } from 'vike/types'
 
-// export { prerender }
+// export { onBeforePrerenderStart }
 
 const onBeforeRender: OnBeforeRenderAsync = async (pageContext): ReturnType<OnBeforeRenderAsync> => {
   const movies = await getStarWarsMovies()
@@ -42,7 +42,7 @@ function filterMoviesData(movies: MovieDetails[]): Movie[] {
 }
 
 /*
-async function prerender() {
+async function onBeforePrerenderStart() {
   const movies = await getStarWarsMovies()
 
   return [
@@ -65,7 +65,7 @@ async function prerender() {
         // Note that we can also provide the `pageContext` of other pages.
         // This means that Vike will not call any
         // `onBeforeRender()` hook and the Star Wars API will be called
-        // only once (in this `prerender()` hook).
+        // only once (in this `onBeforePrerenderStart()` hook).
         pageContext: {
           pageProps: {
             movie: filterMovieData(movie)

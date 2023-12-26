@@ -6,7 +6,7 @@ import fetch from 'node-fetch'
 //import { filterMovieData } from '../filterMovieData'
 import type { Movie, MovieDetails } from '../types'
 
-// export { prerender }
+// export { onBeforePrerenderStart }
 
 type Data = Awaited<ReturnType<typeof data>>
 
@@ -39,7 +39,7 @@ function filterMoviesData(movies: MovieDetails[]): Movie[] {
 }
 
 /*
-async function prerender() {
+async function onBeforePrerenderStart() {
   const movies = await getStarWarsMovies()
 
   return [
@@ -62,7 +62,7 @@ async function prerender() {
         // Note that we can also provide the `pageContext` of other pages.
         // This means that Vike will not call any
         // `data()` hook and the Star Wars API will be called
-        // only once (in this `prerender()` hook).
+        // only once (in this `onBeforePrerenderStart()` hook).
         pageContext: {
           data: {
             movie: filterMovieData(movie),

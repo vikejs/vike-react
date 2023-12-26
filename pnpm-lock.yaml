@@ -215,12 +215,9 @@ importers:
 
   packages/vike-react-zustand:
     dependencies:
-      devalue:
-        specifier: ^4.3.2
-        version: 4.3.2
       vite:
-        specifier: ^4.3.8
-        version: 4.5.1(@types/node@20.10.5)
+        specifier: ^4.3.8 || ^5.0.10
+        version: 5.0.10(@types/node@20.10.5)
     devDependencies:
       '@brillout/release-me':
         specifier: ^0.1.13
@@ -240,15 +237,12 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
-      react-streaming:
-        specifier: ^0.3.18
-        version: 0.3.18(react-dom@18.2.0)(react@18.2.0)
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
         specifier: ^0.4.151
-        version: 0.4.151(react-streaming@0.3.18)(vite@4.5.1)
+        version: 0.4.151(react-streaming@0.3.18)(vite@5.0.10)
       vike-react:
         specifier: ^0.3.8
         version: link:../vike-react

@@ -16,7 +16,7 @@
     "vike-react": "workspace:*",
     "vike-react-zustand": "workspace:*",
     "zustand": "^4.4.7",
-    "vite": "^4.5.1"
+    "vite": "^5.0.10"
   },
   "type": "module"
 }

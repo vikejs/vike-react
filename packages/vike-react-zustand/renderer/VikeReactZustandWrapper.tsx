@@ -8,12 +8,8 @@ type VikeReactZustandWrapperProps = {
 }
 
 export default function VikeReactZustandWrapper({ pageContext, children }: VikeReactZustandWrapperProps) {
+  const context = getContext()
   const createStore = getCreateStore()
   const store = useMemo(() => createStore?.(pageContext), [createStore])
-  if (!store) {
-    return children
-  }
-
-  const context = getContext()
   return <context.Provider value={store}>{children}</context.Provider>
 }

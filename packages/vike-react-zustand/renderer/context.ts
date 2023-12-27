@@ -4,11 +4,11 @@ import { getGlobalObject } from './utils/getGlobalObject.js'
 
 const globalObject = getGlobalObject('ZustandServerSide.ts', {
   createStore: undefined as CreateStore | undefined,
-  context: createContext<StoreApi | null>(null)
+  context: createContext<StoreApi | undefined>(undefined)
 })
 
 export const getCreateStore = () => globalObject.createStore
-export const getContext = <S extends StoreApi>() => globalObject.context as unknown as React.Context<S | null>
+export const getContext = <S extends StoreApi>() => globalObject.context as unknown as React.Context<S | undefined>
 
 export const setCreateStore = (createStore_: CreateStore) => {
   globalObject.createStore = createStore_

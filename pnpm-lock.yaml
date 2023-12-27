@@ -275,6 +275,12 @@ importers:
 
   packages/vike-react-zustand:
     dependencies:
+      devalue:
+        specifier: ^4.3.2
+        version: 4.3.2
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
       vite:
         specifier: ^4.3.8 || ^5.0.10
         version: 5.0.10(@types/node@20.10.5)
@@ -282,6 +288,9 @@ importers:
       '@brillout/release-me':
         specifier: ^0.1.13
         version: 0.1.13
+      '@types/lodash-es':
+        specifier: ^4.17.12
+        version: 4.17.12
       '@types/node':
         specifier: ^20.10.5
         version: 20.10.5
@@ -297,6 +306,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
+      react-streaming:
+        specifier: ^0.3.18
+        version: 0.3.18(react-dom@18.2.0)(react@18.2.0)
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
@@ -2360,6 +2372,10 @@ packages:
     dependencies:
       p-locate: 6.0.0
     dev: true
+
+  /lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
 
   /loose-envify@1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}

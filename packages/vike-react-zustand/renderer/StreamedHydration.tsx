@@ -70,7 +70,7 @@ const diff = (newState: any, oldState: any) => {
       !isEqual(newState[key], oldState[key])
     ) {
       if (typeof newState[key] === 'object' && !Array.isArray(newState[key])) {
-        const value = diff(newState[key] as Entry, oldState[key] as Entry)
+        const value = diff(newState[key], oldState[key])
         if (value && Object.keys(value).length > 0) {
           output[key] = value
         }

@@ -1,10 +1,10 @@
-export { createUseStore, createServerState }
+export { createUseStore, server }
 
 import { useContext } from 'react'
 import { PageContext } from 'vike/types'
 import { useStore as useZustandStore } from 'zustand'
 import { getContext, setCreateStore } from '../renderer/context.js'
-import { ExtractState, PASS_TO_CLIENT, StoreApi } from './types.js'
+import { ExtractState, StoreApi } from './types.js'
 
 function createUseStore<S extends StoreApi>(createStore: (pageContext: PageContext) => S) {
   setCreateStore(createStore)
@@ -21,15 +21,9 @@ function createUseStore<S extends StoreApi>(createStore: (pageContext: PageConte
   return useStore
 }
 
-function createServerState<T extends Record<string, any>>(fn: () => T) {
+function server<T extends Record<string, any>>(fn: () => T) {
   if (typeof window === 'undefined') {
-    const state = fn()
-    const keys = Object.keys(state)
-
-    //@ts-ignore
-    state[PASS_TO_CLIENT] = keys
-
-    return state
+    return fn()
   }
   return {} as T
 }

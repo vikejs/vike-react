@@ -1,6 +1,7 @@
 import React, { ReactNode, useMemo } from 'react'
 import type { PageContext } from 'vike/types'
 import { getContext, getCreateStore } from './context.js'
+import { StreamedHydration } from './StreamedHydration.js'
 
 type VikeReactZustandWrapperProps = {
   pageContext: PageContext
@@ -11,5 +12,13 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
   const context = getContext()
   const createStore = getCreateStore()
   const store = useMemo(() => createStore?.(pageContext), [createStore])
-  return <context.Provider value={store}>{children}</context.Provider>
+  if (!store) {
+    return children
+  }
+
+  return (
+    <context.Provider value={store}>
+      <StreamedHydration store={store}>{children}</StreamedHydration>
+    </context.Provider>
+  )
 }

@@ -2,9 +2,9 @@ export { StreamedHydration }
 
 import { uneval } from 'devalue'
 import type { ReactNode } from 'react'
-import { PASS_TO_CLIENT, type StoreApi } from '../src/types.js'
+import type { StoreApi } from '../src/types.js'
 import { useStream } from 'react-streaming'
-import { mergeWith, isEqual, cloneDeep, pick } from 'lodash-es'
+import { mergeWith, isEqual, cloneDeep } from 'lodash-es'
 
 type Entry = Record<string, unknown>
 declare global {
@@ -34,10 +34,9 @@ function StreamedHydration({ store, children }: { store: StoreApi; children: Rea
     )
 
     const state = store.getState()
-    if (state && typeof state === 'object' && PASS_TO_CLIENT in state && Array.isArray(state[PASS_TO_CLIENT])) {
-      stream.injectToStream(
-        `<script class="_rzstd_">_rzstd_.push(${uneval(pick(state, state[PASS_TO_CLIENT]))});_rzstdc_()</script>`
-      )
+    if (state && typeof state === 'object') {
+      // diff recursively removes functions(functions can't be passed to the client)
+      stream.injectToStream(`<script class="_rzstd_">_rzstd_.push(${uneval(diff(state, {}))});_rzstdc_()</script>`)
     }
 
     store.subscribe((newState, oldState) => {

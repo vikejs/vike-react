@@ -12,7 +12,7 @@ interface Store {
 
 const useStore = createUseStore((pageContext: PageContext) =>
   create<Store>()((set, get) => ({
-    counter: 0,
+    counter: Math.floor(10000 * Math.random()),
     setCounter(value) {
       set({ counter: value })
     },

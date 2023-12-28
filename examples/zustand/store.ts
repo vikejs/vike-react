@@ -1,6 +1,6 @@
 export { useStore }
 
-import { create, server } from 'vike-react-zustand'
+import { create, server, withPageContext } from 'vike-react-zustand'
 
 interface Store {
   counter: number
@@ -8,11 +8,11 @@ interface Store {
   serverEnv: string
 }
 
-const useStore = create<Store>(
+const useStore = create<Store>()(
   (
     set,
     get
-  /* TODO
+    /* TODO
   pageContext
   */
   ) => ({

@@ -1,8 +1,6 @@
 export { useStore }
 
-import { createUseStore, server } from 'vike-react-zustand'
-import { PageContext } from 'vike/types'
-import { create } from 'zustand'
+import { create, server } from 'vike-react-zustand'
 
 interface Store {
   counter: number
@@ -10,8 +8,14 @@ interface Store {
   serverEnv: string
 }
 
-const useStore = createUseStore((pageContext: PageContext) =>
-  create<Store>()((set, get) => ({
+const useStore = create<Store>(
+  (
+    set,
+    get
+  /* TODO
+  pageContext
+  */
+  ) => ({
     counter: Math.floor(10000 * Math.random()),
     setCounter(value) {
       set({ counter: value })
@@ -22,5 +26,5 @@ const useStore = createUseStore((pageContext: PageContext) =>
     ...server(() => ({
       serverEnv: process.env.SOME_ENV!
     }))
-  }))
+  })
 )

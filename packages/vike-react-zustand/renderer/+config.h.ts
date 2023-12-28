@@ -1,4 +1,9 @@
 export default {
   VikeReactZustandWrapper: 'import:vike-react-zustand/renderer/VikeReactZustandWrapper:default',
-  stream: true
+  passToClient: ['vikeReactZustand'],
+  meta: {
+    vikeReactZustand: {
+      env: { server: true, client: true }
+    }
+  }
 }

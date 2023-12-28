@@ -13,5 +13,5 @@ type WithReact<S extends ReadonlyStoreApi<unknown>> = S & {
   getServerState?: () => ExtractState<S>
 }
 
-type StoreApi = WithReact<ZustandStoreApi<unknown>>
+type StoreApi = WithReact<ZustandStoreApi<unknown>> & { __hydrated__?: boolean }
 type CreateStore = (pageContext: PageContext) => StoreApi

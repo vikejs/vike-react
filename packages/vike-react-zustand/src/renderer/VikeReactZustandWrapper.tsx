@@ -2,7 +2,7 @@ import React, { ReactNode, useMemo } from 'react'
 import type { PageContext } from 'vike/types'
 import { getContext, getCreateStore } from './context.js'
 import { isEqual } from 'lodash-es'
-import { assert } from './utils.js'
+import { assert } from '../utils.js'
 
 type VikeReactZustandWrapperProps = {
   pageContext: PageContext

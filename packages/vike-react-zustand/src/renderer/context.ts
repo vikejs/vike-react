@@ -1,5 +1,5 @@
 import React, { createContext } from 'react'
-import { CreateStore, StoreApi } from '../src/types.js'
+import { CreateStore, StoreApi } from '../types.js'
 import { getGlobalObject } from './utils.js'
 
 const globalObject = getGlobalObject('VikeReactZustandContext.ts', {

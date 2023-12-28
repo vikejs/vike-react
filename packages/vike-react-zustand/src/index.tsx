@@ -3,7 +3,7 @@ export { createUseStore, server }
 import { useContext } from 'react'
 import { PageContext } from 'vike/types'
 import { useStore as useZustandStore } from 'zustand'
-import { getContext, setCreateStore } from '../renderer/context.js'
+import { getContext, setCreateStore } from './renderer/context.js'
 import { ExtractState, StoreApi } from './types.js'
 
 function createUseStore<S extends StoreApi>(createStore: (pageContext: PageContext) => S) {

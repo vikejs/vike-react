@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
+    "rootDir": "./src/",
     // Resolution
     "target": "ES2020",
     "module": "Node16",
@@ -15,7 +16,6 @@
     // Output
     "declaration": true,
     "noEmitOnError": false,
-    "rootDir": "./",
     // Misc
     "esModuleInterop": true,
     "skipLibCheck": true,

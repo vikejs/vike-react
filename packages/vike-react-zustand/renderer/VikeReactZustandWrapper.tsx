@@ -2,6 +2,7 @@ import React, { ReactNode, useMemo } from 'react'
 import type { PageContext } from 'vike/types'
 import { getContext, getCreateStore } from './context.js'
 import { isEqual } from 'lodash-es'
+import { assert } from './utils.js'
 
 type VikeReactZustandWrapperProps = {
   pageContext: PageContext
@@ -10,10 +11,15 @@ type VikeReactZustandWrapperProps = {
 
 export default function VikeReactZustandWrapper({ pageContext, children }: VikeReactZustandWrapperProps) {
   const context = getContext()
+  assert(context)
   const createStore = getCreateStore()
   const store = useMemo(() => createStore?.(pageContext), [createStore])
   if (!store) {
+    // Is that the best thing to do?
     return children
+    /* This is problematic if the user first goes to a page that doesn't use any store and then navigates to a page that uses a store.
+    throw new Error('Call createUseStore() ')
+    */
   }
 
   if (typeof window === 'undefined') {

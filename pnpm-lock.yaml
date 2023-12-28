@@ -215,9 +215,6 @@ importers:
 
   packages/vike-react-zustand:
     dependencies:
-      devalue:
-        specifier: ^4.3.2
-        version: 4.3.2
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -246,9 +243,6 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
-      react-streaming:
-        specifier: ^0.3.18
-        version: 0.3.18(react-dom@18.2.0)(react@18.2.0)
       typescript:
         specifier: ^5.3.3
         version: 5.3.3

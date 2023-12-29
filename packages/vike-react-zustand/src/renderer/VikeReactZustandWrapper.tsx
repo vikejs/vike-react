@@ -13,7 +13,7 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
   const context = getContext()
   assert(context)
   const createStore = getCreateStore()
-  const store = useMemo(() => createStore?.(), [createStore])
+  const store = useMemo(() => createStore?.(pageContext), [createStore])
   if (!store) {
     // Is that the best thing to do?
     return children

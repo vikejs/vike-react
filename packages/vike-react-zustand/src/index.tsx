@@ -5,6 +5,7 @@ import type { PageContext } from 'vike/types'
 import { create as create_ } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { getContext, setCreateStore } from './renderer/context.js'
+import { assert } from './utils.js'
 
 /**
  * Zustand integration for vike-react.
@@ -30,7 +31,9 @@ function createImpl(storeCreatorFn: any): any {
       //   }))
       // create calls createImpl a second time, and it returns useStore.
       // but we need to pass the original storeCreatorFn(STORE_CREATOR_FN) to create_
-      return create_()(devtools(storeCreatorFn(pageContext)[STORE_CREATOR_FN]))
+      const originalStoreCreatorFn = storeCreatorFn(pageContext)[STORE_CREATOR_FN]
+      assert(originalStoreCreatorFn)
+      return create_()(devtools(originalStoreCreatorFn))
     } else {
       return create_()(devtools(storeCreatorFn))
     }

@@ -1,7 +1,6 @@
 import React, { ReactNode, useMemo } from 'react'
 import type { PageContext } from 'vike/types'
 import { getContext, getCreateStore } from './context.js'
-import { isEqual } from 'lodash-es'
 import { assert } from '../utils.js'
 
 type VikeReactZustandWrapperProps = {
@@ -23,8 +22,7 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
   }
 
   if (typeof window === 'undefined') {
-    // diff removes functions
-    pageContext.vikeReactZustand = diff(store.getState(), {})
+    pageContext.vikeReactZustand = removeFunctionsAndUndefined(store.getState(), {})
   } else if (!store.__hydrated__) {
     store.__hydrated__ = true
     store.setState(pageContext.vikeReactZustand)
@@ -33,17 +31,12 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
   return <context.Provider value={store}>{children}</context.Provider>
 }
 
-const diff = (newState: any, oldState: any) => {
+const removeFunctionsAndUndefined = (newState: any, oldState: any) => {
   const output: any = {}
   Object.keys(newState).forEach((key) => {
-    if (
-      newState[key] !== null &&
-      newState[key] !== undefined &&
-      typeof newState[key] !== 'function' &&
-      !isEqual(newState[key], oldState[key])
-    ) {
+    if (newState[key] !== undefined && typeof newState[key] !== 'function') {
       if (typeof newState[key] === 'object' && !Array.isArray(newState[key])) {
-        const value = diff(newState[key], oldState[key])
+        const value = removeFunctionsAndUndefined(newState[key], oldState[key])
         if (value && Object.keys(value).length > 0) {
           output[key] = value
         }

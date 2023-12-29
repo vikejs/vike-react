@@ -20,7 +20,7 @@ function createImpl(storeCreatorFn: any): any {
       //     counter: 123
       //   }))
       // create calls createImpl a second time, and it returns useStore.
-      // but we need to pass the original storeCreatorFn(_storeCreatorFn) to create_
+      // but we need to pass the original storeCreatorFn(STORE_CREATOR_FN) to create_
       return create_()(storeCreatorFn(pageContext)[STORE_CREATOR_FN])
     } else {
       return create_()(storeCreatorFn)

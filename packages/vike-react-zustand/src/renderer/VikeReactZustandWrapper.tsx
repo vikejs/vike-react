@@ -21,6 +21,7 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
     */
   }
 
+  // TODO: replace with import.meta.env.SSR
   if (typeof window === 'undefined') {
     pageContext.vikeReactZustand = removeFunctionsAndUndefined(store.getState())
   } else if (!store.__hydrated__) {

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "SOME_ENV=123 vite dev",
+    "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
     "test": "tsc --noEmit"

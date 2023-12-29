@@ -6,7 +6,7 @@ import { immer } from 'zustand/middleware/immer'
 interface Store {
   counter: number
   setCounter: (value: number) => void
-  serverEnv: string
+  nodeVersion: string
 }
 
 // withPageContext is optional
@@ -24,7 +24,7 @@ const useStore = withPageContext((pageContext) =>
       // the function passed to serverOnly only runs on the server
       // the return value is available on client/server
       ...serverOnly(() => ({
-        serverEnv: process.env.SOME_ENV!
+        nodeVersion: process.version
       }))
     }))
   )

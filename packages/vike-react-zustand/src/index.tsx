@@ -1,39 +1,11 @@
 export { create, serverOnly, withPageContext }
 
-import { useContext } from 'react'
-import { getContext, setCreateStore } from './renderer/context.js'
-import { create as create_ } from 'zustand'
-import type { StoreMutatorIdentifier, UseBoundStore, Mutate, StoreApi as ZustandStoreApi } from 'zustand'
 import type { PageContext } from 'vike/types'
+import { useContext } from 'react'
+import { create as create_ } from 'zustand'
+import { getContext, setCreateStore } from './renderer/context.js'
 
-type Create = {
-  <T, Mos extends [StoreMutatorIdentifier, unknown][] = []>(
-    initializer: StateCreator<T, [], Mos>
-  ): UseBoundStore<Mutate<ZustandStoreApi<T>, Mos>>
-  <T>(): <Mos extends [StoreMutatorIdentifier, unknown][] = []>(
-    initializer: StateCreator<T, [], Mos>
-  ) => UseBoundStore<Mutate<ZustandStoreApi<T>, Mos>>
-  /**
-   * @deprecated Use `useStore` hook to bind store
-   */
-  <S extends ZustandStoreApi<unknown>>(store: S): UseBoundStore<S>
-}
-
-type Get<T, K, F> = K extends keyof T ? T[K] : F
-export type StateCreator<
-  T,
-  Mis extends [StoreMutatorIdentifier, unknown][] = [],
-  Mos extends [StoreMutatorIdentifier, unknown][] = [],
-  U = T
-> = ((
-  setState: Get<Mutate<ZustandStoreApi<T>, Mis>, 'setState', never>,
-  getState: Get<Mutate<ZustandStoreApi<T>, Mis>, 'getState', never>,
-  store: Mutate<ZustandStoreApi<T>, Mis>
-) => U) & {
-  $$storeMutators?: Mos
-}
-
-const create: Create = ((storeCreatorFn: any) => {
+const create: typeof create_ = ((storeCreatorFn: any) => {
   return storeCreatorFn ? createImpl(storeCreatorFn) : createImpl
 }) as any
 

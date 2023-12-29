@@ -15,8 +15,8 @@ function Page() {
         <li>
           Interactive while loading. <Counter />
         </li>
-        <li>Node version from server: {nodeVersion}</li>
       </ul>
+      <div>Node version from server: {nodeVersion}</div>
     </>
   )
 }

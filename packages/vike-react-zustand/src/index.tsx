@@ -1,8 +1,9 @@
 export { create, serverOnly, withPageContext }
 
-import type { PageContext } from 'vike/types'
 import { useContext } from 'react'
+import type { PageContext } from 'vike/types'
 import { create as create_ } from 'zustand'
+import { devtools } from 'zustand/middleware'
 import { getContext, setCreateStore } from './renderer/context.js'
 
 const create: typeof create_ = ((storeCreatorFn: any) => {
@@ -21,9 +22,9 @@ function createImpl(storeCreatorFn: any): any {
       //   }))
       // create calls createImpl a second time, and it returns useStore.
       // but we need to pass the original storeCreatorFn(STORE_CREATOR_FN) to create_
-      return create_()(storeCreatorFn(pageContext)[STORE_CREATOR_FN])
+      return create_()(devtools(storeCreatorFn(pageContext)[STORE_CREATOR_FN]))
     } else {
-      return create_()(storeCreatorFn)
+      return create_()(devtools(storeCreatorFn))
     }
   })
 

@@ -1,9 +1,10 @@
-export { create, server }
+export { create, serverOnly, withPageContext }
 
 import { useContext } from 'react'
 import { getContext, setCreateStore } from './renderer/context.js'
 import { create as create_ } from 'zustand'
 import type { StoreMutatorIdentifier, UseBoundStore, Mutate, StoreApi as ZustandStoreApi } from 'zustand'
+import type { PageContext } from 'vike/types'
 
 type Create = {
   <T, Mos extends [StoreMutatorIdentifier, unknown][] = []>(
@@ -32,14 +33,25 @@ export type StateCreator<
   $$storeMutators?: Mos
 }
 
-const create: Create = ((createState: any) => {
-  return createState ? createImpl(createState) : createImpl
+const create: Create = ((storeCreatorFn: any) => {
+  return storeCreatorFn ? createImpl(storeCreatorFn) : createImpl
 }) as any
 
-function createImpl(createStore: any): any {
-  // @ts-ignore
+function createImpl(storeCreatorFn: any): any {
   setCreateStore((pageContext: any) => {
-    return create_(createStore)
+    // This is called only once per request
+    if (storeCreatorFn._withPageContext) {
+      // storeCreatorFn(pageContext) looks like this:
+      // (pageContext) =>
+      //   create((set, get) => ({
+      //     counter: 123
+      //   }))
+      // create calls createImpl a second time, and it returns useStore.
+      // but we need to pass the original storeCreatorFn(_storeCreatorFn) to create_
+      return create_()(storeCreatorFn(pageContext)._storeCreatorFn)
+    } else {
+      return create_()(storeCreatorFn)
+    }
   })
 
   function useStore(...args: any[]) {
@@ -50,21 +62,19 @@ function createImpl(createStore: any): any {
     return store(...args)
   }
 
+  useStore._storeCreatorFn = storeCreatorFn
   return useStore
 }
 
-function server<T extends Record<string, any>>(fn: () => T) {
+function serverOnly<T extends Record<string, any>>(fn: () => T) {
   if (typeof window === 'undefined') {
     return fn()
   }
   return {} as T
 }
-type StoreAndHook = ReturnType<typeof create>
-function withPageContext<S extends StoreAndHook>(storeCreatorCreatorFn: (pageContext: StoreAndHook) => S) {
-  //@ts-ignore
-  // createImpl._withPageContext_ = storeCreatorFn
-  // const storeCreatorFn = () => {
-  //   storeCreatorCreatorFn(pageContext)
-  //   return createImpl(storeCreatorFn)
-  // }
+
+function withPageContext<S extends ReturnType<typeof create_>>(storeCreatorFn: (pageContext: PageContext) => S): S {
+  const wrappedStoreCreatorFn = (pageContext: any) => storeCreatorFn(pageContext)
+  wrappedStoreCreatorFn._withPageContext = true
+  return createImpl(wrappedStoreCreatorFn)
 }

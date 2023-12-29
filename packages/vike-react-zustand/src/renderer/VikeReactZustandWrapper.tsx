@@ -22,7 +22,7 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
   }
 
   if (typeof window === 'undefined') {
-    pageContext.vikeReactZustand = removeFunctionsAndUndefined(store.getState(), {})
+    pageContext.vikeReactZustand = removeFunctionsAndUndefined(store.getState())
   } else if (!store.__hydrated__) {
     store.__hydrated__ = true
     store.setState(pageContext.vikeReactZustand)
@@ -31,17 +31,17 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
   return <context.Provider value={store}>{children}</context.Provider>
 }
 
-const removeFunctionsAndUndefined = (newState: any, oldState: any) => {
+const removeFunctionsAndUndefined = (object: any) => {
   const output: any = {}
-  Object.keys(newState).forEach((key) => {
-    if (newState[key] !== undefined && typeof newState[key] !== 'function') {
-      if (typeof newState[key] === 'object' && !Array.isArray(newState[key])) {
-        const value = removeFunctionsAndUndefined(newState[key], oldState[key])
+  Object.keys(object).forEach((key) => {
+    if (object[key] !== undefined && typeof object[key] !== 'function') {
+      if (typeof object[key] === 'object' && !Array.isArray(object[key])) {
+        const value = removeFunctionsAndUndefined(object[key])
         if (value && Object.keys(value).length > 0) {
           output[key] = value
         }
       } else {
-        output[key] = newState[key]
+        output[key] = object[key]
       }
     }
   })

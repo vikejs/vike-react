@@ -9,6 +9,7 @@ const create: typeof create_ = ((storeCreatorFn: any) => {
   return storeCreatorFn ? createImpl(storeCreatorFn) : createImpl
 }) as any
 
+const STORE_CREATOR_FN = Symbol('STORE_CREATOR_FN')
 function createImpl(storeCreatorFn: any): any {
   setCreateStore((pageContext: any) => {
     // This is called only once per request
@@ -20,22 +21,30 @@ function createImpl(storeCreatorFn: any): any {
       //   }))
       // create calls createImpl a second time, and it returns useStore.
       // but we need to pass the original storeCreatorFn(_storeCreatorFn) to create_
-      return create_()(storeCreatorFn(pageContext)._storeCreatorFn)
+      return create_()(storeCreatorFn(pageContext)[STORE_CREATOR_FN])
     } else {
       return create_()(storeCreatorFn)
     }
   })
 
-  function useStore(...args: any[]) {
+  function useStore() {
     const zustandContext = getContext()
     const store = useContext(zustandContext)
     if (!store) throw new Error('Store is missing the provider')
-    // @ts-ignore
-    return store(...args)
+    return store
   }
 
-  useStore._storeCreatorFn = storeCreatorFn
-  return useStore
+  return new Proxy(useStore, {
+    get(target, p: keyof ReturnType<typeof create_> | typeof STORE_CREATOR_FN) {
+      if (p === STORE_CREATOR_FN) {
+        return storeCreatorFn
+      }
+      return target()[p]
+    },
+    apply(target, _this, [selector]) {
+      return target()(selector)
+    }
+  })
 }
 
 function serverOnly<T extends Record<string, any>>(fn: () => T) {

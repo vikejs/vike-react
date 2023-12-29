@@ -66,6 +66,7 @@ function createImpl(storeCreatorFn: any): any {
  * @param getState
  */
 function serverOnly<T extends Record<string, any>>(getState: () => T) {
+  // TODO: replace with import.meta.env.SSR
   if (typeof window === 'undefined') {
     return getState()
   }

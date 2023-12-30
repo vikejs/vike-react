@@ -7,3 +7,9 @@ declare global {
     }
   }
 }
+
+declare module 'zustand' {
+  interface StoreApi<T> {
+    __hydrated__?: boolean
+  }
+}

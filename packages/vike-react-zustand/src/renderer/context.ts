@@ -1,18 +1,19 @@
 export { getContext, getCreateStore, setCreateStore }
 
-import React, { createContext } from 'react'
-import { getGlobalObject } from '../utils.js'
+import { createContext } from 'react'
+import type { PageContext } from 'vike/types'
 import type { create } from 'zustand'
+import { getGlobalObject } from '../utils.js'
 
 type StoreAndHook = ReturnType<typeof create>
-type CreateStore = (pageContext: any) => StoreAndHook & { __hydrated__?: true }
+type CreateStore = (pageContext: PageContext) => StoreAndHook
 
 const globalObject = getGlobalObject('VikeReactZustandContext.ts', {
   createStore: undefined as CreateStore | undefined,
   context: createContext<StoreAndHook | undefined>(undefined)
 })
 
-const getContext = () => globalObject.context as unknown as React.Context<StoreAndHook | undefined>
+const getContext = () => globalObject.context
 
 const getCreateStore = () => globalObject.createStore
 const setCreateStore = (createStore_: CreateStore) => {

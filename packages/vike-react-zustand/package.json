@@ -48,6 +48,6 @@
   "files": [
     "dist"
   ],
-  "repository": "github:vikejs/vike-react",
+  "repository": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-zustand",
   "license": "MIT"
 }

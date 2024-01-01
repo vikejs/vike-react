@@ -1,11 +1,13 @@
-export { create, serverOnly, withPageContext }
+export { createWrapper as create, serverOnly, withPageContext }
+
+// TODO: make this export internal
+export { callCreateOriginal }
 
 import { useContext } from 'react'
 import type { PageContext } from 'vike/types'
-import { create as create_ } from 'zustand'
+import { create as createOriginal } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import { getContext, setCreateStore } from './renderer/context.js'
-import { assert } from './utils.js'
+import { getReactStoreContext, initializer_set, withPageContextCallback_set } from './renderer/context.js'
 
 /**
  * Zustand integration for vike-react.
@@ -15,42 +17,29 @@ import { assert } from './utils.js'
  * Usage examples: https://docs.pmnd.rs/zustand/guides/typescript#basic-usage
  *
  */
-const create: typeof create_ = ((storeCreatorFn: any) => {
-  return storeCreatorFn ? createImpl(storeCreatorFn) : createImpl
+const createWrapper: typeof createOriginal = ((initializer: any) => {
+  // Support `create()(() => { /* ... * })`
+  return initializer ? create(initializer) : create
 }) as any
 
-const STORE_CREATOR_FN = Symbol('STORE_CREATOR_FN')
-function createImpl(storeCreatorFn: any): any {
-  setCreateStore((pageContext: any) => {
-    // This is called only once per request
-    if (storeCreatorFn._withPageContext) {
-      // storeCreatorFn(pageContext) looks like this:
-      // (pageContext) =>
-      //   create((set, get) => ({
-      //     counter: 123
-      //   }))
-      // create calls createImpl a second time, and it returns useStore.
-      // but we need to pass the original storeCreatorFn(STORE_CREATOR_FN) to create_
-      const originalStoreCreatorFn = storeCreatorFn(pageContext)[STORE_CREATOR_FN]
-      assert(originalStoreCreatorFn)
-      return create_()(devtools(originalStoreCreatorFn))
-    } else {
-      return create_()(devtools(storeCreatorFn))
-    }
-  })
+function callCreateOriginal(initializer: any) {
+  return createOriginal()(devtools(initializer))
+}
 
+function create(initializer: any): any {
+  initializer_set(initializer)
+  return getStoreProxy()
+}
+
+function getStoreProxy(): any {
   function useStore() {
-    const zustandContext = getContext()
-    const store = useContext(zustandContext)
+    const reactStoreContext = getReactStoreContext()
+    const store = useContext(reactStoreContext)
     if (!store) throw new Error('Store is missing the provider')
     return store
   }
-
   return new Proxy(useStore, {
-    get(target, p: keyof ReturnType<typeof create_> | typeof STORE_CREATOR_FN) {
-      if (p === STORE_CREATOR_FN) {
-        return storeCreatorFn
-      }
+    get(target, p: keyof ReturnType<typeof createOriginal>) {
       return target()[p]
     },
     apply(target, _this, [selector]) {
@@ -108,10 +97,9 @@ function serverOnly<T extends Record<string, any>>(getStateOnServerSide: () => T
  * )
  * ```
  */
-function withPageContext<Store extends ReturnType<typeof create_>>(
+function withPageContext<Store extends ReturnType<typeof createOriginal>>(
   withPageContextCallback: (pageContext: PageContext) => Store
 ): Store {
-  const wrappedStoreCreatorFn = (pageContext: any) => withPageContextCallback(pageContext)
-  wrappedStoreCreatorFn._withPageContext = true
-  return createImpl(wrappedStoreCreatorFn)
+  withPageContextCallback_set(withPageContextCallback)
+  return getStoreProxy()
 }

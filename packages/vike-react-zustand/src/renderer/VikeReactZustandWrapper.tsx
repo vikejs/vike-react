@@ -1,7 +1,8 @@
 import React, { ReactNode, useMemo } from 'react'
 import type { PageContext } from 'vike/types'
-import { getContext, getCreateStore } from './context.js'
+import { getReactStoreContext, initializer_get, withPageContextCallback_get } from './context.js'
 import { assert } from '../utils.js'
+import { callCreateOriginal } from '../index.js'
 
 type VikeReactZustandWrapperProps = {
   pageContext: PageContext
@@ -9,10 +10,15 @@ type VikeReactZustandWrapperProps = {
 }
 
 export default function VikeReactZustandWrapper({ pageContext, children }: VikeReactZustandWrapperProps) {
-  const context = getContext()
-  assert(context)
-  const createStore = getCreateStore()
-  const store = useMemo(() => createStore?.(pageContext), [createStore])
+  const reactStoreContext = getReactStoreContext()
+  assert(reactStoreContext)
+
+  const withPageContextCallback = withPageContextCallback_get()
+  withPageContextCallback?.(pageContext)
+
+  const initializer = initializer_get()
+  const store = initializer && useMemo(() => callCreateOriginal(initializer), [initializer])
+
   if (!store) {
     // Is that the best thing to do?
     return children
@@ -31,7 +37,7 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
     store.setState(pageContext._vikeReactZustand)
   }
 
-  return <context.Provider value={store}>{children}</context.Provider>
+  return <reactStoreContext.Provider value={store}>{children}</reactStoreContext.Provider>
 }
 
 const removeFunctionsAndUndefined = (object: any) => {

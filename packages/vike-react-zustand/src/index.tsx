@@ -60,17 +60,29 @@ function createImpl(storeCreatorFn: any): any {
 }
 
 /**
- * The function passed to `serverOnly` only runs on the `server`.
+ * The function passed to `serverOnly()` only runs on the server-side, while the state returned by it is available on both the server- and client-side.
  *
- * The return value is available in the store on `client`/`server`.
- * @param getState
+ * Example usage:
+ *
+ * ```ts
+ *
+ * import { create, serverOnly } from 'vike-react-zustand'
+ *
+ * // We use serverOnly() because process.version is only available on the server-side but we want to be able to access it everywhere (client- and server-side).
+ * const useStore = create<{ nodeVersion: string }>()({
+ *   ...serverOnly(() => ({
+ *     // This function is called only on the server-side, but nodeVersion is available on both the server- and client-side.
+ *     nodeVersion: process.version
+ *   }))
+ * })
+ * ```
  */
-function serverOnly<T extends Record<string, any>>(getState: () => T) {
+function serverOnly<T extends Record<string, any>>(getStateOnServerSide: () => T) {
   // Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
   // @ts-ignore
   import.meta.env ??= { SSR: true }
   if (import.meta.env.SSR) {
-    return getState()
+    return getStateOnServerSide()
   }
   return {} as T
 }

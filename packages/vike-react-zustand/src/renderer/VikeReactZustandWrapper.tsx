@@ -21,8 +21,10 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
     */
   }
 
-  // TODO: replace with import.meta.env.SSR
-  if (typeof window === 'undefined') {
+  // Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
+  // @ts-ignore
+  import.meta.env ??= { SSR: true }
+  if (import.meta.env.SSR) {
     pageContext._vikeReactZustand = removeFunctionsAndUndefined(store.getState())
   } else if (!store.__hydrated__) {
     store.__hydrated__ = true

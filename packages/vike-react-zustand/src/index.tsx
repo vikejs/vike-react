@@ -66,33 +66,40 @@ function createImpl(storeCreatorFn: any): any {
  * @param getState
  */
 function serverOnly<T extends Record<string, any>>(getState: () => T) {
-  // TODO: replace with import.meta.env.SSR
-  if (typeof window === 'undefined') {
+  // Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
+  // @ts-ignore
+  import.meta.env ??= { SSR: true }
+  if (import.meta.env.SSR) {
     return getState()
   }
   return {} as T
 }
 
 /**
- * To make `pageContext` available to the store and middlewares, you can wrap the store using `withPageContext`.
+ * Utility to make `pageContext` available to the store.
  *
  * Example usage:
  *
  * ```ts
+ *
  * interface Store {
- *   url: string
+ *   user: {
+ *     id: number
+ *     firstName: string
+ *   }
  * }
  *
  * const useStore = withPageContext((pageContext) =>
  *   create<Store>()((set, get) => ({
- *     url: pageContext.urlOriginal
+ *     user: pageContext.user
  *   }))
  * )
  * ```
- *
  */
-function withPageContext<S extends ReturnType<typeof create_>>(storeCreatorFn: (pageContext: PageContext) => S): S {
-  const wrappedStoreCreatorFn = (pageContext: any) => storeCreatorFn(pageContext)
+function withPageContext<Store extends ReturnType<typeof create_>>(
+  withPageContextCallback: (pageContext: PageContext) => Store
+): Store {
+  const wrappedStoreCreatorFn = (pageContext: any) => withPageContextCallback(pageContext)
   wrappedStoreCreatorFn._withPageContext = true
   return createImpl(wrappedStoreCreatorFn)
 }

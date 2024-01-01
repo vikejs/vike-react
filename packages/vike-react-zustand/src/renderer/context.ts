@@ -8,7 +8,7 @@ import { getGlobalObject } from '../utils.js'
 type StoreAndHook = ReturnType<typeof create>
 type CreateStore = (pageContext: PageContext) => StoreAndHook
 
-const globalObject = getGlobalObject('VikeReactZustandContext.ts', {
+const globalObject = getGlobalObject('context.ts', {
   createStore: undefined as CreateStore | undefined,
   context: createContext<StoreAndHook | undefined>(undefined)
 })

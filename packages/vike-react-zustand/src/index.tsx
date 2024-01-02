@@ -3,8 +3,11 @@ export { createWrapped as create, serverOnly, withPageContext, useStoreApi }
 import { useContext } from 'react'
 import type { PageContext } from 'vike/types'
 import { getReactStoreContext, initializer_set, withPageContextCallback_set } from './renderer/context.js'
-import { type create as createZustand } from 'zustand'
+import { type StoreApi, create as createZustand } from 'zustand'
 import { assert } from './utils.js'
+
+type StoreApiAndHook = ReturnType<typeof createZustand>
+type StoreApiOnly<Store extends StoreApiAndHook> = Pick<Store, keyof StoreApi<unknown>>
 
 /**
  * Zustand integration for vike-react.
@@ -45,7 +48,7 @@ function create(initializer: any): any {
  * )
  * ```
  */
-function withPageContext<Store extends ReturnType<typeof createZustand>>(
+function withPageContext<Store extends StoreApiAndHook>(
   withPageContextCallback: (pageContext: PageContext) => Store
 ): Store {
   const key = 'default'
@@ -53,13 +56,13 @@ function withPageContext<Store extends ReturnType<typeof createZustand>>(
   return getUseStore(key)
 }
 
-function useStoreApi<Store extends ReturnType<typeof createZustand>>(useStore: Store | string) {
+function useStoreApi<Store extends StoreApiAndHook>(useStore: Store | string): StoreApiOnly<Store> {
   const key = typeof useStore === 'string' ? useStore : useStore.__key__
   const reactStoreContext = getReactStoreContext()
   const stores = useContext(reactStoreContext)
   const store = stores[key]
   assert(store)
-  return store as Store
+  return store
 }
 
 function getUseStore(key: string): any {

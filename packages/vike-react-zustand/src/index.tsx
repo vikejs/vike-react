@@ -19,8 +19,9 @@ const createWrapped: typeof createZustand = ((initializer: any) => {
   return initializer ? create(initializer) : create
 }) as any
 function create(initializer: any): any {
-  initializer_set(initializer)
-  return getUseStore()
+  const key = 'default'
+  initializer_set(key, initializer)
+  return getUseStore(key)
 }
 
 /**
@@ -47,24 +48,27 @@ function create(initializer: any): any {
 function withPageContext<Store extends ReturnType<typeof createZustand>>(
   withPageContextCallback: (pageContext: PageContext) => Store
 ): Store {
-  withPageContextCallback_set(withPageContextCallback)
-  return getUseStore()
+  const key = 'default'
+  withPageContextCallback_set(key, withPageContextCallback)
+  return getUseStore(key)
 }
 
-function useStoreApi() {
+function useStoreApi<Store extends ReturnType<typeof createZustand>>(useStore: Store | string) {
+  const key = typeof useStore === 'string' ? useStore : useStore.__key__
   const reactStoreContext = getReactStoreContext()
-  const store = useContext(reactStoreContext)
+  const stores = useContext(reactStoreContext)
+  const store = stores[key]
   assert(store)
-  return store
+  return store as Store
 }
 
-function getUseStore(): any {
+function getUseStore(key: string): any {
   function useStore(...args: any[]) {
-    const store = useStoreApi()
+    const store = useStoreApi(key)
     //@ts-ignore
     return store(...args)
   }
-
+  useStore.__key__ = key
   return useStore
 }
 

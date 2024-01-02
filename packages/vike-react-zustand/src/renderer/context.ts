@@ -1,7 +1,7 @@
 export { initializer_set }
-export { initializer_get }
+export { initializers_get as initializer_get }
 export { withPageContextCallback_set }
-export { withPageContextCallback_get }
+export { withPageContextCallbacks_get as withPageContextCallback_get }
 export { getReactStoreContext }
 
 import { createContext } from 'react'
@@ -13,7 +13,7 @@ type StoreAndHook = ReturnType<typeof create>
 
 const globalObject = getGlobalObject('context.ts', {
   reactStoreContext: createContext<{ [key: string]: StoreAndHook }>({}),
-  withPageContextCallback: {} as { [key: string]: (pageContext: PageContext) => StoreAndHook },
+  withPageContextCallbacks: {} as { [key: string]: (pageContext: PageContext) => StoreAndHook },
   initializers: {} as { [key: string]: any }
 })
 
@@ -26,17 +26,17 @@ function initializer_set(key: string, initializer: any) {
     [key]: initializer
   }
 }
-function initializer_get() {
+function initializers_get() {
   return globalObject.initializers
 }
 
 function withPageContextCallback_set(key: string, withPageContextCallback: any) {
   // useMemo will notice the change because we create a new object
-  globalObject.withPageContextCallback = {
-    ...globalObject.withPageContextCallback,
+  globalObject.withPageContextCallbacks = {
+    ...globalObject.withPageContextCallbacks,
     [key]: withPageContextCallback
   }
 }
-function withPageContextCallback_get() {
-  return globalObject.withPageContextCallback
+function withPageContextCallbacks_get() {
+  return globalObject.withPageContextCallbacks
 }

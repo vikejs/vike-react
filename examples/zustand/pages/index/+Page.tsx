@@ -8,7 +8,6 @@ import { useStoreApi } from 'vike-react-zustand'
 function Page() {
   const nodeVersion = useStore((s) => s.nodeVersion)
   const storeApi = useStoreApi(useStore)
-
   useEffect(
     () =>
       storeApi.subscribe((state) => {

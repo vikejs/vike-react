@@ -1,13 +1,10 @@
-export { createWrapped as create, serverOnly, withPageContext, useStoreApi }
+export { createWrapped as create, serverOnly, useStoreApi, withPageContext }
 
 import { useContext } from 'react'
 import type { PageContext } from 'vike/types'
 import { getReactStoreContext, initializer_set, withPageContextCallback_set } from './renderer/context.js'
-import { type StoreApi, create as createZustand } from 'zustand'
+import type { Create, StoreApiAndHook, StoreApiOnly, StoreHookOnly } from './types.js'
 import { assert } from './utils.js'
-
-type StoreApiAndHook = ReturnType<typeof createZustand>
-type StoreApiOnly<Store extends StoreApiAndHook> = Pick<Store, keyof StoreApi<unknown>>
 
 /**
  * Zustand integration for vike-react.
@@ -17,10 +14,11 @@ type StoreApiOnly<Store extends StoreApiAndHook> = Pick<Store, keyof StoreApi<un
  * Usage examples: https://docs.pmnd.rs/zustand/guides/typescript#basic-usage
  *
  */
-const createWrapped: typeof createZustand = ((initializer: any) => {
+const createWrapped: Create = ((initializer?: any) => {
   // Support `create()(() => { /* ... * })`
   return initializer ? create(initializer) : create
 }) as any
+
 function create(initializer: any): any {
   const key = 'default'
   initializer_set(key, initializer)
@@ -48,7 +46,7 @@ function create(initializer: any): any {
  * )
  * ```
  */
-function withPageContext<Store extends StoreApiAndHook>(
+function withPageContext<Store extends StoreHookOnly<unknown>>(
   withPageContextCallback: (pageContext: PageContext) => Store
 ): Store {
   const key = 'default'
@@ -58,7 +56,7 @@ function withPageContext<Store extends StoreApiAndHook>(
 
 /**
  * Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, useStoreApi can be used.
- * 
+ *
  * ⚠️ Note that middlewares that modify set or get are not applied to getState and setState.
  *
  * Example usage:
@@ -79,7 +77,8 @@ function withPageContext<Store extends StoreApiAndHook>(
 // require users to pass useStore, because:
 // 1. useStore needs to be imported at least once for the store to exist
 // 2. the store key is stored on the useStore object
-function useStoreApi<Store extends StoreApiAndHook>(useStore: Store): StoreApiOnly<Store> {
+function useStoreApi<Store extends StoreApiAndHook, Hook = StoreHookOnly<Store>>(useStore: Hook): StoreApiOnly<Store> {
+  //@ts-ignore
   const key = typeof useStore === 'string' ? useStore : useStore.__key__
   assert(key)
   const reactStoreContext = getReactStoreContext()

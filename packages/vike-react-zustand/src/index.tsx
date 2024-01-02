@@ -1,4 +1,4 @@
-export { createWrapped as create, serverOnly, withPageContext }
+export { createWrapped as create, serverOnly, withPageContext, useStoreApi }
 
 import { useContext } from 'react'
 import type { PageContext } from 'vike/types'
@@ -20,7 +20,7 @@ const createWrapped: typeof createZustand = ((initializer: any) => {
 }) as any
 function create(initializer: any): any {
   initializer_set(initializer)
-  return getStoreProxy()
+  return getUseStore()
 }
 
 /**
@@ -48,26 +48,24 @@ function withPageContext<Store extends ReturnType<typeof createZustand>>(
   withPageContextCallback: (pageContext: PageContext) => Store
 ): Store {
   withPageContextCallback_set(withPageContextCallback)
-  return getStoreProxy()
+  return getUseStore()
 }
 
-function getStoreProxy(): any {
-  function useStore() {
-    const reactStoreContext = getReactStoreContext()
-    const store = useContext(reactStoreContext)
-    assert(store)
-    return store
+function useStoreApi() {
+  const reactStoreContext = getReactStoreContext()
+  const store = useContext(reactStoreContext)
+  assert(store)
+  return store
+}
+
+function getUseStore(): any {
+  function useStore(...args: any[]) {
+    const store = useStoreApi()
+    //@ts-ignore
+    return store(...args)
   }
 
-  // TODO: expose the store api in a safer way(rules of hooks, bound to the react context)
-  return new Proxy(useStore, {
-    get(target, p: keyof ReturnType<typeof createZustand>) {
-      throw new Error('Not implemented')
-    },
-    apply(target, _this, [selector]) {
-      return target()(selector)
-    }
-  })
+  return useStore
 }
 
 /**

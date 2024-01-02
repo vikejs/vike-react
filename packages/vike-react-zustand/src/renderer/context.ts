@@ -12,22 +12,30 @@ import { getGlobalObject } from '../utils.js'
 type StoreAndHook = ReturnType<typeof create>
 
 const globalObject = getGlobalObject('context.ts', {
-  reactStoreContext: createContext<StoreAndHook | undefined>(undefined),
-  withPageContextCallback: undefined as undefined | ((pageContext: PageContext) => StoreAndHook),
-  initializer: undefined as any
+  reactStoreContext: createContext<{ [key: string]: StoreAndHook }>({}),
+  withPageContextCallback: {} as { [key: string]: (pageContext: PageContext) => StoreAndHook },
+  initializers: {} as { [key: string]: any }
 })
 
 const getReactStoreContext = () => globalObject.reactStoreContext
 
-function initializer_set(initializer: any) {
-  globalObject.initializer = initializer
+function initializer_set(key: string, initializer: any) {
+  // useMemo will notice the change because we create a new object
+  globalObject.initializers = {
+    ...globalObject.initializers,
+    [key]: initializer
+  }
 }
 function initializer_get() {
-  return globalObject.initializer
+  return globalObject.initializers
 }
 
-function withPageContextCallback_set(withPageContextCallback: any) {
-  globalObject.withPageContextCallback = withPageContextCallback
+function withPageContextCallback_set(key: string, withPageContextCallback: any) {
+  // useMemo will notice the change because we create a new object
+  globalObject.withPageContextCallback = {
+    ...globalObject.withPageContextCallback,
+    [key]: withPageContextCallback
+  }
 }
 function withPageContextCallback_get() {
   return globalObject.withPageContextCallback

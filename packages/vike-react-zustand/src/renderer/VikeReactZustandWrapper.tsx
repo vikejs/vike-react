@@ -11,35 +11,48 @@ type VikeReactZustandWrapperProps = {
 }
 
 export default function VikeReactZustandWrapper({ pageContext, children }: VikeReactZustandWrapperProps) {
-  const withPageContextCallback = withPageContextCallback_get()
+  const withPageContextCallbacks = withPageContextCallback_get()
   useMemo(() => {
-    withPageContextCallback?.(pageContext)
-  }, [withPageContextCallback])
+    for (const withPageContextCallback of Object.values(withPageContextCallbacks)) {
+      withPageContextCallback?.(pageContext)
+    }
+  }, [withPageContextCallbacks])
 
   // Needs to be called after `withPageContextCallback?.(pageContext)`
-  const initializer = initializer_get()
-  const store = useMemo(() => {
-    return initializer && create(initializer)
-  }, [initializer])
+  const initializers = initializer_get()
+  const stores = useMemo(() => {
+    return Object.fromEntries(
+      Object.entries(initializers).map(([key, initializer]) => {
+        const store = create(initializer)
+        return [key, store]
+      })
+    )
+  }, [initializers])
 
-  if (!store) {
+  if (!Object.keys(stores).length) {
     return children
   }
 
   const reactStoreContext = getReactStoreContext()
   assert(reactStoreContext)
 
-  // Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
-  // @ts-expect-error
-  import.meta.env ??= { SSR: true }
-  if (import.meta.env.SSR) {
-    pageContext._vikeReactZustand = removeFunctionsAndUndefined(store.getState())
-  } else if (!store.__hydrated__) {
-    store.__hydrated__ = true
-    store.setState(pageContext._vikeReactZustand)
+  for (const [key, store] of Object.entries(stores)) {
+    // Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
+    // @ts-expect-error
+    import.meta.env ??= { SSR: true }
+    if (import.meta.env.SSR) {
+      pageContext._vikeReactZustand ??= {}
+      pageContext._vikeReactZustand = {
+        ...pageContext._vikeReactZustand,
+        [key]: removeFunctionsAndUndefined(store.getState())
+      }
+    } else if (!store.__hydrated__) {
+      store.__hydrated__ = true
+      store.setState(pageContext._vikeReactZustand[key])
+    }
   }
 
-  return <reactStoreContext.Provider value={store}>{children}</reactStoreContext.Provider>
+  return <reactStoreContext.Provider value={stores}>{children}</reactStoreContext.Provider>
 }
 
 function create(initializer: any) {

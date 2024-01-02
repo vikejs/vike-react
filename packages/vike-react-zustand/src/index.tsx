@@ -77,7 +77,7 @@ function withPageContext<Store extends StoreHookOnly<unknown>>(
 // require users to pass useStore, because:
 // 1. useStore needs to be imported at least once for the store to exist
 // 2. the store key is stored on the useStore object
-function useStoreApi<Store extends StoreApiAndHook, Hook = StoreHookOnly<Store>>(useStore: Hook): StoreApiOnly<Store> {
+function useStoreApi<T>(useStore: StoreHookOnly<T>): StoreApiOnly<T> {
   //@ts-ignore
   const key = typeof useStore === 'string' ? useStore : useStore.__key__
   assert(key)
@@ -85,7 +85,7 @@ function useStoreApi<Store extends StoreApiAndHook, Hook = StoreHookOnly<Store>>
   const stores = useContext(reactStoreContext)
   const store = stores[key]
   assert(store)
-  return store
+  return store as unknown as StoreApiOnly<T>
 }
 
 function getUseStore(key: string): any {

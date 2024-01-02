@@ -1,7 +1,9 @@
 export { initializer_set }
-export { initializers_get as initializer_get }
+export { initializers_get }
 export { withPageContextCallback_set }
-export { withPageContextCallbacks_get as withPageContextCallback_get }
+export { withPageContextCallbacks_get }
+export { storeHooksWithPageContextMapping_set }
+export { storeHooksWithPageContextMapping_get }
 export { getReactStoreContext }
 
 import { createContext } from 'react'
@@ -12,7 +14,8 @@ import { getGlobalObject } from '../utils.js'
 const globalObject = getGlobalObject('context.ts', {
   reactStoreContext: createContext<{ [key: string]: StoreApiAndHook }>({}),
   withPageContextCallbacks: {} as { [key: string]: (pageContext: PageContext) => StoreHookOnly<any> },
-  initializers: {} as { [key: string]: any }
+  initializers: {} as { [key: string]: any },
+  storeHooksWithPageContextMapping: {} as { [key: string]: StoreHookOnly<any> }
 })
 
 const getReactStoreContext: () => React.Context<{ [key: string]: StoreApiAndHook }> = () =>
@@ -38,4 +41,15 @@ function withPageContextCallback_set(key: string, withPageContextCallback: any) 
 }
 function withPageContextCallbacks_get() {
   return globalObject.withPageContextCallbacks
+}
+
+function storeHooksWithPageContextMapping_set(key: string, storeHookOnly: StoreHookOnly<any>) {
+  globalObject.storeHooksWithPageContextMapping = {
+    ...globalObject.storeHooksWithPageContextMapping,
+    [key]: storeHookOnly
+  }
+}
+
+function storeHooksWithPageContextMapping_get(key: string) {
+  return globalObject.storeHooksWithPageContextMapping[key]
 }

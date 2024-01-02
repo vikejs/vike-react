@@ -2,7 +2,13 @@ export { createWrapped as create, serverOnly, useStoreApi, withPageContext }
 
 import { useContext } from 'react'
 import type { PageContext } from 'vike/types'
-import { getReactStoreContext, initializer_set, withPageContextCallback_set } from './renderer/context.js'
+import {
+  getReactStoreContext,
+  initializer_set,
+  storeHooksWithPageContextMapping_get,
+  storeHooksWithPageContextMapping_set,
+  withPageContextCallback_set
+} from './renderer/context.js'
 import type { Create, StoreApiOnly, StoreHookOnly } from './types.js'
 import { assert } from './utils.js'
 import { simpleHash } from './utils/simpleHash.js'
@@ -51,25 +57,22 @@ function withPageContext<Store extends StoreHookOnly<unknown>>(
 ): Store {
   const stack = new Error().stack
   assert(stack)
-  const key = simpleHash(stack)
+  const stackWithoutTimestamp = stack.replaceAll(/\?t=\d+/gm, '')
+  const key = simpleHash(stackWithoutTimestamp)
 
-  let storeHookOnly: Store | undefined
+  let storeHookOnly = storeHooksWithPageContextMapping_get(key)
   withPageContextCallback_set(key, (pageContext: PageContext) => {
     storeHookOnly = withPageContextCallback(pageContext)
+    storeHooksWithPageContextMapping_set(key, storeHookOnly)
   })
 
   return new Proxy(() => {}, {
     apply(_target, _this, [selector]) {
-      if (!storeHookOnly) {
-        assert(typeof window !== 'undefined')
-        window.location.reload()
-      }
       assert(storeHookOnly)
       return storeHookOnly(selector)
     },
-    get(_target, p) {
+    get(_target, p: keyof typeof storeHookOnly) {
       assert(storeHookOnly)
-      //@ts-ignore
       return storeHookOnly[p]
     }
   }) as Store

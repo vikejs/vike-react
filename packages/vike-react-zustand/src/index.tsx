@@ -3,7 +3,7 @@ export { createWrapped as create, serverOnly, useStoreApi, withPageContext }
 import { useContext } from 'react'
 import type { PageContext } from 'vike/types'
 import { getReactStoreContext, initializer_set, withPageContextCallback_set } from './renderer/context.js'
-import type { Create, StoreApiAndHook, StoreApiOnly, StoreHookOnly } from './types.js'
+import type { Create, StoreApiOnly, StoreHookOnly } from './types.js'
 import { assert } from './utils.js'
 
 /**
@@ -14,16 +14,15 @@ import { assert } from './utils.js'
  * Usage examples: https://docs.pmnd.rs/zustand/guides/typescript#basic-usage
  *
  */
-const createWrapped: Create = ((initializer?: any) => {
+const createWrapped = ((initializer) => {
   // Support `create()(() => { /* ... * })`
   return initializer ? create(initializer) : create
-}) as any
+}) as Create
 
-function create(initializer: any): any {
-  const key = 'default'
+const create = ((initializer, key = 'default') => {
   initializer_set(key, initializer)
   return getUseStore(key)
-}
+}) as Create
 
 /**
  * Utility to make `pageContext` available to the store.
@@ -47,9 +46,9 @@ function create(initializer: any): any {
  * ```
  */
 function withPageContext<Store extends StoreHookOnly<unknown>>(
-  withPageContextCallback: (pageContext: PageContext) => Store
+  withPageContextCallback: (pageContext: PageContext) => Store,
+  key = 'default'
 ): Store {
-  const key = 'default'
   withPageContextCallback_set(key, withPageContextCallback)
   return getUseStore(key)
 }

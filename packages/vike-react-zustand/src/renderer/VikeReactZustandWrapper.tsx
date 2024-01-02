@@ -2,7 +2,7 @@ import React, { ReactNode, useMemo } from 'react'
 import type { PageContext } from 'vike/types'
 import { getReactStoreContext, initializer_get, withPageContextCallback_get } from './context.js'
 import { assert, removeFunctionsAndUndefined } from '../utils.js'
-import { create as createFromZustand } from 'zustand'
+import { create as createZustand } from 'zustand'
 import { devtools } from 'zustand/middleware'
 
 type VikeReactZustandWrapperProps = {
@@ -43,5 +43,5 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
 }
 
 function create(initializer: any) {
-  return createFromZustand()(devtools(initializer))
+  return createZustand()(devtools(initializer))
 }

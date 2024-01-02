@@ -3,7 +3,7 @@ export { createWrapped as create, serverOnly, withPageContext }
 import { useContext } from 'react'
 import type { PageContext } from 'vike/types'
 import { getReactStoreContext, initializer_set, withPageContextCallback_set } from './renderer/context.js'
-import { type create as createFromZustand } from 'zustand'
+import { type create as createZustand } from 'zustand'
 import { assert } from './utils.js'
 
 /**
@@ -14,7 +14,7 @@ import { assert } from './utils.js'
  * Usage examples: https://docs.pmnd.rs/zustand/guides/typescript#basic-usage
  *
  */
-const createWrapped: typeof createFromZustand = ((initializer: any) => {
+const createWrapped: typeof createZustand = ((initializer: any) => {
   // Support `create()(() => { /* ... * })`
   return initializer ? create(initializer) : create
 }) as any
@@ -44,7 +44,7 @@ function create(initializer: any): any {
  * )
  * ```
  */
-function withPageContext<Store extends ReturnType<typeof createFromZustand>>(
+function withPageContext<Store extends ReturnType<typeof createZustand>>(
   withPageContextCallback: (pageContext: PageContext) => Store
 ): Store {
   withPageContextCallback_set(withPageContextCallback)
@@ -59,7 +59,7 @@ function getStoreProxy(): any {
     return store
   }
   return new Proxy(useStore, {
-    get(target, p: keyof ReturnType<typeof createFromZustand>) {
+    get(target, p: keyof ReturnType<typeof createZustand>) {
       return target()[p]
     },
     apply(target, _this, [selector]) {

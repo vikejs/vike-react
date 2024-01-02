@@ -1,7 +1,7 @@
 import React, { ReactNode, useMemo } from 'react'
 import type { PageContext } from 'vike/types'
 import { getReactStoreContext, initializer_get, withPageContextCallback_get } from './context.js'
-import { assert } from '../utils.js'
+import { assert, removeFunctionsAndUndefined } from '../utils.js'
 import { callCreateOriginal } from '../index.js'
 
 type VikeReactZustandWrapperProps = {
@@ -38,22 +38,4 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
   }
 
   return <reactStoreContext.Provider value={store}>{children}</reactStoreContext.Provider>
-}
-
-const removeFunctionsAndUndefined = (object: any) => {
-  const output: any = {}
-  Object.keys(object).forEach((key) => {
-    if (object[key] !== undefined && typeof object[key] !== 'function') {
-      if (typeof object[key] === 'object' && !Array.isArray(object[key])) {
-        const value = removeFunctionsAndUndefined(object[key])
-        if (value && Object.keys(value).length > 0) {
-          output[key] = value
-        }
-      } else {
-        output[key] = object[key]
-      }
-    }
-  })
-
-  return output
 }

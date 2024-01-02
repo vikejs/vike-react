@@ -214,10 +214,6 @@ importers:
         version: 1.2.2(@types/node@20.11.17)(jsdom@24.0.0)
 
   packages/vike-react-zustand:
-    dependencies:
-      vite:
-        specifier: ^4.3.8 || ^5.0.10
-        version: 5.0.10(@types/node@20.10.5)
     devDependencies:
       '@brillout/release-me':
         specifier: ^0.1.13

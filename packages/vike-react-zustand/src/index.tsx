@@ -57,7 +57,7 @@ function withPageContext<Store extends StoreApiAndHook>(
 }
 
 /**
- * Sometimes you need to access state in a non-reactive way or act upon the store.
+ * Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, useStoreApi can be used.
  * 
  * ⚠️ Note that middlewares that modify set or get are not applied to getState and setState.
  *

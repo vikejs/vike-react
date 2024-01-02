@@ -66,16 +66,16 @@ function withPageContext<Store extends StoreHookOnly<unknown>>(
     storeHooksWithPageContextMapping_set(key, storeHookOnly)
   })
 
-  return new Proxy(() => {}, {
-    apply(_target, _this, [selector]) {
-      assert(storeHookOnly)
-      return storeHookOnly(selector)
-    },
-    get(_target, p: keyof typeof storeHookOnly) {
-      assert(storeHookOnly)
-      return storeHookOnly[p]
-    }
+  //@ts-ignore
+  const proxiedStoreHookOnly = ((...args) => {
+    assert(storeHookOnly)
+    //@ts-ignore
+    proxiedStoreHookOnly.__key__ = storeHookOnly.__key__
+    //@ts-ignore
+    return storeHookOnly(...args)
   }) as Store
+
+  return proxiedStoreHookOnly
 }
 
 /**

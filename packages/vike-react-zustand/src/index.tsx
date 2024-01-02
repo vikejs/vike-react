@@ -59,16 +59,15 @@ function getStoreProxy(): any {
     return store
   }
 
-  return useStore
-  //TODO: expose the store api in a safer way(rules of hooks, bound to the react context)
-  // return new Proxy(useStore, {
-  //   get(target, p: keyof ReturnType<typeof createZustand>) {
-  //     return target()[p]
-  //   },
-  //   apply(target, _this, [selector]) {
-  //     return target()(selector)
-  //   }
-  // })
+  // TODO: expose the store api in a safer way(rules of hooks, bound to the react context)
+  return new Proxy(useStore, {
+    get(target, p: keyof ReturnType<typeof createZustand>) {
+      throw new Error('Not implemented')
+    },
+    apply(target, _this, [selector]) {
+      return target()(selector)
+    }
+  })
 }
 
 /**

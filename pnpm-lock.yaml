@@ -242,6 +242,9 @@ importers:
       vike-react:
         specifier: ^0.3.8
         version: link:../vike-react
+      vite:
+        specifier: ^5.0.10
+        version: 5.0.10(@types/node@20.10.5)
       zustand:
         specifier: ^4.4.7
         version: 4.4.7(@types/react@18.2.45)(immer@10.0.3)(react@18.2.0)

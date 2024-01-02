@@ -6,18 +6,17 @@ export { getReactStoreContext }
 
 import { createContext } from 'react'
 import type { PageContext } from 'vike/types'
-import type { create } from 'zustand'
+import type { StoreApiAndHook, StoreHookOnly } from '../types.js'
 import { getGlobalObject } from '../utils.js'
 
-type StoreAndHook = ReturnType<typeof create>
-
 const globalObject = getGlobalObject('context.ts', {
-  reactStoreContext: createContext<{ [key: string]: StoreAndHook }>({}),
-  withPageContextCallbacks: {} as { [key: string]: (pageContext: PageContext) => StoreAndHook },
+  reactStoreContext: createContext<{ [key: string]: StoreApiAndHook }>({}),
+  withPageContextCallbacks: {} as { [key: string]: (pageContext: PageContext) => StoreHookOnly<any> },
   initializers: {} as { [key: string]: any }
 })
 
-const getReactStoreContext = () => globalObject.reactStoreContext
+const getReactStoreContext: () => React.Context<{ [key: string]: StoreApiAndHook }> = () =>
+  globalObject.reactStoreContext
 
 function initializer_set(key: string, initializer: any) {
   // useMemo will notice the change because we create a new object

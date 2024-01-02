@@ -1,7 +1,7 @@
 export default Page
 
 import React, { useEffect } from 'react'
-import { Counter } from './Counter'
+import { Counter, Counter2 } from './Counter'
 import { useStore } from '../../store'
 import { useStoreApi } from 'vike-react-zustand'
 
@@ -24,6 +24,9 @@ function Page() {
         <li>Rendered to HTML.</li>
         <li>
           Interactive while loading. <Counter />
+        </li>
+        <li>
+          Interactive while loading. <Counter2 />
         </li>
       </ul>
       <div>Node version from server: {nodeVersion}</div>

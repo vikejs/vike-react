@@ -5,6 +5,7 @@ import type { PageContext } from 'vike/types'
 import { getReactStoreContext, initializer_set, withPageContextCallback_set } from './renderer/context.js'
 import type { Create, StoreApiOnly, StoreHookOnly } from './types.js'
 import { assert } from './utils.js'
+import { simpleHash } from './utils/simpleHash.js'
 
 /**
  * Zustand integration for vike-react.
@@ -46,11 +47,32 @@ const create = ((initializer, key = 'default') => {
  * ```
  */
 function withPageContext<Store extends StoreHookOnly<unknown>>(
-  withPageContextCallback: (pageContext: PageContext) => Store,
-  key = 'default'
+  withPageContextCallback: (pageContext: PageContext) => Store
 ): Store {
-  withPageContextCallback_set(key, withPageContextCallback)
-  return getUseStore(key)
+  const stack = new Error().stack
+  assert(stack)
+  const key = simpleHash(stack)
+
+  let storeHookOnly: Store | undefined
+  withPageContextCallback_set(key, (pageContext: PageContext) => {
+    storeHookOnly = withPageContextCallback(pageContext)
+  })
+
+  return new Proxy(() => {}, {
+    apply(_target, _this, [selector]) {
+      if (!storeHookOnly) {
+        assert(typeof window !== 'undefined')
+        window.location.reload()
+      }
+      assert(storeHookOnly)
+      return storeHookOnly(selector)
+    },
+    get(_target, p) {
+      assert(storeHookOnly)
+      //@ts-ignore
+      return storeHookOnly[p]
+    }
+  }) as Store
 }
 
 /**

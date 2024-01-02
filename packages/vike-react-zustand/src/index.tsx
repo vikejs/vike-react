@@ -56,8 +56,32 @@ function withPageContext<Store extends StoreApiAndHook>(
   return getUseStore(key)
 }
 
-function useStoreApi<Store extends StoreApiAndHook>(useStore: Store | string): StoreApiOnly<Store> {
+/**
+ * Sometimes you need to access state in a non-reactive way or act upon the store.
+ * 
+ * ⚠️ Note that middlewares that modify set or get are not applied to getState and setState.
+ *
+ * Example usage:
+ *
+ * ```ts
+ *
+ * import { useStoreApi } from 'vike-react-zustand'
+ * import { useStore } from './store'
+ *
+ * function Component() {
+ *   const api = useStoreApi(useStore)
+ *   function onClick() {
+ *     api.setState({ ... })
+ *   }
+ * }
+ *```
+ */
+// require users to pass useStore, because:
+// 1. useStore needs to be imported at least once for the store to exist
+// 2. the store key is stored on the useStore object
+function useStoreApi<Store extends StoreApiAndHook>(useStore: Store): StoreApiOnly<Store> {
   const key = typeof useStore === 'string' ? useStore : useStore.__key__
+  assert(key)
   const reactStoreContext = getReactStoreContext()
   const stores = useContext(reactStoreContext)
   const store = stores[key]
@@ -67,6 +91,7 @@ function useStoreApi<Store extends StoreApiAndHook>(useStore: Store | string): S
 
 function getUseStore(key: string): any {
   function useStore(...args: any[]) {
+    //@ts-ignore
     const store = useStoreApi(key)
     //@ts-ignore
     return store(...args)

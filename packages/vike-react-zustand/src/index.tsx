@@ -14,15 +14,21 @@ import { assert } from './utils.js'
  * Usage examples: https://docs.pmnd.rs/zustand/guides/typescript#basic-usage
  *
  */
-const createWrapped = ((key: string, initializer: any) => {
-  // Support `create()(() => { /* ... * })`
-  return initializer ? create(key, initializer) : create
-}) as unknown as Create
+const createWrapped = ((initializerOrKey: any) => {
+  const initializerFn = typeof initializerOrKey === 'function' && initializerOrKey
+  const key = (typeof initializerOrKey === 'string' && initializerOrKey) || 'default'
 
-const create = (key: string, initializer: any) => {
-  initializers_set(key, initializer)
-  return getUseStore(key)
-}
+  const create = (initializer: any) => {
+    initializers_set(key, initializer)
+    const useStore = getUseStore(key)
+    useStore.__key__ = key
+    return useStore
+  }
+  if (initializerFn) {
+    return create(initializerFn)
+  }
+  return create
+}) as unknown as Create
 
 /**
  * Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, useStoreApi can be used.
@@ -59,14 +65,12 @@ function useStoreApi<T>(useStore: StoreHookOnly<T>): StoreApiOnly<T> {
 }
 
 function getUseStore(key: string): any {
-  function useStore(...args: any[]) {
+  return function useStore(...args: any[]) {
     //@ts-ignore
     const store = useStoreApi(key)
     //@ts-ignore
     return store(...args)
   }
-  useStore.__key__ = key
-  return useStore
 }
 
 /**

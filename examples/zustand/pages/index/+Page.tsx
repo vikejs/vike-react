@@ -5,7 +5,7 @@ import { Counter, Counter2 } from './Counter'
 import { useStore } from '../../store'
 import { create, useStoreApi } from 'vike-react-zustand'
 
-const useStore3 = create<{ a: number }>()((set, get) => ({
+const useStore3 = create<{ a: number }>('store3')((set, get) => ({
   a: Math.floor(10000 * Math.random())
 }))
 

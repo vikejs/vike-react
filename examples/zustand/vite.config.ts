@@ -17,27 +17,19 @@ export default {
           return
         }
 
-        // { create, serverOnly, createWithPageContext }
+        // { create, serverOnly }
         const imports = result[1]
 
-        // [ 'create', 'serverOnly', 'createWithPageContext' ]
+        // [ 'create', 'serverOnly' ]
         const importNames = imports
           .replaceAll(/[{}]/g, '')
           .split(',')
           .map((s) => s.trim())
 
         const hasCreate = importNames.includes('create')
-        const hasWithPageContext = importNames.includes('createWithPageContext')
 
         if (hasCreate) {
           code = code.replace(/create(?:<[\s\w<>:{}]*)?(?:\(\))?\(/gm, (match, position) => {
-            const key = simpleHash(`${id}:${position}`)
-            return `${match}'${key}',`
-          })
-        }
-
-        if (hasWithPageContext) {
-          code = code.replace(/createWithPageContext(?:<[\s\w<>:{}]*)?(?:\(\))?\(/gm, (match, position) => {
             const key = simpleHash(`${id}:${position}`)
             return `${match}'${key}',`
           })

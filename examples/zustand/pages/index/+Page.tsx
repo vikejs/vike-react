@@ -3,7 +3,11 @@ export default Page
 import React, { useEffect } from 'react'
 import { Counter, Counter2 } from './Counter'
 import { useStore } from '../../store'
-import { useStoreApi } from 'vike-react-zustand'
+import { create, useStoreApi } from 'vike-react-zustand'
+
+const useStore3 = create<{ a: number }>()((set, get) => ({
+  a: Math.floor(10000 * Math.random())
+}))
 
 function Page() {
   const nodeVersion = useStore((s) => s.nodeVersion)
@@ -16,8 +20,10 @@ function Page() {
     []
   )
 
+  const { a } = useStore3()
   return (
     <>
+      {a}
       <h1>My Vike + React app</h1>
       This page is:
       <ul>

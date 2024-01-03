@@ -1,8 +1,9 @@
-export { createWrapped as create, createWithPageContextWrapped as createWithPageContext, serverOnly, useStoreApi }
+export { createWrapped as create, serverOnly, useStoreApi }
+export { withPageContext } from './withPageContext.js'
 
 import { useContext } from 'react'
-import { getReactStoreContext, initializers_set, withPageContextInitializers_set } from './renderer/context.js'
-import type { Create, CreateWithPageContext, StoreApiOnly, StoreHookOnly } from './types.js'
+import { getReactStoreContext, initializers_set } from './renderer/context.js'
+import type { Create, StoreApiOnly, StoreHookOnly } from './types.js'
 import { assert } from './utils.js'
 
 /**
@@ -20,16 +21,6 @@ const createWrapped = ((key: string, initializer: any) => {
 
 const create = (key: string, initializer: any) => {
   initializers_set(key, initializer)
-  return getUseStore(key)
-}
-
-const createWithPageContextWrapped = ((key: string, initializer: any) => {
-  // Support `create()(() => { /* ... * })`
-  return initializer ? createWithPageContext(key, initializer) : createWithPageContext
-}) as unknown as CreateWithPageContext
-
-const createWithPageContext = (key: string, initializer: any) => {
-  withPageContextInitializers_set(key, initializer)
   return getUseStore(key)
 }
 

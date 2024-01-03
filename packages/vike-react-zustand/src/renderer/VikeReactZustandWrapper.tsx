@@ -13,25 +13,25 @@ type VikeReactZustandWrapperProps = {
 export default function VikeReactZustandWrapper({ pageContext, children }: VikeReactZustandWrapperProps) {
   // Needs to be called after `withPageContextCallback?.(pageContext)`
   const initializers = initializers_get()
-  const stores = useMemo(() => {
-    return Object.fromEntries(
+  const stores = useMemo(
+    () =>
       Object.entries(initializers).map(([key, initializer]) => {
         setPageContext(pageContext)
         const store = create(initializer)
         setPageContext(null)
-        return [key, store]
-      })
-    )
-  }, [initializers])
+        return [key, store] as const
+      }),
+    [initializers]
+  )
 
-  if (!Object.keys(stores).length) {
+  if (!stores.length) {
     return children
   }
 
   const reactStoreContext = getReactStoreContext()
   assert(reactStoreContext)
 
-  for (const [key, store] of Object.entries(stores)) {
+  for (const [key, store] of stores) {
     // Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
     // @ts-expect-error
     import.meta.env ??= { SSR: true }
@@ -47,7 +47,7 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
     }
   }
 
-  return <reactStoreContext.Provider value={stores}>{children}</reactStoreContext.Provider>
+  return <reactStoreContext.Provider value={Object.fromEntries(stores)}>{children}</reactStoreContext.Provider>
 }
 
 function create(initializer: any) {

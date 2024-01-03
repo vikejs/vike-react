@@ -10,7 +10,12 @@ import { assert } from './utils.js'
  * Zustand integration for vike-react.
  *
  * The `devtools` middleware is included by default.
- *
+ * 
+ * To create multiple stores, set a unique key:
+ * ```ts
+ * const useStore = create<Store>('store1')(...)
+ * const useStore2 = create<Store>('store2')(...)
+ * ```
  * Usage examples: https://docs.pmnd.rs/zustand/guides/typescript#basic-usage
  *
  */

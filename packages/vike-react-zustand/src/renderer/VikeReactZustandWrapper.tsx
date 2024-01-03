@@ -1,8 +1,8 @@
 import React, { ReactNode, useMemo } from 'react'
 import type { PageContext } from 'vike/types'
-import { getReactStoreContext, initializers_get, withPageContextCallbacks_get } from './context.js'
+import { getReactStoreContext, initializers_get, withPageContextInitializers_get } from './context.js'
 import { assert, removeFunctionsAndUndefined } from '../utils.js'
-import { create as createZustand } from 'zustand'
+import { StoreApi, UseBoundStore, create as createZustand } from 'zustand'
 import { devtools } from 'zustand/middleware'
 
 type VikeReactZustandWrapperProps = {
@@ -11,22 +11,20 @@ type VikeReactZustandWrapperProps = {
 }
 
 export default function VikeReactZustandWrapper({ pageContext, children }: VikeReactZustandWrapperProps) {
-  const withPageContextCallbacks = withPageContextCallbacks_get()
-  useMemo(() => {
-    for (const withPageContextCallback of Object.values(withPageContextCallbacks)) {
-      withPageContextCallback?.(pageContext)
-    }
-  }, [withPageContextCallbacks])
-
   // Needs to be called after `withPageContextCallback?.(pageContext)`
   const initializers = initializers_get()
-  const stores = useMemo(() => {
-    return Object.fromEntries(
-      Object.entries(initializers).map(([key, initializer]) => {
+  const withPageContextInitializers = withPageContextInitializers_get()
+  const stores = useMemo<{ [key: string]: UseBoundStore<StoreApi<unknown>> }>(() => {
+    return Object.fromEntries([
+      ...Object.entries(initializers).map(([key, initializer]) => {
         const store = create(initializer)
         return [key, store]
+      }),
+      ...Object.entries(withPageContextInitializers).map(([key, initializer]) => {
+        const store = create(initializer(pageContext))
+        return [key, store]
       })
-    )
+    ])
   }, [initializers])
 
   if (!Object.keys(stores).length) {

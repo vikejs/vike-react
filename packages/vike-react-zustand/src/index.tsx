@@ -1,15 +1,8 @@
-export { createWrapped as create, serverOnly, useStoreApi, withPageContext }
+export { createWrapped as create, createWithPageContextWrapped as createWithPageContext, serverOnly, useStoreApi }
 
 import { useContext } from 'react'
-import type { PageContext } from 'vike/types'
-import {
-  getReactStoreContext,
-  initializer_set,
-  storeHooksWithPageContextMapping_get,
-  storeHooksWithPageContextMapping_set,
-  withPageContextCallback_set
-} from './renderer/context.js'
-import type { Create, StoreApiOnly, StoreHookOnly } from './types.js'
+import { getReactStoreContext, initializers_set, withPageContextInitializers_set } from './renderer/context.js'
+import type { Create, CreateWithPageContext, StoreApiOnly, StoreHookOnly } from './types.js'
 import { assert } from './utils.js'
 
 /**
@@ -26,55 +19,19 @@ const createWrapped = ((key: string, initializer: any) => {
 }) as unknown as Create
 
 const create = (key: string, initializer: any) => {
-  initializer_set(key, initializer)
+  initializers_set(key, initializer)
   return getUseStore(key)
 }
 
-/**
- * Utility to make `pageContext` available to the store.
- *
- * Example usage:
- *
- * ```ts
- *
- * interface Store {
- *   user: {
- *     id: number
- *     firstName: string
- *   }
- * }
- *
- * const useStore = withPageContext((pageContext) =>
- *   create<Store>()((set, get) => ({
- *     user: pageContext.user
- *   }))
- * )
- * ```
- */
-declare function _withPageContext<Store extends StoreHookOnly<unknown>>(
-  withPageContextCallback: (pageContext: PageContext) => Store
-): Store
-const withPageContext: typeof _withPageContext = (<Store extends StoreHookOnly<unknown>>(
-  key: string,
-  withPageContextCallback: (pageContext: PageContext) => Store
-) => {
-  let storeHookOnly = storeHooksWithPageContextMapping_get(key)
-  withPageContextCallback_set(key, (pageContext: PageContext) => {
-    storeHookOnly = withPageContextCallback(pageContext)
-    storeHooksWithPageContextMapping_set(key, storeHookOnly)
-  })
+const createWithPageContextWrapped = ((key: string, initializer: any) => {
+  // Support `create()(() => { /* ... * })`
+  return initializer ? createWithPageContext(key, initializer) : createWithPageContext
+}) as unknown as CreateWithPageContext
 
-  return new Proxy(() => {}, {
-    apply(_target, _this, [selector]) {
-      assert(storeHookOnly)
-      return storeHookOnly(selector)
-    },
-    get(_target, p: keyof typeof storeHookOnly) {
-      assert(storeHookOnly)
-      return storeHookOnly[p]
-    }
-  }) as Store
-}) as any
+const createWithPageContext = (key: string, initializer: any) => {
+  withPageContextInitializers_set(key, initializer)
+  return getUseStore(key)
+}
 
 /**
  * Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, useStoreApi can be used.

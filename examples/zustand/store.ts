@@ -1,6 +1,6 @@
 export { useStore, useStore2 }
 
-import aasdad, { create, serverOnly, withPageContext } from 'vike-react-zustand'
+import { serverOnly, createWithPageContext } from 'vike-react-zustand'
 import { immer } from 'zustand/middleware/immer'
 
 interface Store {
@@ -10,45 +10,41 @@ interface Store {
 }
 
 // withPageContext is optional
-const useStore = withPageContext((pageContext) =>
+const useStore = createWithPageContext<Store>()((pageContext) =>
   // the devtools middleware is included by default
-  create<Store>()(
-    immer((set, get) => ({
-      counter: Math.floor(10000 * Math.random()),
-      setCounter(value) {
-        set((state) => {
-          state.counter = value
-        })
-      },
 
-      // the function passed to serverOnly only runs on the server
-      // the return value is available on client/server
-      ...serverOnly(() => ({
-        nodeVersion: process.version
-      }))
+  immer((set, get) => ({
+    counter: Math.floor(10000 * Math.random()),
+    setCounter(value) {
+      set((state) => {
+        state.counter = value
+      })
+    },
+
+    // the function passed to serverOnly only runs on the server
+    // the return value is available on client/server
+    ...serverOnly(() => ({
+      nodeVersion: process.version
     }))
-  )
+  }))
 )
 
-//asdasdasd
-
 // withPageContext is optional
-const useStore2 = withPageContext((pageContext) =>
+const useStore2 = createWithPageContext<Store>()((pageContext) =>
   // the devtools middleware is included by default
-  create<Store>()(
-    immer((set, get) => ({
-      counter: Math.floor(10000 * Math.random()),
-      setCounter(value) {
-        set((state) => {
-          state.counter = value
-        })
-      },
 
-      // the function passed to serverOnly only runs on the server
-      // the return value is available on client/server
-      ...serverOnly(() => ({
-        nodeVersion: process.version
-      }))
+  immer((set, get) => ({
+    counter: Math.floor(10000 * Math.random()),
+    setCounter(value) {
+      set((state) => {
+        state.counter = value
+      })
+    },
+
+    // the function passed to serverOnly only runs on the server
+    // the return value is available on client/server
+    ...serverOnly(() => ({
+      nodeVersion: process.version
     }))
-  )
+  }))
 )

@@ -13,12 +13,8 @@ type StoreHookOnly<T> = {
   <U>(selector: (state: T) => U, equalityFn: (a: U, b: U) => boolean): U
 }
 type Create = {
-  <T, Mos extends [StoreMutatorIdentifier, unknown][] = []>(
-    initializer: StateCreator<T, [], Mos>,
-    key?: string
-  ): StoreHookOnly<T>
+  <T, Mos extends [StoreMutatorIdentifier, unknown][] = []>(initializer: StateCreator<T, [], Mos>): StoreHookOnly<T>
   <T>(): <Mos extends [StoreMutatorIdentifier, unknown][] = []>(
-    initializer: StateCreator<T, [], Mos>,
-    key?: string
+    initializer: StateCreator<T, [], Mos>
   ) => StoreHookOnly<T>
 }

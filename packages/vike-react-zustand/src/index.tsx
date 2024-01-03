@@ -11,7 +11,6 @@ import {
 } from './renderer/context.js'
 import type { Create, StoreApiOnly, StoreHookOnly } from './types.js'
 import { assert } from './utils.js'
-import { simpleHash } from './utils/simpleHash.js'
 
 /**
  * Zustand integration for vike-react.
@@ -21,15 +20,15 @@ import { simpleHash } from './utils/simpleHash.js'
  * Usage examples: https://docs.pmnd.rs/zustand/guides/typescript#basic-usage
  *
  */
-const createWrapped = ((initializer) => {
+const createWrapped = ((key: string, initializer: any) => {
   // Support `create()(() => { /* ... * })`
-  return initializer ? create(initializer) : create
-}) as Create
+  return initializer ? create(key, initializer) : create
+}) as unknown as Create
 
-const create = ((initializer, key = 'default') => {
+const create = (key: string, initializer: any) => {
   initializer_set(key, initializer)
   return getUseStore(key)
-}) as Create
+}
 
 /**
  * Utility to make `pageContext` available to the store.
@@ -52,14 +51,13 @@ const create = ((initializer, key = 'default') => {
  * )
  * ```
  */
-function withPageContext<Store extends StoreHookOnly<unknown>>(
+declare function _withPageContext<Store extends StoreHookOnly<unknown>>(
   withPageContextCallback: (pageContext: PageContext) => Store
-): Store {
-  const stack = new Error().stack
-  assert(stack)
-  const stackWithoutTimestamp = stack.replaceAll(/\?t=\d+/gm, '')
-  const key = simpleHash(stackWithoutTimestamp)
-
+): Store
+const withPageContext: typeof _withPageContext = (<Store extends StoreHookOnly<unknown>>(
+  key: string,
+  withPageContextCallback: (pageContext: PageContext) => Store
+) => {
   let storeHookOnly = storeHooksWithPageContextMapping_get(key)
   withPageContextCallback_set(key, (pageContext: PageContext) => {
     storeHookOnly = withPageContextCallback(pageContext)
@@ -76,7 +74,7 @@ function withPageContext<Store extends StoreHookOnly<unknown>>(
       return storeHookOnly[p]
     }
   }) as Store
-}
+}) as any
 
 /**
  * Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, useStoreApi can be used.

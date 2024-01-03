@@ -1,6 +1,6 @@
 export { useStore, useStore2 }
 
-import { create, serverOnly, withPageContext } from 'vike-react-zustand'
+import aasdad, { create, serverOnly, withPageContext } from 'vike-react-zustand'
 import { immer } from 'zustand/middleware/immer'
 
 interface Store {
@@ -30,6 +30,8 @@ const useStore = withPageContext((pageContext) =>
   )
 )
 
+//asdasdasd
+
 // withPageContext is optional
 const useStore2 = withPageContext((pageContext) =>
   // the devtools middleware is included by default
@@ -47,7 +49,6 @@ const useStore2 = withPageContext((pageContext) =>
       ...serverOnly(() => ({
         nodeVersion: process.version
       }))
-    })),
-    'store2'
+    }))
   )
 )

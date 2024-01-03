@@ -10,7 +10,7 @@ interface Store {
 }
 
 // withPageContext is optional
-const useStore = create<Store>()(
+const useStore = create<Store>('store1')(
   // the devtools middleware is included by default
   withPageContext((pageContext) =>
     immer((set, get) => ({
@@ -31,8 +31,7 @@ const useStore = create<Store>()(
 )
 
 // withPageContext is optional
-const useStore2 = create<Store>()(
-  // the devtools middleware is included by default
+const useStore2 = create<Store>('store2')(
   withPageContext((pageContext) =>
     immer((set, get) => ({
       counter: Math.floor(10000 * Math.random()),

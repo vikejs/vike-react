@@ -1,6 +1,5 @@
-export type { StoreApiAndHook, StoreApiOnly, StoreHookOnly, Create, CreateWithPageContext }
+export type { StoreApiAndHook, StoreApiOnly, StoreHookOnly, Create }
 
-import { PageContext } from 'vike/types'
 import type { StateCreator, StoreApi, StoreMutatorIdentifier, create } from 'zustand'
 
 type StoreApiAndHook = ReturnType<typeof create>
@@ -15,14 +14,7 @@ type StoreHookOnly<T> = {
 }
 type Create = {
   <T, Mos extends [StoreMutatorIdentifier, unknown][] = []>(initializer: StateCreator<T, [], Mos>): StoreHookOnly<T>
-  <T>(): <Mos extends [StoreMutatorIdentifier, unknown][] = []>(
-    initializer: StateCreator<T, [], Mos>
-  ) => StoreHookOnly<T>
-}
-
-type CreateWithPageContext = {
-  <T, Mos extends [StoreMutatorIdentifier, unknown][] = []>(initializer: StateCreator<T, [], Mos>): StoreHookOnly<T>
-  <T>(): <Mos extends [StoreMutatorIdentifier, unknown][] = []>(
-    initializer: (pageContext: PageContext) => StateCreator<T, [], Mos>
-  ) => StoreHookOnly<T>
+  <T>(
+    key?: string
+  ): <Mos extends [StoreMutatorIdentifier, unknown][] = []>(initializer: StateCreator<T, [], Mos>) => StoreHookOnly<T>
 }

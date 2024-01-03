@@ -13,12 +13,8 @@ type WithPageContext = <
   f: (pageContext: PageContext) => StateCreator<T, Mps, Mcs>
 ) => StateCreator<T, Mps, Mcs>
 
-type WithPageContextImpl = <T>(f: (pageContext: PageContext) => StateCreator<T, [], []>) => StateCreator<T, [], []>
-
-const withPageContextImpl: WithPageContextImpl = (fn) => (set, get, store) => {
+const withPageContext: WithPageContext = (fn) => (set, get, store) => {
   const pageContext = getPageContext()
   assert(pageContext)
   return fn(pageContext)(set, get, store)
 }
-
-const withPageContext = withPageContextImpl as unknown as WithPageContext

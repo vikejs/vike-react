@@ -11,7 +11,6 @@ type VikeReactZustandWrapperProps = {
 }
 
 export default function VikeReactZustandWrapper({ pageContext, children }: VikeReactZustandWrapperProps) {
-  // Needs to be called after `withPageContextCallback?.(pageContext)`
   const initializers = initializers_get()
   const stores = useMemo(
     () =>

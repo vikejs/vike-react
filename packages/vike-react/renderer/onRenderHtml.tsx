@@ -14,7 +14,6 @@ import { getLang } from './getLang.js'
 checkVikeVersion()
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
-  // const lang = pageContext.config.lang || 'en'
 
   const { stream, favicon, description } = pageContext.config
   const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`

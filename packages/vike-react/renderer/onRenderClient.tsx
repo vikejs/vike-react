@@ -9,6 +9,7 @@ import { getPageElement } from './getPageElement.js'
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRenderClientAsync> => {
   const page = getPageElement(pageContext)
+  const lang = pageContext.config.lang || 'en'
 
   const container = document.getElementById('page-view')!
   if (container.innerHTML !== '' && pageContext.isHydration) {
@@ -27,6 +28,7 @@ const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRe
       // document title.
       const title = getTitle(pageContext)
       document.title = title || ''
+      document.documentElement.lang = lang
     }
 
     root.render(page)

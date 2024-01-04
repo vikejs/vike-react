@@ -55,7 +55,7 @@ export default {
       env: { server: true }
     },
     lang: {
-      env: { server: true }
+      env: { server: true, client: true }
     },
     ssr: {
       env: { config: true },

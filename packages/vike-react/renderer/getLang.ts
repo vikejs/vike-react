@@ -8,13 +8,7 @@ import { isCallable } from './utils/isCallable.js'
  * the page's data() and onBeforeRender() hooks or from other hooks.
  */
 function getLang(pageContext: PageContext): null | string {
-  // from data() hook
-  if (pageContext.data?.lang !== undefined) {
-    return pageContext.data.lang
-  }
-
-  // TODO/next-major-release: remove support for setting lang over onBeforeRender()
-  // from onBeforeRender() hook & other hooks, e.g. onBeforeRoute() hook
+  // from onBeforeRoute() hook & other hooks, e.g. onPrerenderStart() hook
   if (pageContext.lang !== undefined) {
     return pageContext.lang
   }

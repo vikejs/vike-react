@@ -24,11 +24,10 @@ declare global {
 
       userAgent?: string
 
-      // Needed by getTitle() & getLang()
+      // Needed by getTitle()
       data?: {
         /** &lt;title>${title}&lt;/title> - set by data() hook, has precedence over the onBeforeRender() hook */
         title?: string
-        lang?: string
       }
     }
   }

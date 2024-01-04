@@ -9,11 +9,12 @@ import { getPageElement } from './getPageElement.js'
 import { PageContextProvider } from './PageContextProvider.js'
 import React from 'react'
 import type { OnRenderHtmlAsync } from 'vike/types'
+import { getLang } from './getLang.js'
 
 checkVikeVersion()
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
-  const lang = pageContext.config.lang || 'en'
+  // const lang = pageContext.config.lang || 'en'
 
   const { stream, favicon, description } = pageContext.config
   const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
@@ -21,6 +22,8 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
 
   const title = getTitle(pageContext)
   const titleTag = !title ? '' : escapeInject`<title>${title}</title>`
+
+  const lang = getLang(pageContext) || 'en'
 
   const Head = pageContext.config.Head || (() => <></>)
   const head = (

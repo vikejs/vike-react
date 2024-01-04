@@ -34,7 +34,7 @@ export default {
   // be used by the renderers.
   // It is a cumulative config option, so a web app using vike-react can extend
   // this list.
-  passToClient: ['pageProps', 'title'],
+  passToClient: ['pageProps', 'title', 'lang'],
 
   clientRouting: true,
   hydrationCanBeAborted: true,

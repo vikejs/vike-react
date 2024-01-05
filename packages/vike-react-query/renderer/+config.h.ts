@@ -5,7 +5,6 @@ export default {
   queryClientConfig: undefined,
   VikeReactQueryWrapper: 'import:vike-react-query/renderer/VikeReactQueryWrapper:default',
   FallbackErrorBoundary: 'import:vike-react-query/renderer/FallbackErrorBoundary:default',
-  stream: true,
   meta: {
     queryClientConfig: {
       env: {
@@ -27,6 +26,7 @@ declare global {
     interface ConfigVikeReact {
       queryClientConfig: QueryClientConfig
       FallbackErrorBoundary: (props: { children: ReactNode }) => ReactNode
+      stream: boolean
     }
   }
 }

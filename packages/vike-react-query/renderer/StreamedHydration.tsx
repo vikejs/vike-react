@@ -1,7 +1,7 @@
 export { StreamedHydration }
 
 import type { QueryClient } from '@tanstack/react-query'
-import { dehydrate, hydrate, DehydratedState } from '@tanstack/react-query'
+import { dehydrate, hydrate, DehydratedState, useQueryClient } from '@tanstack/react-query'
 import { uneval } from 'devalue'
 import type { ReactNode } from 'react'
 import { useStream } from 'react-streaming'
@@ -19,7 +19,8 @@ declare global {
  * - hydrating the query client on the client
  * - if react-streaming is not used, it doesn't do anything
  */
-function StreamedHydration({ client, children }: { client: QueryClient; children: ReactNode }) {
+function StreamedHydration({ client, children }: { client?: QueryClient; children: ReactNode }) {
+  const queryClient = useQueryClient(client)
   const stream = useStream()
 
   // stream is only avaiable in SSR
@@ -31,11 +32,11 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
         document.getElementsByClassName("_rqd_")
       ).forEach((e) => e.remove())};_rqc_()</script>`
     )
-    client.getQueryCache().subscribe((event) => {
+    queryClient.getQueryCache().subscribe((event) => {
       if (['added', 'updated'].includes(event.type) && event.query.state.status === 'success')
         stream.injectToStream(
           `<script class="_rqd_">_rqd_.push(${uneval(
-            dehydrate(client, {
+            dehydrate(queryClient, {
               shouldDehydrateQuery: (query) => query.queryHash === event.query.queryHash
             })
           )});_rqc_()</script>`
@@ -45,7 +46,7 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
 
   if (!isSSR && Array.isArray(window._rqd_)) {
     const onEntry = (entry: DehydratedState) => {
-      hydrate(client, entry)
+      hydrate(queryClient, entry)
     }
     for (const entry of window._rqd_) {
       onEntry(entry)

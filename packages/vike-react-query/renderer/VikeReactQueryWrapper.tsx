@@ -9,13 +9,15 @@ type VikeReactQueryWrapperProps = {
 }
 
 export default function VikeReactQueryWrapper({ pageContext, children }: VikeReactQueryWrapperProps) {
-  const { queryClientConfig, FallbackErrorBoundary = PassThrough } = pageContext.config
+  const { queryClientConfig, FallbackErrorBoundary = PassThrough, stream } = pageContext.config
   const [queryClient] = useState(() => new QueryClient(queryClientConfig))
+
+  const RQStreamedHydration = stream ? StreamedHydration : PassThrough
 
   return (
     <QueryClientProvider client={queryClient}>
       <FallbackErrorBoundary>
-        <StreamedHydration client={queryClient}>{children}</StreamedHydration>
+        <RQStreamedHydration>{children}</RQStreamedHydration>
       </FallbackErrorBoundary>
     </QueryClientProvider>
   )

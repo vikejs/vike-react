@@ -26,7 +26,7 @@ declare global {
     interface ConfigVikeReact {
       queryClientConfig: QueryClientConfig
       FallbackErrorBoundary: (props: { children: ReactNode }) => ReactNode
-      stream: boolean
+      stream?: boolean
     }
   }
 }

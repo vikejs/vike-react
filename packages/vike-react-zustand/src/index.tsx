@@ -99,7 +99,7 @@ function getUseStore(key: string): any {
 function serverOnly<T extends Record<string, any>>(getStateOnServerSide: () => T) {
   // Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
   // @ts-expect-error
-  import.meta.env ??= { SSR: true }
+  import.meta.env = { SSR: true }
   if (import.meta.env.SSR) {
     return getStateOnServerSide()
   }

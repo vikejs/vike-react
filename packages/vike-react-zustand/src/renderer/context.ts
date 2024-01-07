@@ -9,7 +9,7 @@ import type { PageContext } from 'vike/types'
 import type { StoreApiAndHook } from '../types.js'
 import { getGlobalObject } from '../utils.js'
 
-const globalObject = getGlobalObject('context.ts', {
+const globalObject = getGlobalObject('VikeReactZustandContext.ts', {
   reactStoreContext: createContext<{ [key: string]: StoreApiAndHook }>({}),
   initializers: {} as { [key: string]: any },
   pageContextCurrent: null as PageContext | null

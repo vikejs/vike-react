@@ -19,14 +19,36 @@ import { assert } from './utils.js'
  * Usage examples: https://docs.pmnd.rs/zustand/guides/typescript#basic-usage
  *
  */
-const createWrapped = ((initializerOrKey: any) => {
-  const initializerFn = typeof initializerOrKey === 'function' && initializerOrKey
-  const key = (typeof initializerOrKey === 'string' && initializerOrKey) || 'default'
+const createWrapped = ((...args: any[]) => {
+  const initializerFn =
+    // create('keyFromUser')('keyFromTransform', (set,get) => ...)
+    (typeof args[1] === 'function' && args[1]) ||
+    // create('keyFromUser')((set,get) => ...)
+    (typeof args[0] === 'function' && args[0])
 
-  const create_ = (initializer: any) => {
-    initializers_set(key, initializer)
-    const useStore = getUseStore(key)
-    useStore.__key__ = key
+  // create('keyFromUser')('keyFromTransform', (set,get) => ...)
+  // create('keyFromUser')((set,get) => ...)
+  const key = typeof args[0] === 'string' && args[0]
+
+  const create_ = (...args: any[]) => {
+    const initializerFn_ =
+      // create('keyFromUser')('keyFromTransform', (set,get) => ...)
+      (typeof args[1] === 'function' && args[1]) ||
+      // create('keyFromUser')((set,get) => ...)
+      (typeof args[0] === 'function' && args[0])
+
+    const key_ =
+      // create('keyFromUser')('keyFromTransform', (set,get) => ...)
+      // create('keyFromUser')((set,get) => ...)
+      (typeof key === 'string' && key) ||
+      // create('keyFromUser')((set,get) => ...)
+      (typeof args[0] === 'string' && args[0]) ||
+      // create()((set,get) => ...)
+      'default'
+
+    initializers_set(key_, initializerFn_)
+    const useStore = getUseStore(key_)
+    useStore.__key__ = key_
     return useStore
   }
   if (initializerFn) {

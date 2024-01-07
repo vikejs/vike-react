@@ -6,17 +6,17 @@
     "test": "tsc --noEmit"
   },
   "dependencies": {
-    "@types/react": "^18.2.45",
+    "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "@vitejs/plugin-react": "^4.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "^5.3.3",
-    "vike": "^0.4.151",
+    "vike": "^0.4.156",
     "vike-react": "workspace:*",
     "vike-react-query": "workspace:*",
-    "@tanstack/react-query": "^5.14.6",
-    "vite": "^5.0.10"
+    "@tanstack/react-query": "^5.17.8",
+    "vite": "^5.0.11"
   },
   "type": "module"
 }

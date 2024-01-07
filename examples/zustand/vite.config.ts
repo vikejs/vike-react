@@ -16,8 +16,8 @@ export default {
         if (!hasCreate) {
           return
         }
-        // Playground: https://regex101.com/r/cAKn5W/1
-        code = code.replace(/create(?:<[\s\w<>:{}]*)?\((?!\s*[\w'"`])\)?/g, (match, position) => {
+        // Playground: https://regex101.com/r/RLUfaE/1
+        code = code.replace(/create(?:<[\s\w<>:{}]*)?\((?!\s*['"`])\)?/g, (match, position) => {
           const key = simpleHash(`${id}:${position}`)
 
           if (match.at(-1) === ')') {

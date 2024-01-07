@@ -186,6 +186,10 @@ importers:
       zustand:
         specifier: ^4.4.7
         version: 4.4.7(@types/react@18.2.45)(immer@10.0.3)(react@18.2.0)
+    devDependencies:
+      es-module-lexer:
+        specifier: ^1.4.1
+        version: 1.4.1
 
   packages/vike-react:
     dependencies:

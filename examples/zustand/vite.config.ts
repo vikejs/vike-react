@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react'
+import { init, parse } from 'es-module-lexer'
 import vike from 'vike/plugin'
 import type { Plugin, UserConfig } from 'vite'
 
@@ -6,55 +7,78 @@ export default {
   plugins: [react(), vike(), vikeReactZustandPlugin()]
 } satisfies UserConfig
 
-const hotReloaderCode = `
-if (import.meta.hot) {
-  import.meta.hot.accept(() => {
-    window.location.reload()
-  })
-}
-`
-
 function vikeReactZustandPlugin(): Plugin {
-  const ids = new Set()
+  const idsToStoreKeys: { [id: string]: Set<string> } = {}
   return {
     name: 'vikeReactZustand',
-    enforce: 'pre',
+    enforce: 'post',
     transform(code, id) {
-      const start_time = process.hrtime()
       if (id.includes('node_modules')) {
         return
       }
-      // Playground: https://regex101.com/r/qFAOq5/1
-      const hasCreate =
-        /import(?:[\s\w,]*\{[\s\w,]*)(?<!as[\w\s]*)create[\s,}]+(?!as)[\s\w}]*from\s*["']vike-react-zustand["']/.test(
-          code
-        )
-      if (!hasCreate) {
+      const res = parse(code)
+      let importLine = res[0].find((line) => line.n === 'vike-react-zustand')
+      if (!importLine) {
+        return
+      }
+      const lin = code.slice(importLine.ss, importLine.se)
+      const imports = lin
+        .substring(lin.indexOf('{') + 1, lin.indexOf('}'))
+        .split(',')
+        .map((s) => s.trim())
+        .filter((s) => {
+          const split = s.split(' as ')
+          return (
+            split.length === 1 ||
+            // create as create
+            split[0] === split[1]
+          )
+        })
+      if (!imports.includes('create')) {
         return
       }
 
       // Playground: https://regex101.com/r/K8paF7/1
-      code = code.replace(/create\s*(?:<[\s\w<>:.&|{}[\],="]*)?(?:\([\w'"`{}()\s]*?\))?\s*?\(/g, (match, position) => {
-        const key = simpleHash(`${id}:${position}`)
-        return `${match}'${key}',`
-      })
+      const matches = code.matchAll(/create\s*(?:<[\s\w<>:.&|{}[\],="]*)?(?:\([\w'"`{}()\s]*?\))?\s*?\(/g)
+      let idx = 0
+      for (const match of matches) {
+        if (!match.index || !match.input) {
+          continue
+        }
+        const key = simpleHash(`${id}:${idx}`)
+        idsToStoreKeys[id] ??= new Set([key])
+        idsToStoreKeys[id].add(key)
+        code =
+          match.input.substring(0, match.index) +
+          `${match[0]}'${key}',` +
+          match.input.substring(match.index + match[0].length)
+        idx++
+      }
 
-      ids.add(id)
-      code = code + hotReloaderCode
-
-      let end_time = process.hrtime(start_time)
-      // Print the Execution time.
-      console.log('End Time:', end_time)
       return code
     },
-    handleHotUpdate(ctx) {
-      if (ctx.modules.some((m) => ids.has(m.id))) {
-        //@ts-ignore
-        if (globalThis.__vite_plugin_ssr?.['VikeReactZustandContext.ts']) {
+    async buildStart() {
+      await init
+    },
+    async handleHotUpdate(ctx) {
+      const modules = ctx.modules.filter((m) => m.id && m.id in idsToStoreKeys)
+      if (!modules.length) return
+
+      for (const module of modules) {
+        if (!module.id) {
+          continue
+        }
+        const storeKeysInFile = idsToStoreKeys[module.id]
+        for (const key of storeKeysInFile) {
           //@ts-ignore
-          globalThis.__vite_plugin_ssr['VikeReactZustandContext.ts'].initializers = {}
+          if (globalThis.__vite_plugin_ssr?.['VikeReactZustandContext.ts']) {
+            //@ts-ignore
+            delete globalThis.__vite_plugin_ssr['VikeReactZustandContext.ts'].initializers[key]
+          }
         }
       }
+
+      ctx.server.ws.send({ type: 'full-reload' })
     }
   }
 }

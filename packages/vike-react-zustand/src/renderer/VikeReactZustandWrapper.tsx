@@ -33,7 +33,7 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
   for (const [key, store] of stores) {
     // Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
     // @ts-expect-error
-    import.meta.env = { SSR: true }
+    import.meta.env ??= { SSR: true }
     if (import.meta.env.SSR) {
       pageContext._vikeReactZustand ??= {}
       pageContext._vikeReactZustand = {

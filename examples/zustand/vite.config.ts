@@ -11,10 +11,12 @@ export default {
         if (id.includes('node_modules')) {
           return
         }
-        const hasCreate = /import([{\s\w,]*)create([}\s\w,]*)from\s*["']vike-react-zustand["']/.test(code)
+        // Playground: https://regex101.com/r/z9B1Lz/1
+        const hasCreate = /import(?:[\s\w,]*\{[\s\w,]*)create(?:[\s\w,]*\}[\s\w,]*)from\s*["']vike-react-zustand["']/.test(code)
         if (!hasCreate) {
           return
         }
+        // Playground: https://regex101.com/r/OYMwO0/1
         code = code.replace(/create(?:<[\s\w<>:{}]*)?\((?!\s*['"])\)?/g, (match, position) => {
           const key = simpleHash(`${id}:${position}`)
 

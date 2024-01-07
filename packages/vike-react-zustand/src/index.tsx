@@ -10,7 +10,7 @@ import { assert } from './utils.js'
  * Zustand integration for vike-react.
  *
  * The `devtools` middleware is included by default.
- * 
+ *
  * To create multiple stores, set a unique key:
  * ```ts
  * const useStore = create<Store>('store1')(...)
@@ -23,16 +23,16 @@ const createWrapped = ((initializerOrKey: any) => {
   const initializerFn = typeof initializerOrKey === 'function' && initializerOrKey
   const key = (typeof initializerOrKey === 'string' && initializerOrKey) || 'default'
 
-  const create = (initializer: any) => {
+  const create_ = (initializer: any) => {
     initializers_set(key, initializer)
     const useStore = getUseStore(key)
     useStore.__key__ = key
     return useStore
   }
   if (initializerFn) {
-    return create(initializerFn)
+    return create_(initializerFn)
   }
-  return create
+  return create_
 }) as unknown as Create
 
 /**
@@ -98,8 +98,9 @@ function getUseStore(key: string): any {
  */
 function serverOnly<T extends Record<string, any>>(getStateOnServerSide: () => T) {
   // Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
+  // The assignment needs to be conditional, because in DEV, the condition is not statically analyzed/stripped
   // @ts-expect-error
-  import.meta.env = { SSR: true }
+  import.meta.env ??= { SSR: true }
   if (import.meta.env.SSR) {
     return getStateOnServerSide()
   }

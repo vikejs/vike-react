@@ -11,7 +11,7 @@ export default {
         if (id.includes('node_modules')) {
           return
         }
-        // Playground: https://regex101.com/r/z9B1Lz/1
+        // Playground: https://regex101.com/r/1RThko/1
         const hasCreate = /import(?:[\s\w,]*\{[\s\w,]*)create(?:[\s\w,]*\}[\s\w,]*)from\s*["']vike-react-zustand["']/.test(code)
         if (!hasCreate) {
           return

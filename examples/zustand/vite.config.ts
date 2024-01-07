@@ -8,7 +8,7 @@ export default {
 } satisfies UserConfig
 
 function vikeReactZustandPlugin(): Plugin {
-  const idsToStoreKeys: { [id: string]: Set<string> } = {}
+  const idToStoreKeys: { [id: string]: Set<string> } = {}
   return {
     name: 'vikeReactZustand',
     enforce: 'post',
@@ -17,13 +17,13 @@ function vikeReactZustandPlugin(): Plugin {
         return
       }
       const res = parse(code)
-      let importLine = res[0].find((line) => line.n === 'vike-react-zustand')
-      if (!importLine) {
+      const match = res[0].find((line) => line.n === 'vike-react-zustand')
+      if (!match) {
         return
       }
-      const lin = code.slice(importLine.ss, importLine.se)
-      const imports = lin
-        .substring(lin.indexOf('{') + 1, lin.indexOf('}'))
+      const importLine = code.slice(match.ss, match.se)
+      const imports = importLine
+        .substring(importLine.indexOf('{') + 1, importLine.indexOf('}'))
         .split(',')
         .map((s) => s.trim())
         .filter((s) => {
@@ -38,16 +38,16 @@ function vikeReactZustandPlugin(): Plugin {
         return
       }
 
-      // Playground: https://regex101.com/r/K8paF7/1
-      const matches = code.matchAll(/create\s*(?:<[\s\w<>:.&|{}[\],="]*)?(?:\([\w'"`{}()\s]*?\))?\s*?\(/g)
+      // Playground: https://regex101.com/r/a1FcfP/1
+      const matches = code.matchAll(/(?<=[\s:=])create\s*(?:\(\W*?[\w\s.]*?[^,\w]*?\))?\s*?\(/g)
       let idx = 0
       for (const match of matches) {
         if (!match.index || !match.input) {
           continue
         }
         const key = simpleHash(`${id}:${idx}`)
-        idsToStoreKeys[id] ??= new Set([key])
-        idsToStoreKeys[id].add(key)
+        idToStoreKeys[id] ??= new Set([key])
+        idToStoreKeys[id].add(key)
         code =
           match.input.substring(0, match.index) +
           `${match[0]}'${key}',` +
@@ -61,14 +61,14 @@ function vikeReactZustandPlugin(): Plugin {
       await init
     },
     async handleHotUpdate(ctx) {
-      const modules = ctx.modules.filter((m) => m.id && m.id in idsToStoreKeys)
+      const modules = ctx.modules.filter((m) => m.id && m.id in idToStoreKeys)
       if (!modules.length) return
 
       for (const module of modules) {
         if (!module.id) {
           continue
         }
-        const storeKeysInFile = idsToStoreKeys[module.id]
+        const storeKeysInFile = idToStoreKeys[module.id]
         for (const key of storeKeysInFile) {
           //@ts-ignore
           if (globalThis.__vite_plugin_ssr?.['VikeReactZustandContext.ts']) {
@@ -76,9 +76,11 @@ function vikeReactZustandPlugin(): Plugin {
             delete globalThis.__vite_plugin_ssr['VikeReactZustandContext.ts'].initializers[key]
           }
         }
+        delete idToStoreKeys[module.id]
       }
 
       ctx.server.ws.send({ type: 'full-reload' })
+      return []
     }
   }
 }

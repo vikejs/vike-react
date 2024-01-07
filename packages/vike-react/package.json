@@ -25,17 +25,17 @@
     "vite": "^4.3.8 || ^5.0.10"
   },
   "devDependencies": {
-    "@brillout/release-me": "^0.1.13",
-    "@types/node": "^20.10.5",
-    "@types/react": "^18.2.45",
+    "@brillout/release-me": "^0.1.14",
+    "@types/node": "^20.10.7",
+    "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.3.3",
-    "vike": "^0.4.151"
+    "vike": "^0.4.156"
   },
   "dependencies": {
-    "react-streaming": "^0.3.18"
+    "react-streaming": "^0.3.19"
   },
   "typesVersions": {
     "*": {

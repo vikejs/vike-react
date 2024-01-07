@@ -23,7 +23,7 @@ function vikeReactZustandPlugin(): Plugin {
         return
       }
 
-      // Playground: https://regex101.com/r/2XhdOg/1
+      // Playground: https://regex101.com/r/Yqd80A/1
       code = code.replace(/create\s*(?:<[\s\w<>:{}[\]]*)?(?:\([\w'"`{}()\s]*?\))?\s*?\(/g, (match, position) => {
         const key = simpleHash(`${id}:${position}`)
         return `${match}'${key}',`

@@ -38,8 +38,8 @@ function vikeReactZustandPlugin(): Plugin {
         return
       }
 
-      // Playground: https://regex101.com/r/a1FcfP/1
-      const matches = code.matchAll(/(?<=[\s:=])create\s*(?:\(\W*?[\w\s.]*?[^,\w]*?\))?\s*?\(/g)
+      // Playground: https://regex101.com/r/oDNRzp/1
+      const matches = code.matchAll(/(?<=[\s:=,;])create\s*?\(/g)
       let idx = 0
       for (const match of matches) {
         if (!match.index || !match.input) {

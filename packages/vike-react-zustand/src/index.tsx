@@ -11,11 +11,6 @@ import { assert } from './utils.js'
  *
  * The `devtools` middleware is included by default.
  *
- * To create multiple stores, set a unique key:
- * ```ts
- * const useStore = create<Store>('store1')(...)
- * const useStore2 = create<Store>('store2')(...)
- * ```
  * Usage examples: https://docs.pmnd.rs/zustand/guides/typescript#basic-usage
  *
  */
@@ -28,46 +23,38 @@ const createWrapped = ((...args: any[]) => {
     // create((set,get) => ...)
     //        ^^^^^^^^^^^^^^^
     (typeof args[0] === 'function' && args[0]) ||
+    // create('keyFromTransform', 'keyFromUser')((set,get) => ...)
+    //        ^^^^^^^^^^^^^
     // create('keyFromUser')((set,get) => ...)
     //        ^^^^^^^^^^^^^
     // create()((set,get) => ...)
     //       ^
     undefined
 
-  // create('keyFromUser')('keyFromTransform', (set,get) => ...)
-  //        ^^^^^^^^^^^^^
-  // create('keyFromUser')((set,get) => ...)
-  //        ^^^^^^^^^^^^^
-  const keyFromUser = typeof args[0] === 'string' && args[0]
+  const key =
+    // create('keyFromTransform', 'keyFromUser')((set,get) => ...)
+    //                            ^^^^^^^^^^^^^
+    (typeof args[1] === 'string' && args[1]) ||
+    // create('keyFromTransform')((set,get) => ...)
+    //         ^^^^^^^^^^^^^
+    // create('keyFromUser')((set,get) => ...)
+    //        ^^^^^^^^^^^^^
+    (typeof args[0] === 'string' && args[0]) ||
+    // The transform didn't run for this call(skipped in node_modules)
+    // create()((set,get) => ...)
+    // create((set,get) => ...)
+    'default'
 
-  const create_ = (...args: any[]) => {
-    const initializerFn_ =
-      // create('keyFromTransform', (set,get) => ...)
-      //                            ^^^^^^^^^^^^^^^
-      (typeof args[1] === 'function' && args[1]) ||
-      // The transform didn't run for this call(skipped in node_modules)
-      // create((set,get) => ...)
-      //        ^^^^^^^^^^^^^^^
-      (typeof args[0] === 'function' && args[0])
+  assert(key)
 
+  const create_ = (initializerFn_: any) => {
     assert(initializerFn_)
-
-    const key =
-      keyFromUser ||
-      // create('keyFromTransform', (set,get) => ...)
-      //        ^^^^^^^^^^^^^^^^^
-      (typeof args[0] === 'string' && args[0]) ||
-      // The transform didn't run for this call(skipped in node_modules)
-      // create((set,get) => ...)
-      'default'
-
-    assert(key)
-
     initializers_set(key, initializerFn_)
     const useStore = getUseStore(key)
     useStore.__key__ = key
     return useStore
   }
+
   if (initializerFn) {
     // create((set,get) => ...)
     return create_(initializerFn)

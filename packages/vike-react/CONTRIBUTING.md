@@ -6,6 +6,7 @@ Build `vike-react`:
 
 ```bash
 git clone git@github.com:vikejs/vike-react
+cd vike-react/
 pnpm install
 pnpm build
 ```
@@ -45,6 +46,8 @@ This will:
 - create a `vike-react@1.2.3` git tag and push it,
 - build the package and publish it to npm.
 
-Extend [`CHANGELOG.md`](CHANGELOG.md) if anything is missing, as the release
-script only picks up commits
-[that match the pattern of "Feature", "Fix", "Performance Improvement" or "Breaking Changes"](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-cli).
+Extend [`CHANGELOG.md`](CHANGELOG.md) if anything is missing, as the release script:
+
+- only picks up commits
+  [that match the pattern of "Feature", "Fix", "Performance Improvement" or "Breaking Changes"](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-cli),
+- mistakenly picks up commits touching all packages in this monorepo, not only `vike-react`.

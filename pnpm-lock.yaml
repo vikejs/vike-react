@@ -4,6 +4,10 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  vike-react: link:./packages/vike-react/
+  vike-react-query: link:./packages/vike-react-query/
+
 importers:
 
   .:
@@ -42,7 +46,7 @@ importers:
         specifier: ^0.4.156
         version: 0.4.156(react-streaming@0.3.19)(vite@5.0.11)
       vike-react:
-        specifier: workspace:*
+        specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
       vite:
         specifier: ^5.0.11
@@ -78,7 +82,7 @@ importers:
         specifier: ^0.4.156
         version: 0.4.156(react-streaming@0.3.19)(vite@5.0.11)
       vike-react:
-        specifier: workspace:*
+        specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
       vite:
         specifier: ^5.0.11
@@ -111,10 +115,10 @@ importers:
         specifier: ^0.4.156
         version: 0.4.156(react-streaming@0.3.19)(vite@5.0.11)
       vike-react:
-        specifier: workspace:*
+        specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
       vike-react-query:
-        specifier: workspace:*
+        specifier: link:../../packages/vike-react-query
         version: link:../../packages/vike-react-query
       vite:
         specifier: ^5.0.11
@@ -144,7 +148,7 @@ importers:
         specifier: ^0.4.156
         version: 0.4.156(react-streaming@0.3.19)(vite@5.0.11)
       vike-react:
-        specifier: workspace:*
+        specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
       vite:
         specifier: ^5.0.11
@@ -177,7 +181,7 @@ importers:
         specifier: ^0.4.156
         version: 0.4.156(react-streaming@0.3.19)(vite@5.0.11)
       vike-react:
-        specifier: workspace:*
+        specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
       vite:
         specifier: ^5.0.11
@@ -266,7 +270,7 @@ importers:
         specifier: ^0.4.156
         version: 0.4.156(react-streaming@0.3.19)(vite@4.5.1)
       vike-react:
-        specifier: ^0.3.8
+        specifier: link:../vike-react
         version: link:../vike-react
       vitest:
         specifier: ^1.2.0

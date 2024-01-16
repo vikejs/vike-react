@@ -17,6 +17,12 @@
     "========= Only allow pnpm; forbid yarn & npm": "",
     "preinstall": "npx only-allow pnpm"
   },
+  "pnpm": {
+    "overrides": {
+      "vike-react": "link:./packages/vike-react/",
+      "vike-react-query": "link:./packages/vike-react-query/"
+    }
+  },
   "packageManager": "pnpm@8.6.12",
   "devDependencies": {
     "prettier": "^3.2.2"

@@ -1,3 +1,7 @@
+## [0.3.9](https://github.com/vikejs/vike-react/compare/vike-react@0.3.8...vike-react@0.3.9) (2024-01-17)
+
+
+
 ## [0.3.8](https://github.com/vikejs/vike-react/compare/vike-react@0.3.7...vike-react@0.3.8) (2023-12-24)
 
 > [!WARNING]

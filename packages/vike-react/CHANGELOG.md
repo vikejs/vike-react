@@ -1,6 +1,11 @@
 ## [0.3.9](https://github.com/vikejs/vike-react/compare/vike-react@0.3.8...vike-react@0.3.9) (2024-01-17)
 
 
+### Bug Fixes
+
+* Update `lang` on client-side navigation ([#61](https://github.com/vikejs/vike-react/pull/61))
+
+
 
 ## [0.3.8](https://github.com/vikejs/vike-react/compare/vike-react@0.3.7...vike-react@0.3.8) (2023-12-24)
 

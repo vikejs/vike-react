@@ -5,6 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
+  vike: 0.4.158-commit-7e44992
   vike-react: link:./packages/vike-react/
   vike-react-query: link:./packages/vike-react-query/
 
@@ -40,8 +41,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: ^0.4.156
-        version: 0.4.156(react-streaming@0.3.19)(vite@5.0.11)
+        specifier: 0.4.158-commit-7e44992
+        version: 0.4.158-commit-7e44992(react-streaming@0.3.19)(vite@5.0.11)
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -73,8 +74,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: ^0.4.156
-        version: 0.4.156(react-streaming@0.3.19)(vite@5.0.11)
+        specifier: 0.4.158-commit-7e44992
+        version: 0.4.158-commit-7e44992(react-streaming@0.3.19)(vite@5.0.11)
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -106,8 +107,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: ^0.4.156
-        version: 0.4.156(react-streaming@0.3.19)(vite@5.0.11)
+        specifier: 0.4.158-commit-7e44992
+        version: 0.4.158-commit-7e44992(react-streaming@0.3.19)(vite@5.0.11)
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -139,8 +140,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: ^0.4.156
-        version: 0.4.156(react-streaming@0.3.19)(vite@5.0.11)
+        specifier: 0.4.158-commit-7e44992
+        version: 0.4.158-commit-7e44992(react-streaming@0.3.19)(vite@5.0.11)
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -179,8 +180,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: ^0.4.156
-        version: 0.4.156(react-streaming@0.3.19)(vite@4.5.1)
+        specifier: 0.4.158-commit-7e44992
+        version: 0.4.158-commit-7e44992(react-streaming@0.3.19)(vite@4.5.1)
 
   packages/vike-react-query:
     dependencies:
@@ -228,8 +229,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: ^0.4.156
-        version: 0.4.156(react-streaming@0.3.19)(vite@4.5.1)
+        specifier: 0.4.158-commit-7e44992
+        version: 0.4.158-commit-7e44992(react-streaming@0.3.19)(vite@4.5.1)
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -537,8 +538,8 @@ packages:
   /@brillout/require-shim@0.1.2:
     resolution: {integrity: sha512-3I4LRHnVZXoSAsEoni5mosq9l6eiJED58d9V954W4CIZ88AUfYBanWGBGbJG3NztaRTpFHEA6wB3Hn93BmmJdg==}
 
-  /@brillout/vite-plugin-server-entry@0.4.2:
-    resolution: {integrity: sha512-kZwvU3pZGc6trzEPw7K3PgEnRpPE+MriQ8ku+Q0UGZFEa1nQB6QS8Wesr1oE4uyr2dFjDpeqZBUP4YWAvhp9qg==}
+  /@brillout/vite-plugin-server-entry@0.4.3:
+    resolution: {integrity: sha512-JDWFZOsSJfDo9511r7OJDeNON7x5mwIGNZCi1DQWaVuYK2cs9J/eD3Jwypg4M1ex9iAb/WvI+aSAEfsVGmNeMQ==}
     dependencies:
       '@brillout/import': 0.2.3
 
@@ -3080,8 +3081,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vike@0.4.156(react-streaming@0.3.19)(vite@4.5.1):
-    resolution: {integrity: sha512-CaeG+clu+oLDKSv4B+6aOYoWNUb/URF6dK3/AeC9NJD0XvsfW8at1yQO5hA3M1SVWpe7c/tUGw1uYVgceT4JMw==}
+  /vike@0.4.158-commit-7e44992(react-streaming@0.3.19)(vite@4.5.1):
+    resolution: {integrity: sha512-4qPToBMmXvpHevKEjU/x9U1HB8ob4TLO3/e+mhkWVrS2JWtA6TLsjo7tC4w770I3/N8QvZWXcoe8xnE/23dFVw==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     peerDependencies:
@@ -3095,7 +3096,7 @@ packages:
       '@brillout/json-serializer': 0.5.8
       '@brillout/picocolors': 1.0.10
       '@brillout/require-shim': 0.1.2
-      '@brillout/vite-plugin-server-entry': 0.4.2
+      '@brillout/vite-plugin-server-entry': 0.4.3
       acorn: 8.11.2
       cac: 6.7.14
       es-module-lexer: 1.4.1
@@ -3107,8 +3108,8 @@ packages:
       vite: 4.5.1(@types/node@20.11.4)
     dev: true
 
-  /vike@0.4.156(react-streaming@0.3.19)(vite@5.0.11):
-    resolution: {integrity: sha512-CaeG+clu+oLDKSv4B+6aOYoWNUb/URF6dK3/AeC9NJD0XvsfW8at1yQO5hA3M1SVWpe7c/tUGw1uYVgceT4JMw==}
+  /vike@0.4.158-commit-7e44992(react-streaming@0.3.19)(vite@5.0.11):
+    resolution: {integrity: sha512-4qPToBMmXvpHevKEjU/x9U1HB8ob4TLO3/e+mhkWVrS2JWtA6TLsjo7tC4w770I3/N8QvZWXcoe8xnE/23dFVw==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     peerDependencies:
@@ -3122,7 +3123,7 @@ packages:
       '@brillout/json-serializer': 0.5.8
       '@brillout/picocolors': 1.0.10
       '@brillout/require-shim': 0.1.2
-      '@brillout/vite-plugin-server-entry': 0.4.2
+      '@brillout/vite-plugin-server-entry': 0.4.3
       acorn: 8.11.2
       cac: 6.7.14
       es-module-lexer: 1.4.1

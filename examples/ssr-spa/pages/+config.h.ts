@@ -10,10 +10,6 @@ export default {
   Head,
   // <title>
   title: 'My Vike + React App',
-  // <meta name="description">
-  description: 'Demo showcasing Vike + React',
-  // <link rel="icon" href="${favicon}" />
-  favicon: logoUrl,
-  ssr: true, // can be removed, this is the default anyway
+  ssr: true, // can be removed since `true` is the default
   extends: vikeReact
 } satisfies Config

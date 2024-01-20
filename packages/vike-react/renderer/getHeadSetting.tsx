@@ -3,9 +3,12 @@ export { getHeadSetting }
 import type { PageContext } from 'vike/types'
 import { isCallable } from './utils/isCallable.js'
 
-function getHeadSetting(headSetting: 'title' | 'favicon' | 'lang', pageContext: PageContext): null | string {
+function getHeadSetting(
+  headSetting: 'title' | 'favicon' | 'lang',
+  pageContext: PageContext
+): undefined | null | string {
   const config = pageContext.configEntries[headSetting]?.[0]
-  if (!config) return null
+  if (!config) return undefined
   const val = config.configValue
   if (typeof val === 'string') return val
   if (!val) return null

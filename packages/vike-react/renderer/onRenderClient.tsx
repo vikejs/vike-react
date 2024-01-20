@@ -25,9 +25,11 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
       const lang = getHeadSetting('lang', pageContext) || 'en'
       const favicon = getHeadSetting('favicon', pageContext)
 
-      document.title = title
-      document.documentElement.lang = lang
-      setFavicon(favicon)
+      // We skip if the value is undefined because we shouldn't remove values set in HTML (by the Head setting).
+      //  - This also means that previous values will leak: upon client-side navigation, the title set by the previous page won't be removed if the next page doesn't override it. But that's okay because usually pages always have a favicon and title, which means that previous values are always overriden. Also, as a workaround, the user can set the value to `null` to ensure that previous values are overriden.
+      if (title !== undefined) document.title = title
+      if (lang !== undefined) document.documentElement.lang = lang
+      if (favicon !== undefined) setFavicon(favicon)
     }
 
     root.render(page)

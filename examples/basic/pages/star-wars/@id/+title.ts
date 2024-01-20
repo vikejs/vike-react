@@ -1,7 +1,9 @@
-import { useData } from 'vike-react/useData'
-import type { Data } from './+data'
+export { title }
 
-export default () => {
-  const movie = useData<Data>()
-  return  movie.title
+import type { Data } from './+data'
+import type { PageContext } from 'vike/types'
+
+function title(pageContext: PageContext<Data>) {
+  const movie = pageContext.data
+  return movie.title
 }

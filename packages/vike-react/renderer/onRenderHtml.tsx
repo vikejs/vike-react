@@ -6,18 +6,16 @@ import { renderToStream } from 'react-streaming/server'
 import { escapeInject, dangerouslySkipEscape, version } from 'vike/server'
 import { getHeadSetting } from './getHeadSetting.js'
 import { getPageElement } from './getPageElement.js'
-import { PageContextProvider, providePageContextSynchronously } from './PageContextProvider.js'
+import { PageContextProvider } from './PageContextProvider.js'
 import React from 'react'
 import type { OnRenderHtmlAsync } from 'vike/types'
 
 checkVikeVersion()
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
-  const clear = providePageContextSynchronously(pageContext)
   const title = getHeadSetting('title', pageContext)
   const favicon = getHeadSetting('favicon', pageContext)
   const lang = getHeadSetting('lang', pageContext) || 'en'
-  clear()
 
   const titleTag = !title ? '' : escapeInject`<title>${title}</title>`
   const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`

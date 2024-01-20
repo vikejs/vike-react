@@ -10,7 +10,7 @@ function getHeadSetting(headSetting: 'title' | 'favicon' | 'lang', pageContext: 
   if (typeof val === 'string') return val
   if (!val) return null
   if (isCallable(val)) {
-    const valStr = val()
+    const valStr = val(pageContext)
     if (typeof valStr! !== 'string') {
       throw new Error(config.configDefinedAt + ' should return a string')
     }

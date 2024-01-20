@@ -1,5 +1,6 @@
 export { initializers_set }
 export { initializers_get }
+export { initializers_remove }
 export { setPageContext }
 export { getPageContext }
 export { getReactStoreContext }
@@ -32,6 +33,9 @@ function initializers_set(key: string, initializer: any) {
     ...globalObject.initializers,
     [key]: initializer
   }
+}
+function initializers_remove(key: string) {
+  delete globalObject.initializers[key]
 }
 function initializers_get() {
   return globalObject.initializers

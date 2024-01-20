@@ -6,8 +6,9 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
-    "./config": "./dist/renderer/+config.h.js",
-    "./renderer/VikeReactZustandWrapper": "./dist/renderer/VikeReactZustandWrapper.js"
+    "./config": "./dist/renderer/+config.js",
+    "./renderer/VikeReactZustandWrapper": "./dist/renderer/VikeReactZustandWrapper.js",
+    "./plugin": "./dist/plugin.js"
   },
   "scripts": {
     "dev": "tsc --watch",
@@ -20,7 +21,8 @@
     "react-dom": "^18.0.0",
     "vike": "^0.4.151",
     "vike-react": "^0.3.5",
-    "zustand": "^4.0.0"
+    "zustand": "^4.0.0",
+    "es-module-lexer": "^1.4.1"
   },
   "devDependencies": {
     "@brillout/release-me": "^0.1.13",
@@ -33,16 +35,20 @@
     "vike": "^0.4.151",
     "vike-react": "^0.3.8",
     "vite": "^5.0.10",
-    "zustand": "^4.4.7"
+    "zustand": "^4.4.7",
+    "es-module-lexer": "^1.4.1"
   },
   "dependencies": {},
   "typesVersions": {
     "*": {
       "config": [
-        "dist/renderer/+config.h.d.ts"
+        "dist/renderer/+config.d.ts"
       ],
       "renderer/VikeReactZustandWrapper": [
         "dist/renderer/VikeReactZustandWrapper.d.ts"
+      ],
+      "plugin": [
+        "dist/plugin.d.ts"
       ]
     }
   },

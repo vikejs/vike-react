@@ -186,10 +186,6 @@ importers:
       zustand:
         specifier: ^4.4.7
         version: 4.4.7(@types/react@18.2.45)(immer@10.0.3)(react@18.2.0)
-    devDependencies:
-      es-module-lexer:
-        specifier: ^1.4.1
-        version: 1.4.1
 
   packages/vike-react:
     dependencies:
@@ -294,6 +290,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.18
         version: 18.2.18
+      es-module-lexer:
+        specifier: ^1.4.1
+        version: 1.4.1
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -308,7 +307,7 @@ importers:
         version: 0.4.151(react-streaming@0.3.18)(vite@5.0.10)
       vike-react:
         specifier: ^0.3.8
-        version: link:../vike-react
+        version: 0.3.9(react-dom@18.2.0)(react@18.2.0)(vike@0.4.151)(vite@5.0.10)
       vite:
         specifier: ^5.0.10
         version: 5.0.10(@types/node@20.10.5)
@@ -2746,6 +2745,19 @@ packages:
       isbot-fast: 1.2.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+
+  /react-streaming@0.3.19(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-kpxnj/nynMbdVVLUZKAI+AlSx7bJNX0WZO14LSJNtfIcbQJd7YH0ilnP+AFwKkvrjuG8zuNL36W5WCsczM62zg==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    dependencies:
+      '@brillout/import': 0.2.3
+      '@brillout/json-serializer': 0.5.8
+      isbot-fast: 1.2.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: true
 
   /react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}

@@ -19,8 +19,5 @@
     "vite": "^5.0.10",
     "zustand": "^4.4.7"
   },
-  "type": "module",
-  "devDependencies": {
-    "es-module-lexer": "^1.4.1"
-  }
+  "type": "module"
 }

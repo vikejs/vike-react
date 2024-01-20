@@ -4,25 +4,22 @@ export { onRenderHtml }
 import { renderToString } from 'react-dom/server'
 import { renderToStream } from 'react-streaming/server'
 import { escapeInject, dangerouslySkipEscape, version } from 'vike/server'
-import { getTitle } from './getTitle.js'
+import { getHeadSetting } from './getHeadSetting.js'
 import { getPageElement } from './getPageElement.js'
 import { PageContextProvider } from './PageContextProvider.js'
 import React from 'react'
 import type { OnRenderHtmlAsync } from 'vike/types'
-import { getLang } from './getLang.js'
 
 checkVikeVersion()
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
+  // getHeadSetting() needs to be called before any `await` so that users can use component hooks such as usePageContext() nand useData()
+  const title = getHeadSetting('title', pageContext)
+  const favicon = getHeadSetting('favicon', pageContext)
+  const lang = getHeadSetting('lang', pageContext) || 'en'
 
-  const { stream, favicon, description } = pageContext.config
-  const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
-  const descriptionTag = !description ? '' : escapeInject`<meta name="description" content="${description}" />`
-
-  const title = getTitle(pageContext)
   const titleTag = !title ? '' : escapeInject`<title>${title}</title>`
-
-  const lang = getLang(pageContext) || 'en'
+  const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
 
   const Head = pageContext.config.Head || (() => <></>)
   const head = (
@@ -40,7 +37,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
     pageView = ''
   } else {
     const page = getPageElement(pageContext)
-    pageView = !stream
+    pageView = !pageContext.config.stream
       ? dangerouslySkipEscape(renderToString(page))
       : await renderToStream(page, { userAgent: pageContext.userAgent })
   }
@@ -49,10 +46,9 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
     <html lang='${lang}'>
       <head>
         <meta charset="UTF-8" />
-        ${faviconTag}
         ${titleTag}
-        ${descriptionTag}
         ${headHtml}
+        ${faviconTag}
       </head>
       <body>
         <div id="page-view">${pageView}</div>
@@ -70,5 +66,5 @@ function checkVikeVersion() {
     if (versionParts[1] > 4) return
     if (versionParts[2] >= 147) return
   }
-  throw new Error('Update Vike to its latest version (or vike@0.4.147 and any version above)')
+  throw new Error('Update Vike to 0.4.147 or above')
 }

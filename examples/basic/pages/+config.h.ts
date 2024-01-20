@@ -10,8 +10,6 @@ export default {
   Head,
   // <title>
   title: 'My Vike + React App',
-  // <meta name="description">
-  description: 'Demo showcasing Vike + React',
   // <link rel="icon" href="${favicon}" />
   favicon: logoUrl,
   extends: vikeReact

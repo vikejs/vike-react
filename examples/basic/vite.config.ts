@@ -3,6 +3,5 @@ import ssr from 'vike/plugin'
 import { UserConfig } from 'vite'
 
 export default {
-  plugins: [react(), ssr()],
-  optimizeDeps: { include: ['cross-fetch', 'react/jsx-runtime', 'vike-react/renderer/onRenderClient'] }
+  plugins: [react(), ssr()]
 } satisfies UserConfig

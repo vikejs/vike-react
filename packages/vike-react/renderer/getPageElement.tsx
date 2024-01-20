@@ -1,25 +1,20 @@
 export { getPageElement }
 
-import React from 'react'
+import React, { type ReactNode } from 'react'
 import type { PageContext } from 'vike/types'
 import { PageContextProvider } from './PageContextProvider.js'
 
 function getPageElement(pageContext: PageContext): JSX.Element {
   const Layout = pageContext.config.Layout ?? PassThrough
-  const Wrapper =
-    /* Should we implement this? Enabling users to defined a wrapper that is used across all layouts.
-    pageContext.config.Wrapper ??
-    */
-    PassThrough
-  const VikeReactQueryWrapper = pageContext.config.VikeReactQueryWrapper ?? PassThrough
-  // TODO/next-major-release: remove pageProps (i.e. tell users to use data() instead of onBeforeRender() to fetch data)
-  const { Page, pageProps } = pageContext
+  const Wrapper = pageContext.config.Wrapper ?? PassThrough
+  const VikeReactQueryWrapper = pageContext.config.VikeReactQueryWrapper ?? (PassThrough as any)
+  const { Page } = pageContext
   const page = (
     <React.StrictMode>
       <PageContextProvider pageContext={pageContext}>
         <VikeReactQueryWrapper pageContext={pageContext}>
           <Wrapper>
-            <Layout>{Page ? <Page {...pageProps} /> : null}</Layout>
+            <Layout>{Page ? <Page /> : null}</Layout>
           </Wrapper>
         </VikeReactQueryWrapper>
       </PageContextProvider>
@@ -28,6 +23,6 @@ function getPageElement(pageContext: PageContext): JSX.Element {
   return page
 }
 
-function PassThrough({ children }: any) {
+function PassThrough({ children }: { children: ReactNode }) {
   return <>{children}</>
 }

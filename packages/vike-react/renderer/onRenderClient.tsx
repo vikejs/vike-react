@@ -2,37 +2,49 @@
 export { onRenderClient }
 
 import ReactDOM from 'react-dom/client'
-import { getTitle } from './getTitle.js'
-import type { OnRenderClientAsync } from 'vike/types'
+import { getHeadSetting } from './getHeadSetting.js'
+import type { OnRenderClientSync } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
-import { getLang } from './getLang.js'
 
 let root: ReactDOM.Root
-const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRenderClientAsync> => {
+const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderClientSync> => {
   const page = getPageElement(pageContext)
 
   const container = document.getElementById('page-view')!
   if (container.innerHTML !== '' && pageContext.isHydration) {
-    // Hydration
+    // First render (hydration)
     root = ReactDOM.hydrateRoot(container, page)
   } else {
     if (!root) {
-      // First rendering
+      // First render (not hydration)
       root = ReactDOM.createRoot(container)
     } else {
-      // Client routing
-      // See https://vike.dev/server-routing-vs-client-routing
+      // Client-side navigation
 
-      // Get the page's `title` config value, which may be different from the
-      // previous page. It can even be null, in which case we should unset the
-      // document title.
-      const title = getTitle(pageContext)
-      const lang = getLang(pageContext) || 'en'
-
-      document.title = title || ''
+      // getHeadSetting() needs to be called before any `await` so that users can use component hooks such as usePageContext() nand useData()
+      const title = getHeadSetting('title', pageContext) || ''
+      const lang = getHeadSetting('lang', pageContext) || 'en'
+      const favicon = getHeadSetting('favicon', pageContext)
+      document.title = title
       document.documentElement.lang = lang
+      setFavicon(favicon)
     }
 
     root.render(page)
   }
+}
+
+// https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically/260876#260876
+function setFavicon(faviconUrl: string | null) {
+  let link: HTMLLinkElement | null = document.querySelector("link[rel~='icon']")
+  if (!faviconUrl) {
+    if (link) document.head.removeChild(link)
+    return
+  }
+  if (!link) {
+    link = document.createElement('link')
+    link.rel = 'icon'
+    document.head.appendChild(link)
+  }
+  link.href = faviconUrl
 }

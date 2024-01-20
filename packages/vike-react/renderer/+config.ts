@@ -29,7 +29,7 @@ export default {
   onRenderClient: 'import:vike-react/renderer/onRenderClient:onRenderClient',
 
   // https://vike.dev/passToClient
-  passToClient: ['pageProps', 'title', 'lang'],
+  passToClient: ['title', 'lang'],
 
   // https://vike.dev/clientRouting
   clientRouting: true,

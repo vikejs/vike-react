@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom/client'
 import { getHeadSetting } from './getHeadSetting.js'
 import type { OnRenderClientSync } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
+import { providePageContextSynchronously } from './PageContextProvider.js'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderClientSync> => {
@@ -21,10 +22,12 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
     } else {
       // Client-side navigation
 
-      // getHeadSetting() needs to be called before any `await` so that users can use component hooks such as usePageContext() nand useData()
+      const clear = providePageContextSynchronously(pageContext)
       const title = getHeadSetting('title', pageContext) || ''
       const lang = getHeadSetting('lang', pageContext) || 'en'
       const favicon = getHeadSetting('favicon', pageContext)
+      clear()
+
       document.title = title
       document.documentElement.lang = lang
       setFavicon(favicon)

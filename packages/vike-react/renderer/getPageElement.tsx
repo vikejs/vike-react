@@ -14,6 +14,9 @@ function getPageElement(pageContext: PageContext): JSX.Element {
   const VikeReactQueryWrapper = pageContext.config.VikeReactQueryWrapper ?? PassThrough
   // TODO/next-major-release: remove pageProps (i.e. tell users to use data() instead of onBeforeRender() to fetch data)
   const { Page, pageProps } = pageContext
+  if (pageProps) {
+    console.warn('[vike-react][warning] pageContext.pageProps is deprecated, use a data() hook instead. See https://vike.dev/useData')
+  }
   const page = (
     <React.StrictMode>
       <PageContextProvider pageContext={pageContext}>

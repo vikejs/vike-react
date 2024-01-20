@@ -16,6 +16,7 @@ function getTitle(pageContext: PageContext): null | string {
   // TODO/next-major-release: remove support for setting title over onBeforeRender()
   // from onBeforeRender() hook
   if (pageContext.title !== undefined) {
+    console.warn('[vike-react][warning] pageContext.title is deprecated, use a data() hook instead. See https://vike.dev/useData')
     return pageContext.title
   }
 

@@ -16,6 +16,7 @@
     "dev": "tsc --watch",
     "build": "rm -rf dist/ && tsc",
     "release": "release-me --git-prefix vike-react --changelog-dir packages/vike-react/ patch",
+    "release:minor": "release-me --git-prefix vike-react --changelog-dir packages/vike-react/ minor",
     "release:commit": "release-me --git-prefix vike-react --changelog-dir packages/vike-react/ commit"
   },
   "peerDependencies": {

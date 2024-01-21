@@ -1,3 +1,12 @@
+## [0.4.2](https://github.com/vikejs/vike-react/compare/vike-react@0.4.1...vike-react@0.4.2) (2024-01-21)
+
+
+### Bug Fixes
+
+* fix $$typeof workaround ([cb9ffa3](https://github.com/vikejs/vike-react/commit/cb9ffa310533e4a1ddb06e247df1361ef2a87a1a))
+
+
+
 ## [0.4.1](https://github.com/vikejs/vike-react/compare/vike-react@0.4.0...vike-react@0.4.1) (2024-01-21)
 
 

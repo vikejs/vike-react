@@ -1,3 +1,26 @@
+# [0.4.0](https://github.com/vikejs/vike-react/compare/vike-react@0.3.9...vike-react@0.4.0) (2024-01-21)
+
+
+### Bug Fixes
+
+* deprecate pageContext.title ([2c05738](https://github.com/vikejs/vike-react/commit/2c05738f80db0d1f2a0638e38d338ac72071b8f4))
+* deprecate pageProps usage ([cb1a14f](https://github.com/vikejs/vike-react/commit/cb1a14fe57e58685b14fbe423cb0fc8c2862e669))
+* improve bug error message ([21bdb82](https://github.com/vikejs/vike-react/commit/21bdb82269b5e1c603bb9f2f6835bcb4c1bffb89))
+* simplify `<head>` management ([572d71d](https://github.com/vikejs/vike-react/commit/572d71d5b0531342025546b09688359729c9eaae))
+
+
+### BREAKING CHANGES
+
+* Setting the page's title using `pageContext.title`
+is deprecated (`pageContext.description` and `pageContext.lang` are
+also deprecated), use the settings `title` and `Head` instead,
+see https://vike.dev/head
+* Fetching data using `pageContext.pageProps` is
+deprecated, use `data()` and `useData()` instead,
+see https://vike.dev/data-fetching
+
+
+
 ## [0.3.9](https://github.com/vikejs/vike-react/compare/vike-react@0.3.8...vike-react@0.3.9) (2024-01-17)
 
 

@@ -28,6 +28,11 @@ export default {
   // https://vike.dev/onRenderClient
   onRenderClient: 'import:vike-react/renderer/onRenderClient:onRenderClient',
 
+  passToClient: [
+    // https://github.com/vikejs/vike-react/issues/25
+    process.env.NODE_ENV === 'production' && '$$typeof'
+  ].filter(isNotFalse),
+
   // https://vike.dev/clientRouting
   clientRouting: true,
   hydrationCanBeAborted: true,
@@ -111,4 +116,8 @@ declare global {
       Wrapper?: Component
     }
   }
+}
+
+function isNotFalse<T>(val: T | false): val is T {
+  return val !== false
 }

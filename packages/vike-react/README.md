@@ -7,6 +7,5 @@
 
 React integration for [Vike](https://vike.dev).
 
-> For integrations with Vue and Solid, see the other [`vike-*` packages](https://vike.dev/vike-packages).
-
-See [examples/](https://github.com/vikejs/vike-react/tree/main/examples).
+- [Examples](https://github.com/vikejs/vike-react/tree/main/examples)
+- [Changelog](https://github.com/vikejs/vike-react/blob/main/packages/vike-react/CHANGELOG.md)

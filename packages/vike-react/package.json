@@ -10,7 +10,8 @@
     "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js",
     "./usePageContext": "./dist/components/usePageContext.js",
     "./useData": "./dist/components/useData.js",
-    "./ClientOnly": "./dist/components/ClientOnly.js"
+    "./ClientOnly": "./dist/components/ClientOnly.js",
+    "./PageContextProvider": "./dist/renderer/PageContextProvider.js"
   },
   "scripts": {
     "dev": "tsc --watch",

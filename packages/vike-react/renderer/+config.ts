@@ -28,9 +28,6 @@ export default {
   // https://vike.dev/onRenderClient
   onRenderClient: 'import:vike-react/renderer/onRenderClient:onRenderClient',
 
-  // https://vike.dev/passToClient
-  passToClient: ['title', 'lang'],
-
   // https://vike.dev/clientRouting
   clientRouting: true,
   hydrationCanBeAborted: true,

@@ -9,11 +9,6 @@
 
 ## [0.3.8](https://github.com/vikejs/vike-react/compare/vike-react@0.3.7...vike-react@0.3.8) (2023-12-24)
 
-> [!WARNING]
-> [`pageContext.pageProps` and `pageContext.title`](https://github.com/vikejs/vike-react/blob/dbb9bf2/examples/onBeforeRender/pages/star-wars/index/%2BonBeforeRender.ts#L16)
-> are deprecated. Set `pageContext.data` instead. See
-> [example](https://github.com/vikejs/vike-react/blob/dbb9bf2/examples/basic/pages/star-wars/index/%2Bdata.ts#L15).
-
 
 ### Features
 

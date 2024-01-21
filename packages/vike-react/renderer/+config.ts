@@ -30,7 +30,7 @@ export default {
 
   passToClient: [
     // https://github.com/vikejs/vike-react/issues/25
-    process.env.NODE_ENV === 'production' && '$$typeof'
+    process.env.NODE_ENV !== 'production' && '$$typeof'
   ].filter(isNotFalse),
 
   // https://vike.dev/clientRouting

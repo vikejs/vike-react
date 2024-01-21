@@ -22,7 +22,7 @@
   "peerDependencies": {
     "react": "18.x.x",
     "react-dom": "18.x.x",
-    "vike": "^0.4.151",
+    "vike": "^0.4.159",
     "vite": "^4.3.8 || ^5.0.10"
   },
   "devDependencies": {

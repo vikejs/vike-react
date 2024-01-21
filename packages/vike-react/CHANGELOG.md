@@ -1,3 +1,12 @@
+## [0.4.1](https://github.com/vikejs/vike-react/compare/vike-react@0.4.0...vike-react@0.4.1) (2024-01-21)
+
+
+### Bug Fixes
+
+* workaround dev tool issue (fix [#25](https://github.com/vikejs/vike-react/issues/25)) ([bce4a81](https://github.com/vikejs/vike-react/commit/bce4a81ddd00965a070d1941cff2540ec1778d13))
+
+
+
 # [0.4.0](https://github.com/vikejs/vike-react/compare/vike-react@0.3.9...vike-react@0.4.0) (2024-01-21)
 
 

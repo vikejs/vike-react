@@ -98,7 +98,6 @@ declare global {
   }
 }
 
-// Depending on the value of the setting `ssr`, we set other config options' `env` accordingly
 function ssrEffect({ configDefinedAt, configValue }: Parameters<ConfigEffect>[0]): ReturnType<ConfigEffect> {
   if (typeof configValue !== 'boolean') {
     throw new Error(`${configDefinedAt} should be a boolean`)
@@ -106,13 +105,15 @@ function ssrEffect({ configDefinedAt, configValue }: Parameters<ConfigEffect>[0]
 
   return {
     meta: {
-      // When the SSR flag is false, we want to render the page only in the
-      // browser. We achieve this by making the `Page` implementation
-      // accessible only on the client-side
       Page: {
-        env: configValue
-          ? { server: true, client: true } // default
-          : { client: true }
+        env: {
+          // Always load `Page` on the client-side.
+          client: true,
+          // When the SSR flag is false, we want to render the page only on the client-side.
+          // We achieve this by loading `Page` only on the client-side: when onRenderHtml()
+          // gets a `Page` value that is undefined it skip server-side rendering.
+          server: configValue !== false
+        }
       }
     }
   }

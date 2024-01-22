@@ -15,7 +15,7 @@
     // Output
     "declaration": true,
     "noEmitOnError": false,
-    "rootDir": "./",
+    "rootDir": "./src",
     // Misc
     "esModuleInterop": true,
     "skipLibCheck": true,

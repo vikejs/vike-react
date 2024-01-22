@@ -61,8 +61,7 @@
     }
   },
   "files": [
-    "dist/",
-    "types.d.ts"
+    "dist/"
   ],
   "repository": "github:vikejs/vike-react",
   "license": "MIT"

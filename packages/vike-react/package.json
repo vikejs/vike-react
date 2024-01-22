@@ -2,13 +2,13 @@
   "name": "vike-react",
   "version": "0.4.2",
   "type": "module",
-  "main": "./dist/renderer/+config.js",
-  "types": "./dist/renderer/+config.d.ts",
+  "main": "./dist/+config.js",
+  "types": "./dist/+config.d.ts",
   "exports": {
     "./useData": "./dist/hooks/useData.js",
     "./usePageContext": "./dist/hooks/usePageContext.js",
     "./ClientOnly": "./dist/components/ClientOnly.js",
-    ".": "./dist/renderer/+config.js",
+    ".": "./dist/+config.js",
     "./renderer/onRenderHtml": "./dist/renderer/onRenderHtml.js",
     "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js"
   },
@@ -50,7 +50,7 @@
         "./dist/components/ClientOnly.d.ts"
       ],
       ".": [
-        "./dist/renderer/+config.d.ts"
+        "./dist/+config.d.ts"
       ],
       "renderer/onRenderHtml": [
         "./dist/renderer/onRenderHtml.d.ts"

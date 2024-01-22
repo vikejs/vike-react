@@ -1,8 +1,6 @@
-export type { Component }
+import type { Component } from './Component.js'
 
-import type { ReactElement } from 'react'
-type Component = () => ReactElement
-
+// https://vike.dev/pageContext#typescript
 declare global {
   namespace Vike {
     interface PageContext {

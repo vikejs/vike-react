@@ -2,10 +2,8 @@
 
 # `vike-react*`
 
-React integrations for [Vike](https://vike.dev):
+[Vike extensions](https://vike.dev/extensions) for React:
 * [`vike-react`](packages/vike-react/)
   - [Changelog](packages/vike-react/CHANGELOG.md)
 * [`vike-react-query`](packages/vike-react-query/)
   - [Changelog](packages/vike-react-query/CHANGELOG.md)
-
-> See also other [Vike extensions](https://vike.dev/vike-packages).

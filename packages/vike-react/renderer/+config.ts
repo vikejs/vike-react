@@ -98,10 +98,6 @@ declare global {
   }
 }
 
-function isNotFalse<T>(val: T | false): val is T {
-  return val !== false
-}
-
 // Depending on the value of the setting `ssr`, we set other config options' `env` accordingly
 function ssrEffect({ configDefinedAt, configValue }: Parameters<ConfigEffect>[0]): ReturnType<ConfigEffect> {
   if (typeof configValue !== 'boolean') {
@@ -120,4 +116,8 @@ function ssrEffect({ configDefinedAt, configValue }: Parameters<ConfigEffect>[0]
       }
     }
   }
+}
+
+function isNotFalse<T>(val: T | false): val is T {
+  return val !== false
 }

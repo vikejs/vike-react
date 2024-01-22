@@ -1,6 +1,5 @@
-export { PageContextProvider }
 export { usePageContext }
-export { useData }
+export { PageContextProvider }
 
 import React, { useContext } from 'react'
 import { getGlobalObject } from '../utils/getGlobalObject.js'
@@ -26,8 +25,4 @@ function usePageContext() {
   */
   assert(pageContext)
   return pageContext
-}
-function useData<Data>(): Data {
-  const { data } = usePageContext() as any
-  return data
 }

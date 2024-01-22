@@ -1,7 +1,7 @@
 export { getHeadSetting }
 
 import type { PageContext } from 'vike/types'
-import { isCallable } from './utils/isCallable.js'
+import { isCallable } from '../utils/isCallable.js'
 
 function getHeadSetting(
   headSetting: 'title' | 'favicon' | 'lang',

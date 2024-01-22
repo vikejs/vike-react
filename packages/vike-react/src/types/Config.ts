@@ -1,14 +1,12 @@
-import type { Component } from './Component.js'
-
 declare global {
   namespace VikePackages {
     interface ConfigVikeReact {
       /** The page's root React component */
-      Page?: Component
+      Page?: () => React.ReactNode
       /** React element rendered and appended into &lt;head>&lt;/head> */
-      Head?: Component
+      Head?: () => React.ReactNode
       /** A component, usually common to several pages, that wraps the root component `Page` */
-      Layout?: Component
+      Layout?: (props: { children: React.ReactNode }) => React.ReactNode
       /** &lt;title>${title}&lt;/title> */
       title?: string
       /** &lt;link rel="icon" href="${favicon}" /> */
@@ -39,9 +37,9 @@ declare global {
        */
       stream?: boolean
 
-      VikeReactQueryWrapper?: Component
+      VikeReactQueryWrapper?: React.ReactNode
 
-      Wrapper?: Component
+      Wrapper?: () => React.ReactNode
     }
   }
 }

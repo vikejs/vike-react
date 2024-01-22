@@ -5,12 +5,12 @@
   "main": "./dist/renderer/+config.js",
   "types": "./dist/renderer/+config.d.ts",
   "exports": {
+    "./useData": "./dist/hooks/useData.js",
+    "./usePageContext": "./dist/hooks/usePageContext.js",
+    "./ClientOnly": "./dist/components/ClientOnly.js",
     ".": "./dist/renderer/+config.js",
     "./renderer/onRenderHtml": "./dist/renderer/onRenderHtml.js",
-    "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js",
-    "./usePageContext": "./dist/hooks/usePageContext.js",
-    "./useData": "./dist/hooks/useData.js",
-    "./ClientOnly": "./dist/components/ClientOnly.js"
+    "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js"
   },
   "scripts": {
     "dev": "tsc --watch",
@@ -40,14 +40,17 @@
   },
   "typesVersions": {
     "*": {
-      ".": [
-        "./dist/renderer/+config.d.ts"
+      "useData": [
+        "./dist/hooks/useData.d.ts"
       ],
       "usePageContext": [
-        "./dist/components/usePageContext.d.ts"
+        "./dist/hooks/usePageContext.d.ts"
       ],
-      "useData": [
-        "./dist/components/useData.d.ts"
+      "ClientOnly": [
+        "./dist/components/ClientOnly.d.ts"
+      ],
+      ".": [
+        "./dist/renderer/+config.d.ts"
       ],
       "renderer/onRenderHtml": [
         "./dist/renderer/onRenderHtml.d.ts"

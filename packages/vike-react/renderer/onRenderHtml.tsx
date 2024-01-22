@@ -6,7 +6,7 @@ import { renderToStream } from 'react-streaming/server'
 import { escapeInject, dangerouslySkipEscape, version } from 'vike/server'
 import { getHeadSetting } from './getHeadSetting.js'
 import { getPageElement } from './getPageElement.js'
-import { PageContextProvider } from './PageContextProvider.js'
+import { PageContextProvider } from '../hooks/usePageContext.js'
 import React from 'react'
 import type { OnRenderHtmlAsync } from 'vike/types'
 

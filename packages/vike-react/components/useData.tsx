@@ -1,1 +1,1 @@
-export { useData } from '../renderer/PageContextProvider.js'
+export { useData } from '../hooks/usePageContext.js'

@@ -3,9 +3,9 @@ export { usePageContext }
 export { useData }
 
 import React, { useContext } from 'react'
-import { getGlobalObject } from './utils/getGlobalObject.js'
+import { getGlobalObject } from '../renderer/utils/getGlobalObject.js'
 import type { PageContext } from 'vike/types'
-import { assert } from './utils/assert.js'
+import { assert } from '../renderer/utils/assert.js'
 
 const globalObject = getGlobalObject('PageContextProvider.ts', {
   reactContext: React.createContext<PageContext>(undefined as never)

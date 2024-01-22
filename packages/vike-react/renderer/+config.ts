@@ -1,7 +1,8 @@
+export { config }
 import type { Config, ConfigEffect } from 'vike/types'
 import type { Component } from './types.d.ts'
 
-export default {
+const config = {
   // https://vike.dev/onRenderHtml
   onRenderHtml: 'import:vike-react/renderer/onRenderHtml:onRenderHtml',
   // https://vike.dev/onRenderClient

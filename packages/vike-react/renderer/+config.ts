@@ -1,26 +1,5 @@
 import type { Config, ConfigEffect } from 'vike/types'
-
-// Depending on the value of `config.meta.ssr`, set other config options' `env`
-// accordingly.
-// See https://vike.dev/meta#:~:text=Modifying%20the%20environment%20of%20existing%20hooks
-const toggleSsrRelatedConfig: ConfigEffect = ({ configDefinedAt, configValue }) => {
-  if (typeof configValue !== 'boolean') {
-    throw new Error(`${configDefinedAt} should be a boolean`)
-  }
-
-  return {
-    meta: {
-      // When the SSR flag is false, we want to render the page only in the
-      // browser. We achieve this by then making the `Page` implementation
-      // accessible only in the client's renderer.
-      Page: {
-        env: configValue
-          ? { server: true, client: true } // default
-          : { client: true }
-      }
-    }
-  }
-}
+import type { Component } from './types.d.ts'
 
 export default {
   // https://vike.dev/onRenderHtml
@@ -36,6 +15,7 @@ export default {
   // https://vike.dev/clientRouting
   clientRouting: true,
   hydrationCanBeAborted: true,
+
   // https://vike.dev/meta
   meta: {
     Head: {
@@ -55,7 +35,7 @@ export default {
     },
     ssr: {
       env: { config: true },
-      effect: toggleSsrRelatedConfig
+      effect: ssrEffect
     },
     stream: {
       env: { server: true }
@@ -70,7 +50,6 @@ export default {
 } satisfies Config
 
 // We purposely define the ConfigVikeReact interface in this file: that way we ensure it's always applied whenever the user `import vikeReact from 'vike-react'`
-import type { Component } from './types.d.ts'
 // https://vike.dev/pageContext#typescript
 declare global {
   namespace VikePackages {
@@ -120,4 +99,24 @@ declare global {
 
 function isNotFalse<T>(val: T | false): val is T {
   return val !== false
+}
+
+// Depending on the value of the setting `ssr`, we set other config options' `env` accordingly
+function ssrEffect({ configDefinedAt, configValue }: Parameters<ConfigEffect>[0]): ReturnType<ConfigEffect> {
+  if (typeof configValue !== 'boolean') {
+    throw new Error(`${configDefinedAt} should be a boolean`)
+  }
+
+  return {
+    meta: {
+      // When the SSR flag is false, we want to render the page only in the
+      // browser. We achieve this by making the `Page` implementation
+      // accessible only on the client-side
+      Page: {
+        env: configValue
+          ? { server: true, client: true } // default
+          : { client: true }
+      }
+    }
+  }
 }

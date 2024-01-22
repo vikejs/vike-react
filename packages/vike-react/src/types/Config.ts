@@ -1,4 +1,6 @@
+// https://vike.dev/meta#typescript
 declare global {
+  // As a Vike user, use Vike.Config instead of VikePackages.ConfigVikeReact (see https://vike.dev/meta#typescript)
   namespace VikePackages {
     interface ConfigVikeReact {
       /** The page's root React component */

@@ -1,10 +1,8 @@
-export { config }
-
 import type { Config, ConfigEffect } from 'vike/types'
 // Load global interfaces whenever the user `import vikeReact from 'vike-react'`
 import './types/index.js'
 
-const config = {
+export default {
   // https://vike.dev/onRenderHtml
   onRenderHtml: 'import:vike-react/renderer/onRenderHtml:onRenderHtml',
   // https://vike.dev/onRenderClient

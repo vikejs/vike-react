@@ -1,3 +1,13 @@
+## [0.4.3](https://github.com/vikejs/vike-react/compare/vike-react@0.4.2...vike-react@0.4.3) (2024-01-23)
+
+
+### Bug Fixes
+
+* enforce vike@0.4.160 ([e2bed96](https://github.com/vikejs/vike-react/commit/e2bed9616712d8fa5234ef59ad4c91f85cfeaca0))
+* export config at `/config` instead of `/` ([4111cd8](https://github.com/vikejs/vike-react/commit/4111cd87fc7e5b83e8283df8990933f894d4d35f))
+
+
+
 ## [0.4.2](https://github.com/vikejs/vike-react/compare/vike-react@0.4.1...vike-react@0.4.2) (2024-01-21)
 
 

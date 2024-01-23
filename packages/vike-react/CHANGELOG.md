@@ -46,6 +46,8 @@ see https://vike.dev/head
 * Fetching data using `pageContext.pageProps` is
 deprecated, use `data()` and `useData()` instead,
 see https://vike.dev/data-fetching
+* Replace `import vikeReact from 'vike-react'` with `import vikeReact from 'vike-react/config'`
+* Update Vike to `0.4.160` or above.
 
 
 

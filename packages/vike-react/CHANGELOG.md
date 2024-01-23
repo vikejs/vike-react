@@ -7,6 +7,11 @@
 * export config at `/config` instead of `/` ([4111cd8](https://github.com/vikejs/vike-react/commit/4111cd87fc7e5b83e8283df8990933f894d4d35f))
 
 
+### BREAKING CHANGES
+
+* Update Vike to `0.4.160` or above.
+* Replace `import vikeReact from 'vike-react'` with `import vikeReact from 'vike-react/config'`.
+
 
 ## [0.4.2](https://github.com/vikejs/vike-react/compare/vike-react@0.4.1...vike-react@0.4.2) (2024-01-21)
 

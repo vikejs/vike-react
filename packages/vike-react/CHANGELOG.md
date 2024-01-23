@@ -1,3 +1,12 @@
+## [0.4.4](https://github.com/vikejs/vike-react/compare/vike-react@0.4.3...vike-react@0.4.4) (2024-01-23)
+
+
+### Bug Fixes
+
+* improve deprecation warning ([4ab380a](https://github.com/vikejs/vike-react/commit/4ab380a9a365c149f31e6edd3fd336fd28ba0dde))
+
+
+
 ## [0.4.3](https://github.com/vikejs/vike-react/compare/vike-react@0.4.2...vike-react@0.4.3) (2024-01-23)
 
 

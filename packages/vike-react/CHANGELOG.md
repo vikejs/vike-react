@@ -10,7 +10,7 @@
 ### BREAKING CHANGES
 
 * Update Vike to `0.4.160` or above.
-* Replace `import vikeReact from 'vike-react'` with `import vikeReact from 'vike-react/config'`.
+* Replace `import vikeReact from 'vike-react'` with `import vikeReact from 'vike-react/config'`. (Typically in your `/pages/+config.h.js`.)
 
 
 ## [0.4.2](https://github.com/vikejs/vike-react/compare/vike-react@0.4.1...vike-react@0.4.2) (2024-01-21)
@@ -51,7 +51,7 @@ see https://vike.dev/head
 * Fetching data using `pageContext.pageProps` is
 deprecated, use `data()` and `useData()` instead,
 see https://vike.dev/data-fetching
-* Replace `import vikeReact from 'vike-react'` with `import vikeReact from 'vike-react/config'`
+* Replace `import vikeReact from 'vike-react'` with `import vikeReact from 'vike-react/config'`. (Typically in your `/pages/+config.h.js`.)
 * Update Vike to `0.4.160` or above.
 
 

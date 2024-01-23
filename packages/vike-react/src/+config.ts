@@ -1,7 +1,10 @@
 export { config }
 
-import type { Config, ConfigEffect } from 'vike/types'
-// Load global interfaces whenever the user `import vikeReact from 'vike-react'`
+import type { Config } from 'vike/types'
+import { isNotFalse } from './utils/isNotFalse.js'
+import { ssrEffect } from './renderer/ssrEffect.js'
+
+// This is required to make TypeScript load the global interfaces such as Vike.PageContext so that they're always loaded: we can assume that the user always imports this file over `import vikeReact from 'vike-react/config'`
 import './types/index.js'
 
 const config = {
@@ -51,28 +54,3 @@ const config = {
     }
   }
 } satisfies Config
-
-function ssrEffect({ configDefinedAt, configValue }: Parameters<ConfigEffect>[0]): ReturnType<ConfigEffect> {
-  if (typeof configValue !== 'boolean') {
-    throw new Error(`${configDefinedAt} should be a boolean`)
-  }
-
-  return {
-    meta: {
-      Page: {
-        env: {
-          // Always load `Page` on the client-side.
-          client: true,
-          // When the SSR flag is false, we want to render the page only on the client-side.
-          // We achieve this by loading `Page` only on the client-side: when onRenderHtml()
-          // gets a `Page` value that is undefined it skip server-side rendering.
-          server: configValue !== false
-        }
-      }
-    }
-  }
-}
-
-function isNotFalse<T>(val: T | false): val is T {
-  return val !== false
-}

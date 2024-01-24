@@ -17,6 +17,7 @@ Implements:
  - [`Head`](https://vike.dev/Head)
  - [`title`](https://vike.dev/title)
  - [`Layout`](https://vike.dev/Layout)
+ - [`Wrapper`](https://vike.dev/Wrapper)
  - [`ClientOnly`](https://vike.dev/ClientOnly)
  - [`ssr`](https://vike.dev/ssr)
  - [`stream`](https://vike.dev/stream)

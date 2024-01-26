@@ -72,7 +72,7 @@ Vike and React.
 * [`Head`](https://vike.dev/head): **Component** Component to be rendered inside the <head> tag.
 * [`title`](https://vike.dev/head): **string** `<title>...</title>` tag.
 * [`favicon`](https://vike.dev/head): **string** `<link rel="icon" href="..." />` tag.
-* [`lang`](https://vike.dev/lang): **string** `<html lang="...">` tag.
+* [`lang`](https://vike.dev/lang): **string** `<html lang="...">` attribute.
 * [`ssr`](https://vike.dev/ssr): **boolean** Enable/disable Server-Side Rendering
   ([SSR](https://vike.dev/render-modes)).
 * [`stream`](https://vike.dev/stream): **boolean** Enable/disable [HTML streaming](https://vike.dev/streaming).

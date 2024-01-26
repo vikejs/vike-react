@@ -69,9 +69,9 @@ Vike and React.
 
 `vike-react` introduces the following new settings:
 
-* [`Head`](https://vike.dev/head): **Component** Component to be rendered inside the <head> tag.
+* [`Head`](https://vike.dev/head): **Component** Component to be rendered inside the `<head>` tag.
 * [`title`](https://vike.dev/head): **string** `<title>...</title>` tag.
-* [`favicon`](https://vike.dev/head): **string** `<link rel="icon" href="..." />` tag.
+* [`favicon`](https://vike.dev/head): **string** `<link rel="icon" href="..." />` attribute.
 * [`lang`](https://vike.dev/lang): **string** `<html lang="...">` attribute.
 * [`ssr`](https://vike.dev/ssr): **boolean** Enable/disable Server-Side Rendering
   ([SSR](https://vike.dev/render-modes)).

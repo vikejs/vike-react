@@ -1,7 +1,6 @@
 export default Page
 
 import React, { useId } from 'react'
-import { uneval } from 'devalue'
 const date = new Date('2024-01-01 00:00+07:00')
 
 function Page() {
@@ -46,7 +45,7 @@ const DateTime = ({ date, format }: { date: Date; format: (date: Date) => string
           __html: import.meta.env.SSR
             ? `
             {
-              const allFormattedDates = ${uneval(allFormattedDates)};
+              const allFormattedDates = JSON.parse('${JSON.stringify(allFormattedDates)}');
               const localOffsetHours = -(new Date().getTimezoneOffset() / 60).toFixed(1);
               const localFormattedDate = allFormattedDates[localOffsetHours];
               window['localFormattedDate${key}'] = localFormattedDate;

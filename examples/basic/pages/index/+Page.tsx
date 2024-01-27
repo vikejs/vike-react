@@ -34,7 +34,7 @@ const DateTime = ({ date, format }: { date: Date; format: (date: Date) => string
     localFormattedDate = allFormattedDates[localOffsetHours]
   } else {
     //@ts-ignore
-    localFormattedDate = window[`localFormattedDate${key}`]
+    localFormattedDate = window[`localFormattedDate${key}`] ?? format(date)
   }
 
   return (

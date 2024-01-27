@@ -27,6 +27,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.2.1
         version: 4.2.1(vite@5.0.12)
+      devalue:
+        specifier: ^4.3.2
+        version: 4.3.2
       node-fetch:
         specifier: ^3.3.2
         version: 3.3.2

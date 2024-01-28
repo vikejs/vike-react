@@ -1,6 +1,6 @@
 export default Page
 
-import React, { useId } from 'react'
+import React, { useId, useMemo } from 'react'
 const date = new Date('2024-01-01 00:00+07:00')
 
 function Page() {
@@ -32,8 +32,7 @@ const DateTime = ({ date, format }: { date: Date; format: (date: Date) => string
     }
     localFormattedDate = allFormattedDates[localOffsetHours]
   } else {
-    //@ts-ignore
-    localFormattedDate = window[`localFormattedDate${key}`] ?? format(date)
+    localFormattedDate = useMemo(() => format(date), [format, date])
   }
 
   return (
@@ -48,7 +47,6 @@ const DateTime = ({ date, format }: { date: Date; format: (date: Date) => string
               const allFormattedDates = JSON.parse('${JSON.stringify(allFormattedDates)}');
               const localOffsetHours = -(new Date().getTimezoneOffset() / 60).toFixed(1);
               const localFormattedDate = allFormattedDates[localOffsetHours];
-              window['localFormattedDate${key}'] = localFormattedDate;
               document.getElementById('${id}').innerHTML = localFormattedDate;
               document.getElementById('${idScript}').innerHTML= '';
             }

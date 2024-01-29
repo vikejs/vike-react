@@ -91,7 +91,7 @@ If used together with `telefunc`, the query function will always run on the serv
 #### Query example:
 ```tsx
 //movie.telefunc.ts
-export const function getMovie(id: string) {
+export async function getMovie(id: string) {
   const movie = await prisma.movie.findUnique({ where: id })
   return movie;
 }
@@ -104,12 +104,12 @@ import { getMovie } from './movie.telefunc'
 
 const Movie = withFallback(
   ({ id }: { id: string }) => {
-    const result = useSuspenseQuery({
+    const query = useSuspenseQuery({
       queryKey: ['movie', id],
       queryFn: () => getMovie(id)
     })
 
-    const { title } = result.data
+    const { title } = query.data
 
     return (
       <div>
@@ -144,22 +144,22 @@ import { createMovie } from './movie.telefunc'
 
 const CreateMovie = () => {
   const ref = useRef<HTMLInputElement>(null)
-  const methods = useMutation({
+  const mutation = useMutation({
     mutationFn: createMovie
   })
 
   const onCreate = () => {
     const title = ref.current?.value || 'No title'
-    methods.mutate({ title })
+    mutation.mutate({ title })
   }
 
   return (
     <div>
       <input type="text" ref={ref} />
       <button onClick={onCreate}>Create movie</button>
-      {methods.isPending && 'Creating movie..'}
-      {methods.isSuccess && 'Created movie ' + methods.data.title}
-      {methods.isError && 'Error while creating the movie'}
+      {mutation.isPending && 'Creating movie..'}
+      {mutation.isSuccess && 'Created movie ' + mutation.data.title}
+      {mutation.isError && 'Error while creating the movie'}
     </div>
   )
 }
@@ -193,7 +193,8 @@ const Movies = withFallback(
     const mutation = useMutation({
       mutationFn: createMovie,
       onSuccess() {
-        queryClient.invalidateQueries({ queryKey: ['movies'] })
+        query.invalidateQueries({ queryKey: ['movies'] })
+        // or query.refetch()
       }
     })
 
@@ -229,6 +230,4 @@ const Movies = withFallback(
     )
   }
 )
-
-
 ```

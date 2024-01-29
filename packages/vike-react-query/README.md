@@ -90,13 +90,18 @@ If used together with `telefunc`, the query function will always run on the serv
 
 #### Query example:
 ```tsx
-//component.telefunc.ts
+//movie.telefunc.ts
 export const function getMovie(id: string) {
   const movie = await prisma.movie.findUnique({ where: id })
   return movie;
 }
 
-//component.tsx
+
+//movie.tsx
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { withFallback } from 'vike-react-query'
+import { getMovie } from './movie.telefunc'
+
 const Movie = withFallback(
   ({ id }: { id: string }) => {
     const result = useSuspenseQuery({
@@ -126,14 +131,17 @@ const Movie = withFallback(
 
 #### Mutation example:
 ```tsx
-//component.telefunc.ts
+//movie.telefunc.ts
 export async function createMovie({ title }: { title: string }) {
   const movie = await prisma.movie.create({ data: { title } })
   return movie
 }
 
 
-//component.tsx
+//movie.tsx
+import { useMutation } from '@tanstack/react-query'
+import { createMovie } from './movie.telefunc'
+
 const CreateMovie = () => {
   const ref = useRef<HTMLInputElement>(null)
   const methods = useMutation({
@@ -159,8 +167,7 @@ const CreateMovie = () => {
 
 #### Putting it together:
 ```tsx
-
-//component.telefunc.ts
+//movie.telefunc.ts
 export async function getMovies() {
   const movies = await prisma.movie.findMany()
   return movies;
@@ -170,7 +177,12 @@ export async function createMovie({ title }: { title: string }) {
   return movie
 }
 
-//component.ts
+
+//movie.tsx
+import { useSuspenseQuery, useMutation } from '@tanstack/react-query'
+import { withFallback } from 'vike-react-query'
+import { getMovies, createMovie } from './movie.telefunc'
+
 const Movies = withFallback(
   () => {
     const queryClient = useQueryClient()

@@ -5,11 +5,9 @@
 
 # `vike-react-query`
 
-[TanStack React Query](https://tanstack.com/query/latest) integration for [vike-react](https://github.com/vikejs/vike-react).
+[TanStack React Query](https://tanstack.com/query/latest) integration for [vike-react](https://github.com/vikejs/vike-react/tree/main/packages/vike-react).
 
-See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-query) and [upcoming new design](https://github.com/vikejs/vike-react/pull/39#issuecomment-1845374127).
-
-> See also other [Vike extensions](https://vike.dev/vike-packages).
+See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-query).
 
 ## Installation: 
 1. `pnpm i @tanstack/react-query vike-react-query`
@@ -85,8 +83,8 @@ const Movie = withFallback(
 )
 ```
 
-## Usage with `telefunc`:
-If used together with `telefunc`, the query function will always run on the server. (similar to [Next.js Server Actions and Mutations](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations))
+## Usage with Telefunc:
+If used together with [Telefunc](https://telefunc.com/), the query function will always run on the server. (Similar to [Next.js Server Actions and Mutations](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations).)
 
 #### Query example:
 ```tsx

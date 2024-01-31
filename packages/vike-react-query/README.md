@@ -47,7 +47,7 @@ const Movie = ({ id }: { id: string }) => {
 
 
 ## `withFallback`
-Using `withFallback`, you can create reusable and independent components, that leverage React 18's suspense streaming feature. (similar to [Next.js Loading UI and Streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming), but on component level)<br/>
+Using `withFallback`, you can create reusable and independent components, that leverage React 18's suspense streaming feature. (Similar to [Next.js Loading UI and Streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming), but on component level.)<br/>
 While the query is loading, it renders the `Loading` component.<br/>
 When the query completed and the data is available, the component independently becomes interactive.<br/>
 If there is an error during loading or rendering the component, the `Error` component is rendered instead.

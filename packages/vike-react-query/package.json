@@ -6,7 +6,7 @@
   "typings": "dist/src/index.js",
   "exports": {
     ".": "./dist/src/index.js",
-    "./config": "./dist/renderer/+config.h.js",
+    "./config": "./dist/renderer/+config.js",
     "./renderer/VikeReactQueryWrapper": "./dist/renderer/VikeReactQueryWrapper.js",
     "./renderer/FallbackErrorBoundary": "./dist/renderer/FallbackErrorBoundary.js"
   },
@@ -49,7 +49,7 @@
   "typesVersions": {
     "*": {
       "config": [
-        "dist/renderer/+config.h.d.ts"
+        "dist/renderer/+config.d.ts"
       ],
       "renderer/VikeReactQueryWrapper": [
         "dist/renderer/VikeReactQueryWrapper.d.ts"

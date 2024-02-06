@@ -39,7 +39,7 @@
     "react-streaming": "^0.3.20",
     "vitest": "^1.2.2",
     "@testing-library/react": "^14.2.1",
-    "jsdom": "^23.2.0",
+    "jsdom": "^24.0.0",
     "@tanstack/react-query": "^5.18.1"
   },
   "dependencies": {

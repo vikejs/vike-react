@@ -28,19 +28,19 @@
   },
   "devDependencies": {
     "@brillout/release-me": "^0.1.14",
-    "@types/node": "^20.11.16",
-    "@types/react": "^18.2.54",
-    "@types/react-dom": "^18.2.18",
+    "@types/node": "^20.11.17",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.3.3",
-    "vike": "^0.4.160",
+    "vike": "^0.4.161",
     "vike-react": "^0.4.4",
     "react-streaming": "^0.3.22",
     "vitest": "^1.2.2",
     "@testing-library/react": "^14.2.1",
     "jsdom": "^24.0.0",
-    "@tanstack/react-query": "^5.18.1"
+    "@tanstack/react-query": "^5.20.1"
   },
   "dependencies": {
     "devalue": "^4.3.2",

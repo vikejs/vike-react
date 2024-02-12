@@ -1,5 +1,3 @@
-export { config }
-
 import type { Config } from 'vike/types'
 import { isNotFalse } from './utils/isNotFalse.js'
 import { ssrEffect } from './renderer/ssrEffect.js'
@@ -7,7 +5,7 @@ import { ssrEffect } from './renderer/ssrEffect.js'
 // This is required to make TypeScript load the global interfaces such as Vike.PageContext so that they're always loaded: we can assume that the user always imports this file over `import vikeReact from 'vike-react/config'`
 import './types/index.js'
 
-const config = {
+export default {
   // https://vike.dev/onRenderHtml
   onRenderHtml: 'import:vike-react/renderer/onRenderHtml:onRenderHtml',
   // https://vike.dev/onRenderClient

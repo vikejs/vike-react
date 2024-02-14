@@ -1,3 +1,12 @@
+## [0.4.6](https://github.com/vikejs/vike-react/compare/vike-react@0.4.5...vike-react@0.4.6) (2024-02-14)
+
+
+### Bug Fixes
+
+* set Vike extension name ([02f529e](https://github.com/vikejs/vike-react/commit/02f529eae721f4976fe55ca21ead1bb13e4374e9))
+
+
+
 ## [0.4.5](https://github.com/vikejs/vike-react/compare/vike-react@0.4.4...vike-react@0.4.5) (2024-02-12)
 
 

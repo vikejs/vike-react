@@ -4,7 +4,6 @@
 ### Bug Fixes
 
 * set Vike extension name ([02f529e](https://github.com/vikejs/vike-react/commit/02f529eae721f4976fe55ca21ead1bb13e4374e9))
-* update react-streaming ([382e638](https://github.com/vikejs/vike-react/commit/382e638d1e11f2dbe08fecac7920ca7c4853c3c3))
 
 
 

@@ -6,6 +6,8 @@ import { ssrEffect } from './renderer/ssrEffect.js'
 import './types/index.js'
 
 export default {
+  // @ts-ignore Remove this ts-ignore once Vike's new version is released.
+  name: 'vike-react',
   // https://vike.dev/onRenderHtml
   onRenderHtml: 'import:vike-react/renderer/onRenderHtml:onRenderHtml',
   // https://vike.dev/onRenderClient
@@ -49,6 +51,10 @@ export default {
     },
     Wrapper: {
       env: { client: true, server: true }
+    },
+    // Vike already defines the setting 'name', but we redundantly define it here for older Vike versions (otherwise older Vike versions will complain that 'name` is an unknown config).
+    name: {
+      env: { config: true }
     }
   }
 } satisfies Config

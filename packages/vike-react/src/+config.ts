@@ -50,6 +50,9 @@ export default {
     VikeReactQueryWrapper: {
       env: { client: true, server: true }
     },
+    VikeReactZustandWrapper:{
+      env: { client: true, server: true }
+    },
     Wrapper: {
       env: { client: true, server: true }
     },

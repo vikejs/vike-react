@@ -40,6 +40,7 @@ declare global {
       stream?: boolean
 
       VikeReactQueryWrapper?: React.ReactNode
+      VikeReactZustandWrapper?: React.ReactNode
 
       Wrapper?: () => React.ReactNode
     }

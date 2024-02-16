@@ -152,13 +152,13 @@ importers:
     dependencies:
       '@types/react':
         specifier: ^18.2.45
-        version: 18.2.45
+        version: 18.2.55
       '@types/react-dom':
         specifier: ^18.2.18
-        version: 18.2.18
+        version: 18.2.19
       '@vitejs/plugin-react':
         specifier: ^4.2.1
-        version: 4.2.1(vite@5.0.10)
+        version: 4.2.1(vite@5.1.1)
       immer:
         specifier: ^10.0.3
         version: 10.0.3
@@ -173,19 +173,19 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.151
-        version: 0.4.151(react-streaming@0.3.18)(vite@5.0.10)
+        version: 0.4.161(react-streaming@0.3.22)(vite@5.1.1)
       vike-react:
-        specifier: workspace:*
+        specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
       vike-react-zustand:
         specifier: workspace:*
         version: link:../../packages/vike-react-zustand
       vite:
         specifier: ^5.0.10
-        version: 5.0.10(@types/node@20.10.5)
+        version: 5.1.1(@types/node@20.11.17)
       zustand:
         specifier: ^4.4.7
-        version: 4.4.7(@types/react@18.2.45)(immer@10.0.3)(react@18.2.0)
+        version: 4.4.7(@types/react@18.2.55)(immer@10.0.3)(react@18.2.0)
 
   packages/vike-react:
     dependencies:
@@ -280,16 +280,16 @@ importers:
     devDependencies:
       '@brillout/release-me':
         specifier: ^0.1.13
-        version: 0.1.13
+        version: 0.1.14
       '@types/node':
         specifier: ^20.10.5
-        version: 20.10.5
+        version: 20.11.17
       '@types/react':
         specifier: ^18.2.45
-        version: 18.2.45
+        version: 18.2.55
       '@types/react-dom':
         specifier: ^18.2.18
-        version: 18.2.18
+        version: 18.2.19
       es-module-lexer:
         specifier: ^1.4.1
         version: 1.4.1
@@ -304,16 +304,16 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.151
-        version: 0.4.151(react-streaming@0.3.18)(vite@5.0.10)
+        version: 0.4.161(react-streaming@0.3.22)(vite@5.1.1)
       vike-react:
-        specifier: ^0.3.8
-        version: 0.3.9(react-dom@18.2.0)(react@18.2.0)(vike@0.4.151)(vite@5.0.10)
+        specifier: link:../vike-react
+        version: link:../vike-react
       vite:
         specifier: ^5.0.10
-        version: 5.0.10(@types/node@20.10.5)
+        version: 5.1.1(@types/node@20.11.17)
       zustand:
         specifier: ^4.4.7
-        version: 4.4.7(@types/react@18.2.45)(immer@10.0.3)(react@18.2.0)
+        version: 4.4.7(@types/react@18.2.55)(immer@10.0.3)(react@18.2.0)
 
 packages:
 
@@ -2746,19 +2746,6 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
 
-  /react-streaming@0.3.19(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-kpxnj/nynMbdVVLUZKAI+AlSx7bJNX0WZO14LSJNtfIcbQJd7YH0ilnP+AFwKkvrjuG8zuNL36W5WCsczM62zg==}
-    peerDependencies:
-      react: '>=18'
-      react-dom: '>=18'
-    dependencies:
-      '@brillout/import': 0.2.3
-      '@brillout/json-serializer': 0.5.8
-      isbot-fast: 1.2.0
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: true
-
   /react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
     engines: {node: '>=0.10.0'}
@@ -3197,7 +3184,6 @@ packages:
       sirv: 2.0.3
       source-map-support: 0.5.21
       vite: 5.1.1(@types/node@20.11.17)
-    dev: false
 
   /vite-node@1.2.2(@types/node@20.11.17):
     resolution: {integrity: sha512-1as4rDTgVWJO3n1uHmUYqq7nsFgINQ9u+mRcXpjeOMJUmviqNKjcZB7UfRZrlM7MjYXMKpuWp5oGkjaFLnjawg==}
@@ -3471,7 +3457,7 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  /zustand@4.4.7(@types/react@18.2.45)(immer@10.0.3)(react@18.2.0):
+  /zustand@4.4.7(@types/react@18.2.55)(immer@10.0.3)(react@18.2.0):
     resolution: {integrity: sha512-QFJWJMdlETcI69paJwhSMJz7PPWjVP8Sjhclxmxmxv/RYI7ZOvR5BHX+ktH0we9gTWQMxcne8q1OY8xxz604gw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -3486,7 +3472,7 @@ packages:
       react:
         optional: true
     dependencies:
-      '@types/react': 18.2.45
+      '@types/react': 18.2.55
       immer: 10.0.3
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)

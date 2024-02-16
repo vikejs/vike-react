@@ -15,9 +15,6 @@ function getPageElement(pageContext: PageContext): JSX.Element {
     <React.StrictMode>
       <PageContextProvider pageContext={pageContext}>
         <VikeReactQueryWrapper pageContext={pageContext}>
-          <Wrapper>
-            <Layout>{Page ? <Page /> : null}</Layout>
-          </Wrapper>
           <VikeReactZustandWrapper pageContext={pageContext}>
             <Wrapper>
               <Layout>{Page ? <Page  /> : null}</Layout>

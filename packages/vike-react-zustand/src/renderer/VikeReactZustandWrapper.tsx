@@ -42,8 +42,8 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
         ...pageContext._vikeReactZustand,
         [key]: removeFunctionsAndUndefined(store.getState())
       }
-    } else if (!store.__hydrated__ && !pageContext.isClientSideNavigation) {
-      assert(pageContext._vikeReactZustand)
+      // pageContext._vikeReactZustand can be undefined if ssr is disabled
+    } else if (pageContext._vikeReactZustand && !store.__hydrated__ && !pageContext.isClientSideNavigation) {
       assert(key in pageContext._vikeReactZustand)
 
       // TODO: remove lodash-es dependency and implement deep merging

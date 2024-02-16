@@ -6,6 +6,10 @@ import { create as createZustand } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { cloneDeep, mergeWith } from 'lodash-es'
 
+// Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
+// @ts-expect-error
+import.meta.env ??= { SSR: true }
+
 type VikeReactZustandWrapperProps = {
   pageContext: PageContext
   children: ReactNode
@@ -32,20 +36,20 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
   assert(reactStoreContext)
 
   for (const [key, store] of stores) {
-    // Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
-    // @ts-expect-error
-    import.meta.env ??= { SSR: true }
     if (import.meta.env.SSR) {
       pageContext._vikeReactZustand ??= {}
       pageContext._vikeReactZustand = {
         ...pageContext._vikeReactZustand,
         [key]: removeFunctionsAndUndefined(store.getState())
       }
-    } else if (!store.__hydrated__) {
-      store.__hydrated__ = true
+    } else if (!store.__hydrated__ && !pageContext.isClientSideNavigation) {
+      assert(pageContext._vikeReactZustand)
+      assert(key in pageContext._vikeReactZustand)
+
       // TODO: remove lodash-es dependency and implement deep merging
       const merged = mergeWith(cloneDeep(store.getState()), pageContext._vikeReactZustand[key])
       store.setState(merged, true)
+      store.__hydrated__ = true
     }
   }
 

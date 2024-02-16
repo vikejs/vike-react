@@ -5,6 +5,9 @@
 
 # `vike-react-zustand`
 
+# This package is not ready for use.
+
+
 [Zustand](https://github.com/pmndrs/zustand) integration for [Vike](https://vike.dev).
 
 See [example](https://github.com/vikejs/vike-react/tree/main/examples/zustand).

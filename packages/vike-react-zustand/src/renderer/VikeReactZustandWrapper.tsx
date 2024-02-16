@@ -4,6 +4,7 @@ import { getReactStoreContext, initializers_get, setPageContext } from './contex
 import { assert, removeFunctionsAndUndefined } from '../utils.js'
 import { create as createZustand } from 'zustand'
 import { devtools } from 'zustand/middleware'
+import { cloneDeep, mergeWith } from 'lodash-es'
 
 type VikeReactZustandWrapperProps = {
   pageContext: PageContext
@@ -42,7 +43,9 @@ export default function VikeReactZustandWrapper({ pageContext, children }: VikeR
       }
     } else if (!store.__hydrated__) {
       store.__hydrated__ = true
-      store.setState(pageContext._vikeReactZustand[key])
+      // TODO: remove lodash-es dependency and implement deep merging
+      const merged = mergeWith(cloneDeep(store.getState()), pageContext._vikeReactZustand[key])
+      store.setState(merged, true)
     }
   }
 

@@ -214,10 +214,17 @@ importers:
         version: 1.2.2(@types/node@20.11.17)(jsdom@24.0.0)
 
   packages/vike-react-zustand:
+    dependencies:
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
     devDependencies:
       '@brillout/release-me':
         specifier: ^0.1.13
         version: 0.1.14
+      '@types/lodash-es':
+        specifier: ^4.17.12
+        version: 4.17.12
       '@types/node':
         specifier: ^20.10.5
         version: 20.11.17

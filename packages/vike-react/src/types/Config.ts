@@ -41,7 +41,7 @@ declare global {
 
       VikeReactQueryWrapper?: React.ReactNode
 
-      Wrapper?: () => React.ReactNode
+      Wrapper?: (props: { children: React.ReactNode }) => React.ReactNode
     }
   }
 }

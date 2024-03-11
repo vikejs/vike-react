@@ -41,8 +41,7 @@ declare global {
        */
       stream?: boolean
       /**
-       * If present, called after the page is rendered on the client. The `page` and `root`
-       * properties will be populated.
+       * Client-side hook called after the page is rendered.
        */
       onAfterRenderClient?: (pageContext: PageContextClient) => void
 

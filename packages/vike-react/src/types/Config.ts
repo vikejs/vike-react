@@ -1,4 +1,6 @@
 // https://vike.dev/meta#typescript
+import type { PageContextClient } from 'vike/types'
+
 declare global {
   // As a Vike user, use Vike.Config instead of VikePackages.ConfigVikeReact (see https://vike.dev/meta#typescript)
   namespace VikePackages {
@@ -38,6 +40,11 @@ declare global {
        *
        */
       stream?: boolean
+      /**
+       * If present, called after the page is rendered on the client. The `page` and `root`
+       * properties will be populated.
+       */
+      onAfterRenderClient?: (pageContext: PageContextClient) => void
 
       VikeReactQueryWrapper?: React.ReactNode
 

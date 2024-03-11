@@ -47,6 +47,9 @@ export default {
     stream: {
       env: { server: true }
     },
+    onAfterRenderClient: {
+      env: { client: true }
+    },
     VikeReactQueryWrapper: {
       env: { client: true, server: true }
     },

@@ -34,6 +34,11 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
 
     root.render(page)
   }
+  pageContext.page = page
+  pageContext.root = root
+  if (pageContext.config.onAfterRenderClient) {
+    pageContext.config.onAfterRenderClient(pageContext)
+  }
 }
 
 // https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically/260876#260876

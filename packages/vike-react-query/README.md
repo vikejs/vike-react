@@ -9,30 +9,33 @@
 
 See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-query).
 
-## Installation: 
+## Installation:
+
 1. `pnpm i @tanstack/react-query vike-react-query`
-2. extend `+config.h.ts`
-```ts
+2. Extend `+config.ts`:
+   ```ts
+   import type { Config } from 'vike/types'
+   import vikeReact from 'vike-react/config'
+   import vikeReactQuery from 'vike-react-query/config'
 
-import type { Config } from 'vike/types'
-import vikeReact from 'vike-react/config'
-import vikeReactQuery from 'vike-react-query/config'
-
-export default {
-  ...
-  extends: [vikeReact, vikeReactQuery]
-} satisfies Config
-```
+   export default {
+     ...
+     extends: [vikeReact, vikeReactQuery]
+   } satisfies Config
+   ```
 
 
 ## Basic usage:
+
 ```tsx
 import { useSuspenseQuery } from '@tanstack/react-query'
 
 const Movie = ({ id }: { id: string }) => {
   const result = useSuspenseQuery({
     queryKey: ['movie', id],
-    queryFn: () => fetch(`https://star-wars.brillout.com/api/films/${id}.json`).then((res) => res.json())
+    queryFn: () =>
+      fetch(`https://brillout.github.io/star-wars/api/films/${id}.json`)
+      .then((res) => res.json())
   })
 
   const { title } = result.data
@@ -47,6 +50,7 @@ const Movie = ({ id }: { id: string }) => {
 
 
 ## `withFallback`
+
 Using `withFallback`, you can create reusable and independent components, that leverage React 18's suspense streaming feature. (Similar to [Next.js Loading UI and Streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming), but on component level.)<br/>
 While the query is loading, it renders the `Loading` component.<br/>
 When the query completed and the data is available, the component independently becomes interactive.<br/>
@@ -60,7 +64,9 @@ const Movie = withFallback(
   ({ id }: { id: string }) => {
     const result = useSuspenseQuery({
       queryKey: ['movie', id],
-      queryFn: () => fetch(`https://star-wars.brillout.com/api/films/${id}.json`).then((res) => res.json())
+      queryFn: () =>
+        fetch(`https://brillout.github.io/star-wars/api/films/${id}.json`)
+        .then((res) => res.json())
     })
 
     const { title } = result.data
@@ -84,18 +90,20 @@ const Movie = withFallback(
 ```
 
 ## Usage with Telefunc:
+
 If used together with [Telefunc](https://telefunc.com/), the query function will always run on the server. (Similar to [Next.js Server Actions and Mutations](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations).)
 
 #### Query example:
+
 ```tsx
-//movie.telefunc.ts
+// movie.telefunc.ts
 export async function getMovie(id: string) {
   const movie = await prisma.movie.findUnique({ where: id })
   return movie;
 }
 
 
-//movie.tsx
+// movie.tsx
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { withFallback } from 'vike-react-query'
 import { getMovie } from './movie.telefunc'
@@ -128,15 +136,16 @@ const Movie = withFallback(
 ```
 
 #### Mutation example:
+
 ```tsx
-//movie.telefunc.ts
+// movie.telefunc.ts
 export async function createMovie({ title }: { title: string }) {
   const movie = await prisma.movie.create({ data: { title } })
   return movie
 }
 
 
-//movie.tsx
+// movie.tsx
 import { useMutation } from '@tanstack/react-query'
 import { createMovie } from './movie.telefunc'
 
@@ -164,8 +173,9 @@ const CreateMovie = () => {
 ```
 
 #### Putting it together:
+
 ```tsx
-//movie.telefunc.ts
+// movie.telefunc.ts
 export async function getMovies() {
   const movies = await prisma.movie.findMany()
   return movies;
@@ -176,7 +186,7 @@ export async function createMovie({ title }: { title: string }) {
 }
 
 
-//movie.tsx
+// movie.tsx
 import { useSuspenseQuery, useMutation } from '@tanstack/react-query'
 import { withFallback } from 'vike-react-query'
 import { getMovies, createMovie } from './movie.telefunc'

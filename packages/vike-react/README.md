@@ -38,7 +38,7 @@ npm install vike-react
 2. Extend your existing Vike config files with `vike-react`:
 
 ```diff
- // /pages/+config.h.js
+ // /pages/+config.js
 
 +import vikeReact from 'vike-react/config'
 +

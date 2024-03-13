@@ -7,7 +7,20 @@
 
 [TanStack React Query](https://tanstack.com/query/latest) integration for [vike-react](https://github.com/vikejs/vike-react/tree/main/packages/vike-react).
 
+`vike-react-query` enables you to create components that fetch data.
+
+You can use it instead of [Vike's `data()` hook](https://vike.dev/data): with `vike-react-query` you fetch data at component-level instead of page-level.
+
+You also get:
+ - [Progressive rendering](https://vike.dev/streaming#progressive-rendering) for a significant (perceived) increase in page speed.
+ - Loading and/or error fallback component. (See [`withFallback()`](#withfallback).)
+ - Caching. (See [`useSuspenseQuery()` options](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery).)
+ - (Optional) [Usage with Telefunc](#usage-with-telefunc). Combining RPC with all the React Query goodies.
+
 See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-query).
+
+> [!NOTE]  
+> `vike-react-query` leverages [React 18's suspense streaming feature](https://github.com/brillout/react-streaming). (Similar to [Next.js Loading UI and Streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming), but on a component level.)
 
 
 ## Installation
@@ -54,13 +67,15 @@ const Movie = ({ id }: { id: string }) => {
 
 ## `withFallback()`
 
-Using `withFallback`, you can create reusable and independent components, that leverage React 18's suspense streaming feature. (Similar to [Next.js Loading UI and Streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming), but on component level.)
+Using `withFallback()`, you can define a loading and/or an error fallback compnent:
+ - While the query is loading, the `Loading` component is rendered.
+ - When the query is completed and the data is available, the main component is rendered.
+ - If there is an error during loading or rendering the main component, the `Error` component is rendered instead.
 
-While the query is loading, it renders the `Loading` component.
+> [!NOTE]  
+> Upon SSR, the main component is directly rendered to HTML (without using `Loading`) and the main component is merely phydrated and the data is re-used (instead of fetching the data twice).
+> The `Loading` component is used only on the client-side (e.g. upon client-side navigation).
 
-When the query completed and the data is available, the component independently becomes interactive.
-
-If there is an error during loading or rendering the component, the `Error` component is rendered instead.
 
 ```tsx
 import { useSuspenseQuery } from '@tanstack/react-query'
@@ -94,6 +109,66 @@ const Movie = withFallback(
   }
 )
 ```
+
+## Defaults
+
+You can modify the defaults defined by [`QueryClient`](https://tanstack.com/query/latest/docs/reference/QueryClient).
+
+Gloablly, for all components:
+
+```js
+// /pages/+config.js
+
+// Applies to all pages.
+
+export default {
+  queryClientConfig: {
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000
+      }
+    }
+  }
+}
+```
+
+For the components of one page:
+
+```js
+// /pages/product/@id/+config.js
+
+// Applies only to /product/@id/+Page.js (given there is only
+// one +Page.js file under the /pages/product/@id directory).
+
+export default {
+  queryClientConfig: {
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000
+      }
+    }
+  }
+}
+```
+
+For the components of a group of pages:
+
+```js
+// /pages/admin/+config.js
+
+// Applies to all /pages/admin/**/+Page.js
+
+export default {
+  queryClientConfig: {
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000
+      }
+    }
+  }
+}
+```
+
 
 ## Usage with Telefunc
 

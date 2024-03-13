@@ -14,6 +14,8 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-quer
 1. `pnpm i @tanstack/react-query vike-react-query`
 2. Extend `+config.ts`:
    ```ts
+   // /pages/+config.ts
+
    import type { Config } from 'vike/types'
    import vikeReact from 'vike-react/config'
    import vikeReactQuery from 'vike-react-query/config'
@@ -51,9 +53,12 @@ const Movie = ({ id }: { id: string }) => {
 
 ## `withFallback`
 
-Using `withFallback`, you can create reusable and independent components, that leverage React 18's suspense streaming feature. (Similar to [Next.js Loading UI and Streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming), but on component level.)<br/>
-While the query is loading, it renders the `Loading` component.<br/>
-When the query completed and the data is available, the component independently becomes interactive.<br/>
+Using `withFallback`, you can create reusable and independent components, that leverage React 18's suspense streaming feature. (Similar to [Next.js Loading UI and Streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming), but on component level.)
+
+While the query is loading, it renders the `Loading` component.
+
+When the query completed and the data is available, the component independently becomes interactive.
+
 If there is an error during loading or rendering the component, the `Error` component is rendered instead.
 
 ```tsx
@@ -97,13 +102,15 @@ If used together with [Telefunc](https://telefunc.com/), the query function will
 
 ```tsx
 // movie.telefunc.ts
+
 export async function getMovie(id: string) {
   const movie = await prisma.movie.findUnique({ where: id })
   return movie;
 }
-
-
+```
+```tsx
 // movie.tsx
+
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { withFallback } from 'vike-react-query'
 import { getMovie } from './movie.telefunc'
@@ -139,13 +146,15 @@ const Movie = withFallback(
 
 ```tsx
 // movie.telefunc.ts
+
 export async function createMovie({ title }: { title: string }) {
   const movie = await prisma.movie.create({ data: { title } })
   return movie
 }
-
-
+```
+```tsx
 // movie.tsx
+
 import { useMutation } from '@tanstack/react-query'
 import { createMovie } from './movie.telefunc'
 
@@ -176,6 +185,7 @@ const CreateMovie = () => {
 
 ```tsx
 // movie.telefunc.ts
+
 export async function getMovies() {
   const movies = await prisma.movie.findMany()
   return movies;
@@ -184,9 +194,10 @@ export async function createMovie({ title }: { title: string }) {
   const movie = await prisma.movie.create({ data: { title } })
   return movie
 }
-
-
+```
+```tsx
 // movie.tsx
+
 import { useSuspenseQuery, useMutation } from '@tanstack/react-query'
 import { withFallback } from 'vike-react-query'
 import { getMovies, createMovie } from './movie.telefunc'

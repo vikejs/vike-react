@@ -9,7 +9,8 @@
 
 See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-query).
 
-## Installation:
+
+## Installation
 
 1. `pnpm i @tanstack/react-query vike-react-query`
 2. Extend `+config.ts`:
@@ -27,7 +28,7 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-quer
    ```
 
 
-## Basic usage:
+## Basic usage
 
 ```tsx
 import { useSuspenseQuery } from '@tanstack/react-query'
@@ -51,7 +52,7 @@ const Movie = ({ id }: { id: string }) => {
 ```
 
 
-## `withFallback`
+## `withFallback()`
 
 Using `withFallback`, you can create reusable and independent components, that leverage React 18's suspense streaming feature. (Similar to [Next.js Loading UI and Streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming), but on component level.)
 
@@ -94,11 +95,11 @@ const Movie = withFallback(
 )
 ```
 
-## Usage with Telefunc:
+## Usage with Telefunc
 
 If used together with [Telefunc](https://telefunc.com/), the query function will always run on the server. (Similar to [Next.js Server Actions and Mutations](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations).)
 
-#### Query example:
+#### Query example
 
 ```tsx
 // movie.telefunc.ts
@@ -142,7 +143,7 @@ const Movie = withFallback(
 )
 ```
 
-#### Mutation example:
+#### Mutation example
 
 ```tsx
 // movie.telefunc.ts
@@ -181,7 +182,7 @@ const CreateMovie = () => {
 }
 ```
 
-#### Putting it together:
+#### Putting it together
 
 ```tsx
 // movie.telefunc.ts

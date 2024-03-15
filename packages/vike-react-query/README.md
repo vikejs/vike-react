@@ -7,20 +7,20 @@
 
 [TanStack React Query](https://tanstack.com/query/latest) integration for [vike-react](https://github.com/vikejs/vike-react/tree/main/packages/vike-react).
 
-`vike-react-query` enables you to create components that fetch data.
+`vike-react-query` enables you to create components that can fetch data.
 
 You can use it instead of [Vike's `data()` hook](https://vike.dev/data): with `vike-react-query` you fetch data at component-level instead of page-level.
 
 You also get:
  - [Progressive rendering](https://vike.dev/streaming#progressive-rendering) for a significant (perceived) increase in page speed.
- - Loading and/or error fallback component. (See [`withFallback()`](#withfallback).)
+ - Fallback components upong loading and/or error. (See [`withFallback()`](#withfallback).)
  - Caching. (See [`useSuspenseQuery()` options](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery).)
  - (Optional) [Usage with Telefunc](#usage-with-telefunc). Combining RPC with all the React Query goodies.
 
 See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-query).
 
 > [!NOTE]  
-> `vike-react-query` leverages [React 18's suspense streaming feature](https://github.com/brillout/react-streaming). (Similar to [Next.js Loading UI and Streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming), but on a component level.)
+> `vike-react-query` leverages [React 18's suspense streaming feature](https://github.com/brillout/react-streaming#readme). (Similar to [Next.js Loading UI and Streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming), but on a component level.)
 
 
 ## Installation
@@ -67,10 +67,10 @@ const Movie = ({ id }: { id: string }) => {
 
 ## `withFallback()`
 
-Using `withFallback()`, you can define a loading and/or an error fallback compnent:
+Using `withFallback()`, you can define a loading and/or an error fallback component:
  - While the query is loading, the `Loading` component is rendered.
  - When the query is completed and the data is available, the main component is rendered.
- - If there is an error during loading or rendering the main component, the `Error` component is rendered instead.
+ - If there is an error during loading or rendering, the `Error` component is rendered.
 
 > [!NOTE]  
 > If you use SSR, the main component is rendered to HTML, and merely hydrated on the client-side: the data is re-used (instead of being fetched a second time).

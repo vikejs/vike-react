@@ -73,8 +73,7 @@ Using `withFallback()`, you can define a loading and/or an error fallback compne
  - If there is an error during loading or rendering the main component, the `Error` component is rendered instead.
 
 > [!NOTE]  
-> Upon SSR, the main component is directly rendered to HTML (without using `Loading`) and the main component is merely phydrated and the data is re-used (instead of fetching the data twice).
-> The `Loading` component is used only on the client-side (e.g. upon client-side navigation).
+> If you use SSR, the main component is rendered to HTML, and merely hydrated on the client-side: the data is re-used (instead of being fetched a second time).
 
 
 ```tsx

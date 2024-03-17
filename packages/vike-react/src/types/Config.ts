@@ -46,6 +46,7 @@ declare global {
       onAfterRenderClient?: (pageContext: PageContextClient) => void
 
       VikeReactQueryWrapper?: React.ReactNode
+      VikeReactZustandWrapper?: React.ReactNode
 
       Wrapper?: (props: { children: React.ReactNode }) => React.ReactNode
     }

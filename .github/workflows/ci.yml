@@ -1,0 +1,35 @@
+name: CI
+on: [ push, pull_request ]
+
+jobs:
+  test:
+    # Prevent workflow being run twice, https://github.com/orgs/community/discussions/57827#discussioncomment-6579237
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
+
+    name: ${{ matrix.cmd }} (${{ matrix.os }})
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+        cmd:
+          - pnpm run test:e2e
+          - pnpm run test:units
+          - pnpm run test:types
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 21
+          cache: "pnpm"
+
+      - run: pnpm install
+      - run: pnpm exec playwright install chromium
+      - run: pnpm run build
+
+      - run: ${{ matrix.cmd }}

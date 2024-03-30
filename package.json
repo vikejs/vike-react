@@ -5,10 +5,11 @@
     "========= Basics": "",
     "dev": "cd ./packages/vike-react/ && pnpm run dev",
     "build": "pnpm --recursive --filter {packages/*} run build",
-    "test": "cd ./packages/vike-react-query/ && pnpm run test",
-    "========= Release": "",
-    "release": "cd ./packages/vike-react/ && pnpm run release",
-    "release:commit": "cd ./packages/vike-react/ && pnpm run release:commit",
+    "========= Test": "",
+    "test": "pnpm run test:units && pnpm run test:e2e && pnpm run test:types",
+    "test:e2e": "test-e2e",
+    "test:units": "pnpm --recursive --sequential --filter {packages/*} run test",
+    "test:types": "test-types",
     "========= Clean": "",
     "clean": "git clean -Xdf",
     "reset": "pnpm run clean && pnpm install && pnpm run build",
@@ -17,6 +18,9 @@
     "format:prettier": "git ls-files | egrep '\\.(json|js|jsx|css|ts|tsx|vue|mjs|cjs)$' | grep --invert-match package.json | xargs pnpm exec prettier --write",
     "format:biome": "biome format --write .",
     "format:check": "biome format . || (echo 'Fix formatting by running `$ pnpm run -w format`.' && exit 1)",
+    "========= Release": "",
+    "release": "cd ./packages/vike-react/ && pnpm run release",
+    "release:commit": "cd ./packages/vike-react/ && pnpm run release:commit",
     "========= Only allow pnpm; forbid yarn & npm": "",
     "preinstall": "npx only-allow pnpm"
   },
@@ -29,6 +33,9 @@
   "packageManager": "pnpm@8.6.12",
   "devDependencies": {
     "@biomejs/biome": "^1.5.3",
+    "@brillout/test-e2e": "^0.5.29",
+    "@brillout/test-types": "^0.1.10",
+    "playwright": "^1.42.1",
     "prettier": "^3.2.5"
   }
 }

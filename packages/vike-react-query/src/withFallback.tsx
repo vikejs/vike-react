@@ -6,7 +6,7 @@ type RetryOptions = { retryQuery?: boolean }
 type RetryFn = (options?: RetryOptions) => void
 
 type ErrorFallbackProps = {
-  error: { message: string }
+  error: { message: string } & Record<string, unknown>
   retry: RetryFn
 }
 
@@ -63,6 +63,11 @@ export function withFallback<T extends object = Record<string, never>>(
                 const error = { message }
                 if (typeof originalError === 'object') {
                   Object.assign(error, originalError)
+                  for (const key of ['name', 'stack', 'cause']) {
+                    if (key in originalError) {
+                      Object.assign(error, { [key]: originalError[key] })
+                    }
+                  }
                 }
                 return error
               }

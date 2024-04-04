@@ -53,7 +53,10 @@ function vikeReactZustand(): Plugin {
         idx++
       }
 
-      return code
+      // We only modify the column number by a few characters
+      // - create(() => {})
+      // + create('key', () => {})
+      return { code, map: null }
     },
     async buildStart() {
       await init

@@ -19,10 +19,10 @@ pnpm build
 
 ### Running the examples
 
-You can then test your modifications against an example, e.g. `examples/basic/`:
+You can then test your modifications against an example, e.g. `examples/full/`:
 
 ```bash
-cd examples/basic/
+cd examples/full/
 pnpm dev
 cd ../../
 ```

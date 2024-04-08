@@ -64,6 +64,27 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1(@types/node@20.11.17)
 
+  examples/minimal:
+    dependencies:
+      '@vitejs/plugin-react':
+        specifier: ^4.2.1
+        version: 4.2.1(vite@5.1.1)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      vike:
+        specifier: ^0.4.168
+        version: 0.4.168(react-streaming@0.3.22)(vite@5.1.1)
+      vike-react:
+        specifier: link:../../packages/vike-react
+        version: link:../../packages/vike-react
+      vite:
+        specifier: ^5.1.1
+        version: 5.1.1(@types/node@20.11.17)
+
   examples/react-query:
     dependencies:
       '@tanstack/react-query':

@@ -28,7 +28,7 @@ importers:
         specifier: ^3.2.5
         version: 3.2.5
 
-  examples/basic:
+  examples/full:
     dependencies:
       '@types/react':
         specifier: ^18.2.55
@@ -1354,8 +1354,8 @@ packages:
   /@types/babel__core@7.20.5:
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
     dependencies:
-      '@babel/parser': 7.23.3
-      '@babel/types': 7.23.3
+      '@babel/parser': 7.23.6
+      '@babel/types': 7.23.6
       '@types/babel__generator': 7.6.7
       '@types/babel__template': 7.4.4
       '@types/babel__traverse': 7.20.4

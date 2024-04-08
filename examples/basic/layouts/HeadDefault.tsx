@@ -1,4 +1,4 @@
-export default HeadDefault
+export { HeadDefault }
 
 import React from 'react'
 import logoUrl from '../assets/logo.svg'

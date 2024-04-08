@@ -1,4 +1,4 @@
-export default LayoutDefault
+export { LayoutDefault }
 
 import './style.css'
 import React from 'react'

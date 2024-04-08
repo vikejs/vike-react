@@ -1,4 +1,4 @@
-import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry } from '@brillout/test-e2e'
+import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, partRegex } from '@brillout/test-e2e'
 
 runTest()
 
@@ -47,19 +47,25 @@ function runTest() {
       let body: string | null
       const t1 = textNoSSR
       const t2 = textLandingPage
+
       body = await page.textContent('body')
       expect(body).toContain(t1)
       expect(body).not.toContain(t2)
+      ensureWasClientSideRouted('/pages/without-ssr')
+
       await page.click('a:has-text("Welcome")')
       await testCounter()
       body = await page.textContent('body')
       expect(body).toContain(t2)
       expect(body).not.toContain(t1)
+      ensureWasClientSideRouted('/pages/without-ssr')
+
       await page.click('a:has-text("Without SSR")')
       await testCounter()
       body = await page.textContent('body')
       expect(body).toContain(t1)
       expect(body).not.toContain(t2)
+      ensureWasClientSideRouted('/pages/without-ssr')
     })
   }
 }
@@ -95,4 +101,29 @@ async function testCounter() {
     },
     { timeout: 5 * 1000 }
   )
+}
+
+/** Ensure page wasn't server-side routed.
+ *
+ * Examples:
+ *   await ensureWasClientSideRouted('/pages/index')
+ *   await ensureWasClientSideRouted('/pages/about')
+ */
+async function ensureWasClientSideRouted(pageIdFirst: `/pages/${string}`) {
+  // Check whether the HTML is from the first page before Client-side Routing.
+  // page.content() doesn't return the original HTML (it dumps the DOM to HTML).
+  // Therefore only the serialized pageContext tell us the original HTML.
+  const html = await page.content()
+  const pageId = findFirstPageId(html)
+  expect(pageId).toBe(pageIdFirst)
+}
+function findFirstPageId(html: string) {
+  expect(html).toContain('<script id="vike_pageContext" type="application/json">')
+  expect(html).toContain('_pageId')
+  expect(html.split('_pageId').length).toBe(2)
+  const match = partRegex`"_pageId":"${/([^"]+)/}"`.exec(html)
+  expect(match).toBeTruthy()
+  const pageId = match![1]
+  expect(pageId).toBeTruthy()
+  return pageId
 }

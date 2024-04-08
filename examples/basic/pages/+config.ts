@@ -7,11 +7,13 @@ import vikeReact from 'vike-react/config'
 
 // Default configs (can be overridden by pages)
 const config = {
-  Layout: LayoutDefault,
-  Head: HeadDefault,
   // <title>
   title: 'My Vike + React App',
-  // Enable HTML streaming (https://vike.dev/stream)
-  stream: true,
+  Head: HeadDefault,
+  // https://vike.dev/Layout
+  Layout: LayoutDefault,
+  // https://vike.dev/ssr - this line can be removed since `true` is the default
+  ssr: true,
+  // https://vike.dev/extends
   extends: vikeReact
 } satisfies Config

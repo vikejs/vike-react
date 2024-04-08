@@ -4,18 +4,18 @@ import React from 'react'
 import { Counter } from '../../components/Counter'
 
 function Page() {
-  // Will be printed on the server and in the browser:
-  console.log('Rendering the landing page')
+  // Will be printed only in the browser:
+  console.log('Rendering page without SSR')
 
   return (
     <>
-      <h1>My Vike + React app</h1>
-      This page is:
+      <h1>Without SSR</h1>
+      This page is rendered only in the browser:
       <ul>
-        <li>Rendered to HTML.</li>
         <li>
           Interactive. <Counter />
         </li>
+        <li>It isn't rendered to HTML.</li>
       </ul>
     </>
   )

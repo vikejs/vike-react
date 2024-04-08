@@ -1,14 +1,18 @@
 export default Page
 
-import React, { Suspense, useState } from 'react'
+import React, { Suspense } from 'react'
 import { useAsync } from 'react-streaming'
 import { Counter } from '../../components/Counter'
 
 function Page() {
-  const [count, setCount] = useState(0)
   return (
     <>
       <h1>Star Wars Movies</h1>
+      <p>
+        Same as <code>/star-wars</code> page, but showcasing <a href="https://vike.dev/streaming">HTML Streaming</a> and{' '}
+        <a href="https://vike.dev/streaming#progressive-rendering">Progressive Rendering</a> (note how the counter is
+        interactive before the data has finished loading).
+      </p>
       <Counter />
       <Suspense fallback={<p>Loading...</p>}>
         <MovieList />

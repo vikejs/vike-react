@@ -11,5 +11,7 @@ const config = {
   Head: HeadDefault,
   // <title>
   title: 'My Vike + React App',
+  // Enable HTML streaming (https://vike.dev/stream)
+  stream: true,
   extends: vikeReact
 } satisfies Config

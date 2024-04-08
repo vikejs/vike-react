@@ -18,6 +18,7 @@ function LayoutDefault({ children }: { children: React.ReactNode }) {
         <Logo />
         <Link href="/">Welcome</Link>
         <Link href="/star-wars">Data Fetching</Link>
+        <Link href="/streaming">HTML Streaming</Link>
       </Sidebar>
       <Content>{children}</Content>
     </div>

@@ -1,10 +1,9 @@
-Basic example of using `vike-react`, showcasing:
+Full-fledged example of using `vike-react`, showcasing:
 
-* [layouts](https://vike.dev/layouts)
-* rendering to `<head>`
-* fetching data with [`data()`](https://vike.dev/data) hooks
-* [configs](https://vike.dev/config)
-* [error pages](https://vike.dev/error-page)
+- [Layout](https://vike.dev/Layout)
+- Fetching data with [`data()`](https://vike.dev/data)
+- [Error page](https://vike.dev/error-page)
+- [HTML Streaming](https://vike.dev/streaming)
 
 ```bash
 git clone git@github.com:vikejs/vike-react

@@ -23,6 +23,25 @@ function runTest() {
     title: 'Return of the Jedi',
     text: '1983-05-25'
   })
+
+  {
+    const url = '/without-ssr'
+    const title = 'My Vike + React App'
+    const text = "It isn't rendered to HTML."
+    test(url + ' (HTML)', async () => {
+      const html = await fetchHtml(url)
+      // Isn't rendered to HTML
+      expect(html).toContain('<div id="page-view"></div>')
+      expect(html).not.toContain(text)
+      expect(getTitle(html)).toBe(title)
+    })
+    test(url + ' (Hydration)', async () => {
+      await page.goto(getServerUrl() + url)
+      await testCounter()
+      const body = await page.textContent('body')
+      expect(body).toContain(text)
+    })
+  }
 }
 
 function testUrl({ url, title, text, counter }: { url: string; title: string; text: string; counter?: true }) {
@@ -36,6 +55,7 @@ function testUrl({ url, title, text, counter }: { url: string; title: string; te
     const body = await page.textContent('body')
     expect(body).toContain(text)
     if (counter) {
+      expect(await page.textContent('button')).toBe('Counter 0')
       await testCounter()
     }
   })
@@ -47,7 +67,6 @@ function getTitle(html: string) {
 }
 
 async function testCounter() {
-  expect(await page.textContent('button')).toBe('Counter 0')
   // autoRetry() for awaiting client-side code loading & executing
   await autoRetry(async () => {
     await page.click('button')

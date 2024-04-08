@@ -13,7 +13,7 @@ function Page() {
       This page is rendered only in the browser:
       <ul>
         <li>
-          Interactive. <Counter />
+          It's interactive. <Counter />
         </li>
         <li>It isn't rendered to HTML.</li>
       </ul>

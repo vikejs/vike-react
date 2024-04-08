@@ -22,12 +22,11 @@ declare global {
        */
       lang?: string
       /**
-       * If true, render mode is SSR or pre-rendering (aka SSG). In other words, the
-       * page's HTML will be rendered at build-time or request-time.
-       * If false, render mode is SPA. In other words, the page will only be
-       * rendered in the browser.
+       * If `true`, the page is rendered twice: on the server-side (to HTML) and on the client-side (hydration).
        *
-       * See https://vike.dev/render-modes
+       * If `false`, the page is rendered only once in the browser.
+       *
+       * https://vike.dev/ssr
        *
        * @default true
        *

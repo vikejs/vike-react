@@ -6,9 +6,10 @@ function runTest() {
   run('pnpm run dev')
 
   const textLandingPage = 'Rendered to HTML.'
+  const title = 'My Vike + React App'
   testUrl({
     url: '/',
-    title: 'My Vike + React App',
+    title,
     text: textLandingPage,
     counter: true
   })
@@ -28,7 +29,6 @@ function runTest() {
   const textNoSSR = 'This page is rendered only in the browser'
   {
     const url = '/without-ssr'
-    const title = 'My Vike + React App'
     const text = textNoSSR
     test(url + ' (HTML)', async () => {
       const html = await fetchHtml(url)

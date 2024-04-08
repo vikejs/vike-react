@@ -10,8 +10,8 @@ function Page() {
       <h1>Star Wars Movies</h1>
       <p>
         Same as <code>/star-wars</code> page, but showcasing <a href="https://vike.dev/streaming">HTML Streaming</a> and{' '}
-        <a href="https://vike.dev/streaming#progressive-rendering">Progressive Rendering</a> (note how the counter is
-        interactive before the data has finished loading).
+        <a href="https://vike.dev/streaming#progressive-rendering">Progressive Rendering</a>. (Note how the interactive
+        counter works before the data finished loading.)
       </p>
       <Counter />
       <Suspense fallback={<p>Loading...</p>}>

@@ -33,7 +33,7 @@ function runTest() {
     test(url + ' (HTML)', async () => {
       const html = await fetchHtml(url)
       // Isn't rendered to HTML
-      expect(html).toContain('<div id="page-view"></div>')
+      expect(html).toContain('<div id="react-root"></div>')
       expect(html).not.toContain(text)
       expect(getTitle(html)).toBe(title)
     })

@@ -10,7 +10,7 @@ let root: ReactDOM.Root
 const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderClientSync> => {
   const page = getPageElement(pageContext)
 
-  const container = document.getElementById('page-view')!
+  const container = document.getElementById('react-root')!
   if (container.innerHTML !== '' && pageContext.isHydration) {
     // First render (hydration)
     root = ReactDOM.hydrateRoot(container, page)

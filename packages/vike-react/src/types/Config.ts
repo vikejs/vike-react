@@ -7,14 +7,32 @@ declare global {
     interface ConfigVikeReact {
       /** The page's root React component */
       Page?: () => React.ReactNode
+
       /** React element rendered and appended into &lt;head>&lt;/head> */
       Head?: () => React.ReactNode
-      /** A component, usually common to several pages, that wraps the root component `Page` */
+
+      /**
+       * A component that defines the visual layout of the page common to several pages.
+       *
+       * Technically: the `<Layou>` component wraps the root component `<Page>`.
+       *
+       * https://vike.dev/Layout
+       */
       Layout?: (props: { children: React.ReactNode }) => React.ReactNode
+
+      /**
+       * A component wrapping the the root component `<Page>`.
+       *
+       * https://vike.dev/Wrapper
+       */
+      Wrapper?: (props: { children: React.ReactNode }) => React.ReactNode
+
       /** &lt;title>${title}&lt;/title> */
       title?: string
+
       /** &lt;link rel="icon" href="${favicon}" /> */
       favicon?: string
+
       /** &lt;html lang="${lang}">
        *
        *  @default 'en'
@@ -31,6 +49,7 @@ declare global {
        * @default true
        *
        */
+
       ssr?: boolean
       /**
        * Whether to stream the page's HTML. Requires Server-Side Rendering (`ssr: true`).
@@ -42,11 +61,12 @@ declare global {
       /**
        * Client-side hook called after the page is rendered.
        */
+
+      // https://github.com/vikejs/vike-react/pull/96
       onAfterRenderClient?: (pageContext: PageContextClient) => void
 
+      // Temporary until Wrapper is cumulative
       VikeReactQueryWrapper?: React.ReactNode
-
-      Wrapper?: (props: { children: React.ReactNode }) => React.ReactNode
     }
   }
 }

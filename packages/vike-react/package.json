@@ -27,6 +27,7 @@
     "vite": "^4.3.8 || ^5.0.10"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.6.4",
     "@brillout/release-me": "^0.1.14",
     "@types/node": "^20.11.17",
     "@types/react": "^18.2.55",

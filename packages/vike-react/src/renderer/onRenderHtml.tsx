@@ -11,6 +11,7 @@ import React from 'react'
 import type { OnRenderHtmlAsync } from 'vike/types'
 
 checkVikeVersion()
+addEcosystemStamp()
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
   const title = getHeadSetting('title', pageContext)
@@ -65,4 +66,11 @@ function checkVikeVersion() {
     if (versionParts[2] >= 147) return
   }
   throw new Error('Update Vike to 0.4.147 or above')
+}
+
+// Used by:
+// - react-streaming (to improve error messages)
+function addEcosystemStamp() {
+  const g = globalThis as Record<string, unknown>
+  g._isVikeReactApp = true
 }

@@ -33,7 +33,7 @@
   "packageManager": "pnpm@8.6.12",
   "devDependencies": {
     "@biomejs/biome": "^1.6.4",
-    "@brillout/test-e2e": "^0.5.29",
+    "@brillout/test-e2e": "^0.5.33",
     "@brillout/test-types": "^0.1.13",
     "playwright": "^1.42.1",
     "prettier": "^3.2.5"

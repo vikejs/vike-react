@@ -16,8 +16,8 @@ importers:
         specifier: ^1.6.4
         version: 1.6.4
       '@brillout/test-e2e':
-        specifier: ^0.5.29
-        version: 0.5.29
+        specifier: ^0.5.33
+        version: 0.5.33
       '@brillout/test-types':
         specifier: ^0.1.13
         version: 0.1.13(typescript@4.9.5)
@@ -580,8 +580,8 @@ packages:
   /@brillout/require-shim@0.1.2:
     resolution: {integrity: sha512-3I4LRHnVZXoSAsEoni5mosq9l6eiJED58d9V954W4CIZ88AUfYBanWGBGbJG3NztaRTpFHEA6wB3Hn93BmmJdg==}
 
-  /@brillout/test-e2e@0.5.29:
-    resolution: {integrity: sha512-YetEtr6tn1GsWQSWZ2U8Wtrc69O7Me6Bp9EzYOUP2juAMMUG5yP2hS5m6C04WaN+b2veFqQgOC8zXmFkEhsfkw==}
+  /@brillout/test-e2e@0.5.33:
+    resolution: {integrity: sha512-CAhZQSGYVeMelcxbjFHZwZDT1Jk2BnNVS8JYYKkizin3ZoxQDdMYWskjO7jU+XN9xrjkvEUMlnXGXSO4E8/WjA==}
     hasBin: true
     requiresBuild: true
     dependencies:

@@ -69,7 +69,7 @@ function checkVikeVersion() {
 }
 
 // Used by:
-// - react-streaming (to improve error messages)
+// - react-streaming (to improve error messages, see https://github.com/brillout/react-streaming/blob/70c168de1e97b9c4385a4c3002b5013f1e406341/src/utils/isVikeReactApp.ts#L4)
 function addEcosystemStamp() {
   const g = globalThis as Record<string, unknown>
   g._isVikeReactApp = true

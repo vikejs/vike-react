@@ -7,7 +7,6 @@
 * improve JSDoc ([74daf53](https://github.com/vikejs/vike-react/commit/74daf53297c7bd0bc8956414011dc3f3926d3f90))
 * improve JSDocs ([251be5d](https://github.com/vikejs/vike-react/commit/251be5df6dba64f839e4191cf392cbe02b3534eb))
 * improve streaming error messages ([24c5d1c](https://github.com/vikejs/vike-react/commit/24c5d1cf0ce5177c5a6f19c5bd0f97647d857967))
-* react-query: add name, stack, cause to error ([7a99687](https://github.com/vikejs/vike-react/commit/7a99687d07cfc3338575117a27a8dd9947e61269))
 
 
 ### Features

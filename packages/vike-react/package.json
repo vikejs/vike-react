@@ -38,7 +38,7 @@
     "vike": "^0.4.168"
   },
   "dependencies": {
-    "react-streaming": "^0.3.22"
+    "react-streaming": "^0.3.25"
   },
   "typesVersions": {
     "*": {

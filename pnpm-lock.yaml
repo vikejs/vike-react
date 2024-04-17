@@ -49,14 +49,14 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       react-streaming:
-        specifier: ^0.3.22
-        version: 0.3.22(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.3.25
+        version: 0.3.25(react-dom@18.2.0)(react@18.2.0)
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
         specifier: ^0.4.168
-        version: 0.4.168(react-streaming@0.3.22)(vite@5.1.1)
+        version: 0.4.168(react-streaming@0.3.25)(vite@5.1.1)
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -77,7 +77,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       vike:
         specifier: ^0.4.168
-        version: 0.4.168(react-streaming@0.3.22)(vite@5.1.1)
+        version: 0.4.168(react-streaming@0.3.25)(vite@5.1.1)
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -110,7 +110,7 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.168
-        version: 0.4.168(react-streaming@0.3.22)(vite@5.1.1)
+        version: 0.4.168(react-streaming@0.3.25)(vite@5.1.1)
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -124,8 +124,8 @@ importers:
   packages/vike-react:
     dependencies:
       react-streaming:
-        specifier: ^0.3.22
-        version: 0.3.22(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.3.25
+        version: 0.3.25(react-dom@18.2.0)(react@18.2.0)
       vite:
         specifier: ^4.3.8 || ^5.0.10
         version: 4.5.1(@types/node@20.11.17)
@@ -156,7 +156,7 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.168
-        version: 0.4.168(react-streaming@0.3.22)(vite@4.5.1)
+        version: 0.4.168(react-streaming@0.3.25)(vite@4.5.1)
 
   packages/vike-react-query:
     dependencies:
@@ -198,14 +198,14 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-streaming:
-        specifier: ^0.3.22
-        version: 0.3.22(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.3.25
+        version: 0.3.25(react-dom@18.2.0)(react@18.2.0)
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
         specifier: ^0.4.168
-        version: 0.4.168(react-streaming@0.3.22)(vite@4.5.1)
+        version: 0.4.168(react-streaming@0.3.25)(vite@4.5.1)
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -3039,8 +3039,9 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /react-streaming@0.3.22(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-8kFMtAZQ1oUVnVKJvBqy/DUl1ZjoaRDe/v6GuYQWN4OX4K8jnmDt1NBuQxcjKob26+9Wx618km4m+/Q7PmAPfw==}
+  /react-streaming@0.3.25(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-RfiC1+mEgO6FMNFo5k77TRouXP8Vzj45tUAJRWUbQqPnPnvQSDc1FFkxNJ3LkR4AUdMVxZ+tC/gofjV0A3SW3A==}
+    requiresBuild: true
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -3447,7 +3448,7 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vike@0.4.168(react-streaming@0.3.22)(vite@4.5.1):
+  /vike@0.4.168(react-streaming@0.3.25)(vite@4.5.1):
     resolution: {integrity: sha512-60MJDT/o791TXyvF3bdJJJLLqWVJpbhqhtWDoZytktF/2YhA8gtny7DRcxey6iy69jKwzg3qiAQ9TVPtZRMJow==}
     engines: {node: '>=16.0.0'}
     hasBin: true
@@ -3468,13 +3469,13 @@ packages:
       es-module-lexer: 1.4.1
       esbuild: 0.19.10
       fast-glob: 3.3.2
-      react-streaming: 0.3.22(react-dom@18.2.0)(react@18.2.0)
+      react-streaming: 0.3.25(react-dom@18.2.0)(react@18.2.0)
       sirv: 2.0.3
       source-map-support: 0.5.21
       vite: 4.5.1(@types/node@20.11.17)
     dev: true
 
-  /vike@0.4.168(react-streaming@0.3.22)(vite@5.1.1):
+  /vike@0.4.168(react-streaming@0.3.25)(vite@5.1.1):
     resolution: {integrity: sha512-60MJDT/o791TXyvF3bdJJJLLqWVJpbhqhtWDoZytktF/2YhA8gtny7DRcxey6iy69jKwzg3qiAQ9TVPtZRMJow==}
     engines: {node: '>=16.0.0'}
     hasBin: true
@@ -3495,7 +3496,7 @@ packages:
       es-module-lexer: 1.4.1
       esbuild: 0.19.10
       fast-glob: 3.3.2
-      react-streaming: 0.3.22(react-dom@18.2.0)(react@18.2.0)
+      react-streaming: 0.3.25(react-dom@18.2.0)(react@18.2.0)
       sirv: 2.0.3
       source-map-support: 0.5.21
       vite: 5.1.1(@types/node@20.11.17)

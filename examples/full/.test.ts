@@ -26,9 +26,17 @@ function runTest() {
     text: '1983-05-25'
   })
 
-  const textNoSSR = 'This page is rendered only in the browser'
+  // Not sure how progressive rendering can be tested since fetch() awaits the stream to finish
+  testUrl({
+    url: '/streaming',
+    title,
+    text: 'Progressive Rendering',
+    counter: true
+  })
+
   {
     const url = '/without-ssr'
+    const textNoSSR = 'This page is rendered only in the browser'
     const text = textNoSSR
     test(url + ' (HTML)', async () => {
       const html = await fetchHtml(url)

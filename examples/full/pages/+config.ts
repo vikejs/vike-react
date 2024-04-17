@@ -12,6 +12,8 @@ const config = {
   Head: HeadDefault,
   // https://vike.dev/Layout
   Layout: LayoutDefault,
+  // https://vike.dev/stream
+  stream: true,
   // https://vike.dev/ssr - this line can be removed since `true` is the default
   ssr: true,
   // https://vike.dev/extends

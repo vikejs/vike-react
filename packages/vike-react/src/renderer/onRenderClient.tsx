@@ -10,14 +10,25 @@ let root: ReactDOM.Root
 const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderClientSync> => {
   const page = getPageElement(pageContext)
 
+  // TODO: implement this? So that, upon errors, onRenderClient() throws an error and Vike can render the error. As of April 2024 it isn't released yet.
+  //  - https://react-dev-git-fork-rickhanlonii-rh-root-options-fbopensource.vercel.app/reference/react-dom/client/createRoot#show-a-dialog-for-uncaught-errors
+  //  - https://react-dev-git-fork-rickhanlonii-rh-root-options-fbopensource.vercel.app/reference/react-dom/client/hydrateRoot#show-a-dialog-for-uncaught-errors
+  const onUncaughtError = (_error: any, _errorInfo: any) => {}
+
   const container = document.getElementById('react-root')!
   if (container.innerHTML !== '' && pageContext.isHydration) {
     // First render (hydration)
-    root = ReactDOM.hydrateRoot(container, page)
+    root = ReactDOM.hydrateRoot(container, page, {
+      // @ts-expect-error
+      onUncaughtError
+    })
   } else {
     if (!root) {
       // First render (not hydration)
-      root = ReactDOM.createRoot(container)
+      root = ReactDOM.createRoot(container, {
+        // @ts-expect-error
+        onUncaughtError
+      })
     } else {
       // Client-side navigation
 

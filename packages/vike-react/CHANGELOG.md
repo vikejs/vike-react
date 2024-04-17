@@ -1,3 +1,21 @@
+## [0.4.7](https://github.com/vikejs/vike-react/compare/vike-react@0.4.6...vike-react@0.4.7) (2024-04-17)
+
+
+### Bug Fixes
+
+* add eco stamp ([ca46452](https://github.com/vikejs/vike-react/commit/ca46452992a7ea94e8f58e40f5062ba56a0b56eb))
+* improve JSDoc ([74daf53](https://github.com/vikejs/vike-react/commit/74daf53297c7bd0bc8956414011dc3f3926d3f90))
+* improve JSDocs ([251be5d](https://github.com/vikejs/vike-react/commit/251be5df6dba64f839e4191cf392cbe02b3534eb))
+* improve streaming error messages ([24c5d1c](https://github.com/vikejs/vike-react/commit/24c5d1cf0ce5177c5a6f19c5bd0f97647d857967))
+* react-query: add name, stack, cause to error ([7a99687](https://github.com/vikejs/vike-react/commit/7a99687d07cfc3338575117a27a8dd9947e61269))
+
+
+### Features
+
+* impl onAfterRenderClient() hook ([ddbbdaa](https://github.com/vikejs/vike-react/commit/ddbbdaae953a133d1d705bfbab142655defbeb2e))
+
+
+
 ## [0.4.6](https://github.com/vikejs/vike-react/compare/vike-react@0.4.5...vike-react@0.4.6) (2024-02-14)
 
 

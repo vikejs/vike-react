@@ -13,8 +13,9 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "rm -rf dist/ && tsc",
-    "release": "release-me --git-prefix vike-react-zustand --changelog-dir packages/vike-react-zustand/ patch",
-    "release:commit": "release-me --git-prefix vike-react-zustand --changelog-dir packages/vike-react-zustand/ commit"
+    "release": "release-me patch --git-tag-prefix vike-react-zustand",
+    "release:minor": "release-me minor --git-tag-prefix vike-react-zustand",
+    "release:commit": "release-me commit --git-tag-prefix vike-react-zustand"
   },
   "peerDependencies": {
     "es-module-lexer": "^1.4.1",
@@ -25,7 +26,7 @@
     "zustand": "^4.0.0"
   },
   "devDependencies": {
-    "@brillout/release-me": "^0.1.13",
+    "@brillout/release-me": "^0.2.2",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",

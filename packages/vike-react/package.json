@@ -16,9 +16,9 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "rm -rf dist/ && tsc",
-    "release": "release-me --git-tag-prefix vike-react patch",
-    "release:minor": "release-me --git-tag-prefix vike-react minor",
-    "release:commit": "release-me --git-tag-prefix vike-react commit"
+    "release": "release-me patch --git-tag-prefix vike-react",
+    "release:minor": "release-me minor --git-tag-prefix vike-react",
+    "release:commit": "release-me commit --git-tag-prefix vike-react"
   },
   "peerDependencies": {
     "react": "18.x.x",

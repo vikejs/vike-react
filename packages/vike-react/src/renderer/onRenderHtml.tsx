@@ -37,9 +37,17 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
     pageView = ''
   } else {
     const page = getPageElement(pageContext)
-    pageView = !pageContext.config.stream
-      ? dangerouslySkipEscape(renderToString(page))
-      : await renderToStream(page, { userAgent: pageContext.userAgent })
+    const {
+      stream,
+      // @ts-expect-error
+      _streamIsRequied
+    } = pageContext.config
+    if (!stream && !_streamIsRequied) {
+      pageView = dangerouslySkipEscape(renderToString(page))
+    } else {
+      const disable = stream === false ? true : undefined
+      pageView = await renderToStream(page, { userAgent: pageContext.userAgent, disable })
+    }
   }
 
   const documentHtml = escapeInject`<!DOCTYPE html>

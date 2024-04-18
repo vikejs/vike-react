@@ -46,6 +46,9 @@ export default {
     stream: {
       env: { server: true }
     },
+    _streamIsRequied: {
+      env: { server: true }
+    },
     onAfterRenderClient: {
       env: { client: true }
     },

@@ -1,3 +1,19 @@
+## [0.0.5](https://github.com/vikejs/vike-react/compare/vike-react-query@0.0.4...vike-react-query@0.0.5) (2024-04-18)
+
+
+### Bug Fixes
+
+* improve streaming error messages ([24c5d1c](https://github.com/vikejs/vike-react/commit/24c5d1cf0ce5177c5a6f19c5bd0f97647d857967))
+* react-query: add name, stack, cause to error ([7a99687](https://github.com/vikejs/vike-react/commit/7a99687d07cfc3338575117a27a8dd9947e61269))
+* update react-streaming ([11e64ef](https://github.com/vikejs/vike-react/commit/11e64efb359308c853c17a26397b6d913fc65761))
+
+
+### Features
+
+* allow user to use vike-react-query and disable streaming (closes [#106](https://github.com/vikejs/vike-react/issues/106)) ([0891b60](https://github.com/vikejs/vike-react/commit/0891b60a4da6c277179f0092cab882a50b6a9de5))
+
+
+
 ## [0.0.4](https://github.com/vikejs/vike-react/compare/vike-react-query@0.0.3...vike-react-query@0.0.4) (2024-02-14)
 
 

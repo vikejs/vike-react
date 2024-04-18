@@ -1,3 +1,17 @@
+## [0.4.8](https://github.com/vikejs/vike-react/compare/vike-react@0.4.7...vike-react@0.4.8) (2024-04-18)
+
+
+### Bug Fixes
+
+* update react-streaming ([11e64ef](https://github.com/vikejs/vike-react/commit/11e64efb359308c853c17a26397b6d913fc65761))
+
+
+### Features
+
+* allow user to use vike-react-query and disable streaming (closes [#106](https://github.com/vikejs/vike-react/issues/106)) ([0891b60](https://github.com/vikejs/vike-react/commit/0891b60a4da6c277179f0092cab882a50b6a9de5))
+
+
+
 ## [0.4.7](https://github.com/vikejs/vike-react/compare/vike-react@0.4.6...vike-react@0.4.7) (2024-04-17)
 
 

@@ -13,7 +13,6 @@ type WithPageContext = <
   f: (pageContext: PageContext) => StateCreator<T, Mps, Mcs>
 ) => StateCreator<T, Mps, Mcs>
 
-
 /**
  * Middleware to make `pageContext` available to the store.
  *

@@ -13,9 +13,9 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "rm -rf dist/ && tsc",
-    "release": "release-me patch --git-tag-prefix vike-react-zustand",
-    "release:minor": "release-me minor --git-tag-prefix vike-react-zustand",
-    "release:commit": "release-me commit --git-tag-prefix vike-react-zustand"
+    "release": "release-me patch",
+    "release:minor": "release-me minor",
+    "release:commit": "release-me commit"
   },
   "peerDependencies": {
     "es-module-lexer": "^1.4.1",

@@ -13,8 +13,9 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "rm -rf dist/ && tsc",
-    "release": "release-me patch --git-tag-prefix vike-react-query",
-    "release:commit": "release-me commit --git-tag-prefix vike-react-query",
+    "release": "release-me patch",
+    "release:minor": "release-me minor",
+    "release:commit": "release-me commit",
     "test": "vitest run"
   },
   "peerDependencies": {

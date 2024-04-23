@@ -26,7 +26,7 @@
     "zustand": "^4.0.0"
   },
   "devDependencies": {
-    "@brillout/release-me": "^0.3.0",
+    "@brillout/release-me": "^0.3.4",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",

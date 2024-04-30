@@ -5,12 +5,11 @@ runTest()
 function runTest() {
   run('pnpm run dev')
 
-  const textLandingPage = 'Rendered to HTML.'
   const title = 'My Vike + React App'
   testUrl({
     url: '/',
     title,
-    text: textLandingPage,
+    text: 'Rendered to HTML.',
     counter: true
   })
 
@@ -34,63 +33,80 @@ function runTest() {
     counter: true
   })
 
-  {
-    const url = '/without-ssr'
-    const textNoSSR = 'This page is rendered only in the browser'
-    const text = textNoSSR
-    test(url + ' (HTML)', async () => {
-      const html = await fetchHtml(url)
-      // Isn't rendered to HTML
-      expect(html).toContain('<div id="react-root"></div>')
-      expect(html).not.toContain(text)
-      expect(getTitle(html)).toBe(title)
-    })
-    test(url + ' (Hydration)', async () => {
-      await page.goto(getServerUrl() + url)
-      await testCounter()
-      const body = await page.textContent('body')
-      expect(body).toContain(text)
-    })
-    test('Switch between SSR and non-SSR page', async () => {
-      let body: string | null
-      const t1 = textNoSSR
-      const t2 = textLandingPage
+  const textNoSSR = 'This page is rendered only in the browser'
+  testUrl({
+    url: '/without-ssr',
+    title: 'No SSR',
+    text: textNoSSR,
+    counter: true,
+    noSSR: true
+  })
 
-      body = await page.textContent('body')
-      expect(body).toContain(t1)
-      expect(body).not.toContain(t2)
-      ensureWasClientSideRouted('/pages/without-ssr')
-
-      await page.click('a:has-text("Welcome")')
-      await testCounter()
-      body = await page.textContent('body')
-      expect(body).toContain(t2)
-      expect(body).not.toContain(t1)
-      ensureWasClientSideRouted('/pages/without-ssr')
-
-      await page.click('a:has-text("Without SSR")')
-      await testCounter()
-      body = await page.textContent('body')
-      expect(body).toContain(t1)
-      expect(body).not.toContain(t2)
-      ensureWasClientSideRouted('/pages/without-ssr')
-    })
-  }
+  testNavigationBetweenWithSSRAndWithoutSSR()
 }
 
-function testUrl({ url, title, text, counter }: { url: string; title: string; text: string; counter?: true }) {
+function testNavigationBetweenWithSSRAndWithoutSSR() {
+  const textWithSSR = 'Rendered to HTML.'
+  const textWithoutSSR = "It isn't rendered to HTML"
+
+  const url = '/without-ssr'
+  test(url + " isn't rendered to HTML", async () => {
+    const html = await fetchHtml(url)
+    expect(html).toContain('<div id="react-root"></div>')
+    expect(html).not.toContain(textWithoutSSR)
+    await page.goto(getServerUrl() + url)
+    await testCounter()
+    const body = await page.textContent('body')
+    expect(body).toContain(textWithoutSSR)
+  })
+
+  test('Switch between SSR and non-SSR page', async () => {
+    let body: string | null
+    const t1 = textWithoutSSR
+    const t2 = textWithSSR
+
+    body = await page.textContent('body')
+    expect(body).toContain(t1)
+    expect(body).not.toContain(t2)
+    ensureWasClientSideRouted('/pages/without-ssr')
+
+    await page.click('a:has-text("Welcome")')
+    await testCounter()
+    body = await page.textContent('body')
+    expect(body).toContain(t2)
+    expect(body).not.toContain(t1)
+    ensureWasClientSideRouted('/pages/without-ssr')
+
+    await page.click('a:has-text("Without SSR")')
+    await testCounter()
+    body = await page.textContent('body')
+    expect(body).toContain(t1)
+    expect(body).not.toContain(t2)
+    ensureWasClientSideRouted('/pages/without-ssr')
+  })
+}
+
+function testUrl({
+  url,
+  title,
+  text,
+  counter,
+  noSSR
+}: { url: string; title: string; text: string; counter?: true; noSSR?: true }) {
   test(url + ' (HTML)', async () => {
     const html = await fetchHtml(url)
-    expect(html).toContain(text)
+    if (!noSSR) {
+      expect(html).toContain(text)
+    }
     expect(getTitle(html)).toBe(title)
   })
   test(url + ' (Hydration)', async () => {
     await page.goto(getServerUrl() + url)
-    const body = await page.textContent('body')
-    expect(body).toContain(text)
     if (counter) {
       await testCounter()
     }
+    const body = await page.textContent('body')
+    expect(body).toContain(text)
   })
 }
 

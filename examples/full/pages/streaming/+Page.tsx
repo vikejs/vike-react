@@ -25,7 +25,7 @@ function MovieList() {
   const movies = useAsync(['star-wars-movies'], async () => {
     const response = await fetch('https://star-wars.brillout.com/api/films.json')
     // Simulate slow network
-    await new Promise((r) => setTimeout(r, 2 * 1000))
+    await new Promise((r) => setTimeout(r, 3 * 1000))
     const movies: Movie[] = (await response.json()).results
     return movies
   })

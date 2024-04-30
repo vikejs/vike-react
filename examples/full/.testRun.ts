@@ -1,9 +1,9 @@
+export { testRun }
+
 import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, partRegex } from '@brillout/test-e2e'
 
-runTest()
-
-function runTest() {
-  run('pnpm run dev')
+function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
+  run(cmd)
 
   const title = 'My Vike + React App'
   testUrl({

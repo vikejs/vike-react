@@ -1,10 +1,11 @@
 // https://vike.dev/meta#typescript
 import type { PageContextClient } from 'vike/types'
+import type { Document } from '../types/Document.js'
 
 declare global {
   // As a Vike user, use Vike.Config instead of VikePackages.ConfigVikeReact (see https://vike.dev/meta#typescript)
-  namespace VikePackages {
-    interface ConfigVikeReact {
+  namespace Vike {
+    interface Config {
       /** The page's root React component */
       Page?: () => React.ReactNode
 
@@ -26,6 +27,8 @@ declare global {
        * https://vike.dev/Wrapper
        */
       Wrapper?: (props: { children: React.ReactNode }) => React.ReactNode
+
+      document?: Document
 
       /** &lt;title>${title}&lt;/title> */
       title?: string
@@ -67,6 +70,10 @@ declare global {
 
       // Temporary until Wrapper is cumulative
       VikeReactQueryWrapper?: React.ReactNode
+    }
+
+    interface ConfigResolved {
+      document?: Document[]
     }
   }
 }

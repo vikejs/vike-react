@@ -14,6 +14,7 @@ export default {
   onRenderClient: 'import:vike-react/renderer/onRenderClient:onRenderClient',
 
   passToClient: [
+    '_document',
     // https://github.com/vikejs/vike-react/issues/25
     process.env.NODE_ENV !== 'production' && '$$typeof'
   ].filter(isNotFalse),
@@ -67,6 +68,10 @@ export default {
     },
     reactStrictMode: {
       env: { client: true, server: true }
+    },
+    document: {
+      env: { client: true, server: true },
+      cumulative: true
     }
   }
 } satisfies Config

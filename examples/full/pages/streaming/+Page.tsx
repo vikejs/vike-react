@@ -3,6 +3,7 @@ export default Page
 import React, { Suspense } from 'react'
 import { useAsync } from 'react-streaming'
 import { Counter } from '../../components/Counter'
+import { useDocument } from 'vike-react/useDocument'
 
 function Page() {
   return (
@@ -28,6 +29,11 @@ function MovieList() {
     await new Promise((r) => setTimeout(r, 3 * 1000))
     const movies: Movie[] = (await response.json()).results
     return movies
+  })
+
+  const document = useDocument()
+  document({
+    title: `${movies.length} movies`
   })
 
   return (

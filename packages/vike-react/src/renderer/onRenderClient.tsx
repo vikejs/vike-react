@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom/client'
 import { getHeadSetting } from './getHeadSetting.js'
 import type { OnRenderClientSync } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
+import { applyDocumentClientSide } from './applyDocumentClientSide.js'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderClientSync> => {
@@ -50,6 +51,8 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
       if (title !== undefined) document.title = title
       if (lang !== undefined) document.documentElement.lang = lang
       if (favicon !== undefined) setFavicon(favicon)
+
+      applyDocumentClientSide(pageContext)
     }
 
     root.render(page)

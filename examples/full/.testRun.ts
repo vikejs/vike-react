@@ -2,8 +2,12 @@ export { testRun }
 
 import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, partRegex } from '@brillout/test-e2e'
 
+let isProd: boolean
+
 function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   run(cmd)
+
+  isProd = cmd !== 'pnpm run dev'
 
   const title = 'My Vike + React App'
   testUrl({
@@ -99,6 +103,12 @@ function testUrl({
       expect(html).toContain(text)
     }
     expect(getTitle(html)).toBe(title)
+    const hash = /[a-zA-Z0-9_-]+/
+    if (!isProd) {
+      expect(html).toMatch(partRegex`<link rel="icon" href="/assets/logo.svg"/>`)
+    } else {
+      expect(html).toMatch(partRegex`<link rel="icon" href="/assets/static/logo.${hash}.svg"/>`)
+    }
   })
   test(url + ' (Hydration)', async () => {
     await page.goto(getServerUrl() + url)

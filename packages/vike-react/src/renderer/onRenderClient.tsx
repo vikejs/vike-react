@@ -17,6 +17,7 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
 
   const container = document.getElementById('react-root')!
   if (container.innerHTML !== '' && pageContext.isHydration) {
+    pageContext.config.onBeforeRenderClient?.(pageContext)
     // First render (hydration)
     root = ReactDOM.hydrateRoot(container, page, {
       // @ts-expect-error

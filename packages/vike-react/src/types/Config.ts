@@ -62,7 +62,7 @@ declare global {
        * Client-side hook called before the page is rendered.
        */
 
-      // https://github.com/vikejs/vike-react/issues/999
+      // https://github.com/vikejs/vike-react/issues/110
       onBeforeRenderClient?: (pageContext: PageContextClient) => void
 
       /**

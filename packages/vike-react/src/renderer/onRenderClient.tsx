@@ -8,6 +8,8 @@ import { getPageElement } from './getPageElement.js'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderClientSync> => {
+  // Use case:
+  // - Store hydration https://github.com/vikejs/vike-react/issues/110
   pageContext.config.onBeforeRenderClient?.(pageContext)
 
   const page = getPageElement(pageContext)
@@ -18,8 +20,13 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
   const onUncaughtError = (_error: any, _errorInfo: any) => {}
 
   const container = document.getElementById('react-root')!
-  if (container.innerHTML !== '' && pageContext.isHydration) {
-    // First render (hydration)
+  if (
+    // Whether the page was rendered to HTML. (I.e. whether the user set the [`ssr`](https://vike.dev/ssr) setting to `false`.)
+    container.innerHTML !== '' &&
+    // Whether the page was already rendered to HTML. (I.e. whether this is the first client-side rendering.)
+    pageContext.isHydration
+  ) {
+    // Hydration
     root = ReactDOM.hydrateRoot(container, page, {
       // @ts-expect-error
       onUncaughtError
@@ -50,6 +57,9 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
 
   pageContext.page = page
   pageContext.root = root
+
+  // Use case:
+  // - Testing tool https://github.com/vikejs/vike-react/issues/95
   pageContext.config.onAfterRenderClient?.(pageContext)
 }
 

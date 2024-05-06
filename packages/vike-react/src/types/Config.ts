@@ -39,6 +39,7 @@ declare global {
        *
        */
       lang?: string
+
       /**
        * If `true`, the page is rendered twice: on the server-side (to HTML) and on the client-side (hydration).
        *
@@ -49,8 +50,8 @@ declare global {
        * @default true
        *
        */
-
       ssr?: boolean
+
       /**
        * Whether to stream the page's HTML. Requires Server-Side Rendering (`ssr: true`).
        *
@@ -58,18 +59,15 @@ declare global {
        *
        */
       stream?: boolean
+
       /**
        * Client-side hook called before the page is rendered.
        */
-
-      // https://github.com/vikejs/vike-react/issues/110
       onBeforeRenderClient?: (pageContext: PageContextClient) => void
 
       /**
        * Client-side hook called after the page is rendered.
        */
-
-      // https://github.com/vikejs/vike-react/pull/96
       onAfterRenderClient?: (pageContext: PageContextClient) => void
 
       // Temporary until Wrapper is cumulative

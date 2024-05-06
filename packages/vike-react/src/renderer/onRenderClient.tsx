@@ -8,6 +8,8 @@ import { getPageElement } from './getPageElement.js'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderClientSync> => {
+  pageContext.config.onBeforeRenderClient?.(pageContext)
+
   const page = getPageElement(pageContext)
 
   // TODO: implement this? So that, upon errors, onRenderClient() throws an error and Vike can render the error. As of April 2024 it isn't released yet.

@@ -59,6 +59,13 @@ declare global {
        */
       stream?: boolean
       /**
+       * Client-side hook called before the page is rendered.
+       */
+
+      // https://github.com/vikejs/vike-react/issues/110
+      onBeforeRenderClient?: (pageContext: PageContextClient) => void
+
+      /**
        * Client-side hook called after the page is rendered.
        */
 

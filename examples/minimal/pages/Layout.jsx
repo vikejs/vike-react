@@ -5,19 +5,17 @@ import './Layout.css'
 
 function Layout({ children }) {
   return (
-    <React.StrictMode>
-      <PageLayout>
-        <Sidebar>
-          <a className="navitem" href="/">
-            Home
-          </a>
-          <a className="navitem" href="/about">
-            About
-          </a>
-        </Sidebar>
-        <Content>{children}</Content>
-      </PageLayout>
-    </React.StrictMode>
+    <PageLayout>
+      <Sidebar>
+        <a className="navitem" href="/">
+          Home
+        </a>
+        <a className="navitem" href="/about">
+          About
+        </a>
+      </Sidebar>
+      <Content>{children}</Content>
+    </PageLayout>
   )
 }
 

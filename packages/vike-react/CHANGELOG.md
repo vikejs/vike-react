@@ -1,3 +1,13 @@
+## [0.4.9](https://github.com/vikejs/vike-react/compare/vike-react@0.4.8...vike-react@0.4.9) (2024-05-12)
+
+
+### Features
+
+* `onBeforeRenderClient()` (closes [#110](https://github.com/vikejs/vike-react/issues/110)) ([#111](https://github.com/vikejs/vike-react/issues/111)) ([68be831](https://github.com/vikejs/vike-react/commit/68be8317420ce25aa280a58fb1dcf1a5337fb4ab))
+* new setting `reactStrictMode` (closes [#109](https://github.com/vikejs/vike-react/issues/109)) ([67ba4e7](https://github.com/vikejs/vike-react/commit/67ba4e778c4272a17a109278edebadc8c810002f))
+
+
+
 ## [0.4.8](https://github.com/vikejs/vike-react/compare/vike-react@0.4.7...vike-react@0.4.8) (2024-04-18)
 
 

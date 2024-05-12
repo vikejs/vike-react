@@ -61,6 +61,13 @@ declare global {
       stream?: boolean
 
       /**
+       * Whether to use `<React.StrictMode>`, see https://react.dev/reference/react/StrictMode
+       *
+       * @default true
+       */
+      reactStrictMode?: boolean
+
+      /**
        * Client-side hook called before the page is rendered.
        */
       onBeforeRenderClient?: (pageContext: PageContextClient) => void

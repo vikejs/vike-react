@@ -9,17 +9,18 @@ function getPageElement(pageContext: PageContext): JSX.Element {
   const Wrapper = pageContext.config.Wrapper ?? PassThrough
   const VikeReactQueryWrapper = pageContext.config.VikeReactQueryWrapper ?? (PassThrough as any)
   const { Page } = pageContext
-  const page = (
-    <React.StrictMode>
-      <PageContextProvider pageContext={pageContext}>
-        <VikeReactQueryWrapper pageContext={pageContext}>
-          <Wrapper>
-            <Layout>{Page ? <Page /> : null}</Layout>
-          </Wrapper>
-        </VikeReactQueryWrapper>
-      </PageContextProvider>
-    </React.StrictMode>
+  let page = (
+    <PageContextProvider pageContext={pageContext}>
+      <VikeReactQueryWrapper pageContext={pageContext}>
+        <Wrapper>
+          <Layout>{Page ? <Page /> : null}</Layout>
+        </Wrapper>
+      </VikeReactQueryWrapper>
+    </PageContextProvider>
   )
+  if (pageContext.config.reactStrictMode !== false) {
+    page = <React.StrictMode>{page}</React.StrictMode>
+  }
   return page
 }
 

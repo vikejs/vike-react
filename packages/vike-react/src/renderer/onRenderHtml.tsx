@@ -22,13 +22,14 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
   const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
 
   const Head = pageContext.config.Head || (() => <></>)
-  const head = (
-    <React.StrictMode>
-      <PageContextProvider pageContext={pageContext}>
-        <Head />
-      </PageContextProvider>
-    </React.StrictMode>
+  let head = (
+    <PageContextProvider pageContext={pageContext}>
+      <Head />
+    </PageContextProvider>
   )
+  if (pageContext.config.reactStrictMode !== false) {
+    head = <React.StrictMode>{head}</React.StrictMode>
+  }
 
   const headHtml = dangerouslySkipEscape(renderToString(head))
 

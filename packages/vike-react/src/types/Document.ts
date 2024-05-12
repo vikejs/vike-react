@@ -55,7 +55,7 @@ type Document = {
   icon?:
     | string
     | {
-        url: string
+        href: string
         sizes?: string
         apple?: boolean
       }[]

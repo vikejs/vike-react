@@ -3,10 +3,11 @@
 # `vike-react*`
 
 [Vike extensions](https://vike.dev/extensions) for React:
-- `vike-react`
+- `vike-react` ([React](https://react.dev) integration)
   - Docs at [`vike.dev`](https://vike.dev) and [`vike.dev/vike-react`](https://vike.dev/vike-react)
-  - [Source Code](packages/vike-react/)
   - [CHANGELOG.md](packages/vike-react/CHANGELOG.md)
-- `vike-react-query`
-  - Docs at [`README.md`](packages/vike-react-query/)
+  - [Source Code](packages/vike-react)
+- `vike-react-query` ([TanStack React Query](https://tanstack.com/query/latest) integration)
+  - Docs at [`README.md`](packages/vike-react-query#readme)
   - [CHANGELOG.md](packages/vike-react-query/CHANGELOG.md)
+  - [Source Code](packages/vike-react-query)

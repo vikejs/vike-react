@@ -3,7 +3,10 @@
 # `vike-react*`
 
 [Vike extensions](https://vike.dev/extensions) for React:
-* [`vike-react`](packages/vike-react/)
-  - [Changelog](packages/vike-react/CHANGELOG.md)
-* [`vike-react-query`](packages/vike-react-query/)
-  - [Changelog](packages/vike-react-query/CHANGELOG.md)
+- `vike-react`
+  - Docs at [`vike.dev`](https://vike.dev) and [`vike.dev/vike-react`](https://vike.dev/vike-react)
+  - [Source Code](packages/vike-react/)
+  - [CHANGELOG.md](packages/vike-react/CHANGELOG.md)
+- `vike-react-query`
+  - Docs at [`README.md`](packages/vike-react-query/)
+  - [CHANGELOG.md](packages/vike-react-query/CHANGELOG.md)

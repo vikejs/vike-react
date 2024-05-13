@@ -57,11 +57,15 @@ declare global {
        *
        * @default false
        *
+       * https://vike.dev/stream
+       *
        */
       stream?: boolean
 
       /**
-       * Whether to use `<React.StrictMode>`, see https://react.dev/reference/react/StrictMode
+       * Whether to use `<StrictMode>`.
+       *
+       * https://vike.dev/reactStrictMode
        *
        * @default true
        */
@@ -69,11 +73,15 @@ declare global {
 
       /**
        * Client-side hook called before the page is rendered.
+       *
+       * https://vike.dev/onBeforeRenderClient
        */
       onBeforeRenderClient?: (pageContext: PageContextClient) => void
 
       /**
        * Client-side hook called after the page is rendered.
+       *
+       * https://vike.dev/onAfterRenderClient
        */
       onAfterRenderClient?: (pageContext: PageContextClient) => void
 

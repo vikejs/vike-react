@@ -56,7 +56,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
     }
   }
 
-  let { htmlTags, htmlAttr, bodyAttr, rootAttr } = getHtmlTags(pageContext)
+  let { htmlTags, htmlAttr, bodyAttr } = getHtmlTags(pageContext)
   if (langAttr !== '') htmlAttr = ''
 
   const documentHtml = escapeInject`<!DOCTYPE html>
@@ -69,7 +69,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
         ${dangerouslySkipEscape(htmlTags)}
       </head>
       <body${dangerouslySkipEscape(bodyAttr)}}>
-        <div id="root"${dangerouslySkipEscape(rootAttr)}>${pageView}</div>
+        <div id="root">${pageView}</div>
       </body>
     </html>`
 

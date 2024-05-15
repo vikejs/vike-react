@@ -43,9 +43,14 @@ type Document = {
    */
   locale?: string
 
+  // Or following?
+  // - htmlAttrs
+  // - bodyAttrs
   htmlTagAttributes?: Record<string, string>
   bodyTagAttributes?: Record<string, string>
+  /* Not really needed I think
   rootTagAttributes?: Record<string, string>
+  */
 
   /** Website icon (aka favicon).
    *

@@ -15,7 +15,6 @@ function getHtmlTags(pageContext: PageContextServer) {
   if (!htmlTagAttributes.lang) htmlTagAttributes.lang = lang ?? 'en'
   const htmlAttr = getTagAttributesString(htmlTagAttributes)
   const bodyAttr = getTagAttributesString(document.bodyTagAttributes ?? {})
-  const rootAttr = getTagAttributesString(document.rootTagAttributes ?? {})
 
   const htmlTags = [
     title && `<title>${escapeHtml(title)}</title>`,
@@ -28,8 +27,7 @@ function getHtmlTags(pageContext: PageContextServer) {
   return {
     htmlTags,
     htmlAttr,
-    bodyAttr,
-    rootAttr
+    bodyAttr
   }
 }
 

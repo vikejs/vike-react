@@ -1,3 +1,13 @@
+## [0.4.10](https://github.com/vikejs/vike-react/compare/vike-react@0.4.9...vike-react@0.4.10) (2024-05-17)
+
+
+### Bug Fixes
+
+* add links to JSDocs ([b0e4441](https://github.com/vikejs/vike-react/commit/b0e4441f47d724dd5a1abc3fd76116f30256d0a4))
+* rename root ID `#react-root` => `#root` ([843151d](https://github.com/vikejs/vike-react/commit/843151d987e7ccdad7380c90515d91eb0ff3a512))
+
+
+
 ## [0.4.9](https://github.com/vikejs/vike-react/compare/vike-react@0.4.8...vike-react@0.4.9) (2024-05-12)
 
 

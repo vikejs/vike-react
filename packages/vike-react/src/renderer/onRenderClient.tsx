@@ -19,7 +19,7 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
   //  - https://react-dev-git-fork-rickhanlonii-rh-root-options-fbopensource.vercel.app/reference/react-dom/client/hydrateRoot#show-a-dialog-for-uncaught-errors
   const onUncaughtError = (_error: any, _errorInfo: any) => {}
 
-  const container = document.getElementById('react-root')!
+  const container = document.getElementById('root')!
   if (
     // Whether the page was rendered to HTML. (I.e. whether the user set the [`ssr`](https://vike.dev/ssr) setting to `false`.)
     container.innerHTML !== '' &&

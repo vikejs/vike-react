@@ -56,7 +56,7 @@ function testNavigationBetweenWithSSRAndWithoutSSR() {
   const url = '/without-ssr'
   test(url + " isn't rendered to HTML", async () => {
     const html = await fetchHtml(url)
-    expect(html).toContain('<div id="react-root"></div>')
+    expect(html).toContain('<div id="root"></div>')
     expect(html).not.toContain(textWithoutSSR)
     await page.goto(getServerUrl() + url)
     await testCounter()

@@ -60,7 +60,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
         ${faviconTag}
       </head>
       <body>
-        <div id="react-root">${pageView}</div>
+        <div id="root">${pageView}</div>
       </body>
     </html>`
 

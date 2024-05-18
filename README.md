@@ -2,7 +2,7 @@
 
 # `vike-react*`
 
-[Vike extensions](https://vike.dev/extensions) for React:
+[Vike extensions](https://vike.dev/extensions) for [React](https://react.dev):
 - `vike-react` ([React](https://react.dev) integration)
   - Docs at [`vike.dev`](https://vike.dev) and [`vike.dev/vike-react`](https://vike.dev/vike-react)
   - [CHANGELOG.md](packages/vike-react/CHANGELOG.md)

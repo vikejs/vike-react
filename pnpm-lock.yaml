@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  vike: 0.4.171-commit-f9548df
+  vike: 0.4.171-commit-2876124
   vike-react: link:./packages/vike-react/
   vike-react-query: link:./packages/vike-react-query/
 
@@ -56,8 +56,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: 0.4.171-commit-f9548df
-        version: 0.4.171-commit-f9548df(react-streaming@0.3.27)(vite@5.1.1)
+        specifier: 0.4.171-commit-2876124
+        version: 0.4.171-commit-2876124(react-streaming@0.3.27)(vite@5.1.1)
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -77,8 +77,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       vike:
-        specifier: 0.4.171-commit-f9548df
-        version: 0.4.171-commit-f9548df(react-streaming@0.3.27)(vite@5.1.1)
+        specifier: 0.4.171-commit-2876124
+        version: 0.4.171-commit-2876124(react-streaming@0.3.27)(vite@5.1.1)
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -110,8 +110,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: 0.4.171-commit-f9548df
-        version: 0.4.171-commit-f9548df(react-streaming@0.3.27)(vite@5.1.1)
+        specifier: 0.4.171-commit-2876124
+        version: 0.4.171-commit-2876124(react-streaming@0.3.27)(vite@5.1.1)
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -159,8 +159,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: 0.4.171-commit-f9548df
-        version: 0.4.171-commit-f9548df(react-streaming@0.3.27)(vite@4.5.1)
+        specifier: 0.4.171-commit-2876124
+        version: 0.4.171-commit-2876124(react-streaming@0.3.27)(vite@4.5.1)
 
   packages/vike-react-query:
     dependencies:
@@ -211,8 +211,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: 0.4.171-commit-f9548df
-        version: 0.4.171-commit-f9548df(react-streaming@0.3.27)(vite@4.5.1)
+        specifier: 0.4.171-commit-2876124
+        version: 0.4.171-commit-2876124(react-streaming@0.3.27)(vite@4.5.1)
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -3594,8 +3594,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vike@0.4.171-commit-f9548df(react-streaming@0.3.27)(vite@4.5.1):
-    resolution: {integrity: sha512-IOWVlDpMHcmpTSJ05cuhVSMWCdTj/iygCywUPMSAvuM9t50J7WWpAW+URbdiuksohI+Ws0n7YnJbMyP3F0jqdw==}
+  /vike@0.4.171-commit-2876124(react-streaming@0.3.27)(vite@4.5.1):
+    resolution: {integrity: sha512-IET6k68PFgQIij21su5zu97ly/MzWuo3cYzvgQq1Q76VYTQi4muKWJJAUOlp0U17FFtn3Wmi7cvwfyXXugxmeA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -3621,8 +3621,8 @@ packages:
       vite: 4.5.1(@types/node@20.11.17)
     dev: true
 
-  /vike@0.4.171-commit-f9548df(react-streaming@0.3.27)(vite@5.1.1):
-    resolution: {integrity: sha512-IOWVlDpMHcmpTSJ05cuhVSMWCdTj/iygCywUPMSAvuM9t50J7WWpAW+URbdiuksohI+Ws0n7YnJbMyP3F0jqdw==}
+  /vike@0.4.171-commit-2876124(react-streaming@0.3.27)(vite@5.1.1):
+    resolution: {integrity: sha512-IET6k68PFgQIij21su5zu97ly/MzWuo3cYzvgQq1Q76VYTQi4muKWJJAUOlp0U17FFtn3Wmi7cvwfyXXugxmeA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:

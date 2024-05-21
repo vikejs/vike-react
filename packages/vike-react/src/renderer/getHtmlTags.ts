@@ -3,6 +3,7 @@ export { getHtmlTags }
 import type { PageContextServer } from 'vike/types'
 import type { Document } from '../types/Document.js'
 import { getDocument, getDocumentElementsIsomoprh } from './getDocument.js'
+import { assert } from '../utils/assert.js'
 
 function getHtmlTags(pageContext: PageContextServer) {
   const { title, lang, favicon } = getDocumentElementsIsomoprh(pageContext)
@@ -45,7 +46,7 @@ function escapeHtml(unsafeString: string): string {
 
 function getViewportContent(viewport: Document['viewport']): string {
   if (
-    // User explicitly opting-out
+    // User opting-out
     viewport === null ||
     // Default
     viewport === undefined
@@ -59,7 +60,7 @@ function getViewportContent(viewport: Document['viewport']): string {
   } else if (typeof viewport === 'number') {
     return `width=${viewport}`
   } else {
-    return viewport.raw
+    assert(false)
   }
 }
 

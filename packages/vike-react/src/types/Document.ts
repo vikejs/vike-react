@@ -1,3 +1,5 @@
+import type { PageContextClient, PageContextServer } from 'vike/types'
+
 export type { Document }
 
 // TODO:
@@ -9,6 +11,11 @@ export type { Document }
 //  - Can lang be set to en-US instead of en?
 type Document = {
   title?: string
+  /**
+   * @default: ({ title, name }) => tile ? name ? : && !name ? `${title} | ${name} : !name ?`
+   */
+  titleTemplate?: (pageContext: PageContextClient | PageContextServer) => string
+  name?: string
   description?: string
 
   // TODO/next-major-release: change default to 'responsive'
@@ -22,7 +29,6 @@ type Document = {
    * - When set to `'responsive'`, the page's width corresponds to the device width's (it isn't zoomed out).
    * - When set to a `number`, the page's viewport width is set that number (`px`) on mobile/tablet devices. For example, if your page looks/works well only starting from 1000px, then set the value to `1000` so that the page's width is 1000px even on a mobile device with a physical width of 500px: the page is then zoomed out at a 0.5 scale.
    * - When set to `null`, the `<meta name="viewport">` tag isn't set, falling back to the browser's default. We don't recommend this and instead consider explicitly setting a `number` instead.
-   * - When set to `{ raw: string }`, the `<meta name="viewport" content="${raw}">` tag is set to that value.
    *
    * See also:
    * - Difference between responsive and zoomed out: [1].
@@ -33,7 +39,7 @@ type Document = {
    *
    * @default null
    */
-  viewport?: 'responsive' | number | { raw: string } | null
+  viewport?: 'responsive' | number | null
 
   /**
    *
@@ -43,9 +49,12 @@ type Document = {
    */
   locale?: string
 
-  // Or following?
-  // - htmlAttrs
-  // - bodyAttrs
+  /*
+  htmlAttrs
+  bodyAttrs
+  bodyHtmlStart
+  bodyHtmlEnd
+  */
   htmlTagAttributes?: Record<string, string>
   bodyTagAttributes?: Record<string, string>
   /* Not really needed I think
@@ -71,7 +80,7 @@ type Document = {
    * <meta property="og:image" content="https://vitejs.dev/og-image.png">
    * <meta name="twitter:card" content="summary_large_image">
    */
-  previewImage?:
+  image?:
     | string
     | {
         url: string
@@ -80,7 +89,7 @@ type Document = {
         alt?: string
       }
 
-  // <meta name="twitter:site" content="@vite_js">
+  // <meta name="twitter:site" content="@vike_js">
   twitter?: string
 
   /**
@@ -99,7 +108,7 @@ type Document = {
    * https://developer.mozilla.org/en-US/docs/Web/Manifest
    * https://vike.dev/document
    */
-  manifest?: string
+  manifest?: string | Record<string, unknown>
 
   /**
    * The UI frame color for mobile.

@@ -7,6 +7,13 @@
   "exports": {
     "./useData": "./dist/hooks/useData.js",
     "./usePageContext": "./dist/hooks/usePageContext.js",
+    "./useDocument": {
+      "node": "./dist/hooks/useDocument-server.js",
+      "worker": "./dist/hooks/useDocument-server.js",
+      "deno": "./dist/hooks/useDocument-server.js",
+      "browser": "./dist/hooks/useDocument-client.js",
+      "types": "./dist/hooks/useDocument-server.d.ts"
+    },
     "./ClientOnly": "./dist/components/ClientOnly.js",
     ".": "./dist/index.js",
     "./config": "./dist/+config.js",
@@ -48,6 +55,9 @@
       ],
       "usePageContext": [
         "./dist/hooks/usePageContext.d.ts"
+      ],
+      "useDocument": [
+        "./dist/hooks/useDocument-server.d.ts"
       ],
       "ClientOnly": [
         "./dist/components/ClientOnly.d.ts"

@@ -9,17 +9,22 @@ import { getPageElement } from './getPageElement.js'
 import { PageContextProvider } from '../hooks/usePageContext.js'
 import React from 'react'
 import type { OnRenderHtmlAsync } from 'vike/types'
+import { getHtmlTags } from './getHtmlTags.js'
 
 checkVikeVersion()
 addEcosystemStamp()
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
+  ;(pageContext as any)._htmlHeadAlreadySet = false
+
+  // TODO/next-major-release: remove
   const title = getHeadSetting('title', pageContext)
   const favicon = getHeadSetting('favicon', pageContext)
-  const lang = getHeadSetting('lang', pageContext) || 'en'
+  const lang = getHeadSetting('lang', pageContext)
 
   const titleTag = !title ? '' : escapeInject`<title>${title}</title>`
-  const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
+  const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}"/>`
+  const langAttr = !lang ? '' : escapeInject` lang='${lang}'`
 
   const Head = pageContext.config.Head || (() => <></>)
   let head = (
@@ -47,19 +52,23 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
       pageView = dangerouslySkipEscape(renderToString(page))
     } else {
       const disable = stream === false ? true : undefined
-      pageView = await renderToStream(page, { userAgent: pageContext.userAgent, disable })
+      pageView = await renderToStream(page, { userAgent: pageContext.headers?.['user-agent'], disable })
     }
   }
 
+  let { htmlTags, htmlAttr, bodyAttr } = getHtmlTags(pageContext)
+  if (langAttr !== '') htmlAttr = ''
+
   const documentHtml = escapeInject`<!DOCTYPE html>
-    <html lang='${lang}'>
+    <html${langAttr}${dangerouslySkipEscape(htmlAttr)}>
       <head>
         <meta charset="UTF-8" />
         ${titleTag}
         ${headHtml}
         ${faviconTag}
+        ${dangerouslySkipEscape(htmlTags)}
       </head>
-      <body>
+      <body${dangerouslySkipEscape(bodyAttr)}}>
         <div id="root">${pageView}</div>
       </body>
     </html>`

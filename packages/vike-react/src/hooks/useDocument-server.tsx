@@ -30,7 +30,7 @@ function useDocument(): DocumentSetter {
       return
     }
 
-    // <head> already sent to the browser => we send HTML snippets during the HTML Stream
+    // <head> already sent to the browser => send DOM-manipulating script snippets during HTML Streaming
     assert(htmlHeadAlreadySet === true)
     assert(stream)
     {

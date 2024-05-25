@@ -30,7 +30,7 @@
       "vike-react-query": "link:./packages/vike-react-query/"
     }
   },
-  "packageManager": "pnpm@8.6.12",
+  "packageManager": "pnpm@9.1.2",
   "devDependencies": {
     "@biomejs/biome": "^1.6.4",
     "@brillout/test-e2e": "^0.5.33",

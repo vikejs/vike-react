@@ -18,9 +18,8 @@
     "release": "cd ./packages/vike-react/ && pnpm run release",
     "release:minor": "cd ./packages/vike-react/ && pnpm run release:minor",
     "release:commit": "cd ./packages/vike-react/ && pnpm run release:commit",
-    "========= Clean": "",
-    "clean": "git clean -Xdf",
-    "reset": "pnpm run clean && pnpm install && pnpm run build",
+    "========= Reset": "",
+    "reset": "git clean -Xdf && pnpm install && pnpm run build",
     "========= Only allow pnpm; forbid yarn & npm": "",
     "preinstall": "npx only-allow pnpm"
   },

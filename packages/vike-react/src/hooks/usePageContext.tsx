@@ -16,8 +16,12 @@ function PageContextProvider({ pageContext, children }: { pageContext: PageConte
   return <reactContext.Provider value={pageContext}>{children}</reactContext.Provider>
 }
 
-/** Access the pageContext from any React component */
-function usePageContext() {
+/**
+ * Access `pageContext` from any React component.
+ *
+ * https://vike.dev/usePageContext
+ */
+function usePageContext(): PageContext {
   const { reactContext } = globalObject
   const pageContext = useContext(reactContext)
   /* React throws an error upon wrong hook usage, so I guess a nice error message isn't needed? And I guess we can therefore assume and assert pageContext to have been provided? Let's see if users report back an assert() failure.

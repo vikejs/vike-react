@@ -1,3 +1,13 @@
+## [0.4.11](https://github.com/vikejs/vike-react/compare/vike-react@0.4.10...vike-react@0.4.11) (2024-05-30)
+
+
+### Bug Fixes
+
+* improve `usePageContext()` JSDoc ([0f83834](https://github.com/vikejs/vike-react/commit/0f83834ebe27c99eb519be9aad231ef07c181dd2))
+* remove counterproductive assert() (fix [#115](https://github.com/vikejs/vike-react/issues/115)) ([2cc16cf](https://github.com/vikejs/vike-react/commit/2cc16cfa7a5b434031c528604d3c10c758678a31))
+
+
+
 ## [0.4.10](https://github.com/vikejs/vike-react/compare/vike-react@0.4.9...vike-react@0.4.10) (2024-05-17)
 
 

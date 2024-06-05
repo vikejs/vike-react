@@ -24,7 +24,7 @@
     "react-dom": ">=18.0.0",
     "react-streaming": ">=0.3.19",
     "vike": ">=0.4.173",
-    "vike-react": ">=0.4.4",
+    "vike-react": ">=0.4.12",
     "vite": ">=4.3.8"
   },
   "devDependencies": {

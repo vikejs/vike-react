@@ -6,7 +6,7 @@ import type _ from 'vike-react/config' // Needed for declaration merging of Conf
 export default {
   name: 'vike-react-query',
   require: {
-    'vike-react': '>=0.4.4'
+    'vike-react': '>=0.4.12'
   },
   queryClientConfig: undefined,
   VikeReactQueryWrapper: 'import:vike-react-query/renderer/VikeReactQueryWrapper:default',

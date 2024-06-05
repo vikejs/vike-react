@@ -2,9 +2,8 @@
 import type { PageContextClient } from 'vike/types'
 
 declare global {
-  // As a Vike user, use Vike.Config instead of VikePackages.ConfigVikeReact (see https://vike.dev/meta#typescript)
-  namespace VikePackages {
-    interface ConfigVikeReact {
+  namespace Vike {
+    interface Config {
       /** The page's root React component */
       Page?: () => React.ReactNode
 

@@ -1,5 +1,5 @@
 // https://vike.dev/meta#typescript
-import type { PageContextClient } from 'vike/types'
+import type { ImportString, PageContextClient } from 'vike/types'
 
 declare global {
   namespace Vike {
@@ -24,7 +24,7 @@ declare global {
        *
        * https://vike.dev/Wrapper
        */
-      Wrapper?: (props: { children: React.ReactNode }) => React.ReactNode
+      Wrapper?: Wrapper | ImportString
 
       /** &lt;title>${title}&lt;/title> */
       title?: string
@@ -90,9 +90,11 @@ declare global {
        * https://vike.dev/onAfterRenderClient
        */
       onAfterRenderClient?: (pageContext: PageContextClient) => void
-
-      // Temporary until Wrapper is cumulative
-      Wrapper?: React.ReactNode
+    }
+    interface ConfigResolved {
+      Wrapper?: Wrapper[]
     }
   }
 }
+
+type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode

@@ -1,14 +1,10 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import React, { ReactNode, useState } from 'react'
-import type { PageContext } from 'vike/types'
 import { StreamedHydration } from './StreamedHydration.js'
+import { usePageContext } from 'vike-react/usePageContext'
 
-type WrapperProps = {
-  pageContext: PageContext
-  children: ReactNode
-}
-
-export default function Wrapper({ pageContext, children }: WrapperProps) {
+export default function Wrapper({ children }: { children: ReactNode }) {
+  const pageContext = usePageContext()
   const { queryClientConfig, FallbackErrorBoundary = PassThrough } = pageContext.config
   const [queryClient] = useState(() => new QueryClient(queryClientConfig))
 

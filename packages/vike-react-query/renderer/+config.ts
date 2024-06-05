@@ -9,7 +9,7 @@ export default {
     'vike-react': '>=0.4.12'
   },
   queryClientConfig: undefined,
-  VikeReactQueryWrapper: 'import:vike-react-query/renderer/VikeReactQueryWrapper:default',
+  Wrapper: 'import:vike-react-query/renderer/Wrapper:default',
   FallbackErrorBoundary: 'import:vike-react-query/renderer/FallbackErrorBoundary:default',
   streamIsRequired: true,
   meta: {

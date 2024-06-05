@@ -92,7 +92,7 @@ declare global {
       onAfterRenderClient?: (pageContext: PageContextClient) => void
 
       // Temporary until Wrapper is cumulative
-      VikeReactQueryWrapper?: React.ReactNode
+      Wrapper?: React.ReactNode
     }
   }
 }

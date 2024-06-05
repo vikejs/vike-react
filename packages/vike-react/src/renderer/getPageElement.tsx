@@ -7,15 +7,15 @@ import { PageContextProvider } from '../hooks/usePageContext.js'
 function getPageElement(pageContext: PageContext): JSX.Element {
   const Layout = pageContext.config.Layout ?? PassThrough
   const Wrapper = pageContext.config.Wrapper ?? PassThrough
-  const VikeReactQueryWrapper = pageContext.config.VikeReactQueryWrapper ?? (PassThrough as any)
+  const Wrapper = pageContext.config.Wrapper ?? (PassThrough as any)
   const { Page } = pageContext
   let page = (
     <PageContextProvider pageContext={pageContext}>
-      <VikeReactQueryWrapper pageContext={pageContext}>
+      <Wrapper pageContext={pageContext}>
         <Wrapper>
           <Layout>{Page ? <Page /> : null}</Layout>
         </Wrapper>
-      </VikeReactQueryWrapper>
+      </Wrapper>
     </PageContextProvider>
   )
   if (pageContext.config.reactStrictMode !== false) {

@@ -3,12 +3,12 @@ import React, { ReactNode, useState } from 'react'
 import type { PageContext } from 'vike/types'
 import { StreamedHydration } from './StreamedHydration.js'
 
-type VikeReactQueryWrapperProps = {
+type WrapperProps = {
   pageContext: PageContext
   children: ReactNode
 }
 
-export default function VikeReactQueryWrapper({ pageContext, children }: VikeReactQueryWrapperProps) {
+export default function Wrapper({ pageContext, children }: WrapperProps) {
   const { queryClientConfig, FallbackErrorBoundary = PassThrough } = pageContext.config
   const [queryClient] = useState(() => new QueryClient(queryClientConfig))
 

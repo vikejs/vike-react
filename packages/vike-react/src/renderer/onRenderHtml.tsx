@@ -69,14 +69,17 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
   return documentHtml
 }
 
+// We don't need this anymore starting from vike@0.4.173 which added the `require` setting.
+// TODO/eventually: remove this once <=0.4.172 versions become rare.
 function checkVikeVersion() {
   if (version) {
     const versionParts = version.split('.').map((s) => parseInt(s, 10)) as [number, number, number]
     if (versionParts[0] > 0) return
     if (versionParts[1] > 4) return
-    if (versionParts[2] >= 147) return
+    if (versionParts[2] >= 173) return
   }
-  throw new Error('Update Vike to 0.4.147 or above')
+  // We can leave it 0.4.173 until we entirely remove checkVikeVersion() (because starting vike@0.4.173 we use the new `require` setting).
+  throw new Error('Update Vike to 0.4.173 or above')
 }
 
 // Used by:

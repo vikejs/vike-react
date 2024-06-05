@@ -1,3 +1,25 @@
+## [0.4.12](https://github.com/vikejs/vike-react/compare/vike-react@0.4.11...vike-react@0.4.12) (2024-06-05)
+
+
+### Bug Fixes
+
+* enforce peer dependencies ([e56df6e](https://github.com/vikejs/vike-react/commit/e56df6e0f24541507cec96a506e255d7e862c43b))
+* optimistic peerDependencies ([7c6adb0](https://github.com/vikejs/vike-react/commit/7c6adb0eaf36b442a606954f5270988d468818d5))
+* use pageContext.headers[user-agent] ([53fcec7](https://github.com/vikejs/vike-react/commit/53fcec7d18aae902cc968126c5d7df54673f42bc))
+
+
+### Features
+
+* make streamIsRequired public ([262bf96](https://github.com/vikejs/vike-react/commit/262bf963cdd1e66b63db1986f9a333354b574a3a))
+
+
+### BREAKING CHANGES
+
+* Update all vike-react(-*) packages to their latest
+versions, and update Vike to 0.4.173 or above.
+
+
+
 ## [0.4.11](https://github.com/vikejs/vike-react/compare/vike-react@0.4.10...vike-react@0.4.11) (2024-05-30)
 
 

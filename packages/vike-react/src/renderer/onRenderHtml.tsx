@@ -43,7 +43,13 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
       pageView = dangerouslySkipEscape(renderToString(page))
     } else {
       const disable = stream === false ? true : undefined
-      pageView = await renderToStream(page, { userAgent: pageContext.userAgent, disable })
+      pageView = await renderToStream(page, {
+        userAgent:
+          pageContext.headers?.['user-agent'] ||
+          // Deprecated way of acccessing User Agent header. Eventually remove it.
+          pageContext.userAgent,
+        disable
+      })
     }
   }
 

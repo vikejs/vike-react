@@ -27,8 +27,8 @@ export default {
 declare global {
   namespace Vike {
     interface Config {
-      queryClientConfig: QueryClientConfig
-      FallbackErrorBoundary: (props: { children: ReactNode }) => ReactNode
+      queryClientConfig?: QueryClientConfig
+      FallbackErrorBoundary?: (props: { children: ReactNode }) => ReactNode
     }
   }
 }

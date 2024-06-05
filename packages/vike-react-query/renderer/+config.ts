@@ -7,7 +7,7 @@ export default {
   queryClientConfig: undefined,
   VikeReactQueryWrapper: 'import:vike-react-query/renderer/VikeReactQueryWrapper:default',
   FallbackErrorBoundary: 'import:vike-react-query/renderer/FallbackErrorBoundary:default',
-  _streamIsRequied: true,
+  streamIsRequired: true,
   meta: {
     queryClientConfig: {
       env: {

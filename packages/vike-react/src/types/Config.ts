@@ -63,6 +63,13 @@ declare global {
       stream?: boolean
 
       /**
+       * Whether the existence of the React SSR stream is required (some integrations require it).
+       *
+       * HTML Streaming can still be disabled: the SSR stream is awaited and converted to a string.
+       */
+      streamIsRequired?: boolean
+
+      /**
        * Whether to use `<StrictMode>`.
        *
        * https://vike.dev/reactStrictMode

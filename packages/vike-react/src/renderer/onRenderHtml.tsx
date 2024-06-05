@@ -38,12 +38,8 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
     pageView = ''
   } else {
     const page = getPageElement(pageContext)
-    const {
-      stream,
-      // @ts-expect-error
-      _streamIsRequied
-    } = pageContext.config
-    if (!stream && !_streamIsRequied) {
+    const { stream, streamIsRequired } = pageContext.config
+    if (!stream && !streamIsRequired) {
       pageView = dangerouslySkipEscape(renderToString(page))
     } else {
       const disable = stream === false ? true : undefined

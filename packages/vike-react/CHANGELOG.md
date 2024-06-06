@@ -1,3 +1,12 @@
+## [0.4.13](https://github.com/vikejs/vike-react/compare/vike-react@0.4.12...vike-react@0.4.13) (2024-06-06)
+
+
+### Bug Fixes
+
+* make `<Wrapper>` cumulative ([#118](https://github.com/vikejs/vike-react/issues/118)) ([b3a7de1](https://github.com/vikejs/vike-react/commit/b3a7de15e29d5aed9c881648fc929d5a29fe65ca))
+
+
+
 ## [0.4.12](https://github.com/vikejs/vike-react/compare/vike-react@0.4.11...vike-react@0.4.12) (2024-06-05)
 
 

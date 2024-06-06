@@ -1,3 +1,18 @@
+## [0.0.7](https://github.com/vikejs/vike-react/compare/vike-react-query@0.0.6...vike-react-query@0.0.7) (2024-06-06)
+
+
+### Bug Fixes
+
+* make `<Wrapper>` cumulative ([#118](https://github.com/vikejs/vike-react/issues/118)) ([b3a7de1](https://github.com/vikejs/vike-react/commit/b3a7de15e29d5aed9c881648fc929d5a29fe65ca))
+* require vike-react 0.4.13 ([47cebca](https://github.com/vikejs/vike-react/commit/47cebca5a875dc75ec50ccdfc10650054503a219))
+
+
+### BREAKING CHANGES
+
+* Update vike-react to 0.4.13 or above.
+
+
+
 ## [0.0.6](https://github.com/vikejs/vike-react/compare/vike-react-query@0.0.5...vike-react-query@0.0.6) (2024-06-05)
 
 

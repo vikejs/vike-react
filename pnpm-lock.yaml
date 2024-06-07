@@ -169,9 +169,6 @@ importers:
       react-error-boundary:
         specifier: ^4.0.12
         version: 4.0.12(react@18.2.0)
-      vite:
-        specifier: '>=4.3.8'
-        version: 5.1.1(@types/node@20.11.17)
     devDependencies:
       '@brillout/release-me':
         specifier: ^0.3.8
@@ -188,18 +185,12 @@ importers:
       '@types/react':
         specifier: ^18.2.55
         version: 18.2.55
-      '@types/react-dom':
-        specifier: ^18.2.19
-        version: 18.2.19
       jsdom:
         specifier: ^24.0.0
         version: 24.0.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
       react-streaming:
         specifier: ^0.3.27
         version: 0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -215,6 +206,9 @@ importers:
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
+      vite:
+        specifier: ^5.1.1
+        version: 5.1.1(@types/node@20.11.17)
       vitest:
         specifier: ^1.2.2
         version: 1.2.2(@types/node@20.11.17)(jsdom@24.0.0)

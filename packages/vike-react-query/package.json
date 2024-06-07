@@ -21,11 +21,8 @@
   "peerDependencies": {
     "@tanstack/react-query": ">=5.0.0",
     "react": ">=18.0.0",
-    "react-dom": ">=18.0.0",
     "react-streaming": ">=0.3.19",
-    "vike": ">=0.4.173",
-    "vike-react": ">=0.4.13",
-    "vite": ">=4.3.8"
+    "vike-react": ">=0.4.13"
   },
   "devDependencies": {
     "@brillout/release-me": "^0.3.8",
@@ -33,15 +30,14 @@
     "@testing-library/react": "^14.2.1",
     "@types/node": "^20.11.17",
     "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19",
     "jsdom": "^24.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "react-streaming": "^0.3.27",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3",
     "vike": "^0.4.173",
     "vike-react": "^0.4.13",
+    "vite": "^5.1.1",
     "vitest": "^1.2.2"
   },
   "dependencies": {

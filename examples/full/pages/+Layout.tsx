@@ -1,11 +1,11 @@
-export { LayoutDefault }
+export { Layout }
 
 import './style.css'
 import React from 'react'
 import logoUrl from '../assets/logo.svg'
 import { Link } from '../components/Link'
 
-function LayoutDefault({ children }: { children: React.ReactNode }) {
+function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div
       style={{

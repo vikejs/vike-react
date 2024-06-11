@@ -13,7 +13,7 @@ declare global {
       /**
        * A component that defines the visual layout of the page common to several pages.
        *
-       * Technically: the `<Layou>` component wraps the root component `<Page>`.
+       * Technically: the `<Layout>` component wraps the root component `<Page>`.
        *
        * https://vike.dev/Layout
        */

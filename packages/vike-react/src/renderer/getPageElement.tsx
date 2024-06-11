@@ -1,17 +1,20 @@
 export { getPageElement }
 
-import React, { type ReactNode } from 'react'
+import React from 'react'
 import type { PageContext } from 'vike/types'
 import { PageContextProvider } from '../hooks/usePageContext.js'
 
 function getPageElement(pageContext: PageContext): JSX.Element {
-  // Main component
-  const Layout = pageContext.config.Layout ?? PassThrough
   const { Page } = pageContext
-  let page = <Layout>{Page ? <Page /> : null}</Layout>
+  let page = Page ? <Page /> : null
 
-  // Wrapper components
-  ;(pageContext.config.Wrapper || []).forEach((Wrapper) => {
+  // Wrapping
+  ;[
+    // Inner wrapping
+    ...(pageContext.config.Layout || []),
+    // Outer wrapping
+    ...(pageContext.config.Wrapper || [])
+  ].forEach((Wrapper) => {
     page = <Wrapper>{page}</Wrapper>
   })
   page = <PageContextProvider pageContext={pageContext}>{page}</PageContextProvider>
@@ -20,8 +23,4 @@ function getPageElement(pageContext: PageContext): JSX.Element {
   }
 
   return page
-}
-
-function PassThrough({ children }: { children: ReactNode }) {
-  return <>{children}</>
 }

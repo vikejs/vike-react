@@ -31,7 +31,8 @@ export default {
       env: { server: true }
     },
     Layout: {
-      env: { server: true, client: true }
+      env: { server: true, client: true },
+      cumulative: true
     },
     title: {
       env: { server: true, client: true }

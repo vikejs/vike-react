@@ -17,7 +17,7 @@ declare global {
        *
        * https://vike.dev/Layout
        */
-      Layout?: (props: { children: React.ReactNode }) => React.ReactNode
+      Layout?: Layout
 
       /**
        * A component wrapping the the root component `<Page>`.
@@ -93,8 +93,10 @@ declare global {
     }
     interface ConfigResolved {
       Wrapper?: Wrapper[]
+      Layout?: Layout[]
     }
   }
 }
 
 type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode
+type Layout = Wrapper

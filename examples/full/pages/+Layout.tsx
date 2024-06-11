@@ -20,6 +20,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         <Link href="/star-wars">Data Fetching</Link>
         <Link href="/streaming">HTML Streaming</Link>
         <Link href="/without-ssr">Without SSR</Link>
+        <Link href="/starship">Nested Layout</Link>
       </Sidebar>
       <Content>{children}</Content>
     </div>

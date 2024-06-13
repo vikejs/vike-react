@@ -1,3 +1,19 @@
+## [0.4.14](https://github.com/vikejs/vike-react/compare/vike-react@0.4.13...vike-react@0.4.14) (2024-06-13)
+
+
+### Features
+
+* make `Layout` setting cumulative ([92f8da4](https://github.com/vikejs/vike-react/commit/92f8da478dbfd60af8a89201065811a59d81b2eb))
+
+
+### BREAKING CHANGES
+
+* The `Layout` setting cannot be overriden anymore because it's now cumulative, see:
+ - https://vike.dev/Layout#multiple-layouts
+ - https://vike.dev/Layout#nested-layouts
+
+
+
 ## [0.4.13](https://github.com/vikejs/vike-react/compare/vike-react@0.4.12...vike-react@0.4.13) (2024-06-06)
 
 

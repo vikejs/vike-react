@@ -1,3 +1,12 @@
+# [0.1.0](https://github.com/vikejs/vike-react/compare/vike-react-query@0.0.7...vike-react-query@0.1.0) (2024-06-16)
+
+
+### Bug Fixes
+
+* simplify peerDependencies ([d452995](https://github.com/vikejs/vike-react/commit/d4529953ebc403be454f1f443601dbb059b63b62))
+
+
+
 ## [0.0.7](https://github.com/vikejs/vike-react/compare/vike-react-query@0.0.6...vike-react-query@0.0.7) (2024-06-06)
 
 

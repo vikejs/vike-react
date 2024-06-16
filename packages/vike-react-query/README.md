@@ -13,7 +13,7 @@ You can use it instead of [Vike's `data()` hook](https://vike.dev/data): with `v
 
 You also get:
  - [Progressive rendering](https://vike.dev/streaming#progressive-rendering) for a significant (perceived) increase in page speed.
- - Fallback components upong loading and/or error. (See [`withFallback()`](#withfallback).)
+ - Fallback component upon loading/error. (See [`withFallback()`](#withfallback).)
  - Caching. (See [`useSuspenseQuery()` options](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery).)
  - (Optional) [Usage with Telefunc](#usage-with-telefunc). Combining RPC with all the React Query goodies.
 

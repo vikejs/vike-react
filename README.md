@@ -4,7 +4,7 @@
   - Docs: [vike.dev/vike-react](https://vike.dev/vike-react)
   - Version history: [CHANGELOG.md](packages/vike-react/CHANGELOG.md)
   - Source code: [packages/vike-react/](packages/vike-react)
-- `vike-react-query` ([TanStack React Query](https://tanstack.com/query/latest) integration)
+- `vike-react-query` ([TanStack Query](https://tanstack.com/query) integration)
   - Docs: [README.md](packages/vike-react-query#readme)
   - Version history: [CHANGELOG.md](packages/vike-react-query/CHANGELOG.md)
   - Source code: [packages/vike-react-query/](packages/vike-react-query)

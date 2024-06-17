@@ -35,13 +35,13 @@ cd examples/full/ # or any other examples/*
 pnpm dev
 ```
 
-That's it. You can now view and test your modifications.
+That's it. You can now test your modifications.
 
-> [!Warning]
+> [!WARNING]
 > After changing the source code of `vike-react(-*)`, make sure to **always clear Vite's client cache** with `$ rm -rf examples/full/node_modules/.vite/`. Otherwise you'll get a version mismatch between the server (using the latest build) and the client (using the previous cached build).
 
-> [!Warning]
-> When switching Git branches, make sure to **run `pnpm reset`** at the monorepo root: it will re-install and re-build everything. It's required when swtiching to a branch that, for example, requires another Vike version.
+> [!WARNING]
+> When switching Git branches, make sure to **run `pnpm reset`** at the monorepo root: it will re-install and re-build everything. It's required when switching to a branch that, for example, requires another Vike version.
 
 <br/>
 
@@ -55,4 +55,4 @@ That's it. You can now view and test your modifications.
 > ```shell
 > npm install -g pnpm
 > ```
-> (Or see [pnpm.io > Installation](https://pnpm.io/installation#using-npm) for alternative methods.)
+> (Or see [pnpm Docs > Installation](https://pnpm.io/installation) for alternative methods.)

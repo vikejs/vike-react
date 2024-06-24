@@ -5,7 +5,7 @@
 
 # `vike-react-query`
 
-[TanStack React Query](https://tanstack.com/query/latest) integration for [vike-react](https://github.com/vikejs/vike-react/tree/main/packages/vike-react).
+[TanStack Query](https://tanstack.com/query/latest) integration for [vike-react](https://github.com/vikejs/vike-react/tree/main/packages/vike-react).
 
 `vike-react-query` enables you to create components that can fetch data.
 
@@ -15,7 +15,7 @@ You also get:
  - [Progressive rendering](https://vike.dev/streaming#progressive-rendering) for a significant (perceived) increase in page speed.
  - Fallback component upon loading/error. (See [`withFallback()`](#withfallback).)
  - Caching. (See [`useSuspenseQuery()` options](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery).)
- - (Optional) [Usage with Telefunc](#usage-with-telefunc). Combining RPC with all the React Query goodies.
+ - (Optional) [Usage with Telefunc](#usage-with-telefunc). Combining RPC with all the TranStack Query goodies.
 
 See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-query).
 

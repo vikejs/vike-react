@@ -52,14 +52,20 @@ declare global {
       ssr?: boolean
 
       /**
-       * Whether to stream the page's HTML. Requires Server-Side Rendering (`ssr: true`).
+       * Whether to stream the page's HTML.
+       *
+       * Requires Server-Side Rendering (`ssr: true`).
+       *
+       * A Node.js Stream is used whenever possible, falling back to a Web Stream otherwise.
+       *
+       * By setting the value to `web` or `node`, you force the usage of a Web Stream or Node.js Stream.
        *
        * @default false
        *
        * https://vike.dev/stream
        *
        */
-      stream?: boolean
+      stream?: boolean | 'node' | 'web'
 
       /**
        * Whether the existence of the React SSR stream is required (some integrations require it).

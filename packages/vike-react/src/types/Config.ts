@@ -53,8 +53,8 @@ declare global {
 
       /**
        * Whether to stream the page's HTML. Requires Server-Side Rendering (`ssr: true`).
-       * If true, vike-react will guess which type of underlying Stream is the best for your running platform.
-       * You can also force a Web Stream or Node Stream with the respective 'web' and 'node' values.
+       * A Node.js Stream is used whenever possible, while falling back to a Web Stream otherwise.
+       * By setting the value to `web` or `node`, you force the usage of a Web Stream or Node.js Stream.
        *
        * @default false
        *

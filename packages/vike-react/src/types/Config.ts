@@ -52,9 +52,13 @@ declare global {
       ssr?: boolean
 
       /**
-       * Whether to stream the page's HTML. Requires Server-Side Rendering (`ssr: true`).
-       * A Node.js Stream is used whenever possible, while falling back to a Web Stream otherwise.
-       * By setting the value to `web` or `node`, you force the usage of a Web Stream or Node.js Stream.
+       * Whether to stream the page's HTML.
+       *
+       * Requires Server-Side Rendering (`ssr: true`).
+       *
+       * A Node.js Stream is used whenever possible, falling back to a Web Stream otherwise.
+       *
+       * By setting the value to `web` or `node`, you force the usage of a Web Stream or a Node.js Stream.
        *
        * @default false
        *

@@ -1,3 +1,12 @@
+## [0.4.15](https://github.com/vikejs/vike-react/compare/vike-react@0.4.14...vike-react@0.4.15) (2024-06-25)
+
+
+### Features
+
+* Add support for manual override of stream type ([#122](https://github.com/vikejs/vike-react/issues/122)) ([7a1e9f2](https://github.com/vikejs/vike-react/commit/7a1e9f24212bf2d6a1ff91e7cb36f44f8201ee94))
+
+
+
 ## [0.4.14](https://github.com/vikejs/vike-react/compare/vike-react@0.4.13...vike-react@0.4.14) (2024-06-13)
 
 

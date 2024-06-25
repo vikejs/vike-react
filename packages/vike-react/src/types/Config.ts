@@ -53,13 +53,15 @@ declare global {
 
       /**
        * Whether to stream the page's HTML. Requires Server-Side Rendering (`ssr: true`).
+       * If true, vike-react will guess which type of underlying Stream is the best for your running platform.
+       * You can also force a Web Stream or Node Stream with the respective 'web' and 'node' values.
        *
        * @default false
        *
        * https://vike.dev/stream
        *
        */
-      stream?: boolean
+      stream?: boolean | 'node' | 'web'
 
       /**
        * Whether the existence of the React SSR stream is required (some integrations require it).

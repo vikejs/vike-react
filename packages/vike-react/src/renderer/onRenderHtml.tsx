@@ -1,14 +1,14 @@
 // https://vike.dev/onRenderHtml
 export { onRenderHtml }
 
+import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { renderToStream } from 'react-streaming/server'
-import { escapeInject, dangerouslySkipEscape, version } from 'vike/server'
+import { dangerouslySkipEscape, escapeInject, version } from 'vike/server'
+import type { OnRenderHtmlAsync } from 'vike/types'
+import { PageContextProvider } from '../hooks/usePageContext.js'
 import { getHeadSetting } from './getHeadSetting.js'
 import { getPageElement } from './getPageElement.js'
-import { PageContextProvider } from '../hooks/usePageContext.js'
-import React from 'react'
-import type { OnRenderHtmlAsync } from 'vike/types'
 
 checkVikeVersion()
 addEcosystemStamp()
@@ -44,6 +44,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
     } else {
       const disable = stream === false ? true : undefined
       pageView = await renderToStream(page, {
+        webStream: typeof stream === 'string' ? stream === 'web' : undefined,
         userAgent:
           pageContext.headers?.['user-agent'] ||
           // Deprecated way of acccessing User Agent header. Eventually remove it.

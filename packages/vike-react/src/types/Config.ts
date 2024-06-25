@@ -58,7 +58,7 @@ declare global {
        *
        * A Node.js Stream is used whenever possible, falling back to a Web Stream otherwise.
        *
-       * By setting the value to `web` or `node`, you force the usage of a Web Stream or a Node.js Stream.
+       * By setting the value to `web` or `node`, you force the usage of a Web Stream or Node.js Stream.
        *
        * @default false
        *

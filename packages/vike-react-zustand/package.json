@@ -7,7 +7,7 @@
   "exports": {
     ".": "./dist/index.js",
     "./config": "./dist/renderer/+config.js",
-    "./renderer/VikeReactZustandWrapper": "./dist/renderer/VikeReactZustandWrapper.js",
+    "./renderer/Wrapper": "./dist/renderer/Wrapper.js",
     "./plugin": "./dist/plugin.js"
   },
   "scripts": {
@@ -36,8 +36,8 @@
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3",
-    "vike": "^0.4.151",
-    "vike-react": "^0.3.8",
+    "vike": "^0.4.160",
+    "vike-react": "^0.4.4",
     "vite": "^5.0.10",
     "zustand": "^4.4.7"
   },
@@ -49,8 +49,8 @@
       "config": [
         "dist/renderer/+config.d.ts"
       ],
-      "renderer/VikeReactZustandWrapper": [
-        "dist/renderer/VikeReactZustandWrapper.d.ts"
+      "renderer/Wrapper": [
+        "dist/renderer/Wrapper.d.ts"
       ],
       "plugin": [
         "dist/plugin.d.ts"

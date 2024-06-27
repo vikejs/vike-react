@@ -1,21 +1,17 @@
+import { cloneDeep, mergeWith } from 'lodash-es'
 import React, { ReactNode, useMemo } from 'react'
-import type { PageContext } from 'vike/types'
-import { getReactStoreContext, initializers_get, setPageContext } from './context.js'
-import { assert, removeFunctionsAndUndefined } from '../utils.js'
+import { usePageContext } from 'vike-react/usePageContext'
 import { create as createZustand } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import { cloneDeep, mergeWith } from 'lodash-es'
+import { assert, removeFunctionsAndUndefined } from '../utils.js'
+import { getReactStoreContext, initializers_get, setPageContext } from './context.js'
 
 // Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
 // @ts-expect-error
 import.meta.env ??= { SSR: true }
 
-type VikeReactZustandWrapperProps = {
-  pageContext: PageContext
-  children: ReactNode
-}
-
-export default function VikeReactZustandWrapper({ pageContext, children }: VikeReactZustandWrapperProps) {
+export default function Wrapper({ children }: { children: ReactNode }) {
+  const pageContext = usePageContext()
   const initializers = initializers_get()
   const stores = useMemo(
     () =>

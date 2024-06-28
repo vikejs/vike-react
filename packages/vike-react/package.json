@@ -16,7 +16,7 @@
   },
   "scripts": {
     "dev": "tsc --watch",
-    "build": "rimraf dist/ && tsc --build",
+    "build": "rimraf dist/ && tsc",
     "release": "release-me patch",
     "release:minor": "release-me minor",
     "release:commit": "release-me commit"

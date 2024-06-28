@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "skipLibCheck": true,
+        "declaration": true,
+        "strict": true,
+        "noUnusedParameters": true,
+        "esModuleInterop": true,
+        "noUncheckedIndexedAccess": true,
+        "noEmitOnError": false,
+        "rootDir": "./",
+        "lib": [
+            "ES2021",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "jsx": "react",
+        "types": [
+            "vite/client"
+        ],
+    },
+    "exclude": [
+        "./node_modules/",
+        "./dist/",
+        "**/*.spec.ts"
+    ]
+}

@@ -14,9 +14,9 @@
     "./renderer/onRenderClient": "./dist/shared/renderer/onRenderClient.js",
     "./useNavigate": {
       "browser": "./dist/client/hooks/useNavigate.js",
-      "node": "./dist/shared/hooks/useNavigate.js",
-      "worker": "./dist/shared/hooks/useNavigate.js",
-      "types": "./dist/client/hooks/useNavigate.d.ts"
+      "node": "./dist/node/hooks/useNavigate.js",
+      "worker": "./dist/node/hooks/useNavigate.js",
+      "types": "./dist/shared/hooks/useNavigate.d.ts"
     }
   },
   "scripts": {
@@ -56,7 +56,7 @@
         "./dist/shared/hooks/usePageContext.d.ts"
       ],
       "useNavigate": [
-        "./dist/client/hooks/useNavigate.d.ts"
+        "./dist/shared/hooks/useNavigate.d.ts"
       ],
       "ClientOnly": [
         "./dist/shared/components/ClientOnly.d.ts"

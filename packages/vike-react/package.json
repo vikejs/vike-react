@@ -11,7 +11,8 @@
     ".": "./dist/index.js",
     "./config": "./dist/+config.js",
     "./renderer/onRenderHtml": "./dist/renderer/onRenderHtml.js",
-    "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js"
+    "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js",
+    "./useNavigate": "./dist/hooks/useNavigate.js"
   },
   "scripts": {
     "dev": "tsc --watch",
@@ -48,6 +49,9 @@
       ],
       "usePageContext": [
         "./dist/hooks/usePageContext.d.ts"
+      ],
+      "useNavigate": [
+        "./dist/hooks/useNavigate.d.ts"
       ],
       "ClientOnly": [
         "./dist/components/ClientOnly.d.ts"

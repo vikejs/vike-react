@@ -16,7 +16,7 @@
       "browser": "./dist/client/hooks/useNavigate.js",
       "node": "./dist/shared/hooks/useNavigate.js",
       "worker": "./dist/shared/hooks/useNavigate.js",
-      "types": "./dist/shared/hooks/useNavigate.d.ts"
+      "types": "./dist/client/hooks/useNavigate.d.ts"
     }
   },
   "scripts": {
@@ -56,7 +56,7 @@
         "./dist/shared/hooks/usePageContext.d.ts"
       ],
       "useNavigate": [
-        "./dist/shared/hooks/useNavigate.d.ts"
+        "./dist/client/hooks/useNavigate.d.ts"
       ],
       "ClientOnly": [
         "./dist/shared/components/ClientOnly.d.ts"

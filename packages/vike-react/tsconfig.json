@@ -1,14 +1,24 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./client/"
-    },
-    {
-      "path": "./node/"
-    },
-    {
-      "path": "./shared/"
-    }
-  ]
+  "compilerOptions": {
+    "outDir": "./dist/",
+    // Resolution
+    "target": "ES2020",
+    "module": "ES2020",
+    "moduleResolution": "Node",
+    // Libs
+    "lib": ["ES2021", "DOM", "DOM.Iterable"],
+    "types": ["vite/client"],
+    // Strictness
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitAny": true,
+    // Output
+    "declaration": true,
+    "noEmitOnError": false,
+    "rootDir": "./src",
+    // Misc
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react"
+  }
 }

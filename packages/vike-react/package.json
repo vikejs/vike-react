@@ -5,19 +5,14 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    "./useData": "./dist/shared/hooks/useData.js",
-    "./usePageContext": "./dist/shared/hooks/usePageContext.js",
-    "./ClientOnly": "./dist/shared/components/ClientOnly.js",
-    ".": "./dist/shared/index.js",
-    "./config": "./dist/shared/+config.js",
-    "./renderer/onRenderHtml": "./dist/shared/renderer/onRenderHtml.js",
-    "./renderer/onRenderClient": "./dist/shared/renderer/onRenderClient.js",
-    "./useNavigate": {
-      "browser": "./dist/client/hooks/useNavigate.js",
-      "node": "./dist/node/hooks/useNavigate.js",
-      "worker": "./dist/node/hooks/useNavigate.js",
-      "types": "./dist/shared/hooks/useNavigate.d.ts"
-    }
+    "./useData": "./dist/hooks/useData.js",
+    "./usePageContext": "./dist/hooks/usePageContext.js",
+    "./ClientOnly": "./dist/components/ClientOnly.js",
+    ".": "./dist/index.js",
+    "./config": "./dist/+config.js",
+    "./renderer/onRenderHtml": "./dist/renderer/onRenderHtml.js",
+    "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js",
+    "./useNavigate": "./dist/hooks/useNavigate.js"
   },
   "scripts": {
     "dev": "tsc --watch",
@@ -50,28 +45,28 @@
   "typesVersions": {
     "*": {
       "useData": [
-        "./dist/shared/hooks/useData.d.ts"
+        "./dist/hooks/useData.d.ts"
       ],
       "usePageContext": [
-        "./dist/shared/hooks/usePageContext.d.ts"
+        "./dist/hooks/usePageContext.d.ts"
       ],
       "useNavigate": [
-        "./dist/shared/hooks/useNavigate.d.ts"
+        "./dist/hooks/useNavigate.d.ts"
       ],
       "ClientOnly": [
-        "./dist/shared/components/ClientOnly.d.ts"
+        "./dist/components/ClientOnly.d.ts"
       ],
       ".": [
-        "./dist/shared/index.d.ts"
+        "./dist/index.d.ts"
       ],
       "config": [
-        "./dist/shared/+config.d.ts"
+        "./dist/+config.d.ts"
       ],
       "renderer/onRenderHtml": [
-        "./dist/shared/renderer/onRenderHtml.d.ts"
+        "./dist/renderer/onRenderHtml.d.ts"
       ],
       "renderer/onRenderClient": [
-        "./dist/shared/renderer/onRenderClient.d.ts"
+        "./dist/renderer/onRenderClient.d.ts"
       ]
     }
   },

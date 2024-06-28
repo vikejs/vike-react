@@ -1,9 +1,21 @@
-export { useNavigate }
+export { useNavigate, type NavigateFn }
+
+import { navigate } from 'vike/client/router'
 import { useStream } from 'react-streaming'
 import { redirect } from 'vike/abort'
-import type { NavigateFn } from '../../shared/hooks/useNavigate.js'
 
-function useNavigate() {
+type NavigateOptionsClient = Parameters<typeof navigate>[1]
+type NavigateOptionsServer = { statusCode?: 301 | 302 }
+type NavigateOptions = NavigateOptionsClient & NavigateOptionsServer
+type NavigateFn = (url: string, options?: NavigateOptions) => Promise<void>
+
+function useNavigate(): NavigateFn {
+  // @ts-expect-error
+  import.meta.env ??= { SSR: true }
+  if (!import.meta.env.SSR) {
+    return navigate
+  }
+
   let stream: ReturnType<typeof useStream> | null = null
   try {
     stream = useStream()

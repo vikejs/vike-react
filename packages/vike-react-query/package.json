@@ -57,6 +57,6 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-query",
+  "repository": "github:vikejs/vike-react",
   "license": "MIT"
 }

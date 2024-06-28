@@ -59,9 +59,6 @@ export default {
     onAfterRenderClient: {
       env: { client: true }
     },
-    VikeReactZustandWrapper:{
-      env: { client: true, server: true }
-    },
     Wrapper: {
       cumulative: true,
       env: { client: true, server: true }

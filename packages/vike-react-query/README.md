@@ -14,26 +14,26 @@ You also get:
  - [Fallback upon loading and/or error](#withfallback)
  - [Caching](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
  - [Optional usage with Telefunc](#usage-with-telefunc)
-   > By using `vike-react-query` with Telefunc you combine [RPC](https://vike.dev/RPC) with all the TanStack Query features.
+   > [!NOTE]
+   > By using `vike-react-query` with Telefunc, you combine [RPC](https://vike.dev/RPC) with all the TanStack Query features.
 
 See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-query).
 
 
 ## Installation
 
-1. `pnpm i @tanstack/react-query vike-react-query`
+1. `npm install @tanstack/react-query vike-react-query`
 2. Extend `+config.ts`:
    ```ts
-   // /pages/+config.ts
+   // pages/+config.ts
 
-   import type { Config } from 'vike/types'
    import vikeReact from 'vike-react/config'
    import vikeReactQuery from 'vike-react-query/config'
 
    export default {
-     ...
+     // ...
      extends: [vikeReact, vikeReactQuery]
-   } satisfies Config
+   }
    ```
 
 
@@ -71,7 +71,7 @@ const Movie = ({ id }: { id: string }) => {
 
 ## `withFallback()`
 
-Using `withFallback()`, you can define a loading and/or error fallback.
+You can define a loading and/or error fallback by using `withFallback()`.
 
 ```tsx
 import { useSuspenseQuery } from '@tanstack/react-query'
@@ -113,7 +113,7 @@ You can modify the defaults defined by [`QueryClient`](https://tanstack.com/quer
 Gloablly, for all components:
 
 ```js
-// /pages/+config.js
+// pages/+config.js
 
 // Applies to all pages.
 
@@ -131,7 +131,7 @@ export default {
 For the components of one page:
 
 ```js
-// /pages/product/@id/+config.js
+// pages/product/@id/+config.js
 
 // Applies only to /product/@id/+Page.js (given there is only
 // one +Page.js file under the /pages/product/@id directory).
@@ -150,7 +150,7 @@ export default {
 For the components of a group of pages:
 
 ```js
-// /pages/admin/+config.js
+// pages/admin/+config.js
 
 // Applies to all /pages/admin/**/+Page.js
 

@@ -21,9 +21,9 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-quer
 ## Installation
 
 1. `npm install @tanstack/react-query vike-react-query`
-2. Extend `+config.ts`:
-   ```ts
-   // pages/+config.ts
+2. Extend `+config.js`:
+   ```js
+   // pages/+config.js
 
    import vikeReact from 'vike-react/config'
    import vikeReactQuery from 'vike-react-query/config'
@@ -37,10 +37,10 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-quer
 
 ## Basic usage
 
-```tsx
+```jsx
 import { useSuspenseQuery } from '@tanstack/react-query'
 
-const Movie = ({ id }: { id: string }) => {
+const Movie = ({ id }) => {
   const result = useSuspenseQuery({
     queryKey: ['movie', id],
     queryFn: () =>
@@ -72,6 +72,8 @@ const Movie = ({ id }: { id: string }) => {
 You can define a loading and/or error fallback by using `withFallback()`.
 
 ```tsx
+// Movie.tsx
+
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { withFallback } from 'vike-react-query'
 

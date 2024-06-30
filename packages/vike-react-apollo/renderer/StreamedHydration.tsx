@@ -31,7 +31,7 @@ function StreamedHydration({ client, children }: { client: ApolloClient<any>; ch
       ).forEach((e) => e.remove())};_rac_()</script>`
     )
     if (client.cache instanceof InMemoryCache) {
-      const consoleLink = new ApolloLink((operation, forward) => {
+      const hydrationLink = new ApolloLink((operation, forward) => {
         // TODO: only send diffs
         return new Observable((observer) => {
           const observable = forward(operation)
@@ -53,7 +53,7 @@ function StreamedHydration({ client, children }: { client: ApolloClient<any>; ch
         })
       })
 
-      client.setLink(from([consoleLink, client.link]))
+      client.setLink(from([hydrationLink, client.link]))
     }
   }
 

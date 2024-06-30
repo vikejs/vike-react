@@ -14,8 +14,6 @@ You also get:
  - [Fallback upon loading and/or error](#withfallback)
  - [Caching](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
  - [Optional usage with Telefunc](#usage-with-telefunc)
-   > [!NOTE]
-   > By using `vike-react-query` with Telefunc, you combine [RPC](https://vike.dev/RPC) with all the TanStack Query features.
 
 See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-query).
 
@@ -168,7 +166,12 @@ export default {
 
 ## Usage with Telefunc
 
-If used together with [Telefunc](https://telefunc.com/), the query function will always run on the server. (Similar to [Next.js Server Actions and Mutations](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations).)
+You can use `vike-react-query` with [Telefunc](https://telefunc.com).
+
+> [!NOTE]
+> By using `vike-react-query` with Telefunc, you combine [RPC](https://vike.dev/RPC) with all the TanStack Query features.
+
+With Telefunc, the query function always runs on the server.
 
 #### Query example
 

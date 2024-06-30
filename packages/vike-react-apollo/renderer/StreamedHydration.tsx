@@ -1,6 +1,6 @@
 export { StreamedHydration }
 
-import { ApolloLink, InMemoryCache, Observable, from, type ApolloClient } from '@apollo/client/index.js'
+import { ApolloClient, ApolloLink, InMemoryCache, Observable, from } from '@apollo/client/index.js'
 import { uneval } from 'devalue'
 import type { ReactNode } from 'react'
 import { useStream } from 'react-streaming'
@@ -32,14 +32,34 @@ function StreamedHydration({ client, children }: { client: ApolloClient<any>; ch
     )
     if (client.cache instanceof InMemoryCache) {
       const hydrationLink = new ApolloLink((operation, forward) => {
-        // TODO: only send diffs
         return new Observable((observer) => {
           const observable = forward(operation)
           const subscription = observable.subscribe({
             next(value) {
+              stream.injectToStream(
+                `<script class="_rad_">_rad_.push(${uneval({
+                  data: value.data,
+                  variables: operation.variables,
+                  query: {
+                    definitions: operation.query.definitions,
+                    kind: operation.query.kind,
+                    ...(operation.query.loc && {
+                      loc: {
+                        start: operation.query.loc.start,
+                        end: operation.query.loc.end,
+                        ...(operation.query.loc.source && {
+                          source: {
+                            body: operation.query.loc.source.body,
+                            name: operation.query.loc.source.name,
+                            locationOffset: operation.query.loc.source.locationOffset
+                          }
+                        })
+                      }
+                    })
+                  }
+                })});_rac_()</script>`
+              )
               observer.next(value)
-              const extracted = client.extract()
-              stream.injectToStream(`<script class="_rad_">_rad_.push(${uneval(extracted)});_rac_()</script>`)
             },
             error(e) {
               observer.error(e)
@@ -59,7 +79,7 @@ function StreamedHydration({ client, children }: { client: ApolloClient<any>; ch
 
   if (!isSSR && Array.isArray(window._rad_)) {
     const onEntry = (entry: any) => {
-      client.restore(entry)
+      client.cache.writeQuery(entry)
     }
     for (const entry of window._rad_) {
       onEntry(entry)

@@ -171,7 +171,7 @@ export default {
 You can use `vike-react-query` with [Telefunc](https://telefunc.com).
 
 > [!NOTE]
-> By using `vike-react-query` with Telefunc, you combine [RPC](https://vike.dev/RPC) with all the TanStack Query features.
+> By using `vike-react-query` with Telefunc, you combine [RPC](https://vike.dev/RPC) with all TanStack Query features.
 
 With Telefunc, the query function always runs on the server.
 

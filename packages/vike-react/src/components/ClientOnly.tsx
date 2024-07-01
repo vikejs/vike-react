@@ -45,14 +45,21 @@ function ClientOnly<T>({
 //@ts-expect-error
 import.meta.env ??= { SSR: true }
 
-function clientOnly<T extends ComponentType<any>>(load: () => Promise<{ default: T }>) {
-  if (import.meta.env.SSR) {
-    return (props: ComponentProps<T> & { fallback?: JSX.Element }) => props.fallback
-  }
+function clientOnly<T extends ComponentType<any>>(load: () => Promise<{ default: T } | T>) {
+  type PropsWithFallback = ComponentProps<T> & { fallback?: ReactNode }
 
-  const Component = lazy(load)
+  if (import.meta.env.SSR) return (props: PropsWithFallback) => <>{props.fallback}</>
 
-  return (props: ComponentProps<T> & { fallback?: JSX.Element }) => {
+  const Component = lazy(() =>
+    load()
+      .then((LoadedComponent) => ('default' in LoadedComponent ? LoadedComponent : { default: LoadedComponent }))
+      .catch((error) => {
+        console.error('Component loading failed:', error)
+        return { default: (() => <p>Error loading component.</p>) as unknown as T }
+      })
+  )
+
+  return (props: PropsWithFallback) => {
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
@@ -60,12 +67,12 @@ function clientOnly<T extends ComponentType<any>>(load: () => Promise<{ default:
     }, [])
 
     if (!mounted) {
-      return props.fallback
+      return <>{props.fallback}</>
     }
 
     const { fallback, ...rest } = props
     return (
-      <Suspense fallback={props.fallback}>
+      <Suspense fallback={<>{props.fallback}</>}>
         {
           //@ts-ignore
           <Component {...rest} />

@@ -34,6 +34,9 @@ importers:
       '@apollo/client':
         specifier: ^3.10.8
         version: 3.10.8(@types/react@18.2.55)(graphql@16.9.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@apollo/client-react-streaming':
+        specifier: ^0.11.2
+        version: 0.11.2(@apollo/client@3.10.8(@types/react@18.2.55)(graphql@16.9.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       '@types/react':
         specifier: ^18.2.55
         version: 18.2.55
@@ -57,7 +60,7 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.173
-        version: 0.4.173(react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        version: 0.4.173(react-streaming@0.3.33(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -89,14 +92,14 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       react-streaming:
-        specifier: ^0.3.27
-        version: 0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^0.3.33
+        version: 0.3.33(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
         specifier: ^0.4.173
-        version: 0.4.173(react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        version: 0.4.173(react-streaming@0.3.33(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -117,7 +120,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       vike:
         specifier: ^0.4.173
-        version: 0.4.173(react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        version: 0.4.173(react-streaming@0.3.33(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -150,7 +153,7 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.173
-        version: 0.4.173(react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        version: 0.4.173(react-streaming@0.3.33(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -164,8 +167,8 @@ importers:
   packages/vike-react:
     dependencies:
       react-streaming:
-        specifier: ^0.3.27
-        version: 0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^0.3.33
+        version: 0.3.33(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       vite:
         specifier: '>=4.3.8'
         version: 5.1.1(@types/node@20.11.17)
@@ -199,13 +202,10 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.173
-        version: 0.4.173(react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        version: 0.4.173(react-streaming@0.3.33(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
 
   packages/vike-react-apollo:
     dependencies:
-      devalue:
-        specifier: ^4.3.2
-        version: 4.3.2
       react-error-boundary:
         specifier: ^4.0.12
         version: 4.0.12(react@18.2.0)
@@ -213,6 +213,9 @@ importers:
       '@apollo/client':
         specifier: ^3.10.8
         version: 3.10.8(@types/react@18.2.55)(graphql@16.9.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@apollo/client-react-streaming':
+        specifier: ^0.11.2
+        version: 0.11.2(@apollo/client@3.10.8(@types/react@18.2.55)(graphql@16.9.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       '@brillout/release-me':
         specifier: ^0.3.8
         version: 0.3.8
@@ -225,6 +228,9 @@ importers:
       '@types/react':
         specifier: ^18.2.55
         version: 18.2.55
+      '@types/react-dom':
+        specifier: ^18.3.0
+        version: 18.3.0
       graphql:
         specifier: ^16.9.0
         version: 16.9.0
@@ -234,9 +240,12 @@ importers:
       react:
         specifier: ^18.2.0
         version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
       react-streaming:
-        specifier: ^0.3.27
-        version: 0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^0.3.33
+        version: 0.3.33(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5
@@ -245,7 +254,7 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.173
-        version: 0.4.173(react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        version: 0.4.173(react-streaming@0.3.33(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -287,8 +296,8 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
       react-streaming:
-        specifier: ^0.3.27
-        version: 0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^0.3.33
+        version: 0.3.33(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5
@@ -297,7 +306,7 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.173
-        version: 0.4.173(react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        version: 0.4.173(react-streaming@0.3.33(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -313,6 +322,12 @@ packages:
   '@ampproject/remapping@2.2.1':
     resolution: {integrity: sha512-lFMjJTrFL3j7L9yBxwYfCq2k6qqwHyzuUl/XBnif78PWTJYyL/dfowQHWE3sp6U6ZzqWiiIZnpTMO96zhkjwtg==}
     engines: {node: '>=6.0.0'}
+
+  '@apollo/client-react-streaming@0.11.2':
+    resolution: {integrity: sha512-rRA/dIA09/Y6+jtGGBnXHQfPOv6BYYVZwQP8OzQtWrWbSgDEI6uAhqULssU5f0ZhQJVzKDuslqGE9QAX0gdfRQ==}
+    peerDependencies:
+      '@apollo/client': ^3.10.4
+      react: ^18
 
   '@apollo/client@3.10.8':
     resolution: {integrity: sha512-UaaFEitRrPRWV836wY2L7bd3HRCfbMie1jlYMcmazFAK23MVhz/Uq7VG1nwbotPb5xzFsw5RF4Wnp2G3dWPM3g==}
@@ -983,6 +998,9 @@ packages:
 
   '@types/react-dom@18.2.19':
     resolution: {integrity: sha512-aZvQL6uUbIJpjZk4U8JZGbau9KDeAwMfmhyWorxgBkqDIEf6ROjRozcmPIicqsUwPUjbkDfHKgGee1Lq65APcA==}
+
+  '@types/react-dom@18.3.0':
+    resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
 
   '@types/react@18.2.55':
     resolution: {integrity: sha512-Y2Tz5P4yz23brwm2d7jNon39qoAtMMmalOQv6+fEFt1mT+FcM3D841wDpoUvFXhaYenuROCy3FZYqdTjM7qVyA==}
@@ -1964,8 +1982,8 @@ packages:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
 
-  react-streaming@0.3.27:
-    resolution: {integrity: sha512-pXB8pk3lhR15Rx2u4Yo8gbLFDeSYy2g4QjcckbX4ICPd6LZVTJTbq9UUngNQrws8SrXSMMjDYUu+ESt63TRveQ==}
+  react-streaming@0.3.33:
+    resolution: {integrity: sha512-Yb6ZgYRRMM4h7nA+vmW72wHJW8OyXg1TmSj9S+mmX144tOemfzAZ51cAz7NCWvkyHwI1o8KC8rpXSuGPajQ4Cw==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -2421,6 +2439,12 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.20
+
+  '@apollo/client-react-streaming@0.11.2(@apollo/client@3.10.8(@types/react@18.2.55)(graphql@16.9.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@apollo/client': 3.10.8(@types/react@18.2.55)(graphql@16.9.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+      ts-invariant: 0.10.3
 
   '@apollo/client@3.10.8(@types/react@18.2.55)(graphql@16.9.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
@@ -2933,7 +2957,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.23.5
       '@testing-library/dom': 9.3.3
-      '@types/react-dom': 18.2.19
+      '@types/react-dom': 18.3.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
 
@@ -2971,6 +2995,10 @@ snapshots:
   '@types/prop-types@15.7.10': {}
 
   '@types/react-dom@18.2.19':
+    dependencies:
+      '@types/react': 18.2.55
+
+  '@types/react-dom@18.3.0':
     dependencies:
       '@types/react': 18.2.55
 
@@ -4013,7 +4041,7 @@ snapshots:
 
   react-refresh@0.14.0: {}
 
-  react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  react-streaming@0.3.33(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       '@brillout/import': 0.2.3
       '@brillout/json-serializer': 0.5.10
@@ -4281,7 +4309,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vike@0.4.173(react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17)):
+  vike@0.4.173(react-streaming@0.3.33(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17)):
     dependencies:
       '@brillout/import': 0.2.3
       '@brillout/json-serializer': 0.5.10
@@ -4297,7 +4325,7 @@ snapshots:
       source-map-support: 0.5.21
       vite: 5.1.1(@types/node@20.11.17)
     optionalDependencies:
-      react-streaming: 0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react-streaming: 0.3.33(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
   vite-node@1.2.2(@types/node@20.11.17):
     dependencies:

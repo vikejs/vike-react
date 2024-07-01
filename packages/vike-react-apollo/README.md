@@ -14,7 +14,7 @@ You can use it instead of [Vike's `data()` hook](https://vike.dev/data): with `v
 You also get:
  - [Progressive rendering](https://vike.dev/streaming#progressive-rendering) for a significant (perceived) increase in page speed.
  - Fallback component upon loading/error. (See [`withFallback()`](#withfallback).)
- - Caching. (See [`useSuspenseQuery()` options](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery).)
+ - Caching. ([Read more](https://www.apollographql.com/docs/react/caching/cache-configuration).)
 
 See [example](https://github.com/vikejs/vike-react/tree/main/examples/apollo).
 

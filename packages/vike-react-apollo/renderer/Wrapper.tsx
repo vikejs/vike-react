@@ -9,7 +9,6 @@ export default function Wrapper({ children }: { children: ReactNode }) {
   const { ApolloConfig } = pageContext.config
   assertUsage(ApolloConfig, 'ApolloConfig is required in config')
   return (
-    // @ts-ignore
     <WrappedApolloProvider makeClient={() => new ApolloClient(ApolloConfig!(pageContext))}>
       {children}
     </WrappedApolloProvider>

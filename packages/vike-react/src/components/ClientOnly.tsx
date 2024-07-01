@@ -1,8 +1,9 @@
 export { ClientOnly }
 export { clientOnly }
 
-import React, { lazy, useEffect, useState, startTransition, Suspense } from 'react'
-import type { ComponentProps, ComponentType, ReactNode } from 'react'
+import React, { lazy, useEffect, useState, startTransition } from 'react'
+import type { ComponentType, ReactNode } from 'react'
+import { clientOnly } from '../helpers/clientOnly.js'
 
 function ClientOnly<T>({
   load,
@@ -40,44 +41,4 @@ function ClientOnly<T>({
   }, deps)
 
   return Component ? <Component /> : fallback
-}
-
-//@ts-expect-error
-import.meta.env ??= { SSR: true }
-
-function clientOnly<T extends ComponentType<any>>(load: () => Promise<{ default: T } | T>) {
-  type PropsWithFallback = ComponentProps<T> & { fallback?: ReactNode }
-
-  if (import.meta.env.SSR) return (props: PropsWithFallback) => <>{props.fallback}</>
-
-  const Component = lazy(() =>
-    load()
-      .then((LoadedComponent) => ('default' in LoadedComponent ? LoadedComponent : { default: LoadedComponent }))
-      .catch((error) => {
-        console.error('Component loading failed:', error)
-        return { default: (() => <p>Error loading component.</p>) as unknown as T }
-      })
-  )
-
-  return (props: PropsWithFallback) => {
-    const [mounted, setMounted] = useState(false)
-
-    useEffect(() => {
-      setMounted(true)
-    }, [])
-
-    if (!mounted) {
-      return <>{props.fallback}</>
-    }
-
-    const { fallback, ...rest } = props
-    return (
-      <Suspense fallback={<>{props.fallback}</>}>
-        {
-          //@ts-ignore
-          <Component {...rest} />
-        }
-      </Suspense>
-    )
-  }
 }

@@ -24,7 +24,7 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/apollo).
 
 ## Installation
 
-1. `pnpm i @apollo/client @apollo/client-react-streaming graphql`
+1. `pnpm i @apollo/client @apollo/client-react-streaming graphql vike-react-apollo`
 2. Extend `+config.ts`:
    ```ts
    // /pages/+config.ts

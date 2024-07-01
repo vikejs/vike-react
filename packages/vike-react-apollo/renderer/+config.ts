@@ -1,6 +1,6 @@
-import type { ApolloClientOptions } from '@apollo/client'
 import type { Config } from 'vike/types'
 import type _ from 'vike-react/config' // Needed for declaration merging of Config
+import type { ApolloClientOptions } from './types.js'
 
 export default {
   name: 'vike-react-apollo',
@@ -22,7 +22,7 @@ export default {
 declare global {
   namespace Vike {
     interface Config {
-      ApolloConfig?: (pageContext: PageContext) => ApolloClientOptions<any>
+      ApolloConfig?: (pageContext: PageContext) => ApolloClientOptions
     }
   }
 }

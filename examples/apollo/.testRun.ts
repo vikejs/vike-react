@@ -5,8 +5,8 @@ import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry } from '@br
 function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   run(cmd)
 
-  const content = 'Return of the Jedi'
-  const loading = 'Loading movies...'
+  const content = 'United States'
+  const loading = 'Loading contries...'
   test('HTML', async () => {
     const html = await fetchHtml('/')
     expect(getTitle(html)).toBe('My Vike + React App')

@@ -1,8 +1,9 @@
-import { type ApolloClientOptions, InMemoryCache } from '@apollo/client/index.js'
+import { InMemoryCache } from '@apollo/client-react-streaming'
+import { ApolloClientOptions } from 'vike-react-apollo/types'
 import type { PageContext } from 'vike/types'
 
 export default (pageContext: PageContext) =>
   ({
-    uri: 'https://spacex-production.up.railway.app/',
+    uri: 'https://countries.trevorblades.com',
     cache: new InMemoryCache()
-  }) satisfies ApolloClientOptions<any>
+  }) satisfies ApolloClientOptions

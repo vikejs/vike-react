@@ -2,7 +2,7 @@ export default Page
 
 import React from 'react'
 import { Counter } from './Counter'
-import { Movies } from './Spaceships'
+import { Countries } from './Countries'
 
 function Page() {
   return (
@@ -15,7 +15,7 @@ function Page() {
           Interactive while loading. <Counter />
         </li>
       </ul>
-      <Movies />
+      <Countries />
     </>
   )
 }

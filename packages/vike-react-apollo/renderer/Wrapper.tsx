@@ -1,17 +1,17 @@
-import { ApolloClient, ApolloProvider } from '@apollo/client/index.js'
-import React, { ReactNode, useState } from 'react'
+import { ApolloClient } from '@apollo/client-react-streaming'
+import React, { type ReactNode } from 'react'
 import { usePageContext } from 'vike-react/usePageContext'
-import { StreamedHydration } from './StreamedHydration.js'
+import { assertUsage } from '../utils/assertUsage.js'
+import { WrappedApolloProvider } from './Transport.js'
 
 export default function Wrapper({ children }: { children: ReactNode }) {
   const pageContext = usePageContext()
   const { ApolloConfig } = pageContext.config
-  // TODO: assertUsage
-  const [queryClient] = useState(() => new ApolloClient(ApolloConfig!(pageContext)))
-
+  assertUsage(ApolloConfig, 'ApolloConfig is required in config')
   return (
-    <ApolloProvider client={queryClient}>
-      <StreamedHydration client={queryClient}>{children}</StreamedHydration>
-    </ApolloProvider>
+    // @ts-ignore
+    <WrappedApolloProvider makeClient={() => new ApolloClient(ApolloConfig!(pageContext))}>
+      {children}
+    </WrappedApolloProvider>
   )
 }

@@ -219,9 +219,6 @@ importers:
       '@brillout/release-me':
         specifier: ^0.3.8
         version: 0.3.8
-      '@testing-library/react':
-        specifier: ^14.2.1
-        version: 14.2.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@types/node':
         specifier: ^20.11.17
         version: 20.11.17
@@ -234,9 +231,6 @@ importers:
       graphql:
         specifier: ^16.9.0
         version: 16.9.0
-      jsdom:
-        specifier: ^24.0.0
-        version: 24.0.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -261,9 +255,6 @@ importers:
       vite:
         specifier: ^5.1.1
         version: 5.1.1(@types/node@20.11.17)
-      vitest:
-        specifier: ^1.2.2
-        version: 1.2.2(@types/node@20.11.17)(jsdom@24.0.0)
 
   packages/vike-react-query:
     dependencies:

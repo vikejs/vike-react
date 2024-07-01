@@ -9,7 +9,7 @@
 
 `vike-react-apollo` enables you to create components that can fetch data.
 
-You can use it instead of [Vike's `data()` hook](https://vike.dev/data): with `vike-react-query` you fetch data at component-level instead of page-level.
+You can use it instead of [Vike's `data()` hook](https://vike.dev/data): with `vike-react-apollo` you fetch data at component-level instead of page-level.
 
 You also get:
  - [Progressive rendering](https://vike.dev/streaming#progressive-rendering) for a significant (perceived) increase in page speed.

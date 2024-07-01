@@ -1,5 +1,5 @@
 import { InMemoryCache } from '@apollo/client-react-streaming'
-import { ApolloClientOptions } from 'vike-react-apollo/types'
+import type { ApolloClientOptions } from 'vike-react-apollo/types'
 import type { PageContext } from 'vike/types'
 
 export default (pageContext: PageContext) =>

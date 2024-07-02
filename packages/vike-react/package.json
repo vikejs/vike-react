@@ -8,6 +8,7 @@
     "./useData": "./dist/hooks/useData.js",
     "./usePageContext": "./dist/hooks/usePageContext.js",
     "./ClientOnly": "./dist/components/ClientOnly.js",
+    "./clientOnly": "./dist/helpers/clientOnly.js",
     ".": "./dist/index.js",
     "./config": "./dist/+config.js",
     "./renderer/onRenderHtml": "./dist/renderer/onRenderHtml.js",
@@ -51,6 +52,9 @@
       ],
       "ClientOnly": [
         "./dist/components/ClientOnly.d.ts"
+      ],
+      "clientOnly": [
+        "./dist/helpers/clientOnly.d.ts"
       ],
       ".": [
         "./dist/index.d.ts"

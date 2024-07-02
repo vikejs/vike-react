@@ -1,9 +1,7 @@
 export { ClientOnly }
-export { clientOnly }
 
 import React, { lazy, useEffect, useState, startTransition } from 'react'
 import type { ComponentType, ReactNode } from 'react'
-import { clientOnly } from '../helpers/clientOnly.js'
 
 function ClientOnly<T>({
   load,

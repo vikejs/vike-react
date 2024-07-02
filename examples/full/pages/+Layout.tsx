@@ -21,6 +21,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         <Link href="/streaming">HTML Streaming</Link>
         <Link href="/without-ssr">Without SSR</Link>
         <Link href="/starship">Nested Layout</Link>
+        <Link href="/client-only">Client Only</Link>
       </Sidebar>
       <Content>{children}</Content>
     </div>

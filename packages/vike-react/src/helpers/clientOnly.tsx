@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 export { clientOnly }
 
 import React, {
@@ -18,6 +16,7 @@ function clientOnly<T extends ComponentType<any>>(
 ): ComponentType<ComponentProps<T> & { fallback?: ReactNode }> {
   // Client side: always bundled by Vite, import.meta.env.SSR === false
   // Server side: may or may not be bundled by Vite, import.meta.env.SSR === true || import.meta.env === undefined
+  //@ts-expect-error
   import.meta.env ??= { SSR: true }
   if (import.meta.env.SSR) {
     return (props) => <>{props.fallback}</>
@@ -27,11 +26,11 @@ function clientOnly<T extends ComponentType<any>>(
         .then((LoadedComponent) => ('default' in LoadedComponent ? LoadedComponent : { default: LoadedComponent }))
         .catch((error) => {
           console.error('Component loading failed:', error)
-          return { default: () => <p>Error loading component.</p> }
+          return { default: (() => <p>Error loading component.</p>) as any }
         })
     )
 
-    return forwardRef((props, ref) => {
+    return forwardRef<any, any>((props, ref) => {
       const [mounted, setMounted] = useState(false)
       useEffect(() => {
         setMounted(true)
@@ -45,6 +44,6 @@ function clientOnly<T extends ComponentType<any>>(
           <Component {...rest} ref={ref} />
         </Suspense>
       )
-    })
+    }) as ComponentType<ComponentProps<T> & { fallback?: ReactNode }>
   }
 }

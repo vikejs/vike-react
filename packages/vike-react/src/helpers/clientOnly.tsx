@@ -9,21 +9,13 @@ import React, {
   useEffect,
   useState,
   type ComponentProps,
-  type ComponentRef,
   type ComponentType,
-  type ForwardRefExoticComponent,
   type ReactNode
 } from 'react'
 
-function clientOnly<
-  T extends ComponentType<any>,
-  ClientOnlyComponentPropsWithFallback = ComponentProps<T> & { fallback?: ReactNode },
-  ClientOnlyComponentRef = ComponentRef<T>
->(
+function clientOnly<T extends ComponentType<any>>(
   load: () => Promise<{ default: T } | T>
-): [ClientOnlyComponentRef] extends [never]
-  ? ComponentType<ClientOnlyComponentPropsWithFallback>
-  : ForwardRefExoticComponent<ClientOnlyComponentPropsWithFallback> {
+): ComponentType<ComponentProps<T> & { fallback?: ReactNode }> {
   import.meta.env ??= { SSR: true }
   if (import.meta.env.SSR) return (props) => <>{props.fallback}</>
 

@@ -8,7 +8,7 @@ import './types/index.js'
 export default {
   name: 'vike-react',
   require: {
-    vike: '>=0.4.173'
+    vike: '>=0.4.178'
   },
 
   // https://vike.dev/onRenderHtml

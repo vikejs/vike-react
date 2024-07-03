@@ -23,7 +23,7 @@
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
-    "vike": ">=0.4.173",
+    "vike": ">=0.4.178",
     "vite": ">=4.3.8"
   },
   "devDependencies": {
@@ -36,10 +36,10 @@
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3",
-    "vike": "^0.4.173"
+    "vike": "^0.4.178"
   },
   "dependencies": {
-    "react-streaming": "^0.3.27"
+    "react-streaming": "^0.3.36"
   },
   "typesVersions": {
     "*": {

@@ -49,14 +49,14 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       react-streaming:
-        specifier: ^0.3.27
-        version: 0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^0.3.36
+        version: 0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: ^0.4.173
-        version: 0.4.173(react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: ^0.4.178
+        version: 0.4.178(react-streaming@0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -76,8 +76,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       vike:
-        specifier: ^0.4.173
-        version: 0.4.173(react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: ^0.4.178
+        version: 0.4.178(react-streaming@0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -109,8 +109,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: ^0.4.173
-        version: 0.4.173(react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: ^0.4.178
+        version: 0.4.178(react-streaming@0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -124,8 +124,8 @@ importers:
   packages/vike-react:
     dependencies:
       react-streaming:
-        specifier: ^0.3.27
-        version: 0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^0.3.36
+        version: 0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       vite:
         specifier: '>=4.3.8'
         version: 5.1.1(@types/node@20.11.17)
@@ -158,8 +158,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: ^0.4.173
-        version: 0.4.173(react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: ^0.4.178
+        version: 0.4.178(react-streaming@0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
 
   packages/vike-react-query:
     dependencies:
@@ -192,8 +192,8 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
       react-streaming:
-        specifier: ^0.3.27
-        version: 0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^0.3.36
+        version: 0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5
@@ -201,8 +201,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: ^0.4.173
-        version: 0.4.173(react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: ^0.4.178
+        version: 0.4.178(react-streaming@0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -398,17 +398,11 @@ packages:
   '@brillout/json-serializer@0.5.10':
     resolution: {integrity: sha512-3bh/MS5pudu3H9l3a0KAE1RBfy/L95JWAEo8b2mPBN3H98wzCHYzgjQb9xRl58y+Kc7FgkjApgCFJV+zR06P5Q==}
 
-  '@brillout/json-serializer@0.5.8':
-    resolution: {integrity: sha512-vEuXw30ok+mJfJutOxXKBb4lBJ0HymA7lev9PcYK6W/hzjhCTPk9Bdk85HrcNcKZWRQiwoWtw0F2Di4TRJ7ssQ==}
-
   '@brillout/part-regex@0.1.3':
     resolution: {integrity: sha512-ZyqtOYHvQs3Ca0xt9fb2OlGzCrKwXtMcAATDObkFmI4jKuObEORjWrqAslWTelquXlyEYLz7h1nt6jp50LDyJA==}
 
   '@brillout/picocolors@1.0.10':
     resolution: {integrity: sha512-dh+JJlsBf3QYX+91Ezma8RLKNOjGDoBBmORv/NzRpQuasdyzwQCMXGGjsDu12ZhGz92TqQbL9pv79rvbheI21A==}
-
-  '@brillout/picocolors@1.0.11':
-    resolution: {integrity: sha512-ZDIx2xNRjCKm9c6n+zNDXa3qxXniaVlGKXK1F5OKPCYbDt7EfkH2q5ppzowMITt1lxPyVplxy/b3GpTWwJF+Og==}
 
   '@brillout/picocolors@1.0.12':
     resolution: {integrity: sha512-2gowgbpAqEQz4U1D/dh3tU2fKcRm+yt724d8YTbCsVHxnLTHWP2J5RMO1iTWcoViX7rTmLvPkHHlYtEiKP4gLA==}
@@ -1806,8 +1800,8 @@ packages:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
 
-  react-streaming@0.3.27:
-    resolution: {integrity: sha512-pXB8pk3lhR15Rx2u4Yo8gbLFDeSYy2g4QjcckbX4ICPd6LZVTJTbq9UUngNQrws8SrXSMMjDYUu+ESt63TRveQ==}
+  react-streaming@0.3.36:
+    resolution: {integrity: sha512-2RtP25lSHpyQ5Yv7Fh4S0r45wTK0+8Z9e42dtVZjJD9/c9FXRAUoWbiICvqD35vfkaxQ5mo8hJty2BraZv/wfg==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -1870,6 +1864,11 @@ packages:
 
   semver@7.5.4:
     resolution: {integrity: sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==}
+    engines: {node: '>=10'}
+    hasBin: true
+
+  semver@7.6.2:
+    resolution: {integrity: sha512-FNAIBWCx9qcRhoHcgcJ0gvU7SN1lYU2ZXuSfl04bSC5OpvDHFyJCjdNHomPXxjQlCBU67YW64PzY7/VIEH7F2w==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -2066,12 +2065,12 @@ packages:
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
 
-  vike@0.4.173:
-    resolution: {integrity: sha512-xUlP1pRqz83+vLUNE0f4N7/rCEkJ9C51To0sjaKPf7BoFtZOTz9L7FXyp3z/eRaCX07EK0h+24oFKBnl+B74pA==}
+  vike@0.4.178:
+    resolution: {integrity: sha512-TSfb9HYUIQjvcvlS24pZmTakYa2yxUg7Bjtu24VLDj9BULLsltXcd+ladgCJyUBJqV0y/eMa/aefyqRWgjX7Cg==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
-      react-streaming: '>=0.3.5'
+      react-streaming: '>=0.3.36'
       vite: '>=4.4.0'
     peerDependenciesMeta:
       react-streaming:
@@ -2424,13 +2423,9 @@ snapshots:
 
   '@brillout/json-serializer@0.5.10': {}
 
-  '@brillout/json-serializer@0.5.8': {}
-
   '@brillout/part-regex@0.1.3': {}
 
   '@brillout/picocolors@1.0.10': {}
-
-  '@brillout/picocolors@1.0.11': {}
 
   '@brillout/picocolors@1.0.12': {}
 
@@ -3752,11 +3747,11 @@ snapshots:
 
   react-refresh@0.14.0: {}
 
-  react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  react-streaming@0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       '@brillout/import': 0.2.3
-      '@brillout/json-serializer': 0.5.8
-      '@brillout/picocolors': 1.0.11
+      '@brillout/json-serializer': 0.5.10
+      '@brillout/picocolors': 1.0.13
       isbot-fast: 1.2.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -3832,6 +3827,8 @@ snapshots:
   semver@7.5.4:
     dependencies:
       lru-cache: 6.0.0
+
+  semver@7.6.2: {}
 
   set-function-length@1.1.1:
     dependencies:
@@ -4005,7 +4002,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vike@0.4.173(react-streaming@0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17)):
+  vike@0.4.178(react-streaming@0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17)):
     dependencies:
       '@brillout/import': 0.2.3
       '@brillout/json-serializer': 0.5.10
@@ -4017,11 +4014,12 @@ snapshots:
       es-module-lexer: 1.4.1
       esbuild: 0.19.10
       fast-glob: 3.3.2
+      semver: 7.6.2
       sirv: 2.0.3
       source-map-support: 0.5.21
       vite: 5.1.1(@types/node@20.11.17)
     optionalDependencies:
-      react-streaming: 0.3.27(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react-streaming: 0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
   vite-node@1.2.2(@types/node@20.11.17):
     dependencies:

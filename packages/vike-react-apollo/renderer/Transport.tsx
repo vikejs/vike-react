@@ -12,10 +12,14 @@ export const WrappedApolloProvider = WrapApolloProvider(
         return () => {}
       }
       return async (callback: () => React.ReactNode) => {
-        // await is needed because of https://github.com/apollographql/apollo-client-nextjs/issues/325
-        const reactNode = await callback()
-        const injectionsString = renderToString(reactNode)
-        stream.injectToStream(injectionsString)
+        stream.injectToStream(
+          // https://github.com/apollographql/apollo-client-nextjs/issues/325
+          new Promise((resolve) =>
+            setTimeout(() => {
+              resolve(renderToString(callback()))
+            }, 0)
+          )
+        )
       }
     }
   })

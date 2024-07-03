@@ -83,8 +83,9 @@ function checkVikeVersion() {
   throw new Error('Update Vike to 0.4.173 or above')
 }
 
-// Used by:
-// - react-streaming (to improve error messages, see https://github.com/brillout/react-streaming/blob/70c168de1e97b9c4385a4c3002b5013f1e406341/src/utils/isVikeReactApp.ts#L4)
+// For improving error messages of:
+// - react-streaming https://github.com/brillout/react-streaming/blob/6a43dd20c27fb5d751dca41466b06ee3f4f35462/src/server/useStream.ts#L21
+// - vike https://github.com/vikejs/vike/blob/96c0155380ffebd4976ab076b58e86d8eb2d603a/vike/node/runtime/html/stream/react-streaming.ts#L31
 function addEcosystemStamp() {
   const g = globalThis as Record<string, unknown>
   g._isVikeReactApp =

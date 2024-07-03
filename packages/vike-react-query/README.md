@@ -7,7 +7,10 @@
 
 [TanStack Query](https://tanstack.com/query/latest) integration for [vike-react](https://github.com/vikejs/vike-react/tree/main/packages/vike-react).
 
-`vike-react-query` enables your React components to fetch data. (Instead of using [Vike's `data()` hook](https://vike.dev/data).)
+`vike-react-query` enables your React components to fetch data using TanStack Query.
+
+> [!NOTE]  
+> You can use `vike-react-query` to fetch data on a component-level, instead using [Vike's `data()` hook](https://vike.dev/data) which fetches data on a page-level.
 
 You also get:
  - [Progressive rendering](https://vike.dev/streaming#progressive-rendering)

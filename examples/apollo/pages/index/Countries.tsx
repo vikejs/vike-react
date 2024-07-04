@@ -21,4 +21,4 @@ const Countries = withFallback(() => {
       ))}
     </ul>
   )
-}, 'Loading contries...')
+})

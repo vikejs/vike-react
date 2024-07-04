@@ -1,6 +1,7 @@
 import React, { ComponentType, ReactNode, Suspense } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 import { ApolloConsumer } from '@apollo/client/index.js'
+import { usePageContext } from 'vike-react/usePageContext'
 type RetryOptions = { retryQuery?: boolean }
 type RetryFn = (options?: RetryOptions) => void
 
@@ -9,7 +10,7 @@ type ErrorFallbackProps = {
   retry: RetryFn
 }
 
-type Loading<T> = ComponentType<T> | ReactNode
+type Loading<T> = ComponentType<T> | ReactNode | false
 type Error<T> = ComponentType<T & ErrorFallbackProps> | ReactNode
 
 type WithFallbackOptions<T> = {
@@ -37,68 +38,77 @@ export function withFallback<T extends object = Record<string, never>>(
   if (options && typeof options === 'object' && ('Loading' in options || 'Error' in options)) {
     Loading = options.Loading
     Error = options.Error
-  } else if (options && typeof options !== 'object') {
+  } else if (options !== undefined && typeof options !== 'object') {
     Loading = options
     Error = Error_
   }
 
   const ComponentWithFallback = (componentProps: T) => {
-    if (Error) {
-      return (
-        <Suspense fallback={typeof Loading === 'function' ? <Loading {...componentProps} /> : Loading}>
-          <ApolloConsumer>
-            {({ reFetchObservableQueries }) => {
-              const createRetry =
-                (resetErrorBoundary: FallbackProps['resetErrorBoundary']): RetryFn =>
-                (options = {}) => {
-                  const { retryQuery = true } = options
-                  if (retryQuery) {
-                    reFetchObservableQueries()
-                  }
-                  resetErrorBoundary()
-                }
-              const createError = (originalError: FallbackProps['error']) => {
-                const message = getErrorMessage(originalError)
-                const error = { message }
-                if (typeof originalError === 'object') {
-                  Object.assign(error, originalError)
-                  for (const key of ['name', 'stack', 'cause']) {
-                    if (key in originalError) {
-                      Object.assign(error, { [key]: originalError[key] })
-                    }
-                  }
-                }
-                return error
-              }
+    const pageContext = usePageContext()
 
-              return (
-                <ErrorBoundary
-                  fallbackRender={({ error: originalError, resetErrorBoundary }) =>
-                    typeof Error === 'function' ? (
-                      <Error
-                        {...componentProps}
-                        retry={createRetry(resetErrorBoundary)}
-                        error={createError(originalError)}
-                      />
-                    ) : (
-                      Error
-                    )
+    let element = <Component {...componentProps} />
+
+    if (Error) {
+      element = (
+        <ApolloConsumer>
+          {({ reFetchObservableQueries }) => {
+            const createRetry =
+              (resetErrorBoundary: FallbackProps['resetErrorBoundary']): RetryFn =>
+              (options = {}) => {
+                const { retryQuery = true } = options
+                if (retryQuery) {
+                  reFetchObservableQueries()
+                }
+                resetErrorBoundary()
+              }
+            const createError = (originalError: FallbackProps['error']) => {
+              const message = getErrorMessage(originalError)
+              const error = { message }
+              if (typeof originalError === 'object') {
+                Object.assign(error, originalError)
+                for (const key of ['name', 'stack', 'cause']) {
+                  if (key in originalError) {
+                    Object.assign(error, { [key]: originalError[key] })
                   }
-                >
-                  <Component {...componentProps} />
-                </ErrorBoundary>
-              )
-            }}
-          </ApolloConsumer>
+                }
+              }
+              return error
+            }
+
+            return (
+              <ErrorBoundary
+                fallbackRender={({ error: originalError, resetErrorBoundary }) =>
+                  typeof Error === 'function' ? (
+                    <Error
+                      {...componentProps}
+                      retry={createRetry(resetErrorBoundary)}
+                      error={createError(originalError)}
+                    />
+                  ) : (
+                    Error
+                  )
+                }
+              >
+                {element}
+              </ErrorBoundary>
+            )
+          }}
+        </ApolloConsumer>
+      )
+    }
+
+    if (Loading !== false) {
+      if (!Loading) {
+        Loading = pageContext.config.LoadingComponent
+      }
+      element = (
+        <Suspense fallback={typeof Loading === 'function' ? <Loading {...componentProps} /> : Loading}>
+          {element}
         </Suspense>
       )
     }
 
-    return (
-      <Suspense fallback={typeof Loading === 'function' ? <Loading {...componentProps} /> : Loading}>
-        <Component {...componentProps} />
-      </Suspense>
-    )
+    return element
   }
 
   ComponentWithFallback.displayName = `withFallback(${Component.displayName || Component.name})`

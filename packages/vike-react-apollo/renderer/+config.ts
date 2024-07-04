@@ -10,7 +10,7 @@ export default {
   Wrapper: 'import:vike-react-apollo/renderer/Wrapper:default',
   streamIsRequired: true,
   meta: {
-    ApolloConfig: {
+    ApolloClient: {
       env: {
         server: true,
         client: true
@@ -22,7 +22,7 @@ export default {
 declare global {
   namespace Vike {
     interface Config {
-      ApolloConfig?: (pageContext: PageContext) => ApolloClientOptions
+      ApolloClient?: (pageContext: PageContext) => ApolloClientOptions
     }
   }
 }

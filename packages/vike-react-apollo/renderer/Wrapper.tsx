@@ -6,10 +6,10 @@ import { WrappedApolloProvider } from './Transport.js'
 
 export default function Wrapper({ children }: { children: ReactNode }) {
   const pageContext = usePageContext()
-  const { ApolloConfig } = pageContext.config
-  assertUsage(ApolloConfig, 'ApolloConfig is required in config')
+  const { ApolloClient: getApolloClientOptions } = pageContext.config
+  assertUsage(getApolloClientOptions, 'Setting +ApolloClient is required')
   return (
-    <WrappedApolloProvider makeClient={() => new ApolloClient(ApolloConfig(pageContext))}>
+    <WrappedApolloProvider makeClient={() => new ApolloClient(getApolloClientOptions(pageContext))}>
       {children}
     </WrappedApolloProvider>
   )

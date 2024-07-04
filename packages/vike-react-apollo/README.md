@@ -5,26 +5,22 @@
 
 # `vike-react-apollo`
 
-[Apollo GraphQL](https://www.apollographql.com/docs/react/) integration for [vike-react](https://github.com/vikejs/vike-react/tree/main/packages/vike-react).
+Enable your React components to fetch data using [Apollo GraphQL](https://www.apollographql.com/docs/react/).
 
-`vike-react-apollo` enables you to create components that can fetch data.
-
-You can use it instead of [Vike's `data()` hook](https://vike.dev/data): with `vike-react-apollo` you fetch data at component-level instead of page-level.
+> [!NOTE]
+> With `vike-react-apollo` you fetch data on a component-level, instead using [Vike's `data()` hook](https://vike.dev/data) which fetches data on a page-level.
 
 You also get:
- - [Progressive rendering](https://vike.dev/streaming#progressive-rendering) for a significant (perceived) increase in page speed.
- - Fallback component upon loading/error. (See [`withFallback()`](#withfallback).)
- - Caching. ([Read more](https://www.apollographql.com/docs/react/caching/cache-configuration).)
+ - [Progressive rendering](https://vike.dev/streaming#progressive-rendering)
+ - [Fallback upon loading and/or error](#withfallback)
+ - [Caching](https://www.apollographql.com/docs/react/caching/cache-configuration)
 
 See [example](https://github.com/vikejs/vike-react/tree/main/examples/apollo).
-
-> [!NOTE]  
-> `vike-react-apollo` leverages [React 18's suspense streaming feature](https://github.com/brillout/react-streaming#readme). (Similar to [Next.js Loading UI and Streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming), but on a component level.)
 
 
 ## Installation
 
-1. `pnpm i @apollo/client @apollo/client-react-streaming graphql vike-react-apollo`
+1. `npm install @apollo/client @apollo/client-react-streaming graphql vike-react-apollo`
 2. Extend `+config.ts`:
    ```ts
    // /pages/+config.ts
@@ -38,9 +34,9 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/apollo).
      extends: [vikeReact, vikeReactApollo]
    } satisfies Config
    ```
-3. Create `+ApolloConfig.ts`:
+3. Create `+ApolloClient.ts`:
    ```ts
-    // /pages/+ApolloConfig.ts
+    // /pages/+ApolloClient.ts
     import { InMemoryCache } from '@apollo/client-react-streaming'
     import type { ApolloClientOptions } from 'vike-react-apollo/types'
     import type { PageContext } from 'vike/types'
@@ -51,6 +47,9 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/apollo).
         cache: new InMemoryCache()
     }) satisfies ApolloClientOptions
    ```
+
+> [!NOTE]
+> The `vike-react-apollo` [extension](https://vike.dev/extensions) requires [`vike-react`](https://vike.dev/vike-react).
 
 
 ## Basic usage
@@ -78,19 +77,21 @@ const Countries = () => {
 }
 ```
 
+> [!NOTE]
+> Upon SSR, the component is rendered to HTML and its data loaded on the server side, while on the client side it's merely [hydrated](https://vike.dev/hydration).
+>
+> Upon page navigation, the component is rendered and its data loaded on the client-side.
+
+> [!NOTE]
+> Even though `useSuspenseQuery()` is imported from `@apollo/client`, you still need to [install `vike-react-apollo`](#installation) for it to work. (Behind the scenes `vike-react-apollo` integrates Apollo GraphQL with [the SSR stream](react-streaming#readme).)
+
 
 ## `withFallback()`
 
-Using `withFallback()`, you can define a loading and/or an error fallback component:
- - While the query is loading, the `Loading` component is rendered.
- - When the query is completed and the data is available, the main component is rendered.
- - If there is an error during loading or rendering, the `Error` component is rendered.
-
-> [!NOTE]  
-> If you use SSR, the main component is rendered to HTML, and merely hydrated on the client-side: the data is re-used (instead of being fetched a second time).
-
+You can define a loading and/or error fallback by using `withFallback()`.
 
 ```tsx
+// Country.tsx
 import { useSuspenseQuery, gql } from '@apollo/client/index.js'
 import { withFallback } from 'vike-react-apollo'
 

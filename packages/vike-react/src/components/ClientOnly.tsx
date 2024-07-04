@@ -14,6 +14,9 @@ function ClientOnly<T>({
   fallback: ReactNode
   deps?: Parameters<typeof useEffect>[1]
 }) {
+  // TODO/next-major-release: remove this file/export
+  console.warn('[vike-react][warning] <ClientOnly> is deprecated: use clientOnly() instead https://vike.dev/clientOnly')
+
   const [Component, setComponent] = useState<ComponentType<unknown> | null>(null)
 
   useEffect(() => {

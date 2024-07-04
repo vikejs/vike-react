@@ -4,6 +4,7 @@ export type { Document }
 
 // ??
 //  - bodyAttribtutes
+//  - bodyTagAttribtutes
 //  - bodyStart or bodyHtmlStart?
 //  - Make bodyHtmlStart a global config? See discussion with pdanpdan. If yes then no need to change the DOM and bodyHtmlStart is a good name.
 //  - bodyStart: { dangerouslyInject: '<span>some html</span>' }

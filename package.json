@@ -25,6 +25,7 @@
   },
   "pnpm": {
     "overrides": {
+      "react-streaming": "0.3.40",
       "vike-react": "link:./packages/vike-react/",
       "vike-react-query": "link:./packages/vike-react-query/",
       "vike-react-apollo": "link:./packages/vike-react-apollo/"

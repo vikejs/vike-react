@@ -5,6 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
+  react-streaming: 0.3.40
   vike-react: link:./packages/vike-react/
   vike-react-query: link:./packages/vike-react-query/
   vike-react-apollo: link:./packages/vike-react-apollo/
@@ -60,7 +61,7 @@ importers:
         version: 5.5.3
       vike:
         specifier: ^0.4.178
-        version: 0.4.178(react-streaming@0.3.39(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.3.3(@types/node@20.14.9))
+        version: 0.4.178(react-streaming@0.3.40(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.3.3(@types/node@20.14.9))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -238,8 +239,8 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-streaming:
-        specifier: ^0.3.39
-        version: 0.3.39(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 0.3.40
+        version: 0.3.40(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       rimraf:
         specifier: ^5.0.5
         version: 5.0.7
@@ -248,7 +249,7 @@ importers:
         version: 5.5.3
       vike:
         specifier: ^0.4.178
-        version: 0.4.178(react-streaming@0.3.39(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.3.3(@types/node@20.14.9))
+        version: 0.4.178(react-streaming@0.3.40(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.3.3(@types/node@20.14.9))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -2417,7 +2418,7 @@ packages:
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
-      react-streaming: '>=0.3.36'
+      react-streaming: 0.3.40
       vite: '>=4.4.0'
     peerDependenciesMeta:
       react-streaming:

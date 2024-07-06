@@ -134,7 +134,7 @@ const Country = withFallback(
 #### `+LoadingComponent.ts`
 
 If you don't set `Loading`, a default loading component is used.
-You can customize this default by creating `+LoadingComponent.ts`:
+You can customize this default by defining the `LoadingComponent` config:
 ```tsx
 // +LoadingComponent.tsx
 
@@ -145,7 +145,7 @@ export default function LoadingComponent() {
 #### `+Loading.ts`
 
 If you set `Loading` to `false`, the component is not wrapped with a `Suspense`.
-You can define a page-level loading component by creating `+Loading.ts`:
+You can define a page-level loading component by defining the `Loading` config:
 ```ts
 // +Loading.tsx
 

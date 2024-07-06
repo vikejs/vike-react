@@ -1,3 +1,17 @@
+## [0.4.17](https://github.com/vikejs/vike-react/compare/vike-react@0.4.16...vike-react@0.4.17) (2024-07-06)
+
+
+### Bug Fixes
+
+* update react-streaming ([c98d97b](https://github.com/vikejs/vike-react/commit/c98d97b298cd42c0cfc7f23a43f4a020a34d5a08))
+
+
+### Features
+
+* add clientOnly helper ([#127](https://github.com/vikejs/vike-react/issues/127)) ([dfa586c](https://github.com/vikejs/vike-react/commit/dfa586c40454aaece3415b4454e3a4d94ceec3af))
+
+
+
 ## [0.4.16](https://github.com/vikejs/vike-react/compare/vike-react@0.4.15...vike-react@0.4.16) (2024-07-03)
 
 

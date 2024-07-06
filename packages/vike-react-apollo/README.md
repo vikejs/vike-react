@@ -23,7 +23,7 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/apollo).
 1. `npm install @apollo/client @apollo/client-react-streaming graphql vike-react-apollo`
 2. Extend `+config.ts`:
    ```ts
-   // /pages/+config.ts
+   // pages/+config.ts
 
    import type { Config } from 'vike/types'
    import vikeReact from 'vike-react/config'
@@ -36,7 +36,7 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/apollo).
    ```
 3. Create `+ApolloClient.ts`:
    ```ts
-    // /pages/+ApolloClient.ts
+    // pages/+ApolloClient.ts
     import { InMemoryCache } from '@apollo/client-react-streaming'
     import type { ApolloClientOptions } from 'vike-react-apollo/types'
     import type { PageContext } from 'vike/types'

@@ -49,14 +49,14 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       react-streaming:
-        specifier: ^0.3.36
-        version: 0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^0.3.41
+        version: 0.3.41(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
         specifier: ^0.4.178
-        version: 0.4.178(react-streaming@0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        version: 0.4.178(react-streaming@0.3.41(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -77,7 +77,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       vike:
         specifier: ^0.4.178
-        version: 0.4.178(react-streaming@0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        version: 0.4.178(react-streaming@0.3.41(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -110,7 +110,7 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.178
-        version: 0.4.178(react-streaming@0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        version: 0.4.178(react-streaming@0.3.41(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -124,8 +124,8 @@ importers:
   packages/vike-react:
     dependencies:
       react-streaming:
-        specifier: ^0.3.36
-        version: 0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^0.3.41
+        version: 0.3.41(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       vite:
         specifier: '>=4.3.8'
         version: 5.1.1(@types/node@20.11.17)
@@ -159,7 +159,7 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.178
-        version: 0.4.178(react-streaming@0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        version: 0.4.178(react-streaming@0.3.41(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
 
   packages/vike-react-query:
     dependencies:
@@ -192,8 +192,8 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
       react-streaming:
-        specifier: ^0.3.36
-        version: 0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^0.3.41
+        version: 0.3.41(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5
@@ -202,7 +202,7 @@ importers:
         version: 5.3.3
       vike:
         specifier: ^0.4.178
-        version: 0.4.178(react-streaming@0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        version: 0.4.178(react-streaming@0.3.41(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -1800,8 +1800,8 @@ packages:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
 
-  react-streaming@0.3.36:
-    resolution: {integrity: sha512-2RtP25lSHpyQ5Yv7Fh4S0r45wTK0+8Z9e42dtVZjJD9/c9FXRAUoWbiICvqD35vfkaxQ5mo8hJty2BraZv/wfg==}
+  react-streaming@0.3.41:
+    resolution: {integrity: sha512-ALLhB32V9rjU+LjIwzDBXNuUyJRmyY6sT+yCApssXt7Azm8OxOcEq8Z5qckzWtUWHM7SK2e7dvOFiVsqnGRbxw==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -3747,7 +3747,7 @@ snapshots:
 
   react-refresh@0.14.0: {}
 
-  react-streaming@0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  react-streaming@0.3.41(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       '@brillout/import': 0.2.3
       '@brillout/json-serializer': 0.5.10
@@ -4002,7 +4002,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vike@0.4.178(react-streaming@0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17)):
+  vike@0.4.178(react-streaming@0.3.41(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17)):
     dependencies:
       '@brillout/import': 0.2.3
       '@brillout/json-serializer': 0.5.10
@@ -4019,7 +4019,7 @@ snapshots:
       source-map-support: 0.5.21
       vite: 5.1.1(@types/node@20.11.17)
     optionalDependencies:
-      react-streaming: 0.3.36(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react-streaming: 0.3.41(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
   vite-node@1.2.2(@types/node@20.11.17):
     dependencies:

@@ -92,6 +92,7 @@ You can define a loading and/or error fallback by using `withFallback()`.
 
 ```tsx
 // Country.tsx
+
 import { useSuspenseQuery, gql } from '@apollo/client/index.js'
 import { withFallback } from 'vike-react-apollo'
 
@@ -128,4 +129,27 @@ const Country = withFallback(
     )
   }
 )
+
+```
+#### `+LoadingComponent.ts`
+
+If you don't set `Loading`, a default loading component is used.
+You can customize this default by creating `+LoadingComponent.ts`:
+```tsx
+// +LoadingComponent.tsx
+
+export default function LoadingComponent() {
+  return <div>My default loading component</div>
+}
+```
+#### `+Loading.ts`
+
+If you set `Loading` to `false`, the component is not wrapped with a `Suspense`.
+You can define a page-level loading component by creating `+Loading.ts`:
+```ts
+// +Loading.tsx
+
+export default function Loading() {
+  return <div>My page-level loading component</div>
+}
 ```

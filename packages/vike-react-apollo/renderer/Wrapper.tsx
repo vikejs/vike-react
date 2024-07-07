@@ -9,9 +9,7 @@ export default function Wrapper({ children }: { children: ReactNode }) {
   const { ApolloClient: getApolloClient, Loading } = pageContext.config
   assertUsage(getApolloClient, 'Setting +ApolloClient is required')
   let element = (
-    <WrappedApolloProvider makeClient={() => getApolloClient(pageContext)}>
-      {children}
-    </WrappedApolloProvider>
+    <WrappedApolloProvider makeClient={() => getApolloClient(pageContext)}>{children}</WrappedApolloProvider>
   )
   if (Loading) {
     element = <Suspense fallback={<Loading />}>{element}</Suspense>

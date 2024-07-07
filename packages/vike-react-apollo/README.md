@@ -93,7 +93,7 @@ You can define a loading and/or error fallback by using `withFallback()`.
 ```js
 withFallback(Component, Loading) // Define loading fallback
 withFallback(Component, Loading, Error) // Define loading and error fallback
-withFallback(Component, null, Error) // Define error fallback
+withFallback(Component, undefined, Error) // Define error fallback
 ```
 
 ```jsx

@@ -149,7 +149,7 @@ export default function LoadingComponent() {
 }
 ```
 
-#### `Loading` config
+#### `Loading` setting
 
 If you directly use `useSuspenseQuery()`, then the component doesn't have a loading fallback (technically speaking it isn't wrapped with a [`<Suspense>` boundary](https://react.dev/reference/react/Suspense)) and, instead, you can define a loading fallback on a layout- / page-level by setting `Loading`:
 

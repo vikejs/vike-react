@@ -7,6 +7,7 @@ settings:
 overrides:
   vike-react: link:./packages/vike-react/
   vike-react-query: link:./packages/vike-react-query/
+  vike-react-zustand: link:./packages/vike-react-zustand/
 
 importers:
 
@@ -151,7 +152,7 @@ importers:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
       vike-react-zustand:
-        specifier: workspace:*
+        specifier: link:../../packages/vike-react-zustand
         version: link:../../packages/vike-react-zustand
       vite:
         specifier: ^5.0.10

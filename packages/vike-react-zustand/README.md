@@ -4,21 +4,50 @@
 [![npm version](https://img.shields.io/npm/v/vike-react-zustand)](https://www.npmjs.com/package/vike-react-zustand)
 
 # `vike-react-zustand`
-
-# This package is not ready for use.
-
-
 [Zustand](https://github.com/pmndrs/zustand) integration for [Vike](https://vike.dev).
+
+Vike-react-zustand is just a wrapper around Zustand, with a few additional features. Redux devtools are enabled by default.
+
+
 
 See [example](https://github.com/vikejs/vike-react/tree/main/examples/zustand).
 
 > See also other [Vike extensions](https://vike.dev/vike-packages).
 
 
-# [Introduction](https://docs.pmnd.rs/zustand/getting-started/introduction)
-### How to use vike-react-zustand
 
-Vike-react-zustand is just a wrapper around Zustand, with a few additional features. Redux devtools are enabled by default.
+
+
+## Installation
+
+1. `npm install zustand vike-react-zustand`
+2. Extend `+config.ts`:
+   ```js
+   // pages/config.ts
+
+   import type { Config } from 'vike/types'
+   import vikeReact from 'vike-react/config'
+   import vikeReactZustand from 'vike-react-zustand/config'
+
+   export default {
+     // ...
+     extends: [vikeReact, vikeReactZustand]
+   } satisfies Config
+   ```
+3. Extend `vite.config.ts`:
+   ```ts
+   // vite.config.ts
+
+   import { vikeReactZustand } from 'vike-react-zustand/plugin'
+
+   export default {
+     // ...
+     plugins: [..., vikeReactZustand()]
+   }
+   ```
+
+> [!NOTE]
+> The 3. step will be unnecessary in the future, when Vike extensions can add Vite plugins.
 
 ---
 

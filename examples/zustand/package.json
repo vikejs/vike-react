@@ -14,8 +14,8 @@
     "react-dom": "18.2.0",
     "typescript": "^5.3.3",
     "vike": "^0.4.168",
-    "vike-react": "workspace:*",
-    "vike-react-zustand": "workspace:*",
+    "vike-react": "^0.4.15",
+    "vike-react-zustand": "^0.0.1",
     "vite": "^5.0.10",
     "zustand": "^4.4.7"
   },

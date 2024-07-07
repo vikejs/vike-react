@@ -21,31 +21,29 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/apollo).
 ## Installation
 
 1. `npm install @apollo/client @apollo/client-react-streaming graphql vike-react-apollo`
-2. Extend `+config.ts`:
-   ```ts
-   // pages/+config.ts
+2. Extend `+config.js`:
+   ```js
+   // pages/+config.js
 
-   import type { Config } from 'vike/types'
    import vikeReact from 'vike-react/config'
    import vikeReactApollo from 'vike-react-apollo/config'
 
    export default {
      ...
      extends: [vikeReact, vikeReactApollo]
-   } satisfies Config
+   }
    ```
-3. Create `+ApolloClient.ts`:
-   ```ts
-    // pages/+ApolloClient.ts
+3. Create `+ApolloClient.js`:
+   ```js
+    // +ApolloClient.js
+
     import { InMemoryCache } from '@apollo/client-react-streaming'
-    import type { ApolloClientOptions } from 'vike-react-apollo/types'
-    import type { PageContext } from 'vike/types'
 
     export default (pageContext: PageContext) =>
     ({
         uri: 'https://countries.trevorblades.com',
         cache: new InMemoryCache()
-    }) satisfies ApolloClientOptions
+    })
    ```
 
 > [!NOTE]
@@ -54,11 +52,13 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/apollo).
 
 ## Basic usage
 
-```tsx
+```jsx
+// Countries.jsx
+
 import { useSuspenseQuery, gql } from '@apollo/client/index.js'
 
 const Countries = () => {
-  const { data } = useSuspenseQuery<{ countries: { code: string; name: string }[] }>(gql`
+  const { data } = useSuspenseQuery(gql`
     {
       countries {
         code
@@ -90,15 +90,18 @@ const Countries = () => {
 
 You can define a loading and/or error fallback by using `withFallback()`.
 
-```tsx
-// Country.tsx
+- `withFallback(Component, Loading, Error)`
+- `withFallback(Component, { Loading, Error })`
+
+```jsx
+// Country.jsx
 
 import { useSuspenseQuery, gql } from '@apollo/client/index.js'
 import { withFallback } from 'vike-react-apollo'
 
 const Country = withFallback(
-  ({ code }: { code: string }) => {
-    const { data } = useSuspenseQuery<{ country: { name: string } }>(
+  ({ code }) => {
+    const { data } = useSuspenseQuery(
       gql`
         query Country($code: String!) {
           country(code: $code) {
@@ -131,23 +134,26 @@ const Country = withFallback(
 )
 
 ```
-#### `+LoadingComponent.ts`
+
+#### `LoadingComponent` config
 
 If you don't set `Loading`, a default loading component is used.
-You can customize this default by defining the `LoadingComponent` config:
-```tsx
-// +LoadingComponent.tsx
+You can set this default by defining the `LoadingComponent` config:
+
+```jsx
+// +LoadingComponent.jsx
 
 export default function LoadingComponent() {
   return <div>My default loading component</div>
 }
 ```
-#### `+Loading.ts`
+#### `Loading` config
 
-If you set `Loading` to `false`, the component is not wrapped with a `Suspense`.
-You can define a page-level loading component by defining the `Loading` config:
-```ts
-// +Loading.tsx
+If you set `Loading` to `false`, the component is not wrapped with a [`Suspense`](https://react.dev/reference/react/Suspense).
+You can set a page-level loading component by defining the `Loading` config:
+
+```jsx
+// +Loading.jsx
 
 export default function Loading() {
   return <div>My page-level loading component</div>

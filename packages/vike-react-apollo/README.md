@@ -90,8 +90,11 @@ const Countries = () => {
 
 You can define a loading and/or error fallback by using `withFallback()`.
 
-- `withFallback(Component, Loading, Error)`
-- `withFallback(Component, { Loading, Error })`
+```js
+withFallback(Component, Loading) // Define loading fallback
+withFallback(Component, Loading, Error) // Define loading and error fallback
+withFallback(Component, null, Error) // Define error fallback
+```
 
 ```jsx
 // Country.jsx
@@ -122,23 +125,21 @@ const Country = withFallback(
       </div>
     )
   },
-  {
-    Loading: ({ code }) => <div>Loading country {code}</div>,
-    Error: ({ code, retry }) => (
-      <div>
-        Failed to load country {code}
-        <button onClick={() => retry()}>Retry</button>
-      </div>
-    )
-  }
+  ({ code }) => <div>Loading country {code}</div>,
+  ({ code, retry }) => (
+    <div>
+      Failed to load country {code}
+      <button onClick={() => retry()}>Retry</button>
+    </div>
+  )
 )
-
 ```
 
-#### `LoadingComponent` config
+#### `LoadingComponent` setting
 
-If you don't define `Loading`, a default loading component is used.
-You can define this default by setting the `LoadingComponent` config:
+If you can skip the `Loading` parameter, then a default loading component is used.
+
+You can change this default by setting `LoadingComponent`:
 
 ```jsx
 // +LoadingComponent.jsx
@@ -147,15 +148,21 @@ export default function LoadingComponent() {
   return <div>My default loading component</div>
 }
 ```
+
 #### `Loading` config
 
-If you set `Loading` to `false`, the component is not wrapped with a [`Suspense`](https://react.dev/reference/react/Suspense).
-You can define a page-level loading component by setting the `Loading` config:
+If you directly use `useSuspenseQuery()`, then the component doesn't have a loading fallback (technically speaking it isn't wrapped with a [`<Suspense>` boundary](https://react.dev/reference/react/Suspense)) and, instead, you can define a loading fallback on a layout- / page-level by setting `Loading`:
 
 ```jsx
 // +Loading.jsx
 
 export default function Loading() {
-  return <div>My page-level loading component</div>
+  return <div>My layout-level / page-level loading component</div>
 }
 ```
+
+> [!INFO]
+> You can also set an `Error` fallback without a loading fallback by using `withFallback()` and setting its `Layout` parameter to `false`:
+> ```js
+> withFallback(Component, false, Error)`
+> ```

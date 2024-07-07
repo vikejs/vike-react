@@ -1,4 +1,4 @@
-import { cloneDeep, mergeWith } from 'lodash-es'
+import { mergeWith } from 'lodash-es'
 import React, { ReactNode, useMemo } from 'react'
 import { usePageContext } from 'vike-react/usePageContext'
 import { create as createZustand } from 'zustand'
@@ -42,10 +42,10 @@ export default function Wrapper({ children }: { children: ReactNode }) {
     } else if (pageContext._vikeReactZustand && !store.__hydrated__ && !pageContext.isClientSideNavigation) {
       assert(key in pageContext._vikeReactZustand)
 
-      // TODO: remove lodash-es dependency and implement deep merging
-      const merged = mergeWith(cloneDeep(store.getInitialState()), pageContext._vikeReactZustand[key])
-      //@ts-ignore
-      Object.assign(store.getInitialState(), merged)
+      const initialStateClient = store.getInitialState()
+      const initialStateServer = pageContext._vikeReactZustand[key]
+      mergeWith(initialStateClient, initialStateServer)
+
       store.__hydrated__ = true
     }
   }

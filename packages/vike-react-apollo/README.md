@@ -29,21 +29,21 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/apollo).
    import vikeReactApollo from 'vike-react-apollo/config'
 
    export default {
-     ...
+     // ...
      extends: [vikeReact, vikeReactApollo]
    }
    ```
 3. Create `+ApolloClient.js`:
    ```js
-    // +ApolloClient.js
+   // +ApolloClient.js
 
-    import { InMemoryCache } from '@apollo/client-react-streaming'
+   import { InMemoryCache } from '@apollo/client-react-streaming'
 
-    export default (pageContext: PageContext) =>
-    ({
-        uri: 'https://countries.trevorblades.com',
-        cache: new InMemoryCache()
-    })
+   export default (pageContext: PageContext) =>
+   ({
+       uri: 'https://countries.trevorblades.com',
+       cache: new InMemoryCache()
+   })
    ```
 
 > [!NOTE]

@@ -137,8 +137,8 @@ const Country = withFallback(
 
 #### `LoadingComponent` config
 
-If you don't set `Loading`, a default loading component is used.
-You can set this default by defining the `LoadingComponent` config:
+If you don't define `Loading`, a default loading component is used.
+You can define this default by setting the `LoadingComponent` config:
 
 ```jsx
 // +LoadingComponent.jsx
@@ -150,7 +150,7 @@ export default function LoadingComponent() {
 #### `Loading` config
 
 If you set `Loading` to `false`, the component is not wrapped with a [`Suspense`](https://react.dev/reference/react/Suspense).
-You can set a page-level loading component by defining the `Loading` config:
+You can define a page-level loading component by setting the `Loading` config:
 
 ```jsx
 // +Loading.jsx

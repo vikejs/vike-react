@@ -9,8 +9,7 @@
     "./config": "./dist/renderer/+config.js",
     "./renderer/Wrapper": "./dist/renderer/Wrapper.js",
     "./renderer/LoadingComponent": "./dist/renderer/LoadingComponent.js",
-    "./renderer/ApolloConfig": "./dist/renderer/ApolloConfig.js",
-    "./types": "./dist/renderer/types.js"
+    "./renderer/ApolloConfig": "./dist/renderer/ApolloConfig.js"
   },
   "scripts": {
     "dev": "tsc --watch",
@@ -55,9 +54,6 @@
       ],
       "renderer/Wrapper": [
         "dist/renderer/Wrapper.d.ts"
-      ],
-      "types": [
-        "dist/renderer/types.d.ts"
       ]
     }
   },

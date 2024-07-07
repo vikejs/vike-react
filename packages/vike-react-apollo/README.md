@@ -37,13 +37,13 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/apollo).
    ```js
    // +ApolloClient.js
 
-   import { InMemoryCache } from '@apollo/client-react-streaming'
+   import { ApolloClient, InMemoryCache } from '@apollo/client-react-streaming'
 
    export default (pageContext: PageContext) =>
-   ({
-       uri: 'https://countries.trevorblades.com',
-       cache: new InMemoryCache()
-   })
+      new ApolloClient({
+        uri: 'https://countries.trevorblades.com',
+        cache: new InMemoryCache()
+      })
    ```
 
 > [!NOTE]

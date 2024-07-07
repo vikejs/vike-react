@@ -161,7 +161,7 @@ export default function Loading() {
 }
 ```
 
-> [!INFO]
+> [!NOTE]
 > You can also set an `Error` fallback without a loading fallback by using `withFallback()` and setting its `Layout` parameter to `false`:
 > ```js
 > withFallback(Component, false, Error)`

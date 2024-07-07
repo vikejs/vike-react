@@ -1,4 +1,4 @@
-import type { Config, ImportString } from 'vike/types'
+import type { Config } from 'vike/types'
 import type _ from 'vike-react/config' // Needed for declaration merging of Config
 import type { ApolloClient } from '@apollo/client-react-streaming'
 

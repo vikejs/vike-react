@@ -43,8 +43,9 @@ export default function Wrapper({ children }: { children: ReactNode }) {
       assert(key in pageContext._vikeReactZustand)
 
       // TODO: remove lodash-es dependency and implement deep merging
-      const merged = mergeWith(cloneDeep(store.getState()), pageContext._vikeReactZustand[key])
-      store.setState(merged, true)
+      const merged = mergeWith(cloneDeep(store.getInitialState()), pageContext._vikeReactZustand[key])
+      //@ts-ignore
+      Object.assign(store.getInitialState(), merged)
       store.__hydrated__ = true
     }
   }

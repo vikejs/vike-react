@@ -88,21 +88,26 @@ declare global {
        *
        * https://vike.dev/onBeforeRenderClient
        */
-      onBeforeRenderClient?: (pageContext: PageContextClient) => void
+      onBeforeRenderClient?: RenderHook
 
       /**
        * Client-side hook called after the page is rendered.
        *
        * https://vike.dev/onAfterRenderClient
        */
-      onAfterRenderClient?: (pageContext: PageContextClient) => void
+      onAfterRenderClient?: RenderHook
+      Loading?: () => React.ReactNode
+      LoadingComponent?: (() => React.ReactNode) | ImportString
     }
     interface ConfigResolved {
       Wrapper?: Wrapper[]
       Layout?: Layout[]
+      onBeforeRenderClient?: RenderHook[]
+      onAfterRenderClient?: RenderHook[]
     }
   }
 }
 
 type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode
 type Layout = Wrapper
+type RenderHook = (pageContext: PageContextClient) => void

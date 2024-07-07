@@ -5,12 +5,15 @@ import ReactDOM from 'react-dom/client'
 import { getHeadSetting } from './getHeadSetting.js'
 import type { OnRenderClientSync } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
+import './styles.css'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderClientSync> => {
   // Use case:
   // - Store hydration https://github.com/vikejs/vike-react/issues/110
-  pageContext.config.onBeforeRenderClient?.(pageContext)
+  for (const onBeforeRenderClient of pageContext.config.onBeforeRenderClient || []) {
+    onBeforeRenderClient(pageContext)
+  }
 
   const page = getPageElement(pageContext)
 
@@ -60,7 +63,9 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
 
   // Use case:
   // - Testing tool https://github.com/vikejs/vike-react/issues/95
-  pageContext.config.onAfterRenderClient?.(pageContext)
+  for (const onAfterRenderClient of pageContext.config.onAfterRenderClient || []) {
+    onAfterRenderClient(pageContext)
+  }
 }
 
 // https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically/260876#260876

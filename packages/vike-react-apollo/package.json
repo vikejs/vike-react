@@ -13,7 +13,7 @@
   },
   "scripts": {
     "dev": "tsc --watch",
-    "build": "rimraf dist/ && tsc && cp renderer/styles.css dist/renderer/styles.css",
+    "build": "rimraf dist/ && tsc",
     "release": "release-me patch",
     "release:minor": "release-me minor",
     "release:commit": "release-me commit"

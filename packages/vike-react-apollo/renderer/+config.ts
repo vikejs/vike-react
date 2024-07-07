@@ -8,7 +8,6 @@ export default {
     'vike-react': '>=0.4.13'
   },
   Wrapper: 'import:vike-react-apollo/renderer/Wrapper:default',
-  LoadingComponent: 'import:vike-react-apollo/renderer/LoadingComponent:default',
   streamIsRequired: true,
   meta: {
     ApolloClient: {
@@ -16,12 +15,6 @@ export default {
         server: true,
         client: true
       }
-    },
-    Loading: {
-      env: { server: true, client: true }
-    },
-    LoadingComponent: {
-      env: { server: true, client: true }
     }
   }
 } satisfies Config
@@ -30,8 +23,6 @@ declare global {
   namespace Vike {
     interface Config {
       ApolloClient?: (pageContext: PageContext) => ApolloClient
-      Loading?: () => React.ReactNode
-      LoadingComponent?: (() => React.ReactNode) | ImportString
     }
   }
 }

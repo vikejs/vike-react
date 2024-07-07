@@ -11,6 +11,8 @@ export default {
     vike: '>=0.4.178'
   },
 
+  LoadingComponent: 'import:vike-react/components/LoadingComponent:default',
+
   // https://vike.dev/onRenderHtml
   onRenderHtml: 'import:vike-react/renderer/onRenderHtml:onRenderHtml',
   // https://vike.dev/onRenderClient
@@ -54,9 +56,11 @@ export default {
       env: { server: true }
     },
     onBeforeRenderClient: {
+      cumulative: true,
       env: { client: true }
     },
     onAfterRenderClient: {
+      cumulative: true,
       env: { client: true }
     },
     Wrapper: {
@@ -73,6 +77,12 @@ export default {
     },
     reactStrictMode: {
       env: { client: true, server: true }
+    },
+    Loading: {
+      env: { server: true, client: true }
+    },
+    LoadingComponent: {
+      env: { server: true, client: true }
     }
   }
 } satisfies Config

@@ -15,6 +15,11 @@ function Page() {
           Interactive while loading. <Counter />
         </li>
       </ul>
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper neque magna, a dapibus turpis
+        volutpat eget. Praesent et aliquam nisi. Integer congue nec ligula et sollicitudin.
+      </div>
+      <br />
       <Countries />
     </>
   )

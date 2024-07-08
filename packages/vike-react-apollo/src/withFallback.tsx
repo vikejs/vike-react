@@ -1,4 +1,6 @@
-import React, { ComponentType, ReactNode, Suspense } from 'react'
+export { withFallback }
+
+import React, { type ComponentType, type ReactNode, Suspense } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 import { ApolloConsumer } from '@apollo/client/index.js'
 import { usePageContext } from 'vike-react/usePageContext'
@@ -18,16 +20,16 @@ type WithFallbackOptions<T> = {
   Error?: Error<T>
 }
 
-export function withFallback<T extends object = Record<string, never>>(
+function withFallback<T extends object = Record<string, never>>(
   Component: ComponentType<T>,
   options?: WithFallbackOptions<T>
 ): ComponentType<T>
-export function withFallback<T extends object = Record<string, never>>(
+function withFallback<T extends object = Record<string, never>>(
   Component: ComponentType<T>,
   Loading?: Loading<T>,
   Error?: Error<T>
 ): ComponentType<T>
-export function withFallback<T extends object = Record<string, never>>(
+function withFallback<T extends object = Record<string, never>>(
   Component: ComponentType<T>,
   options?: Loading<T> | WithFallbackOptions<T>,
   Error_?: Error<T>

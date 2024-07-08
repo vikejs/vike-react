@@ -125,6 +125,7 @@ const Country = withFallback(
   },
   ({ code }) => <div>Loading country {code}</div>,
   // The props `retry` and `error` are provided by vike-react-apollo
+  // Other props, such as `code`, are provied by the parent component
   ({ code, retry, error }) => (
     <div>
       Failed to load country {code}
@@ -136,7 +137,7 @@ const Country = withFallback(
 
 **`+LoadingComponent`**
 
-If you skip the `Loading` parameter, then a default loading component is used. You can change this default loading component:
+If you skip the `Loading` parameter, then a default loading component (provided by `vike-react`) is used. You can create a custom default loading component:
 
 ```jsx
 // pages/+LoadingComponent.jsx
@@ -149,7 +150,7 @@ export default function LoadingComponent() {
 
 **`+Loading`**
 
-Instead of adding a loading fallback to the component, you can add a loading fallback to the page and layouts:
+Instead of adding a loading fallback to the component, you can set a loading fallback to the page and layouts:
 
 ```jsx
 // pages/+Loading.jsx
@@ -167,7 +168,7 @@ export default function Loading() {
 > withFallback(Component, undefined) // Use default loading fallback
 > ```
 
-**Custom `<Suspense>` boundary**
+**Manual `<Suspense>` boundary**
 
 Technically speaking:
 - `withFallback()` wraps the component inside a [`<Suspense>` boundary](https://react.dev/reference/react/Suspense).

@@ -5,18 +5,19 @@
 
 # `vike-react-query`
 
-Enable your React components to fetch data using [TanStack Query](https://tanstack.com/query/latest).
+Enables your React components to fetch data using [TanStack Query](https://tanstack.com/query/latest).
 
 > [!NOTE]
-> With `vike-react-query` you fetch data on a component-level, instead using [Vike's `data()` hook](https://vike.dev/data) which fetches data on a page-level.
+> You also get [progressive rendering](https://vike.dev/streaming#progressive-rendering), fallback upon loading and/or error, and [caching](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery).
 
-You also get:
- - [Progressive rendering](https://vike.dev/streaming#progressive-rendering)
- - [Fallback upon loading and/or error](#withfallback)
- - [Caching](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
- - [Optional usage with Telefunc](#usage-with-telefunc)
+[Installation](#installation)  
+[Basic usage](#basic-usage)  
+[`withFallback()`](#withfallback)  
+[Settings](#settings)  
+[Usage with Telefunc](#usage-with-telefunc)  
+[How it works](#how-it-works)  
 
-See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-query).
+<br/>
 
 
 ## Installation
@@ -36,7 +37,9 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-quer
    ```
 
 > [!NOTE]
-> The `vike-react-query` [extension](https://vike.dev/extensions) requires [`vike-react`](https://vike.dev/vike-react).
+> The `vike-react-query` extension requires [`vike-react`](https://vike.dev/vike-react).
+
+<br/>
 
 
 ## Basic usage
@@ -63,12 +66,9 @@ const Movie = ({ id }) => {
 ```
 
 > [!NOTE]
-> Upon SSR, the component is rendered to HTML and its data loaded on the server side, while on the client side it's merely [hydrated](https://vike.dev/hydration).
->
-> Upon page navigation, the component is rendered and its data loaded on the client-side.
+> Even though `useSuspenseQuery()` is imported from `@tanstack/react-query`, you still need to install `vike-react-query` for it to work.
 
-> [!NOTE]
-> Even though `useSuspenseQuery()` is imported from `@tanstack/react-query`, you still need to [install `vike-react-query`](#installation) for it to work. (Behind the scenes `vike-react-query` integrates TanStack Query with [the SSR stream](react-streaming#readme).)
+<br/>
 
 
 ## `withFallback()`
@@ -110,16 +110,15 @@ const Movie = withFallback(
 )
 ```
 
-## Defaults
+<br/>
+
+
+## Settings
 
 You can modify the defaults defined by [`QueryClient`](https://tanstack.com/query/latest/docs/reference/QueryClient).
 
-Gloablly, for all components:
-
 ```js
-// pages/+config.js
-
-// Applies to all pages.
+// +config.js
 
 export default {
   queryClientConfig: {
@@ -132,42 +131,9 @@ export default {
 }
 ```
 
-For the components of one page:
+You can apply settings to all pages, a group of pages, or only one page. See [Vike Docs > Config > Inheritance](https://vike.dev/config#inheritance).
 
-```js
-// pages/product/@id/+config.js
-
-// Applies only to /product/@id/+Page.js (given there is only
-// one +Page.js file under the /pages/product/@id directory).
-
-export default {
-  queryClientConfig: {
-    defaultOptions: {
-      queries: {
-        staleTime: 60 * 1000
-      }
-    }
-  }
-}
-```
-
-For the components of a group of pages:
-
-```js
-// pages/admin/+config.js
-
-// Applies to all /pages/admin/**/+Page.js
-
-export default {
-  queryClientConfig: {
-    defaultOptions: {
-      queries: {
-        staleTime: 60 * 1000
-      }
-    }
-  }
-}
-```
+<br/>
 
 
 ## Usage with Telefunc
@@ -179,7 +145,7 @@ You can use `vike-react-query` with [Telefunc](https://telefunc.com).
 
 With Telefunc, the query function always runs on the server.
 
-#### Query example
+**Query example**
 
 ```tsx
 // movie.telefunc.ts
@@ -223,7 +189,7 @@ const Movie = withFallback(
 )
 ```
 
-#### Mutation example
+**Mutation example**
 
 ```tsx
 // movie.telefunc.ts
@@ -262,7 +228,7 @@ const CreateMovie = () => {
 }
 ```
 
-#### Putting it together
+**Putting it together**
 
 ```tsx
 // movie.telefunc.ts
@@ -331,3 +297,18 @@ const Movies = withFallback(
   }
 )
 ```
+
+<br/>
+
+
+## How it works
+
+Upon SSR, the component is rendered to HTML and its data loaded on the server-side. On the client side, the component is merely [hydrated](https://vike.dev/hydration).
+
+Upon page navigation (and rendering the first page if [SSR is disabled](https://vike.dev/ssr)), the component is rendered and its data loaded on the client-side.
+
+> [!NOTE]
+> With `vike-react-query` you fetch data on a component-level instead of using Vike's [`data()` hook](https://vike.dev/data) which fetches data on a page-level.
+
+> [!NOTE]
+> Behind the scenes `vike-react-query` integrates TanStack Query into [the HTML stream](https://github.com/brillout/react-streaming#readme).

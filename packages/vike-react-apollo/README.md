@@ -8,14 +8,12 @@
 Enables your React components to fetch data using [Apollo GraphQL](https://www.apollographql.com/docs/react/).
 
 > [!NOTE]
-> With `vike-react-apollo` you can fetch data on a component-level, instead using [Vike's `data()` hook](https://vike.dev/data) which fetches data on a page-level.
+> You also get [progressive rendering](https://vike.dev/streaming#progressive-rendering), fallback upon loading and/or error, and [caching](https://www.apollographql.com/docs/react/caching/cache-configuration).
 
-You also get:
- - [Progressive rendering](https://vike.dev/streaming#progressive-rendering)
- - [Fallback upon loading and/or error](#withfallback)
- - [Caching](https://www.apollographql.com/docs/react/caching/cache-configuration)
-
-See [example](https://github.com/vikejs/vike-react/tree/main/examples/apollo).
+[Installation](#installation)  
+[Basic usage](#basic-usage)  
+[`withFallback()`](#withfallback)  
+[How it works](#how-it-works)  
 
 
 ## Installation
@@ -47,7 +45,7 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/apollo).
    ```
 
 > [!NOTE]
-> The `vike-react-apollo` [extension](https://vike.dev/extensions) requires [`vike-react`](https://vike.dev/vike-react).
+> The `vike-react-apollo` extension requires [`vike-react`](https://vike.dev/vike-react).
 
 
 ## Basic usage
@@ -78,12 +76,7 @@ const Countries = () => {
 ```
 
 > [!NOTE]
-> Upon SSR, the component is rendered to HTML and its data loaded on the server side, while on the client side it's merely [hydrated](https://vike.dev/hydration).
->
-> Upon page navigation, the component is rendered and its data loaded on the client-side.
-
-> [!NOTE]
-> Even though `useSuspenseQuery()` is imported from `@apollo/client`, you still need to [install `vike-react-apollo`](#installation) for it to work. (Behind the scenes `vike-react-apollo` integrates Apollo GraphQL with [the SSR stream](react-streaming#readme).)
+> Even though `useSuspenseQuery()` is imported from `@apollo/client`, you still need to install `vike-react-apollo` for it to work.
 
 
 ## `withFallback()`
@@ -135,7 +128,7 @@ const Country = withFallback(
 )
 ```
 
-#### `LoadingComponent` setting
+**`+LoadingComponent`**
 
 If you skip the `Loading` parameter, then a default loading component is used.
 
@@ -149,7 +142,7 @@ export default function LoadingComponent() {
 }
 ```
 
-#### `Loading` setting
+**`+Loading`**
 
 If you directly use `useSuspenseQuery()`, then the component doesn't have a loading fallback (technically speaking it isn't wrapped with a [`<Suspense>` boundary](https://react.dev/reference/react/Suspense)) and, instead, you can define a loading fallback on a layout- / page-level by setting `Loading`:
 
@@ -166,3 +159,16 @@ export default function Loading() {
 > ```js
 > withFallback(Component, false, Error)`
 > ```
+
+
+## How it works
+
+Upon SSR, the component is rendered to HTML and its data loaded on the server-side. On the client side, the component is merely [hydrated](https://vike.dev/hydration).
+
+Upon page navigation (and rendering the first page if [SSR is disabled](https://vike.dev/ssr)), the component is rendered and its data loaded on the client-side.
+
+> [!NOTE]
+> With `vike-react-apollo` you fetch data on a component-level instead of using Vike's [`data()` hook](https://vike.dev/data) which fetches data on a page-level.
+
+> [!NOTE]
+> Behind the scenes `vike-react-apollo` integrates Apollo GraphQL into [the HTML stream](https://github.com/brillout/react-streaming#readme).

@@ -5,7 +5,7 @@
 
 # `vike-react-apollo`
 
-Enable your React components to fetch data using [Apollo GraphQL](https://www.apollographql.com/docs/react/).
+Enables your React components to fetch data using [Apollo GraphQL](https://www.apollographql.com/docs/react/).
 
 > [!NOTE]
 > With `vike-react-apollo` you can fetch data on a component-level, instead using [Vike's `data()` hook](https://vike.dev/data) which fetches data on a page-level.

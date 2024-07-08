@@ -5,7 +5,7 @@
 
 # `vike-react-query`
 
-Enable your React components to fetch data using [TanStack Query](https://tanstack.com/query/latest).
+Enables your React components to fetch data using [TanStack Query](https://tanstack.com/query/latest).
 
 > [!NOTE]
 > With `vike-react-query` you can fetch data on a component-level, instead using [Vike's `data()` hook](https://vike.dev/data) which fetches data on a page-level.

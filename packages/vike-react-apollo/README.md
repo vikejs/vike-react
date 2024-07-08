@@ -90,6 +90,7 @@ const Countries = () => {
 You can define a loading and/or error fallback by using `withFallback()`.
 
 ```js
+withFallback(Component) // Use default loading fallback (see +LoadingComponent)
 withFallback(Component, Loading) // Define loading fallback
 withFallback(Component, Loading, Error) // Define loading and error fallback
 withFallback(Component, undefined, Error) // Define error fallback
@@ -138,33 +139,59 @@ const Country = withFallback(
 
 If you skip the `Loading` parameter, then a default loading component is used.
 
-You can change this default by setting `LoadingComponent`:
+You can change this default loading component:
 
 ```jsx
-// +LoadingComponent.jsx
+// pages/+LoadingComponent.jsx
 
 export default function LoadingComponent() {
-  return <div>My default loading component</div>
+  // Applies on a component-level
+  return <div>Loading...</div>
 }
 ```
 
 **`+Loading`**
 
-If you directly use `useSuspenseQuery()`, then the component doesn't have a loading fallback (technically speaking it isn't wrapped with a [`<Suspense>` boundary](https://react.dev/reference/react/Suspense)) and, instead, you can define a loading fallback on a layout- / page-level by setting `Loading`:
+If you use `useSuspenseQuery()` without `withFallback()`, then the component doesn't have any loading fallback.
+
+Instead of adding a loading fallback to the component, you can add a loading fallback to the page and to all layouts:
 
 ```jsx
-// +Loading.jsx
+// pages/+Loading.jsx
 
 export default function Loading() {
-  return <div>My layout-level / page-level loading component</div>
+  // Applies to the page and all layouts
+  return <div>Loading...</div>
 }
 ```
 
 > [!NOTE]
-> You can also set an `Error` fallback without a loading fallback by using `withFallback()` and setting its `Layout` parameter to `false`:
+> You can also define an error fallback without any loading fallback:
 > ```js
-> withFallback(Component, false, Error)`
+> withFallback(Component, false, Error) // Don't set any loading fallback
+> withFallback(Component, undefined, Error) // Use default loading fallback
 > ```
+
+**Custom `<Suspense>` boundary**
+
+Technically speaking:
+- `withFallback()` wraps the component inside a [`<Suspense>` boundary](https://react.dev/reference/react/Suspense).
+- `+Loading` adds a `<Suspense>` boundary to the [`<Page>` component](https://vike.dev/Page) as well as to all [`<Layout>` components](https://vike.dev/Layout) components.
+
+You can also manually add a `<Suspense>` boundary at any arbitrary position:
+
+```js
+import { Suspense } from 'react'
+
+function SomePageSection() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SomeDataFetchingComponent />
+      <SomeOtherDataFetchingComponent />
+    </Suspense>
+  )
+}
+```
 
 <br/>
 

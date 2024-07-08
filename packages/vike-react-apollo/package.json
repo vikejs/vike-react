@@ -1,14 +1,13 @@
 {
   "name": "vike-react-apollo",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "main": "dist/src/index.js",
   "typings": "dist/src/index.js",
   "exports": {
     ".": "./dist/src/index.js",
     "./config": "./dist/renderer/+config.js",
-    "./renderer/Wrapper": "./dist/renderer/Wrapper.js",
-    "./renderer/ApolloConfig": "./dist/renderer/ApolloConfig.js"
+    "./renderer/Wrapper": "./dist/renderer/Wrapper.js"
   },
   "scripts": {
     "dev": "tsc --watch",

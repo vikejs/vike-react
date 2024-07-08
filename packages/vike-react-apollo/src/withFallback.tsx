@@ -40,7 +40,7 @@ function withFallback<T extends object = Record<string, never>>(
   if (options && typeof options === 'object' && ('Loading' in options || 'Error' in options)) {
     Loading = options.Loading
     Error = options.Error
-  } else if (options !== undefined && typeof options !== 'object') {
+  } else if (typeof options !== 'object') {
     Loading = options
     Error = Error_
   }
@@ -99,10 +99,10 @@ function withFallback<T extends object = Record<string, never>>(
       )
     }
 
+    if (Loading === undefined) {
+      Loading = pageContext.config.LoadingComponent
+    }
     if (Loading !== false) {
-      if (!Loading) {
-        Loading = pageContext.config.LoadingComponent
-      }
       element = (
         <Suspense fallback={typeof Loading === 'function' ? <Loading {...componentProps} /> : Loading}>
           {element}

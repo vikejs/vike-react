@@ -1,5 +1,5 @@
 // https://vike.dev/meta#typescript
-import type { ImportString, PageContextClient } from 'vike/types'
+import type { ImportString, PageContextClient, PageContext } from 'vike/types'
 
 declare global {
   namespace Vike {
@@ -26,18 +26,28 @@ declare global {
        */
       Wrapper?: Wrapper | ImportString
 
-      /** &lt;title>${title}&lt;/title> */
-      title?: string
-
-      /** &lt;link rel="icon" href="${favicon}" /> */
-      favicon?: string
-
-      /** &lt;html lang="${lang}">
-       *
-       *  @default 'en'
-       *
+      /**
+       * ```js
+       * <title>${title}</title>
+       * <meta property="og:title" content="${title}" />
+       * ```
        */
-      lang?: string
+      title?: StringGetter
+
+      /**
+       * ```js
+       * <link rel="icon" href="${favicon}" />
+       * ```
+       */
+      favicon?: StringGetter
+
+      /**
+       * ```js
+       * <html lang="${lang}">
+       * ```
+       * @default 'en'
+       */
+      lang?: StringGetter
 
       /**
        * If `true`, the page is rendered twice: on the server-side (to HTML) and on the client-side (hydration).
@@ -103,6 +113,8 @@ declare global {
     }
   }
 }
+
+type StringGetter = string | ((pageContext: PageContext) => string)
 
 type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode
 type Layout = Wrapper

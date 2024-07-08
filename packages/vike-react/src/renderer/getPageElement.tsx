@@ -12,20 +12,20 @@ function getPageElement(pageContext: PageContext): JSX.Element {
   let page = Page ? <Page /> : null
 
   // Wrapping
+  const addSuspense = (el: React.JSX.Element | null) => {
+    if (!Loading) return el
+    return <Suspense fallback={<Loading />}>{page}</Suspense>
+  }
+  page = addSuspense(page)
   ;[
     // Inner wrapping
     ...(pageContext.config.Layout || []),
     // Outer wrapping
     ...(pageContext.config.Wrapper || [])
-  ].forEach((Wrapper) => {
-    if (Loading) {
-      page = <Suspense fallback={<Loading />}>{page}</Suspense>
-    }
-    page = <Wrapper>{page}</Wrapper>
+  ].forEach((Wrap) => {
+    page = <Wrap>{page}</Wrap>
+    page = addSuspense(page)
   })
-  if (Loading) {
-    page = <Suspense fallback={<Loading />}>{page}</Suspense>
-  }
 
   page = <PageContextProvider pageContext={pageContext}>{page}</PageContextProvider>
   if (pageContext.config.reactStrictMode !== false) {

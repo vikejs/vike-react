@@ -56,11 +56,9 @@ export default {
       env: { server: true }
     },
     onBeforeRenderClient: {
-      cumulative: true,
       env: { client: true }
     },
     onAfterRenderClient: {
-      cumulative: true,
       env: { client: true }
     },
     Wrapper: {

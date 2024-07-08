@@ -15,6 +15,8 @@ Enables your React components to fetch data using [Apollo GraphQL](https://www.a
 [`withFallback()`](#withfallback)  
 [How it works](#how-it-works)  
 
+<br/>
+
 
 ## Installation
 
@@ -47,6 +49,8 @@ Enables your React components to fetch data using [Apollo GraphQL](https://www.a
 > [!NOTE]
 > The `vike-react-apollo` extension requires [`vike-react`](https://vike.dev/vike-react).
 
+<br/>
+
 
 ## Basic usage
 
@@ -77,6 +81,8 @@ const Countries = () => {
 
 > [!NOTE]
 > Even though `useSuspenseQuery()` is imported from `@apollo/client`, you still need to install `vike-react-apollo` for it to work.
+
+<br/>
 
 
 ## `withFallback()`
@@ -159,6 +165,8 @@ export default function Loading() {
 > ```js
 > withFallback(Component, false, Error)`
 > ```
+
+<br/>
 
 
 ## How it works

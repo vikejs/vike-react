@@ -137,7 +137,7 @@ const Country = withFallback(
 
 #### `LoadingComponent` setting
 
-If you can skip the `Loading` parameter, then a default loading component is used.
+If you skip the `Loading` parameter, then a default loading component is used.
 
 You can change this default by setting `LoadingComponent`:
 

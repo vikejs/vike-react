@@ -32,14 +32,14 @@ declare global {
        * <meta property="og:title" content="${title}" />
        * ```
        */
-      title?: StringGetter
+      title?: PlainOrGetter<string>
 
       /**
        * ```js
        * <link rel="icon" href="${favicon}" />
        * ```
        */
-      favicon?: StringGetter
+      favicon?: PlainOrGetter<string>
 
       /**
        * ```js
@@ -47,7 +47,7 @@ declare global {
        * ```
        * @default 'en'
        */
-      lang?: StringGetter
+      lang?: PlainOrGetter<string>
 
       /**
        * If `true`, the page is rendered twice: on the server-side (to HTML) and on the client-side (hydration).
@@ -114,7 +114,7 @@ declare global {
   }
 }
 
-type StringGetter = string | ((pageContext: PageContext) => string)
+type PlainOrGetter<T> = T | ((pageContext: PageContext) => T)
 
 type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode
 type Layout = Wrapper

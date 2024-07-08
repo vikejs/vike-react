@@ -18,7 +18,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
   const favicon = getHeadSetting('favicon', pageContext)
   const lang = getHeadSetting('lang', pageContext) || 'en'
 
-  const titleTag = !title ? '' : escapeInject`<title>${title}</title>`
+  const titleTags = !title ? '' : escapeInject`<title>${title}</title><meta property="og:title" content="${title}" />`
   const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
 
   const Head = pageContext.config.Head || (() => <></>)
@@ -58,7 +58,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
     <html lang='${lang}'>
       <head>
         <meta charset="UTF-8" />
-        ${titleTag}
+        ${titleTags}
         ${headHtml}
         ${faviconTag}
       </head>

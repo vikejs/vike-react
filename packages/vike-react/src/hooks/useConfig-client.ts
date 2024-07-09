@@ -18,7 +18,7 @@ function useConfig(): (config: ConfigFromHook) => void {
   // usePageContext() enables useConfig() to be used as React hook for React components
   pageContext = usePageContext()
   return (config: ConfigFromHook) => {
-    const headAlreadySet = pageContext._headAlreadySet
+    const headAlreadySet = '_headAlreadySet' in pageContext && pageContext._headAlreadySet
 
     // No need to use injectToStream()
     if (!headAlreadySet) {

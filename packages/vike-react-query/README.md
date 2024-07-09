@@ -16,6 +16,7 @@ Enables your React components to fetch data using [TanStack Query](https://tanst
 [Settings](#settings)  
 [Usage with Telefunc](#usage-with-telefunc)  
 [How it works](#how-it-works)  
+[See also](#see-also)  
 
 <br/>
 
@@ -66,7 +67,7 @@ const Movie = ({ id }) => {
 ```
 
 > [!NOTE]
-> Even though `useSuspenseQuery()` is imported from `@tanstack/react-query`, you still need to install `vike-react-query` for it to work.
+> Even though [`useSuspenseQuery()`](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery) is imported from `@tanstack/react-query`, you still need to install `vike-react-query` for it to work.
 
 <br/>
 
@@ -312,3 +313,12 @@ Upon page navigation (and rendering the first page if [SSR is disabled](https://
 
 > [!NOTE]
 > Behind the scenes `vike-react-query` integrates TanStack Query into [the HTML stream](https://github.com/brillout/react-streaming#readme).
+
+<br/>
+
+
+## See also
+
+- [Example](https://github.com/vikejs/vike-react/tree/main/examples/react-query)
+- [TanStack Query > useSuspenseQuery](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
+- [Vike > Data Fetching](https://vike.dev/data-fetching)

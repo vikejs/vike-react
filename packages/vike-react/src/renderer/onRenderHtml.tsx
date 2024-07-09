@@ -5,7 +5,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { renderToStream } from 'react-streaming/server'
 import { dangerouslySkipEscape, escapeInject, version } from 'vike/server'
-import type { OnRenderHtmlAsync } from 'vike/types'
+import type { OnRenderHtmlAsync, PageContext } from 'vike/types'
 import { PageContextProvider } from '../hooks/usePageContext.js'
 import { getHeadSetting } from './getHeadSetting.js'
 import { getPageElement } from './getPageElement.js'
@@ -14,36 +14,30 @@ checkVikeVersion()
 addEcosystemStamp()
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
-  const title = getHeadSetting('title', pageContext)
-  const favicon = getHeadSetting('favicon', pageContext)
-  const lang = getHeadSetting('lang', pageContext) || 'en'
+  const pageHtml = await getPageHtml(pageContext)
+  const { headHtml, lang } = getHeadHtml(pageContext)
 
-  const titleTags = !title ? '' : escapeInject`<title>${title}</title><meta property="og:title" content="${title}" />`
-  const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
+  return escapeInject`<!DOCTYPE html>
+    <html lang='${lang}'>
+      <head>${headHtml}</head>
+      <body>
+        <div id="root">${pageHtml}</div>
+      </body>
+    </html>`
+}
 
-  const Head = pageContext.config.Head || (() => <></>)
-  let head = (
-    <PageContextProvider pageContext={pageContext}>
-      <Head />
-    </PageContextProvider>
-  )
-  if (pageContext.config.reactStrictMode !== false) {
-    head = <React.StrictMode>{head}</React.StrictMode>
-  }
-
-  const headHtml = dangerouslySkipEscape(renderToString(head))
-
-  let pageView: string | ReturnType<typeof dangerouslySkipEscape> | Awaited<ReturnType<typeof renderToStream>>
+async function getPageHtml(pageContext: PageContext) {
+  let pageHtml: string | ReturnType<typeof dangerouslySkipEscape> | Awaited<ReturnType<typeof renderToStream>>
   if (!pageContext.Page) {
-    pageView = ''
+    pageHtml = ''
   } else {
     const page = getPageElement(pageContext)
     const { stream, streamIsRequired } = pageContext.config
     if (!stream && !streamIsRequired) {
-      pageView = dangerouslySkipEscape(renderToString(page))
+      pageHtml = dangerouslySkipEscape(renderToString(page))
     } else {
       const disable = stream === false ? true : undefined
-      pageView = await renderToStream(page, {
+      pageHtml = await renderToStream(page, {
         webStream: typeof stream === 'string' ? stream === 'web' : undefined,
         userAgent:
           pageContext.headers?.['user-agent'] ||
@@ -53,21 +47,35 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
       })
     }
   }
+  return pageHtml
+}
 
-  const documentHtml = escapeInject`<!DOCTYPE html>
-    <html lang='${lang}'>
-      <head>
-        <meta charset="UTF-8" />
-        ${titleTags}
-        ${headHtml}
-        ${faviconTag}
-      </head>
-      <body>
-        <div id="root">${pageView}</div>
-      </body>
-    </html>`
+function getHeadHtml(pageContext: PageContext) {
+  const title = getHeadSetting('title', pageContext)
+  const favicon = getHeadSetting('favicon', pageContext)
+  const lang = getHeadSetting('lang', pageContext) || 'en'
 
-  return documentHtml
+  const titleTags = !title ? '' : escapeInject`<title>${title}</title><meta property="og:title" content="${title}" />`
+  const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
+
+  const Head = pageContext.config.Head || (() => <></>)
+  let headElement = (
+    <PageContextProvider pageContext={pageContext}>
+      <Head />
+    </PageContextProvider>
+  )
+  if (pageContext.config.reactStrictMode !== false) {
+    headElement = <React.StrictMode>{headElement}</React.StrictMode>
+  }
+  const headElementHtml = dangerouslySkipEscape(renderToString(headElement))
+
+  const headHtml = escapeInject`
+    <meta charset="UTF-8" />
+    ${titleTags}
+    ${headElementHtml}
+    ${faviconTag}
+  `
+  return { headHtml, lang }
 }
 
 // We don't need this anymore starting from vike@0.4.173 which added the `require` setting.

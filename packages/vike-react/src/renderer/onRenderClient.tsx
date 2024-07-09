@@ -42,7 +42,7 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
     } else {
       // Client-side navigation
 
-      ;(pageContext as PageContextInternal)._htmlHeadAlreadySet = true
+      ;(pageContext as PageContextInternal)._headAlreadySet = true
       const title = getHeadSetting('title', pageContext) || ''
       const lang = getHeadSetting('lang', pageContext) || 'en'
       const favicon = getHeadSetting('favicon', pageContext)

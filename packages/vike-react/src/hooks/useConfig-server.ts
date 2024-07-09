@@ -21,10 +21,10 @@ function useConfig(): (config: ConfigFromHook) => void {
   pageContext = usePageContext()
   const stream = useStream()
   return (config: ConfigFromHook) => {
-    const htmlHeadAlreadySet = pageContext._htmlHeadAlreadySet
+    const headAlreadySet = pageContext._headAlreadySet
 
     // No need to use injectToStream()
-    if (!htmlHeadAlreadySet) {
+    if (!headAlreadySet) {
       setUsingPageContext(config)
       return
     }

@@ -52,7 +52,7 @@ async function getPageHtml(pageContext: PageContext) {
 }
 
 function getHeadHtml(pageContext: PageContextInternal) {
-  pageContext._htmlHeadAlreadySet = true
+  pageContext._headAlreadySet = true
 
   // Set by settings
   const title = getHeadSetting('title', pageContext)

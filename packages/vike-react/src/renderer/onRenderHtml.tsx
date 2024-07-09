@@ -9,6 +9,7 @@ import type { OnRenderHtmlAsync, PageContext } from 'vike/types'
 import { PageContextProvider } from '../hooks/usePageContext.js'
 import { getHeadSetting } from './getHeadSetting.js'
 import { getPageElement } from './getPageElement.js'
+import type { PageContextInternal } from '../types/PageContext.js'
 
 checkVikeVersion()
 addEcosystemStamp()
@@ -50,7 +51,9 @@ async function getPageHtml(pageContext: PageContext) {
   return pageHtml
 }
 
-function getHeadHtml(pageContext: PageContext) {
+function getHeadHtml(pageContext: PageContextInternal) {
+  pageContext._htmlHeadAlreadySet = true
+
   const title = getHeadSetting('title', pageContext)
   const favicon = getHeadSetting('favicon', pageContext)
   const lang = getHeadSetting('lang', pageContext) || 'en'
@@ -75,6 +78,10 @@ function getHeadHtml(pageContext: PageContext) {
     ${headElementHtml}
     ${faviconTag}
   `
+
+  // Not needed on the client-side, thus we remove it to save KBs sent to the client
+  delete pageContext._configFromHook
+
   return { headHtml, lang }
 }
 

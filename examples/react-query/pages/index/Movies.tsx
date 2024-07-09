@@ -2,18 +2,23 @@ export { Movies }
 
 import React from 'react'
 import { withFallback } from 'vike-react-query'
+import { useConfig } from 'vike-react/useConfig'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { navigate } from 'vike/client/router'
 import { MovieDetails } from './types'
 
 const Movies = withFallback(() => {
+  const config = useConfig()
   const result = useSuspenseQuery({
     queryKey: ['movies'],
     queryFn: getStarWarsMovies
   })
 
   const movies = result.data
-
+  config({
+    // Set <title> tag
+    title: `${movies.length} movies`
+  })
   const onNavigate = (id: string) => {
     navigate(`/${id}`)
   }

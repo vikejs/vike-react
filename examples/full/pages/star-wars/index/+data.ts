@@ -3,14 +3,24 @@ export { data }
 export type Data = Awaited<ReturnType<typeof data>>
 
 import fetch from 'node-fetch'
+import { useConfig } from 'vike-react/useConfig'
 import type { Movie, MovieDetails } from '../types'
 
 const data = async () => {
+  const config = useConfig()
+
   const response = await fetch('https://brillout.github.io/star-wars/api/films.json')
   const moviesData = (await response.json()) as MovieDetails[]
+
+  config({
+    // Set <title> tag
+    title: `${moviesData.length} Star Wars Movies`
+  })
+
   // We remove data we don't need because the data is passed to the client; we should
   // minimize what is sent over the network.
   const movies = minimize(moviesData)
+
   return movies
 }
 

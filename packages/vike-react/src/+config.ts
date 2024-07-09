@@ -17,6 +17,7 @@ export default {
   onRenderClient: 'import:vike-react/renderer/onRenderClient:onRenderClient',
 
   passToClient: [
+    '_configFromHook',
     // https://github.com/vikejs/vike-react/issues/25
     process.env.NODE_ENV !== 'production' && '$$typeof'
   ].filter(isNotFalse),

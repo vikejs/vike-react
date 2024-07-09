@@ -118,3 +118,7 @@ type PlainOrGetter<T> = T | ((pageContext: PageContext) => T)
 
 type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode
 type Layout = Wrapper
+
+export type ConfigFromHook = {
+  title?: string
+}

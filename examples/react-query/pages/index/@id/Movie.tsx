@@ -2,11 +2,13 @@ export { Movie }
 
 import React from 'react'
 import { withFallback } from 'vike-react-query'
+import { useConfig } from 'vike-react/useConfig'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { MovieDetails } from '../types'
 
 const Movie = withFallback(
   ({ id }: { id: string }) => {
+    const config = useConfig()
     const result = useSuspenseQuery({
       queryKey: ['movie', id],
       queryFn: () => getStarWarsMovie(id),
@@ -15,6 +17,10 @@ const Movie = withFallback(
     })
 
     const { title, release_date } = result.data
+    config({
+      // Set <title> tag
+      title
+    })
 
     return (
       <>

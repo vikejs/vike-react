@@ -1,6 +1,8 @@
 import type React from 'react'
 import type { JSX } from 'react'
 import type ReactDOM from 'react-dom/client'
+import type { ConfigFromHook } from './Config.js'
+import { PageContext } from 'vike/types'
 
 // https://vike.dev/pageContext#typescript
 declare global {
@@ -17,3 +19,6 @@ declare global {
     }
   }
 }
+
+// For vike-react internal usage
+export type PageContextInternal = PageContext & { _configFromHook?: ConfigFromHook; _htmlHeadAlreadySet?: true }

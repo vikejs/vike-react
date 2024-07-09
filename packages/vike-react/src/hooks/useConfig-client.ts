@@ -1,9 +1,31 @@
 export { useConfig }
 
 import type { ConfigFromHook } from '../types/Config.js'
+import type { PageContextInternal } from '../types/PageContext.js'
+import { getPageContext } from 'vike/getPageContext'
+import { usePageContext } from './usePageContext.js'
 
 function useConfig(): (config: ConfigFromHook) => void {
-  return (config) => {
+  const setUsingPageContext = (config: ConfigFromHook) => {
+    pageContext._configFromHook ??= {}
+    Object.assign(pageContext._configFromHook, config)
+  }
+
+  // getPageContext() enables useConfig() to be used for Vike hooks
+  let pageContext = getPageContext() as PageContextInternal
+  if (pageContext) return setUsingPageContext
+
+  // usePageContext() enables useConfig() to be used as React hook for React components
+  pageContext = usePageContext()
+  return (config: ConfigFromHook) => {
+    const htmlHeadAlreadySet = pageContext._htmlHeadAlreadySet
+
+    // No need to use injectToStream()
+    if (!htmlHeadAlreadySet) {
+      setUsingPageContext(config)
+      return
+    }
+
     const { title } = config
     if (title) window.document.title = title
 

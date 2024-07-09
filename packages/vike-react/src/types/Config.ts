@@ -121,4 +121,5 @@ type Layout = Wrapper
 
 export type ConfigFromHook = {
   title?: string
+  head?: React.ReactNode
 }

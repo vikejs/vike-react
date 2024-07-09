@@ -54,35 +54,51 @@ async function getPageHtml(pageContext: PageContext) {
 function getHeadHtml(pageContext: PageContextInternal) {
   pageContext._htmlHeadAlreadySet = true
 
+  // Set by settings
   const title = getHeadSetting('title', pageContext)
   const favicon = getHeadSetting('favicon', pageContext)
   const lang = getHeadSetting('lang', pageContext) || 'en'
-
   const titleTags = !title ? '' : escapeInject`<title>${title}</title><meta property="og:title" content="${title}" />`
   const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
 
-  const Head = pageContext.config.Head || (() => <></>)
-  let headElement = (
-    <PageContextProvider pageContext={pageContext}>
-      <Head />
-    </PageContextProvider>
-  )
-  if (pageContext.config.reactStrictMode !== false) {
-    headElement = <React.StrictMode>{headElement}</React.StrictMode>
+  // <Head> set by +Head
+  let headElementHtml: string | ReturnType<typeof dangerouslySkipEscape> = ''
+  const Head = pageContext.config.Head
+  if (Head) {
+    let headElement = (
+      <PageContextProvider pageContext={pageContext}>
+        <Head />
+      </PageContextProvider>
+    )
+    headElementHtml = getHeadElementHtml(headElement, pageContext)
   }
-  const headElementHtml = dangerouslySkipEscape(renderToString(headElement))
+
+  // <Head> set by useConfig()
+  let headElementHtml_configFromHook: string | ReturnType<typeof dangerouslySkipEscape> = ''
+  const headElementFromHook = pageContext._configFromHook?.head
+  if (headElementFromHook) {
+    headElementHtml_configFromHook = getHeadElementHtml(headElementFromHook, pageContext)
+  }
+
+  // Not needed on the client-side, thus we remove it to save KBs sent to the client
+  delete pageContext._configFromHook
 
   const headHtml = escapeInject`
     <meta charset="UTF-8" />
     ${titleTags}
     ${headElementHtml}
+    ${headElementHtml_configFromHook}
     ${faviconTag}
   `
-
-  // Not needed on the client-side, thus we remove it to save KBs sent to the client
-  delete pageContext._configFromHook
-
   return { headHtml, lang }
+}
+
+function getHeadElementHtml(headElement: React.ReactNode, pageContext: PageContext) {
+  if (pageContext.config.reactStrictMode !== false) {
+    headElement = <React.StrictMode>{headElement}</React.StrictMode>
+  }
+  const headElementHtml = dangerouslySkipEscape(renderToString(headElement))
+  return headElementHtml
 }
 
 // We don't need this anymore starting from vike@0.4.173 which added the `require` setting.

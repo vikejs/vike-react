@@ -16,8 +16,12 @@ const Movies = withFallback(() => {
 
   const movies = result.data
   config({
-    // Set <title> tag
-    title: `${movies.length} movies`
+    title: `${movies.length} movies`, // <title>
+    head: (
+      <>
+        <meta name="description" content={`List of ${movies.length} Star Wars movies.`} />
+      </>
+    )
   })
   const onNavigate = (id: string) => {
     navigate(`/${id}`)

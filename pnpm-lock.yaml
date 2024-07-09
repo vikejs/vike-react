@@ -5,6 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
+  vike: 0.4.179-commit-3ede699
   vike-react: link:./packages/vike-react/
   vike-react-query: link:./packages/vike-react-query/
 
@@ -55,8 +56,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: ^0.4.178
-        version: 0.4.178(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: 0.4.179-commit-3ede699
+        version: 0.4.179-commit-3ede699(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -76,8 +77,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       vike:
-        specifier: ^0.4.178
-        version: 0.4.178(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: 0.4.179-commit-3ede699
+        version: 0.4.179-commit-3ede699(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -109,8 +110,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: ^0.4.178
-        version: 0.4.178(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: 0.4.179-commit-3ede699
+        version: 0.4.179-commit-3ede699(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -158,8 +159,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: ^0.4.178
-        version: 0.4.178(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: 0.4.179-commit-3ede699
+        version: 0.4.179-commit-3ede699(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
 
   packages/vike-react-query:
     dependencies:
@@ -201,8 +202,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       vike:
-        specifier: ^0.4.178
-        version: 0.4.178(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: 0.4.179-commit-3ede699
+        version: 0.4.179-commit-3ede699(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -2070,12 +2071,12 @@ packages:
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
 
-  vike@0.4.178:
-    resolution: {integrity: sha512-TSfb9HYUIQjvcvlS24pZmTakYa2yxUg7Bjtu24VLDj9BULLsltXcd+ladgCJyUBJqV0y/eMa/aefyqRWgjX7Cg==}
+  vike@0.4.179-commit-3ede699:
+    resolution: {integrity: sha512-d7K6BvVnnGdDs8TRtRrkk4O3RYzefIBxXdfhZwA+OkAszuRgzCM5WGJ3MiYQza21pVfQ90eb1MBrdRGYOxvD6Q==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
-      react-streaming: '>=0.3.36'
+      react-streaming: '>=0.3.42'
       vite: '>=4.4.0'
     peerDependenciesMeta:
       react-streaming:
@@ -4009,7 +4010,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vike@0.4.178(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17)):
+  vike@0.4.179-commit-3ede699(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17)):
     dependencies:
       '@brillout/import': 0.2.3
       '@brillout/json-serializer': 0.5.10

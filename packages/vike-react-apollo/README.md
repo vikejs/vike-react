@@ -14,6 +14,7 @@ Enables your React components to fetch data using [Apollo GraphQL](https://www.a
 [Basic usage](#basic-usage)  
 [`withFallback()`](#withfallback)  
 [How it works](#how-it-works)  
+[See also](#see-also)  
 
 <br/>
 
@@ -80,7 +81,7 @@ const Countries = () => {
 ```
 
 > [!NOTE]
-> Even though `useSuspenseQuery()` is imported from `@apollo/client`, you still need to install `vike-react-apollo` for it to work.
+> Even though [`useSuspenseQuery()`](https://www.apollographql.com/docs/react/api/react/hooks/#usesuspensequery) is imported from `@apollo/client`, you still need to install `vike-react-apollo` for it to work.
 
 <br/>
 
@@ -203,3 +204,14 @@ Upon page navigation (and rendering the first page if [SSR is disabled](https://
 
 > [!NOTE]
 > Behind the scenes `vike-react-apollo` integrates Apollo GraphQL into [the HTML stream](https://github.com/brillout/react-streaming#readme).
+
+<br/>
+
+
+## See also
+
+- [Example](https://github.com/vikejs/vike-react/tree/main/examples/apollo)
+- [Vike > Data Fetching](https://vike.dev/data-fetching)
+- [Apollo GraphQL > useSuspenseQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usesuspensequery)
+- [Apollo GraphQL > Suspense](https://www.apollographql.com/docs/react/data/suspense/)
+- [React > `<Suspense>`](https://react.dev/reference/react/Suspense)

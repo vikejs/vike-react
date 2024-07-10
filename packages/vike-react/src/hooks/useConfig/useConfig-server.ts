@@ -7,12 +7,13 @@ import { usePageContext } from '../usePageContext.js'
 import { useStream } from 'react-streaming'
 import { getPageContext } from 'vike/getPageContext'
 
+const configsForSeoOnly = ['head'] as const
+
 function useConfig(): (config: ConfigFromHook) => void {
   const setUsingPageContext = (config: ConfigFromHook) => {
     pageContext._configFromHook ??= {}
-    if (pageContext.isClientSideNavigation) {
-      delete config.head
-    }
+    // Avoid passing SEO configs to the client-side
+    if (pageContext.isClientSideNavigation) for (const configName of configsForSeoOnly) delete config[configName]
     Object.assign(pageContext._configFromHook, config)
   }
 

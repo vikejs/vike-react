@@ -1,5 +1,4 @@
 export { testRun }
-
 import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, partRegex } from '@brillout/test-e2e'
 
 let isProd: boolean
@@ -17,6 +16,7 @@ const pages = {
   },
   '/star-wars/3': {
     title: 'Return of the Jedi',
+    description: 'Star Wars Movie Return of the Jedi from Richard Marquand',
     text: '1983-05-25'
   },
   '/streaming': {
@@ -122,10 +122,11 @@ function testPages() {
 function testPage({
   url,
   title,
+  description,
   text,
   counter,
   noSSR
-}: { url: string; title: string; text: string; counter?: true; noSSR?: true }) {
+}: { url: string; title: string; description?: string; text: string; counter?: true; noSSR?: true }) {
   test(url + ' (HTML)', async () => {
     const html = await fetchHtml(url)
     if (!noSSR) {
@@ -137,6 +138,10 @@ function testPage({
       expect(html).toMatch(partRegex`<link rel="icon" href="/assets/logo.svg"/>`)
     } else {
       expect(html).toMatch(partRegex`<link rel="icon" href="/assets/static/logo.${hash}.svg"/>`)
+    }
+
+    if (description) {
+      expect(html).toContain(`<meta name="description" content="${description}"/>`)
     }
   })
   test(url + ' (Hydration)', async () => {

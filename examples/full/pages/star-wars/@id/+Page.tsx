@@ -1,7 +1,7 @@
 export default Page
 
 import React from 'react'
-import type { Data } from './+data.shared'
+import type { Data } from './+data'
 import { useData } from 'vike-react/useData'
 
 function Page() {

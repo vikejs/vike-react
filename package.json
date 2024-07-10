@@ -25,7 +25,7 @@
   },
   "pnpm": {
     "overrides": {
-      "vike": "../vike/vike/",
+      "vike": "0.4.179-commit-3ede699",
       "vike-react": "link:./packages/vike-react/",
       "vike-react-query": "link:./packages/vike-react-query/"
     }

@@ -1,6 +1,6 @@
-export { testRun }
+export {testRun}
 
-import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, partRegex } from '@brillout/test-e2e'
+import {test, expect, run, fetchHtml, page, getServerUrl, autoRetry, partRegex} from '@brillout/test-e2e'
 
 let isProd: boolean
 
@@ -10,27 +10,27 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   isProd = cmd !== 'pnpm run dev'
 
   const title = 'My Vike + React App'
-  testUrl({
+  testPage({
     url: '/',
     title,
     text: 'Rendered to HTML.',
     counter: true
   })
 
-  testUrl({
+  testPage({
     url: '/star-wars',
     title: '6 Star Wars Movies',
     text: 'A New Hope'
   })
 
-  testUrl({
+  testPage({
     url: '/star-wars/3',
     title: 'Return of the Jedi',
     text: '1983-05-25'
   })
 
   // Not sure how progressive rendering can be tested since fetch() awaits the stream to finish
-  testUrl({
+  testPage({
     url: '/streaming',
     title,
     text: 'Progressive Rendering',
@@ -38,7 +38,7 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   })
 
   const textNoSSR = 'This page is rendered only in the browser'
-  testUrl({
+  testPage({
     url: '/without-ssr',
     title: 'No SSR',
     text: textNoSSR,
@@ -46,10 +46,10 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
     noSSR: true
   })
 
-  testNavigationBetweenWithSSRAndWithoutSSR()
+  testPageNavigation_betweenWithSSRAndWithout()
 }
 
-function testNavigationBetweenWithSSRAndWithoutSSR() {
+function testPageNavigation_betweenWithSSRAndWithout() {
   const textWithSSR = 'Rendered to HTML.'
   const textWithoutSSR = "It isn't rendered to HTML"
 
@@ -90,13 +90,13 @@ function testNavigationBetweenWithSSRAndWithoutSSR() {
   })
 }
 
-function testUrl({
+function testPage({
   url,
   title,
   text,
   counter,
   noSSR
-}: { url: string; title: string; text: string; counter?: true; noSSR?: true }) {
+}: {url: string; title: string; text: string; counter?: true; noSSR?: true}) {
   test(url + ' (HTML)', async () => {
     const html = await fetchHtml(url)
     if (!noSSR) {
@@ -133,7 +133,7 @@ async function testCounter() {
       await page.click('button')
       expect(await page.textContent('button')).toContain('Counter 1')
     },
-    { timeout: 5 * 1000 }
+    {timeout: 5 * 1000}
   )
 }
 

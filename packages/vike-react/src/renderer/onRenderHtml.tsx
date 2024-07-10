@@ -54,7 +54,7 @@ async function getPageHtml(pageContext: PageContext) {
 function getHeadHtml(pageContext: PageContextInternal) {
   pageContext._headAlreadySet = true
 
-  // Set by settings
+  // Set by config
   const title = getHeadSetting('title', pageContext)
   const favicon = getHeadSetting('favicon', pageContext)
   const lang = getHeadSetting('lang', pageContext) || 'en'
@@ -62,22 +62,22 @@ function getHeadHtml(pageContext: PageContextInternal) {
   const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
 
   // <Head> set by +Head
-  let headElementHtml: string | ReturnType<typeof dangerouslySkipEscape> = ''
-  const Head = pageContext.config.Head
+  let headElementHtml1: HtmlFragment = ''
+  const { Head } = pageContext.config
   if (Head) {
-    let headElement = (
+    const headElement = (
       <PageContextProvider pageContext={pageContext}>
         <Head />
       </PageContextProvider>
     )
-    headElementHtml = getHeadElementHtml(headElement, pageContext)
+    headElementHtml1 = getHeadElementHtml(headElement, pageContext)
   }
 
   // <Head> set by useConfig()
-  let headElementHtml_configFromHook: string | ReturnType<typeof dangerouslySkipEscape> = ''
-  const headElementFromHook = pageContext._configFromHook?.head
-  if (headElementFromHook) {
-    headElementHtml_configFromHook = getHeadElementHtml(headElementFromHook, pageContext)
+  let headElementHtml2: HtmlFragment = ''
+  const headElement = pageContext._configFromHook?.head
+  if (headElement) {
+    headElementHtml2 = getHeadElementHtml(headElement, pageContext)
   }
 
   // Not needed on the client-side, thus we remove it to save KBs sent to the client
@@ -86,14 +86,15 @@ function getHeadHtml(pageContext: PageContextInternal) {
   const headHtml = escapeInject`
     <meta charset="UTF-8" />
     ${titleTags}
-    ${headElementHtml}
-    ${headElementHtml_configFromHook}
+    ${headElementHtml1}
+    ${headElementHtml2}
     ${faviconTag}
   `
   return { headHtml, lang }
 }
 
-function getHeadElementHtml(headElement: React.ReactNode, pageContext: PageContext) {
+type HtmlFragment = string | ReturnType<typeof dangerouslySkipEscape>
+function getHeadElementHtml(headElement: React.ReactNode, pageContext: PageContext): HtmlFragment {
   if (pageContext.config.reactStrictMode !== false) {
     headElement = <React.StrictMode>{headElement}</React.StrictMode>
   }

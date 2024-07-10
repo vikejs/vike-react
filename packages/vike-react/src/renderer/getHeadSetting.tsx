@@ -8,13 +8,10 @@ function getHeadSetting(
   pageContext: PageContextInternal
 ): undefined | null | string {
   {
-    const val =
-      pageContext._configFromHook?.[
-        // TODO
-        headSetting as 'title'
-      ]
-    if (val) return val
+    const val = (pageContext._configFromHook as undefined | Record<string, string>)?.[headSetting]
+    if (val !== undefined) return val
   }
+
   const config = pageContext.configEntries[headSetting]?.[0]
   if (!config) return undefined
   const val = config.configValue

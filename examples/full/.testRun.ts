@@ -37,6 +37,7 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   isProd = cmd !== 'pnpm run dev'
   testPages()
   testPageNavigation_betweenWithSSRAndWithout()
+  testPageNavigation_titleUpdate()
 }
 
 function testPageNavigation_betweenWithSSRAndWithout() {
@@ -77,6 +78,38 @@ function testPageNavigation_betweenWithSSRAndWithout() {
     expect(body).toContain(t1)
     expect(body).not.toContain(t2)
     ensureWasClientSideRouted('/pages/without-ssr')
+  })
+}
+
+function testPageNavigation_titleUpdate() {
+  test('title update client-side page navigation', async () => {
+    {
+      const { title } = pages['/']
+      await page.goto(getServerUrl() + '/')
+      await expectTitle(title)
+    }
+    const testMovieList = async () => {
+      const { title } = pages['/star-wars']
+      await page.click(`a[href="/star-wars"]`)
+      await expectTitle(title)
+    }
+    await testMovieList()
+    const testMoviePage = async () => {
+      const { title } = pages['/star-wars/3']
+      await page.click(`a:has-text("${title}")`)
+      await expectTitle(title)
+    }
+    await testMoviePage()
+    await testMovieList()
+    await testMoviePage()
+    await testMovieList()
+    await testMoviePage()
+  })
+}
+async function expectTitle(title: string) {
+  await autoRetry(async () => {
+    const titleActual = await page.evaluate(() => window.document.title)
+    expect(titleActual).toBe(title)
   })
 }
 

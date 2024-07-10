@@ -2,47 +2,43 @@ export { useConfig }
 
 import type { ConfigFromHook } from '../../types/Config.js'
 import type { PageContextInternal } from '../../types/PageContext.js'
-import { assert } from '../../utils/assert.js'
+import type { ConfigSetter } from './shared.js'
 import { usePageContext } from '../usePageContext.js'
-import { useStream } from 'react-streaming'
 import { getPageContext } from 'vike/getPageContext'
+import { useStream } from 'react-streaming'
 
 const configsForSeoOnly = ['head'] as const
 
-function useConfig(): (config: ConfigFromHook) => void {
-  const setUsingPageContext = (config: ConfigFromHook) => {
+function useConfig(): ConfigSetter {
+  const setOverPageContext = (config: ConfigFromHook) => {
     pageContext._configFromHook ??= {}
-    // Avoid passing SEO configs to the client-side
+    // Remove SEO configs that the client-side don't need (in order to avoid serialization errors)
     if (pageContext.isClientSideNavigation) for (const configName of configsForSeoOnly) delete config[configName]
     Object.assign(pageContext._configFromHook, config)
   }
 
-  // getPageContext() enables useConfig() to be used for Vike hooks
+  // Vike hook
   let pageContext = getPageContext() as PageContextInternal
-  if (pageContext) return setUsingPageContext
+  if (pageContext) return setOverPageContext
 
-  // usePageContext() enables useConfig() to be used as React hook for React components
+  // React component
   pageContext = usePageContext()
   const stream = useStream()
   return (config: ConfigFromHook) => {
-    const headAlreadySet = pageContext._headAlreadySet
-
-    // No need to use injectToStream()
-    if (!headAlreadySet) {
-      setUsingPageContext(config)
-      return
+    if (!pageContext._headAlreadySet) {
+      setOverPageContext(config)
+    } else {
+      // <head> already sent to the browser => send DOM-manipulating scripts during HTML streaming
+      sideEffect(config, stream!)
     }
+  }
+}
 
-    // <head> already sent to the browser => send DOM-manipulating scripts during HTML streaming
-    assert(stream)
-    {
-      const { title } = config
-      if (title) {
-        assert(typeof title === 'string')
-        // JSON is safe, thus JSON.stringify() should as well.
-        const htmlSnippet = `<script>document.title = ${JSON.stringify(title)}</script>`
-        stream.injectToStream(htmlSnippet)
-      }
-    }
+type Stream = NonNullable<ReturnType<typeof useStream>>
+function sideEffect(config: ConfigFromHook, stream: Stream) {
+  const { title } = config
+  if (title) {
+    const htmlSnippet = `<script>document.title = ${JSON.stringify(title)}</script>`
+    stream.injectToStream(htmlSnippet)
   }
 }

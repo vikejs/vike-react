@@ -2,35 +2,34 @@ export { useConfig }
 
 import type { ConfigFromHook } from '../../types/Config.js'
 import type { PageContextInternal } from '../../types/PageContext.js'
-import { getPageContext } from 'vike/getPageContext'
+import type { ConfigSetter } from './shared.js'
 import { usePageContext } from '../usePageContext.js'
+import { getPageContext } from 'vike/getPageContext'
 
-function useConfig(): (config: ConfigFromHook) => void {
-  const setUsingPageContext = (config: ConfigFromHook) => {
+function useConfig(): ConfigSetter {
+  const setOverPageContext = (config: ConfigFromHook) => {
     pageContext._configFromHook ??= {}
     Object.assign(pageContext._configFromHook, config)
   }
 
-  // getPageContext() enables useConfig() to be used for Vike hooks
+  // Vike hook
   let pageContext = getPageContext() as PageContextInternal
-  if (pageContext) return setUsingPageContext
+  if (pageContext) return setOverPageContext
 
-  // usePageContext() enables useConfig() to be used as React hook for React components
+  // React component
   pageContext = usePageContext()
   return (config: ConfigFromHook) => {
-    const headAlreadySet = '_headAlreadySet' in pageContext && pageContext._headAlreadySet
-
-    // No need to use injectToStream()
-    if (!headAlreadySet) {
-      setUsingPageContext(config)
-      return
+    if (!('_headAlreadySet' in pageContext)) {
+      setOverPageContext(config)
+    } else {
+      sideEffect(config)
     }
+  }
+}
 
-    const { title } = config
-    if (title) window.document.title = title
-
-    // Add support for following?
-    // - favicon
-    // - lang
+function sideEffect(config: ConfigFromHook) {
+  const { title } = config
+  if (title) {
+    window.document.title = title
   }
 }

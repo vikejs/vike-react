@@ -1,9 +1,9 @@
 export { useConfig }
 
-import type { ConfigFromHook } from '../types/Config.js'
-import type { PageContextInternal } from '../types/PageContext.js'
-import { assert } from '../utils/assert.js'
-import { usePageContext } from './usePageContext.js'
+import type { ConfigFromHook } from '../../types/Config.js'
+import type { PageContextInternal } from '../../types/PageContext.js'
+import { assert } from '../../utils/assert.js'
+import { usePageContext } from '../usePageContext.js'
 import { useStream } from 'react-streaming'
 import { getPageContext } from 'vike/getPageContext'
 

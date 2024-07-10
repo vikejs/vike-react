@@ -8,8 +8,8 @@
     "./useData": "./dist/hooks/useData.js",
     "./usePageContext": "./dist/hooks/usePageContext.js",
     "./useConfig": {
-      "browser": "./dist/hooks/useConfig-client.js",
-      "default": "./dist/hooks/useConfig-server.js"
+      "browser": "./dist/hooks/useConfig/useConfig-client.js",
+      "default": "./dist/hooks/useConfig/useConfig-server.js"
     },
     "./ClientOnly": "./dist/components/ClientOnly.js",
     "./clientOnly": "./dist/helpers/clientOnly.js",
@@ -55,7 +55,7 @@
         "./dist/hooks/usePageContext.d.ts"
       ],
       "useConfig": [
-        "./dist/hooks/useConfig-server.d.ts"
+        "./dist/hooks/useConfig/useConfig-server.d.ts"
       ],
       "ClientOnly": [
         "./dist/components/ClientOnly.d.ts"

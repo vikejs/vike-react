@@ -1,9 +1,9 @@
 export { useConfig }
 
-import type { ConfigFromHook } from '../types/Config.js'
-import type { PageContextInternal } from '../types/PageContext.js'
+import type { ConfigFromHook } from '../../types/Config.js'
+import type { PageContextInternal } from '../../types/PageContext.js'
 import { getPageContext } from 'vike/getPageContext'
-import { usePageContext } from './usePageContext.js'
+import { usePageContext } from '../usePageContext.js'
 
 function useConfig(): (config: ConfigFromHook) => void {
   const setUsingPageContext = (config: ConfigFromHook) => {

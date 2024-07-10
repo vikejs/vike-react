@@ -10,6 +10,9 @@ import { getPageContext } from 'vike/getPageContext'
 function useConfig(): (config: ConfigFromHook) => void {
   const setUsingPageContext = (config: ConfigFromHook) => {
     pageContext._configFromHook ??= {}
+    if (pageContext.isClientSideNavigation) {
+      delete config.head
+    }
     Object.assign(pageContext._configFromHook, config)
   }
 

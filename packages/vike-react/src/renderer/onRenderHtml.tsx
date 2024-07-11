@@ -41,7 +41,8 @@ async function getPageHtml(pageContext: PageContext) {
         webStream: typeof stream === 'string' ? stream === 'web' : undefined,
         userAgent:
           pageContext.headers?.['user-agent'] ||
-          // Deprecated way of acccessing User Agent header. Eventually remove it.
+          // TODO/eventually: remove old way of acccessing the User Agent header.
+          // @ts-ignore
           pageContext.userAgent,
         disable
       })

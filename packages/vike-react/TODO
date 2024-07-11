@@ -1,0 +1,31 @@
+TODO/soon:
+- New meta config `global`
+  - Use it for `bodyAttributes`
+- Use escapeInject for bodyHtmlStart
+  - Soft deprecate not using it
+- Copy from https://github.com/vikejs/vike-react/pull/113/files
+  - viewport setting?
+    - Maybe not if we remove favicon setting?
+    - Inject responsive viewport tag by default
+  - escapeHtml()
+  - getTagAttributesString() or use vike-vue one?
+  - remove client-side updating of favicon and lang? (I don't see a concrete use case for it.)
+- Remove favicon setting?
+- Also remove lang setting? Maybe not because of i18n? Let's be conservative?
+- Make config.Head cumulative
+- Add config.head on top of config.Head?
+- name setting?
+  - Appends `| ${name}` to title
+    - No setting to opt-out, instead user should manually use config.head if all he wants is to inject the OG tag.
+  - Sets OG tag
+
+
+TODO/later:
+- locale
+  - Instead of lang?
+  - ```html
+    <html lang="en">
+    <meta property="og:locale" content="en_GB">
+    ```
+- More document settings?
+  - https://github.com/vikejs/vike-react/pull/113/files#diff-43f0478bd822a071df19f8756e0833b975665ce5d118edde04ce1b7187cd63e2

@@ -18,6 +18,17 @@ TODO/soon:
   - Appends `| ${name}` to title
     - No setting to opt-out, instead user should manually use config.head if all he wants is to inject the OG tag.
   - Sets OG tag
+- description setting?
+  ```
+  <meta name="description" content="Page description">
+  <meta property="og:description" content="Page description">
+  ```
+- image setting?
+  ```
+  <meta property="og:image" content="https://www.mywebsite.com/image.jpg">
+  <meta property="og:image:alt" content="Image description">
+  <meta name="twitter:card" content="summary_large_image">
+  ```
 
 
 TODO/later:

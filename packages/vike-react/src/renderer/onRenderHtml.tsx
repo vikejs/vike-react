@@ -10,6 +10,8 @@ import { PageContextProvider } from '../hooks/usePageContext.js'
 import { getHeadSetting } from './getHeadSetting.js'
 import { getPageElement } from './getPageElement.js'
 import type { PageContextInternal } from '../types/PageContext.js'
+import type { Head } from '../types/Config.js'
+import { isReactElement } from '../utils/isReactElement.js'
 
 checkVikeVersion()
 addEcosystemStamp()
@@ -65,12 +67,7 @@ function getHeadHtml(pageContext: PageContextInternal) {
   let headElementHtml1: HtmlFragment = ''
   const { Head } = pageContext.config
   if (Head) {
-    const headElement = (
-      <PageContextProvider pageContext={pageContext}>
-        <Head />
-      </PageContextProvider>
-    )
-    headElementHtml1 = getHeadElementHtml(headElement, pageContext)
+    headElementHtml1 = getHeadElementHtml(Head, pageContext)
   }
 
   // <Head> set by useConfig()
@@ -94,7 +91,17 @@ function getHeadHtml(pageContext: PageContextInternal) {
 }
 
 type HtmlFragment = string | ReturnType<typeof dangerouslySkipEscape>
-function getHeadElementHtml(headElement: React.ReactNode, pageContext: PageContext): HtmlFragment {
+function getHeadElementHtml(Head: Head, pageContext: PageContext): HtmlFragment {
+  let headElement: React.ReactNode
+  if (isReactElement(Head)) {
+    headElement = Head
+  } else {
+    headElement = (
+      <PageContextProvider pageContext={pageContext}>
+        <Head />
+      </PageContextProvider>
+    )
+  }
   if (pageContext.config.reactStrictMode !== false) {
     headElement = <React.StrictMode>{headElement}</React.StrictMode>
   }

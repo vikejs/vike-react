@@ -8,7 +8,7 @@ declare global {
       Page?: () => React.ReactNode
 
       /** React element rendered and appended into &lt;head>&lt;/head> */
-      Head?: () => React.ReactNode
+      Head?: Head
 
       /**
        * A component that defines the visual layout of the page common to several pages.
@@ -116,10 +116,11 @@ declare global {
 
 type PlainOrGetter<T> = T | ((pageContext: PageContext) => T)
 
+export type Head = React.ReactNode | (() => React.ReactNode)
 type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode
 type Layout = Wrapper
 
 export type ConfigFromHook = {
   title?: string
-  Head?: React.ReactNode
+  Head?: Head
 }

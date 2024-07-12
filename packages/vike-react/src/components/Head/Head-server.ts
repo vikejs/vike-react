@@ -1,5 +1,6 @@
 export { Head }
 
+// server-side import
 import { useConfig } from '../../hooks/useConfig/useConfig-server.js'
 
 function Head({ children }: { children: React.ReactNode }): null {

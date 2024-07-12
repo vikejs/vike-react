@@ -21,10 +21,10 @@ const Movies = withFallback(() => {
 
   return (
     <>
+      <Config title={`${movies.length} movies`} />
       <Head>
         <meta name="description" content={`List of ${movies.length} Star Wars movies.`} />
       </Head>
-      <Config title={`${movies.length} movies`} />
       <h1>Star Wars Movies</h1>
       <ol>
         {movies.map(({ id, title, release_date }) => (

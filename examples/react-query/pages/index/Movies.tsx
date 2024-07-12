@@ -5,7 +5,7 @@ import { withFallback } from 'vike-react-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { navigate } from 'vike/client/router'
 import { MovieDetails } from './types'
-import { Config } from 'vike-react/Config'
+import { Title } from 'vike-react/Title'
 import { Head } from 'vike-react/Head'
 
 const Movies = withFallback(() => {
@@ -21,7 +21,7 @@ const Movies = withFallback(() => {
 
   return (
     <>
-      <Config title={`${movies.length} movies`} />
+      <Title>{movies.length} movies</Title>
       <Head>
         <meta name="description" content={`List of ${movies.length} Star Wars movies.`} />
       </Head>

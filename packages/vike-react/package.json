@@ -16,9 +16,9 @@
       "browser": "./dist/components/Head/Head-client.js",
       "default": "./dist/components/Head/Head-server.js"
     },
-    "./Config": {
-      "browser": "./dist/components/Config/Config-client.js",
-      "default": "./dist/components/Config/Config-server.js"
+    "./Title": {
+      "browser": "./dist/components/Title/Title-client.js",
+      "default": "./dist/components/Title/Title-server.js"
     },
     "./clientOnly": "./dist/helpers/clientOnly.js",
     ".": "./dist/index.js",
@@ -68,8 +68,8 @@
       "Head": [
         "./dist/components/Head/Head-server.d.ts"
       ],
-      "Config": [
-        "./dist/components/Config/Config-server.d.ts"
+      "Title": [
+        "./dist/components/Title/Title-server.d.ts"
       ],
       "ClientOnly": [
         "./dist/components/ClientOnly.d.ts"

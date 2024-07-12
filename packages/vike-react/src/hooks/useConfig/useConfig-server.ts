@@ -7,31 +7,49 @@ import { usePageContext } from '../usePageContext.js'
 import { getPageContext } from 'vike/getPageContext'
 import { useStream } from 'react-streaming'
 
-const configsForSeoOnly = ['Head'] as const
-
 function useConfig(): ConfigSetter {
-  const setOverPageContext = (config: ConfigFromHook) => {
-    pageContext._configFromHook ??= {}
-    // Remove SEO configs that the client-side don't need (in order to avoid serialization errors)
-    if (pageContext.isClientSideNavigation) for (const configName of configsForSeoOnly) delete config[configName]
-    Object.assign(pageContext._configFromHook, config)
-  }
+  const configSetter = (config: ConfigFromHook) => setConfigOverPageContext(config, pageContext)
 
   // Vike hook
   let pageContext = getPageContext() as PageContextInternal
-  if (pageContext) return setOverPageContext
+  if (pageContext) return configSetter
 
   // React component
   pageContext = usePageContext()
   const stream = useStream()
   return (config: ConfigFromHook) => {
     if (!pageContext._headAlreadySet) {
-      setOverPageContext(config)
+      configSetter(config)
     } else {
       // <head> already sent to the browser => send DOM-manipulating scripts during HTML streaming
       sideEffect(config, stream!)
     }
   }
+}
+
+const configsForSeoOnly = ['Head'] as const
+const configsCumulative = ['Head'] as const
+const configsOverridable = ['title'] as const
+function setConfigOverPageContext(config: ConfigFromHook, pageContext: PageContextInternal) {
+  pageContext._configFromHook ??= {}
+
+  // Remove SEO configs which the client-side doesn't need (also avoiding serialization errors)
+  if (pageContext.isClientSideNavigation) for (const configName of configsForSeoOnly) delete config[configName]
+
+  // Cumulative values
+  configsCumulative.forEach((configName) => {
+    const configValue = config[configName]
+    if (!configValue) return
+    pageContext._configFromHook![configName] ??= []
+    pageContext._configFromHook![configName].push(configValue)
+  })
+
+  // Overridable values
+  configsOverridable.forEach((configName) => {
+    const configValue = config[configName]
+    if (!configValue) return
+    pageContext._configFromHook![configName] = configValue
+  })
 }
 
 type Stream = NonNullable<ReturnType<typeof useStream>>

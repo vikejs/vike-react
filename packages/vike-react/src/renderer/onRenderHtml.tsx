@@ -69,7 +69,7 @@ function getHeadHtml(pageContext: PageContextInternal) {
       // <Head> set by +Head
       pageContext.config.Head,
       // <Head> set by useConfig()
-      pageContext._configFromHook?.Head
+      ...(pageContext._configFromHook?.Head ?? [])
     ]
       .filter((Head) => Head !== null && Head !== undefined)
       .map((Head) => getHeadElementHtml(Head, pageContext))

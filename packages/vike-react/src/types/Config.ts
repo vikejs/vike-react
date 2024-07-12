@@ -124,3 +124,7 @@ export type ConfigFromHook = {
   title?: string
   Head?: Head
 }
+export type ConfigFromHookResolved = {
+  title?: string
+  Head?: Head[]
+}

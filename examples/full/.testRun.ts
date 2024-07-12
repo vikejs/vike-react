@@ -38,6 +38,7 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   testPages()
   testPageNavigation_betweenWithSSRAndWithout()
   testPageNavigation_titleUpdate()
+  testHeadComponent()
 }
 
 function testPageNavigation_betweenWithSSRAndWithout() {
@@ -169,6 +170,18 @@ async function testCounter() {
     },
     { timeout: 5 * 1000 }
   )
+}
+
+function testHeadComponent() {
+  test('Head Component', async () => {
+    const html = await fetchHtml('/images')
+    expect(html).toContain(
+      '<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"/assets/logo-new.svg"},"creator":{"@type":"Person","name":"brillout"}}</script>'
+    )
+    expect(html).toContain(
+      '<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"/assets/logo.svg"},"creator":{"@type":"Person","name":"Romuald Brillout"}}</script>'
+    )
+  })
 }
 
 /** Ensure page wasn't server-side routed.

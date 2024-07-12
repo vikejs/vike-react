@@ -64,19 +64,17 @@ function getHeadHtml(pageContext: PageContextInternal) {
   const titleTags = !title ? '' : escapeInject`<title>${title}</title><meta property="og:title" content="${title}" />`
   const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
 
-  // <Head> set by +Head
-  let headElementHtml1: HtmlFragment = ''
-  const { Head } = pageContext.config
-  if (Head) {
-    headElementHtml1 = getHeadElementHtml(Head, pageContext)
-  }
-
-  // <Head> set by useConfig()
-  let headElementHtml2: HtmlFragment = ''
-  const headElement = pageContext._configFromHook?.Head
-  if (headElement) {
-    headElementHtml2 = getHeadElementHtml(headElement, pageContext)
-  }
+  const headElementsHtml = dangerouslySkipEscape(
+    [
+      // <Head> set by +Head
+      pageContext.config.Head,
+      // <Head> set by useConfig()
+      pageContext._configFromHook?.Head
+    ]
+      .filter((Head) => Head !== null && Head !== undefined)
+      .map((Head) => getHeadElementHtml(Head, pageContext))
+      .join('\n')
+  )
 
   // Not needed on the client-side, thus we remove it to save KBs sent to the client
   delete pageContext._configFromHook
@@ -84,15 +82,13 @@ function getHeadHtml(pageContext: PageContextInternal) {
   const headHtml = escapeInject`
     <meta charset="UTF-8" />
     ${titleTags}
-    ${headElementHtml1}
-    ${headElementHtml2}
+    ${headElementsHtml}
     ${faviconTag}
   `
   return { headHtml, lang }
 }
 
-type HtmlFragment = string | ReturnType<typeof dangerouslySkipEscape>
-function getHeadElementHtml(Head: Head, pageContext: PageContext): HtmlFragment {
+function getHeadElementHtml(Head: NonNullable<Head>, pageContext: PageContext): string {
   let headElement: React.ReactNode
   if (isReactElement(Head)) {
     headElement = Head
@@ -106,8 +102,7 @@ function getHeadElementHtml(Head: Head, pageContext: PageContext): HtmlFragment 
   if (pageContext.config.reactStrictMode !== false) {
     headElement = <React.StrictMode>{headElement}</React.StrictMode>
   }
-  const headElementHtml = dangerouslySkipEscape(renderToString(headElement))
-  return headElementHtml
+  return renderToString(headElement)
 }
 
 // We don't need this anymore starting from vike@0.4.173 which added the `require` setting.

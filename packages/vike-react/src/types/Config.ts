@@ -121,7 +121,14 @@ type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode
 type Layout = Wrapper
 
 export type ConfigFromHook = {
+  /**
+   * ```js
+   * <title>${title}</title>
+   * <meta property="og:title" content="${title}" />
+   * ```
+   */
   title?: string
+  /** React element rendered and appended into &lt;head>&lt;/head> */
   Head?: Head
 }
 export type ConfigFromHookResolved = {

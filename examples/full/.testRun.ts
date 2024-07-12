@@ -173,14 +173,24 @@ async function testCounter() {
 }
 
 function testHeadComponent() {
-  test('Head Component', async () => {
+  test('Head Component (HTML)', async () => {
     const html = await fetchHtml('/images')
-    expect(html).toContain(
-      '<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"/assets/logo-new.svg"},"creator":{"@type":"Person","name":"brillout"}}</script>'
+    const hash = !isProd ? '' : /\.[a-zA-Z0-9_-]+/
+    const assetsDir = `assets${isProd ? '/static' : ''}`
+    expect(html).toMatch(
+      partRegex`<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"/${assetsDir}/logo-new${hash}.svg"},"creator":{"@type":"Person","name":"brillout"}}</script>`
     )
-    expect(html).toContain(
-      '<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"/assets/logo.svg"},"creator":{"@type":"Person","name":"Romuald Brillout"}}</script>'
+    expect(html).toMatch(
+      partRegex`<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"/${assetsDir}/logo${hash}.svg"},"creator":{"@type":"Person","name":"Romuald Brillout"}}</script>`
     )
+  })
+  test('Head Component (Hydration)', async () => {
+    await page.goto(getServerUrl() + '/')
+    await testCounter()
+    ensureWasClientSideRouted('/pages/index')
+    await page.click('a:has-text("Head Component")')
+    await testCounter()
+    ensureWasClientSideRouted('/pages/index')
   })
 }
 

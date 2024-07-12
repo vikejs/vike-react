@@ -4,6 +4,7 @@ import React from 'react'
 import { Head } from 'vike-react/Head'
 import logoOld from '../../assets/logo.svg'
 import logoNew from '../../assets/logo-new.svg'
+import { Counter } from '../../components/Counter'
 
 function Page() {
   return (
@@ -18,6 +19,8 @@ function Page() {
       <div>
         Old logo: <Image src={logoOld} author="Romuald Brillout" />
       </div>
+      <br />
+      <Counter />
     </>
   )
 }

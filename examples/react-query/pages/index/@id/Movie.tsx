@@ -19,7 +19,7 @@ const Movie = withFallback(
     const { title, release_date } = result.data
     config({
       title, // <title>
-      head: (
+      Head: (
         <>
           <meta name="description" content={`Star Wars Movie ${title} from ${result.data.director}`} />
         </>

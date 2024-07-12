@@ -17,7 +17,7 @@ const Movies = withFallback(() => {
   const movies = result.data
   config({
     title: `${movies.length} movies`, // <title>
-    head: (
+    Head: (
       <>
         <meta name="description" content={`List of ${movies.length} Star Wars movies.`} />
       </>

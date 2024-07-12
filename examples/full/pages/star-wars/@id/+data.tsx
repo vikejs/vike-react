@@ -16,7 +16,7 @@ const data = async (pageContext: PageContextServer) => {
   const { title } = movie
   config({
     title, // <title>
-    head: (
+    Head: (
       <>
         <meta name="description" content={`Star Wars Movie ${title} from ${movie.director}`} />
       </>

@@ -75,7 +75,7 @@ function getHeadHtml(pageContext: PageContextInternal) {
 
   // <Head> set by useConfig()
   let headElementHtml2: HtmlFragment = ''
-  const headElement = pageContext._configFromHook?.head
+  const headElement = pageContext._configFromHook?.Head
   if (headElement) {
     headElementHtml2 = getHeadElementHtml(headElement, pageContext)
   }

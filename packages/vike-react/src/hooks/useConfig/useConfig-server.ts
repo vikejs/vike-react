@@ -7,7 +7,7 @@ import { usePageContext } from '../usePageContext.js'
 import { getPageContext } from 'vike/getPageContext'
 import { useStream } from 'react-streaming'
 
-const configsForSeoOnly = ['head'] as const
+const configsForSeoOnly = ['Head'] as const
 
 function useConfig(): ConfigSetter {
   const setOverPageContext = (config: ConfigFromHook) => {

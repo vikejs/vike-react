@@ -7,24 +7,32 @@ import { usePageContext } from '../usePageContext.js'
 import { getPageContext } from 'vike/getPageContext'
 
 function useConfig(): ConfigSetter {
-  const setOverPageContext = (config: ConfigFromHook) => {
-    pageContext._configFromHook ??= {}
-    Object.assign(pageContext._configFromHook, config)
-  }
+  const configSetter = (config: ConfigFromHook) => setConfigOverPageContext(config, pageContext)
 
   // Vike hook
   let pageContext = getPageContext() as PageContextInternal
-  if (pageContext) return setOverPageContext
+  if (pageContext) return configSetter
 
   // React component
   pageContext = usePageContext()
   return (config: ConfigFromHook) => {
     if (!('_headAlreadySet' in pageContext)) {
-      setOverPageContext(config)
+      configSetter(config)
     } else {
       sideEffect(config)
     }
   }
+}
+
+const configsClientSide = ['title'] as const
+function setConfigOverPageContext(config: ConfigFromHook, pageContext: PageContextInternal) {
+  pageContext._configFromHook ??= {}
+
+  configsClientSide.forEach((configName) => {
+    const configValue = config[configName]
+    if (!configValue) return
+    pageContext._configFromHook![configName] = configValue
+  })
 }
 
 function sideEffect(config: ConfigFromHook) {

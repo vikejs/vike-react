@@ -26,7 +26,8 @@
   "pnpm": {
     "overrides": {
       "vike-react": "link:./packages/vike-react/",
-      "vike-react-query": "link:./packages/vike-react-query/"
+      "vike-react-query": "link:./packages/vike-react-query/",
+      "vike-react-zustand": "link:./packages/vike-react-zustand/"
     }
   },
   "devDependencies": {

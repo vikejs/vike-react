@@ -13,7 +13,7 @@
     "./config": "./dist/+config.js",
     "./renderer/onRenderHtml": "./dist/renderer/onRenderHtml.js",
     "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js",
-    "./components/LoadingComponent": "./dist/components/LoadingComponent.js"
+    "./components/Loading": "./dist/components/Loading.js"
   },
   "scripts": {
     "dev": "tsc --watch",

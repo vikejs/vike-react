@@ -11,7 +11,7 @@ export default {
     vike: '>=0.4.178'
   },
 
-  LoadingComponent: 'import:vike-react/components/LoadingComponent:default',
+  Loading: 'import:vike-react/components/Loading:default',
 
   // https://vike.dev/onRenderHtml
   onRenderHtml: 'import:vike-react/renderer/onRenderHtml:onRenderHtml',
@@ -77,9 +77,6 @@ export default {
       env: { client: true, server: true }
     },
     Loading: {
-      env: { server: true, client: true }
-    },
-    LoadingComponent: {
       env: { server: true, client: true }
     }
   }

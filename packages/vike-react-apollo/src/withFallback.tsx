@@ -99,8 +99,8 @@ function withFallback<T extends object = Record<string, never>>(
       )
     }
 
-    if (Loading === undefined) {
-      Loading = pageContext.config.LoadingComponent
+    if (Loading === undefined && pageContext.config.Loading?.component) {
+      Loading = pageContext.config.Loading.component
     }
     if (Loading !== false) {
       element = (

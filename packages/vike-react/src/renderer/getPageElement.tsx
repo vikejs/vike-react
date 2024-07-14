@@ -13,8 +13,8 @@ function getPageElement(pageContext: PageContext): JSX.Element {
 
   // Wrapping
   const addSuspense = (el: React.JSX.Element | null) => {
-    if (!Loading) return el
-    return <Suspense fallback={<Loading />}>{page}</Suspense>
+    if (!Loading?.layout) return el
+    return <Suspense fallback={<Loading.layout />}>{page}</Suspense>
   }
   page = addSuspense(page)
   ;[

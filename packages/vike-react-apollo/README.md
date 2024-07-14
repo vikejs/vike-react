@@ -89,7 +89,7 @@ const Countries = () => {
 ## `withFallback()`
 
 ```js
-withFallback(Component) // Use default loading fallback (see +LoadingComponent)
+withFallback(Component) // Use default loading fallback (see +Loading)
 withFallback(Component, Loading) // Define loading fallback
 withFallback(Component, Loading, Error) // Define loading and error fallback
 withFallback(Component, undefined, Error) // Define error fallback
@@ -136,25 +136,27 @@ const Country = withFallback(
 )
 ```
 
-**`+LoadingComponent`**
+**`+Loading`**
 
 If you skip the `Loading` parameter, then a default loading component (provided by `vike-react`) is used. You can create a custom default loading component:
 
 ```jsx
-// pages/+LoadingComponent.jsx
+// pages/+Loading.jsx
 
-export default function LoadingComponent() {
+export default { component: LoadingComponent }
+
+function LoadingComponent() {
   // Applies on a component-level
   return <div>Loading...</div>
 }
 ```
 
-**`+Loading`**
-
 Instead of adding a loading fallback to the component, you can set a loading fallback to the page and layouts:
 
 ```jsx
 // pages/+Loading.jsx
+
+export default { layout: Loading }
 
 export default function Loading() {
   // Applies to the page and all layouts
@@ -163,7 +165,7 @@ export default function Loading() {
 ```
 
 > [!NOTE]
-> The setting `+Loading` is optional and only relevant when using `useSuspenseQuery()` without `withFallback()` or `withFallback(Component, false)`.
+> The export `layout` in `+Loading` is optional and only relevant when using `useSuspenseQuery()` without `withFallback()` or `withFallback(Component, false)`.
 > ```js
 > withFallback(Component, false) // Don't set any loading fallback
 > withFallback(Component, undefined) // Use default loading fallback
@@ -173,7 +175,7 @@ export default function Loading() {
 
 Technically speaking:
 - `withFallback()` wraps the component inside a [`<Suspense>` boundary](https://react.dev/reference/react/Suspense).
-- `+Loading` adds a `<Suspense>` boundary to the [`<Page>` component](https://vike.dev/Page) as well as to all [`<Layout>` components](https://vike.dev/Layout).
+- The export `layout` in `+Loading` adds a `<Suspense>` boundary to the [`<Page>` component](https://vike.dev/Page) as well as to all [`<Layout>` components](https://vike.dev/Layout).
 
 You can also manually add a `<Suspense>` boundary at any arbitrary position:
 

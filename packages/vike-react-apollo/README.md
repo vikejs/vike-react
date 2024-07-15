@@ -158,7 +158,7 @@ Instead of adding a loading fallback to the component, you can set a loading fal
 
 export default { layout: LoadingLayout }
 
-export default function LoadingLayout() {
+function LoadingLayout() {
   // Applies to the page and all layouts
   return <div>Loading...</div>
 }

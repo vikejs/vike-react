@@ -1,6 +1,6 @@
 import React, { type ReactNode } from 'react'
 import { usePageContext } from 'vike-react/usePageContext'
-import { assertUsage } from '../utils/assertUsage.js'
+import { assertUsage } from '../utils/assert.js'
 import { WrappedApolloProvider } from './Transport.js'
 
 export default function Wrapper({ children }: { children: ReactNode }) {

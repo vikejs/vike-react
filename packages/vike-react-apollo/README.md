@@ -156,16 +156,16 @@ Instead of adding a loading fallback to the component, you can set a loading fal
 ```jsx
 // pages/+Loading.jsx
 
-export default { layout: Loading }
+export default { layout: LoadingLayout }
 
-export default function Loading() {
+export default function LoadingLayout() {
   // Applies to the page and all layouts
   return <div>Loading...</div>
 }
 ```
 
 > [!NOTE]
-> The export `layout` in `+Loading` is optional and only relevant when using `useSuspenseQuery()` without `withFallback()` or `withFallback(Component, false)`.
+> The `+Loading.layout` setting is optional and only relevant when using `useSuspenseQuery()` without `withFallback()` or `withFallback(Component, false)`.
 > ```js
 > withFallback(Component, false) // Don't set any loading fallback
 > withFallback(Component, undefined) // Use default loading fallback
@@ -175,7 +175,7 @@ export default function Loading() {
 
 Technically speaking:
 - `withFallback()` wraps the component inside a [`<Suspense>` boundary](https://react.dev/reference/react/Suspense).
-- The export `layout` in `+Loading` adds a `<Suspense>` boundary to the [`<Page>` component](https://vike.dev/Page) as well as to all [`<Layout>` components](https://vike.dev/Layout).
+- `+Loading.layout` adds a `<Suspense>` boundary to the [`<Page>` component](https://vike.dev/Page) as well as to all [`<Layout>` components](https://vike.dev/Layout).
 
 You can also manually add a `<Suspense>` boundary at any arbitrary position:
 

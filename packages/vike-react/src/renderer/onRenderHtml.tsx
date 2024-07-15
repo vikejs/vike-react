@@ -1,5 +1,5 @@
 // https://vike.dev/onRenderHtml
-export { onRenderHtml }
+export { getHeadHtml, getPageHtml, onRenderHtml }
 
 import React from 'react'
 import { renderToString } from 'react-dom/server'

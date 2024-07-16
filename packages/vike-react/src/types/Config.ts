@@ -106,6 +106,7 @@ declare global {
        * https://vike.dev/onAfterRenderClient
        */
       onAfterRenderClient?: (pageContext: PageContextClient) => void
+      Loading?: Loading | ImportString
     }
     interface ConfigResolved {
       Wrapper?: Wrapper[]
@@ -118,3 +119,4 @@ type PlainOrGetter<T> = T | ((pageContext: PageContext) => T)
 
 type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode
 type Layout = Wrapper
+type Loading = { component?: () => React.ReactNode; layout?: () => React.ReactNode }

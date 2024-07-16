@@ -5,7 +5,7 @@ import type { ApolloClient } from '@apollo/client-react-streaming'
 export default {
   name: 'vike-react-apollo',
   require: {
-    'vike-react': '>=0.4.13'
+    'vike-react': '>=0.4.18'
   },
   Wrapper: 'import:vike-react-apollo/renderer/Wrapper:default',
   streamIsRequired: true,

@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom/client'
 import { getHeadSetting } from './getHeadSetting.js'
 import type { OnRenderClientSync } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
+import './styles.css'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderClientSync> => {

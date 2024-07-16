@@ -11,6 +11,8 @@ export default {
     vike: '>=0.4.178'
   },
 
+  Loading: 'import:vike-react/components/Loading:default',
+
   // https://vike.dev/onRenderHtml
   onRenderHtml: 'import:vike-react/renderer/onRenderHtml:onRenderHtml',
   // https://vike.dev/onRenderClient
@@ -73,6 +75,9 @@ export default {
     },
     reactStrictMode: {
       env: { client: true, server: true }
+    },
+    Loading: {
+      env: { server: true, client: true }
     }
   }
 } satisfies Config

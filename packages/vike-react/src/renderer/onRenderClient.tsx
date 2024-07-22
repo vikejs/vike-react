@@ -45,16 +45,17 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
   pageContext.root = root
 
   if (!pageContext.isHydration) {
-    // Set document properties such as document.title
-    sideEffect(pageContext)
+    // E.g. document.title
+    updateDocument(pageContext)
   }
 
-  // Use case:
-  // - Testing tool https://github.com/vikejs/vike-react/issues/95
+  // Use cases:
+  // - User-land document settings (e.g. user-land implementation of `config.favicon`)
+  // - Testing tools https://github.com/vikejs/vike-react/issues/95
   pageContext.config.onAfterRenderClient?.(pageContext)
 }
 
-function sideEffect(pageContext: PageContextClient) {
+function updateDocument(pageContext: PageContextClient) {
   const title = getHeadSetting('title', pageContext) || ''
   const lang = getHeadSetting('lang', pageContext) || 'en'
   const favicon = getHeadSetting('favicon', pageContext)
@@ -66,7 +67,7 @@ function sideEffect(pageContext: PageContextClient) {
   if (favicon !== undefined) setFavicon(favicon)
 }
 
-// TODO/eventually: remove favicon setting and, instead, add docs showcasing how to implement a favicon setting on the user-land.
+// TODO/next-major-release: remove config.favicon and, instead, add docs showcasing how to implement a favicon setting on the user-land.
 // https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically/260876#260876
 function setFavicon(faviconUrl: string | null) {
   let link: HTMLLinkElement | null = document.querySelector("link[rel~='icon']")

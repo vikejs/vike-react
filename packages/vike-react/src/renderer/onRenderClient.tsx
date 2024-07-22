@@ -39,13 +39,15 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
         // @ts-expect-error
         onUncaughtError
       })
-    } else {
-      // Set document properties such as document.title
-      sideEffect(pageContext)
     }
     root.render(page)
   }
   pageContext.root = root
+
+  if (!pageContext.isHydration) {
+    // Set document properties such as document.title
+    sideEffect(pageContext)
+  }
 
   // Use case:
   // - Testing tool https://github.com/vikejs/vike-react/issues/95

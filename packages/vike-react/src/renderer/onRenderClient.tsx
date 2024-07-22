@@ -3,7 +3,7 @@ export { onRenderClient }
 
 import ReactDOM from 'react-dom/client'
 import { getHeadSetting } from './getHeadSetting.js'
-import type { OnRenderClientSync } from 'vike/types'
+import type { OnRenderClientSync, PageContextClient } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
 import './styles.css'
 
@@ -14,6 +14,7 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
   pageContext.config.onBeforeRenderClient?.(pageContext)
 
   const page = getPageElement(pageContext)
+  pageContext.page = page
 
   // TODO: implement this? So that, upon errors, onRenderClient() throws an error and Vike can render the error. As of April 2024 it isn't released yet.
   //  - https://react-dev-git-fork-rickhanlonii-rh-root-options-fbopensource.vercel.app/reference/react-dom/client/createRoot#show-a-dialog-for-uncaught-errors
@@ -22,41 +23,28 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
 
   const container = document.getElementById('root')!
   if (
-    // Whether the page was rendered to HTML. (I.e. whether the user set the [`ssr`](https://vike.dev/ssr) setting to `false`.)
-    container.innerHTML !== '' &&
-    // Whether the page was already rendered to HTML. (I.e. whether this is the first client-side rendering.)
-    pageContext.isHydration
+    pageContext.isHydration &&
+    // Whether the page was [Server-Side Rendered](https://vike.dev/ssr).
+    container.innerHTML !== ''
   ) {
-    // Hydration
+    // First render while using SSR, i.e. [hydration](https://vike.dev/hydration)
     root = ReactDOM.hydrateRoot(container, page, {
       // @ts-expect-error
       onUncaughtError
     })
   } else {
     if (!root) {
-      // First render (not hydration)
+      // First render without SSR
       root = ReactDOM.createRoot(container, {
         // @ts-expect-error
         onUncaughtError
       })
     } else {
-      // Client-side navigation
-
-      const title = getHeadSetting('title', pageContext) || ''
-      const lang = getHeadSetting('lang', pageContext) || 'en'
-      const favicon = getHeadSetting('favicon', pageContext)
-
-      // We skip if the value is undefined because we shouldn't remove values set in HTML (by the Head setting).
-      //  - This also means that previous values will leak: upon client-side navigation, the title set by the previous page won't be removed if the next page doesn't override it. But that's okay because usually pages always have a favicon and title, which means that previous values are always overriden. Also, as a workaround, the user can set the value to `null` to ensure that previous values are overriden.
-      if (title !== undefined) document.title = title
-      if (lang !== undefined) document.documentElement.lang = lang
-      if (favicon !== undefined) setFavicon(favicon)
+      // Set document properties such as document.title
+      sideEffect(pageContext)
     }
-
     root.render(page)
   }
-
-  pageContext.page = page
   pageContext.root = root
 
   // Use case:
@@ -64,6 +52,19 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
   pageContext.config.onAfterRenderClient?.(pageContext)
 }
 
+function sideEffect(pageContext: PageContextClient) {
+  const title = getHeadSetting('title', pageContext) || ''
+  const lang = getHeadSetting('lang', pageContext) || 'en'
+  const favicon = getHeadSetting('favicon', pageContext)
+
+  // We skip if the value is undefined because we shouldn't remove values set in HTML (by the Head setting).
+  //  - This also means that previous values will leak: upon client-side navigation, the title set by the previous page won't be removed if the next page doesn't override it. But that's okay because usually pages always have a favicon and title, which means that previous values are always overriden. Also, as a workaround, the user can set the value to `null` to ensure that previous values are overriden.
+  if (title !== undefined) document.title = title
+  if (lang !== undefined) document.documentElement.lang = lang
+  if (favicon !== undefined) setFavicon(favicon)
+}
+
+// TODO/eventually: remove favicon setting and, instead, add docs showcasing how to implement a favicon setting on the user-land.
 // https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically/260876#260876
 function setFavicon(faviconUrl: string | null) {
   let link: HTMLLinkElement | null = document.querySelector("link[rel~='icon']")

@@ -19,7 +19,10 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
 
   return escapeInject`<!DOCTYPE html>
     <html lang='${lang}'>
-      <head>${headHtml}</head>
+      <head>
+        <meta charset="UTF-8" />
+        ${headHtml}
+      </head>
       <body>
         <div id="root">${pageHtml}</div>
       </body>
@@ -71,7 +74,6 @@ function getHeadHtml(pageContext: PageContext) {
   const headElementHtml = dangerouslySkipEscape(renderToString(headElement))
 
   const headHtml = escapeInject`
-    <meta charset="UTF-8" />
     ${titleTags}
     ${headElementHtml}
     ${faviconTag}

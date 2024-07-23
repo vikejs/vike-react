@@ -2,7 +2,7 @@
 export { onRenderHtml }
 
 import React from 'react'
-import { renderToString } from 'react-dom/server'
+import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { renderToStream } from 'react-streaming/server'
 import { dangerouslySkipEscape, escapeInject, version } from 'vike/server'
 import type { OnRenderHtmlAsync, PageContext } from 'vike/types'
@@ -102,7 +102,7 @@ function getHeadElementHtml(Head: NonNullable<Head>, pageContext: PageContext): 
   if (pageContext.config.reactStrictMode !== false) {
     headElement = <React.StrictMode>{headElement}</React.StrictMode>
   }
-  return renderToString(headElement)
+  return renderToStaticMarkup(headElement)
 }
 
 // We don't need this anymore starting from vike@0.4.173 which added the `require` setting.

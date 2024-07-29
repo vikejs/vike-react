@@ -51,3 +51,4 @@ function sideEffect(config: ConfigFromHook) {
   //   - Dynamic favicons, like GMail or Discord, are independent of the page and should, therefore, be implemented on user-land.
   // - TODO: remove this comment and make setting +favicon global (or deprecate it)
   //   - Document how to implement a dynamic favicon. It's a nice example of how to create a custom document setting.
+}

@@ -22,7 +22,10 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
 
   return escapeInject`<!DOCTYPE html>
     <html lang='${lang}'>
-      <head>${headHtml}</head>
+      <head>
+        <meta charset="UTF-8" />
+        ${headHtml}
+      </head>
       <body>
         <div id="root">${pageHtml}</div>
       </body>
@@ -79,7 +82,6 @@ function getHeadHtml(pageContext: PageContextInternal) {
   delete pageContext._configFromHook
 
   const headHtml = escapeInject`
-    <meta charset="UTF-8" />
     ${titleTags}
     ${headElementsHtml}
     ${faviconTag}

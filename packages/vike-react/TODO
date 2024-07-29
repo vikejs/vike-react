@@ -1,35 +1,44 @@
-TODO/soon:
-- Use renderToStaticMarkup instead of renderToString()
+TODO/now:
 - New meta config `global`
-  - Use it for `bodyAttributes`
-- Use escapeInject for bodyHtmlStart
-  - Soft deprecate not using it
-- Copy from https://github.com/vikejs/vike-react/pull/113/files
-  - viewport setting?
-    - Maybe not if we remove favicon setting?
-    - Inject responsive viewport tag by default
-  - escapeHtml()
-  - getTagAttributesString() or use vike-vue one?
-  - remove client-side updating of favicon and lang? (I don't see a concrete use case for it.)
-- Remove favicon setting?
-- Also remove lang setting? Maybe not because of i18n? Let's be conservative?
-- Make config.Head cumulative
-- Add config.head on top of config.Head?
+- [breaking change] make Head cumulative
+- [breaking change] viewport
+- [breaking change] make title generate og tag
+- [breaking change] make bodyHtml{Start,End} global
+  - We can make it non-global and isomorphic later without introducing a breaking change
+- [breaking change] Remove favicon setting
+  - Or make it global
+- bodyAttributes & htmlAttributes
+  - Make it server-only and global for now
+    - We can make it non-global and isomorphic later without introducing a breaking change
+  - Support `lang: null`
+- onAfterRenderClient (or onRenderClientEnd() ?)
+- description setting
+  ```html
+  <meta name="description" content="Page description">
+  <meta property="og:description" content="Page description">
+  ```
+
+Copy-able from https://github.com/vikejs/vike-react/pull/113/files
+- viewport setting?
+  - Maybe not if we remove favicon setting?
+  - Inject responsive viewport tag by default
+- escapeHtml()
+- getTagAttributesString() or use vike-vue one?
+- remove client-side updating of favicon and lang? (I don't see a concrete use case for it.)
+
+TODO/later:
 - name setting?
   - Appends `| ${name}` to title
     - No setting to opt-out, instead user should manually use config.head if all he wants is to inject the OG tag.
   - Sets OG tag
-- description setting?
-  ```
-  <meta name="description" content="Page description">
-  <meta property="og:description" content="Page description">
-  ```
 - image setting?
-  ```
+  ```html
   <meta property="og:image" content="https://www.mywebsite.com/image.jpg">
   <meta property="og:image:alt" content="Image description">
   <meta name="twitter:card" content="summary_large_image">
   ```
+- Use escapeInject for bodyHtmlStart
+  - Soft deprecate not using it
 
 
 TODO/later:
@@ -39,5 +48,6 @@ TODO/later:
     <html lang="en">
     <meta property="og:locale" content="en_GB">
     ```
+- Remove lang setting (soft deprecation)? Maybe not because of i18n?
 - More document settings?
   - https://github.com/vikejs/vike-react/pull/113/files#diff-43f0478bd822a071df19f8756e0833b975665ce5d118edde04ce1b7187cd63e2

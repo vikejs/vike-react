@@ -56,7 +56,7 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
 }
 
 function updateDocument(pageContext: PageContextClient) {
-  const title = getHeadSetting('title', pageContext) || ''
+  const title = getHeadSetting('title', pageContext)
   const lang = getHeadSetting('lang', pageContext) || 'en'
   const favicon = getHeadSetting('favicon', pageContext)
 

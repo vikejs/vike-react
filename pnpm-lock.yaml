@@ -5,7 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  vike: 0.4.179-commit-9384166
   vike-react: link:./packages/vike-react/
   vike-react-query: link:./packages/vike-react-query/
   vike-react-apollo: link:./packages/vike-react-apollo/
@@ -60,8 +59,8 @@ importers:
         specifier: ^5.3.3
         version: 5.5.3
       vike:
-        specifier: 0.4.179-commit-9384166
-        version: 0.4.179-commit-9384166(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: ^0.4.181
+        version: 0.4.181(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -99,8 +98,8 @@ importers:
         specifier: ^5.5.3
         version: 5.5.3
       vike:
-        specifier: 0.4.179-commit-9384166
-        version: 0.4.179-commit-9384166(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: ^0.4.181
+        version: 0.4.181(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -120,8 +119,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       vike:
-        specifier: 0.4.179-commit-9384166
-        version: 0.4.179-commit-9384166(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: ^0.4.181
+        version: 0.4.181(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -153,8 +152,8 @@ importers:
         specifier: ^5.5.3
         version: 5.5.3
       vike:
-        specifier: 0.4.179-commit-9384166
-        version: 0.4.179-commit-9384166(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: ^0.4.181
+        version: 0.4.181(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -202,8 +201,8 @@ importers:
         specifier: ^5.5.3
         version: 5.5.3
       vike:
-        specifier: 0.4.179-commit-9384166
-        version: 0.4.179-commit-9384166(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: ^0.4.181
+        version: 0.4.181(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
 
   packages/vike-react-apollo:
     dependencies:
@@ -248,8 +247,8 @@ importers:
         specifier: ^5.3.3
         version: 5.5.3
       vike:
-        specifier: 0.4.179-commit-9384166
-        version: 0.4.179-commit-9384166(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: ^0.4.181
+        version: 0.4.181(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -297,8 +296,8 @@ importers:
         specifier: ^5.5.3
         version: 5.5.3
       vike:
-        specifier: 0.4.179-commit-9384166
-        version: 0.4.179-commit-9384166(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
+        specifier: ^0.4.181
+        version: 0.4.181(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -532,6 +531,9 @@ packages:
 
   '@brillout/picocolors@1.0.13':
     resolution: {integrity: sha512-LblvMKItHbvkaIMI+Awsk1EEjmReE8E8Mgjtj3Pdn/qBvwQ6e+ts5uEqG6iTrK6JWndcxrQgSe664KfoteN6fA==}
+
+  '@brillout/picocolors@1.0.14':
+    resolution: {integrity: sha512-XhyZY3/FUh56mDuLIjv5kN9qy+oQj7A/d2uQ6cJJ4uVv55+velua3abcrM5WIvs2RHZGA3EE7S9FWo+TjF10ew==}
 
   '@brillout/release-me@0.3.8':
     resolution: {integrity: sha512-feo4CLWpMT0LS5l/fI37vv9pbOOEste6/AO9qLT5WtupqDkgK9k6iBuZmzLlef4AthIA2BY20tXlX/VcFWKuSw==}
@@ -2273,8 +2275,8 @@ packages:
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
 
-  vike@0.4.179-commit-9384166:
-    resolution: {integrity: sha512-r7KysslKPv4TcZS1SRf1B2geUiPEDquWVvSBaHI5iyNHeb56w7HefcY+nqB9P0LLL9rfdJqCyEK2li9XUw9N+Q==}
+  vike@0.4.181:
+    resolution: {integrity: sha512-pGhTonZ67yx3t4isx2UEKqx+ZhKJk1ZrwXBHfmy0Rs8T/u4JOIB58OahNDbVu1k4cvFeNzSqxcpI1BBVfaF5ZA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -2675,6 +2677,8 @@ snapshots:
   '@brillout/picocolors@1.0.12': {}
 
   '@brillout/picocolors@1.0.13': {}
+
+  '@brillout/picocolors@1.0.14': {}
 
   '@brillout/release-me@0.3.8':
     dependencies:
@@ -4320,11 +4324,11 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vike@0.4.179-commit-9384166(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17)):
+  vike@0.4.181(react-streaming@0.3.42(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@5.1.1(@types/node@20.11.17)):
     dependencies:
       '@brillout/import': 0.2.3
       '@brillout/json-serializer': 0.5.13
-      '@brillout/picocolors': 1.0.13
+      '@brillout/picocolors': 1.0.14
       '@brillout/require-shim': 0.1.2
       '@brillout/vite-plugin-server-entry': 0.4.5
       acorn: 8.11.2

@@ -38,7 +38,7 @@
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
-    "vike": ">=0.4.178",
+    "vike": ">=0.4.181",
     "vite": ">=4.3.8"
   },
   "devDependencies": {
@@ -51,7 +51,7 @@
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.5",
     "typescript": "^5.5.3",
-    "vike": "^0.4.178"
+    "vike": "^0.4.181"
   },
   "dependencies": {
     "react-streaming": "^0.3.42"

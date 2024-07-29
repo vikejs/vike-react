@@ -2,13 +2,16 @@
 export { onRenderHtml }
 
 import React from 'react'
-import { renderToString } from 'react-dom/server'
+import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { renderToStream } from 'react-streaming/server'
 import { dangerouslySkipEscape, escapeInject, version } from 'vike/server'
 import type { OnRenderHtmlAsync, PageContext } from 'vike/types'
 import { PageContextProvider } from '../hooks/usePageContext.js'
 import { getHeadSetting } from './getHeadSetting.js'
 import { getPageElement } from './getPageElement.js'
+import type { PageContextInternal } from '../types/PageContext.js'
+import type { Head } from '../types/Config.js'
+import { isReactElement } from '../utils/isReactElement.js'
 
 checkVikeVersion()
 addEcosystemStamp()
@@ -54,31 +57,53 @@ async function getPageHtml(pageContext: PageContext) {
   return pageHtml
 }
 
-function getHeadHtml(pageContext: PageContext) {
+function getHeadHtml(pageContext: PageContextInternal) {
+  pageContext._headAlreadySet = true
+
   const title = getHeadSetting('title', pageContext)
   const favicon = getHeadSetting('favicon', pageContext)
   const lang = getHeadSetting('lang', pageContext) || 'en'
-
   const titleTags = !title ? '' : escapeInject`<title>${title}</title><meta property="og:title" content="${title}" />`
   const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
 
-  const Head = pageContext.config.Head || (() => <></>)
-  let headElement = (
-    <PageContextProvider pageContext={pageContext}>
-      <Head />
-    </PageContextProvider>
+  const headElementsHtml = dangerouslySkipEscape(
+    [
+      // <Head> set by +Head
+      pageContext.config.Head,
+      // <Head> set by useConfig()
+      ...(pageContext._configFromHook?.Head ?? [])
+    ]
+      .filter((Head) => Head !== null && Head !== undefined)
+      .map((Head) => getHeadElementHtml(Head, pageContext))
+      .join('\n')
   )
-  if (pageContext.config.reactStrictMode !== false) {
-    headElement = <React.StrictMode>{headElement}</React.StrictMode>
-  }
-  const headElementHtml = dangerouslySkipEscape(renderToString(headElement))
+
+  // Not needed on the client-side, thus we remove it to save KBs sent to the client
+  delete pageContext._configFromHook
 
   const headHtml = escapeInject`
     ${titleTags}
-    ${headElementHtml}
+    ${headElementsHtml}
     ${faviconTag}
   `
   return { headHtml, lang }
+}
+
+function getHeadElementHtml(Head: NonNullable<Head>, pageContext: PageContext): string {
+  let headElement: React.ReactNode
+  if (isReactElement(Head)) {
+    headElement = Head
+  } else {
+    headElement = (
+      <PageContextProvider pageContext={pageContext}>
+        <Head />
+      </PageContextProvider>
+    )
+  }
+  if (pageContext.config.reactStrictMode !== false) {
+    headElement = <React.StrictMode>{headElement}</React.StrictMode>
+  }
+  return renderToStaticMarkup(headElement)
 }
 
 // We don't need this anymore starting from vike@0.4.173 which added the `require` setting.

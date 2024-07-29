@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom/client'
 import { getHeadSetting } from './getHeadSetting.js'
 import type { OnRenderClientSync, PageContextClient } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
+import type { PageContextInternal } from '../types/PageContext.js'
 import './styles.css'
 
 let root: ReactDOM.Root
@@ -56,6 +57,8 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
 }
 
 function updateDocument(pageContext: PageContextClient) {
+  ;(pageContext as PageContextInternal)._headAlreadySet = true
+
   const title = getHeadSetting('title', pageContext)
   const lang = getHeadSetting('lang', pageContext)
   const favicon = getHeadSetting('favicon', pageContext)

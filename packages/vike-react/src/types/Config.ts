@@ -7,8 +7,12 @@ declare global {
       /** The page's root React component */
       Page?: () => React.ReactNode
 
-      /** React element rendered and appended into &lt;head>&lt;/head> */
-      Head?: () => React.ReactNode
+      /**
+       * Children teleported to &lt;head>
+       *
+       * https://vike.dev/Head
+       */
+      Head?: Head
 
       /**
        * A component that defines the visual layout of the page common to several pages.
@@ -27,10 +31,14 @@ declare global {
       Wrapper?: Wrapper | ImportString
 
       /**
+       * Sets value of:
+       *
        * ```js
        * <title>${title}</title>
        * <meta property="og:title" content="${title}" />
        * ```
+       * ---
+       * https://vike.dev/title
        */
       title?: PlainOrGetter<string>
 
@@ -117,6 +125,31 @@ declare global {
 
 type PlainOrGetter<T> = T | ((pageContext: PageContext) => T)
 
+export type Head = React.ReactNode | (() => React.ReactNode)
 type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode
 type Layout = Wrapper
 type Loading = { component?: () => React.ReactNode; layout?: () => React.ReactNode }
+
+export type ConfigFromHook = {
+  /**
+   * Sets value of:
+   *
+   * ```js
+   * <title>${title}</title>
+   * <meta property="og:title" content="${title}" />
+   * ```
+   * ---
+   * https://vike.dev/title
+   */
+  title?: string
+  /**
+   * Children teleported to &lt;head>
+   *
+   * https://vike.dev/Head
+   */
+  Head?: Head
+}
+export type ConfigFromHookResolved = {
+  title?: string
+  Head?: Head[]
+}

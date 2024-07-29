@@ -8,7 +8,7 @@ import './types/index.js'
 export default {
   name: 'vike-react',
   require: {
-    vike: '>=0.4.178'
+    vike: '>=0.4.181'
   },
 
   Loading: 'import:vike-react/components/Loading:default',
@@ -19,6 +19,7 @@ export default {
   onRenderClient: 'import:vike-react/renderer/onRenderClient:onRenderClient',
 
   passToClient: [
+    '_configFromHook',
     // https://github.com/vikejs/vike-react/issues/25
     process.env.NODE_ENV !== 'production' && '$$typeof'
   ].filter(isNotFalse),

@@ -5,6 +5,8 @@ import { withFallback } from 'vike-react-query'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { navigate } from 'vike/client/router'
 import { MovieDetails } from './types'
+import { Config } from 'vike-react/Config'
+import { Head } from 'vike-react/Head'
 
 const Movies = withFallback(() => {
   const result = useSuspenseQuery({
@@ -13,13 +15,16 @@ const Movies = withFallback(() => {
   })
 
   const movies = result.data
-
   const onNavigate = (id: string) => {
     navigate(`/${id}`)
   }
 
   return (
     <>
+      <Config title={`${movies.length} movies`} />
+      <Head>
+        <meta name="description" content={`List of ${movies.length} Star Wars movies.`} />
+      </Head>
       <h1>Star Wars Movies</h1>
       <ol>
         {movies.map(({ id, title, release_date }) => (

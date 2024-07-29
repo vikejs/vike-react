@@ -1,55 +1,47 @@
 export { testRun }
-
 import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, partRegex } from '@brillout/test-e2e'
 
 let isProd: boolean
 
-function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
-  run(cmd)
-
-  isProd = cmd !== 'pnpm run dev'
-
-  const title = 'My Vike + React App'
-  testUrl({
-    url: '/',
-    title,
+const titleDefault = 'My Vike + React App'
+const pages = {
+  '/': {
+    title: titleDefault,
     text: 'Rendered to HTML.',
     counter: true
-  })
-
-  testUrl({
-    url: '/star-wars',
+  },
+  '/star-wars': {
     title: '6 Star Wars Movies',
     text: 'A New Hope'
-  })
-
-  testUrl({
-    url: '/star-wars/3',
+  },
+  '/star-wars/3': {
     title: 'Return of the Jedi',
+    description: 'Star Wars Movie Return of the Jedi from Richard Marquand',
     text: '1983-05-25'
-  })
-
-  // Not sure how progressive rendering can be tested since fetch() awaits the stream to finish
-  testUrl({
-    url: '/streaming',
-    title,
+  },
+  '/streaming': {
+    title: titleDefault,
     text: 'Progressive Rendering',
     counter: true
-  })
-
-  const textNoSSR = 'This page is rendered only in the browser'
-  testUrl({
-    url: '/without-ssr',
+  },
+  '/without-ssr': {
     title: 'No SSR',
-    text: textNoSSR,
+    text: 'This page is rendered only in the browser',
     counter: true,
     noSSR: true
-  })
+  }
+} as const
 
-  testNavigationBetweenWithSSRAndWithoutSSR()
+function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
+  run(cmd)
+  isProd = cmd !== 'pnpm run dev'
+  testPages()
+  testPageNavigation_betweenWithSSRAndWithout()
+  testPageNavigation_titleUpdate()
+  testHeadComponent()
 }
 
-function testNavigationBetweenWithSSRAndWithoutSSR() {
+function testPageNavigation_betweenWithSSRAndWithout() {
   const textWithSSR = 'Rendered to HTML.'
   const textWithoutSSR = "It isn't rendered to HTML"
 
@@ -90,13 +82,52 @@ function testNavigationBetweenWithSSRAndWithoutSSR() {
   })
 }
 
-function testUrl({
+function testPageNavigation_titleUpdate() {
+  test('title update client-side page navigation', async () => {
+    {
+      const { title } = pages['/']
+      await page.goto(getServerUrl() + '/')
+      await expectTitle(title)
+    }
+    const testMovieList = async () => {
+      const { title } = pages['/star-wars']
+      await page.click(`a[href="/star-wars"]`)
+      await expectTitle(title)
+    }
+    await testMovieList()
+    const testMoviePage = async () => {
+      const { title } = pages['/star-wars/3']
+      await page.click(`a:has-text("${title}")`)
+      await expectTitle(title)
+    }
+    await testMoviePage()
+    await testMovieList()
+    await testMoviePage()
+    await testMovieList()
+    await testMoviePage()
+  })
+}
+async function expectTitle(title: string) {
+  await autoRetry(async () => {
+    const titleActual = await page.evaluate(() => window.document.title)
+    expect(titleActual).toBe(title)
+  })
+}
+
+function testPages() {
+  Object.entries(pages).forEach(([url, pageInfo]) => {
+    testPage({ url, ...pageInfo })
+  })
+}
+
+function testPage({
   url,
   title,
+  description,
   text,
   counter,
   noSSR
-}: { url: string; title: string; text: string; counter?: true; noSSR?: true }) {
+}: { url: string; title: string; description?: string; text: string; counter?: true; noSSR?: true }) {
   test(url + ' (HTML)', async () => {
     const html = await fetchHtml(url)
     if (!noSSR) {
@@ -108,6 +139,10 @@ function testUrl({
       expect(html).toMatch(partRegex`<link rel="icon" href="/assets/logo.svg"/>`)
     } else {
       expect(html).toMatch(partRegex`<link rel="icon" href="/assets/static/logo.${hash}.svg"/>`)
+    }
+
+    if (description) {
+      expect(html).toContain(`<meta name="description" content="${description}"/>`)
     }
   })
   test(url + ' (Hydration)', async () => {
@@ -135,6 +170,28 @@ async function testCounter() {
     },
     { timeout: 5 * 1000 }
   )
+}
+
+function testHeadComponent() {
+  test('Head Component (HTML)', async () => {
+    const html = await fetchHtml('/images')
+    const hash = !isProd ? '' : /\.[a-zA-Z0-9_-]+/
+    const assetsDir = `assets${isProd ? '/static' : ''}`
+    expect(html).toMatch(
+      partRegex`<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"/${assetsDir}/logo-new${hash}.svg"},"creator":{"@type":"Person","name":"brillout"}}</script>`
+    )
+    expect(html).toMatch(
+      partRegex`<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"/${assetsDir}/logo${hash}.svg"},"creator":{"@type":"Person","name":"Romuald Brillout"}}</script>`
+    )
+  })
+  test('Head Component (Hydration)', async () => {
+    await page.goto(getServerUrl() + '/')
+    await testCounter()
+    ensureWasClientSideRouted('/pages/index')
+    await page.click('a:has-text("Head Component")')
+    await testCounter()
+    ensureWasClientSideRouted('/pages/index')
+  })
 }
 
 /** Ensure page wasn't server-side routed.

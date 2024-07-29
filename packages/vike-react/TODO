@@ -1,4 +1,5 @@
 TODO/soon:
+- Use renderToStaticMarkup instead of renderToString()
 - New meta config `global`
   - Use it for `bodyAttributes`
 - Use escapeInject for bodyHtmlStart

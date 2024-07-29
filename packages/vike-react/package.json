@@ -1,6 +1,6 @@
 {
   "name": "vike-react",
-  "version": "0.4.17",
+  "version": "0.4.18",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -24,11 +24,13 @@
     ".": "./dist/index.js",
     "./config": "./dist/+config.js",
     "./renderer/onRenderHtml": "./dist/renderer/onRenderHtml.js",
-    "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js"
+    "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js",
+    "./components/Loading": "./dist/components/Loading.js"
   },
   "scripts": {
     "dev": "tsc --watch",
-    "build": "rimraf dist/ && tsc",
+    "build": "rimraf dist/ && tsc && pnpm run build:css",
+    "build:css": "cp src/renderer/styles.css dist/renderer/styles.css",
     "release": "release-me patch",
     "release:minor": "release-me minor",
     "release:commit": "release-me commit"

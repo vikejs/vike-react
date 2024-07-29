@@ -1,3 +1,20 @@
+## [0.4.18](https://github.com/vikejs/vike-react/compare/vike-react@0.4.17...vike-react@0.4.18) (2024-07-16)
+
+
+### Bug Fixes
+
+* add og:title tag (fix vikejs/vike[#1732](https://github.com/vikejs/vike-react/issues/1732)) ([024b6ad](https://github.com/vikejs/vike-react/commit/024b6ad7527425389d0e06577609979e9803779d))
+* fix document setting types ([7fe7b04](https://github.com/vikejs/vike-react/commit/7fe7b045ce8c7af93910948df1b7f9d72da8dd37))
+* remove pageContext.userAgent type in favor of ([079886d](https://github.com/vikejs/vike-react/commit/079886de727d76638accf20322fd2b286621261a))
+* update react-streaming ([c0679d6](https://github.com/vikejs/vike-react/commit/c0679d68c7a1d21752f2f7d57396bf1c77fd412e))
+
+
+### Features
+
+* Loading config ([#133](https://github.com/vikejs/vike-react/issues/133)) ([2737f03](https://github.com/vikejs/vike-react/commit/2737f03cf09d3e2649672001902f8254b3864272))
+
+
+
 ## [0.4.17](https://github.com/vikejs/vike-react/compare/vike-react@0.4.16...vike-react@0.4.17) (2024-07-06)
 
 

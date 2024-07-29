@@ -3,9 +3,10 @@ export { onRenderClient }
 
 import ReactDOM from 'react-dom/client'
 import { getHeadSetting } from './getHeadSetting.js'
-import type { OnRenderClientSync } from 'vike/types'
+import type { OnRenderClientSync, PageContextClient } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
 import type { PageContextInternal } from '../types/PageContext.js'
+import './styles.css'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderClientSync> => {
@@ -14,6 +15,7 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
   pageContext.config.onBeforeRenderClient?.(pageContext)
 
   const page = getPageElement(pageContext)
+  pageContext.page = page
 
   // TODO: implement this? So that, upon errors, onRenderClient() throws an error and Vike can render the error. As of April 2024 it isn't released yet.
   //  - https://react-dev-git-fork-rickhanlonii-rh-root-options-fbopensource.vercel.app/reference/react-dom/client/createRoot#show-a-dialog-for-uncaught-errors
@@ -22,49 +24,54 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
 
   const container = document.getElementById('root')!
   if (
-    // Whether the page was rendered to HTML. (I.e. whether the user set the [`ssr`](https://vike.dev/ssr) setting to `false`.)
-    container.innerHTML !== '' &&
-    // Whether the page was already rendered to HTML. (I.e. whether this is the first client-side rendering.)
-    pageContext.isHydration
+    pageContext.isHydration &&
+    // Whether the page was [Server-Side Rendered](https://vike.dev/ssr).
+    container.innerHTML !== ''
   ) {
-    // Hydration
+    // First render while using SSR, i.e. [hydration](https://vike.dev/hydration)
     root = ReactDOM.hydrateRoot(container, page, {
       // @ts-expect-error
       onUncaughtError
     })
   } else {
     if (!root) {
-      // First render (not hydration)
+      // First render without SSR
       root = ReactDOM.createRoot(container, {
         // @ts-expect-error
         onUncaughtError
       })
-    } else {
-      // Client-side navigation
-
-      ;(pageContext as PageContextInternal)._headAlreadySet = true
-      const title = getHeadSetting('title', pageContext) || ''
-      const lang = getHeadSetting('lang', pageContext) || 'en'
-      const favicon = getHeadSetting('favicon', pageContext)
-
-      // We skip if the value is undefined because we shouldn't remove values set in HTML (by the Head setting).
-      //  - This also means that previous values will leak: upon client-side navigation, the title set by the previous page won't be removed if the next page doesn't override it. But that's okay because usually pages always have a favicon and title, which means that previous values are always overriden. Also, as a workaround, the user can set the value to `null` to ensure that previous values are overriden.
-      if (title !== undefined) document.title = title
-      if (lang !== undefined) document.documentElement.lang = lang
-      if (favicon !== undefined) setFavicon(favicon)
     }
-
     root.render(page)
   }
-
-  pageContext.page = page
   pageContext.root = root
 
-  // Use case:
-  // - Testing tool https://github.com/vikejs/vike-react/issues/95
+  if (!pageContext.isHydration) {
+    // E.g. document.title
+    updateDocument(pageContext)
+  }
+
+  // Use cases:
+  // - User-land document settings (e.g. user-land implementation of `config.favicon`)
+  // - Testing tools https://github.com/vikejs/vike-react/issues/95
   pageContext.config.onAfterRenderClient?.(pageContext)
 }
 
+function updateDocument(pageContext: PageContextClient) {
+  ;(pageContext as PageContextInternal)._headAlreadySet = true
+
+  const title = getHeadSetting('title', pageContext)
+  const lang = getHeadSetting('lang', pageContext)
+  const favicon = getHeadSetting('favicon', pageContext)
+
+  // - We skip if `undefined` as we shouldn't remove values set by the Head setting.
+  // - Setting a default prevents the previous value to be leaked: upon client-side navigation, the value set by the previous page won't be removed if the next page doesn't override it.
+  //   - Most of the time, the user sets a default himself (i.e. a value defined at /pages/+config.js)
+  if (title !== undefined) document.title = title || ''
+  if (lang !== undefined) document.documentElement.lang = lang || 'en'
+  if (favicon !== undefined) setFavicon(favicon)
+}
+
+// TODO/next-major-release: remove config.favicon and, instead, add docs showcasing how to implement a favicon setting on the user-land.
 // https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically/260876#260876
 function setFavicon(faviconUrl: string | null) {
   let link: HTMLLinkElement | null = document.querySelector("link[rel~='icon']")

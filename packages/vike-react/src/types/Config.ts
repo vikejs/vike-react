@@ -7,7 +7,11 @@ declare global {
       /** The page's root React component */
       Page?: () => React.ReactNode
 
-      /** React element rendered and appended into &lt;head>&lt;/head> */
+      /**
+       * Children teleported to &lt;head>
+       *
+       * https://vike.dev/Head
+       */
       Head?: Head
 
       /**
@@ -27,10 +31,14 @@ declare global {
       Wrapper?: Wrapper | ImportString
 
       /**
+       * Sets value of:
+       *
        * ```js
        * <title>${title}</title>
        * <meta property="og:title" content="${title}" />
        * ```
+       * ---
+       * https://vike.dev/title
        */
       title?: PlainOrGetter<string>
 
@@ -124,13 +132,21 @@ type Loading = { component?: () => React.ReactNode; layout?: () => React.ReactNo
 
 export type ConfigFromHook = {
   /**
+   * Sets value of:
+   *
    * ```js
    * <title>${title}</title>
    * <meta property="og:title" content="${title}" />
    * ```
+   * ---
+   * https://vike.dev/title
    */
   title?: string
-  /** React element rendered and appended into &lt;head>&lt;/head> */
+  /**
+   * Children teleported to &lt;head>
+   *
+   * https://vike.dev/Head
+   */
   Head?: Head
 }
 export type ConfigFromHookResolved = {

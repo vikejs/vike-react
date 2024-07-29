@@ -57,7 +57,6 @@ async function getPageHtml(pageContext: PageContext) {
 function getHeadHtml(pageContext: PageContextInternal) {
   pageContext._headAlreadySet = true
 
-  // Set by config
   const title = getHeadSetting('title', pageContext)
   const favicon = getHeadSetting('favicon', pageContext)
   const lang = getHeadSetting('lang', pageContext) || 'en'

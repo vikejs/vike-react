@@ -2,13 +2,13 @@ export { getHeadSetting }
 
 import { isCallable } from '../utils/isCallable.js'
 import type { PageContextInternal } from '../types/PageContext.js'
+import type { ConfigFromHookResolved } from '../types/Config.js'
 
-function getHeadSetting(
-  headSetting: 'title' | 'favicon' | 'lang',
-  pageContext: PageContextInternal
-): undefined | null | string {
+type HeadSetting = 'title' | 'favicon' | 'lang'
+type HeadSettingFromHook = HeadSetting & keyof ConfigFromHookResolved
+function getHeadSetting(headSetting: HeadSetting, pageContext: PageContextInternal): undefined | null | string {
   {
-    const val = (pageContext._configFromHook as undefined | Record<string, string>)?.[headSetting]
+    const val: undefined | string = pageContext._configFromHook?.[headSetting as HeadSettingFromHook]
     if (val !== undefined) return val
   }
 

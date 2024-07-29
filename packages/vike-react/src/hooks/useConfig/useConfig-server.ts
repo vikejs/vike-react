@@ -7,6 +7,11 @@ import { usePageContext } from '../usePageContext.js'
 import { getPageContext } from 'vike/getPageContext'
 import { useStream } from 'react-streaming'
 
+/**
+ * Set configurations inside React components and Vike hooks.
+ *
+ * https://vike.dev/useConfig
+ */
 function useConfig(): ConfigSetter {
   const configSetter = (config: ConfigFromHook) => setConfigOverPageContext(config, pageContext)
 
@@ -33,8 +38,10 @@ const configsOverridable = ['title'] as const
 function setConfigOverPageContext(config: ConfigFromHook, pageContext: PageContextInternal) {
   pageContext._configFromHook ??= {}
 
-  // Remove SEO configs which the client-side doesn't need (also avoiding serialization errors)
-  if (pageContext.isClientSideNavigation) for (const configName of configsForSeoOnly) delete config[configName]
+  if (pageContext.isClientSideNavigation) {
+    // Remove SEO configs which the client-side doesn't need (also avoiding serialization errors)
+    for (const configName of configsForSeoOnly) delete config[configName]
+  }
 
   // Cumulative values
   configsCumulative.forEach((configName) => {

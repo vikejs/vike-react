@@ -56,14 +56,15 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
 }
 
 function updateDocument(pageContext: PageContextClient) {
-  const title = getHeadSetting('title', pageContext) || ''
-  const lang = getHeadSetting('lang', pageContext) || 'en'
+  const title = getHeadSetting('title', pageContext)
+  const lang = getHeadSetting('lang', pageContext)
   const favicon = getHeadSetting('favicon', pageContext)
 
-  // We skip if the value is undefined because we shouldn't remove values set in HTML (by the Head setting).
-  //  - This also means that previous values will leak: upon client-side navigation, the title set by the previous page won't be removed if the next page doesn't override it. But that's okay because usually pages always have a favicon and title, which means that previous values are always overriden. Also, as a workaround, the user can set the value to `null` to ensure that previous values are overriden.
-  if (title !== undefined) document.title = title
-  if (lang !== undefined) document.documentElement.lang = lang
+  // - We skip if `undefined` as we shouldn't remove values set by the Head setting.
+  // - Setting a default prevents the previous value to be leaked: upon client-side navigation, the value set by the previous page won't be removed if the next page doesn't override it.
+  //   - Most of the time, the user sets a default himself (i.e. a value defined at /pages/+config.js)
+  if (title !== undefined) document.title = title || ''
+  if (lang !== undefined) document.documentElement.lang = lang || 'en'
   if (favicon !== undefined) setFavicon(favicon)
 }
 

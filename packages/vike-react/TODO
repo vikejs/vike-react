@@ -1,5 +1,4 @@
 TODO/now:
-- New meta config `global`
 - [breaking change] make Head cumulative
 - [breaking change] viewport
   - Make it global for now
@@ -8,18 +7,20 @@ TODO/now:
 - [breaking change] make bodyHtml{Start,End} global
   - We can make it non-global and isomorphic later without introducing a breaking change
 - [breaking change] Make favicon a global setting
-- [breaking change] Rename on{After}RenderClient to onRenderClient{Start,End}
-  - Soft deprecate instead of adding a breaking change note?
 - bodyAttributes & htmlAttributes
   - Make it server-only and global for now
     - We can make it non-global and isomorphic later without introducing a breaking change
-- onRenderClientEnd for every Vike extension
 - Align getHeadSettings() implementation accross vike extensions
 - description setting
   ```html
   <meta name="description" content="Page description">
   <meta property="og:description" content="Page description">
   ```
+
+TODO/soon:
+- onRenderClientEnd for every Vike extension
+- Rename on{After}RenderClient to onRenderClient{Start,End}
+  - Soft deprecate it (instead of adding a breaking change note)
 
 Copy-able from https://github.com/vikejs/vike-react/pull/113/files
 - escapeHtml()

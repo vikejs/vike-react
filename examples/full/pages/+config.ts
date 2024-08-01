@@ -12,6 +12,7 @@ const config = {
   // https://vike.dev/ssr - this line can be removed since `true` is the default
   ssr: true,
   bodyAttributes: { class: 'dark' },
+  viewport: 999,
   // https://vike.dev/extends
   extends: vikeReact
 } satisfies Config

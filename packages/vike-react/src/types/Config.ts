@@ -8,7 +8,7 @@ declare global {
       Page?: () => React.ReactNode
 
       /**
-       * Children teleported to &lt;head>
+       * Add arbitrary `<head>` tags.
        *
        * https://vike.dev/Head
        */
@@ -31,13 +31,14 @@ declare global {
       Wrapper?: Wrapper | ImportString
 
       /**
-       * Sets:
+       * Set the page's tilte.
        *
+       * Generates:
        * ```jsx
        * <title>{title}</title>
        * <meta property="og:title" content={title} />
        * ```
-       * ---
+       *
        * https://vike.dev/title
        */
       title?: PlainOrGetter<string>

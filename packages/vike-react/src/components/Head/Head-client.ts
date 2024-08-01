@@ -5,7 +5,9 @@ export { Head }
 import { useConfig } from '../../hooks/useConfig/useConfig-client.js'
 
 /**
- * Children teleported to &lt;head>
+ * Add arbitrary `<head>` tags.
+ *
+ * (The children are teleported to `<head>`.)
  *
  * https://vike.dev/Head
  */

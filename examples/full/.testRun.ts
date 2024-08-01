@@ -142,7 +142,7 @@ function testPage({
     }
 
     if (description) {
-      expect(html).toContain(`<meta name="description" content="${description}"/>`)
+      expect(html).toMatch(partRegex`<meta name="description" content="${description}"${/\s*/}/>`)
     }
   })
   test(url + ' (Hydration)', async () => {

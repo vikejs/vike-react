@@ -14,7 +14,7 @@
 * new setting [`description`](https://vike.dev/description) ([60ffecd](https://github.com/vikejs/vike-react/commit/60ffecd9dcfdaa50d5dea02a8b081eeb2b684188))
 * new setting [`image`](https://vike.dev/image) ([41ec933](https://github.com/vikejs/vike-react/commit/41ec933aeb8d0ba5334c10377e67ef68fdc0334e))
 * new setting [`viewport`](https://vike.dev/viewport) ([bebaf38](https://github.com/vikejs/vike-react/commit/bebaf386aa0cf1ac06351eadf84e1ab69d5da00d))
-* new settings [`htmlAttriutes`](https://vike.dev/htmlAttriutes) and [`bodyAttributes`](https://vike.dev/bodyAttributes) ([427c7cf](https://github.com/vikejs/vike-react/commit/427c7cf2595a8e19fc0f9a4fd6ce4dc05bd3f058))
+* new settings [`htmlAttributes`](https://vike.dev/htmlAttributes) and [`bodyAttributes`](https://vike.dev/bodyAttributes) ([427c7cf](https://github.com/vikejs/vike-react/commit/427c7cf2595a8e19fc0f9a4fd6ce4dc05bd3f058))
 
 
 ### BREAKING CHANGES

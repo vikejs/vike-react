@@ -1,5 +1,6 @@
 // https://vike.dev/meta#typescript
 import type { ImportString, PageContextClient, PageContext } from 'vike/types'
+import type { TagAttributes } from '../utils/getTagAttributesString.js'
 
 declare global {
   namespace Vike {
@@ -95,7 +96,21 @@ declare global {
        * ```
        * @default 'en'
        */
-      lang?: PlainOrGetter<string>
+      lang?: PlainOrGetter<string> | null
+
+      /**
+       * Add tag attributes such as `<html class="dark">`.
+       *
+       * https://vike.dev/htmlAttributes
+       */
+      htmlAttributes?: TagAttributes
+
+      /**
+       * Add tag attributes such as `<body class="dark">`.
+       *
+       * https://vike.dev/bodyAttributes
+       */
+      bodyAttributes?: TagAttributes
 
       /**
        * If `true`, the page is rendered twice: on the server-side (to HTML) and on the client-side (hydration).
@@ -159,6 +174,8 @@ declare global {
     interface ConfigResolved {
       Wrapper?: Wrapper[]
       Layout?: Layout[]
+      bodyAttributes?: TagAttributes[]
+      htmlAttributes?: TagAttributes[]
     }
   }
 }

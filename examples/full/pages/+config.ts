@@ -11,6 +11,7 @@ const config = {
   stream: true,
   // https://vike.dev/ssr - this line can be removed since `true` is the default
   ssr: true,
+  bodyAttributes: { class: 'dark' },
   // https://vike.dev/extends
   extends: vikeReact
 } satisfies Config

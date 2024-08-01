@@ -52,6 +52,16 @@ export default {
     lang: {
       env: { server: true, client: true }
     },
+    htmlAttributes: {
+      env: { server: true },
+      global: true,
+      cumulative: true // for Vike extensions
+    },
+    bodyAttributes: {
+      env: { server: true },
+      global: true,
+      cumulative: true // for Vike extensions
+    },
     ssr: {
       env: { config: true },
       effect: ssrEffect

@@ -12,21 +12,25 @@ import { getPageElement } from './getPageElement.js'
 import type { PageContextInternal } from '../types/PageContext.js'
 import type { Head } from '../types/Config.js'
 import { isReactElement } from '../utils/isReactElement.js'
+import { getTagAttributesString, type TagAttributes } from '../utils/getTagAttributesString.js'
 
 checkVikeVersion()
 addEcosystemStamp()
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
   const pageHtml = await getPageHtml(pageContext)
-  const { headHtml, lang } = getHeadHtml(pageContext)
+
+  const headHtml = getHeadHtml(pageContext)
+
+  const { htmlAttributesString, bodyAttributesString } = getTagAttributes(pageContext)
 
   return escapeInject`<!DOCTYPE html>
-    <html lang='${lang}'>
+    <html${dangerouslySkipEscape(htmlAttributesString)}>
       <head>
         <meta charset="UTF-8" />
         ${headHtml}
       </head>
-      <body>
+      <body${dangerouslySkipEscape(bodyAttributesString)}>
         <div id="root">${pageHtml}</div>
       </body>
     </html>`
@@ -61,7 +65,6 @@ function getHeadHtml(pageContext: PageContextInternal) {
   pageContext._headAlreadySet = true
 
   const favicon = getHeadSetting('favicon', pageContext)
-  const lang = getHeadSetting('lang', pageContext) || 'en'
   const title = getHeadSetting('title', pageContext)
   const description = getHeadSetting('description', pageContext)
   const image = getHeadSetting('image', pageContext)
@@ -98,9 +101,8 @@ function getHeadHtml(pageContext: PageContextInternal) {
     ${faviconTag}
     ${imageTags}
   `
-  return { headHtml, lang }
+  return headHtml
 }
-
 function getHeadElementHtml(Head: NonNullable<Head>, pageContext: PageContext): string {
   let headElement: React.ReactNode
   if (isReactElement(Head)) {
@@ -116,6 +118,25 @@ function getHeadElementHtml(Head: NonNullable<Head>, pageContext: PageContext): 
     headElement = <React.StrictMode>{headElement}</React.StrictMode>
   }
   return renderToStaticMarkup(headElement)
+}
+
+function getTagAttributes(pageContext: PageContext) {
+  let lang = getHeadSetting('lang', pageContext)
+  // Don't set `lang` to its default value if it's `null` (so that users can set it to `null` in order to remove the default value)
+  if (lang === undefined) lang = 'en'
+
+  const bodyAttributes = mergeTagAttributesList(pageContext.config.bodyAttributes)
+  const htmlAttributes = mergeTagAttributesList(pageContext.config.htmlAttributes)
+
+  const bodyAttributesString = getTagAttributesString(bodyAttributes)
+  const htmlAttributesString = getTagAttributesString({ ...htmlAttributes, lang: lang ?? htmlAttributes.lang })
+
+  return { htmlAttributesString, bodyAttributesString }
+}
+function mergeTagAttributesList(tagAttributesList: TagAttributes[] = []) {
+  const tagAttributes: TagAttributes = {}
+  tagAttributesList.forEach((tagAttrs) => Object.assign(tagAttributes, tagAttrs))
+  return tagAttributes
 }
 
 // We don't need this anymore starting from vike@0.4.173 which added the `require` setting.

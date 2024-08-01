@@ -1,7 +1,4 @@
 TODO/now:
-- bodyAttributes & htmlAttributes
-  - Make it server-only and global for now
-    - We can make it non-global and isomorphic later without introducing a breaking change
 - [breaking change] viewport
   - Make it global for now
   - Inject responsive viewport tag by default
@@ -10,6 +7,7 @@ TODO/now:
 TODO/next (align vike-{vue,solid}):
 - description setting
 - image setting
+- bodyAttributes & htmlAttributes settings
 - [breaking change] make Head cumulative
 - [breaking change] make title generate og tag
 - Align getHeadSettings() implementation accross vike extensions

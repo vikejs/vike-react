@@ -1,5 +1,6 @@
 export { testRun }
 import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, partRegex } from '@brillout/test-e2e'
+import assert from 'node:assert'
 
 let isProd: boolean
 
@@ -135,15 +136,12 @@ function testPage({
       expect(html).toContain(text)
     }
     expect(getTitle(html)).toBe(title)
-    const hash = /[a-zA-Z0-9_-]+/
-    if (!isProd) {
-      expect(html).toMatch(partRegex`<link rel="icon" href="/assets/logo.svg"/>`)
-    } else {
-      expect(html).toMatch(partRegex`<link rel="icon" href="/assets/static/logo.${hash}.svg"/>`)
-    }
+    expect(html).toMatch(partRegex`<link rel="icon" href="${getAssetUrl('logo.svg')}"/>`)
 
     if (description) {
       expect(html).toMatch(partRegex`<meta name="description" content="${description}"${/\s*/}/>`)
+    } else {
+      expect(html).not.toContain('<meta name="description"')
     }
   })
   test(url + ' (Hydration)', async () => {
@@ -176,13 +174,15 @@ async function testCounter() {
 function testHeadComponent() {
   test('Head Component (HTML)', async () => {
     const html = await fetchHtml('/images')
-    const hash = !isProd ? '' : /\.[a-zA-Z0-9_-]+/
-    const assetsDir = `assets${isProd ? '/static' : ''}`
     expect(html).toMatch(
-      partRegex`<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"/${assetsDir}/logo-new${hash}.svg"},"creator":{"@type":"Person","name":"brillout"}}</script>`
+      partRegex`<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"${getAssetUrl(
+        'logo-new.svg'
+      )}"},"creator":{"@type":"Person","name":"brillout"}}</script>`
     )
     expect(html).toMatch(
-      partRegex`<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"/${assetsDir}/logo${hash}.svg"},"creator":{"@type":"Person","name":"Romuald Brillout"}}</script>`
+      partRegex`<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"${getAssetUrl(
+        'logo.svg'
+      )}"},"creator":{"@type":"Person","name":"Romuald Brillout"}}</script>`
     )
   })
   test('Head Component (Hydration)', async () => {
@@ -218,4 +218,13 @@ function findFirstPageId(html: string) {
   const pageId = match![1]
   expect(pageId).toBeTruthy()
   return pageId
+}
+
+function getAssetUrl(fileName: string) {
+  if (!isProd) {
+    return `/assets/${fileName}`
+  }
+  const [fileBaseName, fileExt, ...r] = fileName.split('.')
+  assert(r.length === 0)
+  return partRegex`/assets/static/${fileBaseName}.${/[a-zA-Z0-9_-]+/}.${fileExt}`
 }

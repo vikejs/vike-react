@@ -1,6 +1,5 @@
 TODO/now:
 - image setting
-- description setting
 - bodyAttributes & htmlAttributes
   - Make it server-only and global for now
     - We can make it non-global and isomorphic later without introducing a breaking change
@@ -10,6 +9,7 @@ TODO/now:
 - [breaking change] Make favicon a global setting
 
 TODO/next (align vike-{vue,solid}):
+- description setting
 - [breaking change] make Head cumulative
 - [breaking change] make title generate og tag
 - Align getHeadSettings() implementation accross vike extensions

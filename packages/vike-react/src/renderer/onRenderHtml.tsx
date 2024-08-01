@@ -61,9 +61,13 @@ function getHeadHtml(pageContext: PageContextInternal) {
   pageContext._headAlreadySet = true
 
   const title = getHeadSetting('title', pageContext)
+  const description = getHeadSetting('description', pageContext)
   const favicon = getHeadSetting('favicon', pageContext)
   const lang = getHeadSetting('lang', pageContext) || 'en'
   const titleTags = !title ? '' : escapeInject`<title>${title}</title><meta property="og:title" content="${title}" />`
+  const descriptionTags = !description
+    ? ''
+    : escapeInject`<meta name="description" content="${description}" /><meta property="og:description" content="${description}" />`
   const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
 
   const headElementsHtml = dangerouslySkipEscape(
@@ -83,6 +87,7 @@ function getHeadHtml(pageContext: PageContextInternal) {
 
   const headHtml = escapeInject`
     ${titleTags}
+    ${descriptionTags}
     ${headElementsHtml}
     ${faviconTag}
   `

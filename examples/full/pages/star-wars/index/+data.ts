@@ -12,9 +12,10 @@ const data = async () => {
   const response = await fetch('https://brillout.github.io/star-wars/api/films.json')
   const moviesData = (await response.json()) as MovieDetails[]
 
+  const n = moviesData.length
   config({
-    // Set <title> tag
-    title: `${moviesData.length} Star Wars Movies`
+    title: `${n} Star Wars Movies`, // <title>
+    description: `All ${n} Start Wars movies` // <meta name="description">
   })
 
   // We remove data we don't need because the data is passed to the client; we should

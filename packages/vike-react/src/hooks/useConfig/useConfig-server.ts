@@ -32,15 +32,15 @@ function useConfig(): ConfigSetter {
   }
 }
 
-const configsForSeoOnly = ['Head'] as const
+const configsHtmlOnly = ['Head', 'description'] as const
 const configsCumulative = ['Head'] as const
-const configsOverridable = ['title'] as const
+const configsOverridable = ['title', 'description'] as const
 function setConfigOverPageContext(config: ConfigFromHook, pageContext: PageContextInternal) {
   pageContext._configFromHook ??= {}
 
   if (pageContext.isClientSideNavigation) {
-    // Remove SEO configs which the client-side doesn't need (also avoiding serialization errors)
-    for (const configName of configsForSeoOnly) delete config[configName]
+    // Remove HTML only configs which the client-side doesn't need (also avoiding serialization errors)
+    for (const configName of configsHtmlOnly) delete config[configName]
   }
 
   // Cumulative values

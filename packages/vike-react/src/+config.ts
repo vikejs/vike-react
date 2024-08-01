@@ -40,6 +40,9 @@ export default {
     title: {
       env: { server: true, client: true }
     },
+    description: {
+      env: { server: true }
+    },
     favicon: {
       env: { server: true, client: true }
     },

@@ -35,13 +35,30 @@ declare global {
        *
        * Generates:
        * ```jsx
-       * <title>{title}</title>
-       * <meta property="og:title" content={title} />
+       * <head>
+       *   <title>{title}</title>
+       *   <meta property="og:title" content={title} />
+       * </head>
        * ```
        *
        * https://vike.dev/title
        */
       title?: PlainOrGetter<string>
+
+      /**
+       * Set the page's description.
+       *
+       * Generates:
+       * ```jsx
+       * <head>
+       *   <meta name="description" content={description}>
+       *   <meta property="og:description" content={description}>
+       * </head>
+       * ```
+       *
+       * https://vike.dev/description
+       */
+      description?: PlainOrGetter<string>
 
       /**
        * ```js
@@ -135,8 +152,9 @@ type Loading = { component?: () => React.ReactNode; layout?: () => React.ReactNo
 type PickWithoutGetter<T, K extends keyof T> = {
   [P in K]: Exclude<T[P], Function>
 }
-export type ConfigFromHook = PickWithoutGetter<Vike.Config, 'title' | 'Head'>
+export type ConfigFromHook = PickWithoutGetter<Vike.Config, 'title' | 'description' | 'Head'>
 export type ConfigFromHookResolved = {
   title?: string
+  description?: string
   Head?: Head[]
 }

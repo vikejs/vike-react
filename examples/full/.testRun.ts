@@ -12,6 +12,7 @@ const pages = {
   },
   '/star-wars': {
     title: '6 Star Wars Movies',
+    description: 'All 6 Start Wars movies',
     text: 'A New Hope'
   },
   '/star-wars/3': {

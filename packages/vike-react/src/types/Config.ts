@@ -91,10 +91,11 @@ declare global {
       favicon?: PlainOrGetter<string>
 
       /**
-       * ```js
-       * <html lang="${lang}">
-       * ```
+       * Set the page's language (`<html lang>`).
+       *
        * @default 'en'
+       *
+       * https://vike.dev/lang
        */
       lang?: PlainOrGetter<string> | null
 

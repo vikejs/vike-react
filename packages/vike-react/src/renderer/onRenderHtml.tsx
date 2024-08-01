@@ -94,9 +94,12 @@ function getHeadHtml(pageContext: PageContextInternal) {
   // Not needed on the client-side, thus we remove it to save KBs sent to the client
   delete pageContext._configFromHook
 
+  const viewportTag = dangerouslySkipEscape(getViewportTag(pageContext.config.viewport))
+
   const headHtml = escapeInject`
     ${titleTags}
     ${headElementsHtml}
+    ${viewportTag}
     ${descriptionTags}
     ${faviconTag}
     ${imageTags}
@@ -137,6 +140,19 @@ function mergeTagAttributesList(tagAttributesList: TagAttributes[] = []) {
   const tagAttributes: TagAttributes = {}
   tagAttributesList.forEach((tagAttrs) => Object.assign(tagAttributes, tagAttrs))
   return tagAttributes
+}
+
+export type Viewport = 'responsive' | number | null
+function getViewportTag(viewport: Viewport | undefined): string {
+  if (viewport === 'responsive' || viewport === undefined) {
+    // `user-scalable=no` isn't recommended anymore:
+    //   - https://stackoverflow.com/questions/22354435/to-user-scalable-no-or-not-to-user-scalable-no/22544312#comment120949420_22544312
+    return '<meta name="viewport" content="width=device-width,initial-scale=1">'
+  }
+  if (typeof viewport === 'number') {
+    return `<meta name="viewport" content="width=${viewport}">`
+  }
+  return ''
 }
 
 // We don't need this anymore starting from vike@0.4.173 which added the `require` setting.

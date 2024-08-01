@@ -1,6 +1,7 @@
 // https://vike.dev/meta#typescript
 import type { ImportString, PageContextClient, PageContext } from 'vike/types'
 import type { TagAttributes } from '../utils/getTagAttributesString.js'
+import type { Viewport } from '../renderer/onRenderHtml.js'
 
 declare global {
   namespace Vike {
@@ -75,6 +76,15 @@ declare global {
        * https://vike.dev/image
        */
       image?: PlainOrGetter<string>
+
+      /**
+       * Set the page's width shown to the user on mobile/tablet devices.
+       *
+       * https://vike.dev/viewport
+       *
+       * @default "responsive"
+       */
+      viewport?: Viewport
 
       /**
        * Set the page's favicon.

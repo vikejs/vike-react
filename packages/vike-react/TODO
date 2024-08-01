@@ -1,8 +1,3 @@
-TODO/now:
-- [breaking change] viewport
-  - Make it global for now
-  - Inject responsive viewport tag by default
-
 TODO/next (align vike-{vue,solid}):
 - description setting
 - image setting
@@ -10,6 +5,7 @@ TODO/next (align vike-{vue,solid}):
 - [breaking change] make Head cumulative
 - [breaking change] make title generate og tag
 - [breaking change] Make favicon a global setting
+- [breaking change] viewport
 - Align getHeadSetting() implementation accross vike extensions
 
 TODO/soon:

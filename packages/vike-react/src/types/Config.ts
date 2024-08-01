@@ -61,9 +61,16 @@ declare global {
       description?: PlainOrGetter<string>
 
       /**
-       * ```js
-       * <link rel="icon" href="${favicon}" />
+       * Set the page's favicon.
+       *
+       * Generates:
+       * ```jsx
+       * <head>
+       *   <link rel="icon" href={favicon} />
+       * </head>
        * ```
+       *
+       * https://vike.dev/favicon
        */
       favicon?: PlainOrGetter<string>
 

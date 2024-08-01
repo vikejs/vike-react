@@ -45,10 +45,4 @@ function sideEffect(config: ConfigFromHook) {
   if (title) {
     window.document.title = title
   }
-
-  // Favicon implementation: https://github.com/vikejs/vike-react/pull/113/files#diff-9158f1f6357dc1d187f30a09ccdf33ca999f0791a22cbe32fd3c9672901be0c4R14-R27
-  // - I don't see a use case for it. (To be able to define a non-global per-page favicon.)
-  //   - Dynamic favicons, like GMail or Discord, are independent of the page and should, therefore, be implemented on user-land.
-  // - TODO: remove this comment and make setting +favicon global (or deprecate it)
-  //   - Document how to implement a dynamic favicon. It's a nice example of how to create a custom document setting.
 }

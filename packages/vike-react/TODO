@@ -1,21 +1,18 @@
 TODO/now:
-- [breaking change] make Head cumulative
-- [breaking change] viewport
-  - Make it global for now
-  - Inject responsive viewport tag by default
-- [breaking change] make title generate og tag
-- [breaking change] make bodyHtml{Start,End} global
-  - We can make it non-global and isomorphic later without introducing a breaking change
-- [breaking change] Make favicon a global setting
+- image setting
+- description setting
 - bodyAttributes & htmlAttributes
   - Make it server-only and global for now
     - We can make it non-global and isomorphic later without introducing a breaking change
+- [breaking change] viewport
+  - Make it global for now
+  - Inject responsive viewport tag by default
+- [breaking change] Make favicon a global setting
+
+TODO/next (align vike-{vue,solid}):
+- [breaking change] make Head cumulative
+- [breaking change] make title generate og tag
 - Align getHeadSettings() implementation accross vike extensions
-- description setting
-  ```html
-  <meta name="description" content="Page description">
-  <meta property="og:description" content="Page description">
-  ```
 
 TODO/soon:
 - onRenderClientEnd for every Vike extension

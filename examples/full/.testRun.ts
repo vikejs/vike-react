@@ -9,12 +9,14 @@ const pages = {
   '/': {
     title: titleDefault,
     text: 'Rendered to HTML.',
-    counter: true
+    counter: true,
+    image: true
   },
   '/star-wars': {
     title: '6 Star Wars Movies',
     description: 'All 6 Start Wars movies',
-    text: 'A New Hope'
+    text: 'A New Hope',
+    image: true
   },
   '/star-wars/3': {
     title: 'Return of the Jedi',
@@ -128,8 +130,9 @@ function testPage({
   description,
   text,
   counter,
-  noSSR
-}: { url: string; title: string; description?: string; text: string; counter?: true; noSSR?: true }) {
+  noSSR,
+  image
+}: { url: string; title: string; description?: string; text: string; counter?: true; noSSR?: true; image?: true }) {
   test(url + ' (HTML)', async () => {
     const html = await fetchHtml(url)
     if (!noSSR) {
@@ -142,6 +145,12 @@ function testPage({
       expect(html).toMatch(partRegex`<meta name="description" content="${description}"${/\s*/}/>`)
     } else {
       expect(html).not.toContain('<meta name="description"')
+    }
+
+    if (image) {
+      expect(html).toMatch(partRegex`<meta property="og:image" content="${getAssetUrl('logo-new.svg')}">`)
+    } else {
+      expect(html).not.toContain('og:image')
     }
   })
   test(url + ' (Hydration)', async () => {

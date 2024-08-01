@@ -4,7 +4,7 @@ import { isCallable } from '../utils/isCallable.js'
 import type { PageContextInternal } from '../types/PageContext.js'
 import type { ConfigFromHookResolved } from '../types/Config.js'
 
-type HeadSetting = 'favicon' | 'lang' | 'title' | 'description'
+type HeadSetting = 'favicon' | 'lang' | 'title' | 'description' | 'image'
 type HeadSettingFromHook = HeadSetting & keyof ConfigFromHookResolved
 function getHeadSetting(headSetting: HeadSetting, pageContext: PageContextInternal): undefined | null | string {
   {

@@ -5,6 +5,7 @@ export type Data = Awaited<ReturnType<typeof data>>
 import fetch from 'node-fetch'
 import { useConfig } from 'vike-react/useConfig'
 import type { Movie, MovieDetails } from '../types'
+import image from '../../../assets/logo-new.svg'
 
 const data = async () => {
   const config = useConfig()
@@ -15,7 +16,8 @@ const data = async () => {
   const n = moviesData.length
   config({
     title: `${n} Star Wars Movies`, // <title>
-    description: `All ${n} Start Wars movies` // <meta name="description">
+    description: `All ${n} Start Wars movies`, // <meta name="description">
+    image // <meta property="og:image">
   })
 
   // We remove data we don't need because the data is passed to the client; we should

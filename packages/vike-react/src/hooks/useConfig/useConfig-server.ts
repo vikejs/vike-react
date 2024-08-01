@@ -32,9 +32,9 @@ function useConfig(): ConfigSetter {
   }
 }
 
-const configsHtmlOnly = ['Head', 'description'] as const
+const configsHtmlOnly = ['Head', 'description', 'image'] as const
 const configsCumulative = ['Head'] as const
-const configsOverridable = ['title', 'description'] as const
+const configsOverridable = ['title', 'description', 'image'] as const
 function setConfigOverPageContext(config: ConfigFromHook, pageContext: PageContextInternal) {
   pageContext._configFromHook ??= {}
 

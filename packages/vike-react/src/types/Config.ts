@@ -61,6 +61,21 @@ declare global {
       description?: PlainOrGetter<string>
 
       /**
+       * Set the page's preview image upon URL sharing.
+       *
+       * Generates:
+       * ```jsx
+       * <head>
+       *   <meta property="og:image" content={image}>
+       *   <meta name="twitter:card" content="summary_large_image">
+       * </head>
+       * ```
+       *
+       * https://vike.dev/image
+       */
+      image?: PlainOrGetter<string>
+
+      /**
        * Set the page's favicon.
        *
        * Generates:
@@ -159,9 +174,10 @@ type Loading = { component?: () => React.ReactNode; layout?: () => React.ReactNo
 type PickWithoutGetter<T, K extends keyof T> = {
   [P in K]: Exclude<T[P], Function>
 }
-export type ConfigFromHook = PickWithoutGetter<Vike.Config, 'Head' | 'title' | 'description'>
+export type ConfigFromHook = PickWithoutGetter<Vike.Config, 'Head' | 'title' | 'description' | 'image'>
 export type ConfigFromHookResolved = {
   Head?: Head[]
   title?: string
   description?: string
+  image?: string
 }

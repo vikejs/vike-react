@@ -2,7 +2,6 @@ TODO/now:
 - [breaking change] viewport
   - Make it global for now
   - Inject responsive viewport tag by default
-- [breaking change] Make favicon a global setting
 
 TODO/next (align vike-{vue,solid}):
 - description setting
@@ -10,18 +9,13 @@ TODO/next (align vike-{vue,solid}):
 - bodyAttributes & htmlAttributes settings
 - [breaking change] make Head cumulative
 - [breaking change] make title generate og tag
-- Align getHeadSettings() implementation accross vike extensions
+- [breaking change] Make favicon a global setting
+- Align getHeadSetting() implementation accross vike extensions
 
 TODO/soon:
 - onRenderClientEnd for every Vike extension
 - Rename on{After}RenderClient to onRenderClient{Start,End}
   - Soft deprecate it (instead of adding a breaking change note)
-
-Copy-able from https://github.com/vikejs/vike-react/pull/113/files
-- escapeHtml()
-- getTagAttributesString() or use vike-vue one?
-- client-side updating of favicon
-  - Use it to document how to create a custom document setting.
 
 TODO/later:
 - name setting?

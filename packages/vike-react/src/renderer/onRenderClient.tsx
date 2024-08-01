@@ -51,8 +51,8 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
   }
 
   // Use cases:
-  // - User-land document settings (e.g. user-land implementation of `config.favicon`)
-  // - Testing tools https://github.com/vikejs/vike-react/issues/95
+  // - Custom user settings: https://vike.dev/head#custom-settings
+  // - Testing tools: https://github.com/vikejs/vike-react/issues/95
   pageContext.config.onAfterRenderClient?.(pageContext)
 }
 
@@ -61,28 +61,10 @@ function updateDocument(pageContext: PageContextClient) {
 
   const title = getHeadSetting('title', pageContext)
   const lang = getHeadSetting('lang', pageContext)
-  const favicon = getHeadSetting('favicon', pageContext)
 
   // - We skip if `undefined` as we shouldn't remove values set by the Head setting.
   // - Setting a default prevents the previous value to be leaked: upon client-side navigation, the value set by the previous page won't be removed if the next page doesn't override it.
   //   - Most of the time, the user sets a default himself (i.e. a value defined at /pages/+config.js)
   if (title !== undefined) document.title = title || ''
   if (lang !== undefined) document.documentElement.lang = lang || 'en'
-  if (favicon !== undefined) setFavicon(favicon)
-}
-
-// TODO/next-major-release: remove config.favicon and, instead, add docs showcasing how to implement a favicon setting on the user-land.
-// https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically/260876#260876
-function setFavicon(faviconUrl: string | null) {
-  let link: HTMLLinkElement | null = document.querySelector("link[rel~='icon']")
-  if (!faviconUrl) {
-    if (link) document.head.removeChild(link)
-    return
-  }
-  if (!link) {
-    link = document.createElement('link')
-    link.rel = 'icon'
-    document.head.appendChild(link)
-  }
-  link.href = faviconUrl
 }

@@ -47,7 +47,8 @@ export default {
       env: { server: true }
     },
     favicon: {
-      env: { server: true, client: true }
+      env: { server: true },
+      global: true
     },
     lang: {
       env: { server: true, client: true }

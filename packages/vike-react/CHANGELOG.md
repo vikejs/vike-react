@@ -11,15 +11,10 @@
 ### Features
 
 * [`useConfig()`](https://vike.dev/useConfig) ([#128](https://github.com/vikejs/vike-react/issues/128)) ([8d0245c](https://github.com/vikejs/vike-react/commit/8d0245ca2a84e7b3768b335df6fd39545df0e256))
-* new setting `description` ([60ffecd](https://github.com/vikejs/vike-react/commit/60ffecd9dcfdaa50d5dea02a8b081eeb2b684188))
-* new setting `image` ([41ec933](https://github.com/vikejs/vike-react/commit/41ec933aeb8d0ba5334c10377e67ef68fdc0334e))
-* new setting `viewport` ([bebaf38](https://github.com/vikejs/vike-react/commit/bebaf386aa0cf1ac06351eadf84e1ab69d5da00d))
-* new settings `htmlAttriutes` and `bodyAttributes` ([427c7cf](https://github.com/vikejs/vike-react/commit/427c7cf2595a8e19fc0f9a4fd6ce4dc05bd3f058))
-
-
-### fx
-
-* require vike@0.4.182 ([270796b](https://github.com/vikejs/vike-react/commit/270796bfc7b188f3952e6acc51d35823f118880c))
+* new setting [`description`](https://vike.dev/description) ([60ffecd](https://github.com/vikejs/vike-react/commit/60ffecd9dcfdaa50d5dea02a8b081eeb2b684188))
+* new setting [`image`](https://vike.dev/image) ([41ec933](https://github.com/vikejs/vike-react/commit/41ec933aeb8d0ba5334c10377e67ef68fdc0334e))
+* new setting [`viewport`](https://vike.dev/viewport) ([bebaf38](https://github.com/vikejs/vike-react/commit/bebaf386aa0cf1ac06351eadf84e1ab69d5da00d))
+* new settings [`htmlAttriutes`](https://vike.dev/htmlAttriutes) and [`bodyAttributes`](https://vike.dev/bodyAttributes) ([427c7cf](https://github.com/vikejs/vike-react/commit/427c7cf2595a8e19fc0f9a4fd6ce4dc05bd3f058))
 
 
 ### BREAKING CHANGES

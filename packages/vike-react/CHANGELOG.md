@@ -1,3 +1,37 @@
+# [0.5.0](https://github.com/vikejs/vike-react/compare/vike-react@0.4.18...vike-react@0.5.0) (2024-08-01)
+
+
+### Bug Fixes
+
+* avoid overriding Head setting (fix [#135](https://github.com/vikejs/vike-react/issues/135)) ([#136](https://github.com/vikejs/vike-react/issues/136)) ([5c88c7b](https://github.com/vikejs/vike-react/commit/5c88c7b4aa47b01ab66c46eb5c67571298004104))
+* clearer (and maybe more accurate) condition for updating document properties ([6784bac](https://github.com/vikejs/vike-react/commit/6784bac6fa3c4cf9f4d0b9661a45097a38d2880a))
+* make favicon setting global ([28f1c2b](https://github.com/vikejs/vike-react/commit/28f1c2b4bea348ece352136ee3da51c25d59dfe2))
+
+
+### Features
+
+* [`useConfig()`](https://vike.dev/useConfig) ([#128](https://github.com/vikejs/vike-react/issues/128)) ([8d0245c](https://github.com/vikejs/vike-react/commit/8d0245ca2a84e7b3768b335df6fd39545df0e256))
+* new setting `description` ([60ffecd](https://github.com/vikejs/vike-react/commit/60ffecd9dcfdaa50d5dea02a8b081eeb2b684188))
+* new setting `image` ([41ec933](https://github.com/vikejs/vike-react/commit/41ec933aeb8d0ba5334c10377e67ef68fdc0334e))
+* new setting `viewport` ([bebaf38](https://github.com/vikejs/vike-react/commit/bebaf386aa0cf1ac06351eadf84e1ab69d5da00d))
+* new settings `htmlAttriutes` and `bodyAttributes` ([427c7cf](https://github.com/vikejs/vike-react/commit/427c7cf2595a8e19fc0f9a4fd6ce4dc05bd3f058))
+
+
+### fx
+
+* require vike@0.4.182 ([270796b](https://github.com/vikejs/vike-react/commit/270796bfc7b188f3952e6acc51d35823f118880c))
+
+
+### BREAKING CHANGES
+
+* The responsive viewport tag is now injected by default (`<meta name="viewport" content"width=device-width,initial-scale=1">`). If you already inject `<meta name="viewport">` then remove it or set the `viewport` setting to `null`, see https://vike.dev/viewport.
+* The setting `favicon` now only accepts one global
+value, see https://vike.dev/favicon#global
+* update vike to `0.4.182` or above
+* The `Head` setting is now cumulative https://vike.dev/Head#cumulative
+
+
+
 ## [0.4.18](https://github.com/vikejs/vike-react/compare/vike-react@0.4.17...vike-react@0.4.18) (2024-07-16)
 
 

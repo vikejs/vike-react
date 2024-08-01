@@ -8,7 +8,7 @@ import './types/index.js'
 export default {
   name: 'vike-react',
   require: {
-    vike: '>=0.4.181'
+    vike: '>=0.4.182'
   },
 
   Loading: 'import:vike-react/components/Loading:default',

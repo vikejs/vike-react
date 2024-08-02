@@ -74,7 +74,6 @@ function getHeadHtml(pageContext: PageContextInternal) {
   const descriptionTags = !description
     ? ''
     : escapeInject`<meta name="description" content="${description}" /><meta property="og:description" content="${description}" />`
-
   const imageTags = !image
     ? ''
     : escapeInject`<meta property="og:image" content="${image}"><meta name="twitter:card" content="summary_large_image">`

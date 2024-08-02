@@ -1,17 +1,5 @@
 TODO/next (align vike-{vue,solid}):
-- description setting
-- image setting
-- bodyAttributes & htmlAttributes settings
-- [breaking change] make Head cumulative
-- [breaking change] make title generate og tag
-- [breaking change] Make favicon a global setting
-- [breaking change] viewport
-- Align getHeadSetting() implementation accross vike extensions
-
-TODO/soon:
-- onRenderClientEnd for every Vike extension
-- Rename on{After}RenderClient to onRenderClient{Start,End}
-  - Soft deprecate it (instead of adding a breaking change note)
+- useConfig()
 
 TODO/later:
 - name setting?
@@ -36,3 +24,5 @@ TODO/later:
   - I don't see a use case for lang yet, maybe for i18n?
 - More document settings?
   - https://github.com/vikejs/vike-react/pull/113/files#diff-43f0478bd822a071df19f8756e0833b975665ce5d118edde04ce1b7187cd63e2
+- Rename on{After}RenderClient to onRenderClient{Start,End}
+  - Soft deprecate it (instead of adding a breaking change note)

@@ -14,7 +14,11 @@ import type { Viewport } from '../renderer/onRenderHtml.js'
 declare global {
   namespace Vike {
     interface Config {
-      /** The page's root React component */
+      /**
+       * The page's root React component.
+       *
+       * https://vike.dev/Page
+       */
       Page?: () => React.ReactNode
 
       /**
@@ -25,7 +29,7 @@ declare global {
       Head?: Head
 
       /**
-       * A component that defines the visual layout of the page common to several pages.
+       * A component that defines the visual layout common to several pages.
        *
        * Technically: the `<Layout>` component wraps the root component `<Page>`.
        *
@@ -88,9 +92,9 @@ declare global {
       /**
        * Set the page's width shown to the user on mobile/tablet devices.
        *
-       * https://vike.dev/viewport
-       *
        * @default "responsive"
+       *
+       * https://vike.dev/viewport
        */
       viewport?: Viewport
 
@@ -136,10 +140,9 @@ declare global {
        *
        * If `false`, the page is rendered only once in the browser.
        *
-       * https://vike.dev/ssr
-       *
        * @default true
        *
+       * https://vike.dev/ssr
        */
       ssr?: boolean
 
@@ -155,7 +158,6 @@ declare global {
        * @default false
        *
        * https://vike.dev/stream
-       *
        */
       stream?: boolean | 'node' | 'web'
 
@@ -169,9 +171,9 @@ declare global {
       /**
        * Whether to use `<StrictMode>`.
        *
-       * https://vike.dev/reactStrictMode
-       *
        * @default true
+       *
+       * https://vike.dev/reactStrictMode
        */
       reactStrictMode?: boolean
 
@@ -188,6 +190,12 @@ declare global {
        * https://vike.dev/onAfterRenderClient
        */
       onAfterRenderClient?: (pageContext: PageContextClient) => void
+
+      /**
+       * Define loading animations.
+       *
+       * https://vike.dev/Loading
+       */
       Loading?: Loading | ImportString
     }
     interface ConfigResolved {

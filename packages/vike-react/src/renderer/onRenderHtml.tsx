@@ -4,7 +4,7 @@ export { onRenderHtml }
 import React from 'react'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { renderToStream } from 'react-streaming/server'
-import { dangerouslySkipEscape, escapeInject, version } from 'vike/server'
+import { dangerouslySkipEscape, escapeInject } from 'vike/server'
 import type { OnRenderHtmlAsync, PageContext } from 'vike/types'
 import { PageContextProvider } from '../hooks/usePageContext.js'
 import { getHeadSetting } from './getHeadSetting.js'
@@ -14,7 +14,6 @@ import type { Head } from '../types/Config.js'
 import { isReactElement } from '../utils/isReactElement.js'
 import { getTagAttributesString, type TagAttributes } from '../utils/getTagAttributesString.js'
 
-checkVikeVersion()
 addEcosystemStamp()
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
@@ -152,19 +151,6 @@ function getViewportTag(viewport: Viewport | undefined): string {
     return `<meta name="viewport" content="width=${viewport}">`
   }
   return ''
-}
-
-// We don't need this anymore starting from vike@0.4.173 which added the `require` setting.
-// TODO/eventually: remove this once <=0.4.172 versions become rare.
-function checkVikeVersion() {
-  if (version) {
-    const versionParts = version.split('.').map((s) => parseInt(s, 10)) as [number, number, number]
-    if (versionParts[0] > 0) return
-    if (versionParts[1] > 4) return
-    if (versionParts[2] >= 173) return
-  }
-  // We can leave it 0.4.173 until we entirely remove checkVikeVersion() (because starting vike@0.4.173 we use the new `require` setting).
-  throw new Error('Update Vike to 0.4.173 or above')
 }
 
 // For improving error messages of:

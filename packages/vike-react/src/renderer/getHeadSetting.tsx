@@ -1,12 +1,16 @@
 export { getHeadSetting }
 
 import { isCallable } from '../utils/isCallable.js'
+import type { PageContext } from 'vike/types'
 import type { PageContextInternal } from '../types/PageContext.js'
 import type { ConfigFromHookResolved } from '../types/Config.js'
 
 type HeadSetting = 'favicon' | 'lang' | 'title' | 'description' | 'image'
 type HeadSettingFromHook = HeadSetting & keyof ConfigFromHookResolved
-function getHeadSetting(headSetting: HeadSetting, pageContext: PageContextInternal): undefined | null | string {
+function getHeadSetting(
+  headSetting: HeadSetting,
+  pageContext: PageContext & PageContextInternal
+): undefined | null | string {
   {
     const val: undefined | string = pageContext._configFromHook?.[headSetting as HeadSettingFromHook]
     if (val !== undefined) return val

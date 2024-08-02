@@ -5,7 +5,7 @@ import React from 'react'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { renderToStream } from 'react-streaming/server'
 import { dangerouslySkipEscape, escapeInject } from 'vike/server'
-import type { OnRenderHtmlAsync, PageContext } from 'vike/types'
+import type { OnRenderHtmlAsync, PageContextServer } from 'vike/types'
 import { PageContextProvider } from '../hooks/usePageContext.js'
 import { getHeadSetting } from './getHeadSetting.js'
 import { getPageElement } from './getPageElement.js'
@@ -35,7 +35,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
     </html>`
 }
 
-async function getPageHtml(pageContext: PageContext) {
+async function getPageHtml(pageContext: PageContextServer) {
   let pageHtml: string | ReturnType<typeof dangerouslySkipEscape> | Awaited<ReturnType<typeof renderToStream>>
   if (!pageContext.Page) {
     pageHtml = ''
@@ -60,7 +60,7 @@ async function getPageHtml(pageContext: PageContext) {
   return pageHtml
 }
 
-function getHeadHtml(pageContext: PageContextInternal) {
+function getHeadHtml(pageContext: PageContextServer & PageContextInternal) {
   pageContext._headAlreadySet = true
 
   const favicon = getHeadSetting('favicon', pageContext)
@@ -104,7 +104,7 @@ function getHeadHtml(pageContext: PageContextInternal) {
   `
   return headHtml
 }
-function getHeadElementHtml(Head: NonNullable<Head>, pageContext: PageContext): string {
+function getHeadElementHtml(Head: NonNullable<Head>, pageContext: PageContextServer): string {
   let headElement: React.ReactNode
   if (isReactElement(Head)) {
     headElement = Head
@@ -121,7 +121,7 @@ function getHeadElementHtml(Head: NonNullable<Head>, pageContext: PageContext): 
   return renderToStaticMarkup(headElement)
 }
 
-function getTagAttributes(pageContext: PageContext) {
+function getTagAttributes(pageContext: PageContextServer) {
   let lang = getHeadSetting('lang', pageContext)
   // Don't set `lang` to its default value if it's `null` (so that users can set it to `null` in order to remove the default value)
   if (lang === undefined) lang = 'en'

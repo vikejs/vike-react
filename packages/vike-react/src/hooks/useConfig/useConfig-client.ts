@@ -1,7 +1,8 @@
 export { useConfig }
 
-import type { ConfigFromHook } from '../../types/Config.js'
+import type { PageContext } from 'vike/types'
 import type { PageContextInternal } from '../../types/PageContext.js'
+import type { ConfigFromHook } from '../../types/Config.js'
 import type { ConfigSetter } from './shared.js'
 import { usePageContext } from '../usePageContext.js'
 import { getPageContext } from 'vike/getPageContext'
@@ -15,7 +16,7 @@ function useConfig(): ConfigSetter {
   const configSetter = (config: ConfigFromHook) => setConfigOverPageContext(config, pageContext)
 
   // Vike hook
-  let pageContext = getPageContext() as PageContextInternal
+  let pageContext = getPageContext() as PageContext & PageContextInternal
   if (pageContext) return configSetter
 
   // React component

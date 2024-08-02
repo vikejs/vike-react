@@ -203,6 +203,8 @@ declare global {
       Layout?: Layout[]
       bodyAttributes?: TagAttributes[]
       htmlAttributes?: TagAttributes[]
+      onBeforeRenderClient?: Function[]
+      onAfterRenderClient?: Function[]
     }
   }
 }

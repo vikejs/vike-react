@@ -3,16 +3,17 @@ export { onRenderClient }
 
 import ReactDOM from 'react-dom/client'
 import { getHeadSetting } from './getHeadSetting.js'
-import type { OnRenderClientSync, PageContextClient } from 'vike/types'
+import type { OnRenderClientAsync, PageContextClient } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
 import type { PageContextInternal } from '../types/PageContext.js'
 import './styles.css'
+import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 
 let root: ReactDOM.Root
-const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderClientSync> => {
+const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRenderClientAsync> => {
   // Use case:
   // - Store hydration https://github.com/vikejs/vike-react/issues/110
-  pageContext.config.onBeforeRenderClient?.(pageContext)
+  await callCumulativeHooks(pageContext.config.onBeforeRenderClient, pageContext)
 
   const page = getPageElement(pageContext)
   pageContext.page = page
@@ -53,7 +54,7 @@ const onRenderClient: OnRenderClientSync = (pageContext): ReturnType<OnRenderCli
   // Use cases:
   // - Custom user settings: https://vike.dev/head#custom-settings
   // - Testing tools: https://github.com/vikejs/vike-react/issues/95
-  pageContext.config.onAfterRenderClient?.(pageContext)
+  await callCumulativeHooks(pageContext.config.onAfterRenderClient, pageContext)
 }
 
 function updateDocument(pageContext: PageContextClient) {

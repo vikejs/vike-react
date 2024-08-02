@@ -1,5 +1,13 @@
 // https://vike.dev/meta#typescript
-import type { ImportString, PageContextClient, PageContext, PageContextServer } from 'vike/types'
+import type {
+  ImportString,
+  PageContextClient,
+  // Rename it to `PageContext_` to be able to reference it from within `namespace Vike`
+  // - https://stackoverflow.com/questions/46559021/typescript-use-of-global-type-inside-namespace-with-same-type
+  // - https://github.com/Microsoft/TypeScript/issues/983
+  PageContext as PageContext_,
+  PageContextServer
+} from 'vike/types'
 import type { TagAttributes } from '../utils/getTagAttributesString.js'
 import type { Viewport } from '../renderer/onRenderHtml.js'
 
@@ -45,7 +53,7 @@ declare global {
        *
        * https://vike.dev/title
        */
-      title?: PlainOrGetter<string>
+      title?: string | ((pageContext: PageContext_) => string)
 
       /**
        * Set the page's description.
@@ -60,7 +68,7 @@ declare global {
        *
        * https://vike.dev/description
        */
-      description?: PlainOrGetterServer<string>
+      description?: string | ((pageContext: PageContextServer) => string)
 
       /**
        * Set the page's preview image upon URL sharing.
@@ -75,7 +83,7 @@ declare global {
        *
        * https://vike.dev/image
        */
-      image?: PlainOrGetterServer<string>
+      image?: string | ((pageContext: PageContextServer) => string)
 
       /**
        * Set the page's width shown to the user on mobile/tablet devices.
@@ -98,7 +106,7 @@ declare global {
        *
        * https://vike.dev/favicon
        */
-      favicon?: PlainOrGetterServer<string>
+      favicon?: string | ((pageContext: PageContextServer) => string)
 
       /**
        * Set the page's language (`<html lang>`).
@@ -107,7 +115,7 @@ declare global {
        *
        * https://vike.dev/lang
        */
-      lang?: PlainOrGetter<string> | null
+      lang?: string | ((pageContext: PageContext_) => string)
 
       /**
        * Add tag attributes such as `<html class="dark">`.
@@ -190,9 +198,6 @@ declare global {
     }
   }
 }
-
-type PlainOrGetter<T> = T | ((pageContext: PageContext) => T)
-type PlainOrGetterServer<T> = T | ((pageContext: PageContextServer) => T)
 
 export type Head = React.ReactNode | (() => React.ReactNode)
 type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode

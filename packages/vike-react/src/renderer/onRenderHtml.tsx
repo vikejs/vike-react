@@ -97,10 +97,10 @@ function getHeadHtml(pageContext: PageContextInternal) {
 
   const headHtml = escapeInject`
     ${titleTags}
-    ${headElementsHtml}
     ${viewportTag}
-    ${descriptionTags}
+    ${headElementsHtml}
     ${faviconTag}
+    ${descriptionTags}
     ${imageTags}
   `
   return headHtml

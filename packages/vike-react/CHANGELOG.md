@@ -19,7 +19,7 @@
 
 ### BREAKING CHANGES
 
-* The responsive viewport tag is now injected by default (`<meta name="viewport" content"width=device-width,initial-scale=1">`). If you already inject `<meta name="viewport">` then remove it or set the `viewport` setting to `null`, see https://vike.dev/viewport.
+* The responsive viewport tag is now injected by default (`<meta name="viewport" content="width=device-width,initial-scale=1">`). If you already inject `<meta name="viewport">` then remove it or set the `viewport` setting to `null`, see https://vike.dev/viewport.
 * The setting `favicon` now only accepts one global
 value, see https://vike.dev/favicon#global
 * update vike to `0.4.182` or above

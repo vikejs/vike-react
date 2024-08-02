@@ -1,5 +1,5 @@
 // https://vike.dev/meta#typescript
-import type { ImportString, PageContextClient, PageContext } from 'vike/types'
+import type { ImportString, PageContextClient, PageContext, PageContextServer } from 'vike/types'
 import type { TagAttributes } from '../utils/getTagAttributesString.js'
 import type { Viewport } from '../renderer/onRenderHtml.js'
 
@@ -60,7 +60,7 @@ declare global {
        *
        * https://vike.dev/description
        */
-      description?: PlainOrGetter<string>
+      description?: PlainOrGetterServer<string>
 
       /**
        * Set the page's preview image upon URL sharing.
@@ -75,7 +75,7 @@ declare global {
        *
        * https://vike.dev/image
        */
-      image?: PlainOrGetter<string>
+      image?: PlainOrGetterServer<string>
 
       /**
        * Set the page's width shown to the user on mobile/tablet devices.
@@ -98,7 +98,7 @@ declare global {
        *
        * https://vike.dev/favicon
        */
-      favicon?: PlainOrGetter<string>
+      favicon?: PlainOrGetterServer<string>
 
       /**
        * Set the page's language (`<html lang>`).
@@ -192,6 +192,7 @@ declare global {
 }
 
 type PlainOrGetter<T> = T | ((pageContext: PageContext) => T)
+type PlainOrGetterServer<T> = T | ((pageContext: PageContextServer) => T)
 
 export type Head = React.ReactNode | (() => React.ReactNode)
 type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode

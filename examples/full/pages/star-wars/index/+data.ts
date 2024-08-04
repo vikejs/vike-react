@@ -16,7 +16,7 @@ const data = async () => {
   const n = moviesData.length
   config({
     title: `${n} Star Wars Movies`, // <title>
-    description: `All ${n} Start Wars movies`, // <meta name="description">
+    description: `All the ${n} movies from the Star Wars franchise`, // <meta name="description">
     image // <meta property="og:image">
   })
 

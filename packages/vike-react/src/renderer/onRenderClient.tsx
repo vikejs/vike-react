@@ -57,8 +57,8 @@ const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRe
   await callCumulativeHooks(pageContext.config.onAfterRenderClient, pageContext)
 }
 
-function updateDocument(pageContext: PageContextClient) {
-  ;(pageContext as PageContextInternal)._headAlreadySet = true
+function updateDocument(pageContext: PageContextClient & PageContextInternal) {
+  pageContext._headAlreadySet = true
 
   const title = getHeadSetting('title', pageContext)
   const lang = getHeadSetting('lang', pageContext)

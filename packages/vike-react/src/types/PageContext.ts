@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-// vike-react internal usage
+// Internal usage
 export type PageContextInternal = {
   _configFromHook?: ConfigFromHookResolved
   _headAlreadySet?: true

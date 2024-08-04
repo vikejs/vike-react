@@ -215,7 +215,7 @@ type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode
 type Layout = Wrapper
 type Loading = { component?: () => React.ReactNode; layout?: () => React.ReactNode }
 
-// It preserves JSDocs
+// JSDocs are preserved
 type PickWithoutGetter<T, K extends keyof T> = {
   [P in K]: Exclude<T[P], Function>
 }

@@ -14,7 +14,7 @@ const pages = {
   },
   '/star-wars': {
     title: '6 Star Wars Movies',
-    description: 'All 6 Start Wars movies',
+    description: 'All the 6 movies from the Star Wars franchise',
     text: 'A New Hope',
     image: true
   },

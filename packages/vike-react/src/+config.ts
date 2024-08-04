@@ -31,7 +31,8 @@ export default {
   // https://vike.dev/meta
   meta: {
     Head: {
-      env: { server: true }
+      env: { server: true },
+      cumulative: true
     },
     Layout: {
       env: { server: true, client: true },

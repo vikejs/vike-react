@@ -79,9 +79,9 @@ function getHeadHtml(pageContext: PageContextServer & PageContextInternal) {
 
   const headElementsHtml = dangerouslySkipEscape(
     [
-      // <Head> set by +Head
-      pageContext.config.Head,
-      // <Head> set by useConfig()
+      // Added by +Head
+      ...(pageContext.config.Head ?? []),
+      // Added by useConfig()
       ...(pageContext._configFromHook?.Head ?? [])
     ]
       .filter((Head) => Head !== null && Head !== undefined)

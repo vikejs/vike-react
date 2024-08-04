@@ -201,6 +201,7 @@ declare global {
     interface ConfigResolved {
       Wrapper?: Wrapper[]
       Layout?: Layout[]
+      Head?: Head[]
       bodyAttributes?: TagAttributes[]
       htmlAttributes?: TagAttributes[]
       onBeforeRenderClient?: Function[]

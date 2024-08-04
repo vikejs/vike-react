@@ -52,7 +52,7 @@ const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRe
   }
 
   // Use cases:
-  // - Custom user settings: https://vike.dev/head#custom-settings
+  // - Custom user settings: https://vike.dev/head-tags#custom-settings
   // - Testing tools: https://github.com/vikejs/vike-react/issues/95
   await callCumulativeHooks(pageContext.config.onAfterRenderClient, pageContext)
 }

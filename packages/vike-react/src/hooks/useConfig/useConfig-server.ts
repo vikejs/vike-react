@@ -3,7 +3,6 @@ export { useConfig }
 import type { PageContext } from 'vike/types'
 import type { PageContextInternal } from '../../types/PageContext.js'
 import type { ConfigFromHook } from '../../types/Config.js'
-import type { ConfigSetter } from './shared.js'
 import { usePageContext } from '../usePageContext.js'
 import { getPageContext } from 'vike/getPageContext'
 import { useStream } from 'react-streaming'
@@ -13,7 +12,7 @@ import { useStream } from 'react-streaming'
  *
  * https://vike.dev/useConfig
  */
-function useConfig(): ConfigSetter {
+function useConfig(): (config: ConfigFromHook) => void {
   const configSetter = (config: ConfigFromHook) => setConfigOverPageContext(config, pageContext)
 
   // Vike hook

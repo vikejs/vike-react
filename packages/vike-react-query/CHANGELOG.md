@@ -1,3 +1,12 @@
+## [0.1.1](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.0...vike-react-query@0.1.1) (2024-08-05)
+
+
+### Bug Fixes
+
+* withFallback bug ([aa51a93](https://github.com/vikejs/vike-react/commit/aa51a93d40cbd5fc04225a56d2be546b794c1fb2))
+
+
+
 # [0.1.0](https://github.com/vikejs/vike-react/compare/vike-react-query@0.0.7...vike-react-query@0.1.0) (2024-06-16)
 
 

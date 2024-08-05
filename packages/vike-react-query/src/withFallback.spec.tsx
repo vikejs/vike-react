@@ -38,6 +38,23 @@ const ComponentThatSuspends = withFallback(
   ({ count }) => `error${count}`
 )
 
+const ComponentThatSuspends2 = withFallback(
+  ({ count, onMount }: { count?: number; onMount?: () => void }) => {
+    useSuspenseQuery({
+      queryFn: () => new Promise((r) => setTimeout(() => r('some value'), 50)),
+      queryKey: ['ComponentThatSuspends2']
+    })
+
+    useEffect(() => {
+      onMount?.()
+    }, [])
+
+    return count
+  },
+  <div>loading ComponentThatSuspends2</div>,
+  <div>error ComponentThatSuspends2</div>
+)
+
 const ComponentThatThrows = withFallback(
   ({ count, onMount }: { count?: number; onMount?: () => void; onErrorFallbackMount?: () => void }) => {
     useEffect(() => {
@@ -107,6 +124,19 @@ describe('suspense', () => {
       </QueryClientProvider>
     )
     expect(result.container.innerHTML).toBe(`loading${123}`)
+    await waitFor(() => expect(onMount).toBeCalledTimes(1))
+    expect(result.container.innerHTML).toBe('123')
+  })
+
+  it('shows loading fallback element', async () => {
+    const queryClient = new QueryClient()
+    const onMount = vi.fn()
+    let result = render(
+      <QueryClientProvider client={queryClient}>
+        <ComponentThatSuspends2 count={123} onMount={onMount} />
+      </QueryClientProvider>
+    )
+    expect(result.container.innerHTML).toBe('<div>loading ComponentThatSuspends2</div>')
     await waitFor(() => expect(onMount).toBeCalledTimes(1))
     expect(result.container.innerHTML).toBe('123')
   })

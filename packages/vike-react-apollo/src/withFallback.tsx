@@ -1,9 +1,10 @@
 export { withFallback }
 
-import React, { type ComponentType, type ReactNode, Suspense } from 'react'
+import React, { type ComponentType, isValidElement, type ReactNode, Suspense } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 import { ApolloConsumer } from '@apollo/client/index.js'
 import { usePageContext } from 'vike-react/usePageContext'
+
 type RetryOptions = { retryQuery?: boolean }
 type RetryFn = (options?: RetryOptions) => void
 
@@ -40,7 +41,7 @@ function withFallback<T extends object = Record<string, never>>(
   if (options && typeof options === 'object' && ('Loading' in options || 'Error' in options)) {
     Loading = options.Loading
     Error = options.Error
-  } else if (typeof options !== 'object') {
+  } else if (typeof options !== 'object' || isValidElement(options)) {
     Loading = options
     Error = Error_
   }
@@ -51,6 +52,7 @@ function withFallback<T extends object = Record<string, never>>(
     let element = <Component {...componentProps} />
 
     if (Error) {
+      const originalElement = element
       element = (
         <ApolloConsumer>
           {({ reFetchObservableQueries }) => {
@@ -91,7 +93,7 @@ function withFallback<T extends object = Record<string, never>>(
                   )
                 }
               >
-                {element}
+                {originalElement}
               </ErrorBoundary>
             )
           }}
@@ -103,9 +105,10 @@ function withFallback<T extends object = Record<string, never>>(
       Loading = pageContext.config.Loading.component
     }
     if (Loading !== false) {
+      const originalElement = element
       element = (
         <Suspense fallback={typeof Loading === 'function' ? <Loading {...componentProps} /> : Loading}>
-          {element}
+          {originalElement}
         </Suspense>
       )
     }

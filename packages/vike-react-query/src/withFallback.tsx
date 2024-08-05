@@ -1,6 +1,7 @@
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
-import React, { ComponentType, ReactNode, Suspense } from 'react'
+import React, { ComponentType, isValidElement, ReactNode, Suspense } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
+import { usePageContext } from 'vike-react/usePageContext'
 
 type RetryOptions = { retryQuery?: boolean }
 type RetryFn = (options?: RetryOptions) => void
@@ -38,68 +39,78 @@ export function withFallback<T extends object = Record<string, never>>(
   if (options && typeof options === 'object' && ('Loading' in options || 'Error' in options)) {
     Loading = options.Loading
     Error = options.Error
-  } else if (options && typeof options !== 'object') {
+  } else if (typeof options !== 'object' || isValidElement(options)) {
     Loading = options
     Error = Error_
   }
 
   const ComponentWithFallback = (componentProps: T) => {
-    if (Error) {
-      return (
-        <Suspense fallback={typeof Loading === 'function' ? <Loading {...componentProps} /> : Loading}>
-          <QueryErrorResetBoundary>
-            {({ reset }) => {
-              const createRetry =
-                (resetErrorBoundary: FallbackProps['resetErrorBoundary']): RetryFn =>
-                (options = {}) => {
-                  const { retryQuery = true } = options
-                  if (retryQuery) {
-                    reset()
-                  }
-                  resetErrorBoundary()
-                }
-              const createError = (originalError: FallbackProps['error']) => {
-                const message = getErrorMessage(originalError)
-                const error = { message }
-                if (typeof originalError === 'object') {
-                  Object.assign(error, originalError)
-                  for (const key of ['name', 'stack', 'cause']) {
-                    if (key in originalError) {
-                      Object.assign(error, { [key]: originalError[key] })
-                    }
-                  }
-                }
-                return error
-              }
+    const pageContext = usePageContext()
+    let element = <Component {...componentProps} />
 
-              return (
-                <ErrorBoundary
-                  fallbackRender={({ error: originalError, resetErrorBoundary }) =>
-                    typeof Error === 'function' ? (
-                      <Error
-                        {...componentProps}
-                        retry={createRetry(resetErrorBoundary)}
-                        error={createError(originalError)}
-                      />
-                    ) : (
-                      Error
-                    )
+    if (Error) {
+      const originalElement = element
+      element = (
+        <QueryErrorResetBoundary>
+          {({ reset }) => {
+            const createRetry =
+              (resetErrorBoundary: FallbackProps['resetErrorBoundary']): RetryFn =>
+              (options = {}) => {
+                const { retryQuery = true } = options
+                if (retryQuery) {
+                  reset()
+                }
+                resetErrorBoundary()
+              }
+            const createError = (originalError: FallbackProps['error']) => {
+              const message = getErrorMessage(originalError)
+              const error = { message }
+              if (typeof originalError === 'object') {
+                Object.assign(error, originalError)
+                for (const key of ['name', 'stack', 'cause']) {
+                  if (key in originalError) {
+                    Object.assign(error, { [key]: originalError[key] })
                   }
-                >
-                  <Component {...componentProps} />
-                </ErrorBoundary>
-              )
-            }}
-          </QueryErrorResetBoundary>
+                }
+              }
+              return error
+            }
+
+            return (
+              <ErrorBoundary
+                fallbackRender={({ error: originalError, resetErrorBoundary }) =>
+                  typeof Error === 'function' ? (
+                    <Error
+                      {...componentProps}
+                      retry={createRetry(resetErrorBoundary)}
+                      error={createError(originalError)}
+                    />
+                  ) : (
+                    Error
+                  )
+                }
+              >
+                {originalElement}
+              </ErrorBoundary>
+            )
+          }}
+        </QueryErrorResetBoundary>
+      )
+    }
+
+    if (Loading === undefined && pageContext.config.Loading?.component) {
+      Loading = pageContext.config.Loading.component
+    }
+    if (Loading !== false) {
+      const originalElement = element
+      element = (
+        <Suspense fallback={typeof Loading === 'function' ? <Loading {...componentProps} /> : Loading}>
+          {originalElement}
         </Suspense>
       )
     }
 
-    return (
-      <Suspense fallback={typeof Loading === 'function' ? <Loading {...componentProps} /> : Loading}>
-        <Component {...componentProps} />
-      </Suspense>
-    )
+    return element
   }
 
   ComponentWithFallback.displayName = `withFallback(${Component.displayName || Component.name})`

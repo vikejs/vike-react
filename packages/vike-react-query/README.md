@@ -74,7 +74,12 @@ const Movie = ({ id }) => {
 
 ## `withFallback()`
 
-You can define a loading and/or error fallback by using `withFallback()`.
+```js
+withFallback(Component) // Use default loading fallback (see +Loading)
+withFallback(Component, Loading) // Define loading fallback
+withFallback(Component, Loading, Error) // Define loading and error fallback
+withFallback(Component, undefined, Error) // Define error fallback
+```
 
 ```tsx
 // Movie.tsx
@@ -99,16 +104,72 @@ const Movie = withFallback(
       </div>
     )
   },
-  {
-    Loading: ({ id }) => <div>Loading movie {id}</div>,
-    Error: ({ id, retry }) => (
-      <div>
-        Failed to load movie {id}
-        <button onClick={() => retry()}>Retry</button>
-      </div>
-    )
-  }
+  ({ id }) => <div>Loading movie {id}</div>,
+  // The props `retry` and `error` are provided by vike-react-query
+  // Other props, such as `code`, are provied by the parent component
+  ({ id, retry, error }) => (
+    <div>
+      Failed to load movie {id}
+      <button onClick={() => retry()}>Retry</button>
+    </div>
+  )
 )
+```
+
+**`+Loading`**
+
+If you skip the `Loading` parameter, then a default loading component (provided by `vike-react`) is used. You can create a custom default loading component:
+
+```jsx
+// pages/+Loading.jsx
+
+export default { component: LoadingComponent }
+
+function LoadingComponent() {
+  // Applies on a component-level
+  return <div>Loading...</div>
+}
+```
+
+Instead of adding a loading fallback to the component, you can set a loading fallback to the page and layouts:
+
+```jsx
+// pages/+Loading.jsx
+
+export default { layout: LoadingLayout }
+
+function LoadingLayout() {
+  // Applies to the page and all layouts
+  return <div>Loading...</div>
+}
+```
+
+> [!NOTE]
+> The `+Loading.layout` setting is optional and only relevant when using `useSuspenseQuery()` without `withFallback()` or `withFallback(Component, false)`.
+> ```js
+> withFallback(Component, false) // Don't set any loading fallback
+> withFallback(Component, undefined) // Use default loading fallback
+> ```
+
+**Manual `<Suspense>` boundary**
+
+Technically speaking:
+- `withFallback()` wraps the component inside a [`<Suspense>` boundary](https://react.dev/reference/react/Suspense).
+- `+Loading.layout` adds a `<Suspense>` boundary to the [`<Page>` component](https://vike.dev/Page) as well as to all [`<Layout>` components](https://vike.dev/Layout).
+
+You can also manually add a `<Suspense>` boundary at any arbitrary position:
+
+```js
+import { Suspense } from 'react'
+
+function SomePageSection() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SomeDataFetchingComponent />
+      <SomeOtherDataFetchingComponent />
+    </Suspense>
+  )
+}
 ```
 
 <br/>
@@ -178,15 +239,13 @@ const Movie = withFallback(
       </div>
     )
   },
-  {
-    Loading: ({ id }) => <div>Loading movie {id}</div>,
-    Error: ({ id, retry }) => (
-      <div>
-        Failed to load movie {id}
-        <button onClick={() => retry()}>Retry</button>
-      </div>
-    )
-  }
+  ({ id }) => <div>Loading movie {id}</div>,
+  ({ id, retry }) => (
+    <div>
+      Failed to load movie {id}
+      <button onClick={() => retry()}>Retry</button>
+    </div>
+  )
 )
 ```
 
@@ -287,15 +346,13 @@ const Movies = withFallback(
       </div>
     )
   },
-  {
-    Loading: <div>Loading movies</div>,
-    Error: ({ retry }) => (
-      <div>
-        Error while loading movies
-        <button onClick={() => retry()}>Retry</button>
-      </div>
-    )
-  }
+  <div>Loading movies</div>,
+  ({ retry }) => (
+    <div>
+      Error while loading movies
+      <button onClick={() => retry()}>Retry</button>
+    </div>
+  )
 )
 ```
 

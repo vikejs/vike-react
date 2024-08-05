@@ -1,5 +1,7 @@
+export { withFallback }
+
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
-import React, { ComponentType, isValidElement, ReactNode, Suspense } from 'react'
+import React, { type ComponentProps, type ComponentType, isValidElement, type ReactNode, Suspense } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 import { usePageContext } from 'vike-react/usePageContext'
 
@@ -11,30 +13,30 @@ type ErrorFallbackProps = {
   retry: RetryFn
 }
 
-type Loading<T> = ComponentType<T> | ReactNode
-type Error<T> = ComponentType<T & ErrorFallbackProps> | ReactNode
+type Loading<P> = ComponentType<P> | ReactNode | false
+type Error<P> = ComponentType<P & ErrorFallbackProps> | ReactNode
 
-type WithFallbackOptions<T> = {
-  Loading?: Loading<T>
-  Error?: Error<T>
+type WithFallbackOptions<P> = {
+  Loading?: Loading<P>
+  Error?: Error<P>
 }
 
-export function withFallback<T extends object = Record<string, never>>(
-  Component: ComponentType<T>,
-  options?: WithFallbackOptions<T>
-): ComponentType<T>
-export function withFallback<T extends object = Record<string, never>>(
-  Component: ComponentType<T>,
-  Loading?: Loading<T>,
-  Error?: Error<T>
-): ComponentType<T>
-export function withFallback<T extends object = Record<string, never>>(
-  Component: ComponentType<T>,
-  options?: Loading<T> | WithFallbackOptions<T>,
-  Error_?: Error<T>
-): ComponentType<T> {
-  let Loading: Loading<T>
-  let Error: Error<T>
+function withFallback<T extends ComponentType<any>, P extends ComponentProps<T> = ComponentProps<T>>(
+  Component: T,
+  options?: WithFallbackOptions<P>
+): T
+function withFallback<T extends ComponentType<any>, P extends ComponentProps<T> = ComponentProps<T>>(
+  Component: T,
+  Loading?: Loading<P>,
+  Error?: Error<P>
+): T
+function withFallback<T extends ComponentType<any>, P extends ComponentProps<T> = ComponentProps<T>>(
+  Component: T,
+  options?: Loading<P> | WithFallbackOptions<P>,
+  Error_?: Error<P>
+): T {
+  let Loading: Loading<P>
+  let Error: Error<P>
 
   if (options && typeof options === 'object' && ('Loading' in options || 'Error' in options)) {
     Loading = options.Loading
@@ -44,7 +46,7 @@ export function withFallback<T extends object = Record<string, never>>(
     Error = Error_
   }
 
-  const ComponentWithFallback = (componentProps: T) => {
+  const ComponentWithFallback = (componentProps: P) => {
     const pageContext = usePageContext()
     let element = <Component {...componentProps} />
 
@@ -53,36 +55,13 @@ export function withFallback<T extends object = Record<string, never>>(
       element = (
         <QueryErrorResetBoundary>
           {({ reset }) => {
-            const createRetry =
-              (resetErrorBoundary: FallbackProps['resetErrorBoundary']): RetryFn =>
-              (options = {}) => {
-                const { retryQuery = true } = options
-                if (retryQuery) {
-                  reset()
-                }
-                resetErrorBoundary()
-              }
-            const createError = (originalError: FallbackProps['error']) => {
-              const message = getErrorMessage(originalError)
-              const error = { message }
-              if (typeof originalError === 'object') {
-                Object.assign(error, originalError)
-                for (const key of ['name', 'stack', 'cause']) {
-                  if (key in originalError) {
-                    Object.assign(error, { [key]: originalError[key] })
-                  }
-                }
-              }
-              return error
-            }
-
             return (
               <ErrorBoundary
                 fallbackRender={({ error: originalError, resetErrorBoundary }) =>
                   typeof Error === 'function' ? (
                     <Error
                       {...componentProps}
-                      retry={createRetry(resetErrorBoundary)}
+                      retry={createRetry(resetErrorBoundary, reset)}
                       error={createError(originalError)}
                     />
                   ) : (
@@ -113,8 +92,8 @@ export function withFallback<T extends object = Record<string, never>>(
     return element
   }
 
-  ComponentWithFallback.displayName = `withFallback(${Component.displayName || Component.name})`
-  return ComponentWithFallback
+  ComponentWithFallback.displayName = `withFallback(${Component.displayName || Component.name || 'Component'})`
+  return ComponentWithFallback as T
 }
 
 function getErrorMessage(error: unknown) {
@@ -131,4 +110,28 @@ function getErrorMessage(error: unknown) {
   }
 
   return 'Unknown error'
+}
+
+function createError(originalError: FallbackProps['error']) {
+  const message = getErrorMessage(originalError)
+  const error = { message }
+  if (typeof originalError === 'object') {
+    Object.assign(error, originalError)
+    for (const key of ['name', 'stack', 'cause']) {
+      if (key in originalError) {
+        Object.assign(error, { [key]: originalError[key] })
+      }
+    }
+  }
+  return error
+}
+
+function createRetry(resetErrorBoundary: FallbackProps['resetErrorBoundary'], retryQueryFn: () => void): RetryFn {
+  return function retry(options = {}) {
+    const { retryQuery = true } = options
+    if (retryQuery) {
+      retryQueryFn()
+    }
+    resetErrorBoundary()
+  }
 }

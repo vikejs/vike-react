@@ -36,5 +36,6 @@
     "@brillout/test-types": "^0.1.15",
     "playwright": "^1.45.0",
     "prettier": "^3.2.5"
-  }
+  },
+  "packageManager": "pnpm@9.4.0"
 }

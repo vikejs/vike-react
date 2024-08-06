@@ -1,3 +1,16 @@
+## [0.5.1](https://github.com/vikejs/vike-react/compare/vike-react@0.5.0...vike-react@0.5.1) (2024-08-06)
+
+
+### Bug Fixes
+
+* fix cumulative Head handling ([9ae756b](https://github.com/vikejs/vike-react/commit/9ae756bf74ebcf7f2f21ec2b1a0fcc6458577852))
+* improve <head> tags order ([ba1cfd3](https://github.com/vikejs/vike-react/commit/ba1cfd3f374d36db132d5c37fae0642d59732ecf))
+* improve JSDocs ([def8c09](https://github.com/vikejs/vike-react/commit/def8c0920dca2ddb9a7c70f74361bf3992392e39))
+* make hooks `onBeforeRenderClient()` and `onAfterRenderClient()` cumulative ([dc4d944](https://github.com/vikejs/vike-react/commit/dc4d944a677f8ffc834aa827d8ab2fc24cdb83f4))
+* more accurate pageContext type for setting getters ([43f6421](https://github.com/vikejs/vike-react/commit/43f64216ce5ed61529e42b75919468f2ee5c8423))
+
+
+
 # [0.5.0](https://github.com/vikejs/vike-react/compare/vike-react@0.4.18...vike-react@0.5.0) (2024-08-01)
 
 

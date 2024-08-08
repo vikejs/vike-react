@@ -11,15 +11,15 @@
       "browser": "./dist/hooks/useConfig/useConfig-client.js",
       "default": "./dist/hooks/useConfig/useConfig-server.js"
     },
-    "./ClientOnly": "./dist/components/ClientOnly.js",
-    "./Head": {
-      "browser": "./dist/components/Head/Head-client.js",
-      "default": "./dist/components/Head/Head-server.js"
-    },
     "./Config": {
       "browser": "./dist/components/Config/Config-client.js",
       "default": "./dist/components/Config/Config-server.js"
     },
+    "./Head": {
+      "browser": "./dist/components/Head/Head-client.js",
+      "default": "./dist/components/Head/Head-server.js"
+    },
+    "./ClientOnly": "./dist/components/ClientOnly.js",
     "./clientOnly": "./dist/helpers/clientOnly.js",
     ".": "./dist/index.js",
     "./config": "./dist/+config.js",
@@ -68,11 +68,11 @@
       "useConfig": [
         "./dist/hooks/useConfig/useConfig-server.d.ts"
       ],
-      "Head": [
-        "./dist/components/Head/Head-server.d.ts"
-      ],
       "Config": [
         "./dist/components/Config/Config-server.d.ts"
+      ],
+      "Head": [
+        "./dist/components/Head/Head-server.d.ts"
       ],
       "ClientOnly": [
         "./dist/components/ClientOnly.d.ts"

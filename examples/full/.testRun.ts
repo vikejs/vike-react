@@ -42,7 +42,7 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   testPages()
   testPageNavigation_betweenWithSSRAndWithout()
   testPageNavigation_titleUpdate()
-  testHeadComponent()
+  testUseConfig()
 }
 
 function testPageNavigation_betweenWithSSRAndWithout() {
@@ -180,8 +180,8 @@ async function testCounter() {
   )
 }
 
-function testHeadComponent() {
-  test('Head Component (HTML)', async () => {
+function testUseConfig() {
+  test('useConfig() HTML', async () => {
     const html = await fetchHtml('/images')
     expect(html).toMatch(
       partRegex`<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"${getAssetUrl(
@@ -194,11 +194,11 @@ function testHeadComponent() {
       )}"},"creator":{"@type":"Person","name":"Romuald Brillout"}}</script>`
     )
   })
-  test('Head Component (Hydration)', async () => {
+  test('useConfig() hydration', async () => {
     await page.goto(getServerUrl() + '/')
     await testCounter()
     ensureWasClientSideRouted('/pages/index')
-    await page.click('a:has-text("Head Component")')
+    await page.click('a:has-text("useConfig()")')
     await testCounter()
     ensureWasClientSideRouted('/pages/index')
   })

@@ -10,7 +10,8 @@ function Page() {
   return (
     <>
       <p>
-        Page showcasing <code>{'<Image>'}</code> component, with structured data (see HTML).
+        Page showcasing an <code>&lt;Image&gt;</code> component that adds/teleports structured data (
+        <code>&lt;script type="application/ld+json"&gt;</code>) to <code>&lt;head&gt;</code>, see HTML.
       </p>
       <div>
         New logo: <Image src={logoNew} author="brillout" />

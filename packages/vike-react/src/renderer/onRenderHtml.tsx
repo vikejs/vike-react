@@ -76,6 +76,7 @@ function getHeadHtml(pageContext: PageContextServer & PageContextInternal) {
   const imageTags = !image
     ? ''
     : escapeInject`<meta property="og:image" content="${image}"><meta name="twitter:card" content="summary_large_image">`
+  const viewportTag = dangerouslySkipEscape(getViewportTag(pageContext.config.viewport))
 
   const headElementsHtml = dangerouslySkipEscape(
     [
@@ -91,8 +92,6 @@ function getHeadHtml(pageContext: PageContextServer & PageContextInternal) {
 
   // Not needed on the client-side, thus we remove it to save KBs sent to the client
   delete pageContext._configFromHook
-
-  const viewportTag = dangerouslySkipEscape(getViewportTag(pageContext.config.viewport))
 
   const headHtml = escapeInject`
     ${titleTags}

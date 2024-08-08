@@ -52,7 +52,8 @@
     "react-streaming": "^0.3.43",
     "rimraf": "^5.0.5",
     "typescript": "^5.5.3",
-    "vike": "^0.4.182"
+    "vike": "^0.4.182",
+    "vite": "^5.4.0"
   },
   "dependencies": {
     "react-streaming": "^0.3.42"

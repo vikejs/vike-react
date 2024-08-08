@@ -38,8 +38,7 @@
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
-    "vike": ">=0.4.182",
-    "vite": ">=4.3.8"
+    "vike": ">=0.4.182"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.6.4",

@@ -201,6 +201,8 @@ function testUseConfig() {
     await page.click('a:has-text("useConfig()")')
     await testCounter()
     ensureWasClientSideRouted('/pages/index')
+    await page.goto(getServerUrl() + '/images')
+    await testCounter()
   })
 }
 

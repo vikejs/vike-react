@@ -5,17 +5,17 @@
     "preview": "vite build && vite preview"
   },
   "dependencies": {
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19",
-    "@vitejs/plugin-react": "^4.2.1",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "node-fetch": "^3.3.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-streaming": "^0.3.42",
-    "typescript": "^5.5.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-streaming": "^0.3.43",
+    "typescript": "^5.5.4",
     "vike": "^0.4.182",
     "vike-react": "^0.5.1",
-    "vite": "^5.1.1"
+    "vite": "^5.4.0"
   },
   "type": "module"
 }

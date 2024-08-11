@@ -13,6 +13,7 @@ Enables your React components to fetch data using [TanStack Query](https://tanst
 [Installation](#installation)  
 [Basic usage](#basic-usage)  
 [`withFallback()`](#withfallback)  
+[`<head>` tags](#head-tags)  
 [Settings](#settings)  
 [Usage with Telefunc](#usage-with-telefunc)  
 [How it works](#how-it-works)  
@@ -67,7 +68,7 @@ const Movie = ({ id }) => {
 ```
 
 > [!NOTE]
-> Even though [`useSuspenseQuery()`](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery) is imported from `@tanstack/react-query`, you still need to install `vike-react-query` for it to work.
+> Even though [`useSuspenseQuery()`](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery) is imported from `@tanstack/react-query`, you need to install `vike-react-query` for it to work. (The `useSuspenseQuery()` hook requires an [HTML stream](https://vike.dev/streaming) integration.)
 
 <br/>
 
@@ -168,6 +169,38 @@ function SomePageSection() {
       <SomeDataFetchingComponent />
       <SomeOtherDataFetchingComponent />
     </Suspense>
+  )
+}
+```
+
+<br/>
+
+
+## `<head>` tags
+
+To set tags such as `<title>` and `<meta name="description">` based on fetched data, you can use [`<Config>`, `<Head>`, and `useConfig()`](https://vike.dev/useConfig).
+
+```js
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { Config } from 'vike-react/Config'
+import { Head } from 'vike-react/Head'
+
+function Movies() {
+  const query = useSuspenseQuery({
+    queryKey: ['movies'],
+    queryFn: () => fetch('https://star-wars.brillout.com/api/films.json')
+  })
+  const movies = query.data
+  return (
+    <Config title={`${movies.length} Star Wars Movies`} />
+    <Head>
+      <meta name="description" content={`All ${movies.length} movies from the Star Wars franchise.`} />
+    </Head>
+    <ul>{
+      movies.map(({ title }) => (
+        <li>{title}</li>
+      ))
+    }</ul>
   )
 }
 ```

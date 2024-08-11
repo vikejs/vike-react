@@ -13,6 +13,7 @@ Enables your React components to fetch data using [Apollo GraphQL](https://www.a
 [Installation](#installation)  
 [Basic usage](#basic-usage)  
 [`withFallback()`](#withfallback)  
+[`<head>` tags](#head-tags)  
 [How it works](#how-it-works)  
 [See also](#see-also)  
 
@@ -81,7 +82,7 @@ const Countries = () => {
 ```
 
 > [!NOTE]
-> Even though [`useSuspenseQuery()`](https://www.apollographql.com/docs/react/api/react/hooks/#usesuspensequery) is imported from `@apollo/client`, you still need to install `vike-react-apollo` for it to work.
+> Even though [`useSuspenseQuery()`](https://www.apollographql.com/docs/react/api/react/hooks/#usesuspensequery) is imported from `@apollo/client`, you need to install `vike-react-apollo` for it to work. (The `useSuspenseQuery()` hook requires an [HTML stream](https://vike.dev/streaming) integration.)
 
 <br/>
 
@@ -188,6 +189,41 @@ function SomePageSection() {
       <SomeDataFetchingComponent />
       <SomeOtherDataFetchingComponent />
     </Suspense>
+  )
+}
+```
+
+<br/>
+
+
+## `<head>` tags
+
+To set tags such as `<title>` and `<meta name="description">` based on fetched data, you can use [`<Config>`, `<Head>`, and `useConfig()`](https://vike.dev/useConfig).
+
+```js
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { Config } from 'vike-react/Config'
+import { Head } from 'vike-react/Head'
+
+function Movies() {
+  const query = useSuspenseQuery(gql`
+    {
+      movies {
+        title
+      }
+    }
+  `)
+  const movies = query.data
+  return (
+    <Config title={`${movies.length} Star Wars Movies`} />
+    <Head>
+      <meta name="description" content={`All ${movies.length} movies from the Star Wars franchise.`} />
+    </Head>
+    <ul>{
+      movies.map(({ title }) => (
+        <li>{title}</li>
+      ))
+    }</ul>
   )
 }
 ```

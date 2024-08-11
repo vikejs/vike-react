@@ -43,7 +43,7 @@ function setPageContextConfigFromHook(config: ConfigFromHook, pageContext: PageC
     if (!includes(configsCumulative, configName)) {
       // Overridable config
       const configValue = config[configName]
-      if (!configValue) return // TODO: only skip `undefined`
+      if (configValue === undefined) return
       pageContext._configFromHook![configName] = configValue
     } else {
       // Cumulative config

@@ -50,7 +50,7 @@
     "react-dom": "^18.3.1",
     "react-streaming": "^0.3.43",
     "rimraf": "^5.0.5",
-    "typescript": "^5.5.3",
+    "typescript": "^5.5.4",
     "vike": "^0.4.183",
     "vite": "^5.4.0"
   },

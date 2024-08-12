@@ -7,7 +7,7 @@ import type { ConfigFromHookResolved } from '../types/Config.js'
 
 // We use `any` instead of doing proper validation in order to save KBs sent to the client-side
 
-type HeadSetting = 'favicon' | 'lang' | Exclude<keyof ConfigFromHookResolved, 'Head'>
+type HeadSetting = Exclude<keyof ConfigFromHookResolved, 'Head'>
 type HeadSettingFromHook = HeadSetting & keyof ConfigFromHookResolved
 function getHeadSetting<T>(
   headSetting: HeadSetting,

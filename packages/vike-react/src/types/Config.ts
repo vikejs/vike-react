@@ -219,10 +219,15 @@ type Loading = { component?: () => React.ReactNode; layout?: () => React.ReactNo
 type PickWithoutGetter<T, K extends keyof T> = {
   [P in K]: Exclude<T[P], Function>
 }
-export type ConfigFromHook = PickWithoutGetter<Vike.Config, 'Head' | 'title' | 'description' | 'image'>
+export type ConfigFromHook = PickWithoutGetter<
+  Vike.Config,
+  'Head' | 'title' | 'description' | 'image' | 'favicon' | 'lang'
+>
 export type ConfigFromHookResolved = {
   Head?: Head[]
   title?: string
   description?: string
   image?: string
+  favicon?: string
+  lang?: string
 }

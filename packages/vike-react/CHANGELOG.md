@@ -1,3 +1,20 @@
+## [0.5.2](https://github.com/vikejs/vike-react/compare/vike-react@0.5.1...vike-react@0.5.2) (2024-08-12)
+
+
+### Bug Fixes
+
+* add `null` and `undefined` to head settings type ([8acc892](https://github.com/vikejs/vike-react/commit/8acc8922e404930c86f5fa5fc033283876ca1955))
+* make `null` override previous value ([7777570](https://github.com/vikejs/vike-react/commit/77775708a9c757bce41d03ce203d4baaaf77cbcf))
+
+
+### Features
+
+* add `useConfig()` support for `lang` and `favicon` settings ([a0d1520](https://github.com/vikejs/vike-react/commit/a0d1520ec75c0ecfb78dfd4e3bf613b02c078917))
+* support setting `{body,html}Attributes` based on `pageContext` ([41fd399](https://github.com/vikejs/vike-react/commit/41fd3995fea74347eb125de304b5fbbc22126209))
+* support setting viewport based on `pageContext` ([540e91d](https://github.com/vikejs/vike-react/commit/540e91ddd4cfc75f20a5537fb24b64739ed5bda7))
+
+
+
 ## [0.5.1](https://github.com/vikejs/vike-react/compare/vike-react@0.5.0...vike-react@0.5.1) (2024-08-06)
 
 

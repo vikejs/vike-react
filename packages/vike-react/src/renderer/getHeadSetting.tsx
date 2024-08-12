@@ -5,29 +5,25 @@ import type { PageContext } from 'vike/types'
 import type { PageContextInternal } from '../types/PageContext.js'
 import type { ConfigFromHookResolved } from '../types/Config.js'
 
-type HeadSetting = 'favicon' | 'lang' | 'title' | 'description' | 'image'
+// We use `any` instead of doing proper validation in order to save KBs sent to the client-side
+
+type HeadSetting = 'favicon' | 'lang' | Exclude<keyof ConfigFromHookResolved, 'Head'>
 type HeadSettingFromHook = HeadSetting & keyof ConfigFromHookResolved
-function getHeadSetting(
+function getHeadSetting<T>(
   headSetting: HeadSetting,
   pageContext: PageContext & PageContextInternal
-): undefined | null | string {
+): undefined | null | T {
+  // Set by useConfig()
   {
-    const val: undefined | string = pageContext._configFromHook?.[headSetting as HeadSettingFromHook]
-    if (val !== undefined) return val
+    const val = pageContext._configFromHook?.[headSetting as HeadSettingFromHook]
+    if (val !== undefined) return val as any
   }
 
-  const config = pageContext.configEntries[headSetting]?.[0]
-  if (!config) return undefined
-  const val = config.configValue
-  if (typeof val === 'string') return val
-  if (!val) return null
+  // Set by +configName.js
+  const val = pageContext.config[headSetting]
   if (isCallable(val)) {
-    const valStr = val(pageContext)
-    if (typeof valStr! !== 'string') {
-      throw new Error(config.configDefinedAt + ' should return a string')
-    }
-    return valStr
+    return val(pageContext) as any
   } else {
-    throw new Error(config.configDefinedAt + ' should be a string or a function returning a string')
+    return val as any
   }
 }

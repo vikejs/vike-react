@@ -60,8 +60,8 @@ const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRe
 function updateDocument(pageContext: PageContextClient & PageContextInternal) {
   pageContext._headAlreadySet = true
 
-  const title = getHeadSetting('title', pageContext)
-  const lang = getHeadSetting('lang', pageContext)
+  const title = getHeadSetting<string | null>('title', pageContext)
+  const lang = getHeadSetting<string | null>('lang', pageContext)
 
   // - We skip if `undefined` as we shouldn't remove values set by the Head setting.
   // - Setting a default prevents the previous value to be leaked: upon client-side navigation, the value set by the previous page won't be removed if the next page doesn't override it.

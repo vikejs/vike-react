@@ -63,10 +63,10 @@ async function getPageHtml(pageContext: PageContextServer) {
 function getHeadHtml(pageContext: PageContextServer & PageContextInternal) {
   pageContext._headAlreadySet = true
 
-  const favicon = getHeadSetting('favicon', pageContext)
-  const title = getHeadSetting('title', pageContext)
-  const description = getHeadSetting('description', pageContext)
-  const image = getHeadSetting('image', pageContext)
+  const favicon = getHeadSetting<string | null>('favicon', pageContext)
+  const title = getHeadSetting<string | null>('title', pageContext)
+  const description = getHeadSetting<string | null>('description', pageContext)
+  const image = getHeadSetting<string | null>('image', pageContext)
 
   const faviconTag = !favicon ? '' : escapeInject`<link rel="icon" href="${favicon}" />`
   const titleTags = !title ? '' : escapeInject`<title>${title}</title><meta property="og:title" content="${title}" />`
@@ -121,7 +121,7 @@ function getHeadElementHtml(Head: NonNullable<Head>, pageContext: PageContextSer
 }
 
 function getTagAttributes(pageContext: PageContextServer) {
-  let lang = getHeadSetting('lang', pageContext)
+  let lang = getHeadSetting<string | null>('lang', pageContext)
   // Don't set `lang` to its default value if it's `null` (so that users can set it to `null` in order to remove the default value)
   if (lang === undefined) lang = 'en'
 

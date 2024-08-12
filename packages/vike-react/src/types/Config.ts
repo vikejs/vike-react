@@ -223,11 +223,4 @@ export type ConfigFromHook = PickWithoutGetter<
   Vike.Config,
   'Head' | 'title' | 'description' | 'image' | 'favicon' | 'lang'
 >
-export type ConfigFromHookResolved = {
-  Head?: Head[]
-  title?: string
-  description?: string
-  image?: string
-  favicon?: string
-  lang?: string
-}
+export type ConfigFromHookResolved = Omit<ConfigFromHook, 'Head'> & { Head?: Head[] }

@@ -1,4 +1,5 @@
 export { useConfig }
+export type ConfigFromHookCumulative = (typeof configsCumulative)[number]
 
 import type { PageContext } from 'vike/types'
 import type { PageContextInternal } from '../../types/PageContext.js'

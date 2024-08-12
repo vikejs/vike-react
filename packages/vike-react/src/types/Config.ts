@@ -96,7 +96,7 @@ declare global {
        *
        * https://vike.dev/viewport
        */
-      viewport?: Viewport
+      viewport?: Viewport | ((pageContext: PageContextServer) => Viewport | undefined)
 
       /**
        * Set the page's favicon.
@@ -221,6 +221,6 @@ type PickWithoutGetter<T, K extends keyof T> = {
 }
 export type ConfigFromHook = PickWithoutGetter<
   Vike.Config,
-  'Head' | 'title' | 'description' | 'image' | 'favicon' | 'lang'
+  'Head' | 'title' | 'description' | 'image' | 'favicon' | 'lang' | 'viewport'
 >
 export type ConfigFromHookResolved = Omit<ConfigFromHook, 'Head'> & { Head?: Head[] }

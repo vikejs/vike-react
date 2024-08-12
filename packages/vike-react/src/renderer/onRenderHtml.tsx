@@ -76,7 +76,7 @@ function getHeadHtml(pageContext: PageContextServer & PageContextInternal) {
   const imageTags = !image
     ? ''
     : escapeInject`<meta property="og:image" content="${image}"><meta name="twitter:card" content="summary_large_image">`
-  const viewportTag = dangerouslySkipEscape(getViewportTag(pageContext.config.viewport))
+  const viewportTag = dangerouslySkipEscape(getViewportTag(getHeadSetting<Viewport>('viewport', pageContext)))
 
   const headElementsHtml = dangerouslySkipEscape(
     [

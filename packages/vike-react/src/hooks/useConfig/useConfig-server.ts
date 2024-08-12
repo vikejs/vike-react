@@ -33,7 +33,7 @@ function useConfig(): (config: ConfigFromHook) => void {
 }
 
 const configsClientSide = ['title']
-const configsCumulative = ['Head'] as const
+const configsCumulative = ['Head', 'bodyAttributes', 'htmlAttributes'] as const
 function setPageContextConfigFromHook(config: ConfigFromHook, pageContext: PageContext & PageContextInternal) {
   pageContext._configFromHook ??= {}
   objectKeys(config).forEach((configName) => {
@@ -50,7 +50,7 @@ function setPageContextConfigFromHook(config: ConfigFromHook, pageContext: PageC
       const configValue = config[configName]
       if (!configValue) return
       pageContext._configFromHook![configName] ??= []
-      pageContext._configFromHook![configName].push(configValue)
+      pageContext._configFromHook![configName].push(configValue as any)
     }
   })
 }

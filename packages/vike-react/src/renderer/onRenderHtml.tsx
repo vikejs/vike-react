@@ -125,8 +125,8 @@ function getTagAttributes(pageContext: PageContextServer) {
   // Don't set `lang` to its default value if it's `null` (so that users can set it to `null` in order to remove the default value)
   if (lang === undefined) lang = 'en'
 
-  const bodyAttributes = mergeTagAttributesList(pageContext.config.bodyAttributes)
-  const htmlAttributes = mergeTagAttributesList(pageContext.config.htmlAttributes)
+  const bodyAttributes = mergeTagAttributesList(getHeadSetting<TagAttributes[]>('bodyAttributes', pageContext))
+  const htmlAttributes = mergeTagAttributesList(getHeadSetting<TagAttributes[]>('htmlAttributes', pageContext))
 
   const bodyAttributesString = getTagAttributesString(bodyAttributes)
   const htmlAttributesString = getTagAttributesString({ ...htmlAttributes, lang: lang ?? htmlAttributes.lang })

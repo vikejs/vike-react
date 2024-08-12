@@ -126,14 +126,14 @@ declare global {
        *
        * https://vike.dev/htmlAttributes
        */
-      htmlAttributes?: TagAttributes
+      htmlAttributes?: TagAttributes | ((pageContext: PageContextServer) => TagAttributes | undefined)
 
       /**
        * Add tag attributes such as `<body class="dark">`.
        *
        * https://vike.dev/bodyAttributes
        */
-      bodyAttributes?: TagAttributes
+      bodyAttributes?: TagAttributes | ((pageContext: PageContextServer) => TagAttributes | undefined)
 
       /**
        * If `true`, the page is rendered twice: on the server-side (to HTML) and on the client-side (hydration).
@@ -221,6 +221,10 @@ type PickWithoutGetter<T, K extends keyof T> = {
 }
 export type ConfigFromHook = PickWithoutGetter<
   Vike.Config,
-  'Head' | 'title' | 'description' | 'image' | 'favicon' | 'lang' | 'viewport'
+  'Head' | 'title' | 'description' | 'image' | 'favicon' | 'lang' | 'viewport' | 'bodyAttributes' | 'htmlAttributes'
 >
-export type ConfigFromHookResolved = Omit<ConfigFromHook, 'Head'> & { Head?: Head[] }
+export type ConfigFromHookResolved = Omit<ConfigFromHook, 'Head' | 'bodyAttributes' | 'htmlAttributes'> & {
+  Head?: Head[]
+  bodyAttributes?: TagAttributes[]
+  htmlAttributes?: TagAttributes[]
+}

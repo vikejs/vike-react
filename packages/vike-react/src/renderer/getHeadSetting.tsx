@@ -9,10 +9,7 @@ import type { ConfigFromHookResolved } from '../types/Config.js'
 
 type HeadSetting = Exclude<keyof ConfigFromHookResolved, 'Head'>
 type HeadSettingFromHook = HeadSetting & keyof ConfigFromHookResolved
-function getHeadSetting<T>(
-  headSetting: HeadSetting,
-  pageContext: PageContext & PageContextInternal
-): undefined | null | T {
+function getHeadSetting<T>(headSetting: HeadSetting, pageContext: PageContext & PageContextInternal): undefined | T {
   // Set by useConfig()
   {
     const val = pageContext._configFromHook?.[headSetting as HeadSettingFromHook]

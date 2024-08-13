@@ -6,17 +6,12 @@ import type { ConfigFromHook } from '../../types/Config.js'
 import { usePageContext } from '../usePageContext.js'
 import { getPageContext } from 'vike/getPageContext'
 
-/**
- * Set configurations inside React components and Vike hooks.
- *
- * https://vike.dev/useConfig
- */
 function useConfig(): (config: ConfigFromHook) => void {
   // Vike hook
   let pageContext = getPageContext() as PageContext & PageContextInternal
   if (pageContext) return (config: ConfigFromHook) => setPageContextConfigFromHook(config, pageContext)
 
-  // React component
+  // Component
   pageContext = usePageContext()
   return (config: ConfigFromHook) => {
     if (!('_headAlreadySet' in pageContext)) {

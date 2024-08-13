@@ -11,7 +11,7 @@ import { objectKeys } from '../../utils/objectKeys.js'
 import { includes } from '../../utils/includes.js'
 
 /**
- * Set configurations inside React components and Vike hooks.
+ * Set configurations inside components and Vike hooks.
  *
  * https://vike.dev/useConfig
  */
@@ -20,7 +20,7 @@ function useConfig(): (config: ConfigFromHook) => void {
   let pageContext = getPageContext() as PageContext & PageContextInternal
   if (pageContext) return (config: ConfigFromHook) => setPageContextConfigFromHook(config, pageContext)
 
-  // React component
+  // Component
   pageContext = usePageContext()
   const stream = useStream()
   return (config: ConfigFromHook) => {

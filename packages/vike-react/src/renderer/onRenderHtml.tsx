@@ -16,12 +16,17 @@ import { getTagAttributesString, type TagAttributes } from '../utils/getTagAttri
 
 addEcosystemStamp()
 
-const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
+const onRenderHtml: OnRenderHtmlAsync = async (
+  pageContext: PageContextServer & PageContextInternal
+): ReturnType<OnRenderHtmlAsync> => {
   const pageHtml = await getPageHtml(pageContext)
 
   const headHtml = getHeadHtml(pageContext)
 
   const { htmlAttributesString, bodyAttributesString } = getTagAttributes(pageContext)
+
+  // Not needed on the client-side, thus we remove it to save KBs sent to the client
+  delete pageContext._configFromHook
 
   return escapeInject`<!DOCTYPE html>
     <html${dangerouslySkipEscape(htmlAttributesString)}>
@@ -89,9 +94,6 @@ function getHeadHtml(pageContext: PageContextServer & PageContextInternal) {
       .map((Head) => getHeadElementHtml(Head, pageContext))
       .join('\n')
   )
-
-  // Not needed on the client-side, thus we remove it to save KBs sent to the client
-  delete pageContext._configFromHook
 
   const headHtml = escapeInject`
     ${titleTags}

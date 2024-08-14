@@ -17,10 +17,8 @@ function getHeadSetting<T>(headSetting: HeadSetting, pageContext: PageContext & 
   }
 
   // Set by +configName.js
+  const getCallable = (val: unknown) => (isCallable(val) ? val(pageContext) : val)
   const val = pageContext.config[headSetting]
-  if (isCallable(val)) {
-    return val(pageContext) as any
-  } else {
-    return val as any
-  }
+  if (Array.isArray(val)) return val.map(getCallable) as any // cumulative configs
+  return getCallable(val) as any
 }

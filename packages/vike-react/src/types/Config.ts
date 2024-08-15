@@ -10,7 +10,7 @@ import type {
 } from 'vike/types'
 import type { TagAttributes } from '../utils/getTagAttributesString.js'
 import type { Viewport } from '../renderer/onRenderHtml.js'
-import type { ConfigFromHookCumulative } from '../hooks/useConfig/useConfig-server.js'
+import type { ConfigsCumulative } from '../hooks/useConfig/configsCumulative.js'
 
 declare global {
   namespace Vike {
@@ -224,5 +224,5 @@ export type ConfigFromHook = PickWithoutGetter<
   Vike.Config,
   'Head' | 'title' | 'description' | 'image' | 'favicon' | 'lang' | 'viewport' | 'bodyAttributes' | 'htmlAttributes'
 >
-export type ConfigFromHookResolved = Omit<ConfigFromHook, ConfigFromHookCumulative> &
-  Pick<Vike.ConfigResolved, ConfigFromHookCumulative>
+export type ConfigFromHookResolved = Omit<ConfigFromHook, ConfigsCumulative> &
+  Pick<Vike.ConfigResolved, ConfigsCumulative>

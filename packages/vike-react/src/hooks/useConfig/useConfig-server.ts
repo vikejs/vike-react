@@ -1,6 +1,4 @@
 export { useConfig }
-export type ConfigFromHookCumulative = (typeof configsCumulative)[number]
-
 import type { PageContext } from 'vike/types'
 import type { PageContextInternal } from '../../types/PageContext.js'
 import type { ConfigFromHook } from '../../types/Config.js'
@@ -9,6 +7,7 @@ import { getPageContext } from 'vike/getPageContext'
 import { useStream } from 'react-streaming'
 import { objectKeys } from '../../utils/objectKeys.js'
 import { includes } from '../../utils/includes.js'
+import { configsCumulative } from './configsCumulative.js'
 
 /**
  * Set configurations inside components and Vike hooks.
@@ -34,7 +33,6 @@ function useConfig(): (config: ConfigFromHook) => void {
 }
 
 const configsClientSide = ['title']
-const configsCumulative = ['Head', 'bodyAttributes', 'htmlAttributes'] as const
 function setPageContextConfigFromHook(config: ConfigFromHook, pageContext: PageContext & PageContextInternal) {
   pageContext._configFromHook ??= {}
   objectKeys(config).forEach((configName) => {

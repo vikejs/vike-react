@@ -10,7 +10,11 @@ import './styles.css'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 
 let root: ReactDOM.Root
-const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRenderClientAsync> => {
+const onRenderClient: OnRenderClientAsync = async (
+  pageContext: PageContextClient & PageContextInternal
+): ReturnType<OnRenderClientAsync> => {
+  pageContext._headAlreadySet = pageContext.isHydration
+
   // Use case:
   // - Store hydration https://github.com/vikejs/vike-react/issues/110
   await callCumulativeHooks(pageContext.config.onBeforeRenderClient, pageContext)
@@ -47,6 +51,7 @@ const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRe
   pageContext.root = root
 
   if (!pageContext.isHydration) {
+    pageContext._headAlreadySet = true
     // E.g. document.title
     updateDocument(pageContext)
   }
@@ -57,9 +62,7 @@ const onRenderClient: OnRenderClientAsync = async (pageContext): ReturnType<OnRe
   await callCumulativeHooks(pageContext.config.onAfterRenderClient, pageContext)
 }
 
-function updateDocument(pageContext: PageContextClient & PageContextInternal) {
-  pageContext._headAlreadySet = true
-
+function updateDocument(pageContext: PageContextClient) {
   const title = getHeadSetting<string | null>('title', pageContext)
   const lang = getHeadSetting<string | null>('lang', pageContext)
 

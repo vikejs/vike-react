@@ -20,5 +20,5 @@ declare global {
 // Internal usage
 export type PageContextInternal = {
   _configFromHook?: ConfigFromHookResolved
-  _headAlreadySet?: true
+  _headAlreadySet?: boolean
 }

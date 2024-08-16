@@ -8,6 +8,7 @@ import { getPageElement } from './getPageElement.js'
 import type { PageContextInternal } from '../types/PageContext.js'
 import './styles.css'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
+import { applyHeadSettings } from './applyHeadSettings.js'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientAsync = async (
@@ -52,7 +53,7 @@ const onRenderClient: OnRenderClientAsync = async (
 
   if (!pageContext.isHydration) {
     pageContext._headAlreadySet = true
-    applyHeadSettings(pageContext)
+    applyHead(pageContext)
   }
 
   // Use cases:
@@ -61,14 +62,8 @@ const onRenderClient: OnRenderClientAsync = async (
   await callCumulativeHooks(pageContext.config.onAfterRenderClient, pageContext)
 }
 
-function applyHeadSettings(pageContext: PageContextClient) {
+function applyHead(pageContext: PageContextClient) {
   const title = getHeadSetting<string | null>('title', pageContext)
   const lang = getHeadSetting<string | null>('lang', pageContext)
-
-  // - We skip if `undefined` as we shouldn't remove values set by the Head setting.
-  // - Setting a default prevents the previous value to be leaked: upon client-side navigation, the value set by the previous page won't be removed if the next page doesn't override it.
-  //   - Most of the time, the user sets a default himself (i.e. a value defined at /pages/+config.js)
-  //     - If he doesn't have a default then he can use `null` to opt into Vike's defaults
-  if (title !== undefined) document.title = title || ''
-  if (lang !== undefined) document.documentElement.lang = lang || 'en'
+  applyHeadSettings(title, lang)
 }

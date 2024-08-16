@@ -5,6 +5,7 @@ import type { PageContextInternal } from '../../types/PageContext.js'
 import type { ConfigFromHook } from '../../types/Config.js'
 import { usePageContext } from '../usePageContext.js'
 import { getPageContext } from 'vike/getPageContext'
+import { applyHeadSettings } from '../../renderer/applyHeadSettings.js'
 
 function useConfig(): (config: ConfigFromHook) => void {
   // Vike hook
@@ -17,7 +18,7 @@ function useConfig(): (config: ConfigFromHook) => void {
     if (!('_headAlreadySet' in pageContext)) {
       setPageContextConfigFromHook(config, pageContext)
     } else {
-      apply(config)
+      applyHead(config)
     }
   }
 }
@@ -27,7 +28,7 @@ function setPageContextConfigFromHook(config: ConfigFromHook, pageContext: PageC
   Object.assign(pageContext._configFromHook, config)
 }
 
-function apply(config: ConfigFromHook) {
+function applyHead(config: ConfigFromHook) {
   const { title } = config
-  if (title) window.document.title = title
+  applyHeadSettings(title, undefined)
 }

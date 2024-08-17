@@ -1,3 +1,16 @@
+## [0.5.3](https://github.com/vikejs/vike-react/compare/vike-react@0.5.2...vike-react@0.5.3) (2024-08-17)
+
+
+### Bug Fixes
+
+* enable useConfig() after hydration ([c1e0c83](https://github.com/vikejs/vike-react/commit/c1e0c8327aca1f06999b104432ead562c8eec8c4))
+* fix `useConfig()` for `{body,html}Attributes` (vikejs/vike-vue[#180](https://github.com/vikejs/vike-react/issues/180)) ([653b808](https://github.com/vikejs/vike-react/commit/653b808846446182e7d7b51fddc247ad8bc722af))
+* fix callable cumulative configs ([a6c82a2](https://github.com/vikejs/vike-react/commit/a6c82a27ec5a2e916a1fdc93dae5a9465286f93b))
+* support callable cumulative configs ([a53b7c1](https://github.com/vikejs/vike-react/commit/a53b7c17dfa2e03e816e33db5295b7c019ee1f7d))
+* update lang upon useConfig() ([405af64](https://github.com/vikejs/vike-react/commit/405af647a524de7901f3a2c1ae12b7c87083931f))
+
+
+
 ## [0.5.2](https://github.com/vikejs/vike-react/compare/vike-react@0.5.1...vike-react@0.5.2) (2024-08-12)
 
 

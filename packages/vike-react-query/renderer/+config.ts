@@ -1,7 +1,7 @@
 import type { QueryClientConfig } from '@tanstack/react-query'
 import type { ReactNode } from 'react'
 import type { Config, ImportString } from 'vike/types'
-import type _ from 'vike-react/config' // Needed for declaration merging of Config
+import 'vike-react/config' // Needed for declaration merging of Config
 
 export default {
   name: 'vike-react-query',

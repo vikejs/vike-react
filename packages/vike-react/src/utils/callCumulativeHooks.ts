@@ -1,7 +1,15 @@
-export async function callCumulativeHooks(values: undefined | unknown[], pageContext: unknown): Promise<unknown[]> {
+export { callCumulativeHooks }
+
+import { providePageContext } from 'vike/getPageContext'
+
+async function callCumulativeHooks(
+  values: undefined | unknown[],
+  pageContext: Record<string, any>
+): Promise<unknown[]> {
   if (!values) return []
   const valuesPromises = values.map((val) => {
     if (typeof val === 'function') {
+      providePageContext(pageContext)
       // Hook
       return val(pageContext)
     } else {

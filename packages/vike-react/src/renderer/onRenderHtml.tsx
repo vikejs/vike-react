@@ -13,6 +13,7 @@ import type { PageContextInternal } from '../types/PageContext.js'
 import type { Head } from '../types/Config.js'
 import { isReactElement } from '../utils/isReactElement.js'
 import { getTagAttributesString, type TagAttributes } from '../utils/getTagAttributesString.js'
+import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 
 addEcosystemStamp()
 
@@ -40,18 +41,21 @@ const onRenderHtml: OnRenderHtmlAsync = async (
     </html>`
 }
 
+export type PageHtmlStream = Awaited<ReturnType<typeof renderToStream>>
 async function getPageHtml(pageContext: PageContextServer) {
-  let pageHtml: string | ReturnType<typeof dangerouslySkipEscape> | Awaited<ReturnType<typeof renderToStream>>
+  let pageHtml: string | ReturnType<typeof dangerouslySkipEscape> | PageHtmlStream
   if (!pageContext.Page) {
     pageHtml = ''
   } else {
     const page = getPageElement(pageContext)
     const { stream, streamIsRequired } = pageContext.config
     if (!stream && !streamIsRequired) {
-      pageHtml = dangerouslySkipEscape(renderToString(page))
+      const pageHtmlString = renderToString(page)
+      pageContext.pageHtmlString = pageHtmlString
+      pageHtml = dangerouslySkipEscape(pageHtmlString)
     } else {
       const disable = stream === false ? true : undefined
-      pageHtml = await renderToStream(page, {
+      const pageHtmlStream = await renderToStream(page, {
         webStream: typeof stream === 'string' ? stream === 'web' : undefined,
         userAgent:
           pageContext.headers?.['user-agent'] ||
@@ -60,8 +64,14 @@ async function getPageHtml(pageContext: PageContextServer) {
           pageContext.userAgent,
         disable
       })
+      pageContext.pageHtmlStream = pageHtmlStream
+      pageHtml = pageHtmlStream
     }
   }
+
+  // https://github.com/vikejs/vike/discussions/1804#discussioncomment-10394481
+  await callCumulativeHooks(pageContext.config.onAfterRenderHtml, pageContext)
+
   return pageHtml
 }
 

@@ -2,6 +2,7 @@ import type React from 'react'
 import type { JSX } from 'react'
 import type ReactDOM from 'react-dom/client'
 import type { ConfigFromHookResolved } from './Config.js'
+import type { PageHtmlStream } from '../renderer/onRenderHtml.js'
 
 // https://vike.dev/pageContext#typescript
 declare global {
@@ -13,6 +14,8 @@ declare global {
       page?: JSX.Element
       /** The React root DOM container */
       root?: ReactDOM.Root
+      pageHtmlString?: string
+      pageHtmlStream?: PageHtmlStream
     }
   }
 }

@@ -171,6 +171,13 @@ declare global {
       reactStrictMode?: boolean
 
       /**
+       * Server-side hook called right after rendering the page's root React component to HTML.
+       *
+       * https://vike.dev/onAfterRenderHtml
+       */
+      onAfterRenderHtml?: (pageContext: PageContextServer) => void
+
+      /**
        * Client-side hook called before the page is rendered.
        *
        * https://vike.dev/onBeforeRenderClient
@@ -197,6 +204,7 @@ declare global {
       Head?: Head[]
       bodyAttributes?: TagAttributes[]
       htmlAttributes?: TagAttributes[]
+      onAfterRenderHtml?: Function[]
       onBeforeRenderClient?: Function[]
       onAfterRenderClient?: Function[]
     }

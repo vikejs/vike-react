@@ -14,7 +14,10 @@ declare global {
       page?: JSX.Element
       /** The React root DOM container */
       root?: ReactDOM.Root
+
+      /** The +Page.jsx component rendered to the HTML string. */
       pageHtmlString?: string
+      /** The +Pagejsx component rendered to an HTML stream. */
       pageHtmlStream?: PageHtmlStream
     }
   }

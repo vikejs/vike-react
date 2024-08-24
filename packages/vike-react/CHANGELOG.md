@@ -1,3 +1,24 @@
+## [0.5.4](https://github.com/vikejs/vike-react/compare/vike-react@0.5.3...vike-react@0.5.4) (2024-08-24)
+
+
+### Bug Fixes
+
+* add JSDocs ([9dfd4ab](https://github.com/vikejs/vike-react/commit/9dfd4abe6cfd8fa6ed199acdb736fc8a644f2474))
+* make useConfig() work for vike-react hooks ([5d21040](https://github.com/vikejs/vike-react/commit/5d2104013956197cd367eb147bdc347ae964969c))
+* use vike@0.4.191 ([9d9342f](https://github.com/vikejs/vike-react/commit/9d9342ff496a0d507819eb178cc332a69b2da039))
+
+
+### Features
+
+* new hook onAfterRenderHtml() ([acd5466](https://github.com/vikejs/vike-react/commit/acd54666c4c391690224a11b8f08521e2df42dbd))
+
+
+### BREAKING CHANGES
+
+* Update to `vike@0.4.191` or above.
+
+
+
 ## [0.5.3](https://github.com/vikejs/vike-react/compare/vike-react@0.5.2...vike-react@0.5.3) (2024-08-17)
 
 

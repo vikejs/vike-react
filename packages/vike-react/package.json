@@ -1,12 +1,11 @@
 {
   "name": "vike-react",
   "version": "0.5.3",
+  "repository": "https://github.com/vikejs/vike-react",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
-    "./useData": "./dist/hooks/useData.js",
     "./usePageContext": "./dist/hooks/usePageContext.js",
+    "./useData": "./dist/hooks/useData.js",
     "./useConfig": {
       "browser": "./dist/hooks/useConfig/useConfig-client.js",
       "default": "./dist/hooks/useConfig/useConfig-server.js"
@@ -19,13 +18,21 @@
       "browser": "./dist/components/Head/Head-client.js",
       "default": "./dist/components/Head/Head-server.js"
     },
-    "./ClientOnly": "./dist/components/ClientOnly.js",
     "./clientOnly": "./dist/helpers/clientOnly.js",
+    "./ClientOnly": "./dist/components/ClientOnly.js",
     ".": "./dist/index.js",
     "./config": "./dist/+config.js",
     "./renderer/onRenderHtml": "./dist/renderer/onRenderHtml.js",
     "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js",
     "./components/Loading": "./dist/components/Loading.js"
+  },
+  "dependencies": {
+    "react-streaming": "^0.3.42"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "vike": ">=0.4.182"
   },
   "scripts": {
     "dev": "tsc --watch",
@@ -34,11 +41,6 @@
     "release": "release-me patch",
     "release:minor": "release-me minor",
     "release:commit": "release-me commit"
-  },
-  "peerDependencies": {
-    "react": ">=18.0.0",
-    "react-dom": ">=18.0.0",
-    "vike": ">=0.4.182"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.6.4",
@@ -53,9 +55,6 @@
     "typescript": "^5.5.4",
     "vike": "^0.4.191",
     "vite": "^5.4.0"
-  },
-  "dependencies": {
-    "react-streaming": "^0.3.42"
   },
   "typesVersions": {
     "*": {
@@ -94,9 +93,13 @@
       ]
     }
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist/"
   ],
-  "repository": "github:vikejs/vike-react",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [
+    "react"
+  ]
 }

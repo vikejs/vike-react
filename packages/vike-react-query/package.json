@@ -7,8 +7,8 @@
   "exports": {
     ".": "./dist/src/index.js",
     "./config": "./dist/integration/+config.js",
-    "./integration/Wrapper": "./dist/integration/Wrapper.js",
-    "./integration/FallbackErrorBoundary": "./dist/integration/FallbackErrorBoundary.js"
+    "./__internal/integration/Wrapper": "./dist/integration/Wrapper.js",
+    "./__internal/integration/FallbackErrorBoundary": "./dist/integration/FallbackErrorBoundary.js"
   },
   "scripts": {
     "dev": "tsc --watch",
@@ -49,7 +49,7 @@
       "config": [
         "dist/integration/+config.d.ts"
       ],
-      "integration/Wrapper": [
+      "__internal/integration/Wrapper": [
         "dist/integration/Wrapper.d.ts"
       ]
     }

@@ -22,9 +22,9 @@
     "./ClientOnly": "./dist/components/ClientOnly.js",
     ".": "./dist/index.js",
     "./config": "./dist/+config.js",
-    "./integration/onRenderHtml": "./dist/integration/onRenderHtml.js",
-    "./integration/onRenderClient": "./dist/integration/onRenderClient.js",
-    "./components/Loading": "./dist/components/Loading.js"
+    "./__internal/integration/onRenderHtml": "./dist/integration/onRenderHtml.js",
+    "./__internal/integration/onRenderClient": "./dist/integration/onRenderClient.js",
+    "./__internal/components/Loading": "./dist/components/Loading.js"
   },
   "dependencies": {
     "react-streaming": "^0.3.42"
@@ -85,10 +85,10 @@
       "config": [
         "./dist/+config.d.ts"
       ],
-      "integration/onRenderHtml": [
+      "__/internal/integration/onRenderHtml": [
         "./dist/integration/onRenderHtml.d.ts"
       ],
-      "integration/onRenderClient": [
+      "__/internal/integration/onRenderClient": [
         "./dist/integration/onRenderClient.d.ts"
       ]
     }

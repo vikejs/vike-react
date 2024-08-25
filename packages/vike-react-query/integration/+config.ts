@@ -9,8 +9,8 @@ export default {
     'vike-react': '>=0.4.13'
   },
   queryClientConfig: undefined,
-  Wrapper: 'import:vike-react-query/integration/Wrapper:default',
-  FallbackErrorBoundary: 'import:vike-react-query/integration/FallbackErrorBoundary:default',
+  Wrapper: 'import:vike-react-query/__internal/integration/Wrapper:default',
+  FallbackErrorBoundary: 'import:vike-react-query/__internal/integration/FallbackErrorBoundary:default',
   streamIsRequired: true,
   meta: {
     queryClientConfig: {

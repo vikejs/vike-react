@@ -7,7 +7,7 @@ export default {
   require: {
     'vike-react': '>=0.4.18'
   },
-  Wrapper: 'import:vike-react-apollo/integration/Wrapper:default',
+  Wrapper: 'import:vike-react-apollo/__internal/integration/Wrapper:default',
   streamIsRequired: true,
   meta: {
     ApolloClient: {

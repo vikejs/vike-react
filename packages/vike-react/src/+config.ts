@@ -10,12 +10,12 @@ const config = {
     vike: '>=0.4.182'
   },
 
-  Loading: 'import:vike-react/components/Loading:default',
+  Loading: 'import:vike-react/__internal/components/Loading:default',
 
   // https://vike.dev/onRenderHtml
-  onRenderHtml: 'import:vike-react/integration/onRenderHtml:onRenderHtml',
+  onRenderHtml: 'import:vike-react/__internal/integration/onRenderHtml:onRenderHtml',
   // https://vike.dev/onRenderClient
-  onRenderClient: 'import:vike-react/integration/onRenderClient:onRenderClient',
+  onRenderClient: 'import:vike-react/__internal/integration/onRenderClient:onRenderClient',
 
   passToClient: [
     '_configFromHook',

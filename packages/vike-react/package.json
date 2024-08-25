@@ -22,9 +22,9 @@
     "./ClientOnly": "./dist/components/ClientOnly.js",
     ".": "./dist/index.js",
     "./config": "./dist/+config.js",
-    "./renderer/onRenderHtml": "./dist/renderer/onRenderHtml.js",
-    "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js",
-    "./components/Loading": "./dist/components/Loading.js"
+    "./__internal/integration/onRenderHtml": "./dist/integration/onRenderHtml.js",
+    "./__internal/integration/onRenderClient": "./dist/integration/onRenderClient.js",
+    "./__internal/components/Loading": "./dist/components/Loading.js"
   },
   "dependencies": {
     "react-streaming": "^0.3.42"
@@ -37,7 +37,7 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "rimraf dist/ && tsc && pnpm run build:css",
-    "build:css": "cp src/renderer/styles.css dist/renderer/styles.css",
+    "build:css": "cp src/integration/styles.css dist/integration/styles.css",
     "release": "release-me patch",
     "release:minor": "release-me minor",
     "release:commit": "release-me commit"
@@ -85,11 +85,11 @@
       "config": [
         "./dist/+config.d.ts"
       ],
-      "renderer/onRenderHtml": [
-        "./dist/renderer/onRenderHtml.d.ts"
+      "__/internal/integration/onRenderHtml": [
+        "./dist/integration/onRenderHtml.d.ts"
       ],
-      "renderer/onRenderClient": [
-        "./dist/renderer/onRenderClient.d.ts"
+      "__/internal/integration/onRenderClient": [
+        "./dist/integration/onRenderClient.d.ts"
       ]
     }
   },

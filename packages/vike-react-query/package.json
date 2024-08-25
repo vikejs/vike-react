@@ -6,9 +6,9 @@
   "typings": "dist/src/index.js",
   "exports": {
     ".": "./dist/src/index.js",
-    "./config": "./dist/renderer/+config.js",
-    "./renderer/Wrapper": "./dist/renderer/Wrapper.js",
-    "./renderer/FallbackErrorBoundary": "./dist/renderer/FallbackErrorBoundary.js"
+    "./config": "./dist/integration/+config.js",
+    "./__internal/integration/Wrapper": "./dist/integration/Wrapper.js",
+    "./__internal/integration/FallbackErrorBoundary": "./dist/integration/FallbackErrorBoundary.js"
   },
   "scripts": {
     "dev": "tsc --watch",
@@ -47,10 +47,10 @@
   "typesVersions": {
     "*": {
       "config": [
-        "dist/renderer/+config.d.ts"
+        "dist/integration/+config.d.ts"
       ],
-      "renderer/Wrapper": [
-        "dist/renderer/Wrapper.d.ts"
+      "__internal/integration/Wrapper": [
+        "dist/integration/Wrapper.d.ts"
       ]
     }
   },

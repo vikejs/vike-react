@@ -4,7 +4,7 @@ import { providePageContext } from 'vike/getPageContext'
 
 async function callCumulativeHooks(
   values: undefined | unknown[],
-  pageContext: Record<string, any>
+  pageContext: Record<string, any>,
 ): Promise<unknown[]> {
   if (!values) return []
   const valuesPromises = values.map((val) => {

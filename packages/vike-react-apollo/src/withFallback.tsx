@@ -23,17 +23,17 @@ type WithFallbackOptions<P> = {
 
 function withFallback<T extends ComponentType<any>, P extends ComponentProps<T> = ComponentProps<T>>(
   Component: T,
-  options?: WithFallbackOptions<P>
+  options?: WithFallbackOptions<P>,
 ): T
 function withFallback<T extends ComponentType<any>, P extends ComponentProps<T> = ComponentProps<T>>(
   Component: T,
   Loading?: Loading<P>,
-  Error?: Error<P>
+  Error?: Error<P>,
 ): T
 function withFallback<T extends ComponentType<any>, P extends ComponentProps<T> = ComponentProps<T>>(
   Component: T,
   options?: Loading<P> | WithFallbackOptions<P>,
-  Error_?: Error<P>
+  Error_?: Error<P>,
 ): T {
   let Loading: Loading<P>
   let Error: Error<P>

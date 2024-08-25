@@ -5,5 +5,5 @@ import type { PageContext } from 'vike/types'
 export default (pageContext: PageContext) =>
   new ApolloClient({
     uri: 'https://countries.trevorblades.com',
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
   })

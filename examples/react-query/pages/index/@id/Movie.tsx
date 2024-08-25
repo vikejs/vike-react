@@ -13,7 +13,7 @@ const Movie = withFallback(
       queryKey: ['movie', id],
       queryFn: () => getStarWarsMovie(id),
       // Disabled to showcase error fallback
-      retry: false
+      retry: false,
     })
 
     const { title, release_date } = result.data
@@ -23,7 +23,7 @@ const Movie = withFallback(
         <>
           <meta name="description" content={`Star Wars Movie ${title} from ${result.data.director}`} />
         </>
-      )
+      ),
     })
 
     return (
@@ -52,8 +52,8 @@ const Movie = withFallback(
         <div>{error.message}</div>
         <button onClick={() => retry()}>Try again</button>
       </>
-    )
-  }
+    ),
+  },
 )
 
 async function getStarWarsMovie(id: string): Promise<MovieDetails> {

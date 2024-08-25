@@ -8,11 +8,11 @@ import React, {
   useState,
   type ComponentProps,
   type ComponentType,
-  type ReactNode
+  type ReactNode,
 } from 'react'
 
 function clientOnly<T extends ComponentType<any>>(
-  load: () => Promise<{ default: T } | T>
+  load: () => Promise<{ default: T } | T>,
 ): ComponentType<ComponentProps<T> & { fallback?: ReactNode }> {
   // Client side: always bundled by Vite, import.meta.env.SSR === false
   // Server side: may or may not be bundled by Vite, import.meta.env.SSR === true || import.meta.env === undefined
@@ -27,7 +27,7 @@ function clientOnly<T extends ComponentType<any>>(
         .catch((error) => {
           console.error('Component loading failed:', error)
           return { default: (() => <p>Error loading component.</p>) as any }
-        })
+        }),
     )
 
     return forwardRef<any, any>((props, ref) => {

@@ -53,13 +53,13 @@ const pageStyle: CSSProperties = {
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: '#ffe1e3',
-  padding: 12
+  padding: 12,
 }
 
 const textStyle = {
   fontSize: 20,
   fontWeight: 500,
-  color: '#f44250'
+  color: '#f44250',
 }
 
 const buttonStyle: CSSProperties = {
@@ -73,5 +73,5 @@ const buttonStyle: CSSProperties = {
   backgroundColor: '#fff',
   padding: '8px 12px',
   borderRadius: 16,
-  cursor: 'pointer'
+  cursor: 'pointer',
 }

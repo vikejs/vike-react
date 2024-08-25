@@ -36,6 +36,6 @@ async function testCounter() {
       await page.click('button')
       expect(await page.textContent('button')).toContain('Counter 1')
     },
-    { timeout: 5 * 1000 }
+    { timeout: 5 * 1000 },
   )
 }

@@ -13,14 +13,14 @@ const Component = withFallback(
     return count
   },
   ({ count }) => `loading${count}`,
-  ({ count }) => `error${count}`
+  ({ count }) => `error${count}`,
 )
 
 const ComponentThatSuspends = withFallback(
   ({ count, onMount }: { count?: number; onMount?: () => void; onFallbackMount?: () => void }) => {
     useSuspenseQuery({
       queryFn: () => new Promise((r) => setTimeout(() => r('some value'), 50)),
-      queryKey: ['ComponentThatSuspends']
+      queryKey: ['ComponentThatSuspends'],
     })
 
     useEffect(() => {
@@ -35,14 +35,14 @@ const ComponentThatSuspends = withFallback(
     }, [])
     return `loading${count}`
   },
-  ({ count }) => `error${count}`
+  ({ count }) => `error${count}`,
 )
 
 const ComponentThatSuspends2 = withFallback(
   ({ count, onMount }: { count?: number; onMount?: () => void }) => {
     useSuspenseQuery({
       queryFn: () => new Promise((r) => setTimeout(() => r('some value'), 50)),
-      queryKey: ['ComponentThatSuspends2']
+      queryKey: ['ComponentThatSuspends2'],
     })
 
     useEffect(() => {
@@ -52,7 +52,7 @@ const ComponentThatSuspends2 = withFallback(
     return count
   },
   <div>loading ComponentThatSuspends2</div>,
-  <div>error ComponentThatSuspends2</div>
+  <div>error ComponentThatSuspends2</div>,
 )
 
 const ComponentThatThrows = withFallback(
@@ -69,8 +69,8 @@ const ComponentThatThrows = withFallback(
         onErrorFallbackMount?.()
       }, [])
       return `error${error.message}${count}`
-    }
-  }
+    },
+  },
 )
 
 const ComponentThatThrows2 = withFallback(
@@ -81,7 +81,7 @@ const ComponentThatThrows2 = withFallback(
     throw new Error('some message')
   },
   ({ count }) => `loading${count}`,
-  `error fallback string`
+  `error fallback string`,
 )
 
 const OuterComponent = withFallback(
@@ -89,7 +89,7 @@ const OuterComponent = withFallback(
     return children
   },
   () => `outer loading`,
-  () => `outer error`
+  () => `outer error`,
 )
 
 describe('suspense', () => {
@@ -121,7 +121,7 @@ describe('suspense', () => {
     let result = render(
       <QueryClientProvider client={queryClient}>
         <ComponentThatSuspends count={123} onMount={onMount} />
-      </QueryClientProvider>
+      </QueryClientProvider>,
     )
     expect(result.container.innerHTML).toBe(`loading${123}`)
     await waitFor(() => expect(onMount).toBeCalledTimes(1))
@@ -134,7 +134,7 @@ describe('suspense', () => {
     let result = render(
       <QueryClientProvider client={queryClient}>
         <ComponentThatSuspends2 count={123} onMount={onMount} />
-      </QueryClientProvider>
+      </QueryClientProvider>,
     )
     expect(result.container.innerHTML).toBe('<div>loading ComponentThatSuspends2</div>')
     await waitFor(() => expect(onMount).toBeCalledTimes(1))
@@ -148,7 +148,7 @@ describe('suspense', () => {
     let result = render(
       <QueryClientProvider client={queryClient}>
         <ComponentThatSuspends count={123} onMount={onMount} onFallbackMount={onFallbackMount} />
-      </QueryClientProvider>
+      </QueryClientProvider>,
     )
     expect(result.container.innerHTML).toBe(`loading${123}`)
     expect(onFallbackMount).toBeCalledTimes(1)
@@ -157,8 +157,8 @@ describe('suspense', () => {
         <ComponentThatSuspends count={456} onMount={onMount} onFallbackMount={onFallbackMount} />
       </QueryClientProvider>,
       {
-        container: result.container
-      }
+        container: result.container,
+      },
     )
     expect(result.container.innerHTML).toBe(`loading${456}`)
     expect(onFallbackMount).toBeCalledTimes(1)
@@ -186,7 +186,7 @@ describe('suspense', () => {
     const result = render(
       <OuterComponent>
         <ComponentThatThrows count={12345} onMount={onMount} />
-      </OuterComponent>
+      </OuterComponent>,
     )
     expect(result.container.innerHTML).toBe(`errorsome message${12345}`)
     expect(onMount).toBeCalledTimes(0)
@@ -196,14 +196,14 @@ describe('suspense', () => {
     const onMount = vi.fn()
     const onErrorFallbackMount = vi.fn()
     let result = render(
-      <ComponentThatThrows count={456} onMount={onMount} onErrorFallbackMount={onErrorFallbackMount} />
+      <ComponentThatThrows count={456} onMount={onMount} onErrorFallbackMount={onErrorFallbackMount} />,
     )
     expect(result.container.innerHTML).toBe(`errorsome message${456}`)
     expect(onMount).toBeCalledTimes(0)
     expect(onErrorFallbackMount).toBeCalledTimes(1)
 
     result = render(<ComponentThatThrows count={321} onMount={onMount} onErrorFallbackMount={onErrorFallbackMount} />, {
-      container: result.container
+      container: result.container,
     })
     expect(result.container.innerHTML).toBe(`errorsome message${321}`)
     expect(onMount).toBeCalledTimes(0)

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default {
-  component: LoadingComponent
+  component: LoadingComponent,
 }
 
 function LoadingComponent() {
@@ -15,7 +15,7 @@ function LoadingComponent() {
         borderRadius: '5px',
         backgroundSize: '200% 100%',
         animation: '1.3s vike-react-shine linear infinite',
-        aspectRatio: '2.5/1'
+        aspectRatio: '2.5/1',
       }}
     />
   )

@@ -11,7 +11,7 @@ import { includes } from '../utils/includes.js'
 
 function getHeadSetting<T>(
   configName: keyof ConfigFromHookResolved,
-  pageContext: PageContext & PageContextInternal
+  pageContext: PageContext & PageContextInternal,
 ): undefined | T {
   // Set by useConfig()
   const valFromUseConfig = pageContext._configFromHook?.[configName]
@@ -26,7 +26,7 @@ function getHeadSetting<T>(
     return [
       //
       ...((valFromConfig as any) ?? []).map(getCallable),
-      ...((valFromUseConfig as any) ?? [])
+      ...((valFromUseConfig as any) ?? []),
     ] as any
   }
 }

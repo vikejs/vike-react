@@ -18,7 +18,7 @@ import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 addEcosystemStamp()
 
 const onRenderHtml: OnRenderHtmlAsync = async (
-  pageContext: PageContextServer & PageContextInternal
+  pageContext: PageContextServer & PageContextInternal,
 ): ReturnType<OnRenderHtmlAsync> => {
   const pageHtml = await getPageHtml(pageContext)
 
@@ -62,7 +62,7 @@ async function getPageHtml(pageContext: PageContextServer) {
           // TODO/eventually: remove old way of acccessing the User Agent header.
           // @ts-ignore
           pageContext.userAgent,
-        disable
+        disable,
       })
       pageContext.pageHtmlStream = pageHtmlStream
       pageHtml = pageHtmlStream
@@ -98,11 +98,11 @@ function getHeadHtml(pageContext: PageContextServer & PageContextInternal) {
       // Added by +Head
       ...(pageContext.config.Head ?? []),
       // Added by useConfig()
-      ...(pageContext._configFromHook?.Head ?? [])
+      ...(pageContext._configFromHook?.Head ?? []),
     ]
       .filter((Head) => Head !== null && Head !== undefined)
       .map((Head) => getHeadElementHtml(Head, pageContext))
-      .join('\n')
+      .join('\n'),
   )
 
   const headHtml = escapeInject`

@@ -7,7 +7,7 @@ import { PageContextProvider } from '../hooks/usePageContext.js'
 function getPageElement(pageContext: PageContext): JSX.Element {
   const {
     Page,
-    config: { Loading }
+    config: { Loading },
   } = pageContext
   let page = Page ? <Page /> : null
 
@@ -21,7 +21,7 @@ function getPageElement(pageContext: PageContext): JSX.Element {
     // Inner wrapping
     ...(pageContext.config.Layout || []),
     // Outer wrapping
-    ...(pageContext.config.Wrapper || [])
+    ...(pageContext.config.Wrapper || []),
   ].forEach((Wrap) => {
     page = <Wrap>{page}</Wrap>
     page = addSuspense(page)

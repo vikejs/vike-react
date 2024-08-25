@@ -29,16 +29,16 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
     stream.injectToStream(
       `<script class="_rqd_">_rqd_=[];_rqc_=()=>{Array.from(
         document.getElementsByClassName("_rqd_")
-      ).forEach((e) => e.remove())};_rqc_()</script>`
+      ).forEach((e) => e.remove())};_rqc_()</script>`,
     )
     client.getQueryCache().subscribe((event) => {
       if (['added', 'updated'].includes(event.type) && event.query.state.status === 'success')
         stream.injectToStream(
           `<script class="_rqd_">_rqd_.push(${uneval(
             dehydrate(client, {
-              shouldDehydrateQuery: (query) => query.queryHash === event.query.queryHash
-            })
-          )});_rqc_()</script>`
+              shouldDehydrateQuery: (query) => query.queryHash === event.query.queryHash,
+            }),
+          )});_rqc_()</script>`,
         )
     })
   }

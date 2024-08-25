@@ -14,9 +14,9 @@ export const WrappedApolloProvider = WrapApolloProvider(
       return (callback: () => React.ReactNode) => {
         stream.injectToStream(
           // https://github.com/apollographql/apollo-client-nextjs/issues/325
-          (async () => renderToString(await callback()))()
+          (async () => renderToString(await callback()))(),
         )
       }
-    }
-  })
+    },
+  }),
 )

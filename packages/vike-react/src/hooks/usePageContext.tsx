@@ -6,7 +6,7 @@ import { getGlobalObject } from '../utils/getGlobalObject.js'
 import type { PageContext } from 'vike/types'
 
 const globalObject = getGlobalObject('PageContextProvider.ts', {
-  reactContext: React.createContext<PageContext>(undefined as never)
+  reactContext: React.createContext<PageContext>(undefined as never),
 })
 
 function PageContextProvider({ pageContext, children }: { pageContext: PageContext; children: React.ReactNode }) {

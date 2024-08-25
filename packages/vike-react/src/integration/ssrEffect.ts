@@ -10,7 +10,7 @@ function ssrEffect({ configDefinedAt, configValue }: Parameters<ConfigEffect>[0]
     // When the SSR flag is false, we want to render the page only on the client-side.
     // We achieve this by loading `Page` only on the client-side: when onRenderHtml()
     // gets a `Page` value that is undefined it skip server-side rendering.
-    server: configValue !== false
+    server: configValue !== false,
   }
   return {
     meta: {
@@ -18,7 +18,7 @@ function ssrEffect({ configDefinedAt, configValue }: Parameters<ConfigEffect>[0]
       /* We don't do this to enable wraping <Head> with <Wrapper>
       Wrapper: { env }, */
       Layout: { env },
-      Loading: { env }
-    }
+      Loading: { env },
+    },
   }
 }

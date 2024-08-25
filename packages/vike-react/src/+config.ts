@@ -1,7 +1,7 @@
 export { config }
 
 import type { Config } from 'vike/types'
-import { ssrEffect } from './renderer/ssrEffect.js'
+import { ssrEffect } from './integration/ssrEffect.js'
 import { isNotFalse } from './utils/isNotFalse.js'
 
 const config = {
@@ -13,9 +13,9 @@ const config = {
   Loading: 'import:vike-react/components/Loading:default',
 
   // https://vike.dev/onRenderHtml
-  onRenderHtml: 'import:vike-react/renderer/onRenderHtml:onRenderHtml',
+  onRenderHtml: 'import:vike-react/integration/onRenderHtml:onRenderHtml',
   // https://vike.dev/onRenderClient
-  onRenderClient: 'import:vike-react/renderer/onRenderClient:onRenderClient',
+  onRenderClient: 'import:vike-react/integration/onRenderClient:onRenderClient',
 
   passToClient: [
     '_configFromHook',

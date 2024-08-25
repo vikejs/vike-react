@@ -6,8 +6,8 @@
   "typings": "dist/src/index.js",
   "exports": {
     ".": "./dist/src/index.js",
-    "./config": "./dist/renderer/+config.js",
-    "./renderer/Wrapper": "./dist/renderer/Wrapper.js"
+    "./config": "./dist/integration/+config.js",
+    "./integration/Wrapper": "./dist/integration/Wrapper.js"
   },
   "scripts": {
     "dev": "tsc --watch",
@@ -48,10 +48,10 @@
   "typesVersions": {
     "*": {
       "config": [
-        "dist/renderer/+config.d.ts"
+        "dist/integration/+config.d.ts"
       ],
-      "renderer/Wrapper": [
-        "dist/renderer/Wrapper.d.ts"
+      "integration/Wrapper": [
+        "dist/integration/Wrapper.d.ts"
       ]
     }
   },

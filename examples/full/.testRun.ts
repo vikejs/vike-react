@@ -132,7 +132,15 @@ function testPage({
   counter,
   noSSR,
   image,
-}: { url: string; title: string; description?: string; text: string; counter?: true; noSSR?: true; image?: true }) {
+}: {
+  url: string
+  title: string
+  description?: string
+  text: string
+  counter?: true
+  noSSR?: true
+  image?: true
+}) {
   test(url + ' (HTML)', async () => {
     const html = await fetchHtml(url)
     if (!noSSR) {

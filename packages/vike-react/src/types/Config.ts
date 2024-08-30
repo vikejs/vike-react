@@ -119,14 +119,14 @@ declare global {
        *
        * https://vike.dev/bodyHtmlBegin
        */
-      bodyHtmlBegin?: BodyInjectHtml
+      bodyHtmlBegin?: BodyHtmlBoundary
 
       /**
        * Raw HTML injected at the end of `<body>`.
        *
        * https://vike.dev/bodyHtmlEnd
        */
-      bodyHtmlEnd?: BodyInjectHtml
+      bodyHtmlEnd?: BodyHtmlBoundary
 
       /**
        * Add tag attributes such as `<html class="dark">`.
@@ -216,8 +216,8 @@ declare global {
       Wrapper?: Wrapper[]
       Layout?: Layout[]
       Head?: Head[]
-      bodyHtmlBegin?: BodyInjectHtml[]
-      bodyHtmlEnd?: BodyInjectHtml[]
+      bodyHtmlBegin?: BodyHtmlBoundary[]
+      bodyHtmlEnd?: BodyHtmlBoundary[]
       bodyAttributes?: TagAttributes[]
       htmlAttributes?: TagAttributes[]
       onAfterRenderHtml?: Function[]
@@ -232,7 +232,7 @@ declare global {
 // - https://github.com/Microsoft/TypeScript/issues/983
 type PageContext_ = PageContext
 
-type BodyInjectHtml = string | ((pageContext: PageContext) => string)
+type BodyHtmlBoundary = string | ((pageContext: PageContext) => string)
 
 export type Head = React.ReactNode | (() => React.ReactNode)
 type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode

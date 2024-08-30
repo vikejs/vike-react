@@ -115,16 +115,14 @@ declare global {
       lang?: string | null | ((pageContext: PageContext_) => string | null | undefined)
 
       /**
-       * The result of this is injected at the start of `<body>`.
+       * Raw HTML injected at the start of `<body>`.
        *
        * https://vike.dev/bodyHtmlBegin
        */
       bodyHtmlBegin?: BodyInjectHtml
 
       /**
-       * The result of this is injected at the end of `<body>`.
-       *
-       * @default `<div id="teleported"></div>`
+       * Raw HTML injected at the end of `<body>`.
        *
        * https://vike.dev/bodyHtmlEnd
        */

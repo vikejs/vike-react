@@ -24,6 +24,8 @@ const onRenderHtml: OnRenderHtmlAsync = async (
 
   const headHtml = getHeadHtml(pageContext)
 
+  const { bodyHtmlBegin, bodyHtmlEnd } = await getBodyHtmlBoundary(pageContext)
+
   const { htmlAttributesString, bodyAttributesString } = getTagAttributes(pageContext)
 
   // Not needed on the client-side, thus we remove it to save KBs sent to the client
@@ -36,7 +38,9 @@ const onRenderHtml: OnRenderHtmlAsync = async (
         ${headHtml}
       </head>
       <body${dangerouslySkipEscape(bodyAttributesString)}>
+        ${bodyHtmlBegin}
         <div id="root">${pageHtml}</div>
+        ${bodyHtmlEnd}
       </body>
     </html>`
 }
@@ -175,4 +179,14 @@ function addEcosystemStamp() {
     */
     // We use an object so that we can eventually, in the future, add helpful information as needed. (E.g. the vike-react version.)
     {}
+}
+
+async function getBodyHtmlBoundary(pageContext: PageContextServer) {
+  const bodyHtmlBegin = dangerouslySkipEscape(
+    (await callCumulativeHooks(pageContext.config.bodyHtmlBegin, pageContext)).join(''),
+  )
+  const bodyHtmlEnd = dangerouslySkipEscape(
+    (await callCumulativeHooks(pageContext.config.bodyHtmlEnd, pageContext)).join(''),
+  )
+  return { bodyHtmlBegin, bodyHtmlEnd }
 }

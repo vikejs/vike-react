@@ -115,6 +115,20 @@ declare global {
       lang?: string | null | ((pageContext: PageContext_) => string | null | undefined)
 
       /**
+       * Raw HTML injected at the start of `<body>`.
+       *
+       * https://vike.dev/bodyHtmlBegin
+       */
+      bodyHtmlBegin?: BodyHtmlBoundary
+
+      /**
+       * Raw HTML injected at the end of `<body>`.
+       *
+       * https://vike.dev/bodyHtmlEnd
+       */
+      bodyHtmlEnd?: BodyHtmlBoundary
+
+      /**
        * Add tag attributes such as `<html class="dark">`.
        *
        * https://vike.dev/htmlAttributes
@@ -202,6 +216,8 @@ declare global {
       Wrapper?: Wrapper[]
       Layout?: Layout[]
       Head?: Head[]
+      bodyHtmlBegin?: BodyHtmlBoundary[]
+      bodyHtmlEnd?: BodyHtmlBoundary[]
       bodyAttributes?: TagAttributes[]
       htmlAttributes?: TagAttributes[]
       onAfterRenderHtml?: Function[]
@@ -215,6 +231,8 @@ declare global {
 // - https://stackoverflow.com/questions/46559021/typescript-use-of-global-type-inside-namespace-with-same-type
 // - https://github.com/Microsoft/TypeScript/issues/983
 type PageContext_ = PageContext
+
+type BodyHtmlBoundary = string | ((pageContext: PageContext) => string)
 
 export type Head = React.ReactNode | (() => React.ReactNode)
 type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode

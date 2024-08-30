@@ -56,6 +56,16 @@ const config = {
     lang: {
       env: { server: true, client: true },
     },
+    bodyHtmlBegin: {
+      env: { server: true },
+      cumulative: true,
+      global: true,
+    },
+    bodyHtmlEnd: {
+      env: { server: true },
+      cumulative: true,
+      global: true,
+    },
     htmlAttributes: {
       env: { server: true },
       global: true,

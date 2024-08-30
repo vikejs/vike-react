@@ -1,3 +1,12 @@
+## [0.5.5](https://github.com/vikejs/vike-react/compare/vike-react@0.5.4...vike-react@0.5.5) (2024-08-30)
+
+
+### Features
+
+* add bodyHtmlBegin, bodyHtmlEnd ([#146](https://github.com/vikejs/vike-react/issues/146)) ([6fbf795](https://github.com/vikejs/vike-react/commit/6fbf795c4422039c42c6cf0911dc9efe37df9cad))
+
+
+
 ## [0.5.4](https://github.com/vikejs/vike-react/compare/vike-react@0.5.3...vike-react@0.5.4) (2024-08-24)
 
 

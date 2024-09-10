@@ -1,10 +1,8 @@
-export { config }
-
 import type { Config } from 'vike/types'
 import { ssrEffect } from './integration/ssrEffect.js'
 import { isNotFalse } from './utils/isNotFalse.js'
 
-const config = {
+export default {
   name: 'vike-react',
   require: {
     vike: '>=0.4.182',

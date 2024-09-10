@@ -1,3 +1,13 @@
+## [0.5.6](https://github.com/vikejs/vike-react/compare/vike-react@0.5.5...vike-react@0.5.6) (2024-09-10)
+
+
+### Bug Fixes
+
+* properly export config (vikejs/vike-vue[#194](https://github.com/vikejs/vike-react/issues/194)) ([4fb2251](https://github.com/vikejs/vike-react/commit/4fb22517c3da62f0e361fcf7eb9d106b5cde127d))
+* return undefined instead of throw error upon missing pageContext (fix [#147](https://github.com/vikejs/vike-react/issues/147)) ([68b6dc0](https://github.com/vikejs/vike-react/commit/68b6dc0b5b8933ca94f186dff02dc5b7df7ee18e))
+
+
+
 ## [0.5.5](https://github.com/vikejs/vike-react/compare/vike-react@0.5.4...vike-react@0.5.5) (2024-08-30)
 
 

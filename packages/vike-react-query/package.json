@@ -19,10 +19,10 @@
     "test": "vitest run"
   },
   "peerDependencies": {
-    "@tanstack/react-query": ">=5.0.0",
-    "react": ">=18.0.0",
-    "react-streaming": ">=0.3.42",
-    "vike-react": ">=0.4.13"
+    "@tanstack/react-query": "^5.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-streaming": "^0.3.42",
+    "vike-react": "^0.4.13"
   },
   "devDependencies": {
     "@brillout/release-me": "^0.3.8",

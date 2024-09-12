@@ -8,7 +8,7 @@ import 'vike-react/config' // Needed for declaration merging of Config
 const config = {
   name: 'vike-react-query',
   require: {
-    'vike-react': '>=0.4.13',
+    'vike-react': '^0.4.13 || ^0.5.0',
   },
   queryClientConfig: undefined,
   Wrapper: 'import:vike-react-query/__internal/integration/Wrapper:Wrapper',

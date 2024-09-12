@@ -7,7 +7,7 @@ import { isNotFalse } from './utils/isNotFalse.js'
 const config = {
   name: 'vike-react',
   require: {
-    vike: '>=0.4.182',
+    vike: '^0.4.182',
   },
 
   Loading: 'import:vike-react/__internal/components/Loading:default',

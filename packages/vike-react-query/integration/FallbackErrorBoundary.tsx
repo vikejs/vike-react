@@ -1,13 +1,15 @@
+export { FallbackErrorBoundary }
+
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import React, { CSSProperties, ReactElement } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 
-export default ({ children }: { children: ReactElement }) =>
+function FallbackErrorBoundary({ children }: { children: ReactElement }) {
   /* TODO: either remove this or properly check whether env is DEV:
    *  - Safe check against process.env.NODE_ENV for server-side
    *  - Safe check against import.meta.env.DEV for client-side
    */
-  (false as boolean) /*import.meta.env.DEV*/ ? (
+  return (false as boolean) /*import.meta.env.DEV*/ ? (
     <QueryErrorResetBoundary>
       {({ reset }) => (
         <ErrorBoundary onReset={reset} FallbackComponent={Fallback}>
@@ -18,8 +20,9 @@ export default ({ children }: { children: ReactElement }) =>
   ) : (
     children
   )
+}
 
-const Fallback = ({ resetErrorBoundary, error }: FallbackProps) => {
+function Fallback({ resetErrorBoundary, error }: FallbackProps) {
   return (
     <div style={pageStyle}>
       <div style={textStyle}>There was an error.</div>

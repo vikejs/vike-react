@@ -1,6 +1,8 @@
+export { config as default }
+
 import { defineConfig } from 'vitest/config'
 
-export default defineConfig({
+const config = defineConfig({
   test: {
     // test/**/*.test.ts => @brillout/test-e2e
     include: ['**/*.spec.*'],

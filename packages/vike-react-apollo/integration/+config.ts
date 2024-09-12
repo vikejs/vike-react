@@ -1,8 +1,10 @@
+export { config as default }
+
 import type { Config } from 'vike/types'
 import 'vike-react/config' // Needed for declaration merging of Config
 import type { ApolloClient } from '@apollo/client-react-streaming'
 
-export default {
+const config = {
   name: 'vike-react-apollo',
   require: {
     'vike-react': '>=0.4.18',

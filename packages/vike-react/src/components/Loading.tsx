@@ -1,8 +1,8 @@
-import React from 'react'
-
 export default {
   component: LoadingComponent,
 }
+
+import React from 'react'
 
 function LoadingComponent() {
   return (

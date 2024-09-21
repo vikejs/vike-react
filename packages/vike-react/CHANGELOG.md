@@ -1,3 +1,12 @@
+## [0.5.7](https://github.com/vikejs/vike-react/compare/vike-react@0.5.6...vike-react@0.5.7) (2024-09-21)
+
+
+### Bug Fixes
+
+* await rendering before apply head settings ([9261c4b](https://github.com/vikejs/vike-react/commit/9261c4b183efd6a8ce783eb2645db774eaaea6f9))
+
+
+
 ## [0.5.6](https://github.com/vikejs/vike-react/compare/vike-react@0.5.5...vike-react@0.5.6) (2024-09-10)
 
 

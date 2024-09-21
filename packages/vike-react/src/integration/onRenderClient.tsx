@@ -20,7 +20,7 @@ const onRenderClient: OnRenderClientAsync = async (
   // - Store hydration https://github.com/vikejs/vike-react/issues/110
   await callCumulativeHooks(pageContext.config.onBeforeRenderClient, pageContext)
 
-  const page = getPageElement(pageContext)
+  const { page, renderPromise } = getPageElement(pageContext)
   pageContext.page = page
 
   // TODO: implement this? So that, upon errors, onRenderClient() throws an error and Vike can render the error. As of April 2024 it isn't released yet.
@@ -50,6 +50,8 @@ const onRenderClient: OnRenderClientAsync = async (
     root.render(page)
   }
   pageContext.root = root
+
+  await renderPromise
 
   if (!pageContext.isHydration) {
     pageContext._headAlreadySet = true

@@ -51,7 +51,7 @@ async function getPageHtml(pageContext: PageContextServer) {
   if (!pageContext.Page) {
     pageHtml = ''
   } else {
-    const page = getPageElement(pageContext)
+    const { page } = getPageElement(pageContext)
     const { stream, streamIsRequired } = pageContext.config
     if (!stream && !streamIsRequired) {
       const pageHtmlString = renderToString(page)

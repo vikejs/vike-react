@@ -10,6 +10,7 @@ Enables your React components to fetch data using [TanStack Query](https://tanst
 > [!NOTE]
 > You get:
 > - [Progressive rendering](https://vike.dev/streaming#progressive-rendering)
+> - [SSR benefits](https://github.com/brillout/react-streaming#ssr)
 > - Fallback upon loading and/or error
 > - [Caching](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
 

@@ -8,7 +8,7 @@
 Enables your React components to fetch data using [TanStack Query](https://tanstack.com/query/latest).
 
 > [!NOTE]
-> You also get:
+> You get:
 > - [Progressive rendering](https://vike.dev/streaming#progressive-rendering)
 > - Fallback upon loading and/or error
 > - [Caching](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)

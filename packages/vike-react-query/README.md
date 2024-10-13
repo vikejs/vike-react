@@ -8,7 +8,7 @@
 Enables your React components to fetch data using [TanStack Query](https://tanstack.com/query/latest).
 
 > [!NOTE]
-> You get:
+> Including:
 > - [Progressive rendering](https://vike.dev/streaming#progressive-rendering)
 > - [SSR benefits](https://github.com/brillout/react-streaming#ssr)
 > - Fallback upon loading and/or error

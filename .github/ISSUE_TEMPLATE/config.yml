@@ -2,10 +2,10 @@ blank_issues_enabled: true
 contact_links:
   - name: "💥 Bug Report"
     url: https://github.com/vikejs/vike/issues/new/choose
-    about: "Report bugs at Vike's repository instead."
+    about: "Report bugs at Vike's main repository instead."
   - name: "✨ Feature Request"
     url: https://github.com/vikejs/vike/issues/new/choose
-    about: "Suggest features at Vike's repository instead."
+    about: "Suggest features at Vike's main repository instead."
   - name: "🙏 Help & Questions"
     url: https://github.com/vikejs/vike/discussions/new?category=help-questions
     about: "Get official help from Vike maintainers."

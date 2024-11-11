@@ -239,7 +239,7 @@ From a UI perspective, the classic approach to handling errors is the following.
 - **Show an error page**, for example `<h1>500 Internal Server Error</h1><p>Something went wrong.</p>`.
 - **Redirect the user**, for example redirecting the user to `/publish-movie` upon `/movie/some-fake-movie-title` because there isn't any movie `some-fake-movie-title`.
 
-But because `vike-react-query` leverages [HTML streaming](https://vike.dev/streaming) these approaches don't work (well) and we recommend the following instead.
+But because `vike-react-apollo` leverages [HTML streaming](https://vike.dev/streaming) these approaches don't work (well) and we recommend the following instead.
 - **Show a not-found component**, for example `<p>No movie <code>some-fake-movie-title</code> found.</p>`.
 - **Show an error component**, for example `<p>Something went wrong (couldn't fetch movie), please try again later.</p>`.
 - **Show a link** (instead of redirecting the user), for example `<p>No movie <code>some-fake-movie-title</code> found. You can <a href="/publish-movie">publish a new movie</a>.</p>`.

@@ -1,6 +1,6 @@
 export { config as default }
 
-import { LocaleProviderProps, SystemContext } from '@chakra-ui/react'
+import type { LocaleProviderProps, SystemContext } from '@chakra-ui/react'
 import type { Config } from 'vike/types'
 
 const config = {

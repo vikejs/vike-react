@@ -20,12 +20,10 @@
         "vike-react": ">=0.4.13"
     },
     "devDependencies": {
-        "@brillout/release-me": "0.3.8",
+        "@brillout/release-me": "^0.3.8",
         "@chakra-ui/react": "^3.0.2",
         "@emotion/react": "^11.13.3",
-        "@types/node": "^20.11.17",
         "@types/react": "^18.2.55",
-        "jsdom": "^24.0.0",
         "react": "^18.3.1",
         "rimraf": "^5.0.5",
         "typescript": "^5.5.3",

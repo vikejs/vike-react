@@ -14,6 +14,7 @@ Enables your React components to fetch data using [Apollo GraphQL](https://www.a
 [Basic usage](#basic-usage)  
 [`withFallback()`](#withfallback)  
 [`<head>` tags](#head-tags)  
+[Error Handling](#error-handling)  
 [How it works](#how-it-works)  
 [See also](#see-also)  
 
@@ -227,6 +228,28 @@ function Movies() {
   )
 }
 ```
+
+<br/>
+
+
+## Error Handling
+
+From a UI perspective, the classic approach to handling errors is the following.
+- **Show a 404 page**, for example `<h1>404 Page Not Found</h1><p>This page could not found.</p>`.
+- **Show an error page**, for example `<h1>500 Internal Server Error</h1><p>Something went wrong.</p>`.
+- **Redirect the user**, for example redirecting the user to `/publish-movie` upon `/movie/some-fake-movie-title` because there isn't any movie `some-fake-movie-title`.
+
+But because `vike-react-apollo` leverages [HTML streaming](https://vike.dev/streaming) these approaches don't work (well) and we recommend the following instead.
+- **Show a not-found component**, for example `<p>No movie <code>some-fake-movie-title</code> found.</p>`.
+- **Show an error component**, for example `<p>Something went wrong (couldn't fetch movie), please try again later.</p>`.
+- **Show a link** (instead of redirecting the user), for example `<p>No movie <code>some-fake-movie-title</code> found. You can <a href="/publish-movie">publish a new movie</a>.</p>`.
+
+See: [`withFallback()`](#withfallback)
+
+> [!NOTE]
+> HTML chunks that are already streamed to the user cannot be reverted and that's why page-level redirection ([`throw redirect`](https://vike.dev/redirect)) and rewrite ([`throw render()`](https://vike.dev/render)) don't work (well).
+>
+> Also it isn't idiomatic: the whole idea of collocating data-fetching with the UI component is to think in terms of the component in isolation rather than in terms of the page.
 
 <br/>
 

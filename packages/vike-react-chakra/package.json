@@ -3,8 +3,8 @@
     "version": "0.0.1",
     "type": "module",
     "exports": {
-        "./config": "./dist/integration/+config.js",
-        "./__internal/integration/Wrapper": "./dist/integration/Wrapper.js"
+        "./config": "./dist/+config.js",
+        "./__internal/Wrapper": "./dist/+Wrapper.js"
     },
     "scripts": {
         "dev": "tsc --watch",
@@ -33,12 +33,8 @@
     },
     "typesVersions": {
         "*": {
-            "config": [
-                "dist/integration/+config.d.ts"
-            ],
-            "__internal/integration/Wrapper": [
-                "dist/integration/Wrapper.d.ts"
-            ]
+            "config": ["dist/+config.d.ts"],
+            "__internal/Wrapper": ["dist/+Wrapper.d.ts"]
         }
     },
     "files": [

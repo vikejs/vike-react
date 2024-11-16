@@ -8,7 +8,7 @@ const config = {
   require: {
     'vike-react': '>=0.4.13',
   },
-  Wrapper: 'import:vike-react-chakra/__internal/integration/Wrapper:Wrapper',
+  Wrapper: 'import:vike-react-chakra/__internal/Wrapper:Wrapper',
   meta: {
     chakra: {
       env: {

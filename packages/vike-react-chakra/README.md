@@ -22,6 +22,8 @@
    ```
    > [!NOTE]
    > The `vike-react-chakra` extension requires [`vike-react`](https://vike.dev/vike-react).
+   > [!NOTE]
+   > The extension does only one thing: it adds [a Wrapper](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-chakra/Wrapper.tsx) to your pages.
 3. That's it, you can now use Chakra at any of your components.
    ```jsx
    import { HStack, Button } from '@chakra-ui/react'

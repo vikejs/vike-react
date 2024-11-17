@@ -1,5 +1,3 @@
-[![npm version](https://img.shields.io/npm/v/vike-react-chakra)](https://www.npmjs.com/package/vike-react-chakra)
-
 # `vike-react-chakra`
 
 [Installation](#installation)  

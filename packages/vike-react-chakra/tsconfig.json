@@ -7,7 +7,10 @@
     "jsx": "react",
     "outDir": "./dist/",
     "skipLibCheck": true,
+    "types": ["vike-react"],
+    // Strictness
     "strict": true,
-    "types": ["vike-react"]
+    "noUncheckedIndexedAccess": true,
+    "noImplicitAny": true
   }
 }

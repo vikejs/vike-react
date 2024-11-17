@@ -2,7 +2,6 @@ export { config }
 
 import type { Config } from 'vike/types'
 import vikeReact from 'vike-react/config'
-import vikeReactChakra from 'vike-react-chakra/config'
 
 // Default configs (can be overridden by pages)
 const config = {
@@ -15,5 +14,5 @@ const config = {
   bodyAttributes: { class: 'dark' },
   viewport: 999,
   // https://vike.dev/extends
-  extends: [vikeReact, vikeReactChakra],
+  extends: vikeReact,
 } satisfies Config

@@ -104,9 +104,6 @@ importers:
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
-      vike-react-chakra:
-        specifier: link:../../packages/vike-react-chakra
-        version: link:../../packages/vike-react-chakra
       vite:
         specifier: ^5.4.0
         version: 5.4.0(@types/node@20.11.17)

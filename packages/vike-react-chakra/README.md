@@ -70,7 +70,7 @@ const chakra = {
 }
 ```
 
-You can remove Chakra UI from [some of your pages](https://vike.dev/config#inheritance):
+You can remove Chakra from [some of your pages](https://vike.dev/config#inheritance):
 ```js
 // pages/about/+chakra.js
 

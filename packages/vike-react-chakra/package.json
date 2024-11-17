@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "type": "module",
     "exports": {
-        "./config": "./dist/+config.js",
+        "./config": "./dist/config.js",
         "./__internal/Wrapper": "./dist/+Wrapper.js"
     },
     "scripts": {
@@ -34,7 +34,7 @@
     },
     "typesVersions": {
         "*": {
-            "config": ["dist/+config.d.ts"],
+            "config": ["dist/config.d.ts"],
             "__internal/Wrapper": ["dist/+Wrapper.d.ts"]
         }
     },

@@ -20,7 +20,7 @@
      extends: [vikeReact, vikeReactChakra]
    }
    ```
-3. That's it, you can now use Chakra at any of your components.
+3. You can now use Chakra at any of your components.
    ```jsx
    import { HStack, Button } from '@chakra-ui/react'
 

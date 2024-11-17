@@ -22,7 +22,7 @@
    ```
    > [!NOTE]
    > The `vike-react-chakra` extension requires [`vike-react`](https://vike.dev/vike-react).
-3. That's it! You can now use Chakra at any of your components.
+3. That's it, you can now use Chakra at any of your components.
    ```jsx
    import { HStack, Button } from '@chakra-ui/react'
 

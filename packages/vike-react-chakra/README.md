@@ -1,7 +1,7 @@
 # `vike-react-chakra`
 
 [Installation](#installation)  
-[`+chakra` Setting](#chakra-setting)  
+[Settings](#settings)  
 
 <br/>
 
@@ -20,32 +20,31 @@
      extends: [vikeReact, vikeReactChakra]
    }
    ```
+   > [!NOTE]
+   > The `vike-react-chakra` extension requires [`vike-react`](https://vike.dev/vike-react).
+3. That's it! You can now use Chakra at any of your components.
+   ```jsx
+   import { HStack, Button } from '@chakra-ui/react'
 
-> [!NOTE]
-> The `vike-react-chakra` extension requires [`vike-react`](https://vike.dev/vike-react).
-
-
-3. That's it! You can now use Chakra UI components in any of your components.
-```jsx
-import { HStack, Button } from '@chakra-ui/react'
-
-const Demo = () => {
-  return (
-    <HStack>
-      <Button>Click me</Button>
-      <Button>Click me</Button>
-    </HStack>
-  )
-}
-```
+   function SomeComponent() {
+     return (
+       <HStack>
+         <Button>Click me</Button>
+         <Button>Click me</Button>
+       </HStack>
+     )
+   }
+   ```
 
 <br/>
 
-## `+chakra` Setting
+## Settings
 
-`vike-react-chakra` provides a configuration `+chakra` for setting a custom theme system and custom locale.
+`vike-react-chakra` provides a configuration `+chakra` for setting the theme system and locale.
 ```js
 // pages/+chakra.js
+
+export { chakra }
 
 import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react'
 
@@ -53,14 +52,14 @@ const customConfig = defineConfig({
   globalCss: {
     "html, body": {
       margin: 0,
-      padding: 0,
-    },
-  },
+      padding: 0
+    }
+  }
 })
 
 const system = createSystem(defaultConfig, customConfig)
 
-export const chakra = {
+const chakra = {
   system,
   locale: "fr-FR"
 }

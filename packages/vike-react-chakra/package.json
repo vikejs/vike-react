@@ -4,7 +4,7 @@
     "type": "module",
     "exports": {
         "./config": "./dist/config.js",
-        "./__internal/Wrapper": "./dist/+Wrapper.js"
+        "./__internal/Wrapper": "./dist/Wrapper.js"
     },
     "scripts": {
         "dev": "tsc --watch",
@@ -35,7 +35,7 @@
     "typesVersions": {
         "*": {
             "config": ["dist/config.d.ts"],
-            "__internal/Wrapper": ["dist/+Wrapper.d.ts"]
+            "__internal/Wrapper": ["dist/Wrapper.d.ts"]
         }
     },
     "files": [

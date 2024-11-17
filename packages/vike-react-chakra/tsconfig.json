@@ -4,7 +4,6 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "lib": ["DOM", "ESNext"],
     "jsx": "react",
     "outDir": "./dist/",
     "skipLibCheck": true,

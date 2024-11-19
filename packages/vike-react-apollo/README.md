@@ -271,6 +271,8 @@ Upon page navigation (and rendering the first page if [SSR is disabled](https://
 
 ## See also
 
+- Docs: [vike.dev/apollo-graphql](https://vike.dev/apollo-graphql)
+- Version history: [CHANGELOG.md](CHANGELOG.md)
 - [Example](https://github.com/vikejs/vike-react/tree/main/examples/apollo)
 - [Vike > Data Fetching](https://vike.dev/data-fetching)
 - [Apollo GraphQL > useSuspenseQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usesuspensequery)

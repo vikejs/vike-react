@@ -436,6 +436,8 @@ Upon page navigation (and rendering the first page if [SSR is disabled](https://
 
 ## See also
 
+- Docs: [vike.dev/tanstack-query](https://vike.dev/tanstack-query)
+- Version history: [CHANGELOG.md](CHANGELOG.md)
 - [Example](https://github.com/vikejs/vike-react/tree/main/examples/react-query)
 - [TanStack Query > useSuspenseQuery](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
 - [Vike > Data Fetching](https://vike.dev/data-fetching)

@@ -80,4 +80,6 @@ export const chakra = null
 <br/>
 
 ## See also
+
 - Docs: [vike.dev/chakra](https://vike.dev/chakra)
+- Version history: [CHANGELOG.md](CHANGELOG.md)

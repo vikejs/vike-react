@@ -5,10 +5,14 @@
 
 # `vike-react-apollo`
 
-Enables your React components to fetch data using [Apollo GraphQL](https://www.apollographql.com/docs/react/).
+Enables your React components to fetch data using [Apollo GraphQL](https://www.apollographql.com). Powered by [HTML streaming](https://github.com/brillout/react-streaming#readme).
 
 > [!NOTE]
-> You also get [progressive rendering](https://vike.dev/streaming#progressive-rendering), fallback upon loading and/or error, and [caching](https://www.apollographql.com/docs/react/caching/cache-configuration).
+> Includes:
+> - [Progressive rendering](https://vike.dev/streaming#progressive-rendering)
+> - [SSR benefits](https://github.com/brillout/react-streaming#ssr)
+> - Fallback upon loading and/or error
+> - [Caching](https://www.apollographql.com/docs/react/caching/cache-configuration).
 
 [Installation](#installation)  
 [Basic usage](#basic-usage)  
@@ -16,6 +20,7 @@ Enables your React components to fetch data using [Apollo GraphQL](https://www.a
 [`<head>` tags](#head-tags)  
 [Error Handling](#error-handling)  
 [How it works](#how-it-works)  
+[Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-apollo/CHANGELOG.md)  
 [See also](#see-also)  
 
 <br/>
@@ -272,7 +277,8 @@ Upon page navigation (and rendering the first page if [SSR is disabled](https://
 ## See also
 
 - [Example](https://github.com/vikejs/vike-react/tree/main/examples/apollo)
-- [Vike > Data Fetching](https://vike.dev/data-fetching)
+- [Vike Docs > Apollo GraphQL](https://vike.dev/apollo-graphql)
+- [Vike Docs > Data Fetching](https://vike.dev/data-fetching)
 - [Apollo GraphQL > useSuspenseQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usesuspensequery)
 - [Apollo GraphQL > Suspense](https://www.apollographql.com/docs/react/data/suspense/)
 - [React > `<Suspense>`](https://react.dev/reference/react/Suspense)

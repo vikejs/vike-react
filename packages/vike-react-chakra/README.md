@@ -2,6 +2,8 @@
 
 [Installation](#installation)  
 [Settings](#settings)  
+[Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-chakra/CHANGELOG.md)  
+[See Also](#see-also)  
 
 <br/>
 
@@ -42,7 +44,6 @@
 
 <br/>
 
-
 ## Settings
 
 `vike-react-chakra` provides a configuration `+chakra` for setting the theme system and locale.
@@ -76,3 +77,9 @@ You can remove Chakra from [some of your pages](https://vike.dev/config#inherita
 
 export const chakra = null
 ```
+
+<br/>
+
+## See also
+
+- [Vike Docs > Chakra UI](https://vike.dev/chakra)

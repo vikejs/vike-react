@@ -12,7 +12,7 @@ Enables your React components to fetch data using [Apollo GraphQL](https://www.a
 > - [Progressive rendering](https://vike.dev/streaming#progressive-rendering)
 > - [SSR benefits](https://github.com/brillout/react-streaming#ssr)
 > - Fallback upon loading and/or error
-> - [Caching](https://www.apollographql.com/docs/react/caching/cache-configuration).
+> - [Caching](https://www.apollographql.com/docs/react/caching/cache-configuration)
 
 [Installation](#installation)  
 [Basic usage](#basic-usage)  

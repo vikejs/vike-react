@@ -2,6 +2,7 @@
 
 [Installation](#installation)  
 [Settings](#settings)  
+[Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-chakra/CHANGELOG.md)  
 [See Also](#see-also)  
 
 <br/>
@@ -81,5 +82,4 @@ export const chakra = null
 
 ## See also
 
-- Docs: [vike.dev/chakra](https://vike.dev/chakra)
-- Version history: [CHANGELOG.md](CHANGELOG.md)
+- [Vike Docs > Chakra UI](https://vike.dev/chakra)

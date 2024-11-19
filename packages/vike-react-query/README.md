@@ -5,10 +5,10 @@
 
 # `vike-react-query`
 
-Enables your React components to fetch data using [TanStack Query](https://tanstack.com/query/latest).
+Enables your React components to fetch data using [TanStack Query](https://tanstack.com/query/latest). Powered by [HTML streaming](https://github.com/brillout/react-streaming#readme).
 
 > [!NOTE]
-> Including:
+> Includes:
 > - [Progressive rendering](https://vike.dev/streaming#progressive-rendering)
 > - [SSR benefits](https://github.com/brillout/react-streaming#ssr)
 > - Fallback upon loading and/or error
@@ -22,6 +22,7 @@ Enables your React components to fetch data using [TanStack Query](https://tanst
 [Settings](#settings)  
 [Usage with Telefunc](#usage-with-telefunc)  
 [How it works](#how-it-works)  
+[Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-query/CHANGELOG.md)  
 [See also](#see-also)  
 
 <br/>
@@ -436,8 +437,7 @@ Upon page navigation (and rendering the first page if [SSR is disabled](https://
 
 ## See also
 
-- Docs: [vike.dev/tanstack-query](https://vike.dev/tanstack-query)
-- Version history: [CHANGELOG.md](CHANGELOG.md)
 - [Example](https://github.com/vikejs/vike-react/tree/main/examples/react-query)
+- [Vike Docs > TanStack Query](https://vike.dev/tanstack-query)
 - [TanStack Query > useSuspenseQuery](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
-- [Vike > Data Fetching](https://vike.dev/data-fetching)
+- [Vike Docs > Data Fetching](https://vike.dev/data-fetching)

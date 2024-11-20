@@ -47,17 +47,18 @@ const onRenderHtml: OnRenderHtmlAsync = async (
 
 export type PageHtmlStream = Awaited<ReturnType<typeof renderToStream>>
 async function getPageHtml(pageContext: PageContextServer) {
+  if (pageContext.Page) pageContext.page = getPageElement(pageContext).page
+
   let pageHtml: string | ReturnType<typeof dangerouslySkipEscape> | PageHtmlStream = ''
-  if (pageContext.Page) {
-    const { page } = getPageElement(pageContext)
+  if (pageContext.page) {
     const { stream, streamIsRequired } = pageContext.config
     if (!stream && !streamIsRequired) {
-      const pageHtmlString = renderToString(page)
+      const pageHtmlString = renderToString(pageContext.page)
       pageContext.pageHtmlString = pageHtmlString
       pageHtml = dangerouslySkipEscape(pageHtmlString)
     } else {
       const disable = stream === false ? true : undefined
-      const pageHtmlStream = await renderToStream(page, {
+      const pageHtmlStream = await renderToStream(pageContext.page, {
         webStream: typeof stream === 'string' ? stream === 'web' : undefined,
         userAgent:
           pageContext.headers?.['user-agent'] ||

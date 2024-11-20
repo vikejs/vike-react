@@ -47,10 +47,8 @@ const onRenderHtml: OnRenderHtmlAsync = async (
 
 export type PageHtmlStream = Awaited<ReturnType<typeof renderToStream>>
 async function getPageHtml(pageContext: PageContextServer) {
-  let pageHtml: string | ReturnType<typeof dangerouslySkipEscape> | PageHtmlStream
-  if (!pageContext.Page) {
-    pageHtml = ''
-  } else {
+  let pageHtml: string | ReturnType<typeof dangerouslySkipEscape> | PageHtmlStream = ''
+  if (pageContext.Page) {
     const { page } = getPageElement(pageContext)
     const { stream, streamIsRequired } = pageContext.config
     if (!stream && !streamIsRequired) {

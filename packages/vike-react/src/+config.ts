@@ -86,6 +86,10 @@ const config = {
     streamIsRequired: {
       env: { server: true },
     },
+    onBeforeRenderHtml: {
+      env: { server: true },
+      cumulative: true,
+    },
     onAfterRenderHtml: {
       env: { server: true },
       cumulative: true,

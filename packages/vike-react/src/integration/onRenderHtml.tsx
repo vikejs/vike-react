@@ -49,6 +49,9 @@ export type PageHtmlStream = Awaited<ReturnType<typeof renderToStream>>
 async function getPageHtml(pageContext: PageContextServer) {
   if (pageContext.Page) pageContext.page = getPageElement(pageContext).page
 
+  // https://github.com/vikejs/vike-react/issues/87#issuecomment-2488742744
+  await callCumulativeHooks(pageContext.config.onBeforeRenderHtml, pageContext)
+
   let pageHtml: string | ReturnType<typeof dangerouslySkipEscape> | PageHtmlStream = ''
   if (pageContext.page) {
     const { stream, streamIsRequired } = pageContext.config

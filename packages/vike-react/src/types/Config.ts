@@ -185,7 +185,7 @@ declare global {
       reactStrictMode?: boolean
 
       /**
-       * Server-side hook called right after rendering the page's root React component to HTML.
+       * Hook called right after rendering the page's root React component to HTML.
        *
        * https://vike.dev/onAfterRenderHtml
        */

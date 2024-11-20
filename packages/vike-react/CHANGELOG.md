@@ -1,3 +1,18 @@
+## [0.5.8](https://github.com/vikejs/vike-react/compare/vike-react@0.5.7...vike-react@0.5.8) (2024-11-20)
+
+
+### Bug Fixes
+
+* improve JSDoc ([d45d142](https://github.com/vikejs/vike-react/commit/d45d1422323ed07f4816e35d449fff618f07823d))
+* set pageContext.page also on the server-side ([958d8da](https://github.com/vikejs/vike-react/commit/958d8da948d01ed78cdbbe7045a4cf68d5460177))
+
+
+### Features
+
+* new hook onBeforeRenderHtml() ([#87](https://github.com/vikejs/vike-react/issues/87)) ([04ca5b8](https://github.com/vikejs/vike-react/commit/04ca5b8fc0ae267728687cc8d36069ee56776fee))
+
+
+
 ## [0.5.7](https://github.com/vikejs/vike-react/compare/vike-react@0.5.6...vike-react@0.5.7) (2024-09-21)
 
 

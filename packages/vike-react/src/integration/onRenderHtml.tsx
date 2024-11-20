@@ -57,7 +57,6 @@ async function getPageHtml(pageContext: PageContextServer) {
       pageContext.pageHtmlString = pageHtmlString
       pageHtml = dangerouslySkipEscape(pageHtmlString)
     } else {
-      const disable = stream === false ? true : undefined
       const pageHtmlStream = await renderToStream(pageContext.page, {
         webStream: typeof stream === 'string' ? stream === 'web' : undefined,
         userAgent:
@@ -65,7 +64,7 @@ async function getPageHtml(pageContext: PageContextServer) {
           // TODO/eventually: remove old way of acccessing the User Agent header.
           // @ts-ignore
           pageContext.userAgent,
-        disable,
+        disable: stream === false ? true : undefined,
       })
       pageContext.pageHtmlStream = pageHtmlStream
       pageHtml = pageHtmlStream

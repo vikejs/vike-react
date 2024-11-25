@@ -33,7 +33,7 @@ const config = {
 declare global {
   namespace Vike {
     interface Config {
-      queryClientConfig?: QueryClientConfig
+      queryClientConfig?: QueryClientConfig | ((pageContext: PageContext) => QueryClientConfig)
       FallbackErrorBoundary?: ((props: { children: ReactNode }) => ReactNode) | ImportString
     }
   }

@@ -8,7 +8,10 @@ import { usePageContext } from 'vike-react/usePageContext'
 function Wrapper({ children }: { children: ReactNode }) {
   const pageContext = usePageContext()
   const { queryClientConfig, FallbackErrorBoundary = PassThrough } = pageContext.config
-  const [queryClient] = useState(() => new QueryClient(queryClientConfig))
+  const [queryClient] = useState(() => {
+    const config = typeof queryClientConfig === 'function' ? queryClientConfig(pageContext) : queryClientConfig
+    return new QueryClient(config)
+  })
 
   return (
     <QueryClientProvider client={queryClient}>

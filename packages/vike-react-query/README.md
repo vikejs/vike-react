@@ -254,7 +254,23 @@ export default {
 }
 ```
 
-You can apply settings to all pages, a group of pages, or only one page. See [Vike Docs > Config > Inheritance](https://vike.dev/config#inheritance).
+You can access [`pageContext`](https://vike.dev/pageContext):
+
+```js
+// +queryClientConfig.js
+
+export default (pageContext) => ({
+  defaultOptions: {
+    queries: {
+      staleTime: pageContext.data.staleTime,
+      retry: pageContext.routeParams.userId ? true : false
+    }
+  }
+})
+```
+
+> [!NOTE]
+> You can apply settings to all pages, a group of pages, or only one page. See [Vike Docs > Config > Inheritance](https://vike.dev/config#inheritance).
 
 <br/>
 

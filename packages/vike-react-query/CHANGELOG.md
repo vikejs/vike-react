@@ -1,3 +1,22 @@
+## [0.1.2](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.1...vike-react-query@0.1.2) (2024-11-25)
+
+
+### Bug Fixes
+
+* use vike@0.4.191 ([9d9342f](https://github.com/vikejs/vike-react/commit/9d9342ff496a0d507819eb178cc332a69b2da039))
+
+
+### Features
+
+* add ability to create react query client options based on page context ([#154](https://github.com/vikejs/vike-react/issues/154)) ([7e50f90](https://github.com/vikejs/vike-react/commit/7e50f907c42e7e7553e3aca22e6f73034fed8c38))
+
+
+### BREAKING CHANGES
+
+* Update to `vike@0.4.191` or above.
+
+
+
 ## [0.1.1](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.0...vike-react-query@0.1.1) (2024-08-05)
 
 

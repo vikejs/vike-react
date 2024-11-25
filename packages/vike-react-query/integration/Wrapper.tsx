@@ -9,8 +9,8 @@ function Wrapper({ children }: { children: ReactNode }) {
   const pageContext = usePageContext()
   const { queryClientConfig, FallbackErrorBoundary = PassThrough } = pageContext.config
   const [queryClient] = useState(() => {
-    const config = typeof queryClientConfig === 'function' ? queryClientConfig(pageContext) : queryClientConfig;
-    return new QueryClient(config);
+    const config = typeof queryClientConfig === 'function' ? queryClientConfig(pageContext) : queryClientConfig
+    return new QueryClient(config)
   })
 
   return (

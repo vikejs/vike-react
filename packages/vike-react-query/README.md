@@ -254,6 +254,20 @@ export default {
 }
 ```
 
+You can pass a queryClientConfig as a function of [PageContext](https://vike.dev/pageContext) to provide a options depending on page.
+```js
+// +queryClientConfig.js
+
+export default pageContext => ({
+  defaultOptions: {
+      queries: {
+        staleTime: pageContext.data.staleTime,
+        retry: pageContext.routeParams.userId ? true : false
+      }
+    }
+})
+```
+
 You can apply settings to all pages, a group of pages, or only one page. See [Vike Docs > Config > Inheritance](https://vike.dev/config#inheritance).
 
 <br/>

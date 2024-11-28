@@ -1,3 +1,12 @@
+## [1.0.1](https://github.com/vikejs/vike-react/compare/vike-react-chakra@1.0.0...vike-react-chakra@1.0.1) (2024-11-28)
+
+
+### Bug Fixes
+
+* add eject.config.js ([0070495](https://github.com/vikejs/vike-react/commit/00704957fcf374ad0c7ebb0645a36b8d2035d2d2))
+
+
+
 # 1.0.0 (2024-11-18)
 
 ### Features

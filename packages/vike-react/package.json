@@ -24,7 +24,7 @@
     "./config": "./dist/config.js",
     "./__internal/integration/onRenderHtml": "./dist/integration/onRenderHtml.js",
     "./__internal/integration/onRenderClient": "./dist/integration/onRenderClient.js",
-    "./__internal/components/Loading": "./dist/components/Loading.js"
+    "./__internal/integration/Loading": "./dist/integration/Loading.js"
   },
   "dependencies": {
     "react-streaming": "^0.3.42"

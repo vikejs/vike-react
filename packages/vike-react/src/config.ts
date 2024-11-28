@@ -10,7 +10,7 @@ const config = {
     vike: '>=0.4.182',
   },
 
-  Loading: 'import:vike-react/__internal/components/Loading:default',
+  Loading: 'import:vike-react/__internal/integration/Loading:default',
 
   // https://vike.dev/onRenderHtml
   onRenderHtml: 'import:vike-react/__internal/integration/onRenderHtml:onRenderHtml',

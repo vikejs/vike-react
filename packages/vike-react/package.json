@@ -21,7 +21,7 @@
     "./clientOnly": "./dist/helpers/clientOnly.js",
     "./ClientOnly": "./dist/components/ClientOnly.js",
     ".": "./dist/index.js",
-    "./config": "./dist/+config.js",
+    "./config": "./dist/config.js",
     "./__internal/integration/onRenderHtml": "./dist/integration/onRenderHtml.js",
     "./__internal/integration/onRenderClient": "./dist/integration/onRenderClient.js",
     "./__internal/components/Loading": "./dist/components/Loading.js"
@@ -83,7 +83,7 @@
         "./dist/index.d.ts"
       ],
       "config": [
-        "./dist/+config.d.ts"
+        "./dist/config.d.ts"
       ],
       "__/internal/integration/onRenderHtml": [
         "./dist/integration/onRenderHtml.d.ts"

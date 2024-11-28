@@ -5,6 +5,7 @@ import { ssrEffect } from './integration/ssrEffect.js'
 import { isNotFalse } from './utils/isNotFalse.js'
 
 const config = {
+  // @eject-remove start
   name: 'vike-react',
   require: {
     vike: '>=0.4.182',
@@ -17,6 +18,7 @@ const config = {
   // https://vike.dev/onRenderClient
   onRenderClient: 'import:vike-react/__internal/integration/onRenderClient:onRenderClient',
 
+  // @eject-remove end
   passToClient: [
     '_configFromHook',
     // https://github.com/vikejs/vike-react/issues/25
@@ -114,7 +116,9 @@ const config = {
     },
   },
 } satisfies Config
+// @eject-remove start
 
 // This is required to make TypeScript load the global interfaces Vike.Config and Vike.PageContext so that they're always loaded: we can assume that the user always imports this file over `import vikeReact from 'vike-react/config'`
 import './types/Config.js'
 import './types/PageContext.js'
+// @eject-remove end

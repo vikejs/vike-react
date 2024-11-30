@@ -7,6 +7,8 @@
 
 <br/>
 
+Integrates [Chakra UI](https://www.chakra-ui.com/) to your [`vike-react`](https://vike.dev/vike-react) app.
+
 ## Installation
 
 1. `npm install vike-react-chakra @chakra-ui/react @emotion/react`
@@ -39,14 +41,12 @@
 > [!NOTE]
 > The `vike-react-chakra` extension requires [`vike-react`](https://vike.dev/vike-react).
 
-> [!NOTE]
-> The extension does only one thing: it adds [a Wrapper](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-chakra/Wrapper.tsx) to your pages.
-
 <br/>
 
 ## Settings
 
 `vike-react-chakra` provides a configuration `+chakra` for setting the theme system and locale.
+
 ```js
 // pages/+chakra.js
 
@@ -72,11 +72,17 @@ const chakra = {
 ```
 
 You can remove Chakra from [some of your pages](https://vike.dev/config#inheritance):
+
 ```js
 // pages/about/+chakra.js
 
 export const chakra = null
 ```
+
+For full customization consider [ejecting](https://vike.dev/eject).
+
+> [!NOTE]
+> Consider making a [Pull Request before ejecting](https://vike.dev/eject#when-to-eject).
 
 <br/>
 

@@ -28,7 +28,8 @@
       "vike-react": "link:./packages/vike-react/",
       "vike-react-query": "link:./packages/vike-react-query/",
       "vike-react-apollo": "link:./packages/vike-react-apollo/",
-      "vike-react-chakra": "link:./packages/vike-react-chakra/"
+      "vike-react-chakra": "link:./packages/vike-react-chakra/",
+      "vike-react-antd": "link:./packages/vike-react-antd/"
     }
   },
   "devDependencies": {

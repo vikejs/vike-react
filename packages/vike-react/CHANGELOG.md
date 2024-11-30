@@ -1,3 +1,14 @@
+## [0.5.9](https://github.com/vikejs/vike-react/compare/vike-react@0.5.8...vike-react@0.5.9) (2024-11-30)
+
+
+### Bug Fixes
+
+* add `ImportString` type to `onBeforeRenderHtml` & `onAfterRenderHtml` ([b102b72](https://github.com/vikejs/vike-react/commit/b102b72e4da3dbbad3813007bba9b31dfb610464))
+* add eject.config.js ([0070495](https://github.com/vikejs/vike-react/commit/00704957fcf374ad0c7ebb0645a36b8d2035d2d2))
+* rename +config.js to config.js ([fcac4b0](https://github.com/vikejs/vike-react/commit/fcac4b0ac9076925f6a874d05fd6129fd7c787ac))
+
+
+
 ## [0.5.8](https://github.com/vikejs/vike-react/compare/vike-react@0.5.7...vike-react@0.5.8) (2024-11-20)
 
 

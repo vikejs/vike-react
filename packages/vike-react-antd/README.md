@@ -7,6 +7,8 @@
 
 <br/>
 
+Integrates [Ant Design](https://ant.design) to your [`vike-react`](https://vike.dev/vike-react) app.
+
 ## Installation
 
 1. `npm install vike-react-antd antd @ant-design/cssinjs`
@@ -39,14 +41,12 @@
 > [!NOTE]
 > The `vike-react-antd` extension requires [`vike-react`](https://vike.dev/vike-react).
 
-> [!NOTE]
-> The main purpose of this extension is to simplify the integration of Ant Design with [Server Side Rendering](https://ant.design/docs/react/server-side-rendering).
-
 <br/>
 
 ## Settings
 
 `vike-react-antd` provides a configuration `+antd` for customizing Ant Design [Style Compatibility](https://ant.design/docs/react/compatible-style).
+
 ```ts
 // pages/+antd.ts
 export { antd }
@@ -65,11 +65,17 @@ const antd: Omit<StyleProviderProps, "children"> = {
 ```
 
 You can remove Ant Design from [some of your pages](https://vike.dev/config#inheritance):
+
 ```js
 // pages/about/+antd.js
 
 export const antd = null
 ```
+
+For full customization consider [ejecting](https://vike.dev/eject).
+
+> [!NOTE]
+> Consider making a [Pull Request before ejecting](https://vike.dev/eject#when-to-eject).
 
 <br/>
 

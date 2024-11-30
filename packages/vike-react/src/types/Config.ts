@@ -189,14 +189,14 @@ declare global {
        *
        * https://vike.dev/onBeforeRenderHtml
        */
-      onBeforeRenderHtml?: (pageContext: PageContextServer) => void
+      onBeforeRenderHtml?: ((pageContext: PageContextServer) => void) | ImportString
 
       /**
        * Hook called right after rendering the page's root React component to HTML.
        *
        * https://vike.dev/onAfterRenderHtml
        */
-      onAfterRenderHtml?: (pageContext: PageContextServer) => void
+      onAfterRenderHtml?: ((pageContext: PageContextServer) => void) | ImportString
 
       /**
        * Client-side hook called before the page is rendered.

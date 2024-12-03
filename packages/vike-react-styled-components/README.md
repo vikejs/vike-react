@@ -29,7 +29,7 @@ Integrates [styled-components](https://styled-components.com) to your [`vike-rea
    }
    ```
 
-3. Add `babel-plugin-styled-components` to your `vite.config.js`.
+3. Install `babel-plugin-styled-components`:
    ```js
    // vite.config.js
    import { defineConfig } from "vite"

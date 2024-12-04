@@ -1,3 +1,12 @@
+## [0.1.3](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.2...vike-react-query@0.1.3) (2024-12-04)
+
+
+### Bug Fixes
+
+* fix infinite requests for useSuspenseQuery ([#157](https://github.com/vikejs/vike-react/issues/157)) ([56e646e](https://github.com/vikejs/vike-react/commit/56e646e643bfd957970dcef10e03c5841ee7955a))
+
+
+
 ## [0.1.2](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.1...vike-react-query@0.1.2) (2024-11-25)
 
 

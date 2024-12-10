@@ -1,3 +1,12 @@
+## [0.5.10](https://github.com/vikejs/vike-react/compare/vike-react@0.5.9...vike-react@0.5.10) (2024-12-10)
+
+
+### Bug Fixes
+
+* simplify JSDocs for stream setting ([d7615f0](https://github.com/vikejs/vike-react/commit/d7615f030aefac8797ace0b354589c5e14200ab4))
+
+
+
 ## [0.5.9](https://github.com/vikejs/vike-react/compare/vike-react@0.5.8...vike-react@0.5.9) (2024-11-30)
 
 

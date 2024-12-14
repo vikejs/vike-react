@@ -30,7 +30,8 @@
       "vike-react-apollo": "link:./packages/vike-react-apollo/",
       "vike-react-chakra": "link:./packages/vike-react-chakra/",
       "vike-react-antd": "link:./packages/vike-react-antd/",
-      "vike-react-styled-components": "link:./packages/vike-react-styled-components/"
+      "vike-react-styled-components": "link:./packages/vike-react-styled-components/",
+      "vike-react-styled-jsx": "link:./packages/vike-react-styled-jsx/"
     }
   },
   "devDependencies": {

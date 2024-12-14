@@ -15,14 +15,21 @@ const config = {
     styledJsx: {
       env: { server: true },
     },
+    Wrapper: {
+      env: { server: true },
+    },
   },
 } satisfies Config
 
 declare global {
   namespace Vike {
-    interface PageContext {}
+    interface PageContext {
+      styledJsxRegistry?: StyledJsxStyleRegistry
+    }
     interface Config {
-      styledJsx?: StyledJsxStyleRegistry | null
+      styledJsx?: null | {
+        nonce?: string
+      }
     }
   }
 }

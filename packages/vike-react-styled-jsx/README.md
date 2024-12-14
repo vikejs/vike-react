@@ -68,6 +68,19 @@ Integrates [styled-jsx](https://github.com/vercel/styled-jsx) to your [`vike-rea
 
 ## Settings
 
+`vike-react-styled-jsx` provides a configuration `+styledJsx` that adds a [CSP nonce](https://github.com/vercel/styled-jsx?tab=readme-ov-file#content-security-policy) meta tag and injects the nonce into the style tag.
+
+```ts
+// pages/+styledJsx.js
+export { styledJsx }
+
+import nanoid from 'nanoid'
+
+const styledJsx = {
+  nonce: Buffer.from(nanoid()).toString('base64') //ex: N2M0MDhkN2EtMmRkYi00MTExLWFhM2YtNDhkNTc4NGJhMjA3
+}
+```
+
 You can remove the styled-jsx SSR integration from [some of your pages](https://vike.dev/config#inheritance):
 
 ```js

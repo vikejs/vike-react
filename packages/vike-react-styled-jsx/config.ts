@@ -9,6 +9,7 @@ const config = {
     vike: '>=0.4.203',
     'vike-react': '>=0.4.13',
   },
+  onBeforeRenderHtml: 'import:vike-react-styled-jsx/__internal/onBeforeRenderHtml:onBeforeRenderHtml',
   onAfterRenderHtml: 'import:vike-react-styled-jsx/__internal/onAfterRenderHtml:onAfterRenderHtml',
   Wrapper: 'import:vike-react-styled-jsx/__internal/Wrapper:Wrapper',
   meta: {
@@ -16,7 +17,7 @@ const config = {
       env: { server: true },
     },
     Wrapper: {
-      env: { server: true },
+      env: { server: true, client: false },
     },
   },
 } satisfies Config
@@ -24,7 +25,9 @@ const config = {
 declare global {
   namespace Vike {
     interface PageContext {
-      styledJsxRegistry?: StyledJsxStyleRegistry
+      styledJsx?: {
+        registry?: StyledJsxStyleRegistry
+      }
     }
     interface Config {
       styledJsx?: null | {

@@ -5,6 +5,7 @@
   "exports": {
     "./config": "./dist/config.js",
     "./__internal/onAfterRenderHtml": "./dist/onAfterRenderHtml.js",
+    "./__internal/onBeforeRenderHtml": "./dist/onBeforeRenderHtml.js",
     "./__internal/Wrapper": "./dist/Wrapper.js"
   },
   "scripts": {
@@ -38,6 +39,9 @@
       ],
       "__internal/onAfterRenderHtml": [
         "dist/onAfterRenderHtml.d.ts"
+      ],
+      "__internal/onBeforeRenderHtml": [
+        "dist/onBeforeRenderHtml.d.ts"
       ],
       "__internal/Wrapper": [
         "dist/Wrapper.d.ts"

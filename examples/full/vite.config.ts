@@ -11,4 +11,7 @@ export default {
     }),
     vike(),
   ],
+  optimizeDeps: {
+    include: ['styled-jsx/style'],
+  },
 } satisfies UserConfig

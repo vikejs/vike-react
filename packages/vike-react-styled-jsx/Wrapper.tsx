@@ -9,5 +9,7 @@ function Wrapper({ children }: { children: ReactNode }) {
 
   if (pageContext.config.styledJsx === null) return <>{children}</>
 
-  return <StyleRegistry registry={pageContext.styledJsx?.registry}>{children}</StyleRegistry>
+  const styledJsx = 'styledJsx' in pageContext ? pageContext.styledJsx : undefined
+
+  return <StyleRegistry registry={styledJsx?.registry}>{children}</StyleRegistry>
 }

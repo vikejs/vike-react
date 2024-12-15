@@ -25,14 +25,13 @@ Integrates [styled-jsx](https://github.com/vercel/styled-jsx) to your [`vike-rea
    }
    ```
 
-3. Add `styled-jsx/babel` to plugins in your babel configuration:
+3. Add the `styled-jsx`'s Babel plugin:
    ```js
    // vite.config.js
-   import { defineConfig } from "vite"
    import react from "@vitejs/plugin-react"
    import vike from "vike/plugin"
    
-   export default defineConfig({
+   export default {
      plugins: [
       vike(),
       react({
@@ -41,7 +40,7 @@ Integrates [styled-jsx](https://github.com/vercel/styled-jsx) to your [`vike-rea
         },
       }),
     ],
-   });
+   };
    ```
 
 4. You can now use styled-jsx at any of your components.
@@ -49,7 +48,7 @@ Integrates [styled-jsx](https://github.com/vercel/styled-jsx) to your [`vike-rea
    function SomeComponent() {
      return (
        <div>
-        <p>only this paragraph will get the style :)</p>
+        <p>Only this paragraph will get the style.</p>
         
         <style jsx>{`
           p {
@@ -68,7 +67,7 @@ Integrates [styled-jsx](https://github.com/vercel/styled-jsx) to your [`vike-rea
 
 ## Settings
 
-`vike-react-styled-jsx` provides a configuration `+styledJsx` that adds a [CSP nonce](https://github.com/vercel/styled-jsx#content-security-policy) meta tag and injects the nonce into the style tag.
+`vike-react-styled-jsx` provides a configuration `+styledJsx` to set the [CSP nonce for `styled-jsx`](https://github.com/vercel/styled-jsx#content-security-policy).
 
 > [!NOTE]
 > You also need to set a `<meta property="csp-nonce" content={nonce} />` tag with the same nonce.

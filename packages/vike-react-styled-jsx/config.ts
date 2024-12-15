@@ -17,7 +17,7 @@ const config = {
       env: { server: true },
     },
     Wrapper: {
-      env: { server: true, client: false },
+      env: { server: true },
     },
   },
 } satisfies Config

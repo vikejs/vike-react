@@ -3,15 +3,5 @@ import vike from 'vike/plugin'
 import { UserConfig } from 'vite'
 
 export default {
-  plugins: [
-    react({
-      babel: {
-        plugins: [['styled-jsx/babel']],
-      },
-    }),
-    vike(),
-  ],
-  optimizeDeps: {
-    include: ['styled-jsx/style'],
-  },
+  plugins: [react(), vike()],
 } satisfies UserConfig

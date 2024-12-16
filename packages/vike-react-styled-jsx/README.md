@@ -3,6 +3,7 @@
 [Installation](#installation)  
 [Settings](#settings)  
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-styled-jsx/CHANGELOG.md)  
+[What it does ?](#what-it-does)  
 [See also](#see-also)  
 
 <br/>
@@ -36,11 +37,11 @@ Integrates [styled-jsx](https://github.com/vercel/styled-jsx) to your [`vike-rea
       vike(),
       react({
         babel: {
-          plugins: [["styled-jsx/babel"]],
-        },
-      }),
-    ],
-   };
+          plugins: [["styled-jsx/babel"]]
+        }
+      })
+    ]
+   }
    ```
 
 4. You can now use styled-jsx at any of your components.
@@ -91,6 +92,18 @@ You can remove the styled-jsx SSR integration from [some of your pages](https://
 
 export const styledJsx = null
 ```
+
+## What it does ?
+
+The `vite-react-styled-jsx` extension provides automatic integration of `styled-jsx`'s SSR capabilities with `vike-react`, making it easy to use `styled-jsx` for server-side rendering in your `vike-react` projects. What it does is:
+
+1. It creates the registry in [onBeforeRenderHtml()](https://vike.dev/onBeforeRenderHtml) by calling the `styled-jsx`'s `createStyleRegistry()` function and stores the resulting registry in `pageContext.styledJsx.registry`.
+   
+2. It wraps your app with `styled-jsx`'s `<StyleRegistry>` component and passes the registry to it via the [+Wrapper](https://vike.dev/Wrapper) component.
+
+3. It accesses the styles by calling `styled-jsx`'s `registry.styles()` and adds them to the `<head>` tags using [useConfig()](https://vike.dev/useConfig) in [onAfterRenderHtml()](https://vike.dev/onAfterRenderHtml).
+
+<br/>
 
 For full customization consider [ejecting](https://vike.dev/eject).
 

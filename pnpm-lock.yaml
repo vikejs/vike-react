@@ -11,6 +11,7 @@ overrides:
   vike-react-chakra: link:./packages/vike-react-chakra/
   vike-react-antd: link:./packages/vike-react-antd/
   vike-react-styled-components: link:./packages/vike-react-styled-components/
+  vike-react-styled-jsx: link:./packages/vike-react-styled-jsx/
 
 importers:
 
@@ -394,6 +395,36 @@ importers:
       styled-components:
         specifier: ^6.1.13
         version: 6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      typescript:
+        specifier: ^5.5.3
+        version: 5.5.4
+      vike:
+        specifier: ^0.4.203
+        version: 0.4.203(react-streaming@0.3.43(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
+      vike-react:
+        specifier: link:../vike-react
+        version: link:../vike-react
+      vite:
+        specifier: ^5.4.0
+        version: 5.4.0(@types/node@20.11.17)
+
+  packages/vike-react-styled-jsx:
+    devDependencies:
+      '@brillout/release-me':
+        specifier: ^0.4.2
+        version: 0.4.2
+      '@types/react':
+        specifier: ^18.2.55
+        version: 18.3.3
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.5
+      styled-jsx:
+        specifier: ^5.1.6
+        version: 5.1.6(react@18.3.1)
       typescript:
         specifier: ^5.5.3
         version: 5.5.4
@@ -2045,6 +2076,9 @@ packages:
   classnames@2.5.1:
     resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
 
+  client-only@0.0.1:
+    resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
+
   color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
 
@@ -3406,6 +3440,19 @@ packages:
     peerDependencies:
       react: '>= 16.8.0'
       react-dom: '>= 16.8.0'
+
+  styled-jsx@5.1.6:
+    resolution: {integrity: sha512-qSVyDTeMotdvQYoHWLNGwRFJHC+i+ZvdBRYosOFgC+Wg1vx4frN2/RG/NA7SYqqvKNLf39P2LSRA2pu6n0XYZA==}
+    engines: {node: '>= 12.0.0'}
+    peerDependencies:
+      '@babel/core': '*'
+      babel-plugin-macros: '*'
+      react: '>= 16.8.0 || 17.x.x || ^18.0.0-0 || ^19.0.0-0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      babel-plugin-macros:
+        optional: true
 
   stylis@4.2.0:
     resolution: {integrity: sha512-Orov6g6BB1sDfYgzWfTHDOxamtX1bE/zo104Dh9e6fqJ3PooipYyfJ0pUmrZO2wAvO8YbEyeFrkV91XTsGMSrw==}
@@ -6047,6 +6094,8 @@ snapshots:
 
   classnames@2.5.1: {}
 
+  client-only@0.0.1: {}
+
   color-convert@1.9.3:
     dependencies:
       color-name: 1.1.3
@@ -7540,6 +7589,11 @@ snapshots:
       shallowequal: 1.1.0
       stylis: 4.3.2
       tslib: 2.6.2
+
+  styled-jsx@5.1.6(react@18.3.1):
+    dependencies:
+      client-only: 0.0.1
+      react: 18.3.1
 
   stylis@4.2.0: {}
 

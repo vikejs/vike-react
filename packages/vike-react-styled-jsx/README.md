@@ -26,7 +26,7 @@ Integrates [styled-jsx](https://github.com/vercel/styled-jsx) to your [`vike-rea
    }
    ```
 
-3. Add the `styled-jsx`'s Babel plugin:
+3. Add `styled-jsx`'s Babel plugin:
    ```js
    // vite.config.js
    import react from "@vitejs/plugin-react"
@@ -85,7 +85,7 @@ const styledJsx = {
 }
 ```
 
-You can remove the styled-jsx SSR integration from [some of your pages](https://vike.dev/config#inheritance):
+You can remove the `vike-react-styled-jsx` integration from [some of your pages](https://vike.dev/config#inheritance):
 
 ```js
 // pages/about/+styledJsx.js
@@ -93,22 +93,17 @@ You can remove the styled-jsx SSR integration from [some of your pages](https://
 export const styledJsx = null
 ```
 
-## What it does ?
-
-The `vite-react-styled-jsx` extension provides automatic integration of `styled-jsx`'s SSR capabilities with `vike-react`, making it easy to use `styled-jsx` for server-side rendering in your `vike-react` projects. What it does is:
-
-1. It creates the registry in [onBeforeRenderHtml()](https://vike.dev/onBeforeRenderHtml) by calling the `styled-jsx`'s `createStyleRegistry()` function and stores the resulting registry in `pageContext.styledJsx.registry`.
-   
-2. It wraps your app with `styled-jsx`'s `<StyleRegistry>` component and passes the registry to it via the [+Wrapper](https://vike.dev/Wrapper) component.
-
-3. It accesses the styles by calling `styled-jsx`'s `registry.styles()` and adds them to the `<head>` tags using [useConfig()](https://vike.dev/useConfig) in [onAfterRenderHtml()](https://vike.dev/onAfterRenderHtml).
-
 <br/>
 
 For full customization consider [ejecting](https://vike.dev/eject).
 
 > [!NOTE]
 > Consider making a [Pull Request before ejecting](https://vike.dev/eject#when-to-eject).
+
+## What it does ?
+
+The `vike-react-styled-jsx` extension automatically integrates `styled-jsx`'s SSR capabilities, preventing FOUC and scoping style rendering during each SSR pass to ensure concurrency safety. This allows the generated styles to be compared when the client loads, avoiding duplicate styles.  
+To learn more, have a look at the source code which is small. For full control [consider ejecting](https://github.com/vikejs/vike-react/pull/158#ejecting).
 
 <br/>
 

@@ -44,7 +44,7 @@ Integrates [styled-jsx](https://github.com/vercel/styled-jsx) to your [`vike-rea
    }
    ```
 
-4. You can now use styled-jsx at any of your components.
+4. You can now use `styled-jsx` at any of your components.
    ```jsx
    function SomeComponent() {
      return (

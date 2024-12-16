@@ -1,5 +1,7 @@
 # `vike-react-styled-jsx`
 
+Integrates [styled-jsx](https://github.com/vercel/styled-jsx) to your [`vike-react`](https://vike.dev/vike-react) app.
+
 [Installation](#installation)  
 [Settings](#settings)  
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-styled-jsx/CHANGELOG.md)  
@@ -7,8 +9,6 @@
 [See also](#see-also)  
 
 <br/>
-
-Integrates [styled-jsx](https://github.com/vercel/styled-jsx) to your [`vike-react`](https://vike.dev/vike-react) app.
 
 ## Installation
 
@@ -71,8 +71,7 @@ Integrates [styled-jsx](https://github.com/vercel/styled-jsx) to your [`vike-rea
 `vike-react-styled-jsx` provides a configuration `+styledJsx` to set the [CSP nonce for `styled-jsx`](https://github.com/vercel/styled-jsx#content-security-policy).
 
 > [!NOTE]
-> You also need to set a `<meta property="csp-nonce" content={nonce} />` tag with the same nonce.
-> See [Vike Docs > head-tags](https://vike.dev/head-tags).
+> You need to set a `<meta property="csp-nonce" content={nonce} />` tag with the same nonce.
 
 ```ts
 // pages/+styledJsx.js

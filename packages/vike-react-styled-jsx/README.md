@@ -100,6 +100,8 @@ For full customization consider [ejecting](https://vike.dev/eject).
 > [!NOTE]
 > Consider making a [Pull Request before ejecting](https://vike.dev/eject#when-to-eject).
 
+<br/>
+
 ## What it does
 
 The `vike-react-styled-jsx` extension allows you to use `styled-jsx` without [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content).

@@ -102,7 +102,13 @@ For full customization consider [ejecting](https://vike.dev/eject).
 
 ## What it does
 
-The `vike-react-styled-jsx` extension automatically integrates `styled-jsx`'s SSR features under the hood to avoid FOUC. It does this by collecting the page's styles during SSR and injecting them earlier, ensuring that the styles are applied before hydration begins. Learn more in the [styled-jsx README > Server Side Rendering](https://github.com/vercel/styled-jsx#server-side-rendering).  
+The `vike-react-styled-jsx` extension allows you to use `styled-jsx` without [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content).
+
+It collects the page's styles during SSR and injects them earlier in the HTML, ensuring that styles are applied early (before even hydration begins).
+
+You can learn more at:
+ - [Vike > CSS-in-JS > Collect styles](https://vike.dev/css-in-js#collect-styles)
+ - [styled-jsx README > Server Side Rendering](https://github.com/vercel/styled-jsx#server-side-rendering)
 
 To learn more about how the integration works, have a look at the source code which is small. For full control [consider ejecting](https://vike.dev/eject).
 

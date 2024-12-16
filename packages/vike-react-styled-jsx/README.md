@@ -103,7 +103,7 @@ For full customization consider [ejecting](https://vike.dev/eject).
 
 The `vike-react-styled-jsx` extension allows you to use `styled-jsx` without [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content).
 
-It collects the page's styles during SSR and injects them earlier in the HTML, ensuring that styles are applied early (before even hydration begins).
+It collects the page's styles during SSR and injects them in the HTML, ensuring that styles are applied early (before even JavaScript starts loading).
 
 You can learn more at:
  - [Vike > CSS-in-JS > Collect styles](https://vike.dev/css-in-js#collect-styles)

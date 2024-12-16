@@ -110,7 +110,7 @@ You can learn more at:
  - [Vike > CSS-in-JS > Collect styles](https://vike.dev/css-in-js#collect-styles)
  - [styled-jsx README > Server Side Rendering](https://github.com/vercel/styled-jsx#server-side-rendering)
 
-To explore how the integration works, have a look at the source code which is small. For full control [consider ejecting](https://vike.dev/eject).
+For more details, have a look at the source code, which is small. For full control [consider ejecting](https://vike.dev/eject).
 
 <br/>
 

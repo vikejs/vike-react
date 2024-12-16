@@ -92,7 +92,6 @@ You can remove the `vike-react-styled-jsx` integration from [some of your pages]
 
 export const styledJsx = null
 ```
-<br/>
 
 For full customization consider [ejecting](https://vike.dev/eject).
 

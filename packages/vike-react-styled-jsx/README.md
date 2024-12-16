@@ -102,11 +102,14 @@ For full customization consider [ejecting](https://vike.dev/eject).
 
 ## What it does ?
 
-The `vike-react-styled-jsx` extension automatically integrates `styled-jsx`'s SSR capabilities, preventing FOUC and scoping style rendering during each SSR pass to ensure concurrency safety. This allows the generated styles to be compared when the client loads, avoiding duplicate styles.  
-To learn more, have a look at the source code which is small. For full control [consider ejecting](https://github.com/vikejs/vike-react/pull/158#ejecting).
+The `vike-react-styled-jsx` extension automatically integrates `styled-jsx`'s SSR features under the hood, by creating a style registry, extracting the rendered styles, and injecting them during server-side rendering to avoid FOUC. Learn more in the [styled-jsx README > Server Side Rendering](https://github.com/vercel/styled-jsx#server-side-rendering).  
+
+To learn more about how the integration works, have a look at the source code which is small. For full control [consider ejecting](https://github.com/vikejs/vike-react/pull/158#ejecting).
 
 <br/>
 
 ## See also
 
 - [Vike Docs > styled-jsx](https://vike.dev/styled-jsx)
+- [Vike Docs > CSS-in-JS](https://vike.dev/css-in-js)
+- [styled-jsx README](https://github.com/vercel/styled-jsx#readme)

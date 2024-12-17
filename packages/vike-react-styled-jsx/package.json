@@ -1,6 +1,6 @@
 {
   "name": "vike-react-styled-jsx",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "exports": {
     "./config": "./dist/config.js",

@@ -7,12 +7,13 @@ import type { PageContext } from 'vike/types'
 
 function onAfterRenderHtml(pageContext: PageContext) {
   const config = useConfig()
+  const cache = pageContext.antd?.cache
 
-  if (pageContext.config.antd?.cache) {
+  if (cache) {
     const styleTag = React.createElement('style', {
       id: 'antd-cssinjs',
       dangerouslySetInnerHTML: {
-        __html: extractStyle(pageContext.config.antd.cache, true),
+        __html: extractStyle(cache, true),
       },
     })
     config({

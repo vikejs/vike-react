@@ -5,7 +5,8 @@ import type { PageContext } from 'vike/types'
 
 function onBeforeRenderHtml(pageContext: PageContext) {
   if (pageContext.config.antd !== null) {
-    pageContext.config.antd ??= {}
-    pageContext.config.antd.cache = createCache()
+    pageContext.antd = {
+      cache: createCache(),
+    }
   }
 }

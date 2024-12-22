@@ -7,10 +7,15 @@ import { usePageContext } from 'vike-react/usePageContext'
 function Wrapper({ children }: { children: ReactNode }) {
   const pageContext = usePageContext()
   const { antd } = pageContext.config
+  const cache = 'antd' in pageContext ? pageContext.antd?.cache : undefined
 
-  if (antd === null) {
+  if (antd === null || !cache) {
     return <>{children}</>
   }
 
-  return <StyleProvider {...antd}>{children}</StyleProvider>
+  return (
+    <StyleProvider cache={cache} {...antd}>
+      {children}
+    </StyleProvider>
+  )
 }

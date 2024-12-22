@@ -1,5 +1,7 @@
 # `vike-react-antd`
 
+Integrates [Ant Design](https://ant.design) to your [`vike-react`](https://vike.dev/vike-react) app.
+
 [Installation](#installation)  
 [Settings](#settings)  
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-antd/CHANGELOG.md)  
@@ -7,8 +9,6 @@
 [See Also](#see-also)  
 
 <br/>
-
-Integrates [Ant Design](https://ant.design) to your [`vike-react`](https://vike.dev/vike-react) app.
 
 ## Installation
 
@@ -97,4 +97,5 @@ For more details, have a look at the source code of `vike-react-styled-jsx` (whi
 ## See also
 
 - [Vike Docs > Ant Design](https://vike.dev/antd)
+- [Vike Docs > CSS-in-JS](https://vike.dev/css-in-js)
 - [Antd Design](https://ant.design)

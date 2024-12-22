@@ -13,6 +13,9 @@ const config = {
   onBeforeRenderHtml: 'import:vike-react-styled-components/__internal/onBeforeRenderHtml:onBeforeRenderHtml',
   Wrapper: 'import:vike-react-styled-components/__internal/Wrapper:Wrapper',
   meta: {
+    Wrapper: {
+      env: { server: true },
+    },
     styledComponents: {
       env: {
         server: true,
@@ -25,7 +28,9 @@ const config = {
 declare global {
   namespace Vike {
     interface PageContext {
-      styledComponentsSheet?: ServerStyleSheet
+      styledComponents?: {
+        sheet?: ServerStyleSheet
+      }
     }
     interface Config {
       styledComponents?: null | {

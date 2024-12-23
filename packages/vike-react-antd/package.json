@@ -23,10 +23,10 @@
     "vike-react": ">=0.4.13"
   },
   "devDependencies": {
-    "@ant-design/cssinjs": "^1.22.0",
+    "@ant-design/cssinjs": "^1.22.1",
     "@brillout/release-me": "^0.4.2",
     "@types/react": "^18.2.55",
-    "antd": "^5.22.2",
+    "antd": "^5.22.5",
     "react": "^18.3.1",
     "rimraf": "^5.0.5",
     "typescript": "^5.5.3",

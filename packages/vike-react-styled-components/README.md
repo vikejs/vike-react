@@ -1,13 +1,14 @@
 # `vike-react-styled-components`
 
+Integrates [styled-components](https://styled-components.com) to your [`vike-react`](https://vike.dev/vike-react) app.
+
 [Installation](#installation)  
 [Settings](#settings)  
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-styled-components/CHANGELOG.md)  
+[What it does](#what-it-does)  
 [See also](#see-also)  
 
 <br/>
-
-Integrates [styled-components](https://styled-components.com) to your [`vike-react`](https://vike.dev/vike-react) app.
 
 ## Installation
 
@@ -29,26 +30,25 @@ Integrates [styled-components](https://styled-components.com) to your [`vike-rea
    }
    ```
 
-3. Install `babel-plugin-styled-components`:
+3. Add the `babel-plugin-styled-components` plugin:
    ```js
    // vite.config.js
-   import { defineConfig } from "vite"
    import react from "@vitejs/plugin-react"
    import vike from "vike/plugin"
    
-   export default defineConfig({
+   export default {
      plugins: [
       vike(),
       react({
         babel: {
-          plugins: [["babel-plugin-styled-components"]],
-        },
-      }),
-    ],
-   });
+          plugins: [["babel-plugin-styled-components"]]
+        }
+      })
+    ]
+   }
    ```
 
-4. You can now use styled-components at any of your components.
+4. You can now use `styled-components` at any of your components.
    ```jsx
    import { styled } from "styled-components";
 
@@ -94,7 +94,7 @@ const styledComponents = {
 }
 ```
 
-You can remove the styled-components SSR integration from [some of your pages](https://vike.dev/config#inheritance):
+You can remove the `vike-react-styled-components` integration from [some of your pages](https://vike.dev/config#inheritance):
 
 ```js
 // pages/about/+styledComponents.js
@@ -109,6 +109,22 @@ For full customization consider [ejecting](https://vike.dev/eject).
 
 <br/>
 
+## What it does
+
+The `vike-react-styled-components` extension allows you to use `styled-components` without [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content).
+
+It collects the page's styles during SSR and injects them in the HTML, ensuring that styles are applied early (before even JavaScript starts loading).
+
+You can learn more at:
+ - [Vike > CSS-in-JS > Collect styles](https://vike.dev/css-in-js#collect-styles)
+ - [styled-components > Server Side Rendering](https://styled-components.com/docs/advanced#server-side-rendering)
+
+For more details, have a look at the source code of `vike-react-styled-jsx` (which is small).
+
+<br/>
+
 ## See also
 
 - [Vike Docs > styled-components](https://vike.dev/styled-components)
+- [Vike Docs > CSS-in-JS](https://vike.dev/css-in-js)
+- [styled-components Docs](https://styled-components.com/docs)

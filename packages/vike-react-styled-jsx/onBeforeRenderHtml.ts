@@ -5,7 +5,8 @@ import type { PageContext } from 'vike/types'
 
 function onBeforeRenderHtml(pageContext: PageContext) {
   if (pageContext.config.styledJsx !== null) {
-    pageContext.styledJsx ??= {}
-    pageContext.styledJsx.registry = createStyleRegistry()
+    pageContext.styledJsx = {
+      registry: createStyleRegistry(),
+    }
   }
 }

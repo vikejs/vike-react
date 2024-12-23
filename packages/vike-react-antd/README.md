@@ -1,13 +1,14 @@
 # `vike-react-antd`
 
+Integrates [Ant Design](https://ant.design) to your [`vike-react`](https://vike.dev/vike-react) app.
+
 [Installation](#installation)  
 [Settings](#settings)  
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-antd/CHANGELOG.md)  
+[What it does](#what-it-does)  
 [See Also](#see-also)  
 
 <br/>
-
-Integrates [Ant Design](https://ant.design) to your [`vike-react`](https://vike.dev/vike-react) app.
 
 ## Installation
 
@@ -57,14 +58,14 @@ const px2rem = px2remTransformer({
   rootValue: 32, // 32px = 1rem; @default 16
 })
 
-const antd: Omit<StyleProviderProps, "children"> = {
+const antd: Omit<StyleProviderProps, "children" | "cache"> = {
   hashPriority: "high",
   layer: true,
   transformers: [legacyLogicalPropertiesTransformer, px2rem],
 }
 ```
 
-You can remove Ant Design from [some of your pages](https://vike.dev/config#inheritance):
+You can remove the `vike-react-antd` integration from [some of your pages](https://vike.dev/config#inheritance):
 
 ```js
 // pages/about/+antd.js
@@ -79,6 +80,22 @@ For full customization consider [ejecting](https://vike.dev/eject).
 
 <br/>
 
+## What it does
+
+The `vike-react-antd` extension allows you to use Ant Design without [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content).
+
+It collects the page's styles during SSR and injects them in the HTML, ensuring that styles are applied early (before even JavaScript starts loading).
+
+You can learn more at:
+ - [Vike > CSS-in-JS > Collect styles](https://vike.dev/css-in-js#collect-styles)
+ - [Antd Design > Server Side Rendering](https://ant.design/docs/react/server-side-rendering)
+
+For more details, have a look at the source code of `vike-react-styled-jsx` (which is small).
+
+<br/>
+
 ## See also
 
 - [Vike Docs > Ant Design](https://vike.dev/antd)
+- [Vike Docs > CSS-in-JS](https://vike.dev/css-in-js)
+- [Antd Design](https://ant.design)

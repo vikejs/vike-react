@@ -6,18 +6,18 @@ import type { PageContext } from 'vike/types'
 
 function onAfterRenderHtml(pageContext: PageContext) {
   const config = useConfig()
+  const sheet = pageContext.styledComponents?.sheet
 
-  if (pageContext.styledComponentsSheet) {
-    const { styledComponentsSheet } = pageContext
+  if (sheet) {
     try {
-      const styles = styledComponentsSheet.getStyleElement()
+      const styles = sheet.getStyleElement()
       config({
         Head: styles,
       })
     } catch (error) {
       throw error
     } finally {
-      styledComponentsSheet.seal()
+      sheet.seal()
     }
   }
 }

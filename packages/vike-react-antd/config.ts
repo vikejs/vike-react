@@ -13,10 +13,13 @@ const config = {
   onBeforeRenderHtml: 'import:vike-react-antd/__internal/onBeforeRenderHtml:onBeforeRenderHtml',
   Wrapper: 'import:vike-react-antd/__internal/Wrapper:Wrapper',
   meta: {
+    Wrapper: {
+      env: { server: true },
+    },
     antd: {
       env: {
         server: true,
-        client: true,
+        client: false,
       },
     },
   },
@@ -24,8 +27,13 @@ const config = {
 
 declare global {
   namespace Vike {
+    interface PageContext {
+      antd?: {
+        cache?: StyleProviderProps['cache']
+      }
+    }
     interface Config {
-      antd?: null | Omit<StyleProviderProps, 'children'>
+      antd?: null | Omit<StyleProviderProps, 'children' | 'cache'>
     }
   }
 }

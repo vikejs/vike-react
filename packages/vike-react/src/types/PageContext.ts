@@ -1,5 +1,4 @@
 import type React from 'react'
-import type { JSX } from 'react'
 import type ReactDOM from 'react-dom/client'
 import type { ConfigFromHookResolved } from './Config.js'
 import type { PageHtmlStream } from '../integration/onRenderHtml.js'
@@ -11,7 +10,7 @@ declare global {
       /** The root React component of the page */
       Page?: () => React.ReactNode
       /** The root React element of the page */
-      page?: JSX.Element
+      page?: React.JSX.Element
       /** The React root DOM container */
       root?: ReactDOM.Root
 

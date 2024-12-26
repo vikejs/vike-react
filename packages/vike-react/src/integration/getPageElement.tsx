@@ -4,7 +4,7 @@ import React, { Suspense, useEffect } from 'react'
 import type { PageContext } from 'vike/types'
 import { PageContextProvider } from '../hooks/usePageContext.js'
 
-function getPageElement(pageContext: PageContext): { page: JSX.Element; renderPromise: Promise<void> } {
+function getPageElement(pageContext: PageContext): { page: React.JSX.Element; renderPromise: Promise<void> } {
   const {
     Page,
     config: { Loading },

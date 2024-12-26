@@ -1,3 +1,12 @@
+## [0.5.11](https://github.com/vikejs/vike-react/compare/vike-react@0.5.10...vike-react@0.5.11) (2024-12-26)
+
+
+### Bug Fixes
+
+* workaround error `Cannot find namespace JSX` ([076f42a](https://github.com/vikejs/vike-react/commit/076f42acef1fb82918b47a173fba1077e0533e04))
+
+
+
 ## [0.5.10](https://github.com/vikejs/vike-react/compare/vike-react@0.5.9...vike-react@0.5.10) (2024-12-10)
 
 

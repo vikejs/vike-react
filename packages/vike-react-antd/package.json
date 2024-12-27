@@ -6,7 +6,7 @@
     "./config": "./dist/config.js",
     "./__internal/onAfterRenderHtml": "./dist/onAfterRenderHtml.js",
     "./__internal/onBeforeRenderHtml": "./dist/onBeforeRenderHtml.js",
-    "./__internal/Wrapper": "./dist/Wrapper.js"
+    "./__internal/Wrapper": "./dist/Wrapper.server.js"
   },
   "scripts": {
     "dev": "tsc --watch",

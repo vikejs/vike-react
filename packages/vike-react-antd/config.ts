@@ -13,9 +13,6 @@ const config = {
   onBeforeRenderHtml: 'import:vike-react-antd/__internal/onBeforeRenderHtml:onBeforeRenderHtml',
   Wrapper: 'import:vike-react-antd/__internal/Wrapper:Wrapper',
   meta: {
-    Wrapper: {
-      env: { server: true },
-    },
     antd: {
       env: {
         server: true,

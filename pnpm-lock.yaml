@@ -77,9 +77,6 @@ importers:
 
   examples/full:
     dependencies:
-      '@ant-design/cssinjs':
-        specifier: ^1.22.1
-        version: 1.22.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.3
@@ -89,9 +86,6 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.3.1
         version: 4.3.1(vite@5.4.0(@types/node@20.11.17))
-      antd:
-        specifier: ^5.22.5
-        version: 5.22.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       node-fetch:
         specifier: ^3.3.2
         version: 3.3.2
@@ -113,9 +107,6 @@ importers:
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
-      vike-react-antd:
-        specifier: link:../../packages/vike-react-antd
-        version: link:../../packages/vike-react-antd
       vite:
         specifier: ^5.4.0
         version: 5.4.0(@types/node@20.11.17)

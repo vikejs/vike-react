@@ -6,7 +6,7 @@ import type { StyledJsxStyleRegistry } from 'styled-jsx'
 const config = {
   name: 'vike-react-styled-jsx',
   require: {
-    vike: '>=0.4.203',
+    vike: '>=0.4.211',
     'vike-react': '>=0.4.13',
   },
   onBeforeRenderHtml: 'import:vike-react-styled-jsx/__internal/onBeforeRenderHtml:onBeforeRenderHtml',
@@ -14,9 +14,6 @@ const config = {
   Wrapper: 'import:vike-react-styled-jsx/__internal/Wrapper:Wrapper',
   meta: {
     styledJsx: {
-      env: { server: true },
-    },
-    Wrapper: {
       env: { server: true },
     },
   },

@@ -7,11 +7,10 @@ import { usePageContext } from 'vike-react/usePageContext'
 function Wrapper({ children }: { children: ReactNode }) {
   const pageContext = usePageContext()
   const { styledJsx } = pageContext.config
-  const registry = 'styledJsx' in pageContext ? pageContext.styledJsx?.registry : undefined
 
-  if (styledJsx === null || !registry) {
+  if (styledJsx === null) {
     return <>{children}</>
   }
 
-  return <StyleRegistry registry={registry}>{children}</StyleRegistry>
+  return <StyleRegistry registry={pageContext.styledJsx!.registry}>{children}</StyleRegistry>
 }

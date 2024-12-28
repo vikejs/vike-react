@@ -6,7 +6,7 @@
     "./config": "./dist/config.js",
     "./__internal/onAfterRenderHtml": "./dist/onAfterRenderHtml.js",
     "./__internal/onBeforeRenderHtml": "./dist/onBeforeRenderHtml.js",
-    "./__internal/Wrapper": "./dist/Wrapper.js"
+    "./__internal/Wrapper": "./dist/Wrapper.server.js"
   },
   "scripts": {
     "dev": "tsc --watch",
@@ -28,7 +28,7 @@
     "rimraf": "^5.0.5",
     "styled-jsx": "^5.1.6",
     "typescript": "^5.5.3",
-    "vike": "^0.4.203",
+    "vike": "^0.4.211",
     "vike-react": "^0.5.11",
     "vite": "^5.4.0"
   },
@@ -44,7 +44,7 @@
         "dist/onBeforeRenderHtml.d.ts"
       ],
       "__internal/Wrapper": [
-        "dist/Wrapper.d.ts"
+        "dist/Wrapper.server.d.ts"
       ]
     }
   },

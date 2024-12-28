@@ -2,6 +2,7 @@ import type { ImportString, PageContextServer, PageContext, PageContextClient } 
 import type { TagAttributes } from '../utils/getTagAttributesString.js'
 import type { Viewport } from '../integration/onRenderHtml.js'
 import type { ConfigsCumulative } from '../hooks/useConfig/configsCumulative.js'
+import type React from 'react'
 
 // https://vike.dev/meta#typescript
 declare global {

@@ -6,16 +6,13 @@ import type { Config } from 'vike/types'
 const config = {
   name: 'vike-react-styled-components',
   require: {
-    vike: '>=0.4.203',
+    vike: '>=0.4.211',
     'vike-react': '>=0.4.13',
   },
   onAfterRenderHtml: 'import:vike-react-styled-components/__internal/onAfterRenderHtml:onAfterRenderHtml',
   onBeforeRenderHtml: 'import:vike-react-styled-components/__internal/onBeforeRenderHtml:onBeforeRenderHtml',
   Wrapper: 'import:vike-react-styled-components/__internal/Wrapper:Wrapper',
   meta: {
-    Wrapper: {
-      env: { server: true },
-    },
     styledComponents: {
       env: {
         server: true,

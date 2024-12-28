@@ -46,7 +46,7 @@
         "dist/onBeforeRenderHtml.d.ts"
       ],
       "__internal/Wrapper": [
-        "dist/Wrapper.d.ts"
+        "dist/Wrapper.server.d.ts"
       ]
     }
   },

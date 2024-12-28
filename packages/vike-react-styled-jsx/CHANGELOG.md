@@ -1,3 +1,13 @@
+## [1.0.2](https://github.com/vikejs/vike-react/compare/vike-react-styled-jsx@1.0.1...vike-react-styled-jsx@1.0.2) (2024-12-28)
+
+
+### Bug Fixes
+
+* simplify condition checks ([d67da36](https://github.com/vikejs/vike-react/commit/d67da3646e13f0b4c7493ff8c193e50c6f5ca15e))
+* stop overriding Wrapper meta ([ddcab7c](https://github.com/vikejs/vike-react/commit/ddcab7c21742b3701909b3698dca21b89c3dfebc))
+
+
+
 ## [1.0.1](https://github.com/vikejs/vike-react/compare/vike-react-styled-jsx@1.0.0...vike-react-styled-jsx@1.0.1) (2024-12-23)
 
 

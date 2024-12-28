@@ -4,6 +4,7 @@ import React from 'react'
 import { Counter } from '../../components/Counter'
 import image from '../../assets/logo-new.svg'
 import { Config } from 'vike-react/Config'
+import { Button, Flex } from 'antd'
 
 function Page() {
   // Will be printed on the server and in the browser:
@@ -20,6 +21,10 @@ function Page() {
           Interactive. <Counter />
         </li>
       </ul>
+      <Flex gap="small" wrap>
+        <Button type="primary">Primary Button</Button>
+        <Button>Default Button</Button>
+      </Flex>
     </>
   )
 }

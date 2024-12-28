@@ -1,6 +1,7 @@
 export { Head }
 
 import { useConfig } from '../../hooks/useConfig/useConfig-server.js'
+import type React from 'react'
 
 /**
  * Add arbitrary `<head>` tags.

@@ -1,3 +1,13 @@
+## [0.5.12](https://github.com/vikejs/vike-react/compare/vike-react@0.5.11...vike-react@0.5.12) (2025-01-22)
+
+
+### Bug Fixes
+
+* align ReactNode types ([840a114](https://github.com/vikejs/vike-react/commit/840a1143b8d46d6112726517a32b35baf7f65c22))
+* update react-streaming ([79b8240](https://github.com/vikejs/vike-react/commit/79b8240f297475e9e3e5db3137c3bd61b9ecd23e))
+
+
+
 ## [0.5.11](https://github.com/vikejs/vike-react/compare/vike-react@0.5.10...vike-react@0.5.11) (2024-12-26)
 
 

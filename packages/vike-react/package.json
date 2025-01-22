@@ -27,7 +27,7 @@
     "./__internal/integration/Loading": "./dist/integration/Loading.js"
   },
   "dependencies": {
-    "react-streaming": "^0.3.42"
+    "react-streaming": "^0.3.47"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -50,7 +50,7 @@
     "@types/react-dom": "^18.2.19",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-streaming": "^0.3.43",
+    "react-streaming": "^0.3.47",
     "rimraf": "^5.0.5",
     "typescript": "^5.5.4",
     "vike": "^0.4.211",

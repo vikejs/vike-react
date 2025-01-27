@@ -12,6 +12,7 @@ overrides:
   vike-react-antd: link:./packages/vike-react-antd/
   vike-react-styled-components: link:./packages/vike-react-styled-components/
   vike-react-styled-jsx: link:./packages/vike-react-styled-jsx/
+  vike-react-redux: link:./packages/vike-react-redux/
 
 importers:
 
@@ -64,7 +65,7 @@ importers:
         version: 5.5.3
       vike:
         specifier: ^0.4.211
-        version: 0.4.211(react-streaming@0.3.47(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
+        version: 0.4.211(react-streaming@0.3.47(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -103,7 +104,7 @@ importers:
         version: 5.5.4
       vike:
         specifier: ^0.4.211
-        version: 0.4.211(react-streaming@0.3.47(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
+        version: 0.4.211(react-streaming@0.3.47(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -157,7 +158,7 @@ importers:
         version: 5.5.3
       vike:
         specifier: ^0.4.211
-        version: 0.4.211(react-streaming@0.3.47(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
+        version: 0.4.211(react-streaming@0.3.47(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -203,7 +204,7 @@ importers:
         version: 5.5.4
       vike:
         specifier: ^0.4.211
-        version: 0.4.211(react-streaming@0.3.47(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
+        version: 0.4.211(react-streaming@0.3.47(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
       vite:
         specifier: ^5.4.0
         version: 5.4.0(@types/node@20.11.17)
@@ -233,7 +234,7 @@ importers:
         version: 5.5.4
       vike:
         specifier: ^0.4.211
-        version: 0.4.211(react-streaming@0.3.47(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
+        version: 0.4.211(react-streaming@0.3.47(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -285,7 +286,7 @@ importers:
         version: 5.5.3
       vike:
         specifier: ^0.4.211
-        version: 0.4.211(react-streaming@0.3.47(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
+        version: 0.4.211(react-streaming@0.3.47(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -318,7 +319,7 @@ importers:
         version: 5.5.4
       vike:
         specifier: ^0.4.211
-        version: 0.4.211(react-streaming@0.3.47(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
+        version: 0.4.211(react-streaming@0.3.47(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -367,7 +368,7 @@ importers:
         version: 5.5.3
       vike:
         specifier: ^0.4.211
-        version: 0.4.211(react-streaming@0.3.47(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
+        version: 0.4.211(react-streaming@0.3.47(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -377,6 +378,39 @@ importers:
       vitest:
         specifier: ^1.2.2
         version: 1.2.2(@types/node@20.11.17)(jsdom@24.0.0)
+
+  packages/vike-react-redux:
+    devDependencies:
+      '@brillout/release-me':
+        specifier: ^0.4.2
+        version: 0.4.2
+      '@reduxjs/toolkit':
+        specifier: ^2.5.0
+        version: 2.5.0(react-redux@9.2.0(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
+      '@types/react':
+        specifier: ^18.2.55
+        version: 18.3.3
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-redux:
+        specifier: ^9.2.0
+        version: 9.2.0(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1)
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.5
+      typescript:
+        specifier: ^5.5.3
+        version: 5.5.4
+      vike:
+        specifier: ^0.4.211
+        version: 0.4.211(react-streaming@0.3.47(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
+      vike-react:
+        specifier: link:../vike-react
+        version: link:../vike-react
+      vite:
+        specifier: ^5.4.0
+        version: 5.4.0(@types/node@20.11.17)
 
   packages/vike-react-styled-components:
     devDependencies:
@@ -400,7 +434,7 @@ importers:
         version: 5.5.4
       vike:
         specifier: ^0.4.211
-        version: 0.4.211(react-streaming@0.3.47(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
+        version: 0.4.211(react-streaming@0.3.47(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -430,7 +464,7 @@ importers:
         version: 5.5.4
       vike:
         specifier: ^0.4.211
-        version: 0.4.211(react-streaming@0.3.47(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
+        version: 0.4.211(react-streaming@0.3.47(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -1349,6 +1383,17 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
 
+  '@reduxjs/toolkit@2.5.0':
+    resolution: {integrity: sha512-awNe2oTodsZ6LmRqmkFhtb/KH03hUhxOamEQy411m3Njj3BbFvoBovxo4Q1cBWnV1ErprVj9MlF0UPXkng0eyg==}
+    peerDependencies:
+      react: ^16.9.0 || ^17.0.0 || ^18 || ^19
+      react-redux: ^7.2.1 || ^8.1.3 || ^9.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-redux:
+        optional: true
+
   '@rollup/rollup-android-arm-eabi@4.20.0':
     resolution: {integrity: sha512-TSpWzflCc4VGAUJZlPpgAJE1+V60MePDQnBd7PPkpuEmOy8i87aL6tinFGKBFKuEDikYpig72QzdT3QPYIi+oA==}
     cpu: [arm]
@@ -1501,6 +1546,9 @@ packages:
 
   '@types/stylis@4.2.5':
     resolution: {integrity: sha512-1Xve+NMN7FWjY14vLoY5tL3BVEQ/n42YLwaqJIPYhotZ9uBHt87VceMwWQpzmdEt2TNXIorIFG+YeCUUW7RInw==}
+
+  '@types/use-sync-external-store@0.0.6':
+    resolution: {integrity: sha512-zFDAD+tlpf2r4asuHEj0XH6pY6i0g5NeAHPn+15wk3BV6JA69eERFXC1gyGThDkVa1zCyKr5jox1+2LbV/AMLg==}
 
   '@vitejs/plugin-react@4.2.1':
     resolution: {integrity: sha512-oojO9IDc4nCUUi8qIR11KoQm0XFFLIwsRBwHRR4d/88IWghn1y6ckz/bJ8GHDCsYEJee8mDzqtJxh15/cisJNQ==}
@@ -2510,6 +2558,9 @@ packages:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
 
+  immer@10.1.1:
+    resolution: {integrity: sha512-s2MPrmjovJcoMaHtx6K11Ra7oD05NT97w1IC5zpMkT6Atjr7H8LjaDd81iIxUYpMKSRRNMJE703M1Fhr/TctHw==}
+
   import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -3236,6 +3287,18 @@ packages:
   react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
 
+  react-redux@9.2.0:
+    resolution: {integrity: sha512-ROY9fvHhwOD9ySfrF0wmvu//bKCQ6AeZZq1nJNtbDC+kk5DuSuNX/n6YWYF/SYy7bSba4D4FSz8DJeKY/S/r+g==}
+    peerDependencies:
+      '@types/react': ^18.2.25 || ^19
+      react: ^18.0 || ^19
+      redux: ^5.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      redux:
+        optional: true
+
   react-refresh@0.14.0:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
@@ -3262,6 +3325,14 @@ packages:
     resolution: {integrity: sha512-PORM8AgzXeskHO/WEv312k9U03B8K9JSiWF/8N9sUuFjBa+9SF2u6K7VClzXwDXab51jCd8Nd36CNM+zR97ScQ==}
     engines: {node: '>=16'}
 
+  redux-thunk@3.1.0:
+    resolution: {integrity: sha512-NW2r5T6ksUKXCabzhL9z+h206HQw/NJkcLm1GPImRQ8IzfXwRGqjVhKJGauHirT0DAuyy6hjdnMZaRoAcy0Klw==}
+    peerDependencies:
+      redux: ^5.0.0
+
+  redux@5.0.1:
+    resolution: {integrity: sha512-M9/ELqF6fy8FwmkpnF0S3YKOqMyoWJ4+CS5Efg2ct3oY9daQvd/Pc71FpGZsVsbl3Cpb+IIcjBDUnnyBdQbq4w==}
+
   regenerator-runtime@0.14.0:
     resolution: {integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==}
 
@@ -3282,6 +3353,9 @@ packages:
 
   requires-port@1.0.0:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
+
+  reselect@5.1.1:
+    resolution: {integrity: sha512-K/BG6eIky/SBpzfHZv/dd+9JBFiS4SWV7FIujVyJRux6e45+73RaUHXLmIR1f7WOMaQ0U1km6qwklRQxpJJY0w==}
 
   resize-observer-polyfill@1.5.1:
     resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
@@ -3602,6 +3676,11 @@ packages:
 
   url-parse@1.5.10:
     resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}
+
+  use-sync-external-store@1.4.0:
+    resolution: {integrity: sha512-9WXSPC5fMv61vaupRkCKCxsPxBocVnwakBEkMIHHpkTTg6icbJtg6jzgtLDm4bl3cSHAca52rYWih0k4K3PfHw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
@@ -4769,6 +4848,16 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
+  '@reduxjs/toolkit@2.5.0(react-redux@9.2.0(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1))(react@18.3.1)':
+    dependencies:
+      immer: 10.1.1
+      redux: 5.0.1
+      redux-thunk: 3.1.0(redux@5.0.1)
+      reselect: 5.1.1
+    optionalDependencies:
+      react: 18.3.1
+      react-redux: 9.2.0(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1)
+
   '@rollup/rollup-android-arm-eabi@4.20.0':
     optional: true
 
@@ -4906,6 +4995,8 @@ snapshots:
   '@types/scheduler@0.16.6': {}
 
   '@types/stylis@4.2.5': {}
+
+  '@types/use-sync-external-store@0.0.6': {}
 
   '@vitejs/plugin-react@4.2.1(vite@5.4.0(@types/node@20.11.17))':
     dependencies:
@@ -6619,6 +6710,8 @@ snapshots:
     dependencies:
       safer-buffer: 2.1.2
 
+  immer@10.1.1: {}
+
   import-fresh@3.3.0:
     dependencies:
       parent-module: 1.0.1
@@ -7401,6 +7494,15 @@ snapshots:
 
   react-is@18.2.0: {}
 
+  react-redux@9.2.0(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1):
+    dependencies:
+      '@types/use-sync-external-store': 0.0.6
+      react: 18.3.1
+      use-sync-external-store: 1.4.0(react@18.3.1)
+    optionalDependencies:
+      '@types/react': 18.3.3
+      redux: 5.0.1
+
   react-refresh@0.14.0: {}
 
   react-refresh@0.14.2: {}
@@ -7431,6 +7533,12 @@ snapshots:
       parse-json: 7.1.1
       type-fest: 4.8.1
 
+  redux-thunk@3.1.0(redux@5.0.1):
+    dependencies:
+      redux: 5.0.1
+
+  redux@5.0.1: {}
+
   regenerator-runtime@0.14.0: {}
 
   regexp.prototype.flags@1.5.1:
@@ -7445,6 +7553,8 @@ snapshots:
       react: 18.3.1
 
   requires-port@1.0.0: {}
+
+  reselect@5.1.1: {}
 
   resize-observer-polyfill@1.5.1: {}
 
@@ -7728,6 +7838,10 @@ snapshots:
       querystringify: 2.2.0
       requires-port: 1.0.0
 
+  use-sync-external-store@1.4.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+
   validate-npm-package-license@3.0.4:
     dependencies:
       spdx-correct: 3.2.0
@@ -7751,7 +7865,7 @@ snapshots:
     optionalDependencies:
       react-streaming: 0.3.47(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
-  vike@0.4.211(react-streaming@0.3.47(react@18.3.1))(vite@5.4.0(@types/node@20.11.17)):
+  vike@0.4.211(react-streaming@0.3.47(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(vite@5.4.0(@types/node@20.11.17)):
     dependencies:
       '@brillout/import': 0.2.3
       '@brillout/json-serializer': 0.5.15

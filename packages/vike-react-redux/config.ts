@@ -1,4 +1,5 @@
 export { config as default }
+
 import type { Config } from 'vike/types'
 import type { Store } from '@reduxjs/toolkit'
 

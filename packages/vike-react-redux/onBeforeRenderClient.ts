@@ -6,7 +6,7 @@ function onBeforeRenderClient(pageContext: PageContext) {
   if (pageContext.config.redux) {
     const { createStore } = pageContext.config.redux
     if (createStore) {
-      pageContext.config.redux.store = createStore(pageContext.redux?.state)
+      pageContext.reduxStore = createStore(pageContext.reduxState)
     }
   }
 }

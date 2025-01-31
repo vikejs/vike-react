@@ -9,7 +9,7 @@ const config = {
     vike: '>=0.4.211',
     'vike-react': '>=0.4.13',
   },
-  passToClient: ['redux'],
+  passToClient: ['reduxState'],
   onAfterRenderHtml: 'import:vike-react-redux/__internal/onAfterRenderHtml:onAfterRenderHtml',
   onBeforeRenderHtml: 'import:vike-react-redux/__internal/onBeforeRenderHtml:onBeforeRenderHtml',
   onBeforeRenderClient: 'import:vike-react-redux/__internal/onBeforeRenderClient:onBeforeRenderClient',
@@ -24,14 +24,12 @@ const config = {
 declare global {
   namespace Vike {
     interface PageContext {
-      redux?: {
-        state?: unknown
-      }
+      reduxStore?: Store
+      reduxState?: unknown
     }
     interface Config {
       redux?: null | {
         createStore?: (preloadedState?: any) => Store
-        store?: Store
       }
     }
   }

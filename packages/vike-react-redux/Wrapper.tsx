@@ -7,16 +7,15 @@ import type { Store } from '@reduxjs/toolkit'
 
 function Wrapper({ children }: { children: React.ReactNode }) {
   const pageContext = usePageContext()
-  const { redux } = pageContext.config
   const storeRef = useRef<Store>()
 
-  if (!redux?.store) {
+  if (!pageContext.config.redux) {
     return <>{children}</>
   }
 
   if (!storeRef.current) {
-    storeRef.current = redux.store
+    storeRef.current = pageContext.reduxStore
   }
 
-  return <Provider store={storeRef.current}>{children}</Provider>
+  return <Provider store={storeRef.current!}>{children}</Provider>
 }

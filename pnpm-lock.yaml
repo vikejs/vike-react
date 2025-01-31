@@ -380,22 +380,23 @@ importers:
         version: 1.2.2(@types/node@20.11.17)(jsdom@24.0.0)
 
   packages/vike-react-redux:
+    dependencies:
+      '@reduxjs/toolkit':
+        specifier: ^2.5.0
+        version: 2.5.0(react-redux@9.2.0(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
+      react-redux:
+        specifier: ^9.2.0
+        version: 9.2.0(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1)
     devDependencies:
       '@brillout/release-me':
         specifier: ^0.4.2
         version: 0.4.2
-      '@reduxjs/toolkit':
-        specifier: ^2.5.0
-        version: 2.5.0(react-redux@9.2.0(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
       '@types/react':
         specifier: ^18.2.55
         version: 18.3.3
       react:
         specifier: ^18.3.1
         version: 18.3.1
-      react-redux:
-        specifier: ^9.2.0
-        version: 9.2.0(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1)
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5
@@ -408,9 +409,6 @@ importers:
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
-      vite:
-        specifier: ^5.4.0
-        version: 5.4.0(@types/node@20.11.17)
 
   packages/vike-react-styled-components:
     devDependencies:

@@ -169,6 +169,45 @@ importers:
         specifier: ^5.4.0
         version: 5.4.0(@types/node@20.11.17)
 
+  examples/redux:
+    dependencies:
+      '@reduxjs/toolkit':
+        specifier: ^2.5.0
+        version: 2.5.0(react-redux@9.2.0(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
+      '@types/react':
+        specifier: ^18.2.55
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: ^18.2.19
+        version: 18.3.0
+      '@vitejs/plugin-react':
+        specifier: ^4.2.1
+        version: 4.3.1(vite@5.4.0(@types/node@20.11.17))
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+      react-redux:
+        specifier: ^9.2.0
+        version: 9.2.0(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.5.4
+      vike:
+        specifier: ^0.4.211
+        version: 0.4.211(react-streaming@0.3.47(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(vite@5.4.0(@types/node@20.11.17))
+      vike-react:
+        specifier: link:../../packages/vike-react
+        version: link:../../packages/vike-react
+      vike-react-redux:
+        specifier: link:../../packages/vike-react-redux
+        version: link:../../packages/vike-react-redux
+      vite:
+        specifier: ^5.4.0
+        version: 5.4.0(@types/node@20.11.17)
+
   packages/vike-react:
     dependencies:
       react-streaming:

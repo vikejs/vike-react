@@ -29,7 +29,7 @@ declare global {
     }
     interface Config {
       redux?: null | {
-        createStore?: (preloadedState?: any) => Store
+        createStore?: (preloadedState?: any) => PageContext['reduxStore']
       }
     }
   }

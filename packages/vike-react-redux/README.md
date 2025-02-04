@@ -28,53 +28,46 @@ Integrates [React Redux](https://react-redux.js.org) to your [`vike-react`](http
 
 3. Create `+redux.ts` file with the following code format/example:
    ```ts
-   export { redux }
-
-   // Create and import your reducers
-   import counterReducer from "../lib/features/counter/counterSlice";
-   import { combineReducers, configureStore } from "@reduxjs/toolkit";
-   
-   const rootReducer = combineReducers({ counter: counterReducer });
-
-    const redux = {
-        createStore: (preloadedState: any) => {
-            return configureStore({
-                reducer: rootReducer,
-                preloadedState
-            })
-        }
+    export default {
+        redux: {
+            createStore,
+        },
     }
-
-    // Infer the type of redux.createStore
-    export type AppStore = ReturnType<typeof redux.createStore>;
-    // Infer the `RootState` and `AppDispatch` types from the store itself
-    export type RootState = ReturnType<AppStore["getState"]>;
-    // Infer the `AppDispatch` type from the store itself
-    export type AppDispatch = AppStore["dispatch"];
+    
+    export type AppStore = ReturnType<typeof createStore>
+    export type RootState = ReturnType<AppStore['getState']>
+    export type AppDispatch = AppStore['dispatch']
+    
+    // Set up your reducers and import them
+    import counterReducer from '../lib/features/counter/counterSlice'
+    import { combineReducers, configureStore } from '@reduxjs/toolkit'
+    
+    const rootReducer = combineReducers({ counter: counterReducer })
+    
+    function createStore(preloadedState: any) {
+        return configureStore({
+            reducer: rootReducer,
+            preloadedState,
+        })
+    }
    ```
 
-4. Update your `global.d.ts` like the following (optional):
+4. Optionally, update your `global.d.ts` like this:
    ```ts
     import { AppStore, RootState } from "./pages/+redux";
 
     declare global {
         namespace Vike {
             interface PageContext {
-                redux?: {
-                    state?: RootState;
-                };
-            }
-            interface Config {
-                redux?: {
-                    createStore?: (preloadedState?: any) => AppStore;
-                    store?: AppStore;
-                };
+                reduxStore?: AppStore
+                reduxState?: RootState
             }
         }
     }
 
     export {};
    ```
+
 5. You can now use React Redux at any of your components.
    ```tsx
     import React from "react"

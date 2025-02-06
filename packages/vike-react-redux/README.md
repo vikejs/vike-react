@@ -28,10 +28,8 @@ Integrates [React Redux](https://react-redux.js.org) to your [`vike-react`](http
 
 3. Create `+redux.ts` file with the following code format/example:
    ```ts
-    export default {
-        redux: {
-            createStore,
-        },
+    export const redux = {
+        createStore
     }
     
     export type AppStore = ReturnType<typeof createStore>
@@ -47,7 +45,7 @@ Integrates [React Redux](https://react-redux.js.org) to your [`vike-react`](http
     function createStore(preloadedState: any) {
         return configureStore({
             reducer: rootReducer,
-            preloadedState,
+            preloadedState
         })
     }
    ```

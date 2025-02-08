@@ -57,7 +57,9 @@ Integrates [React Redux](https://react-redux.js.org) to your [`vike-react`](http
     declare global {
         namespace Vike {
             interface PageContext {
+                // Refine type of pageContext.reduxStore (it's `Store` by default)
                 reduxStore?: AppStore
+                // Refine type of pageContext.reduxState (it's `unknown` by default)
                 reduxState?: RootState
             }
         }
@@ -104,7 +106,10 @@ For full customization consider [ejecting](https://vike.dev/eject).
 <br/>
 
 ## What it does
-TODO
+
+The `vike-react-redux` extension simplifies SSR with React-Redux by ensuring the server's Redux state is sent to the client. 
+
+It creates a fresh store per request, optionally dispatches actions, extracts the state, and includes it in the HTML response. On the client, the Redux store is initialized with this state, ensuring consistent markup between server and client.
 
 <br/>
 

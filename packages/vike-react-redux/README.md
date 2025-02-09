@@ -111,9 +111,15 @@ The `vike-react-redux` extension simplifies SSR with React-Redux by ensuring the
 
 It creates a fresh store per request, optionally dispatches actions, extracts the state, and includes it in the HTML response. On the client, the Redux store is initialized with this state, ensuring consistent markup between server and client.
 
+You can learn more at:
+ - [Vike > Store (State Management) > SSR](https://vike.dev/store#ssr)
+ - [Redux > Server Side Rendering](https://redux.js.org/usage/server-rendering)
+
+
 <br/>
 
 ## See also
+
 - [Vike Docs > Redux](https://vike.dev/redux)
 - [Vike Docs > Store](https://vike.dev/store)
 - [React Redux](https://react-redux.js.org)

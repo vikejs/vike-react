@@ -41,6 +41,7 @@ function clientOnly<T extends ComponentType<any>>(
       const { fallback, ...rest } = props
       return (
         <Suspense fallback={<>{props.fallback}</>}>
+          {/* @ts-ignore */}
           <Component {...rest} ref={ref} />
         </Suspense>
       )

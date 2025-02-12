@@ -1,1 +1,1 @@
-For more examples, use [Bati](https://batijs.dev) which generates `vike-react` apps.
+For more examples, see [Bati](https://batijs.dev) which generates `vike-react` apps.

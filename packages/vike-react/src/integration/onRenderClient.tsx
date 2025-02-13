@@ -23,7 +23,7 @@ const onRenderClient: OnRenderClientAsync = async (
   const { page, renderPromise } = getPageElement(pageContext)
   pageContext.page = page
 
-  // TODO: implement this? So that, upon errors, onRenderClient() throws an error and Vike can render the error. As of April 2024 it isn't released yet.
+  // TODO: implement this? So that, upon errors, onRenderClient() throws an error and Vike can render the error page. As of April 2024 it isn't released yet.
   //  - https://react-dev-git-fork-rickhanlonii-rh-root-options-fbopensource.vercel.app/reference/react-dom/client/createRoot#show-a-dialog-for-uncaught-errors
   //  - https://react-dev-git-fork-rickhanlonii-rh-root-options-fbopensource.vercel.app/reference/react-dom/client/hydrateRoot#show-a-dialog-for-uncaught-errors
   const onUncaughtError = (_error: any, _errorInfo: any) => {}

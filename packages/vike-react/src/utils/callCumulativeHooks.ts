@@ -1,11 +1,12 @@
 export { callCumulativeHooks }
 
 import { providePageContext } from 'vike/getPageContext'
+import type { ImportString } from 'vike/types'
 
 async function callCumulativeHooks<T>(
   values: undefined | T[],
   pageContext: Record<string, any>,
-): Promise<Exclude<T, Function>[]> {
+): Promise<(undefined | null | Exclude<T, Function | ImportString>)[]> {
   if (!values) return []
   const valuesPromises = values.map((val) => {
     if (typeof val === 'function') {

@@ -36,15 +36,13 @@ const onRenderClient: OnRenderClientAsync = async (
   ) {
     // First render while using SSR, i.e. [hydration](https://vike.dev/hydration)
     root = ReactDOM.hydrateRoot(container, page, {
-      // @ts-expect-error
-      onUncaughtError,
+      // onUncaughtError,
     })
   } else {
     if (!root) {
       // First render without SSR
       root = ReactDOM.createRoot(container, {
-        // @ts-expect-error
-        onUncaughtError,
+        // onUncaughtError,
       })
     }
     root.render(page)

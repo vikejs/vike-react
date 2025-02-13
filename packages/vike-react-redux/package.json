@@ -37,11 +37,11 @@
     },
     "devDependencies": {
       "@brillout/release-me": "^0.4.2",
-      "@types/react": "^18.2.55",
-      "react": "^18.3.1",
+      "@types/react": "^19.0.8",
+      "react": "^19.0.0",
       "rimraf": "^5.0.5",
       "typescript": "^5.5.3",
-      "vike": "^0.4.211",
+      "vike": "^0.4.222",
       "vike-react": "^0.5.12"
     },
     "typesVersions": {

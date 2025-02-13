@@ -9,6 +9,7 @@ import type { PageContextInternal } from '../types/PageContext.js'
 import './styles.css'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { applyHeadSettings } from './applyHeadSettings.js'
+import type { ReactOptions } from '../types/Config.js'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientAsync = async (
@@ -29,21 +30,18 @@ const onRenderClient: OnRenderClientAsync = async (
   const onUncaughtError = (_error: any, _errorInfo: any) => {}
 
   const container = document.getElementById('root')!
+  const { hydrateRootOptions, createRootOptions } = await getReactOptions(pageContext)
   if (
     pageContext.isHydration &&
     // Whether the page was [Server-Side Rendered](https://vike.dev/ssr).
     container.innerHTML !== ''
   ) {
     // First render while using SSR, i.e. [hydration](https://vike.dev/hydration)
-    root = ReactDOM.hydrateRoot(container, page, {
-      // onUncaughtError,
-    })
+    root = ReactDOM.hydrateRoot(container, page, hydrateRootOptions)
   } else {
     if (!root) {
       // First render without SSR
-      root = ReactDOM.createRoot(container, {
-        // onUncaughtError,
-      })
+      root = ReactDOM.createRoot(container, createRootOptions)
     }
     root.render(page)
   }
@@ -66,4 +64,29 @@ function applyHead(pageContext: PageContextClient) {
   const title = getHeadSetting<string | null>('title', pageContext)
   const lang = getHeadSetting<string | null>('lang', pageContext)
   applyHeadSettings(title, lang)
+}
+
+async function getReactOptions(pageContext: PageContextClient): Promise<DeepRequired<ReactOptions>> {
+  const values = await callCumulativeHooks(pageContext.config.react, pageContext)
+  return {
+    hydrateRootOptions: {
+      formState: pickFirst(values.map(v => v?.hydrateRootOptions?.formState)),
+      identifierPrefix: pickFirst(values.map(v => v?.hydrateRootOptions?.identifierPrefix)),
+      onUncaughtError: undefined,
+      onRecoverableError: undefined,
+      onCaughtError: undefined,
+    },
+    createRootOptions: {
+      identifierPrefix: pickFirst(values.map(v => v?.createRootOptions?.identifierPrefix)),
+      onUncaughtError: undefined,
+      onRecoverableError: undefined,
+      onCaughtError: undefined,
+    },
+  }
+}
+function pickFirst<T>(arr: T[]): T | undefined {
+  return arr.filter((v) => v !== undefined)[0]
+}
+type DeepRequired<T> = {
+  [K in keyof Required<T>]: T[K] extends Record<string, unknown> | undefined ? DeepRequired<T[K]> : (T[K])
 }

@@ -10,6 +10,8 @@ import './styles.css'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { applyHeadSettings } from './applyHeadSettings.js'
 import type { ReactOptions } from '../types/Config.js'
+import {isCallable} from '../utils/isCallable.js'
+import {objectEntries} from '../utils/objectEntries.js'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientAsync = async (
@@ -83,6 +85,22 @@ async function getReactOptions(pageContext: PageContextClient): Promise<DeepRequ
       onCaughtError: undefined,
     },
   }
+}
+function resolveOptions<T extends Record<string, unknown>>(optionList: T[]): T | undefined {
+  const options = optionList[0]
+  optionList.slice(1).forEach(opts => {
+    objectEntries(opts).forEach(([key, val]) => {
+      if (!isCallable(val)) {
+        options![key] ??= val
+      } else {
+        (options![key] as Function|undefined) = (...args: unknown[]) => {
+          (options![key] as Function|undefined)?.(...args)
+          val(...args)
+        }
+      }
+    })
+  })
+  return options
 }
 function pickFirst<T>(arr: T[]): T | undefined {
   return arr.filter((v) => v !== undefined)[0]

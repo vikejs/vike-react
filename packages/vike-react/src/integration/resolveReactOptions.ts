@@ -18,7 +18,7 @@ function resolveReactOptions(pageContext: PageContext) {
           // @ts-ignore
           optionsAcc[fnName][key] ??= val
         } else {
-          const valPrevious = optionsAcc[fnName]![key] as any as Function
+          const valPrevious = optionsAcc[fnName]![key] as any as Function | undefined
           // @ts-ignore
           optionsAcc[fnName][key] = (...args: unknown[]) => {
             valPrevious?.(...args)

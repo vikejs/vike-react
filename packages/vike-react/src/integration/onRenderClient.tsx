@@ -9,8 +9,8 @@ import type { PageContextInternal } from '../types/PageContext.js'
 import './styles.css'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { applyHeadSettings } from './applyHeadSettings.js'
-import {isCallable} from '../utils/isCallable.js'
-import {objectEntries} from '../utils/objectEntries.js'
+import { isCallable } from '../utils/isCallable.js'
+import { objectEntries } from '../utils/objectEntries.js'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientAsync = async (
@@ -31,7 +31,10 @@ const onRenderClient: OnRenderClientAsync = async (
   const onUncaughtError = (_error: any, _errorInfo: any) => {}
 
   const container = document.getElementById('root')!
-  const { hydrateRootOptions, createRootOptions } = await resolveCumulativeOptions(pageContext.config.react, pageContext)
+  const { hydrateRootOptions, createRootOptions } = await resolveCumulativeOptions(
+    pageContext.config.react,
+    pageContext,
+  )
   if (
     pageContext.isHydration &&
     // Whether the page was [Server-Side Rendered](https://vike.dev/ssr).
@@ -67,22 +70,26 @@ function applyHead(pageContext: PageContextClient) {
   applyHeadSettings(title, lang)
 }
 
-async function resolveCumulativeOptions<Options extends Partial<Record<string, unknown>>>(optionList: (Options | undefined | ((pageContext: PageContextClient) => Options | undefined))[] | undefined, pageContext: PageContextClient): Promise<Options> {
+async function resolveCumulativeOptions<Options extends Partial<Record<string, unknown>>>(
+  optionList: (Options | undefined | ((pageContext: PageContextClient) => Options | undefined))[] | undefined,
+  pageContext: PageContextClient,
+): Promise<Options> {
   const optionsAcc: Options = {} as Options
-  await Promise.all((optionList??[])
-    .map(async valUnresolved => {
-    const options: Options | undefined = isCallable(valUnresolved) ? valUnresolved(pageContext) : valUnresolved
+  await Promise.all(
+    (optionList ?? []).map(async (valUnresolved) => {
+      const options: Options | undefined = isCallable(valUnresolved) ? valUnresolved(pageContext) : valUnresolved
       if (!options) return
-    objectEntries(options).forEach(([key, val]) => {
-      if (!isCallable(val)) {
-        options![key] ??= val
-      } else {
-        (options![key] as Function|undefined) = (...args: unknown[]) => {
-          (options![key] as Function|undefined)?.(...args)
-          val(...args)
+      objectEntries(options).forEach(([key, val]) => {
+        if (!isCallable(val)) {
+          options![key] ??= val
+        } else {
+          ;(options![key] as Function | undefined) = (...args: unknown[]) => {
+            ;(options![key] as Function | undefined)?.(...args)
+            val(...args)
+          }
         }
-      }
-    })
-  }))
+      })
+    }),
+  )
   return optionsAcc
 }

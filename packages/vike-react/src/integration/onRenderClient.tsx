@@ -9,9 +9,7 @@ import type { PageContextInternal } from '../types/PageContext.js'
 import './styles.css'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { applyHeadSettings } from './applyHeadSettings.js'
-import { isCallable } from '../utils/isCallable.js'
-import { objectEntries } from '../utils/objectEntries.js'
-import type {ReactOptions} from '../types/Config.js'
+import { resolveReactOptions } from './resolveReactOptions.js'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientAsync = async (
@@ -33,9 +31,6 @@ const onRenderClient: OnRenderClientAsync = async (
 
   const container = document.getElementById('root')!
   const { hydrateRootOptions, createRootOptions } = resolveReactOptions(pageContext)
-  console.log('pageContext.config.react', pageContext.config.react)
-  console.log('createRootOptions', createRootOptions)
-  console.log('hydrateRootOptions', hydrateRootOptions)
   if (
     pageContext.isHydration &&
     // Whether the page was [Server-Side Rendered](https://vike.dev/ssr).
@@ -69,33 +64,4 @@ function applyHead(pageContext: PageContextClient) {
   const title = getHeadSetting<string | null>('title', pageContext)
   const lang = getHeadSetting<string | null>('lang', pageContext)
   applyHeadSettings(title, lang)
-}
-
-function resolveReactOptions(
-  pageContext: PageContextClient,
-) {
-  const optionsAcc: ReactOptions = {}
-  ;(pageContext.config.react ?? []).forEach((valUnresolved) => {
-    const optionList = isCallable(valUnresolved) ? valUnresolved(pageContext) : valUnresolved
-    if (!optionList) return
-    objectEntries(optionList).forEach(([fnName, options]) => {
-      if (!options) return
-      if (!optionList[fnName]) return
-      optionsAcc[fnName] ??= {}
-      console.log('options', options)
-      objectEntries(optionList[fnName]).forEach(([key, val]) => {
-      if (!isCallable(val)) {
-        // @ts-ignore
-        optionsAcc[fnName][key] ??= val
-      } else {
-        ;(options[key] as Function | undefined) = (...args: unknown[]) => {
-          ;(options[key] as Function | undefined)?.(...args)
-          // @ts-ignore
-          val(...args)
-        }
-      }
-      })
-    })
-  })
-  return optionsAcc
 }

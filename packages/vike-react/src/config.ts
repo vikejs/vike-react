@@ -114,6 +114,10 @@ const config = {
     Loading: {
       env: { server: true, client: true },
     },
+    react: {
+      cumulative: true,
+      env: {},
+    },
   },
 } satisfies Config
 // @eject-remove start

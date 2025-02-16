@@ -3,6 +3,8 @@ import type { TagAttributes } from '../utils/getTagAttributesString.js'
 import type { Viewport } from '../integration/onRenderHtml.js'
 import type { ConfigsCumulative } from '../hooks/useConfig/configsCumulative.js'
 import type React from 'react'
+import type { HydrationOptions, RootOptions } from 'react-dom/client'
+import type { ServerOptions } from 'react-dom/server'
 
 // https://vike.dev/meta#typescript
 declare global {
@@ -211,6 +213,13 @@ declare global {
        * https://vike.dev/Loading
        */
       Loading?: Loading | ImportString
+
+      /**
+       * Options passed to React functions such as `createRoot()` or `hydrateRoot()`.
+       *
+       * https://vike.dev/react-setting
+       */
+      react?: ReactOptions | ((pageContext: PageContext) => ReactOptions) | ImportString
     }
     interface ConfigResolved {
       Wrapper?: Wrapper[]
@@ -224,6 +233,7 @@ declare global {
       onAfterRenderHtml?: Function[]
       onBeforeRenderClient?: Function[]
       onAfterRenderClient?: Function[]
+      react?: Exclude<Config['react'], ImportString>[]
     }
   }
 }
@@ -250,3 +260,9 @@ export type ConfigFromHook = PickWithoutGetter<
 >
 export type ConfigFromHookResolved = Omit<ConfigFromHook, ConfigsCumulative> &
   Pick<Vike.ConfigResolved, ConfigsCumulative>
+
+export type ReactOptions = {
+  hydrateRootOptions?: HydrationOptions
+  createRootOptions?: RootOptions
+  renderToStringOptions?: ServerOptions
+}

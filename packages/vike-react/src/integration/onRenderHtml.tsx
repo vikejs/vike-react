@@ -14,6 +14,7 @@ import type { Head } from '../types/Config.js'
 import { isReactElement } from '../utils/isReactElement.js'
 import { getTagAttributesString, type TagAttributes } from '../utils/getTagAttributesString.js'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
+import { resolveReactOptions } from './resolveReactOptions.js'
 
 addEcosystemStamp()
 
@@ -52,11 +53,13 @@ async function getPageHtml(pageContext: PageContextServer) {
   // https://github.com/vikejs/vike-react/issues/87#issuecomment-2488742744
   await callCumulativeHooks(pageContext.config.onBeforeRenderHtml, pageContext)
 
+  const { renderToStringOptions } = resolveReactOptions(pageContext)
+
   let pageHtml: string | ReturnType<typeof dangerouslySkipEscape> | PageHtmlStream = ''
   if (pageContext.page) {
     const { stream, streamIsRequired } = pageContext.config
     if (!stream && !streamIsRequired) {
-      const pageHtmlString = renderToString(pageContext.page)
+      const pageHtmlString = renderToString(pageContext.page, renderToStringOptions)
       pageContext.pageHtmlString = pageHtmlString
       pageHtml = dangerouslySkipEscape(pageHtmlString)
     } else {

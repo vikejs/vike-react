@@ -214,6 +214,11 @@ declare global {
        */
       Loading?: Loading | ImportString
 
+      /**
+       * Options passed to React functions such as `createRoot()` or `hydrateRoot()`.
+       *
+       * https://vike.dev/react-setting
+       */
       react?: ReactOptions | ((pageContext: PageContext) => ReactOptions) | ImportString
     }
     interface ConfigResolved {

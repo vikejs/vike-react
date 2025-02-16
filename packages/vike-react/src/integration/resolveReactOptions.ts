@@ -18,8 +18,10 @@ function resolveReactOptions(pageContext: PageContext) {
           // @ts-ignore
           optionsAcc[fnName][key] ??= val
         } else {
-          ;(options[key] as Function | undefined) = (...args: unknown[]) => {
-            ;(options[key] as Function | undefined)?.(...args)
+          // @ts-ignore
+          optionsAcc[fnName][key] = (...args: unknown[]) => {
+            // @ts-ignore
+            optionsAcc[fnName][key]?.(...args)
             // @ts-ignore
             val(...args)
           }

@@ -1,3 +1,17 @@
+## [0.5.13](https://github.com/vikejs/vike-react/compare/vike-react@0.5.12...vike-react@0.5.13) (2025-02-16)
+
+
+### Bug Fixes
+
+* support `stream: false` ([702d05e](https://github.com/vikejs/vike-react/commit/702d05ee163a981f882fec88c93491b3c6e4302e))
+
+
+### Features
+
+* +react.{client,server}.js ([#165](https://github.com/vikejs/vike-react/issues/165)) ([831e451](https://github.com/vikejs/vike-react/commit/831e451aadf5b2798ec2ffc9c310562ec6184dff))
+
+
+
 ## [0.5.12](https://github.com/vikejs/vike-react/compare/vike-react@0.5.11...vike-react@0.5.12) (2025-01-22)
 
 

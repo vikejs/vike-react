@@ -9,7 +9,6 @@ import type { PageContextInternal } from '../types/PageContext.js'
 import './styles.css'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { applyHeadSettings } from './applyHeadSettings.js'
-import type { ReactOptions } from '../types/Config.js'
 import {isCallable} from '../utils/isCallable.js'
 import {objectEntries} from '../utils/objectEntries.js'
 
@@ -32,7 +31,7 @@ const onRenderClient: OnRenderClientAsync = async (
   const onUncaughtError = (_error: any, _errorInfo: any) => {}
 
   const container = document.getElementById('root')!
-  const { hydrateRootOptions, createRootOptions } = await getReactOptions(pageContext)
+  const { hydrateRootOptions, createRootOptions } = await resolveCumulativeOptions(pageContext.config.react, pageContext)
   if (
     pageContext.isHydration &&
     // Whether the page was [Server-Side Rendered](https://vike.dev/ssr).
@@ -68,28 +67,13 @@ function applyHead(pageContext: PageContextClient) {
   applyHeadSettings(title, lang)
 }
 
-async function getReactOptions(pageContext: PageContextClient): Promise<DeepRequired<ReactOptions>> {
-  const values = await callCumulativeHooks(pageContext.config.react, pageContext)
-  return {
-    hydrateRootOptions: {
-      formState: pickFirst(values.map(v => v?.hydrateRootOptions?.formState)),
-      identifierPrefix: pickFirst(values.map(v => v?.hydrateRootOptions?.identifierPrefix)),
-      onUncaughtError: undefined,
-      onRecoverableError: undefined,
-      onCaughtError: undefined,
-    },
-    createRootOptions: {
-      identifierPrefix: pickFirst(values.map(v => v?.createRootOptions?.identifierPrefix)),
-      onUncaughtError: undefined,
-      onRecoverableError: undefined,
-      onCaughtError: undefined,
-    },
-  }
-}
-function resolveOptions<T extends Record<string, unknown>>(optionList: T[]): T | undefined {
-  const options = optionList[0]
-  optionList.slice(1).forEach(opts => {
-    objectEntries(opts).forEach(([key, val]) => {
+async function resolveCumulativeOptions<Options extends Partial<Record<string, unknown>>>(optionList: (Options | undefined | ((pageContext: PageContextClient) => Options | undefined))[] | undefined, pageContext: PageContextClient): Promise<Options> {
+  const optionsAcc: Options = {} as Options
+  await Promise.all((optionList??[])
+    .map(async valUnresolved => {
+    const options: Options | undefined = isCallable(valUnresolved) ? valUnresolved(pageContext) : valUnresolved
+      if (!options) return
+    objectEntries(options).forEach(([key, val]) => {
       if (!isCallable(val)) {
         options![key] ??= val
       } else {
@@ -99,12 +83,6 @@ function resolveOptions<T extends Record<string, unknown>>(optionList: T[]): T |
         }
       }
     })
-  })
-  return options
-}
-function pickFirst<T>(arr: T[]): T | undefined {
-  return arr.filter((v) => v !== undefined)[0]
-}
-type DeepRequired<T> = {
-  [K in keyof Required<T>]: T[K] extends Record<string, unknown> | undefined ? DeepRequired<T[K]> : (T[K])
+  }))
+  return optionsAcc
 }

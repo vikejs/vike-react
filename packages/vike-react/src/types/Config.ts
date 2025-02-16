@@ -227,7 +227,7 @@ declare global {
       onAfterRenderHtml?: Function[]
       onBeforeRenderClient?: Function[]
       onAfterRenderClient?: Function[]
-      react?: Exclude<Config['react'][], ImportString>
+      react?: Exclude<Config['react'], ImportString>[]
     }
   }
 }

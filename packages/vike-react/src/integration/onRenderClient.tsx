@@ -11,6 +11,7 @@ import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { applyHeadSettings } from './applyHeadSettings.js'
 import { isCallable } from '../utils/isCallable.js'
 import { objectEntries } from '../utils/objectEntries.js'
+import type {ReactOptions} from '../types/Config.js'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientAsync = async (
@@ -31,9 +32,10 @@ const onRenderClient: OnRenderClientAsync = async (
   const onUncaughtError = (_error: any, _errorInfo: any) => {}
 
   const container = document.getElementById('root')!
-  const { hydrateRootOptions, createRootOptions } = resolveCumulativeOptions(pageContext.config.react, pageContext)
+  const { hydrateRootOptions, createRootOptions } = resolveReactOptions(pageContext)
   console.log('pageContext.config.react', pageContext.config.react)
   console.log('createRootOptions', createRootOptions)
+  console.log('hydrateRootOptions', hydrateRootOptions)
   if (
     pageContext.isHydration &&
     // Whether the page was [Server-Side Rendered](https://vike.dev/ssr).
@@ -69,24 +71,30 @@ function applyHead(pageContext: PageContextClient) {
   applyHeadSettings(title, lang)
 }
 
-function resolveCumulativeOptions<Options extends Partial<Record<string, unknown>>>(
-  optionList: (Options | undefined | ((pageContext: PageContextClient) => Options | undefined))[] | undefined,
+function resolveReactOptions(
   pageContext: PageContextClient,
-): Options {
-  const optionsAcc: Options = {} as Options
-  ;(optionList ?? []).forEach((valUnresolved) => {
-    const options: Options | undefined = isCallable(valUnresolved) ? valUnresolved(pageContext) : valUnresolved
-    console.log('options', options)
-    if (!options) return
-    objectEntries(options).forEach(([key, val]) => {
+) {
+  const optionsAcc: ReactOptions = {}
+  ;(pageContext.config.react ?? []).forEach((valUnresolved) => {
+    const optionList = isCallable(valUnresolved) ? valUnresolved(pageContext) : valUnresolved
+    if (!optionList) return
+    objectEntries(optionList).forEach(([fnName, options]) => {
+      if (!options) return
+      if (!optionList[fnName]) return
+      optionsAcc[fnName] ??= {}
+      console.log('options', options)
+      objectEntries(optionList[fnName]).forEach(([key, val]) => {
       if (!isCallable(val)) {
-        options[key] ??= val
+        // @ts-ignore
+        optionsAcc[fnName][key] ??= val
       } else {
         ;(options[key] as Function | undefined) = (...args: unknown[]) => {
           ;(options[key] as Function | undefined)?.(...args)
+          // @ts-ignore
           val(...args)
         }
       }
+      })
     })
   })
   return optionsAcc

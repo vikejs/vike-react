@@ -1,7 +1,7 @@
 import type { Config } from 'vike/types'
 
 export default {
-  createRootOptions: {
+  hydrateRootOptions: {
     identifierPrefix: 'some-id-prefix',
   },
 } satisfies Config['react']

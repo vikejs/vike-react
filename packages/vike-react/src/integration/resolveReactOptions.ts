@@ -12,9 +12,8 @@ function resolveReactOptions(pageContext: PageContext) {
     if (!optionList) return
     objectEntries(optionList).forEach(([fnName, options]) => {
       if (!options) return
-      if (!optionList[fnName]) return
       optionsAcc[fnName] ??= {}
-      objectEntries(optionList[fnName]).forEach(([key, val]) => {
+      objectEntries(options).forEach(([key, val]) => {
         if (!isCallable(val)) {
           // @ts-ignore
           optionsAcc[fnName][key] ??= val

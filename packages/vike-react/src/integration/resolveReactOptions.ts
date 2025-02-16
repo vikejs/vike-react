@@ -1,11 +1,11 @@
-import { PageContextClient } from 'vike/types'
-import { ReactOptions } from '../types/Config.js'
+export { resolveReactOptions }
+
+import type { PageContext } from 'vike/types'
+import type { ReactOptions } from '../types/Config.js'
 import { isCallable } from '../utils/isCallable.js'
 import { objectEntries } from '../utils/objectEntries.js'
 
-export { resolveReactOptions }
-
-function resolveReactOptions(pageContext: PageContextClient) {
+function resolveReactOptions(pageContext: PageContext) {
   const optionsAcc: ReactOptions = {}
   ;(pageContext.config.react ?? []).forEach((valUnresolved) => {
     const optionList = isCallable(valUnresolved) ? valUnresolved(pageContext) : valUnresolved

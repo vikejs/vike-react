@@ -4,6 +4,7 @@ import type { Viewport } from '../integration/onRenderHtml.js'
 import type { ConfigsCumulative } from '../hooks/useConfig/configsCumulative.js'
 import type React from 'react'
 import type { HydrationOptions, RootOptions } from 'react-dom/client'
+import type { ServerOptions } from 'react-dom/server'
 
 // https://vike.dev/meta#typescript
 declare global {
@@ -213,7 +214,7 @@ declare global {
        */
       Loading?: Loading | ImportString
 
-      react?: ReactOptions | ((pageContext: PageContextClient) => ReactOptions) | ImportString
+      react?: ReactOptions | ((pageContext: PageContext) => ReactOptions) | ImportString
     }
     interface ConfigResolved {
       Wrapper?: Wrapper[]
@@ -258,4 +259,5 @@ export type ConfigFromHookResolved = Omit<ConfigFromHook, ConfigsCumulative> &
 export type ReactOptions = {
   hydrateRootOptions?: HydrationOptions
   createRootOptions?: RootOptions
+  renderToStringOptions?: ServerOptions
 }

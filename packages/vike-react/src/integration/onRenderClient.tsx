@@ -31,10 +31,7 @@ const onRenderClient: OnRenderClientAsync = async (
   const onUncaughtError = (_error: any, _errorInfo: any) => {}
 
   const container = document.getElementById('root')!
-  const { hydrateRootOptions, createRootOptions } = resolveCumulativeOptions(
-    pageContext.config.react,
-    pageContext,
-  )
+  const { hydrateRootOptions, createRootOptions } = resolveCumulativeOptions(pageContext.config.react, pageContext)
   console.log('pageContext.config.react', pageContext.config.react)
   console.log('createRootOptions', createRootOptions)
   if (
@@ -77,20 +74,20 @@ function resolveCumulativeOptions<Options extends Partial<Record<string, unknown
   pageContext: PageContextClient,
 ): Options {
   const optionsAcc: Options = {} as Options
-    (optionList ?? []).forEach((valUnresolved) => {
-      const options: Options | undefined = isCallable(valUnresolved) ? valUnresolved(pageContext) : valUnresolved
-      console.log('options', options)
-      if (!options) return
-      objectEntries(options).forEach(([key, val]) => {
-        if (!isCallable(val)) {
-          options[key] ??= val
-        } else {
-          ;(options[key] as Function | undefined) = (...args: unknown[]) => {
-            ;(options[key] as Function | undefined)?.(...args)
-            val(...args)
-          }
+  ;(optionList ?? []).forEach((valUnresolved) => {
+    const options: Options | undefined = isCallable(valUnresolved) ? valUnresolved(pageContext) : valUnresolved
+    console.log('options', options)
+    if (!options) return
+    objectEntries(options).forEach(([key, val]) => {
+      if (!isCallable(val)) {
+        options[key] ??= val
+      } else {
+        ;(options[key] as Function | undefined) = (...args: unknown[]) => {
+          ;(options[key] as Function | undefined)?.(...args)
+          val(...args)
         }
-      })
+      }
     })
+  })
   return optionsAcc
 }

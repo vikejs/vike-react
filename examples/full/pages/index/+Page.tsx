@@ -1,6 +1,6 @@
 export default Page
 
-import React, {useId} from 'react'
+import React, { useId } from 'react'
 import { Counter } from '../../components/Counter'
 import image from '../../assets/logo-new.svg'
 import { Config } from 'vike-react/Config'

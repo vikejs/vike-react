@@ -1,3 +1,40 @@
+## [0.1.3](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.2...vike-react-query@0.1.3) (2024-12-04)
+
+
+### Bug Fixes
+
+* fix infinite requests for useSuspenseQuery ([#157](https://github.com/vikejs/vike-react/issues/157)) ([56e646e](https://github.com/vikejs/vike-react/commit/56e646e643bfd957970dcef10e03c5841ee7955a))
+
+
+
+## [0.1.2](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.1...vike-react-query@0.1.2) (2024-11-25)
+
+
+### Bug Fixes
+
+* use vike@0.4.191 ([9d9342f](https://github.com/vikejs/vike-react/commit/9d9342ff496a0d507819eb178cc332a69b2da039))
+
+
+### Features
+
+* add ability to create react query client options based on page context ([#154](https://github.com/vikejs/vike-react/issues/154)) ([7e50f90](https://github.com/vikejs/vike-react/commit/7e50f907c42e7e7553e3aca22e6f73034fed8c38))
+
+
+### BREAKING CHANGES
+
+* Update to `vike@0.4.191` or above.
+
+
+
+## [0.1.1](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.0...vike-react-query@0.1.1) (2024-08-05)
+
+
+### Bug Fixes
+
+* withFallback bug ([aa51a93](https://github.com/vikejs/vike-react/commit/aa51a93d40cbd5fc04225a56d2be546b794c1fb2))
+
+
+
 # [0.1.0](https://github.com/vikejs/vike-react/compare/vike-react-query@0.0.7...vike-react-query@0.1.0) (2024-06-16)
 
 

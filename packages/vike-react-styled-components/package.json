@@ -1,0 +1,56 @@
+{
+  "name": "vike-react-styled-components",
+  "version": "1.0.2",
+  "type": "module",
+  "exports": {
+    "./config": "./dist/config.js",
+    "./__internal/onAfterRenderHtml": "./dist/onAfterRenderHtml.js",
+    "./__internal/onBeforeRenderHtml": "./dist/onBeforeRenderHtml.js",
+    "./__internal/Wrapper": "./dist/Wrapper.server.js"
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "rimraf dist/ && tsc",
+    "release": "release-me patch",
+    "release:minor": "release-me minor",
+    "release:major": "release-me major",
+    "release:commit": "release-me commit"
+  },
+  "peerDependencies": {
+    "styled-components": ">=6",
+    "react": ">=18",
+    "vike-react": ">=0.4.13"
+  },
+  "devDependencies": {
+    "@brillout/release-me": "^0.4.2",
+    "@types/react": "^19.0.8",
+    "react": "^19.0.0",
+    "rimraf": "^5.0.5",
+    "styled-components": "^6.1.13",
+    "typescript": "^5.5.3",
+    "vike": "^0.4.223",
+    "vike-react": "^0.5.13",
+    "vite": "^6.1.0"
+  },
+  "typesVersions": {
+    "*": {
+      "config": [
+        "dist/config.d.ts"
+      ],
+      "__internal/onAfterRenderHtml": [
+        "dist/onAfterRenderHtml.d.ts"
+      ],
+      "__internal/onBeforeRenderHtml": [
+        "dist/onBeforeRenderHtml.d.ts"
+      ],
+      "__internal/Wrapper": [
+        "dist/Wrapper.server.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-styled-components",
+  "license": "MIT"
+}

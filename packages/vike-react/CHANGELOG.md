@@ -1,3 +1,232 @@
+## [0.5.13](https://github.com/vikejs/vike-react/compare/vike-react@0.5.12...vike-react@0.5.13) (2025-02-16)
+
+
+### Bug Fixes
+
+* support `stream: false` ([702d05e](https://github.com/vikejs/vike-react/commit/702d05ee163a981f882fec88c93491b3c6e4302e))
+
+
+### Features
+
+* +react.{client,server}.js ([#165](https://github.com/vikejs/vike-react/issues/165)) ([831e451](https://github.com/vikejs/vike-react/commit/831e451aadf5b2798ec2ffc9c310562ec6184dff))
+
+
+
+## [0.5.12](https://github.com/vikejs/vike-react/compare/vike-react@0.5.11...vike-react@0.5.12) (2025-01-22)
+
+
+### Bug Fixes
+
+* align ReactNode types ([840a114](https://github.com/vikejs/vike-react/commit/840a1143b8d46d6112726517a32b35baf7f65c22))
+* update react-streaming ([79b8240](https://github.com/vikejs/vike-react/commit/79b8240f297475e9e3e5db3137c3bd61b9ecd23e))
+
+
+
+## [0.5.11](https://github.com/vikejs/vike-react/compare/vike-react@0.5.10...vike-react@0.5.11) (2024-12-26)
+
+
+### Bug Fixes
+
+* workaround error `Cannot find namespace JSX` ([076f42a](https://github.com/vikejs/vike-react/commit/076f42acef1fb82918b47a173fba1077e0533e04))
+
+
+
+## [0.5.10](https://github.com/vikejs/vike-react/compare/vike-react@0.5.9...vike-react@0.5.10) (2024-12-10)
+
+
+### Bug Fixes
+
+* simplify JSDocs for stream setting ([d7615f0](https://github.com/vikejs/vike-react/commit/d7615f030aefac8797ace0b354589c5e14200ab4))
+
+
+
+## [0.5.9](https://github.com/vikejs/vike-react/compare/vike-react@0.5.8...vike-react@0.5.9) (2024-11-30)
+
+
+### Bug Fixes
+
+* add `ImportString` type to `onBeforeRenderHtml` & `onAfterRenderHtml` ([b102b72](https://github.com/vikejs/vike-react/commit/b102b72e4da3dbbad3813007bba9b31dfb610464))
+* add eject.config.js ([0070495](https://github.com/vikejs/vike-react/commit/00704957fcf374ad0c7ebb0645a36b8d2035d2d2))
+* rename +config.js to config.js ([fcac4b0](https://github.com/vikejs/vike-react/commit/fcac4b0ac9076925f6a874d05fd6129fd7c787ac))
+
+
+
+## [0.5.8](https://github.com/vikejs/vike-react/compare/vike-react@0.5.7...vike-react@0.5.8) (2024-11-20)
+
+
+### Bug Fixes
+
+* improve JSDoc ([d45d142](https://github.com/vikejs/vike-react/commit/d45d1422323ed07f4816e35d449fff618f07823d))
+* set pageContext.page also on the server-side ([958d8da](https://github.com/vikejs/vike-react/commit/958d8da948d01ed78cdbbe7045a4cf68d5460177))
+
+
+### Features
+
+* new hook onBeforeRenderHtml() ([#87](https://github.com/vikejs/vike-react/issues/87)) ([04ca5b8](https://github.com/vikejs/vike-react/commit/04ca5b8fc0ae267728687cc8d36069ee56776fee))
+
+
+
+## [0.5.7](https://github.com/vikejs/vike-react/compare/vike-react@0.5.6...vike-react@0.5.7) (2024-09-21)
+
+
+### Bug Fixes
+
+* await rendering before apply head settings ([9261c4b](https://github.com/vikejs/vike-react/commit/9261c4b183efd6a8ce783eb2645db774eaaea6f9))
+
+
+
+## [0.5.6](https://github.com/vikejs/vike-react/compare/vike-react@0.5.5...vike-react@0.5.6) (2024-09-10)
+
+
+### Bug Fixes
+
+* properly export config (vikejs/vike-vue[#194](https://github.com/vikejs/vike-react/issues/194)) ([4fb2251](https://github.com/vikejs/vike-react/commit/4fb22517c3da62f0e361fcf7eb9d106b5cde127d))
+* return undefined instead of throw error upon missing pageContext (fix [#147](https://github.com/vikejs/vike-react/issues/147)) ([68b6dc0](https://github.com/vikejs/vike-react/commit/68b6dc0b5b8933ca94f186dff02dc5b7df7ee18e))
+
+
+
+## [0.5.5](https://github.com/vikejs/vike-react/compare/vike-react@0.5.4...vike-react@0.5.5) (2024-08-30)
+
+
+### Features
+
+* add bodyHtmlBegin, bodyHtmlEnd ([#146](https://github.com/vikejs/vike-react/issues/146)) ([6fbf795](https://github.com/vikejs/vike-react/commit/6fbf795c4422039c42c6cf0911dc9efe37df9cad))
+
+
+
+## [0.5.4](https://github.com/vikejs/vike-react/compare/vike-react@0.5.3...vike-react@0.5.4) (2024-08-24)
+
+
+### Bug Fixes
+
+* add JSDocs ([9dfd4ab](https://github.com/vikejs/vike-react/commit/9dfd4abe6cfd8fa6ed199acdb736fc8a644f2474))
+* make useConfig() work for vike-react hooks ([5d21040](https://github.com/vikejs/vike-react/commit/5d2104013956197cd367eb147bdc347ae964969c))
+* use vike@0.4.191 ([9d9342f](https://github.com/vikejs/vike-react/commit/9d9342ff496a0d507819eb178cc332a69b2da039))
+
+
+### Features
+
+* new hook onAfterRenderHtml() ([acd5466](https://github.com/vikejs/vike-react/commit/acd54666c4c391690224a11b8f08521e2df42dbd))
+
+
+### BREAKING CHANGES
+
+* Update to `vike@0.4.191` or above.
+
+
+
+## [0.5.3](https://github.com/vikejs/vike-react/compare/vike-react@0.5.2...vike-react@0.5.3) (2024-08-17)
+
+
+### Bug Fixes
+
+* enable useConfig() after hydration ([c1e0c83](https://github.com/vikejs/vike-react/commit/c1e0c8327aca1f06999b104432ead562c8eec8c4))
+* fix `useConfig()` for `{body,html}Attributes` (vikejs/vike-vue[#180](https://github.com/vikejs/vike-react/issues/180)) ([653b808](https://github.com/vikejs/vike-react/commit/653b808846446182e7d7b51fddc247ad8bc722af))
+* fix callable cumulative configs ([a6c82a2](https://github.com/vikejs/vike-react/commit/a6c82a27ec5a2e916a1fdc93dae5a9465286f93b))
+* support callable cumulative configs ([a53b7c1](https://github.com/vikejs/vike-react/commit/a53b7c17dfa2e03e816e33db5295b7c019ee1f7d))
+* update lang upon useConfig() ([405af64](https://github.com/vikejs/vike-react/commit/405af647a524de7901f3a2c1ae12b7c87083931f))
+
+
+
+## [0.5.2](https://github.com/vikejs/vike-react/compare/vike-react@0.5.1...vike-react@0.5.2) (2024-08-12)
+
+
+### Bug Fixes
+
+* add `null` and `undefined` to head settings type ([8acc892](https://github.com/vikejs/vike-react/commit/8acc8922e404930c86f5fa5fc033283876ca1955))
+* make `null` override previous value ([7777570](https://github.com/vikejs/vike-react/commit/77775708a9c757bce41d03ce203d4baaaf77cbcf))
+
+
+### Features
+
+* add `useConfig()` support for `lang` and `favicon` settings ([a0d1520](https://github.com/vikejs/vike-react/commit/a0d1520ec75c0ecfb78dfd4e3bf613b02c078917))
+* support setting `{body,html}Attributes` based on `pageContext` ([41fd399](https://github.com/vikejs/vike-react/commit/41fd3995fea74347eb125de304b5fbbc22126209))
+* support setting viewport based on `pageContext` ([540e91d](https://github.com/vikejs/vike-react/commit/540e91ddd4cfc75f20a5537fb24b64739ed5bda7))
+
+
+
+## [0.5.1](https://github.com/vikejs/vike-react/compare/vike-react@0.5.0...vike-react@0.5.1) (2024-08-06)
+
+
+### Bug Fixes
+
+* fix cumulative Head handling ([9ae756b](https://github.com/vikejs/vike-react/commit/9ae756bf74ebcf7f2f21ec2b1a0fcc6458577852))
+* improve <head> tags order ([ba1cfd3](https://github.com/vikejs/vike-react/commit/ba1cfd3f374d36db132d5c37fae0642d59732ecf))
+* improve JSDocs ([def8c09](https://github.com/vikejs/vike-react/commit/def8c0920dca2ddb9a7c70f74361bf3992392e39))
+* make hooks `onBeforeRenderClient()` and `onAfterRenderClient()` cumulative ([dc4d944](https://github.com/vikejs/vike-react/commit/dc4d944a677f8ffc834aa827d8ab2fc24cdb83f4))
+* more accurate pageContext type for setting getters ([43f6421](https://github.com/vikejs/vike-react/commit/43f64216ce5ed61529e42b75919468f2ee5c8423))
+
+
+
+# [0.5.0](https://github.com/vikejs/vike-react/compare/vike-react@0.4.18...vike-react@0.5.0) (2024-08-01)
+
+
+### Bug Fixes
+
+* avoid overriding Head setting (fix [#135](https://github.com/vikejs/vike-react/issues/135)) ([#136](https://github.com/vikejs/vike-react/issues/136)) ([5c88c7b](https://github.com/vikejs/vike-react/commit/5c88c7b4aa47b01ab66c46eb5c67571298004104))
+* clearer (and maybe more accurate) condition for updating document properties ([6784bac](https://github.com/vikejs/vike-react/commit/6784bac6fa3c4cf9f4d0b9661a45097a38d2880a))
+* make favicon setting global ([28f1c2b](https://github.com/vikejs/vike-react/commit/28f1c2b4bea348ece352136ee3da51c25d59dfe2))
+
+
+### Features
+
+* [`useConfig()`](https://vike.dev/useConfig) ([#128](https://github.com/vikejs/vike-react/issues/128)) ([8d0245c](https://github.com/vikejs/vike-react/commit/8d0245ca2a84e7b3768b335df6fd39545df0e256))
+* new setting [`description`](https://vike.dev/description) ([60ffecd](https://github.com/vikejs/vike-react/commit/60ffecd9dcfdaa50d5dea02a8b081eeb2b684188))
+* new setting [`image`](https://vike.dev/image) ([41ec933](https://github.com/vikejs/vike-react/commit/41ec933aeb8d0ba5334c10377e67ef68fdc0334e))
+* new setting [`viewport`](https://vike.dev/viewport) ([bebaf38](https://github.com/vikejs/vike-react/commit/bebaf386aa0cf1ac06351eadf84e1ab69d5da00d))
+* new settings [`htmlAttributes`](https://vike.dev/htmlAttributes) and [`bodyAttributes`](https://vike.dev/bodyAttributes) ([427c7cf](https://github.com/vikejs/vike-react/commit/427c7cf2595a8e19fc0f9a4fd6ce4dc05bd3f058))
+
+
+### BREAKING CHANGES
+
+* The responsive viewport tag is now injected by default (`<meta name="viewport" content="width=device-width,initial-scale=1">`). If you already inject `<meta name="viewport">` then remove it or set the `viewport` setting to `null`, see https://vike.dev/viewport.
+* The setting `favicon` now only accepts one global
+value, see https://vike.dev/favicon#global
+* update vike to `0.4.182` or above
+* The `Head` setting is now cumulative https://vike.dev/Head#cumulative
+
+
+
+## [0.4.18](https://github.com/vikejs/vike-react/compare/vike-react@0.4.17...vike-react@0.4.18) (2024-07-16)
+
+
+### Bug Fixes
+
+* add og:title tag (fix vikejs/vike[#1732](https://github.com/vikejs/vike-react/issues/1732)) ([024b6ad](https://github.com/vikejs/vike-react/commit/024b6ad7527425389d0e06577609979e9803779d))
+* fix document setting types ([7fe7b04](https://github.com/vikejs/vike-react/commit/7fe7b045ce8c7af93910948df1b7f9d72da8dd37))
+* remove pageContext.userAgent type in favor of ([079886d](https://github.com/vikejs/vike-react/commit/079886de727d76638accf20322fd2b286621261a))
+* update react-streaming ([c0679d6](https://github.com/vikejs/vike-react/commit/c0679d68c7a1d21752f2f7d57396bf1c77fd412e))
+
+
+### Features
+
+* Loading config ([#133](https://github.com/vikejs/vike-react/issues/133)) ([2737f03](https://github.com/vikejs/vike-react/commit/2737f03cf09d3e2649672001902f8254b3864272))
+
+
+
+## [0.4.17](https://github.com/vikejs/vike-react/compare/vike-react@0.4.16...vike-react@0.4.17) (2024-07-06)
+
+
+### Bug Fixes
+
+* update react-streaming ([c98d97b](https://github.com/vikejs/vike-react/commit/c98d97b298cd42c0cfc7f23a43f4a020a34d5a08))
+
+
+### Features
+
+* add clientOnly helper ([#127](https://github.com/vikejs/vike-react/issues/127)) ([dfa586c](https://github.com/vikejs/vike-react/commit/dfa586c40454aaece3415b4454e3a4d94ceec3af))
+
+
+
+## [0.4.16](https://github.com/vikejs/vike-react/compare/vike-react@0.4.15...vike-react@0.4.16) (2024-07-03)
+
+
+### Bug Fixes
+
+* use react-streaming >=0.3.36 and vike >=0.4.178 ([cac8d49](https://github.com/vikejs/vike-react/commit/cac8d49ec4f3903b75e39c82b2f1091c8540794e))
+
+
+
 ## [0.4.15](https://github.com/vikejs/vike-react/compare/vike-react@0.4.14...vike-react@0.4.15) (2024-06-25)
 
 

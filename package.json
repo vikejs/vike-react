@@ -27,14 +27,20 @@
     "overrides": {
       "vike-react": "link:./packages/vike-react/",
       "vike-react-query": "link:./packages/vike-react-query/",
-      "vike-react-zustand": "link:./packages/vike-react-zustand/"
+      "vike-react-zustand": "link:./packages/vike-react-zustand/",
+      "vike-react-apollo": "link:./packages/vike-react-apollo/",
+      "vike-react-chakra": "link:./packages/vike-react-chakra/",
+      "vike-react-antd": "link:./packages/vike-react-antd/",
+      "vike-react-styled-components": "link:./packages/vike-react-styled-components/",
+      "vike-react-styled-jsx": "link:./packages/vike-react-styled-jsx/"
     }
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.6.4",
+    "@biomejs/biome": "^1.8.3",
     "@brillout/test-e2e": "^0.5.33",
     "@brillout/test-types": "^0.1.15",
-    "playwright": "^1.42.1",
+    "playwright": "^1.45.0",
     "prettier": "^3.2.5"
-  }
+  },
+  "packageManager": "pnpm@9.4.0"
 }

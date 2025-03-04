@@ -1,17 +1,33 @@
 export { testRun }
 
-import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry } from '@brillout/test-e2e'
+import { test, expect, run, page, getServerUrl, autoRetry } from '@brillout/test-e2e'
 
 function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   run(cmd)
 
   const content = 'Return of the Jedi'
   const loading = 'Loading movies...'
-  test('HTML', async () => {
-    const html = await fetchHtml('/')
-    expect(getTitle(html)).toBe('My Vike + React App')
-    // fetchHtml() awaits the stream
+  const titleDefault = 'My Vike + React App'
+  const titleOverriden = '6 movies'
+  const titleAsScript = `<script>document.title = "${titleOverriden}"</script>`
+  const description = '<meta name="description" content="List of 6 Star Wars movies."/>'
+  test('HTML (as user)', async () => {
+    const html = await fetchAsUser('/')
     expect(html).toContain(content)
+    expect(html).toContain(loading)
+    expect(html).toContain(titleAsScript)
+    expect(getTitle(html)).toBe(titleDefault)
+    expect(html.split('<title>').length).toBe(2)
+    expect(html).not.toContain(description)
+  })
+  test('HTML (as bot)', async () => {
+    const html = await fetchAsBot('/')
+    expect(html).toContain(content)
+    expect(html).not.toContain(loading)
+    expect(html).not.toContain(titleAsScript)
+    expect(getTitle(html)).toBe(titleOverriden)
+    expect(html.split('<title>').length).toBe(2)
+    expect(html).toContain(description)
   })
   test('DOM', async () => {
     await page.goto(getServerUrl() + '/')
@@ -36,6 +52,18 @@ async function testCounter() {
       await page.click('button')
       expect(await page.textContent('button')).toContain('Counter 1')
     },
-    { timeout: 5 * 1000 }
+    { timeout: 5 * 1000 },
   )
+}
+
+async function fetchAsBot(pathname: string) {
+  return await fetchHtml(pathname, 'curl/8.5.0')
+}
+async function fetchAsUser(pathname: string) {
+  return await fetchHtml(pathname, 'chrome')
+}
+async function fetchHtml(pathname: string, userAgent: string) {
+  const response = await fetch(getServerUrl() + pathname, { headers: { ['User-Agent']: userAgent } })
+  const html = await response.text()
+  return html
 }

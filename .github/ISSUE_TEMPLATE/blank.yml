@@ -1,0 +1,10 @@
+name: "Blank issue"
+description: Don't use this unless you're a Vike maintainer.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # **Don't use** this unless you're a Vike maintainer, see [these links](https://github.com/vikejs/vike-react/issues/new/choose) instead.
+  - type: textarea
+    attributes:
+      label: Description

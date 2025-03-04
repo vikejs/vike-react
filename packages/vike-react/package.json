@@ -1,45 +1,59 @@
 {
   "name": "vike-react",
-  "version": "0.4.15",
+  "version": "0.5.13",
+  "repository": "https://github.com/vikejs/vike-react",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
-    "./useData": "./dist/hooks/useData.js",
     "./usePageContext": "./dist/hooks/usePageContext.js",
+    "./useData": "./dist/hooks/useData.js",
+    "./useConfig": {
+      "browser": "./dist/hooks/useConfig/useConfig-client.js",
+      "default": "./dist/hooks/useConfig/useConfig-server.js"
+    },
+    "./Config": {
+      "browser": "./dist/components/Config/Config-client.js",
+      "default": "./dist/components/Config/Config-server.js"
+    },
+    "./Head": {
+      "browser": "./dist/components/Head/Head-client.js",
+      "default": "./dist/components/Head/Head-server.js"
+    },
+    "./clientOnly": "./dist/helpers/clientOnly.js",
     "./ClientOnly": "./dist/components/ClientOnly.js",
     ".": "./dist/index.js",
-    "./config": "./dist/+config.js",
-    "./renderer/onRenderHtml": "./dist/renderer/onRenderHtml.js",
-    "./renderer/onRenderClient": "./dist/renderer/onRenderClient.js"
+    "./config": "./dist/config.js",
+    "./__internal/integration/onRenderHtml": "./dist/integration/onRenderHtml.js",
+    "./__internal/integration/onRenderClient": "./dist/integration/onRenderClient.js",
+    "./__internal/integration/Loading": "./dist/integration/Loading.js"
   },
-  "scripts": {
-    "dev": "tsc --watch",
-    "build": "rimraf dist/ && tsc",
-    "release": "release-me patch",
-    "release:minor": "release-me minor",
-    "release:commit": "release-me commit"
+  "dependencies": {
+    "react-streaming": "^0.3.48"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
-    "vike": ">=0.4.173",
-    "vite": ">=4.3.8"
+    "vike": ">=0.4.182"
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "rimraf dist/ && tsc && pnpm run build:css",
+    "build:css": "cp src/integration/styles.css dist/integration/styles.css",
+    "release": "release-me patch",
+    "release:minor": "release-me minor",
+    "release:commit": "release-me commit"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.6.4",
-    "@brillout/release-me": "^0.3.8",
+    "@brillout/release-me": "^0.4.2",
     "@types/node": "^20.11.17",
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "rimraf": "^5.0.5",
-    "typescript": "^5.3.3",
-    "vike": "^0.4.173"
-  },
-  "dependencies": {
-    "react-streaming": "^0.3.27"
+    "typescript": "^5.7.3",
+    "vike": "^0.4.223",
+    "vite": "^6.1.0"
   },
   "typesVersions": {
     "*": {
@@ -49,26 +63,42 @@
       "usePageContext": [
         "./dist/hooks/usePageContext.d.ts"
       ],
+      "useConfig": [
+        "./dist/hooks/useConfig/useConfig-server.d.ts"
+      ],
+      "Config": [
+        "./dist/components/Config/Config-server.d.ts"
+      ],
+      "Head": [
+        "./dist/components/Head/Head-server.d.ts"
+      ],
       "ClientOnly": [
         "./dist/components/ClientOnly.d.ts"
+      ],
+      "clientOnly": [
+        "./dist/helpers/clientOnly.d.ts"
       ],
       ".": [
         "./dist/index.d.ts"
       ],
       "config": [
-        "./dist/+config.d.ts"
+        "./dist/config.d.ts"
       ],
-      "renderer/onRenderHtml": [
-        "./dist/renderer/onRenderHtml.d.ts"
+      "__/internal/integration/onRenderHtml": [
+        "./dist/integration/onRenderHtml.d.ts"
       ],
-      "renderer/onRenderClient": [
-        "./dist/renderer/onRenderClient.d.ts"
+      "__/internal/integration/onRenderClient": [
+        "./dist/integration/onRenderClient.d.ts"
       ]
     }
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist/"
   ],
-  "repository": "github:vikejs/vike-react",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [
+    "react"
+  ]
 }

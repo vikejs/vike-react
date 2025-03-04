@@ -1,52 +1,60 @@
 <!-- WARNING: keep links absolute in this file so they work on NPM too -->
 
-[<img src="https://vike.dev/vike-readme.svg" align="right" height="90">](https://vike.dev)
 [![npm version](https://img.shields.io/npm/v/vike-react-query)](https://www.npmjs.com/package/vike-react-query)
 
 # `vike-react-query`
 
-[TanStack Query](https://tanstack.com/query/latest) integration for [vike-react](https://github.com/vikejs/vike-react/tree/main/packages/vike-react).
+Enables your React components to fetch data using [TanStack Query](https://tanstack.com/query/latest). Powered by [HTML streaming](https://github.com/brillout/react-streaming#readme).
 
-`vike-react-query` enables you to create components that can fetch data.
+> [!NOTE]
+> Includes:
+> - [Progressive rendering](https://vike.dev/streaming#progressive-rendering)
+> - [SSR benefits](https://github.com/brillout/react-streaming#ssr)
+> - Fallback upon loading and/or error
+> - [Caching](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
 
-You can use it instead of [Vike's `data()` hook](https://vike.dev/data): with `vike-react-query` you fetch data at component-level instead of page-level.
+[Installation](#installation)  
+[Basic usage](#basic-usage)  
+[`withFallback()`](#withfallback)  
+[`<head>` tags](#head-tags)  
+[Error Handling](#error-handling)  
+[Settings](#settings)  
+[Usage with Telefunc](#usage-with-telefunc)  
+[How it works](#how-it-works)  
+[Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-query/CHANGELOG.md)  
+[See also](#see-also)  
 
-You also get:
- - [Progressive rendering](https://vike.dev/streaming#progressive-rendering) for a significant (perceived) increase in page speed.
- - Fallback component upon loading/error. (See [`withFallback()`](#withfallback).)
- - Caching. (See [`useSuspenseQuery()` options](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery).)
- - (Optional) [Usage with Telefunc](#usage-with-telefunc). Combining RPC with all the TranStack Query goodies.
-
-See [example](https://github.com/vikejs/vike-react/tree/main/examples/react-query).
-
-> [!NOTE]  
-> `vike-react-query` leverages [React 18's suspense streaming feature](https://github.com/brillout/react-streaming#readme). (Similar to [Next.js Loading UI and Streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming), but on a component level.)
+<br/>
 
 
 ## Installation
 
-1. `pnpm i @tanstack/react-query vike-react-query`
-2. Extend `+config.ts`:
-   ```ts
-   // /pages/+config.ts
+1. `npm install @tanstack/react-query vike-react-query`
+2. Extend `+config.js`:
+   ```js
+   // pages/+config.js
 
-   import type { Config } from 'vike/types'
    import vikeReact from 'vike-react/config'
    import vikeReactQuery from 'vike-react-query/config'
 
    export default {
-     ...
+     // ...
      extends: [vikeReact, vikeReactQuery]
-   } satisfies Config
+   }
    ```
+
+> [!NOTE]
+> The `vike-react-query` extension requires [`vike-react`](https://vike.dev/vike-react).
+
+<br/>
 
 
 ## Basic usage
 
-```tsx
+```jsx
 import { useSuspenseQuery } from '@tanstack/react-query'
 
-const Movie = ({ id }: { id: string }) => {
+const Movie = ({ id }) => {
   const result = useSuspenseQuery({
     queryKey: ['movie', id],
     queryFn: () =>
@@ -64,19 +72,24 @@ const Movie = ({ id }: { id: string }) => {
 }
 ```
 
+> [!NOTE]
+> Even though [`useSuspenseQuery()`](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery) is imported from `@tanstack/react-query`, you need to install `vike-react-query` for it to work. (The `useSuspenseQuery()` hook requires an [HTML stream](https://vike.dev/streaming) integration.)
+
+<br/>
+
 
 ## `withFallback()`
 
-Using `withFallback()`, you can define a loading and/or an error fallback component:
- - While the query is loading, the `Loading` component is rendered.
- - When the query is completed and the data is available, the main component is rendered.
- - If there is an error during loading or rendering, the `Error` component is rendered.
-
-> [!NOTE]  
-> If you use SSR, the main component is rendered to HTML, and merely hydrated on the client-side: the data is re-used (instead of being fetched a second time).
-
+```js
+withFallback(Component) // Use default loading fallback (see +Loading)
+withFallback(Component, Loading) // Define loading fallback
+withFallback(Component, Loading, Error) // Define loading and error fallback
+withFallback(Component, undefined, Error) // Define error fallback
+```
 
 ```tsx
+// Movie.tsx
+
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { withFallback } from 'vike-react-query'
 
@@ -97,28 +110,137 @@ const Movie = withFallback(
       </div>
     )
   },
-  {
-    Loading: ({ id }) => <div>Loading movie {id}</div>,
-    Error: ({ id, retry }) => (
-      <div>
-        Failed to load movie {id}
-        <button onClick={() => retry()}>Retry</button>
-      </div>
-    )
-  }
+  ({ id }) => <div>Loading movie {id}</div>,
+  // The props `retry` and `error` are provided by vike-react-query
+  // Other props, such as `code`, are provied by the parent component
+  ({ id, retry, error }) => (
+    <div>
+      Failed to load movie {id}
+      <button onClick={() => retry()}>Retry</button>
+    </div>
+  )
 )
 ```
 
-## Defaults
+**`+Loading`**
+
+If you skip the `Loading` parameter, then a default loading component (provided by `vike-react`) is used. You can create a custom default loading component:
+
+```jsx
+// pages/+Loading.jsx
+
+export default { component: LoadingComponent }
+
+function LoadingComponent() {
+  // Applies on a component-level
+  return <div>Loading...</div>
+}
+```
+
+Instead of adding a loading fallback to the component, you can set a loading fallback to the page and layouts:
+
+```jsx
+// pages/+Loading.jsx
+
+export default { layout: LoadingLayout }
+
+function LoadingLayout() {
+  // Applies to the page and all layouts
+  return <div>Loading...</div>
+}
+```
+
+> [!NOTE]
+> The `+Loading.layout` setting is optional and only relevant when using `useSuspenseQuery()` without `withFallback()` or `withFallback(Component, false)`.
+> ```js
+> withFallback(Component, false) // Don't set any loading fallback
+> withFallback(Component, undefined) // Use default loading fallback
+> ```
+
+**Manual `<Suspense>` boundary**
+
+Technically speaking:
+- `withFallback()` wraps the component inside a [`<Suspense>` boundary](https://react.dev/reference/react/Suspense).
+- `+Loading.layout` adds a `<Suspense>` boundary to the [`<Page>` component](https://vike.dev/Page) as well as to all [`<Layout>` components](https://vike.dev/Layout).
+
+You can also manually add a `<Suspense>` boundary at any arbitrary position:
+
+```js
+import { Suspense } from 'react'
+
+function SomePageSection() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SomeDataFetchingComponent />
+      <SomeOtherDataFetchingComponent />
+    </Suspense>
+  )
+}
+```
+
+<br/>
+
+
+## `<head>` tags
+
+To set tags such as `<title>` and `<meta name="description">` based on fetched data, you can use [`<Config>`, `<Head>`, and `useConfig()`](https://vike.dev/useConfig).
+
+```js
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { Config } from 'vike-react/Config'
+import { Head } from 'vike-react/Head'
+
+function Movies() {
+  const query = useSuspenseQuery({
+    queryKey: ['movies'],
+    queryFn: () => fetch('https://star-wars.brillout.com/api/films.json')
+  })
+  const movies = query.data
+  return (
+    <Config title={`${movies.length} Star Wars Movies`} />
+    <Head>
+      <meta name="description" content={`All ${movies.length} movies from the Star Wars franchise.`} />
+    </Head>
+    <ul>{
+      movies.map(({ title }) => (
+        <li>{title}</li>
+      ))
+    }</ul>
+  )
+}
+```
+
+<br/>
+
+
+## Error Handling
+
+From a UI perspective, the classic approach to handling errors is the following.
+- **Show a 404 page**, for example `<h1>404 Page Not Found</h1><p>This page could not found.</p>`.
+- **Show an error page**, for example `<h1>500 Internal Server Error</h1><p>Something went wrong.</p>`.
+- **Redirect the user**, for example redirecting the user to `/publish-movie` upon `/movie/some-fake-movie-title` because there isn't any movie `some-fake-movie-title`.
+
+But because `vike-react-query` leverages [HTML streaming](https://vike.dev/streaming) these approaches don't work (well) and we recommend the following instead.
+- **Show a not-found component**, for example `<p>No movie <code>some-fake-movie-title</code> found.</p>`.
+- **Show an error component**, for example `<p>Something went wrong (couldn't fetch movie), please try again later.</p>`.
+- **Show a link** (instead of redirecting the user), for example `<p>No movie <code>some-fake-movie-title</code> found. You can <a href="/publish-movie">publish a new movie</a>.</p>`.
+
+See: [`withFallback()`](#withfallback)
+
+> [!NOTE]
+> HTML chunks that are already streamed to the user cannot be reverted and that's why page-level redirection ([`throw redirect`](https://vike.dev/redirect)) and rewrite ([`throw render()`](https://vike.dev/render)) don't work (well).
+>
+> Also it isn't idiomatic: the whole idea of collocating data-fetching with the UI component is to think in terms of the component in isolation rather than in terms of the page.
+
+<br/>
+
+
+## Settings
 
 You can modify the defaults defined by [`QueryClient`](https://tanstack.com/query/latest/docs/reference/QueryClient).
 
-Gloablly, for all components:
-
 ```js
-// /pages/+config.js
-
-// Applies to all pages.
+// +config.js
 
 export default {
   queryClientConfig: {
@@ -131,49 +253,37 @@ export default {
 }
 ```
 
-For the components of one page:
+You can access [`pageContext`](https://vike.dev/pageContext):
 
 ```js
-// /pages/product/@id/+config.js
+// +queryClientConfig.js
 
-// Applies only to /product/@id/+Page.js (given there is only
-// one +Page.js file under the /pages/product/@id directory).
-
-export default {
-  queryClientConfig: {
-    defaultOptions: {
-      queries: {
-        staleTime: 60 * 1000
-      }
+export default (pageContext) => ({
+  defaultOptions: {
+    queries: {
+      staleTime: pageContext.data.staleTime,
+      retry: pageContext.routeParams.userId ? true : false
     }
   }
-}
+})
 ```
 
-For the components of a group of pages:
+> [!NOTE]
+> You can apply settings to all pages, a group of pages, or only one page. See [Vike Docs > Config > Inheritance](https://vike.dev/config#inheritance).
 
-```js
-// /pages/admin/+config.js
-
-// Applies to all /pages/admin/**/+Page.js
-
-export default {
-  queryClientConfig: {
-    defaultOptions: {
-      queries: {
-        staleTime: 60 * 1000
-      }
-    }
-  }
-}
-```
+<br/>
 
 
 ## Usage with Telefunc
 
-If used together with [Telefunc](https://telefunc.com/), the query function will always run on the server. (Similar to [Next.js Server Actions and Mutations](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations).)
+You can use `vike-react-query` with [Telefunc](https://telefunc.com).
 
-#### Query example
+> [!NOTE]
+> By using `vike-react-query` with Telefunc, you combine [RPC](https://vike.dev/RPC) with all TanStack Query features.
+
+With Telefunc, the query function always runs on the server.
+
+**Query example**
 
 ```tsx
 // movie.telefunc.ts
@@ -205,19 +315,17 @@ const Movie = withFallback(
       </div>
     )
   },
-  {
-    Loading: ({ id }) => <div>Loading movie {id}</div>,
-    Error: ({ id, retry }) => (
-      <div>
-        Failed to load movie {id}
-        <button onClick={() => retry()}>Retry</button>
-      </div>
-    )
-  }
+  ({ id }) => <div>Loading movie {id}</div>,
+  ({ id, retry }) => (
+    <div>
+      Failed to load movie {id}
+      <button onClick={() => retry()}>Retry</button>
+    </div>
+  )
 )
 ```
 
-#### Mutation example
+**Mutation example**
 
 ```tsx
 // movie.telefunc.ts
@@ -256,7 +364,7 @@ const CreateMovie = () => {
 }
 ```
 
-#### Putting it together
+**Putting it together**
 
 ```tsx
 // movie.telefunc.ts
@@ -314,14 +422,37 @@ const Movies = withFallback(
       </div>
     )
   },
-  {
-    Loading: <div>Loading movies</div>,
-    Error: ({ retry }) => (
-      <div>
-        Error while loading movies
-        <button onClick={() => retry()}>Retry</button>
-      </div>
-    )
-  }
+  <div>Loading movies</div>,
+  ({ retry }) => (
+    <div>
+      Error while loading movies
+      <button onClick={() => retry()}>Retry</button>
+    </div>
+  )
 )
 ```
+
+<br/>
+
+
+## How it works
+
+Upon SSR, the component is rendered to HTML and its data loaded on the server-side. On the client side, the component is merely [hydrated](https://vike.dev/hydration).
+
+Upon page navigation (and rendering the first page if [SSR is disabled](https://vike.dev/ssr)), the component is rendered and its data loaded on the client-side.
+
+> [!NOTE]
+> With `vike-react-query` you fetch data on a component-level instead of using Vike's [`data()` hook](https://vike.dev/data) which fetches data on a page-level.
+
+> [!NOTE]
+> Behind the scenes `vike-react-query` integrates TanStack Query into [the HTML stream](https://github.com/brillout/react-streaming#readme).
+
+<br/>
+
+
+## See also
+
+- [Example](https://github.com/vikejs/vike-react/tree/main/examples/react-query)
+- [Vike Docs > TanStack Query](https://vike.dev/tanstack-query)
+- [TanStack Query > useSuspenseQuery](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
+- [Vike Docs > Data Fetching](https://vike.dev/data-fetching)

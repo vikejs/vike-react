@@ -7,13 +7,16 @@ function ClientOnly<T>({
   load,
   children,
   fallback,
-  deps = []
+  deps = [],
 }: {
   load: () => Promise<{ default: React.ComponentType<T> } | React.ComponentType<T>>
   children: (Component: React.ComponentType<T>) => ReactNode
   fallback: ReactNode
   deps?: Parameters<typeof useEffect>[1]
 }) {
+  // TODO/next-major: remove this file/export
+  console.warn('[vike-react][warning] <ClientOnly> is deprecated: use clientOnly() instead https://vike.dev/clientOnly')
+
   const [Component, setComponent] = useState<ComponentType<unknown> | null>(null)
 
   useEffect(() => {
@@ -22,13 +25,13 @@ function ClientOnly<T>({
         load()
           .then((LoadedComponent) => {
             return {
-              default: () => children('default' in LoadedComponent ? LoadedComponent.default : LoadedComponent)
+              default: () => children('default' in LoadedComponent ? LoadedComponent.default : LoadedComponent),
             }
           })
           .catch((error) => {
             console.error('Component loading failed:', error)
             return { default: () => <p>Error loading component.</p> }
-          })
+          }),
       )
       setComponent(Component)
     }

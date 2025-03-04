@@ -37,26 +37,23 @@ function vikeReactZustand(): Plugin {
       }
 
       // Playground: https://regex101.com/r/oDNRzp/1
-      const matches = code.matchAll(/(?<=[\s:=,;])create\s*?\(/g)
-      let idx = 0
-      for (const match of matches) {
-        if (!match.index || !match.input) {
-          continue
-        }
-        const key = simpleHash(`${id}:${idx}`)
-        idToStoreKeys[id] ??= new Set([key])
-        idToStoreKeys[id]!.add(key)
-        code =
-          match.input.substring(0, match.index) +
-          `${match[0]}'${key}',` +
-          match.input.substring(match.index + match[0].length)
-        idx++
+      let parts = code.split(/(?<=[\s:=,;])create\s*?\(/g)
+      if (parts.length <= 1) {
+        return
+      }
+
+      idToStoreKeys[id] = idToStoreKeys[id] || new Set()
+      let result = parts[0]
+      for (let i = 1; i < parts.length; i++) {
+        const key = simpleHash(`${id}:${i - 1}`)
+        idToStoreKeys[id].add(key)
+        result += `create('${key}',` + parts[i]
       }
 
       // We only modify the column number by a few characters
       // - create(() => {})
       // + create('key', () => {})
-      return { code, map: null }
+      return { code: result, map: null }
     },
     async buildStart() {
       await init
@@ -77,7 +74,7 @@ function vikeReactZustand(): Plugin {
 
       ctx.server.ws.send({ type: 'full-reload' })
       return []
-    }
+    },
   }
 }
 

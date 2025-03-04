@@ -13,7 +13,7 @@ import { getGlobalObject } from '../utils.js'
 const globalObject = getGlobalObject('VikeReactZustandContext.ts', {
   reactStoreContext: createContext<{ [key: string]: StoreApiAndHook }>({}),
   initializers: {} as { [key: string]: any },
-  pageContextCurrent: null as PageContext | null
+  pageContextCurrent: null as PageContext | null,
 })
 
 function setPageContext(pageContext: PageContext | null) {
@@ -31,7 +31,7 @@ function initializers_set(key: string, initializer: any) {
   // useMemo will notice the change because we create a new object
   globalObject.initializers = {
     ...globalObject.initializers,
-    [key]: initializer
+    [key]: initializer,
   }
 }
 function initializers_remove(key: string) {

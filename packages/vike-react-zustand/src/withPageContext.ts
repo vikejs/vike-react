@@ -8,9 +8,9 @@ import { assert } from './utils.js'
 type WithPageContext = <
   T,
   Mps extends [StoreMutatorIdentifier, unknown][] = [],
-  Mcs extends [StoreMutatorIdentifier, unknown][] = []
+  Mcs extends [StoreMutatorIdentifier, unknown][] = [],
 >(
-  f: (pageContext: PageContext) => StateCreator<T, Mps, Mcs>
+  f: (pageContext: PageContext) => StateCreator<T, Mps, Mcs>,
 ) => StateCreator<T, Mps, Mcs>
 
 /**

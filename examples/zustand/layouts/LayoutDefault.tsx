@@ -10,7 +10,7 @@ function LayoutDefault({ children }: { children: React.ReactNode }) {
       style={{
         display: 'flex',
         maxWidth: 900,
-        margin: 'auto'
+        margin: 'auto',
       }}
     >
       <Sidebar>
@@ -31,7 +31,7 @@ function Sidebar({ children }: { children: React.ReactNode }) {
         display: 'flex',
         flexDirection: 'column',
         lineHeight: '1.8em',
-        borderRight: '2px solid #eee'
+        borderRight: '2px solid #eee',
       }}
     >
       {children}
@@ -47,7 +47,7 @@ function Content({ children }: { children: React.ReactNode }) {
         style={{
           padding: 20,
           paddingBottom: 50,
-          minHeight: '100vh'
+          minHeight: '100vh',
         }}
       >
         {children}
@@ -61,7 +61,7 @@ function Logo() {
     <div
       style={{
         marginTop: 20,
-        marginBottom: 10
+        marginBottom: 10,
       }}
     >
       <a href="/">

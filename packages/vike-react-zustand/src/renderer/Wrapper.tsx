@@ -5,6 +5,7 @@ import { create as createZustand } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { assert, removeFunctionsAndUndefined } from '../utils.js'
 import { getReactStoreContext, initializers_get, setPageContext } from './context.js'
+import type { PageContext } from 'vike/types'
 
 // Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
 // @ts-expect-error
@@ -16,12 +17,12 @@ export default function Wrapper({ children }: { children: ReactNode }) {
   const stores = useMemo(
     () =>
       Object.entries(initializers).map(([key, initializer]) => {
-        setPageContext(pageContext)
+        setPageContext(pageContext as PageContext)
         const store = create(initializer)
         setPageContext(null)
         return [key, store] as const
       }),
-    [initializers]
+    [initializers],
   )
 
   if (!stores.length) {
@@ -36,7 +37,7 @@ export default function Wrapper({ children }: { children: ReactNode }) {
       pageContext._vikeReactZustand ??= {}
       pageContext._vikeReactZustand = {
         ...pageContext._vikeReactZustand,
-        [key]: removeFunctionsAndUndefined(store.getState())
+        [key]: removeFunctionsAndUndefined(store.getState()),
       }
       // pageContext._vikeReactZustand can be undefined if ssr is disabled
     } else if (pageContext._vikeReactZustand && !store.__hydrated__ && !pageContext.isClientSideNavigation) {

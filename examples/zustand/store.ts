@@ -23,8 +23,8 @@ const useStore = create<Store>()(
       // the function passed to serverOnly only runs on the server
       // the return value is available on client/server
       ...serverOnly(() => ({
-        nodeVersion: process.version
-      }))
-    }))
-  )
+        nodeVersion: process.version,
+      })),
+    })),
+  ),
 )

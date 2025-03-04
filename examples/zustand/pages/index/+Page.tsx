@@ -13,7 +13,7 @@ function Page() {
       storeApi.subscribe((state) => {
         console.log(state)
       }),
-    []
+    [],
   )
 
   return (

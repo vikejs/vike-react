@@ -1,23 +1,23 @@
 {
   "scripts": {
-    "dev": "vite dev",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "vike dev",
+    "build": "vike build",
+    "preview": "vike preview",
     "test": "tsc --noEmit"
   },
   "dependencies": {
-    "@types/react": "^18.2.45",
-    "@types/react-dom": "^18.2.18",
-    "@vitejs/plugin-react": "^4.2.1",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
     "immer": "^10.0.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "typescript": "^5.3.3",
-    "vike": "^0.4.168",
-    "vike-react": "^0.4.15",
+    "vike": "^0.4.223",
+    "vike-react": "^0.5.13",
     "vike-react-zustand": "^0.0.1",
-    "vite": "^5.0.10",
-    "zustand": "^4.4.7"
+    "vite": "^6.2.0",
+    "zustand": "^5.0.3"
   },
   "type": "module"
 }

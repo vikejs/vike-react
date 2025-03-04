@@ -13,5 +13,5 @@ const config = {
   // https://vike.dev/ssr - this line can be removed since `true` is the default
   ssr: true,
   // https://vike.dev/extends
-  extends: [vikeReact, vikeReactZustand]
+  extends: [vikeReact, vikeReactZustand],
 } satisfies Config

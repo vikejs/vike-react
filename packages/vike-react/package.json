@@ -30,8 +30,8 @@
     "react-streaming": "^0.3.48"
   },
   "peerDependencies": {
-    "react": ">=18.0.0",
-    "react-dom": ">=18.0.0",
+    "react": ">=19",
+    "react-dom": ">=19",
     "vike": ">=0.4.182"
   },
   "scripts": {

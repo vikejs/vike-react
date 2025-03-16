@@ -1,3 +1,12 @@
+## [0.6.1](https://github.com/vikejs/vike-react/compare/vike-react@0.6.0...vike-react@0.6.1) (2025-03-16)
+
+
+### Bug Fixes
+
+* allow user to override pageContext.{pageHtmlString,pageHtmlStream} (vikejs/vike[#389](https://github.com/vikejs/vike-react/issues/389), https://github.com/vikejs/vike/issues/389#issuecomment-2725260763) ([95cf570](https://github.com/vikejs/vike-react/commit/95cf5706c962d6ed6a13860630d9fc65275a2a2b)), closes [/github.com/vikejs/vike/issues/389#issuecomment-2725260763](https://github.com//github.com/vikejs/vike/issues/389/issues/issuecomment-2725260763)
+
+
+
 # [0.6.0](https://github.com/vikejs/vike-react/compare/vike-react@0.5.13...vike-react@0.6.0) (2025-03-11)
 
 

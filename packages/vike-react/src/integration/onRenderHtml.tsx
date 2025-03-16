@@ -13,6 +13,7 @@ import type { PageContextInternal } from '../types/PageContext.js'
 import type { Head } from '../types/Config.js'
 import { isReactElement } from '../utils/isReactElement.js'
 import { getTagAttributesString, type TagAttributes } from '../utils/getTagAttributesString.js'
+import { assert } from '../utils/assert.js'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { resolveReactOptions } from './resolveReactOptions.js'
 
@@ -21,7 +22,7 @@ addEcosystemStamp()
 const onRenderHtml: OnRenderHtmlAsync = async (
   pageContext: PageContextServer & PageContextInternal,
 ): ReturnType<OnRenderHtmlAsync> => {
-  const pageHtml = await getPageHtml(pageContext)
+  await renderPageToHtml(pageContext)
 
   const headHtml = getHeadHtml(pageContext)
 
@@ -32,6 +33,19 @@ const onRenderHtml: OnRenderHtmlAsync = async (
   // Not needed on the client-side, thus we remove it to save KBs sent to the client
   delete pageContext._configFromHook
 
+  // pageContext.{pageHtmlString,pageHtmlStream} is set by renderPageToHtml() and can be overridden by user at onAfterRenderHtml()
+  let pageHtmlStringOrStream: string | ReturnType<typeof dangerouslySkipEscape> | PageHtmlStream =
+    // Set to empty string if SSR is disabled
+    ''
+  if (pageContext.pageHtmlString) {
+    assert(pageContext.pageHtmlStream === undefined)
+    pageHtmlStringOrStream = dangerouslySkipEscape(pageContext.pageHtmlString)
+  }
+  if (pageContext.pageHtmlStream) {
+    assert(pageContext.pageHtmlString === undefined)
+    pageHtmlStringOrStream = pageContext.pageHtmlStream
+  }
+
   return escapeInject`<!DOCTYPE html>
     <html${dangerouslySkipEscape(htmlAttributesString)}>
       <head>
@@ -40,14 +54,14 @@ const onRenderHtml: OnRenderHtmlAsync = async (
       </head>
       <body${dangerouslySkipEscape(bodyAttributesString)}>
         ${bodyHtmlBegin}
-        <div id="root">${pageHtml}</div>
+        <div id="root">${pageHtmlStringOrStream}</div>
         ${bodyHtmlEnd}
       </body>
     </html>`
 }
 
 export type PageHtmlStream = Awaited<ReturnType<typeof renderToStream>>
-async function getPageHtml(pageContext: PageContextServer) {
+async function renderPageToHtml(pageContext: PageContextServer) {
   if (pageContext.Page) pageContext.page = getPageElement(pageContext).page
 
   // https://github.com/vikejs/vike-react/issues/87#issuecomment-2488742744
@@ -55,13 +69,11 @@ async function getPageHtml(pageContext: PageContextServer) {
 
   const { renderToStringOptions } = resolveReactOptions(pageContext)
 
-  let pageHtml: string | ReturnType<typeof dangerouslySkipEscape> | PageHtmlStream = ''
   if (pageContext.page) {
     const { stream, streamIsRequired } = pageContext.config
     if (!stream && !streamIsRequired) {
       const pageHtmlString = renderToString(pageContext.page, renderToStringOptions)
       pageContext.pageHtmlString = pageHtmlString
-      pageHtml = dangerouslySkipEscape(pageHtmlString)
     } else {
       const pageHtmlStream = await renderToStream(pageContext.page, {
         webStream: typeof stream === 'string' ? stream === 'web' : undefined,
@@ -73,14 +85,11 @@ async function getPageHtml(pageContext: PageContextServer) {
         disable: stream === false ? true : undefined,
       })
       pageContext.pageHtmlStream = pageHtmlStream
-      pageHtml = pageHtmlStream
     }
   }
 
   // https://github.com/vikejs/vike/discussions/1804#discussioncomment-10394481
   await callCumulativeHooks(pageContext.config.onAfterRenderHtml, pageContext)
-
-  return pageHtml
 }
 
 function getHeadHtml(pageContext: PageContextServer & PageContextInternal) {

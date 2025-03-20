@@ -36,7 +36,7 @@ jobs:
         with:
           node-version: 20
           # TODO/eventually: try using the cache again
-          # The cache breaks playwright https://github.com/vikejs/vike-vue/pull/119
+          # The cache breaks playwright installation, see https://github.com/vikejs/vike-vue/pull/119
           # cache: "pnpm"
 
       - run: pnpm install

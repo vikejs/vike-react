@@ -30,7 +30,7 @@ function clientOnly<T extends ComponentType<any>>(
         }),
     )
 
-    return forwardRef<any, any>((props, ref) => {
+    return forwardRef((props, ref) => {
       const [mounted, setMounted] = useState(false)
       useEffect(() => {
         setMounted(true)

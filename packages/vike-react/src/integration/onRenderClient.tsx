@@ -9,6 +9,7 @@ import type { PageContextInternal } from '../types/PageContext.js'
 import './styles.css'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { applyHeadSettings } from './applyHeadSettings.js'
+import { resolveReactOptions } from './resolveReactOptions.js'
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientAsync = async (
@@ -23,27 +24,24 @@ const onRenderClient: OnRenderClientAsync = async (
   const { page, renderPromise } = getPageElement(pageContext)
   pageContext.page = page
 
-  // TODO: implement this? So that, upon errors, onRenderClient() throws an error and Vike can render the error. As of April 2024 it isn't released yet.
+  // TODO: implement this? So that, upon errors, onRenderClient() throws an error and Vike can render the error page. As of April 2024 it isn't released yet.
   //  - https://react-dev-git-fork-rickhanlonii-rh-root-options-fbopensource.vercel.app/reference/react-dom/client/createRoot#show-a-dialog-for-uncaught-errors
   //  - https://react-dev-git-fork-rickhanlonii-rh-root-options-fbopensource.vercel.app/reference/react-dom/client/hydrateRoot#show-a-dialog-for-uncaught-errors
   const onUncaughtError = (_error: any, _errorInfo: any) => {}
 
   const container = document.getElementById('root')!
+  const { hydrateRootOptions, createRootOptions } = resolveReactOptions(pageContext)
   if (
     pageContext.isHydration &&
     // Whether the page was [Server-Side Rendered](https://vike.dev/ssr).
     container.innerHTML !== ''
   ) {
     // First render while using SSR, i.e. [hydration](https://vike.dev/hydration)
-    root = ReactDOM.hydrateRoot(container, page, {
-      // onUncaughtError,
-    })
+    root = ReactDOM.hydrateRoot(container, page, hydrateRootOptions)
   } else {
     if (!root) {
       // First render without SSR
-      root = ReactDOM.createRoot(container, {
-        // onUncaughtError,
-      })
+      root = ReactDOM.createRoot(container, createRootOptions)
     }
     root.render(page)
   }

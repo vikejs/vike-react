@@ -4,9 +4,10 @@ import type { PageContextInternal } from '../../types/PageContext.js'
 import type { ConfigFromHook } from '../../types/Config.js'
 import { usePageContext } from '../usePageContext.js'
 import { getPageContext } from 'vike/getPageContext'
-import { useStream } from 'react-streaming'
+import { useStreamOptional } from 'react-streaming'
 import { objectKeys } from '../../utils/objectKeys.js'
 import { includes } from '../../utils/includes.js'
+import { assert } from '../../utils/assert.js'
 import { configsCumulative } from './configsCumulative.js'
 
 /**
@@ -21,13 +22,14 @@ function useConfig(): (config: ConfigFromHook) => void {
 
   // Component
   pageContext = usePageContext()
-  const stream = useStream()
+  const stream = useStreamOptional()
   return (config: ConfigFromHook) => {
     if (!pageContext._headAlreadySet) {
       setPageContextConfigFromHook(config, pageContext)
     } else {
+      assert(stream)
       // <head> already sent to the browser => send DOM-manipulating scripts during HTML streaming
-      apply(config, stream!)
+      apply(config, stream)
     }
   }
 }
@@ -54,7 +56,7 @@ function setPageContextConfigFromHook(config: ConfigFromHook, pageContext: PageC
   })
 }
 
-type Stream = NonNullable<ReturnType<typeof useStream>>
+type Stream = NonNullable<ReturnType<typeof useStreamOptional>>
 function apply(config: ConfigFromHook, stream: Stream) {
   const { title } = config
   if (title) {

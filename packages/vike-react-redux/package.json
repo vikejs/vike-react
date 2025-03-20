@@ -32,17 +32,17 @@
       }
     },
     "dependencies": {
-      "@reduxjs/toolkit": "^2.5.0",
+      "@reduxjs/toolkit": "^2.6.1",
       "react-redux": "^9.2.0"
     },
     "devDependencies": {
       "@brillout/release-me": "^0.4.2",
-      "@types/react": "^19.0.8",
+      "@types/react": "^19.0.10",
       "react": "^19.0.0",
       "rimraf": "^5.0.5",
       "typescript": "^5.5.3",
-      "vike": "^0.4.222",
-      "vike-react": "^0.5.12"
+      "vike": "^0.4.223",
+      "vike-react": "^0.6.1"
     },
     "typesVersions": {
       "*": {

@@ -7,7 +7,6 @@
   "exports": {
     ".": "./dist/src/index.js",
     "./config": "./dist/integration/+config.js",
-    "./__internal/integration/client": "./dist/integration/client.js",
     "./__internal/integration/Wrapper": "./dist/integration/Wrapper.js",
     "./__internal/integration/FallbackErrorBoundary": "./dist/integration/FallbackErrorBoundary.js"
   },

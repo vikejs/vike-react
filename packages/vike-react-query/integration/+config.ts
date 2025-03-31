@@ -13,7 +13,6 @@ const config = {
   queryClientConfig: undefined,
   Wrapper: 'import:vike-react-query/__internal/integration/Wrapper:Wrapper',
   FallbackErrorBoundary: 'import:vike-react-query/__internal/integration/FallbackErrorBoundary:FallbackErrorBoundary',
-  client: 'import:vike-react-query/__internal/integration/client:default',
   streamIsRequired: true,
   meta: {
     queryClientConfig: {

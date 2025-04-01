@@ -33,9 +33,6 @@
       "vike-react-antd": "link:./packages/vike-react-antd/",
       "vike-react-styled-components": "link:./packages/vike-react-styled-components/",
       "vike-react-styled-jsx": "link:./packages/vike-react-styled-jsx/"
-    },
-    "patchedDependencies": {
-      "vike@0.4.227-commit-25aa0f8": "patches/vike@0.4.227-commit-25aa0f8.patch"
     }
   },
   "devDependencies": {

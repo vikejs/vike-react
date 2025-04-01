@@ -14,11 +14,6 @@ overrides:
   vike-react-styled-components: link:./packages/vike-react-styled-components/
   vike-react-styled-jsx: link:./packages/vike-react-styled-jsx/
 
-patchedDependencies:
-  vike@0.4.227-commit-25aa0f8:
-    hash: 2mt23bbiy32qxwmsc4k3otcchm
-    path: patches/vike@0.4.227-commit-25aa0f8.patch
-
 importers:
 
   .:
@@ -70,7 +65,7 @@ importers:
         version: 5.7.3
       vike:
         specifier: 0.4.227-commit-25aa0f8
-        version: 0.4.227-commit-25aa0f8(patch_hash=2mt23bbiy32qxwmsc4k3otcchm)(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
+        version: 0.4.227-commit-25aa0f8(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -109,7 +104,7 @@ importers:
         version: 5.7.3
       vike:
         specifier: 0.4.227-commit-25aa0f8
-        version: 0.4.227-commit-25aa0f8(patch_hash=2mt23bbiy32qxwmsc4k3otcchm)(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
+        version: 0.4.227-commit-25aa0f8(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -130,7 +125,7 @@ importers:
         version: 19.0.0(react@19.0.0)
       vike:
         specifier: 0.4.227-commit-25aa0f8
-        version: 0.4.227-commit-25aa0f8(patch_hash=2mt23bbiy32qxwmsc4k3otcchm)(react-streaming@0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@5.1.0(@types/node@20.11.17))
+        version: 0.4.227-commit-25aa0f8(react-streaming@0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@5.1.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -163,7 +158,7 @@ importers:
         version: 5.7.3
       vike:
         specifier: 0.4.227-commit-25aa0f8
-        version: 0.4.227-commit-25aa0f8(patch_hash=2mt23bbiy32qxwmsc4k3otcchm)(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
+        version: 0.4.227-commit-25aa0f8(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -209,7 +204,7 @@ importers:
         version: 5.7.3
       vike:
         specifier: 0.4.227-commit-25aa0f8
-        version: 0.4.227-commit-25aa0f8(patch_hash=2mt23bbiy32qxwmsc4k3otcchm)(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
+        version: 0.4.227-commit-25aa0f8(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
       vite:
         specifier: ^6.1.0
         version: 6.1.0(@types/node@20.11.17)
@@ -239,7 +234,7 @@ importers:
         version: 5.7.3
       vike:
         specifier: 0.4.227-commit-25aa0f8
-        version: 0.4.227-commit-25aa0f8(patch_hash=2mt23bbiy32qxwmsc4k3otcchm)(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
+        version: 0.4.227-commit-25aa0f8(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -291,7 +286,7 @@ importers:
         version: 5.7.3
       vike:
         specifier: 0.4.227-commit-25aa0f8
-        version: 0.4.227-commit-25aa0f8(patch_hash=2mt23bbiy32qxwmsc4k3otcchm)(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
+        version: 0.4.227-commit-25aa0f8(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -306,7 +301,7 @@ importers:
         version: 0.4.2
       '@chakra-ui/react':
         specifier: ^3.0.2
-        version: 3.0.2(@emotion/react@11.13.3(@types/react@19.0.10)(react@19.0.0))(@internationalized/date@3.5.6)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 3.0.2(@emotion/react@11.13.3(@types/react@19.0.10)(react@19.0.0))(@internationalized/date@3.5.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@emotion/react':
         specifier: ^11.13.3
         version: 11.13.3(@types/react@19.0.10)(react@19.0.0)
@@ -324,7 +319,7 @@ importers:
         version: 5.7.3
       vike:
         specifier: 0.4.227-commit-25aa0f8
-        version: 0.4.227-commit-25aa0f8(patch_hash=2mt23bbiy32qxwmsc4k3otcchm)(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
+        version: 0.4.227-commit-25aa0f8(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -373,7 +368,7 @@ importers:
         version: 5.7.3
       vike:
         specifier: 0.4.227-commit-25aa0f8
-        version: 0.4.227-commit-25aa0f8(patch_hash=2mt23bbiy32qxwmsc4k3otcchm)(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
+        version: 0.4.227-commit-25aa0f8(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -406,7 +401,7 @@ importers:
         version: 5.7.3
       vike:
         specifier: 0.4.227-commit-25aa0f8
-        version: 0.4.227-commit-25aa0f8(patch_hash=2mt23bbiy32qxwmsc4k3otcchm)(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
+        version: 0.4.227-commit-25aa0f8(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -436,7 +431,7 @@ importers:
         version: 5.7.3
       vike:
         specifier: 0.4.227-commit-25aa0f8
-        version: 0.4.227-commit-25aa0f8(patch_hash=2mt23bbiy32qxwmsc4k3otcchm)(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
+        version: 0.4.227-commit-25aa0f8(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -3826,7 +3821,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@ark-ui/anatomy@3.5.0(@internationalized/date@3.5.6)':
+  '@ark-ui/anatomy@3.5.0(@internationalized/date@3.5.5)':
     dependencies:
       '@zag-js/accordion': 0.62.1
       '@zag-js/anatomy': 0.62.1
@@ -3839,7 +3834,7 @@ snapshots:
       '@zag-js/color-utils': 0.62.1
       '@zag-js/combobox': 0.62.1
       '@zag-js/date-picker': 0.62.1
-      '@zag-js/date-utils': 0.62.1(@internationalized/date@3.5.6)
+      '@zag-js/date-utils': 0.62.1(@internationalized/date@3.5.5)
       '@zag-js/dialog': 0.62.1
       '@zag-js/editable': 0.62.1
       '@zag-js/file-upload': 0.62.1
@@ -4119,9 +4114,9 @@ snapshots:
       '@brillout/import': 0.2.6
       '@brillout/picocolors': 1.0.26
 
-  '@chakra-ui/react@3.0.2(@emotion/react@11.13.3(@types/react@19.0.10)(react@19.0.0))(@internationalized/date@3.5.6)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@chakra-ui/react@3.0.2(@emotion/react@11.13.3(@types/react@19.0.10)(react@19.0.0))(@internationalized/date@3.5.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@ark-ui/anatomy': 3.5.0(@internationalized/date@3.5.6)
+      '@ark-ui/anatomy': 3.5.0(@internationalized/date@3.5.5)
       '@ark-ui/react': 4.1.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@emotion/is-prop-valid': 1.3.1
       '@emotion/react': 11.13.3(@types/react@19.0.10)(react@19.0.0)
@@ -5026,10 +5021,6 @@ snapshots:
   '@zag-js/date-utils@0.62.1(@internationalized/date@3.5.5)':
     dependencies:
       '@internationalized/date': 3.5.5
-
-  '@zag-js/date-utils@0.62.1(@internationalized/date@3.5.6)':
-    dependencies:
-      '@internationalized/date': 3.5.6
 
   '@zag-js/date-utils@0.74.2(@internationalized/date@3.5.6)':
     dependencies:
@@ -7527,7 +7518,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vike@0.4.227-commit-25aa0f8(patch_hash=2mt23bbiy32qxwmsc4k3otcchm)(react-streaming@0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@5.1.0(@types/node@20.11.17)):
+  vike@0.4.227-commit-25aa0f8(react-streaming@0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@5.1.0(@types/node@20.11.17)):
     dependencies:
       '@brillout/import': 0.2.6
       '@brillout/json-serializer': 0.5.15
@@ -7549,7 +7540,7 @@ snapshots:
       react-streaming: 0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       vite: 5.1.0(@types/node@20.11.17)
 
-  vike@0.4.227-commit-25aa0f8(patch_hash=2mt23bbiy32qxwmsc4k3otcchm)(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17)):
+  vike@0.4.227-commit-25aa0f8(react-streaming@0.4.2(react@19.0.0))(vite@6.1.0(@types/node@20.11.17)):
     dependencies:
       '@brillout/import': 0.2.6
       '@brillout/json-serializer': 0.5.15

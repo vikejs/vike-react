@@ -37,7 +37,7 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "rimraf dist/ && tsc && pnpm run build:css",
-    "build:css": "cp src/integration/styles.css dist/integration/styles.css",
+    "build:css": "cp src/integration/Loading.css dist/integration/Loading.css",
     "release": "release-me patch",
     "release:minor": "release-me minor",
     "release:commit": "release-me commit"

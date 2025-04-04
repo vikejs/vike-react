@@ -3,6 +3,7 @@ export default {
 }
 
 import React from 'react'
+import './Loading.css'
 
 function LoadingComponent() {
   return (

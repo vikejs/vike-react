@@ -24,7 +24,7 @@ Integrates [Chakra UI](https://www.chakra-ui.com/) into your [`vike-react`](http
      extends: [vikeReact, vikeReactChakra]
    }
    ```
-3. You can now use Chakra at any of your components.
+3. You can now use Chakra in any of your components.
    ```jsx
    import { HStack, Button } from '@chakra-ui/react'
 

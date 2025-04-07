@@ -25,7 +25,7 @@ Integrates [Ant Design](https://ant.design) into your [`vike-react`](https://vik
      extends: [vikeReact, vikeReactAntd]
    }
    ```
-3. You can now use Ant Design at any of your components.
+3. You can now use Ant Design in any of your components.
    ```jsx
    import { Button, Flex } from "antd";
 

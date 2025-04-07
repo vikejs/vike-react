@@ -48,7 +48,7 @@ Integrates [styled-components](https://styled-components.com) into your [`vike-r
    }
    ```
 
-4. You can now use `styled-components` at any of your components.
+4. You can now use `styled-components` in any of your components.
    ```jsx
    import { styled } from "styled-components";
 

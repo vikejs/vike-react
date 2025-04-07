@@ -42,7 +42,7 @@ Integrates [React Redux](https://react-redux.js.org) to your [`vike-react`](http
     
     const rootReducer = combineReducers({ counter: counterReducer })
     
-    function createStore(preloadedState: any) {
+    function createStore(preloadedState?: Record<string, unknown>) {
         return configureStore({
             reducer: rootReducer,
             preloadedState

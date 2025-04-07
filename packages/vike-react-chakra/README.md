@@ -7,7 +7,7 @@
 
 <br/>
 
-Integrates [Chakra UI](https://www.chakra-ui.com/) to your [`vike-react`](https://vike.dev/vike-react) app.
+Integrates [Chakra UI](https://www.chakra-ui.com/) into your [`vike-react`](https://vike.dev/vike-react) app.
 
 ## Installation
 

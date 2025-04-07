@@ -1,6 +1,6 @@
 # `vike-react-antd`
 
-Integrates [Ant Design](https://ant.design) to your [`vike-react`](https://vike.dev/vike-react) app.
+Integrates [Ant Design](https://ant.design) into your [`vike-react`](https://vike.dev/vike-react) app.
 
 [Installation](#installation)  
 [Settings](#settings)  

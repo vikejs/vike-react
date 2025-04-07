@@ -6,7 +6,7 @@ Integrates [Ant Design](https://ant.design) into your [`vike-react`](https://vik
 [Settings](#settings)  
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-antd/CHANGELOG.md)  
 [What it does](#what-it-does)  
-[See Also](#see-also)  
+[See also](#see-also)  
 
 <br/>
 

@@ -3,7 +3,7 @@
 [Installation](#installation)  
 [Settings](#settings)  
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-chakra/CHANGELOG.md)  
-[See Also](#see-also)  
+[See also](#see-also)  
 
 <br/>
 

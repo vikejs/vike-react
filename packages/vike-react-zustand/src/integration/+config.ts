@@ -7,7 +7,7 @@ export default {
   require: {
     'vike-react': '>=0.4.13',
   },
-  Wrapper: 'import:vike-react-zustand/renderer/Wrapper:default',
+  Wrapper: 'import:vike-react-zustand/integration/Wrapper:default',
   passToClient: ['_vikeReactZustand'],
   vite: {
     plugins: [vikeReactZustand()],

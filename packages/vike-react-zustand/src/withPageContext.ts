@@ -2,7 +2,7 @@ export { withPageContext }
 
 import type { PageContext } from 'vike/types'
 import type { StateCreator, StoreMutatorIdentifier } from 'zustand'
-import { getPageContext } from './renderer/context.js'
+import { getPageContext } from './integration/context.js'
 import { assert } from './utils.js'
 
 type WithPageContext = <

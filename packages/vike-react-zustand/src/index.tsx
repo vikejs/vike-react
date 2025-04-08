@@ -2,7 +2,7 @@ export { createWrapped as create, serverOnly, useStoreApi }
 export { withPageContext } from './withPageContext.js'
 
 import { useContext } from 'react'
-import { getReactStoreContext, initializers_set } from './renderer/context.js'
+import { getReactStoreContext, initializers_set } from './integration/context.js'
 import type { Create, StoreApiOnly, StoreHookOnly } from './types.js'
 import { assert } from './utils.js'
 

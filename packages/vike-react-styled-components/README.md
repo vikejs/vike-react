@@ -1,6 +1,6 @@
 # `vike-react-styled-components`
 
-Integrates [styled-components](https://styled-components.com) to your [`vike-react`](https://vike.dev/vike-react) app.
+Integrates [styled-components](https://styled-components.com) into your [`vike-react`](https://vike.dev/vike-react) app.
 
 [Installation](#installation)  
 [Settings](#settings)  
@@ -48,7 +48,7 @@ Integrates [styled-components](https://styled-components.com) to your [`vike-rea
    }
    ```
 
-4. You can now use `styled-components` at any of your components.
+4. You can now use `styled-components` in any of your components.
    ```jsx
    import { styled } from "styled-components";
 

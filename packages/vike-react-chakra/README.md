@@ -1,13 +1,13 @@
 # `vike-react-chakra`
 
+Integrates [Chakra UI](https://www.chakra-ui.com/) into your [`vike-react`](https://vike.dev/vike-react) app.
+
 [Installation](#installation)  
 [Settings](#settings)  
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-chakra/CHANGELOG.md)  
-[See Also](#see-also)  
+[See also](#see-also)  
 
 <br/>
-
-Integrates [Chakra UI](https://www.chakra-ui.com/) to your [`vike-react`](https://vike.dev/vike-react) app.
 
 ## Installation
 
@@ -24,7 +24,7 @@ Integrates [Chakra UI](https://www.chakra-ui.com/) to your [`vike-react`](https:
      extends: [vikeReact, vikeReactChakra]
    }
    ```
-3. You can now use Chakra at any of your components.
+3. You can now use Chakra in any of your components.
    ```jsx
    import { HStack, Button } from '@chakra-ui/react'
 

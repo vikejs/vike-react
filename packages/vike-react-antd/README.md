@@ -1,12 +1,12 @@
 # `vike-react-antd`
 
-Integrates [Ant Design](https://ant.design) to your [`vike-react`](https://vike.dev/vike-react) app.
+Integrates [Ant Design](https://ant.design) into your [`vike-react`](https://vike.dev/vike-react) app.
 
 [Installation](#installation)  
 [Settings](#settings)  
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-antd/CHANGELOG.md)  
 [What it does](#what-it-does)  
-[See Also](#see-also)  
+[See also](#see-also)  
 
 <br/>
 
@@ -25,7 +25,7 @@ Integrates [Ant Design](https://ant.design) to your [`vike-react`](https://vike.
      extends: [vikeReact, vikeReactAntd]
    }
    ```
-3. You can now use Ant Design at any of your components.
+3. You can now use Ant Design in any of your components.
    ```jsx
    import { Button, Flex } from "antd";
 

@@ -22,8 +22,8 @@ importers:
         specifier: ^1.8.3
         version: 1.9.4
       '@brillout/test-e2e':
-        specifier: ^0.5.33
-        version: 0.5.38
+        specifier: ^0.6.8
+        version: 0.6.8
       '@brillout/test-types':
         specifier: ^0.1.15
         version: 0.1.15(typescript@5.8.2)
@@ -50,7 +50,7 @@ importers:
         version: 19.0.4(@types/react@19.0.12)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
-        version: 4.3.4(vite@6.2.2(@types/node@20.17.24))
+        version: 4.3.4(vite@6.2.5(@types/node@20.17.24))
       graphql:
         specifier: ^16.9.0
         version: 16.10.0
@@ -65,7 +65,7 @@ importers:
         version: 5.8.2
       vike:
         specifier: ^0.4.223
-        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.2(@types/node@20.17.24))
+        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -73,8 +73,8 @@ importers:
         specifier: link:../../packages/vike-react-apollo
         version: link:../../packages/vike-react-apollo
       vite:
-        specifier: ^6.1.0
-        version: 6.2.2(@types/node@20.17.24)
+        specifier: ^6.2.5
+        version: 6.2.5(@types/node@20.17.24)
 
   examples/full:
     dependencies:
@@ -86,7 +86,7 @@ importers:
         version: 19.0.4(@types/react@19.0.12)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
-        version: 4.3.4(vite@6.2.2(@types/node@20.17.24))
+        version: 4.3.4(vite@6.2.5(@types/node@20.17.24))
       node-fetch:
         specifier: ^3.3.2
         version: 3.3.2
@@ -104,19 +104,19 @@ importers:
         version: 5.8.2
       vike:
         specifier: ^0.4.223
-        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.2(@types/node@20.17.24))
+        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
       vite:
-        specifier: ^6.1.0
-        version: 6.2.2(@types/node@20.17.24)
+        specifier: ^6.2.5
+        version: 6.2.5(@types/node@20.17.24)
 
   examples/minimal:
     dependencies:
       '@vitejs/plugin-react':
         specifier: 4.2.1
-        version: 4.2.1(vite@5.1.0(@types/node@20.17.24))
+        version: 4.2.1(vite@6.2.5(@types/node@20.17.24))
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -125,13 +125,13 @@ importers:
         version: 19.0.0(react@19.0.0)
       vike:
         specifier: ^0.4.223
-        version: 0.4.225(react-streaming@0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@5.1.0(@types/node@20.17.24))
+        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
       vite:
-        specifier: 5.1.0
-        version: 5.1.0(@types/node@20.17.24)
+        specifier: ^6.2.5
+        version: 6.2.5(@types/node@20.17.24)
 
   examples/react-query:
     dependencies:
@@ -146,7 +146,7 @@ importers:
         version: 19.0.4(@types/react@19.0.12)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
-        version: 4.3.4(vite@6.2.2(@types/node@20.17.24))
+        version: 4.3.4(vite@6.2.5(@types/node@20.17.24))
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -158,7 +158,7 @@ importers:
         version: 5.8.2
       vike:
         specifier: ^0.4.223
-        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.2(@types/node@20.17.24))
+        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -166,8 +166,8 @@ importers:
         specifier: link:../../packages/vike-react-query
         version: link:../../packages/vike-react-query
       vite:
-        specifier: ^6.1.0
-        version: 6.2.2(@types/node@20.17.24)
+        specifier: ^6.2.5
+        version: 6.2.5(@types/node@20.17.24)
 
   examples/redux:
     dependencies:
@@ -197,7 +197,7 @@ importers:
         version: 5.8.2
       vike:
         specifier: ^0.4.223
-        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.2(@types/node@20.17.24))
+        version: 0.4.225(react-streaming@0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@6.2.2(@types/node@20.17.24))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -243,10 +243,10 @@ importers:
         version: 5.8.2
       vike:
         specifier: ^0.4.223
-        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.2(@types/node@20.17.24))
+        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vite:
-        specifier: ^6.1.0
-        version: 6.2.2(@types/node@20.17.24)
+        specifier: ^6.2.5
+        version: 6.2.5(@types/node@20.17.24)
 
   packages/vike-react-antd:
     devDependencies:
@@ -273,13 +273,13 @@ importers:
         version: 5.8.2
       vike:
         specifier: ^0.4.223
-        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.2(@types/node@20.17.24))
+        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
       vite:
-        specifier: ^6.1.0
-        version: 6.2.2(@types/node@20.17.24)
+        specifier: ^6.2.5
+        version: 6.2.5(@types/node@20.17.24)
 
   packages/vike-react-apollo:
     dependencies:
@@ -325,13 +325,13 @@ importers:
         version: 5.8.2
       vike:
         specifier: ^0.4.223
-        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.2(@types/node@20.17.24))
+        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
       vite:
-        specifier: ^6.1.0
-        version: 6.2.2(@types/node@20.17.24)
+        specifier: ^6.2.5
+        version: 6.2.5(@types/node@20.17.24)
 
   packages/vike-react-chakra:
     devDependencies:
@@ -358,13 +358,13 @@ importers:
         version: 5.8.2
       vike:
         specifier: ^0.4.223
-        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.2(@types/node@20.17.24))
+        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
       vite:
-        specifier: ^6.1.0
-        version: 6.2.2(@types/node@20.17.24)
+        specifier: ^6.2.5
+        version: 6.2.5(@types/node@20.17.24)
 
   packages/vike-react-query:
     dependencies:
@@ -407,13 +407,13 @@ importers:
         version: 5.8.2
       vike:
         specifier: ^0.4.223
-        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.2(@types/node@20.17.24))
+        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
       vite:
-        specifier: ^6.1.0
-        version: 6.2.2(@types/node@20.17.24)
+        specifier: ^6.2.5
+        version: 6.2.5(@types/node@20.17.24)
       vitest:
         specifier: ^1.2.2
         version: 1.6.1(@types/node@20.17.24)(jsdom@24.1.3)
@@ -444,7 +444,7 @@ importers:
         version: 5.8.2
       vike:
         specifier: ^0.4.223
-        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.2(@types/node@20.17.24))
+        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -471,13 +471,13 @@ importers:
         version: 5.8.2
       vike:
         specifier: ^0.4.223
-        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.2(@types/node@20.17.24))
+        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
       vite:
-        specifier: ^6.1.0
-        version: 6.2.2(@types/node@20.17.24)
+        specifier: ^6.2.5
+        version: 6.2.5(@types/node@20.17.24)
 
   packages/vike-react-styled-jsx:
     devDependencies:
@@ -501,13 +501,13 @@ importers:
         version: 5.8.2
       vike:
         specifier: ^0.4.223
-        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.2(@types/node@20.17.24))
+        version: 0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
       vite:
-        specifier: ^6.1.0
-        version: 6.2.2(@types/node@20.17.24)
+        specifier: ^6.2.5
+        version: 6.2.5(@types/node@20.17.24)
 
 packages:
 
@@ -739,8 +739,8 @@ packages:
   '@brillout/require-shim@0.1.2':
     resolution: {integrity: sha512-3I4LRHnVZXoSAsEoni5mosq9l6eiJED58d9V954W4CIZ88AUfYBanWGBGbJG3NztaRTpFHEA6wB3Hn93BmmJdg==}
 
-  '@brillout/test-e2e@0.5.38':
-    resolution: {integrity: sha512-9TLvnLhZU4atzdV+CEQwS1XeD9IqcfZNmu3VtuFKJlqu0eTUVtfTYeD+apbVcUUN3PTGqbgLZ5NPLDzbWdmI3w==}
+  '@brillout/test-e2e@0.6.8':
+    resolution: {integrity: sha512-U22qsQSnPeRPrqlrXk4FgihUpkbziO2neD6kK8mbEq9pG+qivfU1fkLbTGrmjJ7b+L8keqD+xVp+zKuGufHVeA==}
     hasBin: true
 
   '@brillout/test-types@0.1.15':
@@ -3770,6 +3770,46 @@ packages:
       yaml:
         optional: true
 
+  vite@6.2.5:
+    resolution: {integrity: sha512-j023J/hCAa4pRIUH6J9HemwYfjB5llR2Ps0CWeikOtdR8+pAURAk0DoJC5/mm9kd+UgdnIy7d6HE4EAvlYhPhA==}
+    engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^18.0.0 || ^20.0.0 || >=22.0.0
+      jiti: '>=1.21.0'
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      sass-embedded: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.16.0
+      tsx: ^4.8.1
+      yaml: ^2.4.2
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      jiti:
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      sass-embedded:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+      tsx:
+        optional: true
+      yaml:
+        optional: true
+
   vitest@1.6.1:
     resolution: {integrity: sha512-Ljb1cnSJSivGN0LqXd/zmDbWEM0RNNg2t1QW/XUhYl/qPqyu7CsqeWtqQXHVaJsecLPuDoak2oJcZN2QoRIOag==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -4213,7 +4253,7 @@ snapshots:
 
   '@brillout/require-shim@0.1.2': {}
 
-  '@brillout/test-e2e@0.5.38':
+  '@brillout/test-e2e@0.6.8':
     dependencies:
       '@brillout/part-regex': 0.1.4
       '@brillout/picocolors': 1.0.26
@@ -4938,14 +4978,14 @@ snapshots:
 
   '@types/use-sync-external-store@0.0.6': {}
 
-  '@vitejs/plugin-react@4.2.1(vite@5.1.0(@types/node@20.17.24))':
+  '@vitejs/plugin-react@4.2.1(vite@6.2.5(@types/node@20.17.24))':
     dependencies:
       '@babel/core': 7.26.10
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.10)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.10)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.1.0(@types/node@20.17.24)
+      vite: 6.2.5(@types/node@20.17.24)
     transitivePeerDependencies:
       - supports-color
 
@@ -4957,6 +4997,17 @@ snapshots:
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
       vite: 6.2.2(@types/node@20.17.24)
+    transitivePeerDependencies:
+      - supports-color
+
+  '@vitejs/plugin-react@4.3.4(vite@6.2.5(@types/node@20.17.24))':
+    dependencies:
+      '@babel/core': 7.26.10
+      '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.10)
+      '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.10)
+      '@types/babel__core': 7.20.5
+      react-refresh: 0.14.2
+      vite: 6.2.5(@types/node@20.17.24)
     transitivePeerDependencies:
       - supports-color
 
@@ -7379,28 +7430,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vike@0.4.225(react-streaming@0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@5.1.0(@types/node@20.17.24)):
-    dependencies:
-      '@brillout/import': 0.2.6
-      '@brillout/json-serializer': 0.5.15
-      '@brillout/picocolors': 1.0.26
-      '@brillout/require-shim': 0.1.2
-      '@brillout/vite-plugin-server-entry': 0.6.3
-      acorn: 8.14.1
-      cac: 6.7.14
-      es-module-lexer: 1.6.0
-      esbuild: 0.24.2
-      json5: 2.2.3
-      picomatch: 4.0.2
-      semver: 7.7.1
-      sirv: 3.0.1
-      source-map-support: 0.5.21
-      tinyglobby: 0.2.12
-    optionalDependencies:
-      react-streaming: 0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      vite: 5.1.0(@types/node@20.17.24)
-
-  vike@0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.2(@types/node@20.17.24)):
+  vike@0.4.225(react-streaming@0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@6.2.2(@types/node@20.17.24)):
     dependencies:
       '@brillout/import': 0.2.6
       '@brillout/json-serializer': 0.5.15
@@ -7420,6 +7450,27 @@ snapshots:
     optionalDependencies:
       react-streaming: 0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       vite: 6.2.2(@types/node@20.17.24)
+
+  vike@0.4.225(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24)):
+    dependencies:
+      '@brillout/import': 0.2.6
+      '@brillout/json-serializer': 0.5.15
+      '@brillout/picocolors': 1.0.26
+      '@brillout/require-shim': 0.1.2
+      '@brillout/vite-plugin-server-entry': 0.6.3
+      acorn: 8.14.1
+      cac: 6.7.14
+      es-module-lexer: 1.6.0
+      esbuild: 0.24.2
+      json5: 2.2.3
+      picomatch: 4.0.2
+      semver: 7.7.1
+      sirv: 3.0.1
+      source-map-support: 0.5.21
+      tinyglobby: 0.2.12
+    optionalDependencies:
+      react-streaming: 0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      vite: 6.2.5(@types/node@20.17.24)
 
   vite-node@1.6.1(@types/node@20.17.24):
     dependencies:
@@ -7448,6 +7499,15 @@ snapshots:
       fsevents: 2.3.3
 
   vite@6.2.2(@types/node@20.17.24):
+    dependencies:
+      esbuild: 0.25.1
+      postcss: 8.5.3
+      rollup: 4.36.0
+    optionalDependencies:
+      '@types/node': 20.17.24
+      fsevents: 2.3.3
+
+  vite@6.2.5(@types/node@20.17.24):
     dependencies:
       esbuild: 0.25.1
       postcss: 8.5.3

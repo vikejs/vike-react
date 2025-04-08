@@ -11,5 +11,4 @@ export default {
   // <title>
   title: 'My Vike + React App',
   extends: [vikeReact, vikeReactRedux],
-  passToClient: ['routeParams'],
 } satisfies Config

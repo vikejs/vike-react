@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "vike dev",
     "build": "vike build",
-    "preview": "vike preview",
+    "preview": "vike build && vike preview",
     "test": "tsc --noEmit"
   },
   "dependencies": {

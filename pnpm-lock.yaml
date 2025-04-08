@@ -420,16 +420,16 @@ importers:
 
   packages/vike-react-redux:
     dependencies:
-      '@reduxjs/toolkit':
-        specifier: ^2.6.1
-        version: 2.6.1(react-redux@9.2.0(@types/react@19.0.12)(react@19.0.0)(redux@5.0.1))(react@19.0.0)
       react-redux:
-        specifier: ^9.2.0
+        specifier: '>=9'
         version: 9.2.0(@types/react@19.0.12)(react@19.0.0)(redux@5.0.1)
     devDependencies:
       '@brillout/release-me':
         specifier: ^0.4.2
         version: 0.4.3
+      '@reduxjs/toolkit':
+        specifier: ^2.6.1
+        version: 2.6.1(react-redux@9.2.0(@types/react@19.0.12)(react@19.0.0)(redux@5.0.1))(react@19.0.0)
       '@types/react':
         specifier: ^19.0.10
         version: 19.0.12

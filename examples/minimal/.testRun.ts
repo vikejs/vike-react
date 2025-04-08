@@ -2,7 +2,7 @@ export { testRunClassic as testRun }
 
 import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry } from '@brillout/test-e2e'
 
-function testRunClassic(cmd: 'npm run dev' | 'npm run preview' | 'npm run prod') {
+function testRunClassic(cmd: 'pnpm run dev' | 'pnpm run preview') {
   run(cmd)
 
   test('page content is rendered to HTML', async () => {

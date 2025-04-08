@@ -8,14 +8,7 @@ import type { PageContext } from 'vike/types'
 function Wrapper({ children }: { children: React.ReactNode }) {
   const pageContext = usePageContext()
   const storeRef = useRef<PageContext['reduxStore']>(undefined)
-
-  if (!pageContext.config.redux) {
-    return <>{children}</>
-  }
-
-  if (!storeRef.current) {
-    storeRef.current = pageContext.reduxStore
-  }
-
+  if (!pageContext.config.redux) return <>{children}</>
+  if (!storeRef.current) storeRef.current = pageContext.reduxStore
   return <Provider store={storeRef.current!}>{children}</Provider>
 }

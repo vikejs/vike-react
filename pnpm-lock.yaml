@@ -115,7 +115,7 @@ importers:
     dependencies:
       '@vitejs/plugin-react':
         specifier: 4.2.1
-        version: 4.2.1(vite@5.1.0(@types/node@20.11.17))
+        version: 4.2.1(vite@6.2.5(@types/node@20.11.17))
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -124,13 +124,13 @@ importers:
         version: 19.0.0(react@19.0.0)
       vike:
         specifier: ^0.4.223
-        version: 0.4.223(react-streaming@0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@5.1.0(@types/node@20.11.17))
+        version: 0.4.223(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.11.17))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
       vite:
-        specifier: 5.1.0
-        version: 5.1.0(@types/node@20.11.17)
+        specifier: ^6.2.5
+        version: 6.2.5(@types/node@20.11.17)
 
   examples/react-query:
     dependencies:
@@ -5226,14 +5226,14 @@ snapshots:
 
   '@types/stylis@4.2.5': {}
 
-  '@vitejs/plugin-react@4.2.1(vite@5.1.0(@types/node@20.11.17))':
+  '@vitejs/plugin-react@4.2.1(vite@6.2.5(@types/node@20.11.17))':
     dependencies:
       '@babel/core': 7.26.8
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.8)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.8)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.1.0(@types/node@20.11.17)
+      vite: 6.2.5(@types/node@20.11.17)
     transitivePeerDependencies:
       - supports-color
 
@@ -8098,25 +8098,6 @@ snapshots:
     dependencies:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
-
-  vike@0.4.223(react-streaming@0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@5.1.0(@types/node@20.11.17)):
-    dependencies:
-      '@brillout/import': 0.2.3
-      '@brillout/json-serializer': 0.5.15
-      '@brillout/picocolors': 1.0.15
-      '@brillout/require-shim': 0.1.2
-      '@brillout/vite-plugin-server-entry': 0.6.0
-      acorn: 8.11.2
-      cac: 6.7.14
-      es-module-lexer: 1.4.1
-      esbuild: 0.24.2
-      fast-glob: 3.3.2
-      json5: 2.2.3
-      semver: 7.6.2
-      source-map-support: 0.5.21
-    optionalDependencies:
-      react-streaming: 0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      vite: 5.1.0(@types/node@20.11.17)
 
   vike@0.4.223(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.11.17)):
     dependencies:

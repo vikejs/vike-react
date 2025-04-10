@@ -1,8 +1,8 @@
 export { onBeforeRenderClient }
 
-import type { PageContext } from 'vike/types'
+import type { PageContextClient } from 'vike/types'
 
-function onBeforeRenderClient(pageContext: PageContext) {
+function onBeforeRenderClient(pageContext: PageContextClient) {
   const createStore = pageContext.config.redux?.createStore
   if (!createStore) return
   pageContext.reduxStore = createStore(pageContext.reduxState)

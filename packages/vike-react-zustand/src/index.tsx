@@ -1,10 +1,10 @@
-export { createWrapped as create, serverOnly, useStoreApi }
+export { createWrapped as create, transfer as transfer, useStoreApi }
 export { withPageContext } from './withPageContext.js'
 
 import { useContext } from 'react'
 import { getReactStoreContext, initializers_set } from './integration/context.js'
 import type { Create, StoreApiOnly, StoreHookOnly } from './types.js'
-import { assert } from './utils.js'
+import { assert, TRANSFER_STATE_KEY } from './utils.js'
 
 /**
  * Zustand integration for vike-react.
@@ -108,30 +108,34 @@ function getUseStore(key: string): any {
 }
 
 /**
- * The function passed to `serverOnly()` only runs on the server-side, while the state returned by it is available on both the server- and client-side.
+ * The function passed to `transfer()` only runs on the server-side, while the state returned by it is available on both the server- and client-side.
  *
  * Example usage:
  *
  * ```ts
  *
- * import { create, serverOnly } from 'vike-react-zustand'
+ * import { create, transfer } from 'vike-react-zustand'
  *
- * // We use serverOnly() because process.version is only available on the server-side but we want to be able to access it everywhere (client- and server-side).
+ * // We use transfer() because process.version is only available on the server-side but we want to be able to access it everywhere (client- and server-side).
  * const useStore = create<{ nodeVersion: string }>()({
- *   ...serverOnly(() => ({
+ *   ...transfer(() => ({
  *     // This function is called only on the server-side, but nodeVersion is available on both the server- and client-side.
  *     nodeVersion: process.version
  *   }))
  * })
  * ```
  */
-function serverOnly<T extends Record<string, any>>(getStateOnServerSide: () => T) {
+function transfer<T extends Record<string, any>>(getStateOnServerSide: () => T) {
   // Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
   // The assignment needs to be conditional, because in DEV, the condition is not statically analyzed/stripped
   // @ts-expect-error
   import.meta.env ??= { SSR: true }
   if (import.meta.env.SSR) {
-    return getStateOnServerSide()
+    const ret = getStateOnServerSide()
+    return {
+      ...ret,
+      [TRANSFER_STATE_KEY]: ret,
+    }
   }
   return {} as T
 }

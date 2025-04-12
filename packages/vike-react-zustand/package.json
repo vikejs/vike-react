@@ -8,6 +8,8 @@
     ".": "./dist/index.js",
     "./config": "./dist/integration/+config.js",
     "./integration/Wrapper": "./dist/integration/Wrapper.js",
+    "./integration/onBeforeRender": "./dist/integration/onBeforeRender.js",
+    "./integration/onBeforeRenderClient": "./dist/integration/onBeforeRenderClient.js",
     "./plugin": "./dist/plugin.js"
   },
   "scripts": {

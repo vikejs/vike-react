@@ -6,7 +6,7 @@ import { immer } from 'zustand/middleware/immer'
 interface Store {
   counter: number
   setCounter: (value: number) => void
-  nodeVersion: string
+  nodeVersionAbout: string
 }
 
 const useStore = create<Store>()(
@@ -19,11 +19,11 @@ const useStore = create<Store>()(
         })
       },
 
-      // the function passed to serverOnly only runs on the server
+      // the function passed to transfer only runs on the server
       // the return value is available on client/server
       ...transfer(() => ({
         counter: Math.floor(10000 * Math.random()),
-        nodeVersion: process.version,
+        nodeVersionAbout: process.version,
       })),
     })),
   ),

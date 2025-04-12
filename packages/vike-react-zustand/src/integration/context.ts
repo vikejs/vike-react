@@ -28,11 +28,7 @@ const getReactStoreContext: () => React.Context<{ [key: string]: StoreApiAndHook
   globalObject.reactStoreContext
 
 function initializers_set(key: string, initializer: any) {
-  // useMemo will notice the change because we create a new object
-  globalObject.initializers = {
-    ...globalObject.initializers,
-    [key]: initializer,
-  }
+  globalObject.initializers[key] = initializer
 }
 function initializers_remove(key: string) {
   delete globalObject.initializers[key]

@@ -6,6 +6,7 @@ declare global {
   namespace Vike {
     interface PageContext {
       _vikeReactZustand: Record<string, unknown>
+      _stores: ReturnType<typeof import('./createStores.ts').createStores>
     }
   }
 }

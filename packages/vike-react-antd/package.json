@@ -30,7 +30,7 @@
     "react": "^19.0.0",
     "rimraf": "^5.0.5",
     "typescript": "^5.5.3",
-    "vike": "0.4.228-commit-ae4784f",
+    "vike": "0.4.228-commit-90cfb1a",
     "vike-react": "^0.6.1",
     "vite": "^6.2.5"
   },

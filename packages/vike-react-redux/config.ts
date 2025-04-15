@@ -11,7 +11,6 @@ const config = {
   },
   passToClient: ['reduxState'],
   onAfterRenderHtml: 'import:vike-react-redux/__internal/onAfterRenderHtml:onAfterRenderHtml',
-  // @ts-expect-error
   onCreatePageContext: 'import:vike-react-redux/__internal/onCreatePageContext:onCreatePageContext',
   onBeforeRenderClient: 'import:vike-react-redux/__internal/onBeforeRenderClient:onBeforeRenderClient',
   Wrapper: 'import:vike-react-redux/__internal/Wrapper:Wrapper',

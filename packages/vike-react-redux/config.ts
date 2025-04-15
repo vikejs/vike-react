@@ -11,12 +11,14 @@ const config = {
   },
   passToClient: ['reduxState'],
   onAfterRenderHtml: 'import:vike-react-redux/__internal/onAfterRenderHtml:onAfterRenderHtml',
-  onBeforeRenderHtml: 'import:vike-react-redux/__internal/onBeforeRenderHtml:onBeforeRenderHtml',
+  // @ts-expect-error
+  onCreatePageContext: 'import:vike-react-redux/__internal/onCreatePageContext:onCreatePageContext',
   onBeforeRenderClient: 'import:vike-react-redux/__internal/onBeforeRenderClient:onBeforeRenderClient',
   Wrapper: 'import:vike-react-redux/__internal/Wrapper:Wrapper',
   meta: {
     redux: {
       env: { server: true, client: true },
+      global: true
     },
   },
 } satisfies Config

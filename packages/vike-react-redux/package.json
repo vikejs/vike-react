@@ -5,7 +5,7 @@
   "exports": {
     "./config": "./dist/config.js",
     "./__internal/onAfterRenderHtml": "./dist/onAfterRenderHtml.js",
-    "./__internal/onBeforeRenderHtml": "./dist/onBeforeRenderHtml.js",
+    "./__internal/onCreatePageContext": "./dist/onCreatePageContext.js",
     "./__internal/onBeforeRenderClient": "./dist/onBeforeRenderClient.js",
     "./__internal/Wrapper": "./dist/Wrapper.js"
   },
@@ -40,8 +40,8 @@
       "__internal/onAfterRenderHtml": [
         "dist/onAfterRenderHtml.d.ts"
       ],
-      "__internal/onBeforeRenderHtml": [
-        "dist/onBeforeRenderHtml.d.ts"
+      "__internal/onCreatePageContext": [
+        "dist/onCreatePageContext.d.ts"
       ],
       "__internal/onBeforeRenderClient": [
         "dist/onBeforeRenderClient.d.ts"

@@ -18,7 +18,7 @@ const config = {
   meta: {
     redux: {
       env: { server: true, client: true },
-      global: true
+      global: true,
     },
   },
 } satisfies Config

@@ -21,8 +21,8 @@ const useStore = create<Store>()(
 
       // the function passed to serverOnly only runs on the server
       // the return value is available on client/server
-      ...transfer(() => ({
-        counter: Math.floor(10000 * Math.random()),
+      ...transfer(async () => ({
+        counter: await new Promise((r) => setTimeout(r, 50)).then(() => Math.floor(10000 * Math.random())),
         nodeVersion: process.version,
       })),
     })),

@@ -125,16 +125,16 @@ function getUseStore(key: string): any {
  * })
  * ```
  */
-function transfer<T extends Record<string, any>>(getStateOnServerSide: () => T) {
+function transfer<T extends Record<string, any>>(getStateOnServerSide: () => T | Promise<T>): T {
   // Trick to make import.meta.env.SSR work direclty on Node.js (without Vite)
   // The assignment needs to be conditional, because in DEV, the condition is not statically analyzed/stripped
   // @ts-expect-error
   import.meta.env ??= { SSR: true }
   if (import.meta.env.SSR) {
-    const ret = getStateOnServerSide()
+    // Promise<T> is resolved in onBeforeRender()
+    // @ts-expect-error
     return {
-      ...ret,
-      [TRANSFER_STATE_KEY]: ret,
+      [TRANSFER_STATE_KEY]: getStateOnServerSide,
     }
   }
   return {} as T

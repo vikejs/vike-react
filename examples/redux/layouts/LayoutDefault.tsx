@@ -2,7 +2,7 @@ export default LayoutDefault
 
 import './style.css'
 import React from 'react'
-import logoUrl from '../assets/logo.svg'
+import logoUrl from './logo.svg'
 import { Link } from '../components/Link'
 
 function LayoutDefault({ children }: { children: React.ReactNode }) {

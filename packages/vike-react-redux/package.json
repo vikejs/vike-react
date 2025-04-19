@@ -4,7 +4,7 @@
   "type": "module",
   "exports": {
     "./config": "./dist/config.js",
-    "./__internal/onAfterRenderHtml": "./dist/onAfterRenderHtml.js",
+    "./__internal/onAfterRenderHtml": "./dist/onAfterRenderHtml.server.js",
     "./__internal/onCreatePageContext": "./dist/onCreatePageContext.server.js",
     "./__internal/onBeforeRenderClient": "./dist/onBeforeRenderClient.client.js",
     "./__internal/Wrapper": "./dist/Wrapper.js"

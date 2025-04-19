@@ -9,9 +9,9 @@ function Wrapper({ children }: { children: React.ReactNode }) {
   const pageContext = usePageContext()
   let reduxStore: undefined | Store
   if (pageContext.isClientSide) {
-    reduxStore = pageContext.globalContext.reduxStore
+    reduxStore = pageContext.globalContext.redux?.store
   } else {
-    reduxStore = pageContext.reduxStore
+    reduxStore = pageContext.redux?.store
   }
   if (!reduxStore) return <>{children}</>
   return <Provider store={reduxStore}>{children}</Provider>

@@ -3,8 +3,6 @@ export { onAfterRenderHtml }
 import type { PageContextServer } from 'vike/types'
 
 function onAfterRenderHtml(pageContext: PageContextServer) {
-  const { reduxStore } = pageContext
-  if (!reduxStore) return
-  pageContext.redux ??= {}
-  pageContext.redux.ssrState = reduxStore.getState()
+  if (!pageContext.redux) return
+  pageContext.redux.ssrState = pageContext.redux.store.getState()
 }

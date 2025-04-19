@@ -30,7 +30,7 @@ declare global {
   namespace Vike {
     interface Config {
       redux?: null | {
-        createStore?: (pageContext: PageContext) => Store
+        createStore: (pageContext: PageContext) => Store
       }
     }
     interface PageContext {
@@ -39,10 +39,14 @@ declare global {
       }
     }
     interface PageContextServer {
-      reduxStore?: Store
+      redux?: {
+        store: Store
+      }
     }
     interface GlobalContextClient {
-      reduxStore?: Store
+      redux?: {
+        store: Store
+      }
     }
   }
 }

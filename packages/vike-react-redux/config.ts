@@ -25,13 +25,11 @@ const config = {
 declare global {
   namespace Vike {
     interface PageContext {
-      reduxStore?: Store
       reduxState?: Record<string, unknown>
-      serverState?: Partial<PageContext['reduxState']>
     }
     interface Config {
       redux?: null | {
-        createStore?: (preloadedState?: Record<string, unknown>) => PageContext['reduxStore']
+        createStore?: (preloadedState?: Record<string, unknown>) => Store
       }
     }
   }

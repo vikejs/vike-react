@@ -1,14 +1,18 @@
 export { Wrapper }
 
-import React, { useRef } from 'react'
+import React from 'react'
 import { Provider } from 'react-redux'
 import { usePageContext } from 'vike-react/usePageContext'
-import type { PageContext } from 'vike/types'
+import type { Store } from '@reduxjs/toolkit'
 
 function Wrapper({ children }: { children: React.ReactNode }) {
   const pageContext = usePageContext()
-  const storeRef = useRef<PageContext['reduxStore']>(undefined)
-  if (!pageContext.config.redux) return <>{children}</>
-  if (!storeRef.current) storeRef.current = pageContext.reduxStore
-  return <Provider store={storeRef.current!}>{children}</Provider>
+  let reduxStore: undefined | Store
+  if (pageContext.isClientSide) {
+    reduxStore = pageContext.globalContext.reduxStore
+  } else {
+    reduxStore = pageContext.reduxStore
+  }
+  if (!reduxStore) return <>{children}</>
+  return <Provider store={reduxStore}>{children}</Provider>
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { increment, selectCount } from '../lib/features/counter/counterSlice'
+import { increment, selectCount } from '../store/counter/counterSlice'
 
 export function Counter() {
   const dispatch = useAppDispatch()

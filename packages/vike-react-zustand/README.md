@@ -91,15 +91,15 @@ const useStore = create<Store>()(
 )
 ```
 
-### `serverOnly`
-The function passed to serverOnly() only runs on the server-side, while the state returned by it is available on both the server- and client-side.
+### `transfer`
+The function passed to `transfer()` only runs on the server-side, while the state returned by it is available on both the server- and client-side. The callback can be async, but this will block rendering until the async operation completes.
 
 ```ts
-import { create, serverOnly } from 'vike-react-zustand'
+import { create, transfer } from 'vike-react-zustand'
 
-// We use serverOnly() because process.version is only available on the server-side but we want to be able to access it everywhere (client- and server-side).
+// We use transfer() because process.version is only available on the server-side but we want to be able to access it everywhere (client- and server-side).
 const useStore = create<{ nodeVersion: string }>()({
-  ...serverOnly(() => ({
+  ...transfer(() => ({
     // This function is called only on the server-side, but nodeVersion is available on both the server- and client-side.
     nodeVersion: process.version
   }))

@@ -1,5 +1,5 @@
 import type { Config } from 'vike/types'
 
 export default {
-  ssr: false
+  ssr: false,
 } satisfies Config

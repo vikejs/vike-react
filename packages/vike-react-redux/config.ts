@@ -24,6 +24,11 @@ const config = {
 
 declare global {
   namespace Vike {
+    interface Config {
+      redux?: null | {
+        createStore?: (preloadedState?: Record<string, unknown>) => Store
+      }
+    }
     interface PageContext {
       reduxState?: Record<string, unknown>
     }
@@ -32,11 +37,6 @@ declare global {
     }
     interface GlobalContextClient {
       reduxStore?: Store
-    }
-    interface Config {
-      redux?: null | {
-        createStore?: (preloadedState?: Record<string, unknown>) => Store
-      }
     }
   }
 }

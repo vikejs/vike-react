@@ -64,8 +64,8 @@ importers:
         specifier: ^5.3.3
         version: 5.8.2
       vike:
-        specifier: 0.4.228-commit-c2f6e1f
-        version: 0.4.228-commit-c2f6e1f(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
+        specifier: 0.4.228-commit-4bed128
+        version: 0.4.228-commit-4bed128(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -103,8 +103,8 @@ importers:
         specifier: ^5.5.4
         version: 5.8.2
       vike:
-        specifier: 0.4.228-commit-c2f6e1f
-        version: 0.4.228-commit-c2f6e1f(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
+        specifier: 0.4.228-commit-4bed128
+        version: 0.4.228-commit-4bed128(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -124,8 +124,8 @@ importers:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
       vike:
-        specifier: 0.4.228-commit-c2f6e1f
-        version: 0.4.228-commit-c2f6e1f(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
+        specifier: 0.4.228-commit-4bed128
+        version: 0.4.228-commit-4bed128(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -157,8 +157,8 @@ importers:
         specifier: ^5.5.3
         version: 5.8.2
       vike:
-        specifier: 0.4.228-commit-c2f6e1f
-        version: 0.4.228-commit-c2f6e1f(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
+        specifier: 0.4.228-commit-4bed128
+        version: 0.4.228-commit-4bed128(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -196,8 +196,8 @@ importers:
         specifier: ^5.5.4
         version: 5.8.2
       vike:
-        specifier: 0.4.228-commit-c2f6e1f
-        version: 0.4.228-commit-c2f6e1f(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
+        specifier: 0.4.228-commit-4bed128
+        version: 0.4.228-commit-4bed128(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
@@ -242,8 +242,8 @@ importers:
         specifier: ^5.7.3
         version: 5.8.2
       vike:
-        specifier: 0.4.228-commit-c2f6e1f
-        version: 0.4.228-commit-c2f6e1f(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
+        specifier: 0.4.228-commit-4bed128
+        version: 0.4.228-commit-4bed128(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vite:
         specifier: ^6.2.5
         version: 6.2.5(@types/node@20.17.24)
@@ -272,8 +272,8 @@ importers:
         specifier: ^5.5.3
         version: 5.8.2
       vike:
-        specifier: 0.4.228-commit-c2f6e1f
-        version: 0.4.228-commit-c2f6e1f(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
+        specifier: 0.4.228-commit-4bed128
+        version: 0.4.228-commit-4bed128(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -324,8 +324,8 @@ importers:
         specifier: ^5.3.3
         version: 5.8.2
       vike:
-        specifier: 0.4.228-commit-c2f6e1f
-        version: 0.4.228-commit-c2f6e1f(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
+        specifier: 0.4.228-commit-4bed128
+        version: 0.4.228-commit-4bed128(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -357,8 +357,8 @@ importers:
         specifier: ^5.5.3
         version: 5.8.2
       vike:
-        specifier: 0.4.228-commit-c2f6e1f
-        version: 0.4.228-commit-c2f6e1f(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
+        specifier: 0.4.228-commit-4bed128
+        version: 0.4.228-commit-4bed128(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -406,8 +406,8 @@ importers:
         specifier: ^5.5.3
         version: 5.8.2
       vike:
-        specifier: 0.4.228-commit-c2f6e1f
-        version: 0.4.228-commit-c2f6e1f(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
+        specifier: 0.4.228-commit-4bed128
+        version: 0.4.228-commit-4bed128(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -443,8 +443,8 @@ importers:
         specifier: ^5.5.3
         version: 5.8.2
       vike:
-        specifier: 0.4.228-commit-c2f6e1f
-        version: 0.4.228-commit-c2f6e1f(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
+        specifier: 0.4.228-commit-4bed128
+        version: 0.4.228-commit-4bed128(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -470,8 +470,8 @@ importers:
         specifier: ^5.5.3
         version: 5.8.2
       vike:
-        specifier: 0.4.228-commit-c2f6e1f
-        version: 0.4.228-commit-c2f6e1f(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
+        specifier: 0.4.228-commit-4bed128
+        version: 0.4.228-commit-4bed128(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -500,8 +500,8 @@ importers:
         specifier: ^5.5.3
         version: 5.8.2
       vike:
-        specifier: 0.4.228-commit-c2f6e1f
-        version: 0.4.228-commit-c2f6e1f(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
+        specifier: 0.4.228-commit-4bed128
+        version: 0.4.228-commit-4bed128(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
         specifier: link:../vike-react
         version: link:../vike-react
@@ -3529,8 +3529,8 @@ packages:
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
 
-  vike@0.4.228-commit-c2f6e1f:
-    resolution: {integrity: sha512-VPrHB1swAO9gXRkqPtRnasnIaESIpeYc0rCarnSe4PqHMtBHzIu3zuqbvEaDn0PvP4lRmyKIVETF3WytgnFu7A==}
+  vike@0.4.228-commit-4bed128:
+    resolution: {integrity: sha512-T9c8jiwglaJefbwEjMbZH32qATtCMhSdr5U6DjHjyErMjMIVO1vlpEZGKdpbg7VS0jSsIBX7e+4MMfr9bA4tnQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -7121,7 +7121,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vike@0.4.228-commit-c2f6e1f(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24)):
+  vike@0.4.228-commit-4bed128(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24)):
     dependencies:
       '@brillout/import': 0.2.6
       '@brillout/json-serializer': 0.5.15

@@ -11,7 +11,7 @@ const config = {
     'vike-react': '>=0.4.13',
   },
 
-  passToClient: ['reduxState'],
+  passToClient: ['redux.ssrState'],
 
   meta: {
     redux: {
@@ -34,7 +34,9 @@ declare global {
       }
     }
     interface PageContext {
-      reduxState?: Record<string, unknown>
+      redux?: {
+        ssrState?: Record<string, unknown>
+      }
     }
     interface PageContextServer {
       reduxStore?: Store

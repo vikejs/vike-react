@@ -29,7 +29,7 @@ const config = {
 declare global {
   namespace Vike {
     interface Config {
-      redux?: null | {
+      redux?: {
         createStore: (pageContext: PageContext) => Store
       }
     }

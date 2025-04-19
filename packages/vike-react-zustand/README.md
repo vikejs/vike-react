@@ -34,21 +34,6 @@ See [example](https://github.com/vikejs/vike-react/tree/main/examples/zustand).
      extends: [vikeReact, vikeReactZustand]
    } satisfies Config
    ```
-3. Extend `vite.config.ts`:
-   ```ts
-   // vite.config.ts
-
-   import { vikeReactZustand } from 'vike-react-zustand/plugin'
-
-   export default {
-     // ...
-     plugins: [..., vikeReactZustand()]
-   }
-   ```
-
-> [!NOTE]
-> The 3. step will be unnecessary in the future, when Vike extensions can add Vite plugins.
-
 ---
 
 ### `create`

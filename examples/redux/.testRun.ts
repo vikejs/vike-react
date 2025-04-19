@@ -9,6 +9,7 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
     await page.goto(getServerUrl() + '/')
     await testCounter()
     await page.click('a:has-text("About")')
+    await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/about')
     await testCounter(1)
   })
 }

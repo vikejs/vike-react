@@ -5,7 +5,7 @@ import { test, expect, run, page, getServerUrl, autoRetry } from '@brillout/test
 function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   run(cmd)
 
-  test('The store persists across page navigation', async () => {
+  test('store', async () => {
     await page.goto(getServerUrl() + '/')
     await testCounter(42)
 

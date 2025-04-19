@@ -1,5 +1,4 @@
-import type { OutputChunk } from 'rollup'
-import { Plugin } from 'vite'
+import type { Plugin } from 'vite'
 import { assert } from '../../utils.js'
 
 export const storeManifestBuild = (): Plugin => {
@@ -16,14 +15,15 @@ export const storeManifestBuild = (): Plugin => {
         ([_, value]) =>
           'facadeModuleId' in value &&
           value.facadeModuleId &&
-          value.facadeModuleId.includes('virtual:vike:pageConfigValuesAll:client:')
+          value.facadeModuleId.includes('virtual:vike:pageConfigValuesAll:client:'),
       )
 
       for (const [_, value] of pageEntries) {
         assert('facadeModuleId' in value && value.facadeModuleId)
         const pageId = value.facadeModuleId.split('virtual:vike:pageConfigValuesAll:client:')[1]
         assert(pageId)
-        
+
+        type OutputChunk = typeof value
         // Collect all chunks (direct and indirect imports)
         const chunks = new Set<OutputChunk>([value])
         for (const chunk of chunks) {

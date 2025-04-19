@@ -1,5 +1,5 @@
 import { uneval } from 'devalue'
-import { Plugin } from 'vite'
+import type { Plugin } from 'vite'
 import { assert } from '../../utils.js'
 
 export const storeManifestVirtual = (): Plugin => {
@@ -28,13 +28,13 @@ export const storeManifestVirtual = (): Plugin => {
 
       // SSR dev mode: create dynamic function
       assert(this.environment.mode === 'dev')
-      
+
       // Set up the dynamic function that will be called at runtime
       global.vikeReactZustandGlobalState.getStoresForPage = (pageId) => {
         const { devServer, idToStoreKeys } = global.vikeReactZustandGlobalState
         global.vikeReactZustandGlobalState.pagesToStoresMap = {}
         const { pagesToStoresMap } = global.vikeReactZustandGlobalState
-        
+
         // Find the page module
         const serverEnv = devServer!.environments.ssr
         const url = `\0virtual:vike:pageConfigValuesAll:server:${pageId}`
@@ -42,12 +42,12 @@ export const storeManifestVirtual = (): Plugin => {
         if (!pageModule) {
           return { has: () => true as const }
         }
-        
+
         // Process each store module
         for (const [storeModuleId, storeKeys] of Object.entries(idToStoreKeys)) {
           const storeModule = serverEnv.moduleGraph.getModuleById(storeModuleId)
           if (!storeModule) continue
-          
+
           // Collect all importers (direct and indirect)
           const importers = new Set(storeModule.importers)
           for (const importer of importers) {
@@ -55,7 +55,7 @@ export const storeManifestVirtual = (): Plugin => {
               importers.add(innerImporter)
             }
           }
-          
+
           // Check if page uses this store
           for (const importer of importers) {
             for (const storeKey of storeKeys) {
@@ -66,7 +66,7 @@ export const storeManifestVirtual = (): Plugin => {
             }
           }
         }
-        
+
         return pagesToStoresMap[pageId] || { has: () => true as const }
       }
 

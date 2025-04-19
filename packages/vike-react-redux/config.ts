@@ -26,7 +26,7 @@ declare global {
   namespace Vike {
     interface Config {
       redux?: null | {
-        createStore?: (preloadedState?: Record<string, unknown>) => Store
+        createStore?: (pageContext: PageContext) => Store
       }
     }
     interface PageContext {

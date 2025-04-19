@@ -11,6 +11,6 @@ const rootReducer = combineReducers({ counter: counterReducer })
 function createStore(pageContext: PageContext) {
   return configureStore({
     reducer: rootReducer,
-    preloadedState: undefined,
+    preloadedState: pageContext.reduxState,
   })
 }

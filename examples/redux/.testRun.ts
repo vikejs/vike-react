@@ -7,10 +7,10 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
 
   test('The store persists across page navigation', async () => {
     await page.goto(getServerUrl() + '/')
-    await testCounter()
+    await testCounter(42)
     await page.click('a:has-text("About")')
     await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/about')
-    await testCounter(1)
+    await testCounter(43)
   })
 }
 

@@ -1,6 +1,6 @@
-import type { Config, ImportString } from 'vike/types'
-import 'vike-react/config' // Needed for declaration merging of Config
-import { vikeReactZustand } from '../plugin.js'
+import 'vike-react/config'; // Needed for declaration merging of Config
+import type { Config } from 'vike/types'
+import { vikeReactZustand } from '../plugin/index.js'
 
 export default {
   name: 'vike-react-zustand',

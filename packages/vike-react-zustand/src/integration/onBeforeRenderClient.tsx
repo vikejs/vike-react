@@ -1,6 +1,5 @@
 import { mergeWith } from 'lodash-es'
 import type { PageContext } from 'vike/types'
-import { assert } from '../utils.js'
 import { createStores } from './createStores.js'
 
 /**

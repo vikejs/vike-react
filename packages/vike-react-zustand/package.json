@@ -44,7 +44,8 @@
   },
   "dependencies": {
     "lodash-es": "^4.17.21",
-    "es-module-lexer": "^1.6.0"
+    "es-module-lexer": "^1.6.0",
+    "devalue": "^5.1.1"
   },
   "typesVersions": {
     "*": {

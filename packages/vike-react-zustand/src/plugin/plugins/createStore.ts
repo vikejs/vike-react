@@ -1,12 +1,10 @@
-export { vikeReactZustand }
-
-import type { Plugin } from 'vite'
-import { initializers_remove } from './integration/context.js'
-import { assert } from './utils.js'
 import { init, parse } from 'es-module-lexer'
+import type { Plugin } from 'vite'
+import { initializers_remove } from '../../integration/context.js'
+import { assert } from '../../utils.js'
 
-function vikeReactZustand(): Plugin {
-  const idToStoreKeys: { [id: string]: Set<string> } = {}
+export const createStore = (): Plugin => {
+  const { idToStoreKeys } = global.vikeReactZustandGlobalState
   return {
     name: 'vikeReactZustand',
     enforce: 'post',

@@ -11,7 +11,7 @@ import.meta.env ??= { SSR: true }
  * Server-side hook that prepares store state for client hydration
  *
  * This function:
- * 1. Creates server-side stores
+ * 1. Creates server-side stores (only those needed by client)
  * 2. Extracts transferable state from each store
  * 3. Attaches this state to pageContext for transfer to client
  */
@@ -20,11 +20,9 @@ const onBeforeRender = async (pageContext: PageContext) => {
   if (!import.meta.env.SSR) return
 
   try {
-    // Create all stores
-    pageContext._stores = createStores(pageContext)
-
     // Initialize hydration state object if needed
     pageContext._vikeReactZustand ??= {}
+    pageContext._stores = createStores(pageContext)
 
     // Extract and prepare transferable state from each store
     for (const [key, store] of Object.entries(pageContext._stores)) {

@@ -2,7 +2,7 @@ export { Counter }
 
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { increment, selectCount } from '../store/counter/counterSlice'
+import { increment, selectCount } from '../store/slices/counter'
 
 function Counter() {
   const dispatch = useAppDispatch()

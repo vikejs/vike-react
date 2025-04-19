@@ -1,6 +1,6 @@
 export { data }
 
-import { initializeCount } from '../store/counter/counterSlice'
+import { initializeCount } from '../store/slices/counter'
 import type { PageContextServer } from 'vike/types'
 
 function data(pageContext: PageContextServer) {

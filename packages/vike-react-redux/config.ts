@@ -20,8 +20,8 @@ const config = {
     },
   },
 
-  onAfterRenderHtml: 'import:vike-react-redux/__internal/onAfterRenderHtml:onAfterRenderHtml',
   onCreatePageContext: 'import:vike-react-redux/__internal/onCreatePageContext:onCreatePageContext',
+  onAfterRenderHtml: 'import:vike-react-redux/__internal/onAfterRenderHtml:onAfterRenderHtml',
   onBeforeRenderClient: 'import:vike-react-redux/__internal/onBeforeRenderClient:onBeforeRenderClient',
   Wrapper: 'import:vike-react-redux/__internal/Wrapper:Wrapper',
 } satisfies Config

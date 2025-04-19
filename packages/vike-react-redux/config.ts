@@ -27,6 +27,12 @@ declare global {
     interface PageContext {
       reduxState?: Record<string, unknown>
     }
+    interface PageContextServer {
+      reduxStore?: Store
+    }
+    interface GlobalContextClient {
+      reduxStore?: Store
+    }
     interface Config {
       redux?: null | {
         createStore?: (preloadedState?: Record<string, unknown>) => Store

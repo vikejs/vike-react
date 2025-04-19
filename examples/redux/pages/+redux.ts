@@ -5,11 +5,12 @@ export type AppDispatch = AppStore['dispatch']
 
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import counterReducer from '../lib/features/counter/counterSlice'
+import type { PageContext } from 'vike/types'
 const rootReducer = combineReducers({ counter: counterReducer })
 
-function createStore(preloadedState: any) {
+function createStore(pageContext: PageContext) {
   return configureStore({
     reducer: rootReducer,
-    preloadedState,
+    preloadedState: undefined,
   })
 }

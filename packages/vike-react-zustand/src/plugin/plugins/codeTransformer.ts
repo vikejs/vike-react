@@ -171,8 +171,8 @@ class CodeTransformer {
         }
 
         // Strip transfer calls if enabled
-        if (this.options.stripTransfer && this.isTransferSpreadElement(node)) {
-          this.stripTransferCall(node)
+        if (this.options.stripTransfer && this.isTransferCall(node)) {
+          this.replaceTransferFunctionArgs(node)
         }
       },
     })
@@ -183,13 +183,6 @@ class CodeTransformer {
    */
   private isCreateCall(node: Node): boolean {
     return node.type === 'CallExpression' && node.callee.type === 'Identifier' && this.createNames.has(node.callee.name)
-  }
-
-  /**
-   * Check if node is a spread element with a transfer() call
-   */
-  private isTransferSpreadElement(node: Node): boolean {
-    return node.type === 'SpreadElement' && this.isTransferCall(node.argument)
   }
 
   /**
@@ -236,10 +229,19 @@ class CodeTransformer {
   }
 
   /**
-   * Strip a transfer() call
+   * Replace transfer function arguments with an empty function
    */
-  private stripTransferCall(node: Node): void {
-    this.magicString.remove(node.start, node.end)
+  private replaceTransferFunctionArgs(callExpr: Node): void {
+    assert(callExpr.type === 'CallExpression' && callExpr.callee.type === 'Identifier')
+    // If there are arguments, replace all of them with an empty function
+    if (callExpr.arguments.length > 0) {
+      const firstArg = callExpr.arguments[0]
+      const lastArg = callExpr.arguments[callExpr.arguments.length - 1]
+      assert(firstArg)
+      assert(lastArg)
+      // Replace all arguments with an empty function that returns an empty object
+      this.magicString.overwrite(firstArg.start, lastArg.end, '() => ({})')
+    }
   }
 
   /**

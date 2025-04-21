@@ -1,6 +1,6 @@
 export { useStore }
 
-import { transfer, create, withPageContext } from 'vike-react-zustand'
+import { create, withPageContext, transfer, initialize } from 'vike-react-zustand'
 import { immer } from 'zustand/middleware/immer'
 
 interface Store {
@@ -19,12 +19,20 @@ const useStore = create<Store>()(
         })
       },
 
-      // the function passed to serverOnly only runs on the server
+      // the function passed to transfer only runs on the server
       // the return value is available on client/server
-      ...transfer(async () => ({
-        counter: await new Promise((r) => setTimeout(r, 50)).then(() => Math.floor(10000 * Math.random())),
-        nodeVersion: process.version,
-      })),
+      ...transfer(async () => {
+        return {
+          counter: await new Promise((r) => setTimeout(r, 50)).then(() => Math.floor(10000 * Math.random())),
+          nodeVersion: process.version,
+        }
+      }),
+
+      // the function passed to initialize runs on both client/server right after the store is created
+      // the return value is merged into the store
+      ...initialize(async () => {
+        console.log('initialize', get())
+      }),
     })),
   ),
 )

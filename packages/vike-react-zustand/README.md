@@ -4,41 +4,45 @@
 [![npm version](https://img.shields.io/npm/v/vike-react-zustand)](https://www.npmjs.com/package/vike-react-zustand)
 
 # `vike-react-zustand`
-[Zustand](https://github.com/pmndrs/zustand) integration for [Vike](https://vike.dev).
 
-Vike-react-zustand is just a wrapper around Zustand, with a few additional features. Redux devtools are enabled by default.
+[Zustand](https://github.com/pmndrs/zustand) integration for [Vike](https://vike.dev) with React.
 
+## Features
 
-
-See [example](https://github.com/vikejs/vike-react/tree/main/examples/zustand).
-
-> See also other [Vike extensions](https://vike.dev/vike-packages).
-
-
-
-
+- **Server-Side State Transfer**: Run code on the server and make the resulting state available on the client
+- **Page Context Access**: Use Vike's page context in your stores
+- **Redux DevTools**: Enabled by default for debugging
+- **TypeScript Support**: Type safety for your stores
+- **Async Support**: Handle async operations in store initialization
 
 ## Installation
 
-1. `npm install zustand vike-react-zustand`
-2. Extend `+config.ts`:
-   ```js
-   // pages/config.ts
+```bash
+npm install zustand vike-react-zustand
+```
 
-   import type { Config } from 'vike/types'
-   import vikeReact from 'vike-react/config'
-   import vikeReactZustand from 'vike-react-zustand/config'
+## Setup
 
-   export default {
-     // ...
-     extends: [vikeReact, vikeReactZustand]
-   } satisfies Config
-   ```
----
+Extend your Vike configuration:
 
-### `create`
-Create a store:
+```js
+// pages/+config.ts
+import type { Config } from 'vike/types'
+import vikeReact from 'vike-react/config'
+import vikeReactZustand from 'vike-react-zustand/config'
+
+export default {
+  // ...
+  extends: [vikeReact, vikeReactZustand]
+} satisfies Config
+```
+
+## Basic Usage
+
+### Creating a Store
+
 ```ts
+// store.ts
 import { create } from 'vike-react-zustand'
 
 interface Store {
@@ -55,10 +59,33 @@ const useStore = create<Store>()((set) => ({
     }))
   }
 }))
+
+export { useStore }
 ```
 
-### `withPageContext`
-Middleware to make pageContext available to the store.
+### Using the Store in Components
+
+```tsx
+// Component.tsx
+import { useStore } from './store'
+
+function Counter() {
+  const { counter, setCounter } = useStore()
+  
+  return (
+    <button onClick={() => setCounter(counter + 1)}>
+      Counter {counter}
+    </button>
+  )
+}
+```
+
+## Advanced Features
+
+### `withPageContext` - Access Page Context in Stores
+
+The `withPageContext` middleware makes Vike's page context available to your store:
+
 ```ts
 import { create, withPageContext } from 'vike-react-zustand'
 
@@ -76,39 +103,78 @@ const useStore = create<Store>()(
 )
 ```
 
-### `transfer`
-The function passed to `transfer()` only runs on the server-side, while the state returned by it is available on both the server- and client-side. The callback can be async, but this will block rendering until the async operation completes.
+### `transfer` - Server-Only Code with Client Access
+
+The `transfer` function allows you to run code only on the server while making the results available on both server and client:
 
 ```ts
 import { create, transfer } from 'vike-react-zustand'
 
-// We use transfer() because process.version is only available on the server-side but we want to be able to access it everywhere (client- and server-side).
-const useStore = create<{ nodeVersion: string }>()({
-  ...transfer(() => ({
-    // This function is called only on the server-side, but nodeVersion is available on both the server- and client-side.
-    nodeVersion: process.version
+const useStore = create<{ nodeVersion: string; serverData: any }>()((set) => ({
+  // This function only runs on the server
+  ...transfer(async () => ({
+    // Access server-only APIs
+    nodeVersion: process.version,
+    // Can be async and fetch data
+    serverData: await fetchDataFromDatabase()
   }))
-})
+}))
 ```
 
-### `useStoreApi`
-Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, `useStoreApi` can be used.
+### `initialize` - Run Code After Store Creation
 
-⚠️ Note that middlewares that modify set or get are not applied to getState and setState.
+The `initialize` function runs after the store is created and can be used to perform initialization logic:
 
 ```ts
+import { create, initialize } from 'vike-react-zustand'
+
+const useStore = create<Store>()((set, get) => ({
+  counter: 0,
+  setCounter: (value) => set({ counter: value }),
+  
+  // Runs after store creation on both client and server
+  ...initialize(async () => {
+    console.log('Store initialized with:', get())
+    // Can return values to merge into the store
+    return { initialized: true }
+  })
+}))
+```
+
+### `useStoreApi` - Non-Reactive Store Access
+
+For cases where you need non-reactive access to the store:
+
+```tsx
 import { useStoreApi } from 'vike-react-zustand'
 import { useStore } from './store'
 
 function Component() {
   const api = useStoreApi(useStore)
-  function onClick() {
-    api.setState({ ... })
+  
+  // Access store methods without causing re-renders
+  function handleClick() {
+    api.setState({ counter: 100 })
   }
+  
+  // Subscribe to store changes
+  useEffect(() => {
+    const unsubscribe = api.subscribe(
+      state => console.log('Store changed:', state)
+    )
+    return unsubscribe
+  }, [])
+  
+  return <button onClick={handleClick}>Set to 100</button>
 }
 ```
 
-## With immer
+> ⚠️ Note: Middlewares that modify `set` or `get` are not applied to `getState` and `setState`.
+
+## Using with Immer
+
+Zustand's Immer middleware works seamlessly with vike-react-zustand:
+
 ```ts
 import { create } from 'vike-react-zustand'
 import { immer } from 'zustand/middleware/immer'
@@ -129,3 +195,50 @@ const useStore = create<Store>()(
   }))
 )
 ```
+
+## Multiple Stores
+
+You can create and use multiple stores in your application:
+
+```ts
+// userStore.ts
+export const useUserStore = create<UserStore>()((set) => ({
+  user: null,
+  setUser: (user) => set({ user })
+}))
+
+// cartStore.ts
+export const useCartStore = create<CartStore>()((set) => ({
+  items: [],
+  addItem: (item) => set((state) => ({ 
+    items: [...state.items, item] 
+  }))
+}))
+```
+
+## How It Works
+
+vike-react-zustand integrates Zustand with Vike's SSR lifecycle:
+
+1. **Server-Side**:
+   - Creates stores needed for the current page
+   - Executes `transfer()` functions to get server-only data
+   - Runs `initialize()` functions
+   - Serializes and attaches state to the page context
+
+2. **Client-Side**:
+   - Creates client-side stores
+   - Hydrates them with the server state
+   - Runs `initialize()` functions
+   - Provides access to server-generated data
+
+## Examples
+
+See the [example project](https://github.com/vikejs/vike-react/tree/main/examples/zustand) for a complete implementation.
+
+## Related Packages
+
+- [vike-react](https://github.com/vikejs/vike-react) - React integration for Vike
+- [vike-react-query](https://github.com/vikejs/vike-react/tree/main/packages/vike-react-query) - React Query integration for Vike
+
+> See also other [Vike extensions](https://vike.dev/vike-packages).

@@ -1,7 +1,7 @@
 import type { PageContext } from 'vike/types'
-import { removeFunctionsAndUndefined, TRANSFER_STATE_KEY } from '../utils.js'
+import { INITIALIZE_KEY, removeFunctionsAndUndefined, TRANSFER_KEY } from '../utils.js'
 import { createStores } from './createStores.js'
-import { mergeWith } from 'lodash-es'
+import { mergeWith, pick } from 'lodash-es'
 
 // Ensure import.meta.env.SSR works in Node.js without Vite
 // @ts-expect-error
@@ -26,15 +26,25 @@ const onBeforeRender = async (pageContext: PageContext) => {
 
     // Extract and prepare transferable state from each store
     for (const [key, store] of Object.entries(pageContext._stores)) {
-      const serverState = store.getInitialState()
-      const getStateOnServerSide = serverState[TRANSFER_STATE_KEY]
+      const serverState = store.getInitialState() as any
+      const getStateOnServerSide = serverState[TRANSFER_KEY]
+      let transferKeys: string[] = []
       if (getStateOnServerSide) {
         const transferableState = removeFunctionsAndUndefined(await getStateOnServerSide())
         mergeWith(serverState, transferableState)
-
-        // Add to hydration data
-        pageContext._vikeReactZustand[key] = transferableState
+        transferKeys = Object.keys(transferableState)
       }
+
+      const initialize = serverState[INITIALIZE_KEY]
+      if (initialize) {
+        const returnValue = await initialize()
+        if (returnValue) {
+          mergeWith(serverState, returnValue)
+        }
+      }
+
+      // Add to hydration data
+      pageContext._vikeReactZustand[key] = pick(store.getState(), transferKeys)
     }
   } catch (error) {
     console.error('Error preparing store state for hydration:', error)

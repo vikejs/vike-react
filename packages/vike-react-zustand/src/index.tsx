@@ -1,10 +1,10 @@
-export { createWrapped as create, transfer as transfer, useStoreApi }
+export { createWrapped as create, transfer, initialize, useStoreApi }
 export { withPageContext } from './withPageContext.js'
 
 import { useContext } from 'react'
 import { getReactStoreContext, initializers_set } from './integration/context.js'
 import type { Create, StoreApiOnly, StoreHookOnly } from './types.js'
-import { assert, TRANSFER_STATE_KEY } from './utils.js'
+import { assert, INITIALIZE_KEY, TRANSFER_KEY } from './utils.js'
 
 /**
  * Zustand integration for vike-react.
@@ -134,8 +134,16 @@ function transfer<T extends Record<string, any>>(getStateOnServerSide: () => T |
     // Promise<T> is resolved in onBeforeRender()
     // @ts-expect-error
     return {
-      [TRANSFER_STATE_KEY]: getStateOnServerSide,
+      [TRANSFER_KEY]: getStateOnServerSide,
     }
   }
   return {} as T
+}
+
+function initialize<T extends Record<string, any>>(initializerFn: () => T | Promise<T> | void | Promise<void>): T {
+  // Promise<T> is resolved in onBeforeRender()
+  // @ts-expect-error
+  return {
+    [INITIALIZE_KEY]: initializerFn,
+  }
 }

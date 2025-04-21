@@ -40,7 +40,7 @@ if (!import.meta.env.SSR && clientCache && !clientCache.fetchOverridden) {
     if (isGetRequest && isPageContextRequest) {
       newOptions.headers = new Headers(newOptions.headers || {})
       const keysString = Object.keys(clientCache.stores).join(',')
-      newOptions.headers.set('x-vike-react-zustand-transfer', keysString)
+      newOptions.headers.set('x-vike-react-zustand-notransfer', keysString)
     }
 
     return originalFetch(resource, newOptions)
@@ -52,11 +52,11 @@ if (!import.meta.env.SSR && clientCache && !clientCache.fetchOverridden) {
 export const createStores = (pageContext: PageContext) => {
   const pageId = pageContext.pageId
   const initializers = initializers_get()
-  const result: Record<string, any> = {}
+  const result: Record<string, ReturnType<typeof createStore>> = {}
 
   let keysToProcess: string[]
   if (import.meta.env.SSR) {
-    const transferHeader = pageContext.headers?.['x-vike-react-zustand-transfer']
+    const transferHeader = pageContext.headers?.['x-vike-react-zustand-notransfer']
     let existingKeys: string[] = []
     if (transferHeader !== undefined && transferHeader) {
       existingKeys = transferHeader.split(',')

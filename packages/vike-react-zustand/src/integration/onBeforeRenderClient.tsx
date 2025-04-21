@@ -1,6 +1,7 @@
 import { mergeWith } from 'lodash-es'
 import type { PageContext } from 'vike/types'
 import { createStores } from './createStores.js'
+import { INITIALIZE_KEY } from '../utils.js'
 
 /**
  * Client-side hook that hydrates stores with server-provided state
@@ -10,7 +11,7 @@ import { createStores } from './createStores.js'
  * 2. For each store that has server state, merges that state into the client store
  * 3. Marks stores as hydrated to prevent double-hydration
  */
-const onBeforeRenderClient = (pageContext: PageContext) => {
+const onBeforeRenderClient = async (pageContext: PageContext) => {
   try {
     // Create all stores
     pageContext._stores = createStores(pageContext)
@@ -20,12 +21,12 @@ const onBeforeRenderClient = (pageContext: PageContext) => {
 
     // Hydrate each store that has server data
     for (const [key, store] of Object.entries(pageContext._stores)) {
+      const clientState = store.getInitialState() as any
       const hasServerState = key in pageContext._vikeReactZustand
       const needsHydration = !store.__hydrated__
 
       if (hasServerState && needsHydration) {
         // Get states to merge
-        const clientState = store.getInitialState()
         const serverState = pageContext._vikeReactZustand[key]
 
         // Merge server state into client state
@@ -33,6 +34,18 @@ const onBeforeRenderClient = (pageContext: PageContext) => {
 
         // Mark as hydrated to prevent double-hydration
         store.__hydrated__ = true
+      }
+
+      const needsInitialization = !store.__initialized__
+      if (needsInitialization) {
+        const initialize = clientState[INITIALIZE_KEY]
+        if (initialize) {
+          const returnValue = await initialize()
+          if (returnValue) {
+            mergeWith(clientState, returnValue)
+          }
+        }
+        store.__initialized__ = true
       }
     }
   } catch (error) {

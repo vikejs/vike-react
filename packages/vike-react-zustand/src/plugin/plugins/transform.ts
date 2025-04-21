@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite'
 import { initializers_remove } from '../../integration/context.js'
 import { assert } from '../../utils.js'
-import { transformCode } from './codeTransformer.js'
+import { transformCode } from './babelTransformer.js'
 
 export const transform = (): Plugin => {
   const { idToStoreKeys } = global.vikeReactZustandGlobalState

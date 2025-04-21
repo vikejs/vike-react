@@ -20,14 +20,15 @@
     "release:commit": "release-me commit"
   },
   "peerDependencies": {
-    "react-dom": ">=18.0.0",
-    "vike-react": ">=0.4.13",
-    "zustand": ">=5.0.0",
     "react": ">=18.0.0",
-    "react-streaming": ">=0.3.42"
+    "react-dom": ">=18.0.0",
+    "react-streaming": ">=0.3.42",
+    "vike-react": ">=0.4.13",
+    "zustand": ">=5.0.0"
   },
   "devDependencies": {
     "@brillout/release-me": "^0.3.4",
+    "@types/babel__core": "^7.20.5",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.11.17",
     "@types/react": "^19.0.10",
@@ -43,10 +44,10 @@
     "zustand": "^5.0.3"
   },
   "dependencies": {
-    "lodash-es": "^4.17.21",
+    "@babel/core": "^7.24.0",
+    "@babel/types": "^7.24.0",
     "devalue": "^5.1.1",
-    "estree-walker": "^3.0.3",
-    "magic-string": "^0.30.5"
+    "lodash-es": "^4.17.21"
   },
   "typesVersions": {
     "*": {

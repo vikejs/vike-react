@@ -12,7 +12,7 @@ overrides:
   vike-react-antd: link:./packages/vike-react-antd/
   vike-react-styled-components: link:./packages/vike-react-styled-components/
   vike-react-styled-jsx: link:./packages/vike-react-styled-jsx/
-  vike-react-zustand: link:./packages/vike-react-zustand/
+  vike-react-zustand-experimental: link:./packages/vike-react-zustand-experimental/
 
 importers:
 
@@ -169,7 +169,7 @@ importers:
         specifier: ^6.2.5
         version: 6.2.5(@types/node@20.11.17)
 
-  examples/zustand:
+  examples/zustand-experimental:
     dependencies:
       '@types/react':
         specifier: ^19.0.10
@@ -198,9 +198,9 @@ importers:
       vike-react:
         specifier: link:../../packages/vike-react
         version: link:../../packages/vike-react
-      vike-react-zustand:
-        specifier: link:../../packages/vike-react-zustand
-        version: link:../../packages/vike-react-zustand
+      vike-react-zustand-experimental:
+        specifier: link:../../packages/vike-react-zustand-experimental
+        version: link:../../packages/vike-react-zustand-experimental
       vite:
         specifier: ^6.2.5
         version: 6.2.5(@types/node@20.11.17)
@@ -478,7 +478,7 @@ importers:
         specifier: ^6.2.5
         version: 6.2.5(@types/node@20.11.17)
 
-  packages/vike-react-zustand:
+  packages/vike-react-zustand-experimental:
     dependencies:
       '@babel/core':
         specifier: ^7.24.0

@@ -2,9 +2,9 @@ export { vikeReactZustand }
 
 import type { Plugin, ViteDevServer } from 'vite'
 import { config } from './plugins/config.js'
-import { createStore } from './plugins/createStore.js'
 import { storeManifestBuild } from './plugins/storeManifestBuild.js'
 import { storeManifestVirtual } from './plugins/storeManifestVirtual.js'
+import { transform } from './plugins/transform.js'
 
 type GlobalState = {
   idToStoreKeys: { [id: string]: Set<string> }
@@ -27,5 +27,5 @@ global.vikeReactZustandGlobalState ||= {
 }
 
 function vikeReactZustand(): Plugin[] {
-  return [config, createStore(), storeManifestBuild(), storeManifestVirtual()]
+  return [config, transform(), storeManifestBuild(), storeManifestVirtual()]
 }

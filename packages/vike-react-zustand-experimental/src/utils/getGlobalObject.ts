@@ -3,7 +3,8 @@ export function getGlobalObject<T extends Record<string, unknown> = never>(
   key: `${string}.ts`,
   defaultValue: T,
 ): T {
-  const allGlobalObjects = (globalThis.__vike_react_zustand_experimental = globalThis.__vike_react_zustand_experimental || {})
+  const allGlobalObjects = (globalThis.__vike_react_zustand_experimental =
+    globalThis.__vike_react_zustand_experimental || {})
   const globalObject = (allGlobalObjects[key] = (allGlobalObjects[key] as T) || defaultValue)
   return globalObject
 }

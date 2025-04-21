@@ -7,5 +7,9 @@ export default function Wrapper({ children }: { children: ReactNode }) {
   const pageContext = usePageContext()
   const reactStoreContext = getReactStoreContext()
   assert(reactStoreContext)
-  return <reactStoreContext.Provider value={pageContext._vikeReactZustandExperimentalStores}>{children}</reactStoreContext.Provider>
+  return (
+    <reactStoreContext.Provider value={pageContext._vikeReactZustandExperimentalStores}>
+      {children}
+    </reactStoreContext.Provider>
+  )
 }

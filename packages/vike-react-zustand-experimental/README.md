@@ -29,11 +29,11 @@ Extend your Vike configuration:
 // pages/+config.ts
 import type { Config } from 'vike/types'
 import vikeReact from 'vike-react/config'
-import vikeReactZustand from 'vike-react-zustand-experimental/config'
+import vikeReactZustandExperimental from 'vike-react-zustand-experimental/config'
 
 export default {
   // ...
-  extends: [vikeReact, vikeReactZustand]
+  extends: [vikeReact, vikeReactZustandExperimental]
 } satisfies Config
 ```
 
@@ -234,7 +234,7 @@ vike-react-zustand-experimental integrates Zustand with Vike's SSR lifecycle:
 
 ## Examples
 
-See the [example project](https://github.com/vikejs/vike-react/tree/main/examples/zustand) for a complete implementation.
+See the [example project](https://github.com/vikejs/vike-react/tree/main/examples/zustand-experimental) for a complete implementation.
 
 ## Related Packages
 

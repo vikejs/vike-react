@@ -13,8 +13,7 @@
     "build": "rimraf dist/ && tsc",
     "release": "release-me patch",
     "release:minor": "release-me minor",
-    "release:commit": "release-me commit",
-    "test": "vitest run"
+    "release:commit": "release-me commit"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -39,8 +38,7 @@
     "vike-react": "^0.6.1",
     "react-streaming": "^0.4.2",
     "vite": "^6.2.5",
-    "zustand": "^5.0.3",
-    "vitest": "^1.2.2"
+    "zustand": "^5.0.3"
   },
   "dependencies": {
     "@babel/core": "^7.24.0",

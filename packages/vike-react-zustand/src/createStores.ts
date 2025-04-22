@@ -52,7 +52,7 @@ function getOrCreateStore<T>({
         const store = createStore_(initializerFn)
         clientCache.stores[key] = store
         clientCache.initializers[key] = initializerFn
-        mergeServerStateOptional({ key, store })
+        assignServerStateOptional({ key, store })
         return store
       } else {
         const store = clientCache.stores[key]
@@ -75,7 +75,7 @@ function createStore_<T>(initializer: StateCreator<T, [], []>) {
 declare global {
   var _vikeReactZustandState: undefined | Record<string, string>
 }
-function mergeServerStateOptional<T>({ key, store }: { key: string; store: CreateStoreReturn<T> }) {
+function assignServerStateOptional<T>({ key, store }: { key: string; store: CreateStoreReturn<T> }) {
   if (globalThis._vikeReactZustandState && globalThis._vikeReactZustandState[key]) {
     const clientState = store.getInitialState()
     const serverState = parse(globalThis._vikeReactZustandState[key])

@@ -24,6 +24,7 @@ function createStore({
   initializerFn: any
   pageContext: PageContext
 }) {
+  pageContext._vikeReactZustandStores ??= {}
   let store = pageContext._vikeReactZustandStores[key]
   if (store) return store
 
@@ -40,6 +41,7 @@ function createStore({
     } else {
       store = clientCache.stores[key]
     }
+    pageContext._vikeReactZustandStores[key] = store
     return store
   } finally {
     setPageContext(null)
@@ -52,7 +54,7 @@ function createStore_(initializer: any) {
 
 function loadServerStateOptional({ key, store, pageContext }: { key: string; store: any; pageContext: PageContext }) {
   const clientState = store.getInitialState() as any
-  const hasServerState = key in pageContext._vikeReactZustandState
+  const hasServerState = pageContext._vikeReactZustandState && key in pageContext._vikeReactZustandState
   const needsHydration = !store.__hydrated__
   if (hasServerState && needsHydration) {
     const serverState = pageContext._vikeReactZustandState[key]

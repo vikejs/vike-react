@@ -1,4 +1,4 @@
-Example of using `vike-react-zustand-experimental`.
+Example of using `vike-react-zustand`.
 
 ```bash
 git clone git@github.com:vikejs/vike-react

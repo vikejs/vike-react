@@ -7,7 +7,7 @@ export default {
   require: {
     'vike-react': '>=0.4.13',
   },
-  onAfterRenderHtml: 'import:vike-react-zustand/__internal/integration/onAfterRenderHtml:default',
+  onAfterRenderHtml: 'import:vike-react-zustand/__internal/integration/onAfterRenderHtml:onAfterRenderHtml',
   passToClient: ['_vikeReactZustandState'],
   vite: {
     plugins: [vikeReactZustand()],

@@ -1,12 +1,11 @@
 export { useStore }
 
-import { transfer, create, withPageContext } from 'vike-react-zustand-experimental'
+import { create, withPageContext } from 'vike-react-zustand'
 import { immer } from 'zustand/middleware/immer'
 
 interface Store {
   counter: number
   setCounter: (value: number) => void
-  nodeVersionAbout: string
 }
 
 const useStore = create<Store>()(
@@ -18,13 +17,7 @@ const useStore = create<Store>()(
           state.counter = value
         })
       },
-
-      // the function passed to transfer only runs on the server
-      // the return value is available on client/server
-      ...transfer(() => ({
-        counter: Math.floor(10000 * Math.random()),
-        nodeVersionAbout: process.version,
-      })),
+      counter: Math.floor(10000 * Math.random()),
     })),
   ),
 )

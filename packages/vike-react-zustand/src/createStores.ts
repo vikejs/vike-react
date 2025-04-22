@@ -28,7 +28,7 @@ function createStore({
   initializerFn: any
   pageContext: PageContext
   stream: ReturnType<typeof import('react-streaming').useStreamOptional>
-}) {
+}): ReturnType<typeof createStore_> {
   try {
     setPageContext(pageContext)
     if (import.meta.env.SSR) {

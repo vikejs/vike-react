@@ -1,11 +1,23 @@
 export { withPageContext } from './withPageContext.js'
 export { createWrapped as create, useStoreApi }
 
+import { useStreamOptional } from 'react-streaming'
 import { usePageContext } from 'vike-react/usePageContext'
+import type { StateCreator } from 'zustand'
 import { createStore } from './createStores.js'
-import type { Create, StoreApiOnly, StoreHookOnly } from './types.js'
+import type { Create, StoreApiAndHook, StoreApiOnly, StoreHookOnly } from './types.js'
 import { assert } from './utils/assert.js'
-import { useStream, useStreamOptional } from 'react-streaming'
+
+// Define Symbol keys for internal use
+const STORE_KEY = Symbol.for('vike-react-zustand-store-key')
+const STORE_INITIALIZER_FN = Symbol.for('vike-react-zustand-store-initializer-fn')
+
+// Internal interface that extends StoreHookOnly with our symbol properties
+// This keeps the symbols out of the public API while allowing TypeScript to type-check correctly
+interface InternalStoreHookOnly<T> extends StoreHookOnly<T> {
+  [STORE_KEY]: string
+  [STORE_INITIALIZER_FN]: StateCreator<T, [], []>
+}
 
 /**
  * Zustand integration for vike-react.
@@ -17,29 +29,24 @@ import { useStream, useStreamOptional } from 'react-streaming'
  */
 const createWrapped = ((...args: any[]) => {
   const initializerFn =
-    // create('keyFromTransform', (set,get) => ...)
-    //                            ^^^^^^^^^^^^^^^
+    // create('key', (set,get) => ...)
+    //               ^^^^^^^^^^^^^^^
     (typeof args[1] === 'function' && args[1]) ||
     // The transform didn't run for this call(skipped in node_modules)
     // create((set,get) => ...)
     //        ^^^^^^^^^^^^^^^
     (typeof args[0] === 'function' && args[0]) ||
-    // create('keyFromTransform', 'keyFromUser')((set,get) => ...)
-    //        ^^^^^^^^^^^^^
-    // create('keyFromUser')((set,get) => ...)
-    //        ^^^^^^^^^^^^^
+    // create('key')((set,get) => ...)
+    //         ^^^
     // create()((set,get) => ...)
     //       ^
     undefined
 
   const key =
-    // create('keyFromTransform', 'keyFromUser')((set,get) => ...)
-    //                            ^^^^^^^^^^^^^
-    (typeof args[1] === 'string' && args[1]) ||
-    // create('keyFromTransform')((set,get) => ...)
-    //         ^^^^^^^^^^^^^
-    // create('keyFromUser')((set,get) => ...)
-    //        ^^^^^^^^^^^^^
+    // create('key')((set,get) => ...)
+    //         ^^^
+    // create('key', (set,get) => ...)
+    //         ^^^
     (typeof args[0] === 'string' && args[0]) ||
     // The transform didn't run for this call(skipped in node_modules)
     // create()((set,get) => ...)
@@ -48,16 +55,15 @@ const createWrapped = ((...args: any[]) => {
 
   assert(key)
 
-  const create_ = (initializerFn_: any) => {
+  const create_ = <T>(initializerFn_: StateCreator<T, [], []>): StoreHookOnly<T> => {
     assert(initializerFn_)
-    function useStore(...args: any[]): any {
-      //@ts-ignore
-      const store = useStoreApi(useStore)
-      //@ts-ignore
+    const useStore = ((...args: Parameters<StoreHookOnly<T>>) => {
+      const store = useStoreApi(useStore) as StoreApiAndHook<T>
       return store(...args)
-    }
-    useStore.__key__ = key
-    useStore.__initializerFn__ = initializerFn_
+    }) as InternalStoreHookOnly<T>
+
+    useStore[STORE_KEY] = key
+    useStore[STORE_INITIALIZER_FN] = initializerFn_
     return useStore
   }
 
@@ -68,7 +74,7 @@ const createWrapped = ((...args: any[]) => {
 
   // create()((set,get) => ...)
   return create_
-}) as unknown as Create
+}) as Create
 
 /**
  * Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, useStoreApi can be used.
@@ -90,18 +96,14 @@ const createWrapped = ((...args: any[]) => {
  * }
  *```
  */
-// require users to pass useStore, because:
-// 1. useStore needs to be imported at least once for the store to exist
-// 2. the store key is stored on the useStore object
 function useStoreApi<T>(useStore: StoreHookOnly<T>): StoreApiOnly<T> {
-  //@ts-ignore
-  const key = useStore.__key__
-  //@ts-ignore
-  const initializerFn = useStore.__initializerFn__
+  const internalStore = useStore as InternalStoreHookOnly<T>
+  const key = internalStore[STORE_KEY]
+  const initializerFn = internalStore[STORE_INITIALIZER_FN]
   assert(key)
   const pageContext = usePageContext()
   const stream = useStreamOptional()
   const store = createStore({ key, initializerFn, pageContext, stream })
   assert(store)
-  return store as unknown as StoreApiOnly<T>
+  return store as StoreApiOnly<T>
 }

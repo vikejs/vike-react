@@ -11,6 +11,7 @@ type State = {
   hasVikeReactZustand: boolean
   storeKeyCounter: number
   createNames: Set<string>
+  isStoreFile: boolean
 }
 
 /**
@@ -18,6 +19,7 @@ type State = {
  * 1. Adding unique keys to create() calls
  * 2. Stripping transfer() calls on client-side
  * 3. Removing unreferenced code
+ * 4. Adding HMR code to store files
  */
 export async function transformCode(code: string, id: string): Promise<TransformResult> {
   try {
@@ -26,6 +28,7 @@ export async function transformCode(code: string, id: string): Promise<Transform
       hasVikeReactZustand: false,
       storeKeyCounter: 0,
       createNames: new Set<string>(),
+      isStoreFile: false,
     }
 
     const result = await transformAsync(code, {
@@ -44,8 +47,21 @@ export async function transformCode(code: string, id: string): Promise<Transform
       return null
     }
 
+    // Add HMR code to store files
+    let finalCode = result.code
+    if (state.isStoreFile) {
+      const hmrCode = `
+// HMR for store
+if (import.meta.hot) {
+  import.meta.hot.accept(() => {
+    window.location.reload()
+  })
+}`
+      finalCode += hmrCode
+    }
+
     return {
-      code: result.code,
+      code: finalCode,
       map: result.map,
     }
   } catch (error) {
@@ -92,6 +108,9 @@ function addStoreKeysPlugin(state: State, moduleId: string): PluginItem {
         if (!t.isIdentifier(path.node.callee) || !state.createNames.has(path.node.callee.name)) {
           return
         }
+
+        // Mark this as a store file for HMR plugin
+        state.isStoreFile = true
 
         // Skip if first argument is already a string literal
         if (path.node.arguments.length > 0 && t.isStringLiteral(path.node.arguments[0])) {

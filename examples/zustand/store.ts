@@ -19,7 +19,7 @@ const useStore = create<Store>()(
         })
       },
       counter: Math.floor(10000 * Math.random()),
-      nodeVersion: import.meta.env.SSR ? process.version : undefined,
+      nodeVersion: import.meta.env.SSR ? process.version : '',
     })),
   ),
 )

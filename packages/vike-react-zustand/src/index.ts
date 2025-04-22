@@ -97,9 +97,9 @@ const createWrapped = ((...args: any[]) => {
  *```
  */
 function useStoreApi<T>(useStore: StoreHookOnly<T>): StoreApiOnly<T> {
-  const internalStore = useStore as InternalStoreHookOnly<T>
-  const key = internalStore[STORE_KEY]
-  const initializerFn = internalStore[STORE_INITIALIZER_FN]
+  const internalStoreHook = useStore as InternalStoreHookOnly<T>
+  const key = internalStoreHook[STORE_KEY]
+  const initializerFn = internalStoreHook[STORE_INITIALIZER_FN]
   assert(key)
   assert(initializerFn)
   const pageContext = usePageContext()

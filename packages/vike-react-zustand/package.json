@@ -49,13 +49,7 @@
   "typesVersions": {
     "*": {
       "config": [
-        "dist/integration/+config.d.ts"
-      ],
-      "integration/Wrapper": [
-        "dist/integration/Wrapper.d.ts"
-      ],
-      "plugin": [
-        "dist/plugin.d.ts"
+        "dist/integration/config.d.ts"
       ]
     }
   },

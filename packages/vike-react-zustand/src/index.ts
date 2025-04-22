@@ -4,7 +4,7 @@ export { createWrapped as create, useStoreApi }
 import { useStreamOptional } from 'react-streaming'
 import { usePageContext } from 'vike-react/usePageContext'
 import type { StateCreator } from 'zustand'
-import { createStore } from './createStores.js'
+import { getOrCreateStore } from './createStores.js'
 import type { Create, StoreApiAndHook, StoreApiOnly, StoreHookOnly } from './types.js'
 import { assert } from './utils/assert.js'
 
@@ -101,9 +101,10 @@ function useStoreApi<T>(useStore: StoreHookOnly<T>): StoreApiOnly<T> {
   const key = internalStore[STORE_KEY]
   const initializerFn = internalStore[STORE_INITIALIZER_FN]
   assert(key)
+  assert(initializerFn)
   const pageContext = usePageContext()
   const stream = useStreamOptional()
-  const store = createStore({ key, initializerFn, pageContext, stream })
+  const store = getOrCreateStore({ key, initializerFn, pageContext, stream })
   assert(store)
   return store as StoreApiOnly<T>
 }

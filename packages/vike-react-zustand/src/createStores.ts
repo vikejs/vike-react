@@ -1,9 +1,10 @@
-export { createStore }
+export { getOrCreateStore }
 
-import { parse, stringify } from 'devalue'
+import { parse } from '@brillout/json-serializer/parse'
+import { stringify } from '@brillout/json-serializer/stringify'
 import { mergeWith } from 'lodash-es'
 import type { PageContext } from 'vike/types'
-import { create as createZustand } from 'zustand'
+import { create as createZustand, StateCreator } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { setPageContext } from './context.js'
 import { assert } from './utils/assert.js'
@@ -14,26 +15,26 @@ import { removeFunctionsAndUndefined } from './utils/removeFunctionsAndUndefined
 const clientCache = import.meta.env.SSR
   ? null
   : getGlobalObject('createStore.ts', {
-      initializers: {} as Record<string, any>,
-      stores: {} as Record<string, any>,
+      initializers: {} as Record<string, StateCreator<any, [], []>>,
+      stores: {} as Record<string, CreateStoreReturn<any>>,
     })
 
-function createStore({
+function getOrCreateStore<T>({
   key,
   initializerFn,
   pageContext,
   stream,
 }: {
   key: string
-  initializerFn: any
+  initializerFn: StateCreator<T, [], []>
   pageContext: PageContext
   stream: ReturnType<typeof import('react-streaming').useStreamOptional>
-}): ReturnType<typeof createStore_> {
+}): CreateStoreReturn<T> {
   try {
     setPageContext(pageContext)
     if (import.meta.env.SSR) {
       pageContext._vikeReactZustandStores ??= {}
-      let store = pageContext._vikeReactZustandStores[key]
+      let store: ReturnType<typeof createStore_<T>> = pageContext._vikeReactZustandStores[key]
       if (store) return store
       store = createStore_(initializerFn)
       const serverState = store.getInitialState()
@@ -54,7 +55,9 @@ function createStore({
         mergeServerStateOptional({ key, store })
         return store
       } else {
-        return clientCache.stores[key]
+        const store = clientCache.stores[key]
+        assert(store)
+        return store
       }
     }
 
@@ -64,18 +67,20 @@ function createStore({
   }
 }
 
-function createStore_(initializer: any) {
-  return createZustand()(devtools(initializer))
+type CreateStoreReturn<T> = ReturnType<typeof createStore_<T>>
+function createStore_<T>(initializer: StateCreator<T, [], []>) {
+  return createZustand<T>()(devtools(initializer))
 }
 
 declare global {
   var _vikeReactZustandState: undefined | Record<string, string>
 }
-
-function mergeServerStateOptional({ key, store }: { key: string; store: ReturnType<typeof createStore_> }) {
+function mergeServerStateOptional<T>({ key, store }: { key: string; store: CreateStoreReturn<T> }) {
   if (globalThis._vikeReactZustandState && globalThis._vikeReactZustandState[key]) {
     const clientState = store.getInitialState()
     const serverState = parse(globalThis._vikeReactZustandState[key])
+    assert(clientState && typeof clientState === 'object')
+    assert(serverState && typeof serverState === 'object')
     mergeWith(clientState, serverState)
   }
 }

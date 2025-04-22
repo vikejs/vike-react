@@ -43,7 +43,7 @@
   "dependencies": {
     "@babel/core": "^7.24.0",
     "@babel/types": "^7.24.0",
-    "devalue": "^5.1.1",
+    "@brillout/json-serializer": "^0.5.15",
     "lodash-es": "^4.17.21"
   },
   "typesVersions": {

@@ -6,8 +6,7 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
-    "./config": "./dist/integration/config.js",
-    "./__internal/integration/onAfterRenderHtml": "./dist/integration/onAfterRenderHtml.server.js"
+    "./config": "./dist/integration/config.js"
   },
   "scripts": {
     "dev": "tsc --watch",
@@ -38,6 +37,7 @@
     "typescript": "^5.8.2",
     "vike": "^0.4.223",
     "vike-react": "^0.6.1",
+    "react-streaming": "^0.4.2",
     "vite": "^6.2.5",
     "zustand": "^5.0.3",
     "vitest": "^1.2.2"

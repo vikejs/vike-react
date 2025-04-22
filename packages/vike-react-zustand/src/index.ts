@@ -5,6 +5,7 @@ import { usePageContext } from 'vike-react/usePageContext'
 import { createStore } from './createStores.js'
 import type { Create, StoreApiOnly, StoreHookOnly } from './types.js'
 import { assert } from './utils/assert.js'
+import { useStream, useStreamOptional } from 'react-streaming'
 
 /**
  * Zustand integration for vike-react.
@@ -99,10 +100,8 @@ function useStoreApi<T>(useStore: StoreHookOnly<T>): StoreApiOnly<T> {
   const initializerFn = useStore.__initializerFn__
   assert(key)
   const pageContext = usePageContext()
-  const store = createStore({ key, initializerFn, pageContext })
-  if (!store) {
-    pageContext._vikeReactZustandStores[key] = store
-  }
+  const stream = useStreamOptional()
+  const store = createStore({ key, initializerFn, pageContext, stream })
   assert(store)
   return store as unknown as StoreApiOnly<T>
 }

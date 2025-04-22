@@ -1,6 +1,10 @@
-export { removeFunctionsAndUndefined }
+export { sanitizeForSerialization }
 
-function removeFunctionsAndUndefined(input: any, visited = new WeakSet()): any {
+/**
+ * Sanitizes data for serialization by removing functions, promises, and undefined values.
+ * Creates a deep copy of the input with all non-serializable values removed.
+ */
+function sanitizeForSerialization<T>(input: T, visited = new WeakSet<object>()): T | undefined {
   if (typeof input !== 'object' || input === null) {
     return input
   }
@@ -12,7 +16,7 @@ function removeFunctionsAndUndefined(input: any, visited = new WeakSet()): any {
     const output = []
     for (const value of input) {
       if (include(value)) {
-        const ret = removeFunctionsAndUndefined(value, visited)
+        const ret = sanitizeForSerialization(value, visited)
         if (include(ret)) {
           output.push(ret)
         } else {
@@ -23,47 +27,51 @@ function removeFunctionsAndUndefined(input: any, visited = new WeakSet()): any {
         return undefined
       }
     }
-    return output
+    return output as T
   }
   if (input instanceof Map) {
     const output = new Map()
     for (const [key, value] of input.entries()) {
       if (include(value)) {
-        const ret = removeFunctionsAndUndefined(value, visited)
+        const ret = sanitizeForSerialization(value, visited)
         if (include(ret)) {
           output.set(key, ret)
         }
       }
     }
-    return output
+    return output as T
   }
   if (input instanceof Set) {
     const output = new Set()
     for (const value of input.values()) {
       if (include(value)) {
-        const ret = removeFunctionsAndUndefined(value, visited)
+        const ret = sanitizeForSerialization(value, visited)
         if (include(ret)) {
           output.add(ret)
         }
       }
     }
-    return output
+    return output as T
   }
   const output: { [key: string]: any } = {}
   for (const key in input) {
     if (Object.prototype.hasOwnProperty.call(input, key)) {
       const value = input[key]
       if (include(value)) {
-        const ret = removeFunctionsAndUndefined(value, visited)
+        const ret = sanitizeForSerialization(value, visited)
         if (include(ret)) {
           output[key] = ret
         }
       }
     }
   }
-  return output
+  return output as T
 }
-function include(value: unknown) {
+/**
+ * Determines if a value should be included in the sanitized output.
+ * Excludes functions, promises, undefined, and empty objects/collections.
+ */
+function include(value: unknown): boolean {
   if (isPromiseLike(value) || typeof value === 'function' || value === undefined) {
     return false
   }
@@ -79,6 +87,14 @@ function include(value: unknown) {
   return true
 }
 
-function isPromiseLike(value: any) {
-  return value && typeof value === 'object' && typeof value.then === 'function' && typeof value.catch === 'function'
+/**
+ * Checks if a value is promise-like (has then and catch methods).
+ */
+function isPromiseLike(value: unknown): boolean {
+  return Boolean(
+    value &&
+      typeof value === 'object' &&
+      typeof (value as any).then === 'function' &&
+      typeof (value as any).catch === 'function',
+  )
 }

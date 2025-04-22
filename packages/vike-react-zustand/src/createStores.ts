@@ -2,14 +2,14 @@ export { getOrCreateStore }
 
 import { parse } from '@brillout/json-serializer/parse'
 import { stringify } from '@brillout/json-serializer/stringify'
-import { mergeWith } from 'lodash-es'
 import type { PageContext } from 'vike/types'
 import { create as createZustand, StateCreator } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { setPageContext } from './context.js'
 import { assert } from './utils/assert.js'
 import { getGlobalObject } from './utils/getGlobalObject.js'
-import { removeFunctionsAndUndefined } from './utils/removeFunctionsAndUndefined.js'
+import { sanitizeForSerialization } from './utils/sanitizeForSerialization.js'
+import { assignDeep } from './utils/assignDeep.js'
 
 // Client-side cache (not used in SSR)
 const clientCache = import.meta.env.SSR
@@ -38,7 +38,7 @@ function getOrCreateStore<T>({
       if (store) return store
       store = createStore_(initializerFn)
       const serverState = store.getInitialState()
-      const transferableState = removeFunctionsAndUndefined(serverState)
+      const transferableState = sanitizeForSerialization(serverState)
       assert(stream)
       stream.injectToStream(
         `<script>if(!window._vikeReactZustandState)window._vikeReactZustandState={};window._vikeReactZustandState['${key}']='${stringify(transferableState)}'</script>`,
@@ -81,6 +81,6 @@ function mergeServerStateOptional<T>({ key, store }: { key: string; store: Creat
     const serverState = parse(globalThis._vikeReactZustandState[key])
     assert(clientState && typeof clientState === 'object')
     assert(serverState && typeof serverState === 'object')
-    mergeWith(clientState, serverState)
+    assignDeep(clientState, serverState)
   }
 }

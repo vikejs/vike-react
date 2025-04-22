@@ -6,6 +6,7 @@ import { immer } from 'zustand/middleware/immer'
 interface Store {
   counter: number
   setCounter: (value: number) => void
+  nodeVersion: string
 }
 
 const useStore = create<Store>()(
@@ -18,6 +19,7 @@ const useStore = create<Store>()(
         })
       },
       counter: Math.floor(10000 * Math.random()),
+      nodeVersion: import.meta.env.SSR ? process.version : undefined,
     })),
   ),
 )

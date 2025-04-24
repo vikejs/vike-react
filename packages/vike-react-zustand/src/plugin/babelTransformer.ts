@@ -14,13 +14,6 @@ type State = {
   isStoreFile: boolean
 }
 
-/**
- * Main code transformer that handles:
- * 1. Adding unique keys to create() calls
- * 2. Stripping transfer() calls on client-side
- * 3. Removing unreferenced code
- * 4. Adding HMR code to store files
- */
 export async function transformCode(code: string, id: string): Promise<TransformResult> {
   try {
     const state: State = {

@@ -1,4 +1,5 @@
 export { getOrCreateStore }
+export type { CreateStoreReturn }
 
 import { parse } from '@brillout/json-serializer/parse'
 import { stringify } from '@brillout/json-serializer/stringify'
@@ -33,8 +34,8 @@ function getOrCreateStore<T>({
   try {
     setPageContext(pageContext)
     if (import.meta.env.SSR) {
-      pageContext._vikeReactZustandStores ??= {}
-      let store: ReturnType<typeof createStore_<T>> = pageContext._vikeReactZustandStores[key]
+      pageContext._vikeReactZustandStoresServer ??= {}
+      let store = pageContext._vikeReactZustandStoresServer[key] as CreateStoreReturn<T>
       if (store) return store
       store = createStore_(initializerFn)
       const serverState = store.getInitialState()
@@ -43,7 +44,7 @@ function getOrCreateStore<T>({
       stream.injectToStream(
         `<script>if(!globalThis._vikeReactZustandState)globalThis._vikeReactZustandState={};globalThis._vikeReactZustandState['${key}']='${stringify(transferableState)}'</script>`,
       )
-      pageContext._vikeReactZustandStores[key] = store
+      pageContext._vikeReactZustandStoresServer[key] = store
       return store
     } else {
       assert(clientCache)

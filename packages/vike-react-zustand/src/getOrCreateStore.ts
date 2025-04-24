@@ -41,7 +41,7 @@ function getOrCreateStore<T>({
       const transferableState = sanitizeForSerialization(serverState)
       assert(stream)
       stream.injectToStream(
-        `<script>if(!window._vikeReactZustandState)window._vikeReactZustandState={};window._vikeReactZustandState['${key}']='${stringify(transferableState)}'</script>`,
+        `<script>if(!globalThis._vikeReactZustandState)globalThis._vikeReactZustandState={};globalThis._vikeReactZustandState['${key}']='${stringify(transferableState)}'</script>`,
       )
       pageContext._vikeReactZustandStores[key] = store
       return store

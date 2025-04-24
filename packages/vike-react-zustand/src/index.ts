@@ -4,7 +4,7 @@ export { createWrapped as create, useStoreApi }
 import { useStreamOptional } from 'react-streaming'
 import { usePageContext } from 'vike-react/usePageContext'
 import type { StateCreator } from 'zustand'
-import { getOrCreateStore } from './createStores.js'
+import { getOrCreateStore } from './getOrCreateStore.js'
 import type { Create, StoreApiAndHook, StoreApiOnly, StoreHookOnly } from './types.js'
 import { assert } from './utils/assert.js'
 

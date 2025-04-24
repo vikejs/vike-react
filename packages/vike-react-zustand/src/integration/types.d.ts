@@ -5,7 +5,7 @@ export type {}
 declare global {
   namespace Vike {
     interface PageContext {
-      _vikeReactZustandStores: { [key: string]: ReturnType<typeof import('../createStores.ts').createStore_> }
+      _vikeReactZustandStores: { [key: string]: ReturnType<typeof import('../getOrCreateStore.ts').createStore_> }
     }
   }
 }

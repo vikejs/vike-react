@@ -1,3 +1,5 @@
+// Credits: https://github.com/radashi-org/radashi/blob/main/src/object/assign.ts
+
 export { assignDeep }
 
 function assignDeep(initial: Record<keyof any, any>, override: Record<keyof any, any>) {

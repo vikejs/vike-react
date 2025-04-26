@@ -1,7 +1,7 @@
 export default Page
 
 import React, { useEffect } from 'react'
-import { Counter } from './Counter'
+import { Counter } from '../../components/Counter'
 import { useStore } from '../../store'
 import { useStoreApi } from 'vike-react-zustand'
 

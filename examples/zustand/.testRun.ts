@@ -20,27 +20,46 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run preview') {
     const html = await fetchHtml('/')
     expect(html).toContain(`Node version from server: <!-- -->${process.version}`)
   })
+
+  test('store is persisted upon client-side navigation', async () => {
+    await page.goto(getServerUrl() + '/')
+    let value = await testCounter()
+    await page.click('a:has-text("About")')
+    await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/about')
+    await testCounter(value)
+    value++
+    await page.click('a:has-text("Home")')
+    await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/')
+    await testCounter(value)
+    value++
+  })
 }
 
-async function testCounter() {
+async function testCounter(currentValue?: number) {
   // autoRetry() in case page just got client-side navigated
-  let currentValue: number
   await autoRetry(
     async () => {
       const btn = page.locator('button', { hasText: 'Counter' })
       const content = await btn.textContent()
       expect(content).toMatch(partRegex`Counter ${/[0-9]+/}`)
-      currentValue = parseInt(content!.slice('Counter '.length), 10)
+      const value = parseInt(content!.slice('Counter '.length), 10)
+      if (currentValue) {
+        expect(value).toBe(currentValue)
+      } else {
+        currentValue = value
+      }
     },
     { timeout: 5 * 1000 },
   )
+  const valueNew = currentValue! + 1
   // autoRetry() in case page isn't hydrated yet
   await autoRetry(
     async () => {
       const btn = page.locator('button', { hasText: 'Counter' })
       await btn.click()
-      expect(await btn.textContent()).toBe(`Counter ${currentValue + 1}`)
+      expect(await btn.textContent()).toBe(`Counter ${valueNew}`)
     },
     { timeout: 5 * 1000 },
   )
+  return valueNew
 }

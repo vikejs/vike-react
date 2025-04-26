@@ -61,8 +61,6 @@ function getOrCreateStore<T>({
         return store
       }
     }
-
-    assert(false)
   } finally {
     setPageContext(null)
   }

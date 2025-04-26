@@ -15,7 +15,7 @@ import { assignDeep } from './utils/assignDeep.js'
 // Client-side cache (not used in SSR)
 const clientCache = import.meta.env.SSR
   ? null
-  : getGlobalObject('createStore.ts', {
+  : getGlobalObject('getOrCreateStore.ts', {
       initializers: {} as Record<string, StateCreator<any, [], []>>,
       stores: {} as Record<string, CreateStoreReturn<any>>,
     })

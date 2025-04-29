@@ -5,7 +5,6 @@ import { parse } from '@brillout/json-serializer/parse'
 import { stringify } from '@brillout/json-serializer/stringify'
 import type { PageContext } from 'vike/types'
 import { create as createZustand, StateCreator } from 'zustand'
-import { devtools } from 'zustand/middleware'
 import { setPageContext } from './context.js'
 import { assert } from './utils/assert.js'
 import { getGlobalObject } from './utils/getGlobalObject.js'
@@ -68,7 +67,7 @@ function getOrCreateStore<T>({
 
 type CreateStoreReturn<T> = ReturnType<typeof createStore_<T>>
 function createStore_<T>(initializer: StateCreator<T, [], []>) {
-  return createZustand<T>()(devtools(initializer))
+  return createZustand<T>()(initializer)
 }
 
 declare global {

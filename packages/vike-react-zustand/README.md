@@ -10,7 +10,6 @@ Integrates [Zustand](https://zustand-demo.pmnd.rs/) state management into your [
 > Includes:
 > - Automatic state hydration on the client
 > - Access to pageContext in store initializers
-> - Built-in devtools integration
 
 [Installation](#installation)
 [Basic usage](#basic-usage)
@@ -146,7 +145,6 @@ The `vike-react-zustand` extension enables Zustand stores to work seamlessly wit
 1. During SSR, store state is captured and serialized
 2. The serialized state is injected into the HTML response
 3. On the client, the store is hydrated with the server state
-4. The `devtools` middleware is included by default for easier debugging
 
 The extension handles all the complexities of state transfer between server and client, ensuring your React components have access to the same state during both server rendering and client hydration.
 

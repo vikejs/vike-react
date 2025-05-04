@@ -6,7 +6,8 @@ export type AppDispatch = AppStore['dispatch']
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { counterReducer } from './slices/counter'
 import type { PageContext } from 'vike/types'
-const reducer = combineReducers({ counter: counterReducer })
+import { todosReducer } from './slices/todos'
+const reducer = combineReducers({ counter: counterReducer, todos: todosReducer })
 
 function createStore(pageContext: PageContext) {
   const preloadedState = pageContext.isClientSide ? pageContext.redux!.ssrState : undefined

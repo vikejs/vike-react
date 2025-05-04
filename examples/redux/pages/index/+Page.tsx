@@ -1,5 +1,6 @@
 import React from 'react'
 import { Counter } from '../../components/Counter'
+import { TodoList } from './TodoList'
 
 export default function Page() {
   return (
@@ -12,6 +13,7 @@ export default function Page() {
           Interactive. <Counter />
         </li>
       </ul>
+      <TodoList />
     </>
   )
 }

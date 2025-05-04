@@ -6,9 +6,7 @@ type Todo = {
   isCompleted?: boolean
 }
 
-const initialState: { todos: Todo[] } = {
-  todos: [],
-}
+const initialState = { todos: [] as Todo[] }
 
 const todosSlice = createSlice({
   name: 'todos',
@@ -27,6 +25,7 @@ const todosSlice = createSlice({
       state.todos.splice(action.payload, 1)
     },
     initializeTodos: (state, action: PayloadAction<Todo[]>) => {
+      if (state.todos.length > 0) return
       state.todos = action.payload
     },
   },

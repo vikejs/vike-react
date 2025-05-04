@@ -1,12 +1,20 @@
+// Environment: server
 export { data }
+export type Data = Awaited<ReturnType<typeof data>>
 
-import { initializeCount } from '../../store/slices/counter'
-import type { PageContextServer } from 'vike/types'
-import { initializeTodos } from '../../store/slices/todos'
 import { fetchCounterInitValue } from '../../components/Counter/fetchCounterInitValue'
+import type { PageContextServer } from 'vike/types'
 
 async function data(pageContext: PageContextServer) {
   const counterIniValue = await fetchCounterInitValue()
-  pageContext.redux!.store.dispatch(initializeCount(counterIniValue))
-  pageContext.redux!.store.dispatch(initializeTodos([]))
+  const todosInit = await fetchTodosInit()
+  return {
+    counterIniValue,
+    todosInit,
+  }
+}
+
+// Pretending the list is fetched over the network
+async function fetchTodosInit() {
+  return [{ text: 'Buy apples' }, { text: `Update Node.js ${process.version} to latest version` }]
 }

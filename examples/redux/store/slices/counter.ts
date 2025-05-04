@@ -13,6 +13,7 @@ const counterSlice = createSlice({
       state.value -= 1
     },
     initializeCount: (state, action: PayloadAction<number>) => {
+      if (state.value !== 0) return
       state.value = action.payload
     },
   },

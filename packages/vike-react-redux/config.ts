@@ -36,17 +36,17 @@ declare global {
       }
     }
     interface PageContext {
-      redux?: {
+      redux: {
         ssrState?: Record<string, unknown>
       }
     }
     interface PageContextServer {
-      redux?: {
+      redux: {
         store: Store
       }
     }
     interface GlobalContextClient {
-      redux?: {
+      redux: {
         store: Store
       }
     }

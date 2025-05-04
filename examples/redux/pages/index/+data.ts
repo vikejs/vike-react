@@ -2,11 +2,11 @@
 export { data }
 export type Data = Awaited<ReturnType<typeof data>>
 
-import { fetchCounterInitValue } from '../../components/Counter/fetchCounterInitValue'
+import { fetchCountInit } from '../../components/Counter/fetchCountInit'
 import type { PageContextServer } from 'vike/types'
 
 async function data(pageContext: PageContextServer) {
-  const countInit = await fetchCounterInitValue()
+  const countInit = await fetchCountInit()
   const todosInit = await fetchTodosInit()
   return {
     countInit,

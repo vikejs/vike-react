@@ -13,5 +13,5 @@ function onData(pageContext: PageContext & { data: Data }) {
   const store = !pageContext.isClientSide ? pageContext.redux!.store : pageContext.globalContext.redux!.store
   //*/
   store.dispatch(initializeTodos(pageContext.data.todosInit))
-  store.dispatch(initializeCount(pageContext.data.counterIniValue))
+  store.dispatch(initializeCount(pageContext.data.countInit))
 }

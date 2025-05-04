@@ -6,8 +6,8 @@ import { fetchCounterInitValue } from '../../components/Counter/fetchCounterInit
 import type { PageContextServer } from 'vike/types'
 
 async function data(pageContext: PageContextServer) {
-  const counterIniValue = await fetchCounterInitValue()
+  const countInit = await fetchCounterInitValue()
   return {
-    counterIniValue,
+    countInit,
   }
 }

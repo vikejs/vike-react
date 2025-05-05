@@ -17,7 +17,7 @@ const todosSlice = createSlice({
     },
   },
   selectors: {
-    selectTodos: (todos) => todos.todos,
+    selectTodos: (state) => state.todos,
   },
 })
 

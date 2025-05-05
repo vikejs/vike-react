@@ -18,7 +18,7 @@ const countSlice = createSlice({
     },
   },
   selectors: {
-    selectCount: (counter) => counter.value,
+    selectCount: (state) => state.value,
   },
 })
 

@@ -22,6 +22,6 @@ const countSlice = createSlice({
   },
 })
 
-export const counterReducer = countSlice.reducer
+export const countReducer = countSlice.reducer
 export const { selectCount } = countSlice.selectors
 export const { increment, decrement, initializeCount } = countSlice.actions

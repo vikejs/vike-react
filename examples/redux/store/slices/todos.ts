@@ -2,22 +2,22 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 type Todo = { text: string }
-const initialState = { todos: [] as Todo[] }
+const initialState = { todoList: [] as Todo[] }
 
 const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
     addTodo: (state, action: PayloadAction<string>) => {
-      state.todos.push({ text: action.payload })
+      state.todoList.push({ text: action.payload })
     },
     initializeTodos: (state, action: PayloadAction<Todo[]>) => {
-      if (state.todos.length > 0) return
-      state.todos = action.payload
+      if (state.todoList.length > 0) return
+      state.todoList = action.payload
     },
   },
   selectors: {
-    selectTodos: (state) => state.todos,
+    selectTodos: (state) => state.todoList,
   },
 })
 

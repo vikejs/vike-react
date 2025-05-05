@@ -8,34 +8,42 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   test('count', async () => {
     await page.goto(getServerUrl() + '/')
     await testCounter(42)
-
-    // Client-side navigation
+    await clientSideNavigation()
+    await fullPageReload()
+  })
+  async function clientSideNavigation() {
     await page.click('a:has-text("About")')
     await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/about')
     await testCounter(43)
     await page.click('a:has-text("Welcome")')
     await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/')
     await testCounter(44)
-
-    // Full page reload
-    await page.goto(getServerUrl() + '/')
-    await testCounter(42)
+  }
+  async function fullPageReload() {
     await page.goto(getServerUrl() + '/about')
     await testCounter(42)
-  })
+    await page.goto(getServerUrl() + '/')
+    await testCounter(42)
+  }
 
-  test('todos - initial list', expectInitialList)
+  test('todos - initial list', async () => {
+    await page.goto(getServerUrl() + '/')
+    await expectInitialList()
+  })
   async function expectInitialList() {
-    const html = await fetchHtml('/')
     const buyApples = 'Buy apples'
     const nodeVerison = `Node.js ${process.version}`
-    expect(html).toContain(`<li>${buyApples}</li>`)
-    expect(html).toContain(nodeVerison)
-    await page.goto(getServerUrl() + '/')
-    const bodyText = await page.textContent('body')
-    expect(bodyText).toContain(buyApples)
-    expect(bodyText).toContain(nodeVerison)
-    expect(await getNumberOfItems()).toBe(2)
+    {
+      const html = await fetchHtml('/')
+      expect(html).toContain(`<li>${buyApples}</li>`)
+      expect(html).toContain(nodeVerison)
+    }
+    {
+      const bodyText = await page.textContent('body')
+      expect(bodyText).toContain(buyApples)
+      expect(bodyText).toContain(nodeVerison)
+      expect(await getNumberOfItems()).toBe(2)
+    }
   }
 
   test('todos - add to-do', async () => {
@@ -50,19 +58,11 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
     await expectBananas()
 
     await testCounter(42)
-
-    // Client-side navigation
-    await page.click('a:has-text("About")')
-    await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/about')
-    await testCounter(43)
-    await page.click('a:has-text("Welcome")')
-    await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/')
-    await testCounter(44)
+    await clientSideNavigation()
     await expectBananas()
 
     // Full page reload
-    await page.goto(getServerUrl() + '/')
-    await testCounter(42)
+    await fullPageReload()
     await expectInitialList()
   })
 }

@@ -14,5 +14,6 @@ function onData(pageContext: PageContext & { data: Data }) {
   //*/
   store.dispatch(initializeTodos(pageContext.data.todosInit))
   store.dispatch(initializeCount(pageContext.data.countInit))
+  // Save KBs: we don't need to pass the data to the client-side
   if (!pageContext.isClientSide && !pageContext.isPrerendering) delete (pageContext as { data?: Data }).data
 }

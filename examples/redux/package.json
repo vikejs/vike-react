@@ -2,7 +2,8 @@
   "scripts": {
     "dev": "vike dev",
     "build": "vike build",
-    "preview": "vike build && vike preview"
+    "preview": "vike build && vike preview",
+    "preview:ssg": "vike build --prerender && vike preview --prerender"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.6.1",

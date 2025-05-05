@@ -2,7 +2,7 @@ export { testRun }
 
 import { test, expect, run, page, getServerUrl, autoRetry, fetchHtml } from '@brillout/test-e2e'
 
-function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
+function testRun(cmd: `pnpm run ${'dev' | 'preview' | 'preview:ssg'}`) {
   run(cmd)
 
   test('count', async () => {

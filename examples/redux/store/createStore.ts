@@ -7,7 +7,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { countReducer } from './slices/count'
 import type { PageContext } from 'vike/types'
 import { todosReducer } from './slices/todos'
-const reducer = combineReducers({ counter: countReducer, todos: todosReducer })
+const reducer = combineReducers({ count: countReducer, todos: todosReducer })
 
 function createStore(pageContext: PageContext) {
   const preloadedState = pageContext.isClientSide ? pageContext.redux.ssrState : undefined

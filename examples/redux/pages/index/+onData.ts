@@ -3,7 +3,7 @@ export { onData }
 
 import type { PageContext } from 'vike/types'
 import type { Data } from './+data'
-import { initializeCount } from '../../store/slices/counter'
+import { initializeCount } from '../../store/slices/count'
 import { initializeTodos } from '../../store/slices/todos'
 
 function onData(pageContext: PageContext & { data: Data }) {

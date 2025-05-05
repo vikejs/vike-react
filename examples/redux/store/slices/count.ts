@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = { value: 0 }
-const counterSlice = createSlice({
+const countSlice = createSlice({
   name: 'count',
   initialState,
   reducers: {
@@ -22,6 +22,6 @@ const counterSlice = createSlice({
   },
 })
 
-export const counterReducer = counterSlice.reducer
-export const { selectCount } = counterSlice.selectors
-export const { increment, decrement, initializeCount } = counterSlice.actions
+export const counterReducer = countSlice.reducer
+export const { selectCount } = countSlice.selectors
+export const { increment, decrement, initializeCount } = countSlice.actions

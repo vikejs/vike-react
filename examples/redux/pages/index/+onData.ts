@@ -14,4 +14,5 @@ function onData(pageContext: PageContext & { data: Data }) {
   //*/
   store.dispatch(initializeTodos(pageContext.data.todosInit))
   store.dispatch(initializeCount(pageContext.data.countInit))
+  if (!pageContext.isClientSide && !pageContext.isPrerendering) delete (pageContext as { data?: Data }).data
 }

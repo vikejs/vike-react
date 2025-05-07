@@ -1,12 +1,14 @@
 {
-  "name": "vike-react-styled-components",
-  "version": "1.0.2",
+  "name": "vike-react-redux",
+  "version": "0.0.0",
   "type": "module",
   "exports": {
     "./config": "./dist/config.js",
-    "./__internal/onAfterRenderHtml": "./dist/onAfterRenderHtml.js",
-    "./__internal/onBeforeRenderHtml": "./dist/onBeforeRenderHtml.js",
-    "./__internal/Wrapper": "./dist/Wrapper.server.js"
+    "./__internal/onCreatePageContext": "./dist/onCreatePageContext.server.js",
+    "./__internal/onAfterRenderHtml": "./dist/onAfterRenderHtml.server.js",
+    "./__internal/onCreateGlobalContext": "./dist/onCreateGlobalContext.client.js",
+    "./__internal/onBeforeRenderClient": "./dist/onBeforeRenderClient.client.js",
+    "./__internal/Wrapper": "./dist/Wrapper.js"
   },
   "scripts": {
     "dev": "tsc --watch",
@@ -17,20 +19,20 @@
     "release:commit": "release-me commit"
   },
   "peerDependencies": {
-    "styled-components": ">=6",
+    "react-redux": ">=9",
     "react": ">=18",
+    "vike": ">=0.4.228",
     "vike-react": ">=0.4.13"
   },
   "devDependencies": {
     "@brillout/release-me": "^0.4.2",
+    "@reduxjs/toolkit": "^2.6.1",
     "@types/react": "^19.0.10",
     "react": "^19.0.0",
     "rimraf": "^5.0.5",
-    "styled-components": "^6.1.13",
     "typescript": "^5.5.3",
     "vike": "0.4.229-commit-7056ef0",
-    "vike-react": "^0.6.1",
-    "vite": "^6.2.5"
+    "vike-react": "^0.6.1"
   },
   "typesVersions": {
     "*": {
@@ -40,17 +42,20 @@
       "__internal/onAfterRenderHtml": [
         "dist/onAfterRenderHtml.d.ts"
       ],
-      "__internal/onBeforeRenderHtml": [
-        "dist/onBeforeRenderHtml.d.ts"
+      "__internal/onCreatePageContext": [
+        "dist/onCreatePageContext.server.d.ts"
+      ],
+      "__internal/onBeforeRenderClient": [
+        "dist/onBeforeRenderClient.d.ts"
       ],
       "__internal/Wrapper": [
-        "dist/Wrapper.server.d.ts"
+        "dist/Wrapper.d.ts"
       ]
     }
   },
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-styled-components",
+  "repository": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-redux",
   "license": "MIT"
 }

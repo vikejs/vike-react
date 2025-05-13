@@ -94,8 +94,6 @@ interface Store {
 
 export const useStore = create<Store>()(
   withPageContext((pageContext) => (set) => ({
-    // Access server-only data during SSR
-    nodeVersion: import.meta.env.SSR ? process.version : undefined,
     // Access pageContext data
     user: pageContext.user
   }))

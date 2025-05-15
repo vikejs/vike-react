@@ -54,6 +54,8 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
     }
    ```
    ```ts
+   // store/hooks.ts
+
    // This file serves as a central hub for re-exporting pre-typed Redux hooks.
    import { useDispatch, useSelector, useStore } from 'react-redux'
    import type { AppDispatch, AppStore, RootState } from './createStore'
@@ -65,6 +67,8 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
    ```
 1. You can now use Redux at any of your components.
    ```tsx
+   // components/Counter.tsx
+
    export { Counter }
 
    import React from 'react'

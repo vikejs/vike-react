@@ -6,7 +6,6 @@
     "./config": "./dist/config.js",
     "./__internal/onCreatePageContext": "./dist/onCreatePageContext.server.js",
     "./__internal/onAfterRenderHtml": "./dist/onAfterRenderHtml.server.js",
-    "./__internal/onCreateGlobalContext": "./dist/onCreateGlobalContext.client.js",
     "./__internal/onBeforeRenderClient": "./dist/onBeforeRenderClient.client.js",
     "./__internal/Wrapper": "./dist/Wrapper.js"
   },

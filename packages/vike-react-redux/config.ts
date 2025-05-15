@@ -22,7 +22,6 @@ const config = {
 
   onCreatePageContext: 'import:vike-react-redux/__internal/onCreatePageContext:onCreatePageContext',
   onAfterRenderHtml: 'import:vike-react-redux/__internal/onAfterRenderHtml:onAfterRenderHtml',
-  onCreateGlobalContext: 'import:vike-react-redux/__internal/onCreateGlobalContext:onCreateGlobalContext',
   onBeforeRenderClient: 'import:vike-react-redux/__internal/onBeforeRenderClient:onBeforeRenderClient',
   Wrapper: 'import:vike-react-redux/__internal/Wrapper:Wrapper',
 } satisfies Config
@@ -32,7 +31,6 @@ declare global {
     interface Config {
       redux?: {
         createStore: (pageContext: PageContext | GlobalContextClient) => Store
-        createStoreAlwaysEarly?: true
       }
     }
     interface PageContext {

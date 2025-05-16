@@ -8,7 +8,7 @@ const config = {
   require: {
     // TODO/now: bump
     vike: '>=0.4.228',
-    'vike-react': '>=0.6.1',
+    'vike-react': '>=0.6.2',
   },
 
   passToClient: ['redux.ssrState'],

@@ -31,12 +31,13 @@
       "vike-react-chakra": "link:./packages/vike-react-chakra/",
       "vike-react-antd": "link:./packages/vike-react-antd/",
       "vike-react-styled-components": "link:./packages/vike-react-styled-components/",
-      "vike-react-styled-jsx": "link:./packages/vike-react-styled-jsx/"
+      "vike-react-styled-jsx": "link:./packages/vike-react-styled-jsx/",
+      "vike-react-redux": "link:./packages/vike-react-redux/"
     }
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "@brillout/test-e2e": "^0.6.8",
+    "@brillout/test-e2e": "^0.6.9",
     "@brillout/test-types": "^0.1.15",
     "playwright": "^1.45.0",
     "prettier": "^3.2.5"

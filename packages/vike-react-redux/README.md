@@ -151,10 +151,10 @@ function onData(pageContext: PageContext & { data?: Data }) {
 
 ## What it does
 
-The `vike-react-redux` extension essentially does the following:
- - Initializes the store (using [`+onCreatePageContext.server`](https://vike.dev/onCreatePageContext), [`+onAfterRenderHtml.server`](https://vike.dev/onAfterRenderHtml), and [`+onBeforeRenderClient.client`](https://vike.dev/onBeforeRenderClient)).
- - Installs [`<Provider>`](https://react-redux.js.org/api/provider).
- - Passes the initial state (`pageContext.redux.ssrState`) used during [SSR](https://vike.dev/ssr) to the client-side.
+`vike-react-redux` does the following:
+ - Initializes the store. (Using [`+onCreatePageContext.server`](https://vike.dev/onCreatePageContext), [`+onAfterRenderHtml.server`](https://vike.dev/onAfterRenderHtml), and [`+onBeforeRenderClient.client`](https://vike.dev/onBeforeRenderClient).)
+ - Installs Redux's [`<Provider>`](https://react-redux.js.org/api/provider).
+ - Passes the initial state (`pageContext.redux.ssrState`) used during [SSR](https://vike.dev/ssr) to the client. (To ensure that the same state is used for hydration, preventing hydration mismatches.)
 
 For more details, have a look at the source code of `vike-react-redux` (it's tiny!).
 

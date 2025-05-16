@@ -10,6 +10,6 @@ import { todosReducer } from './slices/todos'
 const reducer = combineReducers({ count: countReducer, todos: todosReducer })
 
 function createStore(pageContext: PageContext) {
-  const preloadedState = pageContext.isClientSide ? pageContext.redux.ssrState : undefined
+  const preloadedState = pageContext.isClientSide ? pageContext.redux?.ssrState : undefined
   return configureStore({ reducer, preloadedState })
 }

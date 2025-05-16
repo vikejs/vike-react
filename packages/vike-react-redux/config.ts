@@ -34,19 +34,14 @@ declare global {
       }
     }
     interface PageContext {
-      redux: {
+      // vike-react-redux only defines pageContext.redux.store on the server-side, but thanks to https://github.com/vikejs/vike/pull/2459 the store is also avaiable at pageContext.redux.store on the client-side: on the client-side pageContext.redux.store falls back to globalContext.store
+      store: Store
+      redux?: {
         ssrState?: Record<string, unknown>
       }
     }
-    interface PageContextServer {
-      redux: {
-        store: Store
-      }
-    }
     interface GlobalContextClient {
-      redux: {
-        store: Store
-      }
+      store: Store
     }
   }
 }

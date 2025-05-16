@@ -6,13 +6,13 @@ import type { Data } from './+data'
 import { initializeCount } from '../../store/slices/count'
 import { initializeTodos } from '../../store/slices/todos'
 
-function onData(pageContext: PageContext & { data: Data }) {
+function onData(pageContext: PageContext & { data?: Data }) {
   const { store } = pageContext
-  store.dispatch(initializeTodos(pageContext.data.todosInit))
-  store.dispatch(initializeCount(pageContext.data.countInit))
+  store.dispatch(initializeTodos(pageContext.data!.todosInit))
+  store.dispatch(initializeCount(pageContext.data!.countInit))
 
-  // Save KBs: we don't need pageContext.data on the client-side (we use the store instead).
-  // - If we don't delete pageContext.data then Vike sends pageContext.data to the client-side.
-  // - This optimization only works if you SSR your page: if you pre-render your page then don't do this.
-  if (!pageContext.isClientSide && !pageContext.isPrerendering) delete (pageContext as { data?: Data }).data
+  // Saving KBs: we don't need pageContext.data (we use the store instead)
+  // - If we don't delete pageContext.data then Vike sends pageContext.data to the client-side
+  // - This optimization only works if the page is SSR'd: if the page is pre-rendered then don't do this
+  if (!pageContext.isPrerendering) delete pageContext.data
 }

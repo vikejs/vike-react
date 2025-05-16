@@ -5,6 +5,7 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
 [Installation](#installation)  
 [Example](#example)  
 [Settings](#settings)  
+[Populate store with `+data`](#populate-store-with-data)  
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-redux/CHANGELOG.md)  
 [What it does](#what-it-does)  
 [See Also](#see-also)  
@@ -98,6 +99,10 @@ See [examples/redux](https://github.com/vikejs/vike-react/tree/main/examples/red
 
 ## Settings
 
+The only `+redux` setting is `createStore()` as documented at [Installation](#installation).
+
+**Install only for some pages**
+
 You can remove the `vike-react-redux` integration for [some of your pages](https://vike.dev/config#inheritance):
 
 ```js
@@ -106,10 +111,40 @@ You can remove the `vike-react-redux` integration for [some of your pages](https
 export const redux = null
 ```
 
+**Custom integration**
+
 For full customization consider [ejecting](https://vike.dev/eject).
 
 > [!NOTE]
 > Consider making a [Pull Request before ejecting](https://vike.dev/eject#when-to-eject).
+
+
+<br/>
+
+## Populate store with `+data`
+
+To populate your store with data fetched via the [`+data`](https://vike.dev/data) hook, use [`+onData`](https://vike.dev/onData) and [`pageContext.data`](https://vike.dev/pageContext#data)).
+
+```ts
+// pages/todos/+onData.ts
+// Environment: server, client
+
+export { onData }
+
+import type { PageContext } from 'vike/types'
+import type { Data } from './+data'
+import { initializeTodos } from '../../store/slices/todos'
+
+function onData(pageContext: PageContext & { data: Data }) {
+  const { store } = pageContext
+  store.dispatch(initializeTodos(pageContext.data.todosInit))
+
+  // Save KBs: we don't need pageContext.data on the client-side (we use the store instead).
+  // - If we don't delete pageContext.data then Vike sends pageContext.data to the client-side.
+  // - This optimization only works if you SSR your page: if you pre-render your page then don't do this.
+  if (!pageContext.isClientSide) delete (pageContext as { data?: Data }).data
+}
+```
 
 
 <br/>

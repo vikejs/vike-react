@@ -7,12 +7,12 @@ import type { Store } from '@reduxjs/toolkit'
 
 function Wrapper({ children }: { children: React.ReactNode }) {
   const pageContext = usePageContext()
-  let reduxStore: undefined | Store
+  let store: undefined | Store
   if (pageContext.isClientSide) {
-    reduxStore = pageContext.globalContext.store
+    store = pageContext.globalContext.store
   } else {
-    reduxStore = pageContext.store
+    store = pageContext.store
   }
-  if (!reduxStore) return <>{children}</>
-  return <Provider store={reduxStore}>{children}</Provider>
+  if (!store) return <>{children}</>
+  return <Provider store={store}>{children}</Provider>
 }

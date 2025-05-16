@@ -11,7 +11,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "typescript": "^5.3.3",
-    "vike": "^0.4.223",
+    "vike": "0.4.229-commit-847f1b6",
     "vike-react": "^0.6.2",
     "vike-react-apollo": "^0.1.1",
     "@apollo/client": "^3.10.8",

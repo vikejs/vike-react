@@ -1,3 +1,12 @@
+## [0.6.2](https://github.com/vikejs/vike-react/compare/vike-react@0.6.1...vike-react@0.6.2) (2025-05-16)
+
+
+### Bug Fixes
+
+* fix providePageContext usage ([#172](https://github.com/vikejs/vike-react/issues/172)) ([a9afa2d](https://github.com/vikejs/vike-react/commit/a9afa2de5d01b18a21d48c2f0cc8c8f3e22bb23a))
+
+
+
 ## [0.6.1](https://github.com/vikejs/vike-react/compare/vike-react@0.6.0...vike-react@0.6.1) (2025-03-16)
 
 

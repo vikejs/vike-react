@@ -16,7 +16,7 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
 ## Installation
 
 1. `npm install vike-react-redux react-redux @reduxjs/toolkit`
-1. Extend `+config.js`:
+2. Extend `+config.js`:
    ```js
    // pages/+config.js
 
@@ -28,7 +28,7 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
      extends: [vikeReact, vikeReactRedux]
    }
    ```
-1. Create `+redux.js` file:
+3. Create `+redux.js` file:
    ```js
     // pages/+redux.js
     // Environemnt: client, server
@@ -66,7 +66,7 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
    export const useAppSelector = useSelector.withTypes<RootState>()
    export const useAppStore = useStore.withTypes<AppStore>()
    ```
-1. You can now use Redux at any of your components.
+4. You can now use Redux at any of your components.
    ```tsx
    // components/Counter.tsx
 
@@ -123,7 +123,7 @@ For full customization consider [ejecting](https://vike.dev/eject).
 
 ## Populate store with `+data`
 
-To populate your store with data fetched via the [`+data`](https://vike.dev/data) hook, use [`+onData`](https://vike.dev/onData) and [`pageContext.data`](https://vike.dev/pageContext#data)).
+To populate your store with data fetched via the [`+data`](https://vike.dev/data) hook, use [`+onData`](https://vike.dev/onData) and [`pageContext.data`](https://vike.dev/pageContext#data).
 
 ```ts
 // pages/todos/+onData.ts
@@ -139,7 +139,7 @@ function onData(pageContext: PageContext & { data: Data }) {
   const { store } = pageContext
   store.dispatch(initializeTodos(pageContext.data.todosInit))
 
-  // Save KBs: we don't need pageContext.data on the client-side (we use the store instead)
+  // Saving KBs: we don't need pageContext.data to be sent to the client-side (we use the store instead)
   // - If we don't delete pageContext.data then Vike sends pageContext.data to the client-side
   // - This optimization only works if you SSR your page: if you pre-render your page then don't do this
   if (!pageContext.isClientSide) delete (pageContext as { data?: Data }).data

@@ -1,6 +1,6 @@
 export type { StoreVanillaAndHook, StoreVanillaOnly, StoreHookOnly, Create }
 
-import type { StateCreator, StoreVanilla, StoreMutatorIdentifier } from 'zustand'
+import type { StateCreator, StoreApi as StoreVanilla, StoreMutatorIdentifier } from 'zustand'
 
 /**
  * The store hook function that is returned by createWrapped

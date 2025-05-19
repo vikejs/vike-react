@@ -17,7 +17,7 @@ Integrates [Zustand](https://zustand-demo.pmnd.rs/) state management into your [
 [`useStoreVanilla()`](#usestorevanilla)  
 [Example](#example)  
 [Populate store with `+data`](#populate-store-with-data)  
-[Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-zustand/CHANGELOG.md)  
+[Version history](#version-history)  
 [How it works](#how-it-works)  
 [See also](#see-also)  
 
@@ -189,6 +189,12 @@ export const useTodoStore = create<TodoStore>()(
 ```
 
 See the To-Do List example at [examples/zustand/](https://github.com/vikejs/vike-react/tree/main/examples/zustand).
+
+<br/>
+
+## Version history
+
+See [CHANGELOG.md](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-zustand/CHANGELOG.md).
 
 <br/>
 

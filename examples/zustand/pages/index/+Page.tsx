@@ -2,12 +2,12 @@ export default Page
 
 import React, { useEffect } from 'react'
 import { Counter } from '../../components/Counter'
-import { useStore } from '../../store'
+import { useNodeStore } from '../../store'
 import { useStoreVanilla } from 'vike-react-zustand'
 
 function Page() {
-  const nodeVersion = useStore((s) => s.nodeVersion)
-  const storeVanilla = useStoreVanilla(useStore)
+  const nodeVersion = useNodeStore((s) => s.nodeVersion)
+  const storeVanilla = useStoreVanilla(useNodeStore)
   useEffect(
     () =>
       storeVanilla.subscribe((state) => {

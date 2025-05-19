@@ -1,10 +1,10 @@
 export { Counter }
 
 import React from 'react'
-import { useStore } from '../store'
+import { useCounterStore } from '../store'
 
 function Counter() {
-  const { counter, setCounter } = useStore()
+  const { counter, setCounter } = useCounterStore()
 
   return <button onClick={() => setCounter(counter + 1)}>Counter {counter}</button>
 }

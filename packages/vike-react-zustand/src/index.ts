@@ -1,11 +1,11 @@
 export { withPageContext } from './withPageContext.js'
-export { createWrapped as create, useStoreApi }
+export { createWrapped as create, useStoreVanilla }
 
 import { useStreamOptional } from 'react-streaming'
 import { usePageContext } from 'vike-react/usePageContext'
 import type { StateCreator } from 'zustand'
 import { getOrCreateStore } from './getOrCreateStore.js'
-import type { Create, StoreApiAndHook, StoreApiOnly, StoreHookOnly } from './types.js'
+import type { Create, StoreVanillaAndHook, StoreVanillaOnly, StoreHookOnly } from './types.js'
 import { assert } from './utils/assert.js'
 
 // Define Symbol keys for internal use
@@ -57,7 +57,7 @@ const createWrapped = ((...args: any[]) => {
   const create_ = <T>(initializerFn_: StateCreator<T, [], []>): StoreHookOnly<T> => {
     assert(initializerFn_)
     const useStore = ((...args: Parameters<StoreHookOnly<T>>) => {
-      const store = useStoreApi(useStore) as StoreApiAndHook<T>
+      const store = useStoreVanilla(useStore) as StoreVanillaAndHook<T>
       return store(...args)
     }) as InternalStoreHookOnly<T>
 
@@ -76,16 +76,16 @@ const createWrapped = ((...args: any[]) => {
 }) as Create
 
 /**
- * Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, you can use `useStoreApi` to directly access the vanilla store.
+ * Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, you can use `useStoreVanilla` to directly access the vanilla store.
  *
  * ```ts
- * import { useStoreApi } from 'vike-react-zustand'
+ * import { useStoreVanilla } from 'vike-react-zustand'
  * import { useStore } from './store'
  *
  * function Component() {
- *   const storeApi = useStoreApi(useStore)
+ *   const storeVanilla = useStoreVanilla(useStore)
  *   function onClick() {
- *     storeApi.setState({ ... })
+ *     storeVanilla.setState({ ... })
  *   }
  * }
  * ```
@@ -95,7 +95,7 @@ const createWrapped = ((...args: any[]) => {
  *
  * https://github.com/vikejs/vike-react/tree/main/packages/vike-react-zustand
  */
-function useStoreApi<T>(useStore: StoreHookOnly<T>): StoreApiOnly<T> {
+function useStoreVanilla<T>(useStore: StoreHookOnly<T>): StoreVanillaOnly<T> {
   const internalStoreHook = useStore as InternalStoreHookOnly<T>
   const key = internalStoreHook[STORE_KEY]
   const initializerFn = internalStoreHook[STORE_INITIALIZER_FN]
@@ -105,5 +105,5 @@ function useStoreApi<T>(useStore: StoreHookOnly<T>): StoreApiOnly<T> {
   const stream = useStreamOptional()
   const store = getOrCreateStore({ key, initializerFn, pageContext, stream })
   assert(store)
-  return store as StoreApiOnly<T>
+  return store as StoreVanillaOnly<T>
 }

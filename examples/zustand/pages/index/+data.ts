@@ -5,8 +5,8 @@ export type Data = Awaited<ReturnType<typeof data>>
 import type { PageContextServer } from 'vike/types'
 
 async function data(pageContext: PageContextServer) {
-  const todosInit = await fetchTodosInit()
-  return { todosInit }
+  const todoItemsInitial = await fetchTodosInit()
+  return { todoItemsInitial }
 }
 
 // Pretending the list is fetched over the network

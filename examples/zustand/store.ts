@@ -29,7 +29,7 @@ interface TodoStore {
 const useTodoStore = create<TodoStore>()(
   withPageContext((pageContext) =>
     immer((set, get) => ({
-      todoItems: (pageContext.data as Data).todosInit,
+      todoItems: (pageContext.data as Data).todoItemsInitial,
       addTodo(todo) {
         set((state) => {
           state.todoItems.push(todo)

@@ -14,7 +14,7 @@ Integrates [Zustand](https://zustand-demo.pmnd.rs/) state management into your [
 [Installation](#installation)
 [Basic usage](#basic-usage)
 [`withPageContext()`](#withpagecontext)
-[`useStoreVanilla()`](#usestoreapi)
+[`useStoreApi()`](#usestoreapi)
 [Example](#example)
 [How it works](#how-it-works)
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-zustand/CHANGELOG.md)
@@ -119,20 +119,20 @@ const nextStateCreatorFn = withPageContext((pageContext) => stateCreatorFn)
 
 <br/>
 
-## `useStoreVanilla()`
+## `useStoreApi()`
 
-Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, you can use `useStoreVanilla` to directly access the [vanilla store](https://zustand.docs.pmnd.rs/apis/create-store).
+Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, you can use `useStoreApi` to directly access the [vanilla store](https://zustand.docs.pmnd.rs/apis/create-store).
 
 ```tsx
-import { useStoreVanilla } from 'vike-react-zustand'
+import { useStoreApi } from 'vike-react-zustand'
 import { useStore } from './store'
 
 function Component() {
-  const storeVanilla = useStoreVanilla(useStore)
+  const storeApi = useStoreApi(useStore)
 
   // Subscribe to store changes
   useEffect(
-    () => storeVanilla.subscribe(
+    () => storeApi.subscribe(
       state => console.log('Store changed:', state)
     ),
     []
@@ -140,8 +140,8 @@ function Component() {
 
   // Get current state without subscribing to changes
   const handleClick = () => {
-    const currentState = storeVanilla.getState()
-    storeVanilla.setState({ counter: currentState.counter + 5 })
+    const currentState = storeApi.getState()
+    storeApi.setState({ counter: currentState.counter + 5 })
   }
 
   return <button onClick={handleClick}>Add 5</button>

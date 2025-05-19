@@ -5,7 +5,7 @@ import { useStreamOptional } from 'react-streaming'
 import { usePageContext } from 'vike-react/usePageContext'
 import type { StateCreator } from 'zustand'
 import { getOrCreateStore } from './getOrCreateStore.js'
-import type { Create, StoreVanillaAndHook, StoreVanillaOnly, StoreHookOnly } from './types.js'
+import type { Create, StoreVanillaAndHook, StoreVanilla, StoreHookOnly } from './types.js'
 import { assert } from './utils/assert.js'
 
 // Define Symbol keys for internal use
@@ -95,7 +95,7 @@ const createWrapped = ((...args: any[]) => {
  *
  * https://github.com/vikejs/vike-react/tree/main/packages/vike-react-zustand
  */
-function useStoreVanilla<T>(useStore: StoreHookOnly<T>): StoreVanillaOnly<T> {
+function useStoreVanilla<T>(useStore: StoreHookOnly<T>): StoreVanilla<T> {
   const internalStoreHook = useStore as InternalStoreHookOnly<T>
   const key = internalStoreHook[STORE_KEY]
   const initializerFn = internalStoreHook[STORE_INITIALIZER_FN]
@@ -105,5 +105,5 @@ function useStoreVanilla<T>(useStore: StoreHookOnly<T>): StoreVanillaOnly<T> {
   const stream = useStreamOptional()
   const store = getOrCreateStore({ key, initializerFn, pageContext, stream })
   assert(store)
-  return store as StoreVanillaOnly<T>
+  return store as StoreVanilla<T>
 }

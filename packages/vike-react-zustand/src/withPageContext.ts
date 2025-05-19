@@ -14,12 +14,11 @@ type WithPageContext = <
 ) => StateCreator<T, Mps, Mcs>
 
 /**
- * Middleware to make `pageContext` available to the store.
+ * Middleware to make `pageContext` available to the store during initialization.
  *
  * Example usage:
  *
  * ```ts
- *
  * interface Store {
  *   user: {
  *     id: number
@@ -28,11 +27,13 @@ type WithPageContext = <
  * }
  *
  * const useStore = create<Store>()(
- *   withPageContext((pageContext) => (set, get) => ({
+ *   withPageContext((pageContext) => (set, get, store) => ({
  *     user: pageContext.user
  *   }))
  * )
  * ```
+ *
+ * https://github.com/vikejs/vike-react/tree/main/packages/vike-react-zustand
  */
 const withPageContext: WithPageContext = (fn) => (set, get, store) => {
   const pageContext = getPageContext()

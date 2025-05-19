@@ -20,10 +20,11 @@ interface InternalStoreHookOnly<T> extends StoreHookOnly<T> {
 }
 
 /**
- * Zustand integration for vike-react.
+ * Same API as Zustand's `create()`:
  *
- * Usage examples: https://docs.pmnd.rs/zustand/guides/typescript#basic-usage
+ * `const useSomeStore = create(stateCreatorFn)`
  *
+ * https://github.com/vikejs/vike-react/tree/main/packages/vike-react-zustand
  */
 const createWrapped = ((...args: any[]) => {
   const initializerFn =
@@ -75,24 +76,24 @@ const createWrapped = ((...args: any[]) => {
 }) as Create
 
 /**
- * Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, useStoreApi can be used.
- *
- * ⚠️ Note that middlewares that modify set or get are not applied to getState and setState.
- *
- * Example usage:
+ * Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, you can use `useStoreApi` to directly access the vanilla store.
  *
  * ```ts
- *
  * import { useStoreApi } from 'vike-react-zustand'
  * import { useStore } from './store'
  *
  * function Component() {
- *   const api = useStoreApi(useStore)
+ *   const storeApi = useStoreApi(useStore)
  *   function onClick() {
- *     api.setState({ ... })
+ *     storeApi.setState({ ... })
  *   }
  * }
- *```
+ * ```
+ *
+ * ⚠️  Note that middlewares that modify set or get are not applied to `getState` and `setState`.
+ *
+ *
+ * https://github.com/vikejs/vike-react/tree/main/packages/vike-react-zustand
  */
 function useStoreApi<T>(useStore: StoreHookOnly<T>): StoreApiOnly<T> {
   const internalStoreHook = useStore as InternalStoreHookOnly<T>

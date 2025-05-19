@@ -15,6 +15,7 @@ Integrates [Zustand](https://zustand-demo.pmnd.rs/) state management into your [
 [Basic usage](#basic-usage)
 [`withPageContext()`](#withpagecontext)
 [`useStoreApi()`](#usestoreapi)
+[Example](#example)
 [How it works](#how-it-works)
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-zustand/CHANGELOG.md)
 [See also](#see-also)
@@ -46,10 +47,11 @@ Integrates [Zustand](https://zustand-demo.pmnd.rs/) state management into your [
 
 ## Basic usage
 
-Create a store with the `create` function from `vike-react-zustand`:
+Create a store using the `create` function from `vike-react-zustand`:
 
 ```ts
 // store.ts
+
 import { create } from 'vike-react-zustand'
 
 interface Store {
@@ -62,6 +64,11 @@ export const useStore = create<Store>()((set) => ({
   increment: () => set((state) => ({ counter: state.counter + 1 })),
 }))
 ```
+
+> [!NOTE]
+> The API is the same as [Zustand's `create()`](https://zustand.docs.pmnd.rs/apis/create#reference).
+>
+> (Extra parentheses `()` are required only when using TypeScript, as explained [here](https://zustand.docs.pmnd.rs/guides/typescript#basic-usage).)
 
 Use the store in your components:
 
@@ -93,18 +100,28 @@ interface Store {
 }
 
 export const useStore = create<Store>()(
-  withPageContext((pageContext) => (set) => ({
+  withPageContext((pageContext) => (set, get, store) => ({
     // Access pageContext data
     user: pageContext.user
   }))
 )
 ```
 
+**API**
+
+```ts
+const nextStateCreatorFn = withPageContext((pageContext) => stateCreatorFn)
+```
+
+- [`pageContext`](https://vike.dev/pageContext)
+- `stateCreatorFn`: A state creator function that takes `set` function, `get` function and `store` as arguments. Usually, you will return an object with the methods you want to expose.
+- Returns: a state creator function.
+
 <br/>
 
 ## `useStoreApi()`
 
-Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, `useStoreApi` can be used:
+Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, you can use `useStoreApi` to directly access the [vanilla store](https://zustand.docs.pmnd.rs/apis/create-store).
 
 ```tsx
 import { useStoreApi } from 'vike-react-zustand'
@@ -136,21 +153,26 @@ function Component() {
 
 <br/>
 
+## Example
+
+See [examples/zustand/](https://github.com/vikejs/vike-react/tree/main/examples/zustand).
+
+<br/>
+
 ## How it works
 
-The `vike-react-zustand` extension enables Zustand stores to work seamlessly with server-side rendering:
+The `vike-react-zustand` extension enables Zustand stores to work seamlessly with [SSR](https://vike.dev/ssr):
 
 1. During SSR, store state is captured and serialized
-2. The serialized state is injected into the HTML response
-3. On the client, the store is hydrated with the server state
+2. The serialized state is passed to the client
+3. On the client, the store is hydrated using the server-side state
 
-The extension handles all the complexities of state transfer between server and client, ensuring your React components have access to the same state during both server rendering and client hydration.
+The extension handles all the complexities of state transfer between server and client, ensuring your React components have access to the same state during both serer-side rendering and client-side hydration.
 
 <br/>
 
 ## See also
 
 - [Example](https://github.com/vikejs/vike-react/tree/main/examples/zustand)
-- [Vike Docs > State Management](https://vike.dev/state-management)
-- [Zustand Documentation](https://docs.pmnd.rs/zustand/getting-started/introduction)
-- [Zustand GitHub](https://github.com/pmndrs/zustand)
+- [Vike Docs > State Management](https://vike.dev/store)
+- [Zustand Documentation](https://docs.pmnd.rs/zustand)

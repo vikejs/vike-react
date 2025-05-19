@@ -3,14 +3,14 @@ export default Page
 import React, { useEffect } from 'react'
 import { Counter } from '../../components/Counter'
 import { useStore } from '../../store'
-import { useStoreApi } from 'vike-react-zustand'
+import { useStoreVanilla } from 'vike-react-zustand'
 
 function Page() {
   const nodeVersion = useStore((s) => s.nodeVersion)
-  const storeApi = useStoreApi(useStore)
+  const storeVanilla = useStoreVanilla(useStore)
   useEffect(
     () =>
-      storeApi.subscribe((state) => {
+      storeVanilla.subscribe((state) => {
         console.log(state)
       }),
     [],

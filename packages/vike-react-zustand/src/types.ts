@@ -1,6 +1,6 @@
-export type { StoreApiAndHook, StoreApiOnly, StoreHookOnly, Create }
+export type { StoreVanillaAndHook, StoreVanillaOnly, StoreHookOnly, Create }
 
-import type { StateCreator, StoreApi, StoreMutatorIdentifier } from 'zustand'
+import type { StateCreator, StoreVanilla, StoreMutatorIdentifier } from 'zustand'
 
 /**
  * The store hook function that is returned by createWrapped
@@ -13,12 +13,12 @@ type StoreHookOnly<T> = {
 /**
  * Just the store API without the hook functionality
  */
-type StoreApiOnly<T> = StoreApi<T>
+type StoreVanillaOnly<T> = StoreVanilla<T>
 
 /**
  * Combined type used in the React context
  */
-type StoreApiAndHook<T = any> = StoreApiOnly<T> & {
+type StoreVanillaAndHook<T = any> = StoreVanillaOnly<T> & {
   (): any
   <U>(selector: (state: any) => U): U
 }

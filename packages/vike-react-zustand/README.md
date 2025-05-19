@@ -11,15 +11,15 @@ Integrates [Zustand](https://zustand-demo.pmnd.rs/) state management into your [
 > - Automatic state hydration on the client
 > - Access to pageContext in store initializers
 
-[Installation](#installation)
-[Basic usage](#basic-usage)
-[`withPageContext()`](#withpagecontext)
-[`useStoreVanilla()`](#usestoreapi)
-[Example](#example)
-[Populate store with `+data`](#populate-store-with-data)
-[Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-zustand/CHANGELOG.md)
-[How it works](#how-it-works)
-[See also](#see-also)
+[Installation](#installation)  
+[Basic usage](#basic-usage)  
+[`withPageContext()`](#withpagecontext)  
+[`useStoreVanilla()`](#usestoreapi)  
+[Example](#example)  
+[Populate store with `+data`](#populate-store-with-data)  
+[Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-zustand/CHANGELOG.md)  
+[How it works](#how-it-works)  
+[See also](#see-also)  
 
 <br/>
 

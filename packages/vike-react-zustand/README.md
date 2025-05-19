@@ -7,9 +7,9 @@
 Integrates [Zustand](https://zustand-demo.pmnd.rs/) state management into your [`vike-react`](https://vike.dev/vike-react) app with SSR support.
 
 > [!NOTE]
-> Includes:
-> - Automatic state hydration on the client
-> - Access to pageContext in store initializers
+> If you don't use any Zustand store during [Server-Side Rendering](https://vike.dev/ssr), then you **don't need `vike-react-zustand`** — you can just use Zustand directly without any Vike integration.
+>
+> The `vike-react-zustand` extension is about enabling you to use stores with SSR. See [How it works](#how-it-works).
 
 [Installation](#installation)  
 [Basic usage](#basic-usage)  

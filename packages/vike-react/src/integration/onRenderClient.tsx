@@ -9,6 +9,7 @@ import type { PageContextInternal } from '../types/PageContext.js'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { applyHeadSettings } from './applyHeadSettings.js'
 import { resolveReactOptions } from './resolveReactOptions.js'
+import './Loading.css' // See comment inside Loading.tsx
 
 let root: ReactDOM.Root
 const onRenderClient: OnRenderClientAsync = async (

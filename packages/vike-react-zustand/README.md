@@ -16,6 +16,7 @@ Integrates [Zustand](https://zustand-demo.pmnd.rs/) state management into your [
 [`withPageContext()`](#withpagecontext)
 [`useStoreVanilla()`](#usestoreapi)
 [Example](#example)
+[Populate store with `+data`](#populate-store-with-data)
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-zustand/CHANGELOG.md)
 [How it works](#how-it-works)
 [See also](#see-also)
@@ -156,6 +157,38 @@ function Component() {
 ## Example
 
 See [examples/zustand/](https://github.com/vikejs/vike-react/tree/main/examples/zustand).
+
+<br/>
+
+## Populate store with `+data`
+
+To populate your store with data fetched via the [`+data`](https://vike.dev/data) hook, use the [`withPageContext()`](#withpagecontext) middleware.
+
+```ts
+import { create, withPageContext } from 'vike-react-zustand'
+import { immer } from 'zustand/middleware/immer'
+import type { Data } from './+data'
+
+type Todo = { text: string }
+interface TodoStore {
+  todoItems: Todo[]
+  addTodo: (todo: Todo) => void
+}
+export const useTodoStore = create<TodoStore>()(
+  withPageContext((pageContext) =>
+    immer((set, get) => ({
+      todoItems: (pageContext.data as Data).todoItemsInitial,
+      addTodo(todo) {
+        set((state) => {
+          state.todoItems.push(todo)
+        })
+      },
+    })),
+  ),
+)
+```
+
+See the To-Do List example at [examples/zustand/](https://github.com/vikejs/vike-react/tree/main/examples/zustand).
 
 <br/>
 

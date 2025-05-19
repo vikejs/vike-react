@@ -11,16 +11,14 @@ interface CounterStore {
   setCounter: (value: number) => void
 }
 const useCounterStore = create<CounterStore>()(
-  withPageContext((pageContext) =>
-    immer((set, get) => ({
-      setCounter(value) {
-        set((state) => {
-          state.counter = value
-        })
-      },
-      counter: Math.floor(10000 * Math.random()),
-    })),
-  ),
+  immer((set, get) => ({
+    setCounter(value) {
+      set((state) => {
+        state.counter = value
+      })
+    },
+    counter: Math.floor(10000 * Math.random()),
+  })),
 )
 
 type Todo = { text: string }

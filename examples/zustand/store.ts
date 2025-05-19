@@ -10,7 +10,6 @@ interface Store {
 }
 
 const useStore = create<Store>()(
-  // the devtools middleware is included by default
   withPageContext((pageContext) =>
     immer((set, get) => ({
       setCounter(value) {

@@ -22,8 +22,6 @@ interface InternalStoreHookOnly<T> extends StoreHookOnly<T> {
 /**
  * Zustand integration for vike-react.
  *
- * The `devtools` middleware is included by default.
- *
  * Usage examples: https://docs.pmnd.rs/zustand/guides/typescript#basic-usage
  *
  */

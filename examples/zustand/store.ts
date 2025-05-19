@@ -27,8 +27,6 @@ interface TodoStore {
   addTodo: (todo: Todo) => void
 }
 const useTodoStore = create<TodoStore>()(
-  // TODO/now
-  // withPageContext((pageContext: PageContext & { data: Data }) =>
   withPageContext((pageContext) =>
     immer((set, get) => ({
       todoItems: (pageContext.data as Data).todosInit,

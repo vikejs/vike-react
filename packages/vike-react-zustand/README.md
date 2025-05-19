@@ -15,7 +15,7 @@ Integrates [Zustand](https://zustand-demo.pmnd.rs/) state management into your [
 [Basic usage](#basic-usage)  
 [`withPageContext()`](#withpagecontext)  
 [`useStoreVanilla()`](#usestorevanilla)  
-[Example](https://github.com/vikejs/vike-react/tree/main/examples/zustand)  
+[Example](#example)  
 [Populate store with `+data`](#populate-store-with-data)  
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-zustand/CHANGELOG.md)  
 [How it works](#how-it-works)  
@@ -151,6 +151,12 @@ function Component() {
 
 > [!NOTE]
 > Middlewares that modify `set` or `get` are not applied to `getState` and `setState`.
+
+<br/>
+
+## Example
+
+See [examples/zustand/](https://github.com/vikejs/vike-react/tree/main/examples/zustand).
 
 <br/>
 

@@ -6,7 +6,7 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
 [Example](#example)  
 [Settings](#settings)  
 [Populate store with `+data`](#populate-store-with-data)  
-[Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-redux/CHANGELOG.md)  
+[Version history](#version-history)  
 [What it does](#what-it-does)  
 [See Also](#see-also)  
 
@@ -145,6 +145,13 @@ function onData(pageContext: PageContext & { data?: Data }) {
   delete pageContext.data
 }
 ```
+
+
+<br/>
+
+## Version history
+
+See [CHANGELOG.md](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-redux/CHANGELOG.md).
 
 
 <br/>

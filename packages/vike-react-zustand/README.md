@@ -14,7 +14,7 @@ Integrates [Zustand](https://zustand-demo.pmnd.rs/) state management into your [
 [Installation](#installation)  
 [Basic usage](#basic-usage)  
 [`withPageContext()`](#withpagecontext)  
-[`useStoreVanilla()`](#usestoreapi)  
+[`useStoreVanilla()`](#usestorevanilla)  
 [Example](#example)  
 [Populate store with `+data`](#populate-store-with-data)  
 [Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-zustand/CHANGELOG.md)  

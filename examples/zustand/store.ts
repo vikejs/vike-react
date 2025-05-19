@@ -1,8 +1,10 @@
 export { useNodeStore }
 export { useCounterStore }
+export { useTodoStore }
 
 import { create, withPageContext } from 'vike-react-zustand'
 import { immer } from 'zustand/middleware/immer'
+import type { Data } from './pages/index/+data'
 
 interface CounterStore {
   counter: number
@@ -17,6 +19,26 @@ const useCounterStore = create<CounterStore>()(
         })
       },
       counter: Math.floor(10000 * Math.random()),
+    })),
+  ),
+)
+
+type Todo = { text: string }
+interface TodoStore {
+  todoItems: Todo[]
+  addTodo: (todo: Todo) => void
+}
+const useTodoStore = create<TodoStore>()(
+  // TODO/now
+  // withPageContext((pageContext: PageContext & { data: Data }) =>
+  withPageContext((pageContext) =>
+    immer((set, get) => ({
+      todoItems: (pageContext.data as Data).todosInit,
+      addTodo(todo) {
+        set((state) => {
+          state.todoItems.push(todo)
+        })
+      },
     })),
   ),
 )

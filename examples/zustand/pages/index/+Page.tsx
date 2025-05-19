@@ -1,9 +1,10 @@
-export default Page
+export { Page }
 
 import React, { useEffect } from 'react'
 import { Counter } from '../../components/Counter'
 import { useNodeStore } from '../../store'
 import { useStoreVanilla } from 'vike-react-zustand'
+import { TodoList } from './TodoList'
 
 function Page() {
   const nodeVersion = useNodeStore((s) => s.nodeVersion)
@@ -27,6 +28,7 @@ function Page() {
         </li>
       </ul>
       <div>Node version from server: {nodeVersion}</div>
+      <TodoList />
     </>
   )
 }

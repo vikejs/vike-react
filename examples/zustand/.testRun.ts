@@ -28,11 +28,64 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run preview') {
     await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/about')
     await testCounter(value)
     value++
-    await page.click('a:has-text("Home")')
+    await page.click('a:has-text("Welcome")')
     await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/')
     await testCounter(value)
     value++
   })
+
+  test('todos - initial list', async () => {
+    await page.goto(getServerUrl() + '/')
+    await expectInitialList()
+  })
+  async function expectInitialList() {
+    const buyApples = 'Buy apples'
+    const nodeVerison = `Node.js ${process.version}`
+    {
+      const html = await fetchHtml('/')
+      expect(html).toContain(`<li>${buyApples}</li>`)
+      expect(html).toContain(nodeVerison)
+    }
+    {
+      const bodyText = await page.textContent('body')
+      expect(bodyText).toContain(buyApples)
+      expect(bodyText).toContain(nodeVerison)
+      expect(await getNumberOfItems()).toBe(2)
+    }
+  }
+
+  test('todos - add to-do', async () => {
+    await page.fill('input[type="text"]', 'Buy bananas')
+    await page.click('button[type="submit"]')
+    const expectBananas = async () => {
+      await autoRetry(async () => {
+        expect(await getNumberOfItems()).toBe(3)
+      })
+      expect(await page.textContent('body')).toContain('Buy bananas')
+    }
+    await expectBananas()
+
+    await clientSideNavigation()
+    await expectBananas()
+
+    // Full page reload
+    await fullPageReload()
+    await expectInitialList()
+  })
+  async function clientSideNavigation() {
+    await page.click('a:has-text("About")')
+    await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/about')
+    await page.click('a:has-text("Welcome")')
+    await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/')
+  }
+  async function fullPageReload() {
+    await page.goto(getServerUrl() + '/about')
+    await page.goto(getServerUrl() + '/')
+  }
+}
+
+async function getNumberOfItems() {
+  return await page.evaluate(() => document.querySelectorAll('#todo-list li').length)
 }
 
 async function testCounter(currentValue?: number) {

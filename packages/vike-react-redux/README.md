@@ -1,3 +1,7 @@
+<!-- WARNING: keep links absolute in this file so they work on NPM too -->
+
+[![npm version](https://img.shields.io/npm/v/vike-react-redux)](https://www.npmjs.com/package/vike-react-redux)
+
 # `vike-react-redux`
 
 Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://vike.dev/vike-react) app.

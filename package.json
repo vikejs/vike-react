@@ -32,7 +32,8 @@
       "vike-react-antd": "link:./packages/vike-react-antd/",
       "vike-react-styled-components": "link:./packages/vike-react-styled-components/",
       "vike-react-styled-jsx": "link:./packages/vike-react-styled-jsx/",
-      "vike-react-redux": "link:./packages/vike-react-redux/"
+      "vike-react-redux": "link:./packages/vike-react-redux/",
+      "vike-react-zustand": "link:./packages/vike-react-zustand"
     }
   },
   "devDependencies": {

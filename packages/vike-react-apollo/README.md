@@ -6,14 +6,17 @@
 
 Enables your React components to fetch data using [Apollo GraphQL](https://www.apollographql.com).
 
-Powered by HTML streaming with [`react-streaming`](https://github.com/brillout/react-streaming#readme).
+Powered by [`react-streaming`](https://github.com/brillout/react-streaming#readme).
 
-> [!NOTE]
-> Features:
-> - [Progressive Rendering](https://vike.dev/streaming#progressive-rendering)
-> - [SSR benefits](https://github.com/brillout/react-streaming#ssr)
-> - Fallback upon loading and/or error
-> - [Caching](https://www.apollographql.com/docs/react/caching/cache-configuration)
+Features:
+- [Progressive Rendering](https://vike.dev/streaming#progressive-rendering)
+- [SSR benefits](https://github.com/brillout/react-streaming#ssr)
+- Fallback upon loading and/or error
+- [Caching](https://www.apollographql.com/docs/react/caching/cache-configuration)
+
+<br/>
+
+**Table of Contents**
 
 [Installation](#installation)  
 [Basic usage](#basic-usage)  

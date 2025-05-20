@@ -6,14 +6,17 @@
 
 Enables your React components to fetch data using [TanStack Query](https://tanstack.com/query/latest).
 
-Powered by HTML streaming with [`react-streaming`](https://github.com/brillout/react-streaming#readme).
+Powered by [`react-streaming`](https://github.com/brillout/react-streaming#readme).
 
-> [!NOTE]
-> Features:
-> - [Progressive Rendering](https://vike.dev/streaming#progressive-rendering)
-> - [SSR benefits](https://github.com/brillout/react-streaming#ssr)
-> - Fallback upon loading and/or error
-> - [Caching](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
+Features:
+- [Progressive Rendering](https://vike.dev/streaming#progressive-rendering)
+- [SSR benefits](https://github.com/brillout/react-streaming#ssr)
+- Fallback upon loading and/or error
+- [Caching](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
+
+<br/>
+
+**Table of Contents**
 
 [Installation](#installation)  
 [Basic usage](#basic-usage)  

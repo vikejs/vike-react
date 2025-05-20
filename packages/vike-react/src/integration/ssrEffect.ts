@@ -15,7 +15,7 @@ function ssrEffect({ configDefinedAt, configValue }: Parameters<ConfigEffect>[0]
   return {
     meta: {
       Page: { env },
-      /* We don't do this to enable wraping <Head> with <Wrapper>
+      /* We don't do this to enable wrapping <Head> with <Wrapper>
       Wrapper: { env }, */
       Layout: { env },
       Loading: { env },

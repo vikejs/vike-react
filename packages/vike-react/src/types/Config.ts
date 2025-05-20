@@ -198,14 +198,14 @@ declare global {
        *
        * https://vike.dev/onBeforeRenderClient
        */
-      onBeforeRenderClient?: (pageContext: PageContextClient) => void
+      onBeforeRenderClient?: ((pageContext: PageContextClient) => void) | ImportString
 
       /**
        * Client-side hook called after the page is rendered.
        *
        * https://vike.dev/onAfterRenderClient
        */
-      onAfterRenderClient?: (pageContext: PageContextClient) => void
+      onAfterRenderClient?: ((pageContext: PageContextClient) => void) | ImportString
 
       /**
        * Define loading animations.

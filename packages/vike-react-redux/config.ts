@@ -6,9 +6,8 @@ import type { Store } from '@reduxjs/toolkit'
 const config = {
   name: 'vike-react-redux',
   require: {
-    // TODO/now: bump
-    vike: '>=0.4.228',
-    'vike-react': '>=0.6.2',
+    vike: '>=0.4.230',
+    'vike-react': '>=0.6.3',
   },
 
   passToClient: ['redux.ssrState'],

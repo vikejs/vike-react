@@ -4,26 +4,28 @@
 
 # `vike-react-apollo`
 
-Enables your React components to fetch data using [Apollo GraphQL](https://www.apollographql.com). Powered by [HTML streaming](https://github.com/brillout/react-streaming#readme).
+Enables your React components to fetch data using [Apollo GraphQL](https://www.apollographql.com).
+
+Powered by HTML streaming with [`react-streaming`](https://github.com/brillout/react-streaming#readme).
 
 > [!NOTE]
-> Includes:
-> - [Progressive rendering](https://vike.dev/streaming#progressive-rendering)
+> Features:
+> - [Progressive Rendering](https://vike.dev/streaming#progressive-rendering)
 > - [SSR benefits](https://github.com/brillout/react-streaming#ssr)
 > - Fallback upon loading and/or error
 > - [Caching](https://www.apollographql.com/docs/react/caching/cache-configuration)
 
 [Installation](#installation)  
 [Basic usage](#basic-usage)  
+[Example](#example)  
 [`withFallback()`](#withfallback)  
 [`<head>` tags](#head-tags)  
 [Error Handling](#error-handling)  
 [How it works](#how-it-works)  
-[Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-apollo/CHANGELOG.md)  
+[Version history](#version-history)  
 [See also](#see-also)  
 
 <br/>
-
 
 ## Installation
 
@@ -58,7 +60,6 @@ Enables your React components to fetch data using [Apollo GraphQL](https://www.a
 
 <br/>
 
-
 ## Basic usage
 
 ```jsx
@@ -89,8 +90,20 @@ const Countries = () => {
 > [!NOTE]
 > Even though [`useSuspenseQuery()`](https://www.apollographql.com/docs/react/api/react/hooks/#usesuspensequery) is imported from `@apollo/client`, you need to install `vike-react-apollo` for it to work. (The `useSuspenseQuery()` hook requires an [HTML stream](https://vike.dev/streaming) integration.)
 
+Benefits:
+ - Data is fetched at the component level (unlike [`+data`](https://vike.dev/data), which fetches at the page level).
+ - The rest of the page is eagerly rendered while the component waits for its data (see [Progressive Rendering](https://vike.dev/streaming#progressive-rendering)).
+ - All the niceties of Apollo GraphQL.
+
+You can completely stop using Vike's [`+data` hook](https://vike.dev/data) — or use both: `+data` for some pages, and `vike-react-apollo` for others.
+
 <br/>
 
+## Example
+
+See [examples/apollo/](https://github.com/vikejs/vike-react/tree/main/examples/apollo).
+
+<br/>
 
 ## `withFallback()`
 
@@ -200,7 +213,6 @@ function SomePageSection() {
 
 <br/>
 
-
 ## `<head>` tags
 
 To set tags such as `<title>` and `<meta name="description">` based on fetched data, you can use [`<Config>`, `<Head>`, and `useConfig()`](https://vike.dev/useConfig).
@@ -235,7 +247,6 @@ function Movies() {
 
 <br/>
 
-
 ## Error Handling
 
 From a UI perspective, the classic approach to handling errors is the following.
@@ -257,25 +268,25 @@ See: [`withFallback()`](#withfallback)
 
 <br/>
 
-
 ## How it works
 
-Upon SSR, the component is rendered to HTML and its data loaded on the server-side. On the client side, the component is merely [hydrated](https://vike.dev/hydration).
+On the server side (during SSR), the component is rendered to HTML and its data is loaded. On the client side, the component is just [hydrated](https://vike.dev/hydration): the data fetched on the server is passed to the client and reused.
 
 Upon page navigation (and rendering the first page if [SSR is disabled](https://vike.dev/ssr)), the component is rendered and its data loaded on the client-side.
 
 > [!NOTE]
-> With `vike-react-apollo` you fetch data on a component-level instead of using Vike's [`data()` hook](https://vike.dev/data) which fetches data on a page-level.
-
-> [!NOTE]
-> Behind the scenes `vike-react-apollo` integrates Apollo GraphQL into [the HTML stream](https://github.com/brillout/react-streaming#readme).
+> Behind the scenes `vike-react-apollo` integrates Apollo GraphQL into [`react-streaming`](https://github.com/brillout/react-streaming#readme).
 
 <br/>
 
+## Version history
+
+See [CHANGELOG.md](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-apollo/CHANGELOG.md).
+
+<br/>
 
 ## See also
 
-- [Example](https://github.com/vikejs/vike-react/tree/main/examples/apollo)
 - [Vike Docs > Apollo GraphQL](https://vike.dev/apollo-graphql)
 - [Vike Docs > Data Fetching](https://vike.dev/data-fetching)
 - [Apollo GraphQL > useSuspenseQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usesuspensequery)

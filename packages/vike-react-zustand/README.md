@@ -7,7 +7,7 @@
 Integrates [Zustand](https://zustand-demo.pmnd.rs/) state management into your [`vike-react`](https://vike.dev/vike-react) app with SSR support.
 
 > [!NOTE]
-> If you don't use any Zustand store during [Server-Side Rendering](https://vike.dev/ssr), then you **don't need `vike-react-zustand`** — you can just use Zustand directly without any Vike integration.
+> If you don't use any of your Zustand store during [Server-Side Rendering](https://vike.dev/ssr), then you **don't need `vike-react-zustand`** — you can just use Zustand directly without any Vike integration.
 >
 > The `vike-react-zustand` extension is about enabling you to use stores with SSR. See [How it works](#how-it-works).
 
@@ -48,7 +48,7 @@ Integrates [Zustand](https://zustand-demo.pmnd.rs/) state management into your [
 
 ## Basic usage
 
-Create a store using the `create` function from `vike-react-zustand`:
+Create a store using the `create()` function from `vike-react-zustand`:
 
 ```ts
 // store.ts
@@ -108,7 +108,7 @@ export const useStore = create<Store>()(
 )
 ```
 
-**API**
+**API Reference**
 
 ```ts
 const nextStateCreatorFn = withPageContext((pageContext) => stateCreatorFn)
@@ -212,6 +212,5 @@ The extension handles all the complexities of state transfer between server and 
 
 ## See also
 
-- [Example](https://github.com/vikejs/vike-react/tree/main/examples/zustand)
 - [Vike Docs > State Management](https://vike.dev/store)
 - [Zustand Documentation](https://docs.pmnd.rs/zustand)

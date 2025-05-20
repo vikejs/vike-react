@@ -28,7 +28,7 @@
     "rimraf": "^5.0.5",
     "styled-components": "^6.1.13",
     "typescript": "^5.5.3",
-    "vike": "^0.4.223",
+    "vike": "^0.4.230",
     "vike-react": "^0.6.3",
     "vite": "^6.2.5"
   },

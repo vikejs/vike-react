@@ -1,4 +1,3 @@
-export { useNodeStore }
 export { useCounterStore }
 export { useTodoStore }
 
@@ -38,8 +37,3 @@ const useTodoStore = create<TodoStore>()(
     })),
   ),
 )
-
-// Using a store to pass information form server-side to client-side
-const useNodeStore = create<{ nodeVersion: string }>()(() => ({
-  nodeVersion: import.meta.env.SSR ? process.version : '',
-}))

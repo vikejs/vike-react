@@ -1,11 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import React from 'react'
 import { useTodoStore } from '../../store'
+import { useStoreVanilla } from 'vike-react-zustand'
 
 export function TodoList() {
   const [newTodo, setNewTodo] = useState('')
   const { todoItems, addTodo } = useTodoStore()
+  const storeVanilla = useStoreVanilla(useTodoStore)
+  useEffect(
+    () =>
+      storeVanilla.subscribe((state) => {
+        console.log(JSON.stringify(state.todoItems))
+      }),
+    [],
+  )
+
   return (
     <>
       <h2>To-Do</h2>

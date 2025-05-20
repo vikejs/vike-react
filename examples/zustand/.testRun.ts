@@ -59,7 +59,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run preview') {
       expect(await page.textContent('body')).toContain('Buy bananas')
     }
     await expectBananas()
-    expectLog('{\"text\":\"Buy bananas\"}') // See `storeVanilla.subscribe()`
+    expectLog('{\\"text\\":\\"Buy bananas\\"}') // See `storeVanilla.subscribe()`
 
     await clientSideNavigation()
     await expectBananas()

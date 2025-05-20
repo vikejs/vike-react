@@ -3,7 +3,11 @@ export default {
 }
 
 import React from 'react'
+/* We can't import it here: https://github.com/vikejs/vike/issues/2460
+ * - We import it inside onRenderClient.js instead.
+ * - We'll be able to do it if Vite + Rolldown always transpiles the server-side.
 import './Loading.css'
+*/
 
 function LoadingComponent() {
   return (

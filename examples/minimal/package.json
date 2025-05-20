@@ -9,7 +9,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "vike": "^0.4.223",
-    "vike-react": "^0.6.2",
+    "vike-react": "^0.6.3",
     "vite": "^6.2.5"
   },
   "type": "module"

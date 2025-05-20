@@ -4,28 +4,33 @@
 
 # `vike-react-query`
 
-Enables your React components to fetch data using [TanStack Query](https://tanstack.com/query/latest). Powered by [HTML streaming](https://github.com/brillout/react-streaming#readme).
+Enables your React components to fetch data using [TanStack Query](https://tanstack.com/query/latest).
 
-> [!NOTE]
-> Includes:
-> - [Progressive rendering](https://vike.dev/streaming#progressive-rendering)
-> - [SSR benefits](https://github.com/brillout/react-streaming#ssr)
-> - Fallback upon loading and/or error
-> - [Caching](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
+Powered by [`react-streaming`](https://github.com/brillout/react-streaming#readme).
+
+Features:
+- [Progressive Rendering](https://vike.dev/streaming#progressive-rendering)
+- [SSR benefits](https://github.com/brillout/react-streaming#ssr)
+- Fallback upon loading and/or error
+- [Caching](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
+
+<br/>
+
+**Table of Contents**
 
 [Installation](#installation)  
 [Basic usage](#basic-usage)  
+[Example](#example)  
 [`withFallback()`](#withfallback)  
 [`<head>` tags](#head-tags)  
 [Error Handling](#error-handling)  
 [Settings](#settings)  
 [Usage with Telefunc](#usage-with-telefunc)  
 [How it works](#how-it-works)  
-[Version history](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-query/CHANGELOG.md)  
+[Version history](#version-history)  
 [See also](#see-also)  
 
 <br/>
-
 
 ## Installation
 
@@ -47,7 +52,6 @@ Enables your React components to fetch data using [TanStack Query](https://tanst
 > The `vike-react-query` extension requires [`vike-react`](https://vike.dev/vike-react).
 
 <br/>
-
 
 ## Basic usage
 
@@ -75,8 +79,20 @@ const Movie = ({ id }) => {
 > [!NOTE]
 > Even though [`useSuspenseQuery()`](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery) is imported from `@tanstack/react-query`, you need to install `vike-react-query` for it to work. (The `useSuspenseQuery()` hook requires an [HTML stream](https://vike.dev/streaming) integration.)
 
+Benefits:
+ - Data is fetched at the component level (unlike [`+data`](https://vike.dev/data), which fetches at the page level).
+ - The rest of the page is eagerly rendered while the component waits for its data (see [Progressive Rendering](https://vike.dev/streaming#progressive-rendering)).
+ - All the niceties of TanStack Query.
+
+You can completely stop using Vike's [`+data` hook](https://vike.dev/data) — or use both: `+data` for some pages, and `vike-react-query` for others.
+
 <br/>
 
+## Example
+
+See [examples/react-query/](https://github.com/vikejs/vike-react/tree/main/examples/react-query).
+
+<br/>
 
 ## `withFallback()`
 
@@ -180,7 +196,6 @@ function SomePageSection() {
 
 <br/>
 
-
 ## `<head>` tags
 
 To set tags such as `<title>` and `<meta name="description">` based on fetched data, you can use [`<Config>`, `<Head>`, and `useConfig()`](https://vike.dev/useConfig).
@@ -212,7 +227,6 @@ function Movies() {
 
 <br/>
 
-
 ## Error Handling
 
 From a UI perspective, the classic approach to handling errors is the following.
@@ -233,7 +247,6 @@ See: [`withFallback()`](#withfallback)
 > Also it isn't idiomatic: the whole idea of collocating data-fetching with the UI component is to think in terms of the component in isolation rather than in terms of the page.
 
 <br/>
-
 
 ## Settings
 
@@ -272,7 +285,6 @@ export default (pageContext) => ({
 > You can apply settings to all pages, a group of pages, or only one page. See [Vike Docs > Config > Inheritance](https://vike.dev/config#inheritance).
 
 <br/>
-
 
 ## Usage with Telefunc
 
@@ -434,25 +446,26 @@ const Movies = withFallback(
 
 <br/>
 
-
 ## How it works
 
-Upon SSR, the component is rendered to HTML and its data loaded on the server-side. On the client side, the component is merely [hydrated](https://vike.dev/hydration).
+On the server side (during SSR), the component is rendered to HTML and its data is loaded. On the client side, the component is just [hydrated](https://vike.dev/hydration): the data fetched on the server is passed to the client and reused.
 
 Upon page navigation (and rendering the first page if [SSR is disabled](https://vike.dev/ssr)), the component is rendered and its data loaded on the client-side.
 
 > [!NOTE]
-> With `vike-react-query` you fetch data on a component-level instead of using Vike's [`data()` hook](https://vike.dev/data) which fetches data on a page-level.
-
-> [!NOTE]
-> Behind the scenes `vike-react-query` integrates TanStack Query into [the HTML stream](https://github.com/brillout/react-streaming#readme).
+> Behind the scenes `vike-react-query` integrates TanStack Query into [`react-streaming`](https://github.com/brillout/react-streaming#readme).
 
 <br/>
 
+## Version history
+
+See [CHANGELOG.md](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-query/CHANGELOG.md).
+
+<br/>
 
 ## See also
 
-- [Example](https://github.com/vikejs/vike-react/tree/main/examples/react-query)
 - [Vike Docs > TanStack Query](https://vike.dev/tanstack-query)
-- [TanStack Query > useSuspenseQuery](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
 - [Vike Docs > Data Fetching](https://vike.dev/data-fetching)
+- [TanStack Query > useSuspenseQuery](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
+- [React > `<Suspense>`](https://react.dev/reference/react/Suspense)

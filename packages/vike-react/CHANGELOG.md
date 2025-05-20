@@ -1,3 +1,12 @@
+## [0.6.3](https://github.com/vikejs/vike-react/compare/vike-react@0.6.2...vike-react@0.6.3) (2025-05-16)
+
+
+### Bug Fixes
+
+* import CSS onl on the client-side (fix vikejs/vike[#2460](https://github.com/vikejs/vike-react/issues/2460)) ([43a5cc1](https://github.com/vikejs/vike-react/commit/43a5cc1ebd30c619fbfb59f3dbbba09b9d4a30c4))
+
+
+
 ## [0.6.2](https://github.com/vikejs/vike-react/compare/vike-react@0.6.1...vike-react@0.6.2) (2025-05-16)
 
 

@@ -9,7 +9,7 @@ import { initializeTodos } from '../../store/slices/todos'
 function onData(pageContext: PageContext & { data?: Data }) {
   const { store } = pageContext
   store.dispatch(initializeTodos(pageContext.data!.todoItemsInitial))
-  store.dispatch(initializeCount(pageContext.data!.countInit))
+  store.dispatch(initializeCount(pageContext.data!.countInitial))
 
   // Saving KBs: we don't need pageContext.data (we use the store instead)
   // - If we don't delete pageContext.data then Vike sends pageContext.data to the client-side

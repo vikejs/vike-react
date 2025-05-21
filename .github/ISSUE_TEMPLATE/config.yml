@@ -1,11 +1,14 @@
 blank_issues_enabled: false
 contact_links:
-  - name: "💥 Bug Report"
-    url: https://github.com/vikejs/vike/issues/new/choose
-    about: "Report bugs at Vike's main repository instead."
-  - name: "✨ Feature Request"
-    url: https://github.com/vikejs/vike/issues/new/choose
-    about: "Suggest features at Vike's main repository instead."
+  - name: "💥 Bug"
+    url: https://github.com/vikejs/vike/issues/new?template=bug.yml
+    about: "Report a bug. (Redirects to Vike's main repository.)"
+  - name: "🚀 Feature"
+    url: https://github.com/vikejs/vike/issues/new?template=feature.yml
+    about: "Suggest a new feature. (Redirects to Vike's main repository.)"
+  - name: "✨ Polish"
+    url: https://github.com/vikejs/vike/issues/new?template=polish.yaml
+    about: "Unclear API or docs? Let us know — we'll polish Vike's DX. (Redirects to Vike's main repository.)"
   - name: "🙏 Help & Questions"
     url: https://github.com/vikejs/vike/discussions/new?category=help-questions
     about: "Get official help from Vike maintainers."

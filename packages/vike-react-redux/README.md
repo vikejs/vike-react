@@ -150,6 +150,7 @@ function onData(pageContext: PageContext & { data?: Data }) {
 }
 ```
 
+See the To-Do List example at [examples/redux/](https://github.com/vikejs/vike-react/tree/main/examples/redux).
 
 <br/>
 

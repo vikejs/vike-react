@@ -6,8 +6,8 @@ import { fetchCountInit } from '../../components/Counter/fetchCountInit'
 import type { PageContextServer } from 'vike/types'
 
 async function data(pageContext: PageContextServer) {
-  const [countInit, todosInit] = await Promise.all([fetchCountInit(), fetchTodosInit()])
-  return { countInit, todosInit }
+  const [countInit, todoItemsInitial] = await Promise.all([fetchCountInit(), fetchTodosInit()])
+  return { countInit, todoItemsInitial }
 }
 
 // Pretending the list is fetched over the network

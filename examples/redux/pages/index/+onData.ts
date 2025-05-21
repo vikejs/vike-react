@@ -8,7 +8,7 @@ import { initializeTodos } from '../../store/slices/todos'
 
 function onData(pageContext: PageContext & { data?: Data }) {
   const { store } = pageContext
-  store.dispatch(initializeTodos(pageContext.data!.todosInit))
+  store.dispatch(initializeTodos(pageContext.data!.todoItemsInitial))
   store.dispatch(initializeCount(pageContext.data!.countInit))
 
   // Saving KBs: we don't need pageContext.data (we use the store instead)

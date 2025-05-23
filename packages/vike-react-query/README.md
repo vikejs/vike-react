@@ -198,7 +198,7 @@ function SomePageSection() {
 
 ## `<head>` tags
 
-To set tags such as `<title>` and `<meta name="description">` based on fetched data, you can use [`<Config>`, `<Head>`, and `useConfig()`](https://vike.dev/useConfig).
+To set tags such as `<title>` and `<meta name="description">` based on fetched data, you can use [`useConfig()` / `<Config>` / `<Head>`](https://vike.dev/useConfig#ui-components).
 
 ```js
 import { useSuspenseQuery } from '@tanstack/react-query'
@@ -224,6 +224,8 @@ function Movies() {
   )
 }
 ```
+
+> As explained at [Vike > `useConfig` > HTML Streaming](https://vike.dev/useConfig#html-streaming), some `<head>` tags may be missing from the HTML streamed to human users (this isn't case for bots).
 
 <br/>
 

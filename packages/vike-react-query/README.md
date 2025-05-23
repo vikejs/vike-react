@@ -90,7 +90,7 @@ You can completely stop using Vike's [`+data` hook](https://vike.dev/data) — o
 
 ## Example
 
-See [examples/react-query/](https://github.com/vikejs/vike-react/tree/main/examples/react-query).
+See [examples/query/](https://github.com/vikejs/vike-react/tree/main/examples/query).
 
 <br/>
 

@@ -51,7 +51,7 @@ Features:
 
    import { ApolloClient, InMemoryCache } from '@apollo/client-react-streaming'
 
-   export default (pageContext: PageContext) =>
+   export default (pageContext) =>
       new ApolloClient({
         uri: 'https://countries.trevorblades.com',
         cache: new InMemoryCache()

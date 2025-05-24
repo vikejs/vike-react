@@ -90,7 +90,7 @@ function Counter() {
 
 ## `withPageContext()`
 
-The `withPageContext` middleware gives your store access to the Vike `pageContext` during initialization:
+The `withPageContext` middleware gives your store access to the Vike [`pageContext`](https://vike.dev/pageContext) during initialization:
 
 ```ts
 import { create, withPageContext } from 'vike-react-zustand'

@@ -248,7 +248,7 @@ function Movies() {
 }
 ```
 
-> As explained at [Vike > `useConfig` > HTML Streaming](https://vike.dev/useConfig#html-streaming), some `<head>` tags may be missing from the HTML streamed to human users (this isn't case for bots).
+> The `<meta name="description">` tag is only shown to bots. See the explanation at [Vike Docs > `useConfig` > HTML Streaming](https://vike.dev/useConfig#html-streaming).
 
 <br/>
 

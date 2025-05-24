@@ -225,6 +225,7 @@ function Movies() {
 }
 ```
 
+> [!NOTE]
 > The `<meta name="description">` tag is only shown to bots. See the explanation at [Vike Docs > `useConfig` > HTML Streaming](https://vike.dev/useConfig#html-streaming).
 
 <br/>

@@ -2,30 +2,28 @@ export { testRun }
 
 import { test, expect, run, page, getServerUrl, autoRetry, fetchHtml } from '@brillout/test-e2e'
 
-const counterInitValue = 42
-
 function testRun(cmd: `pnpm run ${'dev' | 'preview' | 'preview:ssg'}`) {
   run(cmd)
 
   test('count', async () => {
     await page.goto(getServerUrl() + '/')
-    await testCounter(counterInitValue)
+    await testCounter()
     await clientSideNavigation()
     await fullPageReload()
   })
   async function clientSideNavigation() {
     await page.click('a:has-text("About")')
     await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/about')
-    await testCounter(counterInitValue + 1)
+    await testCounter(1)
     await page.click('a:has-text("Welcome")')
     await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/')
-    await testCounter(counterInitValue + 2)
+    await testCounter(2)
   }
   async function fullPageReload() {
     await page.goto(getServerUrl() + '/about')
-    await testCounter(counterInitValue)
+    await testCounter()
     await page.goto(getServerUrl() + '/')
-    await testCounter(counterInitValue)
+    await testCounter()
   }
 
   test('todos - initial list', async () => {
@@ -59,7 +57,7 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview' | 'preview:ssg'}`) {
     }
     await expectBananas()
 
-    await testCounter(counterInitValue)
+    await testCounter()
     await clientSideNavigation()
     await expectBananas()
 
@@ -73,7 +71,9 @@ async function getNumberOfItems() {
   return await page.evaluate(() => document.querySelectorAll('#todo-list li').length)
 }
 
-async function testCounter(currentValue = 0) {
+const counterInitValue = 42
+async function testCounter(inc: 0 | 1 | 2 = 0) {
+  const currentValue = counterInitValue + inc
   // autoRetry() in case page just got client-side navigated
   await autoRetry(
     async () => {

@@ -71,8 +71,8 @@ async function getNumberOfItems() {
   return await page.evaluate(() => document.querySelectorAll('#todo-list li').length)
 }
 
-const counterInitValue = 42
 async function testCounter(inc: 0 | 1 | 2 = 0) {
+  const counterInitValue = 42
   const currentValue = counterInitValue + inc
   // autoRetry() in case page just got client-side navigated
   await autoRetry(

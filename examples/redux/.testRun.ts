@@ -2,28 +2,30 @@ export { testRun }
 
 import { test, expect, run, page, getServerUrl, autoRetry, fetchHtml } from '@brillout/test-e2e'
 
+const counterInitValue = 42
+
 function testRun(cmd: `pnpm run ${'dev' | 'preview' | 'preview:ssg'}`) {
   run(cmd)
 
   test('count', async () => {
     await page.goto(getServerUrl() + '/')
-    await testCounter(42)
+    await testCounter(counterInitValue)
     await clientSideNavigation()
     await fullPageReload()
   })
   async function clientSideNavigation() {
     await page.click('a:has-text("About")')
     await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/about')
-    await testCounter(43)
+    await testCounter(counterInitValue + 1)
     await page.click('a:has-text("Welcome")')
     await page.waitForFunction(() => (window as any)._vike.fullyRenderedUrl === '/')
-    await testCounter(44)
+    await testCounter(counterInitValue + 2)
   }
   async function fullPageReload() {
     await page.goto(getServerUrl() + '/about')
-    await testCounter(42)
+    await testCounter(counterInitValue)
     await page.goto(getServerUrl() + '/')
-    await testCounter(42)
+    await testCounter(counterInitValue)
   }
 
   test('todos - initial list', async () => {
@@ -57,7 +59,7 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview' | 'preview:ssg'}`) {
     }
     await expectBananas()
 
-    await testCounter(42)
+    await testCounter(counterInitValue)
     await clientSideNavigation()
     await expectBananas()
 

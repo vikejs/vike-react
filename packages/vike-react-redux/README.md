@@ -14,7 +14,6 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
 [What it does](#what-it-does)  
 [See Also](#see-also)  
 
-
 <br/>
 
 ## Installation
@@ -91,13 +90,11 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
    }
    ```
 
-
 <br/>
 
 ## Example
 
 See [examples/redux](https://github.com/vikejs/vike-react/tree/main/examples/redux).
-
 
 <br/>
 
@@ -122,7 +119,6 @@ For full customization consider [ejecting](https://vike.dev/eject).
 > [!NOTE]
 > Consider making a [Pull Request before ejecting](https://vike.dev/eject#when-to-eject).
 
-
 <br/>
 
 ## Populate store with `+data`
@@ -132,7 +128,6 @@ To populate your store with data fetched via the [`+data`](https://vike.dev/data
 ```ts
 // pages/todos/+onData.ts
 // Environment: server, client
-
 export { onData }
 
 import type { PageContext } from 'vike/types'
@@ -165,7 +160,6 @@ See To-Do List example at [examples/redux/](https://github.com/vikejs/vike-react
 
 See [CHANGELOG.md](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-redux/CHANGELOG.md).
 
-
 <br/>
 
 ## What it does
@@ -180,7 +174,6 @@ For more details, have a look at the source code of `vike-react-redux` (it's tin
 You can learn more at:
  - [Vike > Store (State Management) > SSR](https://vike.dev/store#ssr)
  - [Redux > Server Side Rendering](https://redux.js.org/usage/server-rendering)
-
 
 <br/>
 

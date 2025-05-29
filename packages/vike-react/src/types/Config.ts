@@ -166,6 +166,7 @@ declare global {
         | 'node'
         | 'web'
         | {
+            type?: 'node' | 'web'
             /**
              * Whether the existence of the React SSR stream is required (some integrations require it).
              *
@@ -173,7 +174,6 @@ declare global {
              */
             require?: boolean
             enable?: boolean | null
-            type?: 'node' | 'web'
           }
 
       /** @deprecated Set +stream.require instead */

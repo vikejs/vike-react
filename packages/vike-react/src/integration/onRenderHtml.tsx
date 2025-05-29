@@ -229,9 +229,9 @@ function resolveStreamSetting(pageContext: PageContextServer): StreamSetting {
   const {
     stream,
     // TODO/eventually: remove +streamIsRequired
-    //  - Let's remove it once following vike-react-{query,apollo} releases can be considered old versions.
-    //    - Last vike-react-query version that uses +streamIsRequired is 0.1.3
-    //    - Last vike-react-apollo version that uses +streamIsRequired is 0.1.1
+    //  - Let's remove it once following last vike-react-{query,apollo} releases using +streamIsRequired can be considered old versions.
+    //    - Last vike-react-query version that uses +streamIsRequired was 0.1.3
+    //    - Last vike-react-apollo version that uses +streamIsRequired was 0.1.1
     //    - New vike-react-{query,apollo} versions using +stream.require instead +streamIsRequired were released on May 29th 2025
     //  - Remove it in a minor release (AFAICT it's only used by vike-react-{query,apollo})
     //    - Add a `Negligible Breaking Change`

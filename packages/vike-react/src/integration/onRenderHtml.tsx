@@ -244,8 +244,8 @@ function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
       }
       if (isObject(setting)) {
         if (setting.enable !== null) streamConfig.enable = setting.enable ?? true
-        if (setting.require) streamConfig.require = setting.require
-        if (setting.type) streamConfig.type = setting.type
+        if (setting.require !== undefined) streamConfig.require = setting.require
+        if (setting.type !== undefined) streamConfig.type = setting.type
         return
       }
       isType<never>(setting)

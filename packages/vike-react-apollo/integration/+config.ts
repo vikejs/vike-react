@@ -7,10 +7,10 @@ import type { ApolloClient } from '@apollo/client-react-streaming'
 const config = {
   name: 'vike-react-apollo',
   require: {
-    'vike-react': '>=0.4.18',
+    'vike-react': '>=0.6.4',
   },
   Wrapper: 'import:vike-react-apollo/__internal/integration/Wrapper:Wrapper',
-  streamIsRequired: true,
+  stream: { require: true },
   meta: {
     ApolloClient: {
       env: {

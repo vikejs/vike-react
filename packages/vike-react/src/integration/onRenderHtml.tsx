@@ -74,7 +74,7 @@ async function renderPageToHtml(pageContext: PageContextServer) {
 
   if (pageContext.page) {
     const streamConfig = resolveStreamConfig(pageContext)
-    if (!streamConfig.enable && !streamConfig.required) {
+    if (!streamConfig.enable && !streamConfig.require) {
       const pageHtmlString = renderToString(pageContext.page, renderToStringOptions)
       pageContext.pageHtmlString = pageHtmlString
     } else {
@@ -210,7 +210,7 @@ async function getBodyHtmlBoundary(pageContext: PageContextServer) {
 type StreamConfig = {
   type: 'node' | 'web'
   enable: boolean
-  required: boolean
+  require: boolean
 }
 function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
   const {
@@ -227,7 +227,7 @@ function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
   const streamConfig: StreamConfig = {
     type: 'node',
     enable: false,
-    required: streamIsRequired ?? false,
+    require: streamIsRequired ?? false,
   }
   ;(stream ?? [])
     .reverse()
@@ -240,7 +240,7 @@ function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
         streamConfig.enable = true
       } else if (isObject(setting)) {
         if (setting.enable !== null) streamConfig.enable = setting.enable ?? true
-        if (setting.required) streamConfig.required = setting.required
+        if (setting.require) streamConfig.require = setting.require
         if (setting.type) streamConfig.type = setting.type
       } else {
         isType<never>(setting)

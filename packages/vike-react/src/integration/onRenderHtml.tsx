@@ -85,12 +85,12 @@ async function renderPageToHtml(pageContext: PageContextServer) {
           // TODO/eventually: remove old way of acccessing the User Agent header.
           // @ts-ignore
           pageContext.userAgent,
-        disable: !streamConfig.enable
-          ? true
-          : /* Don't override disabling when bot is detected.
-             false
-             */
-            undefined,
+        disable: streamConfig.enable
+          ? /* Don't override disabling when bot is detected.
+            false
+            */
+            undefined
+          : true,
       })
       pageContext.pageHtmlStream = pageHtmlStream
     }

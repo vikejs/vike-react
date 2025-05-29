@@ -1,3 +1,7 @@
+<!-- WARNING: keep links absolute in this file so they work on NPM too -->
+
+[![npm version](https://img.shields.io/npm/v/vike-react-styled-components)](https://www.npmjs.com/package/vike-react-styled-components)
+
 # `vike-react-styled-components`
 
 Integrates [styled-components](https://styled-components.com) into your [`vike-react`](https://vike.dev/vike-react) app.

@@ -1,3 +1,7 @@
+<!-- WARNING: keep links absolute in this file so they work on NPM too -->
+
+[![npm version](https://img.shields.io/npm/v/vike-react-chakra)](https://www.npmjs.com/package/vike-react-chakra)
+
 # `vike-react-chakra`
 
 Integrates [Chakra UI](https://www.chakra-ui.com/) into your [`vike-react`](https://vike.dev/vike-react) app.

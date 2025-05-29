@@ -1,3 +1,7 @@
+<!-- WARNING: keep links absolute in this file so they work on NPM too -->
+
+[![npm version](https://img.shields.io/npm/v/vike-react-antd)](https://www.npmjs.com/package/vike-react-antd)
+
 # `vike-react-antd`
 
 Integrates [Ant Design](https://ant.design) into your [`vike-react`](https://vike.dev/vike-react) app.

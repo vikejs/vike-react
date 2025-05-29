@@ -2,10 +2,10 @@
   "name": "vike-react-apollo",
   "version": "0.1.1",
   "type": "module",
-  "main": "dist/src/index.js",
-  "typings": "dist/src/index.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.js",
   "exports": {
-    ".": "./dist/src/index.js",
+    ".": "./dist/index.js",
     "./config": "./dist/integration/+config.js",
     "./__internal/integration/Wrapper": "./dist/integration/Wrapper.js"
   },

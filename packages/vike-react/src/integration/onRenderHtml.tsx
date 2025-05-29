@@ -74,7 +74,7 @@ async function renderPageToHtml(pageContext: PageContextServer) {
 
   if (pageContext.page) {
     const streamConfig = resolveStreamConfig(pageContext)
-    if (!streamConfig.enabled && !streamConfig.required) {
+    if (!streamConfig.enable && !streamConfig.required) {
       const pageHtmlString = renderToString(pageContext.page, renderToStringOptions)
       pageContext.pageHtmlString = pageHtmlString
     } else {
@@ -85,7 +85,7 @@ async function renderPageToHtml(pageContext: PageContextServer) {
           // TODO/eventually: remove old way of acccessing the User Agent header.
           // @ts-ignore
           pageContext.userAgent,
-        disable: !streamConfig.enabled,
+        disable: !streamConfig.enable,
       })
       pageContext.pageHtmlStream = pageHtmlStream
     }
@@ -209,7 +209,7 @@ async function getBodyHtmlBoundary(pageContext: PageContextServer) {
 
 type StreamConfig = {
   type: 'node' | 'web'
-  enabled: boolean
+  enable: boolean
   required: boolean
 }
 function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
@@ -226,7 +226,7 @@ function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
   } = pageContext.config
   const streamConfig: StreamConfig = {
     type: 'node',
-    enabled: false,
+    enable: false,
     required: streamIsRequired ?? false,
   }
   stream
@@ -234,12 +234,12 @@ function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
     .filter(isNotNullish)
     .forEach((setting) => {
       if (typeof setting === 'boolean') {
-        streamConfig.enabled = setting
+        streamConfig.enable = setting
       } else if (typeof setting === 'string') {
         streamConfig.type = setting
-        streamConfig.enabled = true
+        streamConfig.enable = true
       } else if (isObject(setting)) {
-        if (setting.enabled !== null) streamConfig.enabled = setting.enabled ?? true
+        if (setting.enable !== null) streamConfig.enable = setting.enable ?? true
         if (setting.required) streamConfig.required = setting.required
         if (setting.type) streamConfig.type = setting.type
       } else {

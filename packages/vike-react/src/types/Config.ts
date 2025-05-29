@@ -172,7 +172,7 @@ declare global {
              * HTML Streaming can still be disabled: the SSR stream is awaited and converted to a string.
              */
             required?: boolean
-            enabled?: boolean | null
+            enable?: boolean | null
             type?: 'node' | 'web'
           }
 

@@ -79,7 +79,12 @@ async function renderPageToHtml(pageContext: PageContextServer) {
       pageContext.pageHtmlString = pageHtmlString
     } else {
       const pageHtmlStream = await renderToStream(pageContext.page, {
-        webStream: streamConfig.type === 'web',
+        webStream: !streamConfig.type
+          ? /* Let react-streaming decide which stream type to use.
+            false
+            */
+            undefined
+          : streamConfig.type === 'web',
         userAgent:
           pageContext.headers?.['user-agent'] ||
           // TODO/eventually: remove old way of acccessing the User Agent header.
@@ -213,7 +218,7 @@ async function getBodyHtmlBoundary(pageContext: PageContextServer) {
 }
 
 type StreamConfig = {
-  type: 'node' | 'web'
+  type: 'node' | 'web' | null
   enable: boolean
   require: boolean
 }
@@ -230,7 +235,7 @@ function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
     streamIsRequired,
   } = pageContext.config
   const streamConfig: StreamConfig = {
-    type: 'node',
+    type: null,
     enable: false,
     require: streamIsRequired ?? false,
   }

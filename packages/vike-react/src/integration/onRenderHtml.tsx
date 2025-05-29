@@ -16,6 +16,9 @@ import { getTagAttributesString, type TagAttributes } from '../utils/getTagAttri
 import { assert } from '../utils/assert.js'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { resolveReactOptions } from './resolveReactOptions.js'
+import { isNotNullish } from '../utils/isNotNullish.js'
+import { isObject } from '../utils/isObject.js'
+import { isType } from '../utils/isType.js'
 
 addEcosystemStamp()
 
@@ -70,19 +73,32 @@ async function renderPageToHtml(pageContext: PageContextServer) {
   const { renderToStringOptions } = resolveReactOptions(pageContext)
 
   if (pageContext.page) {
-    const { stream, streamIsRequired } = pageContext.config
-    if (!stream && !streamIsRequired) {
+    const streamSetting = resolveStreamSetting(pageContext)
+    if (!streamSetting.enable && !streamSetting.require) {
       const pageHtmlString = renderToString(pageContext.page, renderToStringOptions)
       pageContext.pageHtmlString = pageHtmlString
     } else {
       const pageHtmlStream = await renderToStream(pageContext.page, {
-        webStream: typeof stream === 'string' ? stream === 'web' : undefined,
+        webStream: !streamSetting.type
+          ? /* Let react-streaming decide which stream type to use.
+            false
+            */
+            undefined
+          : streamSetting.type === 'web',
         userAgent:
           pageContext.headers?.['user-agent'] ||
           // TODO/eventually: remove old way of acccessing the User Agent header.
           // @ts-ignore
           pageContext.userAgent,
-        disable: stream === false ? true : undefined,
+        disable:
+          // +stream.require is true  => default +stream.enable is true
+          // +stream.require is false => default +stream.enable is false
+          streamSetting.enable === false
+            ? true
+            : /* Don't override disabling when bot is detected.
+              false,
+              */
+              undefined,
       })
       pageContext.pageHtmlStream = pageHtmlStream
     }
@@ -202,4 +218,51 @@ async function getBodyHtmlBoundary(pageContext: PageContextServer) {
     (await callCumulativeHooks(pageContext.config.bodyHtmlEnd, pageContext)).join(''),
   )
   return { bodyHtmlBegin, bodyHtmlEnd }
+}
+
+type StreamSetting = {
+  type: 'node' | 'web' | null
+  enable: boolean | null
+  require: boolean
+}
+function resolveStreamSetting(pageContext: PageContextServer): StreamSetting {
+  const {
+    stream,
+    // TODO/eventually: remove +streamIsRequired
+    //  - Let's remove it once following last vike-react-{query,apollo} releases using +streamIsRequired can be considered old versions.
+    //    - Last vike-react-query version that uses +streamIsRequired was 0.1.3
+    //    - Last vike-react-apollo version that uses +streamIsRequired was 0.1.1
+    //    - New vike-react-{query,apollo} versions using +stream.require instead +streamIsRequired were released on May 29th 2025
+    //  - Remove it in a minor release (AFAICT it's only used by vike-react-{query,apollo})
+    //    - Add a `Negligible Breaking Change`
+    streamIsRequired,
+  } = pageContext.config
+  const streamSetting: StreamSetting = {
+    type: null,
+    enable: null,
+    require: streamIsRequired ?? false,
+  }
+  stream
+    ?.reverse()
+    .filter(isNotNullish)
+    .forEach((setting) => {
+      if (typeof setting === 'boolean') {
+        streamSetting.enable = setting
+        return
+      }
+      if (typeof setting === 'string') {
+        streamSetting.type = setting
+        streamSetting.enable = true
+        return
+      }
+      if (isObject(setting)) {
+        if (setting.enable !== null) streamSetting.enable = setting.enable ?? true
+        if (setting.require !== undefined) streamSetting.require = setting.require
+        if (setting.type !== undefined) streamSetting.type = setting.type
+        return
+      }
+      isType<never>(setting)
+      throw new Error(`Unexpected +stream value ${setting}`)
+    })
+  return streamSetting
 }

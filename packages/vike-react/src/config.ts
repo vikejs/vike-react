@@ -84,6 +84,7 @@ const config = {
     },
     stream: {
       env: { server: true },
+      cumulative: true,
     },
     streamIsRequired: {
       env: { server: true },

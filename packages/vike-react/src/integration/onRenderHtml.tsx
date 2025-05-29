@@ -90,12 +90,15 @@ async function renderPageToHtml(pageContext: PageContextServer) {
           // TODO/eventually: remove old way of acccessing the User Agent header.
           // @ts-ignore
           pageContext.userAgent,
-        disable: streamConfig.enable
-          ? /* Don't override disabling when bot is detected.
-            false
-            */
-            undefined
-          : true,
+        disable:
+          // +stream.require is true  => default +stream.enable is true
+          // +stream.require is false => default +stream.enable is false
+          streamConfig.enable === false
+            ? true
+            : /* Don't override disabling when bot is detected.
+              false,
+              */
+              undefined,
       })
       pageContext.pageHtmlStream = pageHtmlStream
     }
@@ -219,7 +222,7 @@ async function getBodyHtmlBoundary(pageContext: PageContextServer) {
 
 type StreamConfig = {
   type: 'node' | 'web' | null
-  enable: boolean
+  enable: boolean | null
   require: boolean
 }
 function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
@@ -236,7 +239,7 @@ function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
   } = pageContext.config
   const streamConfig: StreamConfig = {
     type: null,
-    enable: false,
+    enable: null,
     require: streamIsRequired ?? false,
   }
   ;(stream ?? [])

@@ -235,17 +235,21 @@ function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
     .forEach((setting) => {
       if (typeof setting === 'boolean') {
         streamConfig.enable = setting
-      } else if (typeof setting === 'string') {
+        return
+      }
+      if (typeof setting === 'string') {
         streamConfig.type = setting
         streamConfig.enable = true
-      } else if (isObject(setting)) {
+        return
+      }
+      if (isObject(setting)) {
         if (setting.enable !== null) streamConfig.enable = setting.enable ?? true
         if (setting.require) streamConfig.require = setting.require
         if (setting.type) streamConfig.type = setting.type
-      } else {
-        isType<never>(setting)
-        throw new Error(`Unexpected +stream value ${setting}`)
+        return
       }
+      isType<never>(setting)
+      throw new Error(`Unexpected +stream value ${setting}`)
     })
   return streamConfig
 }

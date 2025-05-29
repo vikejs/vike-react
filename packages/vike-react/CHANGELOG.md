@@ -1,3 +1,12 @@
+## [0.6.4](https://github.com/vikejs/vike-react/compare/vike-react@0.6.3...vike-react@0.6.4) (2025-05-29)
+
+
+### Features
+
+* +stream.enable ([#173](https://github.com/vikejs/vike-react/issues/173)) ([858d050](https://github.com/vikejs/vike-react/commit/858d0505b4ba5bbd52fbf00c14bc97614482f280))
+
+
+
 ## [0.6.3](https://github.com/vikejs/vike-react/compare/vike-react@0.6.2...vike-react@0.6.3) (2025-05-16)
 
 

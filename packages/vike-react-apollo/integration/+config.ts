@@ -10,7 +10,7 @@ const config = {
     'vike-react': '>=0.4.18',
   },
   Wrapper: 'import:vike-react-apollo/__internal/integration/Wrapper:Wrapper',
-  stream: { require: true },
+  streamIsRequired: true,
   meta: {
     ApolloClient: {
       env: {

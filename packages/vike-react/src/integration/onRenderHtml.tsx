@@ -225,7 +225,7 @@ type StreamConfig = {
 function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
   const {
     stream,
-    // TO-DO/eventually: remove +streamIsRequired
+    // TODO/eventually: remove +streamIsRequired
     //  - Let's remove it once following May 29th 2025 releses can be considered old versions.
     //    - First vike-react version that implements +stream.required is 0.6.4
     //    - First vike-react-query version that sets +stream.required is 0.1.4

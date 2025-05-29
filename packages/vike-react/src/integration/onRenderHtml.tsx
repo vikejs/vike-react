@@ -73,18 +73,18 @@ async function renderPageToHtml(pageContext: PageContextServer) {
   const { renderToStringOptions } = resolveReactOptions(pageContext)
 
   if (pageContext.page) {
-    const streamConfig = resolveStreamConfig(pageContext)
-    if (!streamConfig.enable && !streamConfig.require) {
+    const streamSetting = resolveStreamSetting(pageContext)
+    if (!streamSetting.enable && !streamSetting.require) {
       const pageHtmlString = renderToString(pageContext.page, renderToStringOptions)
       pageContext.pageHtmlString = pageHtmlString
     } else {
       const pageHtmlStream = await renderToStream(pageContext.page, {
-        webStream: !streamConfig.type
+        webStream: !streamSetting.type
           ? /* Let react-streaming decide which stream type to use.
             false
             */
             undefined
-          : streamConfig.type === 'web',
+          : streamSetting.type === 'web',
         userAgent:
           pageContext.headers?.['user-agent'] ||
           // TODO/eventually: remove old way of acccessing the User Agent header.
@@ -93,7 +93,7 @@ async function renderPageToHtml(pageContext: PageContextServer) {
         disable:
           // +stream.require is true  => default +stream.enable is true
           // +stream.require is false => default +stream.enable is false
-          streamConfig.enable === false
+          streamSetting.enable === false
             ? true
             : /* Don't override disabling when bot is detected.
               false,
@@ -220,12 +220,12 @@ async function getBodyHtmlBoundary(pageContext: PageContextServer) {
   return { bodyHtmlBegin, bodyHtmlEnd }
 }
 
-type StreamConfig = {
+type StreamSetting = {
   type: 'node' | 'web' | null
   enable: boolean | null
   require: boolean
 }
-function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
+function resolveStreamSetting(pageContext: PageContextServer): StreamSetting {
   const {
     stream,
     // TODO/eventually: remove +streamIsRequired
@@ -237,7 +237,7 @@ function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
     //    - Add a `Negligible Breaking Change`
     streamIsRequired,
   } = pageContext.config
-  const streamConfig: StreamConfig = {
+  const streamSetting: StreamSetting = {
     type: null,
     enable: null,
     require: streamIsRequired ?? false,
@@ -247,22 +247,22 @@ function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
     .filter(isNotNullish)
     .forEach((setting) => {
       if (typeof setting === 'boolean') {
-        streamConfig.enable = setting
+        streamSetting.enable = setting
         return
       }
       if (typeof setting === 'string') {
-        streamConfig.type = setting
-        streamConfig.enable = true
+        streamSetting.type = setting
+        streamSetting.enable = true
         return
       }
       if (isObject(setting)) {
-        if (setting.enable !== null) streamConfig.enable = setting.enable ?? true
-        if (setting.require !== undefined) streamConfig.require = setting.require
-        if (setting.type !== undefined) streamConfig.type = setting.type
+        if (setting.enable !== null) streamSetting.enable = setting.enable ?? true
+        if (setting.require !== undefined) streamSetting.require = setting.require
+        if (setting.type !== undefined) streamSetting.type = setting.type
         return
       }
       isType<never>(setting)
       throw new Error(`Unexpected +stream value ${setting}`)
     })
-  return streamConfig
+  return streamSetting
 }

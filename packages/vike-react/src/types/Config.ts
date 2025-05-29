@@ -157,7 +157,7 @@ declare global {
       ssr?: boolean
 
       /**
-       * Enable or disable HTML Streaming.
+       * Settings for HTML Streaming.
        *
        * https://vike.dev/stream
        */
@@ -166,13 +166,27 @@ declare global {
         | 'node'
         | 'web'
         | {
+            /**
+             * Whether the HTML stream should be a Web Stream or a Node.js Stream.
+             *
+             * https://vike.dev/stream
+             */
             type?: 'node' | 'web'
             /**
-             * Whether the existence of the React SSR stream is required (some integrations require it).
+             * Whether Server-Side Rendering (SSR) must use a stream. (Some tool integrations require it.)
              *
-             * HTML Streaming can still be disabled: the SSR stream is awaited and converted to a string.
+             * Setting +stream to `{ require: true, disable: true }` means that SSR is done using a stream but, from the user's perspective, HTML Streaming is disabled: the stream is awaited, converted to a string, and the full HTML is sent at once.
+             *
+             * https://vike.dev/stream
              */
             require?: boolean
+            /**
+             * Setting +stream to `{ enable: null }` is the same as not setting +stream at all.
+             *
+             * Useful for changing stream settings without enabling streaming. For example, Vike extensions can set +stream to `{ enable: null, type: 'web' }` to change the default stream type without enabling streaming.
+             *
+             * https://vike.dev/stream
+             */
             enable?: boolean | null
           }
 

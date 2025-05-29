@@ -10,7 +10,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "typescript": "^5.3.3",
+    "typescript": "^5.8.3",
     "vike": "^0.4.230",
     "vike-react": "0.6.4",
     "vike-react-apollo": "0.1.1",

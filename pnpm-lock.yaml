@@ -62,8 +62,8 @@ importers:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
       typescript:
-        specifier: ^5.3.3
-        version: 5.8.2
+        specifier: ^5.8.3
+        version: 5.8.3
       vike:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
@@ -101,8 +101,8 @@ importers:
         specifier: ^0.4.2
         version: 0.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       typescript:
-        specifier: ^5.5.4
-        version: 5.8.2
+        specifier: ^5.8.3
+        version: 5.8.3
       vike:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
@@ -155,7 +155,7 @@ importers:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
       typescript:
-        specifier: ^5.5.3
+        specifier: ^5.8.3
         version: 5.8.3
       vike:
         specifier: ^0.4.230
@@ -194,8 +194,8 @@ importers:
         specifier: ^9.2.0
         version: 9.2.0(@types/react@19.0.12)(react@19.0.0)(redux@5.0.1)
       typescript:
-        specifier: ^5.5.4
-        version: 5.8.2
+        specifier: ^5.8.3
+        version: 5.8.3
       vike:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
@@ -230,7 +230,7 @@ importers:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
       typescript:
-        specifier: ^5.3.3
+        specifier: ^5.8.3
         version: 5.8.3
       vike:
         specifier: ^0.4.223
@@ -279,8 +279,8 @@ importers:
         specifier: ^5.0.5
         version: 5.0.10
       typescript:
-        specifier: ^5.7.3
-        version: 5.8.2
+        specifier: ^5.8.3
+        version: 5.8.3
       vike:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
@@ -309,8 +309,8 @@ importers:
         specifier: ^5.0.5
         version: 5.0.10
       typescript:
-        specifier: ^5.5.3
-        version: 5.8.2
+        specifier: ^5.8.3
+        version: 5.8.3
       vike:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
@@ -361,8 +361,8 @@ importers:
         specifier: ^5.0.5
         version: 5.0.10
       typescript:
-        specifier: ^5.3.3
-        version: 5.8.2
+        specifier: ^5.8.3
+        version: 5.8.3
       vike:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
@@ -394,8 +394,8 @@ importers:
         specifier: ^5.0.5
         version: 5.0.10
       typescript:
-        specifier: ^5.5.3
-        version: 5.8.2
+        specifier: ^5.8.3
+        version: 5.8.3
       vike:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
@@ -443,8 +443,8 @@ importers:
         specifier: ^5.0.5
         version: 5.0.10
       typescript:
-        specifier: ^5.5.3
-        version: 5.8.2
+        specifier: ^5.8.3
+        version: 5.8.3
       vike:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
@@ -480,8 +480,8 @@ importers:
         specifier: ^5.0.5
         version: 5.0.10
       typescript:
-        specifier: ^5.5.3
-        version: 5.8.2
+        specifier: ^5.8.3
+        version: 5.8.3
       vike:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
@@ -507,8 +507,8 @@ importers:
         specifier: ^6.1.13
         version: 6.1.16(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       typescript:
-        specifier: ^5.5.3
-        version: 5.8.2
+        specifier: ^5.8.3
+        version: 5.8.3
       vike:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
@@ -537,8 +537,8 @@ importers:
         specifier: ^5.1.6
         version: 5.1.6(react@19.0.0)
       typescript:
-        specifier: ^5.5.3
-        version: 5.8.2
+        specifier: ^5.8.3
+        version: 5.8.3
       vike:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
@@ -589,7 +589,7 @@ importers:
         specifier: ^5.0.5
         version: 5.0.10
       typescript:
-        specifier: ^5.8.2
+        specifier: ^5.8.3
         version: 5.8.3
       vike:
         specifier: ^0.4.223
@@ -3594,11 +3594,6 @@ packages:
   type-fest@4.37.0:
     resolution: {integrity: sha512-S/5/0kFftkq27FPNye0XM1e2NsnoD/3FS+pBmbjmmtLT6I+i344KoOf7pvXreaFsDamWeaJX55nczA1m5PsBDg==}
     engines: {node: '>=16'}
-
-  typescript@5.8.2:
-    resolution: {integrity: sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ==}
-    engines: {node: '>=14.17'}
-    hasBin: true
 
   typescript@5.8.3:
     resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
@@ -7231,8 +7226,6 @@ snapshots:
   type-fest@3.13.1: {}
 
   type-fest@4.37.0: {}
-
-  typescript@5.8.2: {}
 
   typescript@5.8.3: {}
 

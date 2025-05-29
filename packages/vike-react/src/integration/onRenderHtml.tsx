@@ -16,6 +16,9 @@ import { getTagAttributesString, type TagAttributes } from '../utils/getTagAttri
 import { assert } from '../utils/assert.js'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { resolveReactOptions } from './resolveReactOptions.js'
+import { isNotNullish } from '../utils/isNotNullish.js'
+import { isObject } from '../utils/isObject.js'
+import { isType } from '../utils/isType.js'
 
 addEcosystemStamp()
 
@@ -70,19 +73,19 @@ async function renderPageToHtml(pageContext: PageContextServer) {
   const { renderToStringOptions } = resolveReactOptions(pageContext)
 
   if (pageContext.page) {
-    const { stream, streamIsRequired } = pageContext.config
-    if (!stream && !streamIsRequired) {
+    const streamConfig = resolveStreamConfig(pageContext)
+    if (!streamConfig.enabled && !streamConfig.required) {
       const pageHtmlString = renderToString(pageContext.page, renderToStringOptions)
       pageContext.pageHtmlString = pageHtmlString
     } else {
       const pageHtmlStream = await renderToStream(pageContext.page, {
-        webStream: typeof stream === 'string' ? stream === 'web' : undefined,
+        webStream: streamConfig.type === 'web',
         userAgent:
           pageContext.headers?.['user-agent'] ||
           // TODO/eventually: remove old way of acccessing the User Agent header.
           // @ts-ignore
           pageContext.userAgent,
-        disable: stream === false ? true : undefined,
+        disable: !streamConfig.enabled,
       })
       pageContext.pageHtmlStream = pageHtmlStream
     }
@@ -202,4 +205,47 @@ async function getBodyHtmlBoundary(pageContext: PageContextServer) {
     (await callCumulativeHooks(pageContext.config.bodyHtmlEnd, pageContext)).join(''),
   )
   return { bodyHtmlBegin, bodyHtmlEnd }
+}
+
+type StreamConfig = {
+  type: 'node' | 'web'
+  enabled: boolean
+  required: boolean
+}
+function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
+  const {
+    stream,
+    // TO-DO/eventually: remove +streamIsRequired
+    //  - Let's remove it once following May 29th 2025 releses can be considered old versions.
+    //    - First vike-react version that implements +stream.required is 0.6.4
+    //    - First vike-react-query version that sets +stream.required is 0.1.4
+    //    - First vike-react-apollo version that sets +stream.required is 0.1.2
+    //  - Remove it in a minor release (AFAICT it's only used by vike-react-{query,apollo})
+    //    - Add a `Negligible Breaking Change`
+    streamIsRequired,
+  } = pageContext.config
+  const streamConfig: StreamConfig = {
+    type: 'node',
+    enabled: false,
+    required: streamIsRequired ?? false,
+  }
+  stream
+    ?.reverse()
+    .filter(isNotNullish)
+    .forEach((setting) => {
+      if (typeof setting === 'boolean') {
+        streamConfig.enabled = setting
+      } else if (typeof setting === 'string') {
+        streamConfig.type = setting
+        streamConfig.enabled = true
+      } else if (isObject(setting)) {
+        if (setting.enabled !== null) streamConfig.enabled = setting.enabled ?? true
+        if (setting.required) streamConfig.required = setting.required
+        if (setting.type) streamConfig.type = setting.type
+      } else {
+        isType<never>(setting)
+        throw new Error(`Unexpected +stream value ${setting}`)
+      }
+    })
+  return streamConfig
 }

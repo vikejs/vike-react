@@ -161,13 +161,22 @@ declare global {
        *
        * https://vike.dev/stream
        */
-      stream?: boolean | 'node' | 'web'
+      stream?:
+        | boolean
+        | 'node'
+        | 'web'
+        | {
+           /**
+            * Whether the existence of the React SSR stream is required (some integrations require it).
+            *
+            * HTML Streaming can still be disabled: the SSR stream is awaited and converted to a string.
+            */
+            required?: boolean
+            enabled?: boolean | null
+            type?: 'node' | 'web'
+          }
 
-      /**
-       * Whether the existence of the React SSR stream is required (some integrations require it).
-       *
-       * HTML Streaming can still be disabled: the SSR stream is awaited and converted to a string.
-       */
+      /** @deprecated Set +stream.required instead */
       streamIsRequired?: boolean
 
       /**
@@ -234,6 +243,7 @@ declare global {
       onBeforeRenderClient?: Function[]
       onAfterRenderClient?: Function[]
       react?: Exclude<Config['react'], ImportString>[]
+      stream?: Exclude<Config['stream'], ImportString>[]
     }
   }
 }

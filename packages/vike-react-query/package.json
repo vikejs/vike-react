@@ -2,10 +2,10 @@
   "name": "vike-react-query",
   "version": "0.1.3",
   "type": "module",
-  "main": "dist/src/index.js",
-  "typings": "dist/src/index.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.js",
   "exports": {
-    ".": "./dist/src/index.js",
+    ".": "./dist/index.js",
     "./config": "./dist/integration/+config.js",
     "./__internal/integration/Wrapper": "./dist/integration/Wrapper.js",
     "./__internal/integration/FallbackErrorBoundary": "./dist/integration/FallbackErrorBoundary.js"

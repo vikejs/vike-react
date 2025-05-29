@@ -242,8 +242,8 @@ function resolveStreamSetting(pageContext: PageContextServer): StreamSetting {
     enable: null,
     require: streamIsRequired ?? false,
   }
-  ;(stream ?? [])
-    .reverse()
+  stream
+    ?.reverse()
     .filter(isNotNullish)
     .forEach((setting) => {
       if (typeof setting === 'boolean') {

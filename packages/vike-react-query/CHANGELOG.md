@@ -1,3 +1,14 @@
+## [0.1.4](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.3...vike-react-query@0.1.4) (2025-05-29)
+
+
+### Bug Fixes
+
+* support `stream: false` ([702d05e](https://github.com/vikejs/vike-react/commit/702d05ee163a981f882fec88c93491b3c6e4302e))
+* update +stream usage ([#175](https://github.com/vikejs/vike-react/issues/175)) ([7a3d1d6](https://github.com/vikejs/vike-react/commit/7a3d1d601f0ff2ff45409d92b3226f544eaf24c7))
+* update react-streaming ([79b8240](https://github.com/vikejs/vike-react/commit/79b8240f297475e9e3e5db3137c3bd61b9ecd23e))
+
+
+
 ## [0.1.3](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.2...vike-react-query@0.1.3) (2024-12-04)
 
 

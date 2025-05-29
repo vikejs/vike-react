@@ -166,11 +166,11 @@ declare global {
         | 'node'
         | 'web'
         | {
-           /**
-            * Whether the existence of the React SSR stream is required (some integrations require it).
-            *
-            * HTML Streaming can still be disabled: the SSR stream is awaited and converted to a string.
-            */
+            /**
+             * Whether the existence of the React SSR stream is required (some integrations require it).
+             *
+             * HTML Streaming can still be disabled: the SSR stream is awaited and converted to a string.
+             */
             required?: boolean
             enabled?: boolean | null
             type?: 'node' | 'web'

@@ -229,8 +229,8 @@ function resolveStreamConfig(pageContext: PageContextServer): StreamConfig {
     enable: false,
     required: streamIsRequired ?? false,
   }
-  stream
-    ?.reverse()
+  ;(stream ?? [])
+    .reverse()
     .filter(isNotNullish)
     .forEach((setting) => {
       if (typeof setting === 'boolean') {

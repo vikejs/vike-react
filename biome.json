@@ -16,10 +16,24 @@
     }
   },
   "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": false,
+      "style": {
+        "useNodejsImportProtocol": "error"
+      }
+    }
+  },
+  "organizeImports": {
     "enabled": false
   },
   "vcs": {
     "enabled": true,
     "clientKind": "git"
+  },
+  "css": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
   }
 }

@@ -4,17 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  vike-react: link:./packages/vike-react/
-  vike-react-query: link:./packages/vike-react-query/
-  vike-react-apollo: link:./packages/vike-react-apollo/
-  vike-react-chakra: link:./packages/vike-react-chakra/
-  vike-react-antd: link:./packages/vike-react-antd/
-  vike-react-styled-components: link:./packages/vike-react-styled-components/
-  vike-react-styled-jsx: link:./packages/vike-react-styled-jsx/
-  vike-react-redux: link:./packages/vike-react-redux/
-  vike-react-zustand: link:./packages/vike-react-zustand
-
 importers:
 
   .:
@@ -68,10 +57,10 @@ importers:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
-        specifier: link:../../packages/vike-react
+        specifier: 0.6.4
         version: link:../../packages/vike-react
       vike-react-apollo:
-        specifier: link:../../packages/vike-react-apollo
+        specifier: 0.1.2
         version: link:../../packages/vike-react-apollo
       vite:
         specifier: ^6.2.5
@@ -107,7 +96,7 @@ importers:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
-        specifier: link:../../packages/vike-react
+        specifier: 0.6.4
         version: link:../../packages/vike-react
       vite:
         specifier: ^6.2.5
@@ -128,7 +117,7 @@ importers:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
-        specifier: link:../../packages/vike-react
+        specifier: 0.6.4
         version: link:../../packages/vike-react
       vite:
         specifier: ^6.2.5
@@ -161,10 +150,10 @@ importers:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
-        specifier: link:../../packages/vike-react
+        specifier: 0.6.4
         version: link:../../packages/vike-react
       vike-react-query:
-        specifier: link:../../packages/vike-react-query
+        specifier: 0.1.4
         version: link:../../packages/vike-react-query
       vite:
         specifier: ^6.2.5
@@ -200,10 +189,10 @@ importers:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
-        specifier: link:../../packages/vike-react
+        specifier: 0.6.4
         version: link:../../packages/vike-react
       vike-react-redux:
-        specifier: link:../../packages/vike-react-redux
+        specifier: 0.1.0
         version: link:../../packages/vike-react-redux
       vite:
         specifier: ^6.2.5
@@ -236,10 +225,10 @@ importers:
         specifier: ^0.4.223
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
-        specifier: link:../../packages/vike-react
+        specifier: 0.6.4
         version: link:../../packages/vike-react
       vike-react-zustand:
-        specifier: link:../../packages/vike-react-zustand
+        specifier: 0.1.0
         version: link:../../packages/vike-react-zustand
       vite:
         specifier: ^6.2.5
@@ -315,7 +304,7 @@ importers:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
-        specifier: link:../vike-react
+        specifier: 0.6.4
         version: link:../vike-react
       vite:
         specifier: ^6.2.5
@@ -367,7 +356,7 @@ importers:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
-        specifier: link:../vike-react
+        specifier: 0.6.4
         version: link:../vike-react
       vite:
         specifier: ^6.2.5
@@ -400,7 +389,7 @@ importers:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
-        specifier: link:../vike-react
+        specifier: 0.6.4
         version: link:../vike-react
       vite:
         specifier: ^6.2.5
@@ -449,7 +438,7 @@ importers:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
-        specifier: link:../vike-react
+        specifier: 0.6.4
         version: link:../vike-react
       vite:
         specifier: ^6.2.5
@@ -486,7 +475,7 @@ importers:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
-        specifier: link:../vike-react
+        specifier: 0.6.4
         version: link:../vike-react
 
   packages/vike-react-styled-components:
@@ -513,7 +502,7 @@ importers:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
-        specifier: link:../vike-react
+        specifier: 0.6.4
         version: link:../vike-react
       vite:
         specifier: ^6.2.5
@@ -543,7 +532,7 @@ importers:
         specifier: ^0.4.230
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
-        specifier: link:../vike-react
+        specifier: 0.6.4
         version: link:../vike-react
       vite:
         specifier: ^6.2.5
@@ -595,7 +584,7 @@ importers:
         specifier: ^0.4.223
         version: 0.4.230(react-streaming@0.4.2(react@19.0.0))(vite@6.2.5(@types/node@20.17.24))
       vike-react:
-        specifier: link:../vike-react
+        specifier: 0.6.4
         version: link:../vike-react
       vite:
         specifier: ^6.2.5

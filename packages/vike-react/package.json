@@ -52,7 +52,7 @@
     "react-dom": "^19.0.0",
     "rimraf": "^5.0.5",
     "typescript": "^5.8.3",
-    "vike": "^0.4.230",
+    "vike": "^0.4.235",
     "vite": "^6.2.5"
   },
   "typesVersions": {

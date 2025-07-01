@@ -1,6 +1,7 @@
 {
   "name": "vike-react-chakra",
   "version": "1.0.1",
+  "homepage": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-chakra#readme",
   "type": "module",
   "exports": {
     "./config": "./dist/config.js",
@@ -45,6 +46,5 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-chakra",
   "license": "MIT"
 }

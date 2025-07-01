@@ -1,6 +1,7 @@
 {
   "name": "vike-react-redux",
   "version": "0.1.0",
+  "homepage": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-redux#readme",
   "type": "module",
   "exports": {
     "./config": "./dist/config.js",
@@ -55,6 +56,5 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-redux",
   "license": "MIT"
 }

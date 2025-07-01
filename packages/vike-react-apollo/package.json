@@ -1,6 +1,7 @@
 {
   "name": "vike-react-apollo",
   "version": "0.1.2",
+  "homepage": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-apollo#readme",
   "type": "module",
   "main": "dist/index.js",
   "typings": "dist/index.js",
@@ -58,6 +59,5 @@
   "files": [
     "dist"
   ],
-  "repository": "github:vikejs/vike-react",
   "license": "MIT"
 }

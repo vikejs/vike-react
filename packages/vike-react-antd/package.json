@@ -1,6 +1,7 @@
 {
   "name": "vike-react-antd",
   "version": "1.0.2",
+  "homepage": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-antd#readme",
   "type": "module",
   "exports": {
     "./config": "./dist/config.js",
@@ -53,6 +54,5 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-antd",
   "license": "MIT"
 }

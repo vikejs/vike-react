@@ -1,6 +1,7 @@
 {
   "name": "vike-react-zustand",
   "version": "0.1.0",
+  "homepage": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-zustand#readme",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -53,6 +54,5 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-zustand",
   "license": "MIT"
 }

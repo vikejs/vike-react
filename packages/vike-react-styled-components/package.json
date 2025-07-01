@@ -1,6 +1,7 @@
 {
   "name": "vike-react-styled-components",
   "version": "1.0.2",
+  "homepage": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-styled-components#readme",
   "type": "module",
   "exports": {
     "./config": "./dist/config.js",
@@ -51,6 +52,5 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-styled-components",
   "license": "MIT"
 }

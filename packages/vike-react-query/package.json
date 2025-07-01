@@ -1,6 +1,7 @@
 {
   "name": "vike-react-query",
   "version": "0.1.4",
+  "homepage": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-query#readme",
   "type": "module",
   "main": "dist/index.js",
   "typings": "dist/index.js",
@@ -57,6 +58,5 @@
   "files": [
     "dist"
   ],
-  "repository": "github:vikejs/vike-react",
   "license": "MIT"
 }

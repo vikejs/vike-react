@@ -1,3 +1,12 @@
+## [0.1.5](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.4...vike-react-query@0.1.5) (2025-07-01)
+
+
+### Bug Fixes
+
+* fix repo link on npm ([7a85501](https://github.com/vikejs/vike-react/commit/7a85501148774c871a342881cbe9f06678378754))
+
+
+
 ## [0.1.4](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.3...vike-react-query@0.1.4) (2025-05-29)
 
 

@@ -545,7 +545,7 @@ importers:
         version: 7.26.10
       '@babel/types':
         specifier: ^7.24.0
-        version: 7.26.8
+        version: 7.26.10
       '@brillout/json-serializer':
         specifier: ^0.5.15
         version: 0.5.15
@@ -751,10 +751,6 @@ packages:
     resolution: {integrity: sha512-emqcG3vHrpxUKTrxcblR36dcrcoRDvKmnL/dCL6ZsHaShW80qxCAcNhzQZrpeM765VzEos+xOi4s+r4IXzTwdQ==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/types@7.26.8':
-    resolution: {integrity: sha512-eUuWapzEGWFEpHFxgEaBG8e3n6S8L3MSu0oda755rOfabWPnh0Our1AozNFVUxGFIhbKgd1ksprsoDGMinTOTA==}
-    engines: {node: '>=6.9.0'}
-
   '@biomejs/biome@1.9.4':
     resolution: {integrity: sha512-1rkd7G70+o9KkTn5KLmDYXihGoTaIGO9PIIN2ZB7UJxFrWw04CZHPYiMRjYsaDvVV7hP1dYNRLxSANLaBFGpog==}
     engines: {node: '>=14.21.3'}
@@ -816,9 +812,6 @@ packages:
 
   '@brillout/part-regex@0.1.4':
     resolution: {integrity: sha512-PQy5LfRmIueEfGwhvMedsnj6KulDfxlfvUaTsUchBqA7nTge4C7taG/V6np2uCHVxxE4+cSmwM4COn9aNcMn7g==}
-
-  '@brillout/picocolors@1.0.26':
-    resolution: {integrity: sha512-oJF92OEpzunaJyaEWXuS4PWY0k8JsqNO18kMf5hIwvsh+tyhbv+UwAnPPauSlO2eyvMSciui+YFKV9DEzTpmGA==}
 
   '@brillout/picocolors@1.0.28':
     resolution: {integrity: sha512-FBsirUdUlmjmeUlEuqfnUoKAZUt+d0VfMVBYUsFQrDFEV9Rm/QDyG69PSQtQbI6SZQNiZuAWuyhE5USflzx6iQ==}
@@ -2697,6 +2690,7 @@ packages:
   node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
+    deprecated: Use your platform's native DOMException instead
 
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
@@ -4016,11 +4010,6 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@babel/types@7.26.8':
-    dependencies:
-      '@babel/helper-string-parser': 7.25.9
-      '@babel/helper-validator-identifier': 7.25.9
-
   '@biomejs/biome@1.9.4':
     optionalDependencies:
       '@biomejs/cli-darwin-arm64': 1.9.4
@@ -4062,8 +4051,6 @@ snapshots:
 
   '@brillout/part-regex@0.1.4': {}
 
-  '@brillout/picocolors@1.0.26': {}
-
   '@brillout/picocolors@1.0.28': {}
 
   '@brillout/release-me@0.4.7(conventional-commits-filter@5.0.0)':
@@ -4082,7 +4069,7 @@ snapshots:
   '@brillout/test-e2e@0.6.10':
     dependencies:
       '@brillout/part-regex': 0.1.4
-      '@brillout/picocolors': 1.0.26
+      '@brillout/picocolors': 1.0.28
       chai: 4.5.0
       esbuild: 0.23.1
       fast-glob: 3.3.3
@@ -4097,7 +4084,7 @@ snapshots:
 
   '@brillout/test-types@0.1.15(typescript@5.8.3)':
     dependencies:
-      '@brillout/picocolors': 1.0.26
+      '@brillout/picocolors': 1.0.28
       fast-glob: 3.3.3
       source-map-support: 0.5.21
       typescript: 5.8.3
@@ -4105,7 +4092,7 @@ snapshots:
   '@brillout/vite-plugin-server-entry@0.7.8':
     dependencies:
       '@brillout/import': 0.2.6
-      '@brillout/picocolors': 1.0.26
+      '@brillout/picocolors': 1.0.28
 
   '@chakra-ui/react@3.13.0(@emotion/react@11.14.0(@types/react@19.0.12)(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
@@ -6701,7 +6688,7 @@ snapshots:
     dependencies:
       '@brillout/import': 0.2.6
       '@brillout/json-serializer': 0.5.15
-      '@brillout/picocolors': 1.0.26
+      '@brillout/picocolors': 1.0.28
       isbot-fast: 1.2.0
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
@@ -7051,7 +7038,7 @@ snapshots:
     dependencies:
       '@brillout/import': 0.2.6
       '@brillout/json-serializer': 0.5.15
-      '@brillout/picocolors': 1.0.26
+      '@brillout/picocolors': 1.0.28
       '@brillout/require-shim': 0.1.2
       '@brillout/vite-plugin-server-entry': 0.7.8
       acorn: 8.14.1
@@ -7073,7 +7060,7 @@ snapshots:
     dependencies:
       '@brillout/import': 0.2.6
       '@brillout/json-serializer': 0.5.15
-      '@brillout/picocolors': 1.0.26
+      '@brillout/picocolors': 1.0.28
       '@brillout/require-shim': 0.1.2
       '@brillout/vite-plugin-server-entry': 0.7.8
       acorn: 8.14.1

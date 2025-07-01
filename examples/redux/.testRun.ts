@@ -52,8 +52,8 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview' | 'preview:ssg'}`) {
     const expectBananas = async () => {
       await autoRetry(async () => {
         expect(await getNumberOfItems()).toBe(3)
+        expect(await page.textContent('body')).toContain('Buy bananas')
       })
-      expect(await page.textContent('body')).toContain('Buy bananas')
     }
     await expectBananas()
 

@@ -7,7 +7,7 @@
     "========= Test": "",
     "test": "pnpm run test:units && pnpm run test:e2e && pnpm run test:types",
     "test:e2e": "test-e2e",
-    "test:units": "pnpm --recursive --sequential --filter {packages/*} run test",
+    "test:units": "pnpm --recursive --sequential run test:units",
     "test:types": "test-types",
     "========= Formatting": "",
     "format": "pnpm run format:biome",

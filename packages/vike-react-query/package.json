@@ -17,7 +17,7 @@
     "release": "release-me patch",
     "release:minor": "release-me minor",
     "release:commit": "release-me commit",
-    "test": "vitest run"
+    "test:units": "vitest run"
   },
   "peerDependencies": {
     "@tanstack/react-query": ">=5.0.0",

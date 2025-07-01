@@ -45,14 +45,14 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@brillout/release-me": "^0.4.7",
-    "@types/node": "^20.11.17",
+    "@types/node": "^24.0.8",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "rimraf": "^5.0.5",
     "typescript": "^5.8.3",
-    "vike": "^0.4.230",
+    "vike": "^0.4.235",
     "vite": "^6.2.5"
   },
   "typesVersions": {

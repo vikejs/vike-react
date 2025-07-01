@@ -1,6 +1,6 @@
 {
   "name": "vike-react-redux",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-redux#readme",
   "type": "module",
   "exports": {

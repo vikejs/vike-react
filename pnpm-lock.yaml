@@ -192,7 +192,7 @@ importers:
         specifier: 0.6.4
         version: link:../../packages/vike-react
       vike-react-redux:
-        specifier: 0.1.0
+        specifier: 0.1.1
         version: link:../../packages/vike-react-redux
       vite:
         specifier: ^6.2.5

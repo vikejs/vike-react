@@ -1,7 +1,7 @@
 {
   "scripts": {
     "========= Build": "",
-    "build": "pnpm --recursive --filter '{packages/*}' run build",
+    "build": "pnpm --recursive --filter \"{packages/*}\" run build",
     "========= Dev": "",
     "dev": "cd ./packages/vike-react/ && pnpm run dev",
     "========= Test": "",

@@ -25,7 +25,7 @@
     "vike-react": ">=0.6.3"
   },
   "devDependencies": {
-    "@brillout/release-me": "^0.4.2",
+    "@brillout/release-me": "^0.4.7",
     "@reduxjs/toolkit": "^2.6.1",
     "@types/react": "^19.0.10",
     "react": "^19.0.0",

@@ -1,3 +1,12 @@
+## [1.0.3](https://github.com/vikejs/vike-react/compare/vike-react-styled-jsx@1.0.2...vike-react-styled-jsx@1.0.3) (2025-07-01)
+
+
+### Bug Fixes
+
+* fix repo link on npm ([7a85501](https://github.com/vikejs/vike-react/commit/7a85501148774c871a342881cbe9f06678378754))
+
+
+
 ## [1.0.2](https://github.com/vikejs/vike-react/compare/vike-react-styled-jsx@1.0.1...vike-react-styled-jsx@1.0.2) (2024-12-28)
 
 

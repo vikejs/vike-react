@@ -66,13 +66,14 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run preview') {
     // TODO/soon: remove this
     if (isCI() && !isWindows()) return
 
+    expect(await getNumberOfItems()).toBe(2)
     await page.fill('input[type="text"]', 'Buy bananas')
     await page.click('button[type="submit"]')
     const expectBananas = async () => {
       await autoRetry(async () => {
         expect(await getNumberOfItems()).toBe(3)
+        expect(await page.textContent('body')).toContain('Buy bananas')
       })
-      expect(await page.textContent('body')).toContain('Buy bananas')
     }
     await expectBananas()
     expectLog('{"text":"Buy bananas"}') // See `storeVanilla.subscribe()`

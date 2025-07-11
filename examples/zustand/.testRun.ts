@@ -12,9 +12,12 @@ import {
   expectLog,
   isCI,
   isWindows,
+  sleep,
 } from '@brillout/test-e2e'
 
 function testRun(cmd: 'pnpm run dev' | 'pnpm run preview') {
+  const isDev = cmd === 'pnpm run dev'
+
   run(cmd)
 
   test('page content is rendered to HTML', async () => {
@@ -67,6 +70,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run preview') {
     if (isCI() && !isWindows()) return
 
     expect(await getNumberOfItems()).toBe(2)
+    if (isDev && !isCI()) await sleep(300) // Seems to be required, otherwise the test is flaky when run locally. I don't know why.
     await page.fill('input[type="text"]', 'Buy bananas')
     await page.click('button[type="submit"]')
     const expectBananas = async () => {

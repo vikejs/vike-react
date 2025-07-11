@@ -1,8 +1,8 @@
 export { config as default }
 
 import type { Config } from 'vike/types'
-import 'vike-react/config' // Needed for declaration merging of Config
 import type { ApolloClient } from '@apollo/client-react-streaming'
+import 'vike-react/config' // Needed for merging vike-react's Vike.Config such as +stream
 
 const config = {
   name: 'vike-react-apollo',

@@ -32,7 +32,7 @@
     "rimraf": "^5.0.5",
     "typescript": "^5.8.3",
     "vike": "^0.4.235",
-    "vike-react": "0.6.4"
+    "vike-react": "0.6.5"
   },
   "typesVersions": {
     "*": {

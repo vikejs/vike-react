@@ -46,14 +46,14 @@
     "@biomejs/biome": "^1.9.4",
     "@brillout/release-me": "^0.4.8",
     "@types/node": "^24.0.8",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "rimraf": "^5.0.5",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.2",
     "vike": "^0.4.235",
-    "vite": "^6.2.5"
+    "vite": "^7.1.2"
   },
   "typesVersions": {
     "*": {

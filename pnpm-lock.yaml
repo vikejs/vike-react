@@ -54,8 +54,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -93,8 +93,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -114,8 +114,8 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -147,8 +147,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -186,8 +186,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -222,8 +222,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -271,8 +271,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vite:
         specifier: ^7.1.2
         version: 7.1.2(@types/node@24.0.8)
@@ -301,8 +301,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -353,8 +353,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -386,8 +386,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -435,8 +435,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -472,8 +472,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -499,8 +499,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -529,8 +529,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -581,8 +581,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.235
-        version: 0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
+        specifier: ^0.4.236
+        version: 0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -876,6 +876,9 @@ packages:
 
   '@brillout/json-serializer@0.5.15':
     resolution: {integrity: sha512-iLAyV1HNC3nG07ypBwCJohFrajY1HeZdfBBgGuRtMH/JPddgG9bPmoSI18A1RBx67vRmY6/8rgisjR5YfTvZHA==}
+
+  '@brillout/json-serializer@0.5.17':
+    resolution: {integrity: sha512-QDe1kMDj9qq+f/bmZKnKAeuVtqdqT1nc1nVrXotfJtUhh7Sqb369d/BKmHG7J/qOyQ87Y8P0Cl+GoZrhj9wQ6Q==}
 
   '@brillout/part-regex@0.1.4':
     resolution: {integrity: sha512-PQy5LfRmIueEfGwhvMedsnj6KulDfxlfvUaTsUchBqA7nTge4C7taG/V6np2uCHVxxE4+cSmwM4COn9aNcMn7g==}
@@ -2199,9 +2202,6 @@ packages:
   es-get-iterator@1.1.3:
     resolution: {integrity: sha512-sPZmqHBe6JIiTfN5q2pEi//TwxmAFHwj/XEuYjTuse78i8KxaqMTTzxPoFKuzRpDpTJ+0NAbpfenkmH2rePtuw==}
 
-  es-module-lexer@1.6.0:
-    resolution: {integrity: sha512-qqnD1yMU6tk/jnaMosogGySTZP8YtUgAffA9nMN+E/rjxcfRQ6IEk7IiozUjgxKoFHBGjTLnrHB/YC45r/59EQ==}
-
   es-module-lexer@1.7.0:
     resolution: {integrity: sha512-jEQoCwk8hyb2AZziIOLhDqpm5+2ww5uIE6lkO/6jcOCusfk6LhMHpXXfBLXTZ7Ydyt0j4VoUQv6uGNYbdW+kBA==}
 
@@ -2254,14 +2254,6 @@ packages:
 
   fd-package-json@1.2.0:
     resolution: {integrity: sha512-45LSPmWf+gC5tdCQMNH4s9Sr00bIkiD9aN7dc5hqkrEw1geRYyDQS1v1oMHAW3ysfxfndqGsrDREHHjNNbKUfA==}
-
-  fdir@6.4.3:
-    resolution: {integrity: sha512-PMXmW2y1hDDfTSRc9gaXIuCCRpuoz3Kaz8cUelp3smouvfT632ozg2vrT6lJsHKKOF59YLbOGfAWGUcKEfRMQw==}
-    peerDependencies:
-      picomatch: ^3 || ^4
-    peerDependenciesMeta:
-      picomatch:
-        optional: true
 
   fdir@6.4.6:
     resolution: {integrity: sha512-hiFoqpyZcfNm1yc4u8oWCf9A2c4D3QjCrks3zmoVKVxpQRzmPNar1hUJcBG2RQHvEVGDN+Jm81ZheVLAQMK6+w==}
@@ -3353,10 +3345,6 @@ packages:
   tinyexec@0.3.2:
     resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==}
 
-  tinyglobby@0.2.12:
-    resolution: {integrity: sha512-qkf4trmKSIiMTs/E63cxH+ojC2unam7rJ0WrauAzpT3ECNTxGRMlaXxVbfxMUC/w0LaYk6jQ4y/nGR9uBO3tww==}
-    engines: {node: '>=12.0.0'}
-
   tinyglobby@0.2.14:
     resolution: {integrity: sha512-tX5e7OM1HnYr2+a2C/4V0htOcSQcoSTH9KgJnVvNm5zm/cyEWKJ7j7YutsH9CxMdtOkkLFy2AHrMci9IM8IPZQ==}
     engines: {node: '>=12.0.0'}
@@ -3446,8 +3434,8 @@ packages:
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
 
-  vike@0.4.235:
-    resolution: {integrity: sha512-wbx9wCF7E8IpaDhyhrsIOiLUl7hE/7e8vJy2bmFMjKjhIs7BhHiLLymTHe0i5qmbATmMhMLE0ur+vK4QH+nesw==}
+  vike@0.4.236:
+    resolution: {integrity: sha512-8IRz4OmWGx5YwVBP9Zql405klEgys6tNQh3//IcD4tjhhgIoWm42rtvGb7TVfXX8CNX8DmEPHEvHTsrhk1y7ww==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -4046,6 +4034,8 @@ snapshots:
   '@brillout/import@0.2.6': {}
 
   '@brillout/json-serializer@0.5.15': {}
+
+  '@brillout/json-serializer@0.5.17': {}
 
   '@brillout/part-regex@0.1.4': {}
 
@@ -5582,8 +5572,6 @@ snapshots:
       isarray: 2.0.5
       stop-iteration-iterator: 1.1.0
 
-  es-module-lexer@1.6.0: {}
-
   es-module-lexer@1.7.0: {}
 
   es-object-atoms@1.1.1:
@@ -5691,10 +5679,6 @@ snapshots:
   fd-package-json@1.2.0:
     dependencies:
       walk-up-path: 3.0.1
-
-  fdir@6.4.3(picomatch@4.0.2):
-    optionalDependencies:
-      picomatch: 4.0.2
 
   fdir@6.4.6(picomatch@4.0.3):
     optionalDependencies:
@@ -6846,11 +6830,6 @@ snapshots:
 
   tinyexec@0.3.2: {}
 
-  tinyglobby@0.2.12:
-    dependencies:
-      fdir: 6.4.3(picomatch@4.0.2)
-      picomatch: 4.0.2
-
   tinyglobby@0.2.14:
     dependencies:
       fdir: 6.4.6(picomatch@4.0.3)
@@ -6924,24 +6903,24 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vike@0.4.235(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2):
+  vike@0.4.236(react-streaming@0.4.3(react@19.1.1))(vite@7.1.2):
     dependencies:
       '@brillout/import': 0.2.6
-      '@brillout/json-serializer': 0.5.15
+      '@brillout/json-serializer': 0.5.17
       '@brillout/picocolors': 1.0.28
       '@brillout/require-shim': 0.1.2
       '@brillout/vite-plugin-server-entry': 0.7.8
       acorn: 8.14.1
       cac: 6.7.14
-      es-module-lexer: 1.6.0
+      es-module-lexer: 1.7.0
       esbuild: 0.25.1
       json5: 2.2.3
       magic-string: 0.30.17
-      picomatch: 4.0.2
+      picomatch: 4.0.3
       semver: 7.7.1
       sirv: 3.0.1
       source-map-support: 0.5.21
-      tinyglobby: 0.2.12
+      tinyglobby: 0.2.14
     optionalDependencies:
       react-streaming: 0.4.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       vite: 7.1.2(@types/node@24.0.8)

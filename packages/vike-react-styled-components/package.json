@@ -24,11 +24,11 @@
   },
   "devDependencies": {
     "@brillout/release-me": "^0.4.8",
-    "@types/react": "^19.0.10",
+    "@types/react": "^19.1.10",
     "react": "^19.1.1",
     "rimraf": "^5.0.5",
     "styled-components": "^6.1.13",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.2",
     "vike": "^0.4.235",
     "vike-react": "0.6.5",
     "vite": "^6.2.5"

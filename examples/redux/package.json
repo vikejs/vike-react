@@ -6,7 +6,7 @@
     "preview:ssg": "vike build --prerender && vike preview --prerender"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.6.1",
+    "@reduxjs/toolkit": "^2.8.2",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^4.3.4",

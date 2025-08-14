@@ -26,7 +26,7 @@
     "@chakra-ui/react": "^3.0.2",
     "@emotion/react": "^11.13.3",
     "@types/react": "^19.0.10",
-    "react": "^19.0.0",
+    "react": "^19.1.1",
     "rimraf": "^5.0.5",
     "typescript": "^5.8.3",
     "vike": "^0.4.235",

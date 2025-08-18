@@ -1,5 +1,6 @@
 export { testRun }
 import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, partRegex, expectLog } from '@brillout/test-e2e'
+// @ts-ignore
 import assert from 'node:assert'
 
 let isProd: boolean
@@ -69,21 +70,21 @@ function testPageNavigation_betweenWithSSRAndWithout() {
     body = await page.textContent('body')
     expect(body).toContain(t1)
     expect(body).not.toContain(t2)
-    ensureWasClientSideRouted('/pages/without-ssr')
+    await ensureWasClientSideRouted('/pages/without-ssr')
 
     await page.click('a:has-text("Welcome")')
     await testCounter()
     body = await page.textContent('body')
     expect(body).toContain(t2)
     expect(body).not.toContain(t1)
-    ensureWasClientSideRouted('/pages/without-ssr')
+    await ensureWasClientSideRouted('/pages/without-ssr')
 
     await page.click('a:has-text("Without SSR")')
     await testCounter()
     body = await page.textContent('body')
     expect(body).toContain(t1)
     expect(body).not.toContain(t2)
-    ensureWasClientSideRouted('/pages/without-ssr')
+    await ensureWasClientSideRouted('/pages/without-ssr')
   })
 }
 
@@ -206,10 +207,10 @@ function testUseConfig() {
   test('useConfig() hydration', async () => {
     await page.goto(getServerUrl() + '/')
     await testCounter()
-    ensureWasClientSideRouted('/pages/index')
+    await ensureWasClientSideRouted('/pages/index')
     await page.click('a:has-text("useConfig()")')
     await testCounter()
-    ensureWasClientSideRouted('/pages/index')
+    await ensureWasClientSideRouted('/pages/index')
     await page.goto(getServerUrl() + '/images')
     await testCounter()
   })
@@ -235,8 +236,11 @@ function findFirstPageId(html: string) {
   expect(html.split('"pageId"').length).toBe(2)
   const match = partRegex`"pageId":"${/([^"]+)/}"`.exec(html)
   expect(match).toBeTruthy()
-  const pageId = match![1]
+  let pageId = match![1]
   expect(pageId).toBeTruthy()
+  pageId =
+    // @ts-ignore
+    pageId.replaceAll('\\\\/', '/')
   return pageId
 }
 
@@ -253,7 +257,7 @@ function testReactSetting() {
   test('+react.{server.client}.js', async () => {
     await page.goto(getServerUrl() + '/')
     await testCounter()
-    expectLog('some-id-server-prefix', (log) => log.logSource === 'stdout')
-    expectLog('some-id-client-prefix', (log) => log.logSource === 'Browser Log')
+    expectLog('some-id-server-prefix', { filter: (log) => log.logSource === 'stdout' })
+    expectLog('some-id-client-prefix', { filter: (log) => log.logSource === 'Browser Log' })
   })
 }

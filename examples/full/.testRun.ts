@@ -1,5 +1,6 @@
 export { testRun }
 import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, partRegex, expectLog } from '@brillout/test-e2e'
+// @ts-ignore
 import assert from 'node:assert'
 
 let isProd: boolean
@@ -256,7 +257,7 @@ function testReactSetting() {
   test('+react.{server.client}.js', async () => {
     await page.goto(getServerUrl() + '/')
     await testCounter()
-    expectLog('some-id-server-prefix', (log) => log.logSource === 'stdout')
-    expectLog('some-id-client-prefix', (log) => log.logSource === 'Browser Log')
+    expectLog('some-id-server-prefix', { filter: (log) => log.logSource === 'stdout' })
+    expectLog('some-id-client-prefix', { filter: (log) => log.logSource === 'Browser Log' })
   })
 }

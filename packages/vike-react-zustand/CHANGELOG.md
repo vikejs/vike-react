@@ -1,3 +1,12 @@
+## [0.1.3](https://github.com/vikejs/vike-react/compare/vike-react-zustand@0.1.2...vike-react-zustand@0.1.3) (2025-08-18)
+
+
+### Bug Fixes
+
+* avoid Vite type version mismatch ([c58b61a](https://github.com/vikejs/vike-react/commit/c58b61ab0c22e3781a65575202ba634dcebd6496))
+
+
+
 ## [0.1.2](https://github.com/vikejs/vike-react/compare/vike-react-zustand@0.1.1...vike-react-zustand@0.1.2) (2025-07-11)
 
 

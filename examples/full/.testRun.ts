@@ -70,21 +70,21 @@ function testPageNavigation_betweenWithSSRAndWithout() {
     body = await page.textContent('body')
     expect(body).toContain(t1)
     expect(body).not.toContain(t2)
-    ensureWasClientSideRouted('/pages/without-ssr')
+    await ensureWasClientSideRouted('/pages/without-ssr')
 
     await page.click('a:has-text("Welcome")')
     await testCounter()
     body = await page.textContent('body')
     expect(body).toContain(t2)
     expect(body).not.toContain(t1)
-    ensureWasClientSideRouted('/pages/without-ssr')
+    await ensureWasClientSideRouted('/pages/without-ssr')
 
     await page.click('a:has-text("Without SSR")')
     await testCounter()
     body = await page.textContent('body')
     expect(body).toContain(t1)
     expect(body).not.toContain(t2)
-    ensureWasClientSideRouted('/pages/without-ssr')
+    await ensureWasClientSideRouted('/pages/without-ssr')
   })
 }
 
@@ -207,10 +207,10 @@ function testUseConfig() {
   test('useConfig() hydration', async () => {
     await page.goto(getServerUrl() + '/')
     await testCounter()
-    ensureWasClientSideRouted('/pages/index')
+    await ensureWasClientSideRouted('/pages/index')
     await page.click('a:has-text("useConfig()")')
     await testCounter()
-    ensureWasClientSideRouted('/pages/index')
+    await ensureWasClientSideRouted('/pages/index')
     await page.goto(getServerUrl() + '/images')
     await testCounter()
   })

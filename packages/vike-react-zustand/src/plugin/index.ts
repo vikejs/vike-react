@@ -3,8 +3,10 @@ export { vikeReactZustand }
 import type { Plugin } from 'vite'
 import { transformCode } from './babelTransformer.js'
 
-function vikeReactZustand(): Plugin[] {
-  return [
+type PluginInterop = Record<string, unknown> & { name: string }
+// Return `PluginInterop` instead of `Plugin` to avoid type mismatch upon different Vite versions
+function vikeReactZustand(): PluginInterop[] {
+  const plugins: Plugin[] = [
     {
       name: 'vike-react-zustand:config',
       configEnvironment() {
@@ -26,4 +28,5 @@ function vikeReactZustand(): Plugin[] {
       },
     },
   ]
+  return plugins as any
 }

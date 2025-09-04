@@ -1,3 +1,12 @@
+## [0.1.4](https://github.com/vikejs/vike-react/compare/vike-react-zustand@0.1.3...vike-react-zustand@0.1.4) (2025-09-04)
+
+
+### Performance Improvements
+
+* use hook filters ([#183](https://github.com/vikejs/vike-react/issues/183)) ([949b5c6](https://github.com/vikejs/vike-react/commit/949b5c678ee0923f26416ac3992e3b2f56da7907))
+
+
+
 ## [0.1.3](https://github.com/vikejs/vike-react/compare/vike-react-zustand@0.1.2...vike-react-zustand@0.1.3) (2025-08-18)
 
 

@@ -228,7 +228,7 @@ importers:
         specifier: 0.6.5
         version: link:../../packages/vike-react
       vike-react-zustand:
-        specifier: 0.1.3
+        specifier: 0.1.4
         version: link:../../packages/vike-react-zustand
       vite:
         specifier: ^7.1.2

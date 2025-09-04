@@ -5,7 +5,7 @@ import { transformCode } from './babelTransformer.js'
 import { assert } from './utils.js'
 
 // Filter patterns for JavaScript/TypeScript files excluding node_modules
-const jstsFileRE = /\.[jt]sx?$/
+const jstsFileRE = /\.[jt]$/
 const nodeModulesRE = /node_modules/
 
 const filterRolldown = {

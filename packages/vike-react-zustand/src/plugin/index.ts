@@ -2,7 +2,7 @@ export { vikeReactZustand }
 
 import type { Plugin } from 'vite'
 import { transformCode } from './babelTransformer.js'
-import { assert } from './utils.js'
+import { assert } from '../utils/assert.js'
 
 const skipNonJsFiles = /\.[jt]sx?$/
 const skipNodeModules = /node_modules/

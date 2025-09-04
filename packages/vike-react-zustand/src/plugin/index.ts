@@ -5,14 +5,18 @@ import { transformCode } from './babelTransformer.js'
 import { assert } from '../utils/assert.js'
 
 const skipNonJsFiles = /\.[jt]sx?$/
-const skipNodeModules = /node_modules/
+const skipNodeModules = 'node_modules'
 const filterRolldown = {
   id: {
     include: skipNonJsFiles,
-    exclude: skipNodeModules,
+    exclude: `**/${skipNodeModules}/**`,
   },
 }
-const filterFunction = (id: string) => skipNonJsFiles.test(id) && !skipNodeModules.test(id)
+const filterFunction = (id: string) => {
+  if (id.includes(skipNodeModules)) return false
+  if (!skipNonJsFiles.test(id)) return false
+  return true
+}
 
 type PluginInterop = Record<string, unknown> & { name: string }
 // Return `PluginInterop` instead of `Plugin` to avoid type mismatch upon different Vite versions
@@ -34,13 +38,9 @@ function vikeReactZustand(): PluginInterop[] {
       name: 'vike-react-zustand:transform',
       enforce: 'post',
       transform: {
-        // Hook filter to only process JavaScript/TypeScript files and exclude node_modules
         filter: filterRolldown,
         handler(code, id) {
           assert(filterFunction(id))
-
-          // The filter above already handles the file type and node_modules check
-          // so we can remove the redundant checks here
           return transformCode(code, id)
         },
       },

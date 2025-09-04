@@ -10,25 +10,25 @@ function vikeReactZustand(): PluginInterop[] {
     {
       name: 'vike-react-zustand:config',
       configEnvironment: {
-      handler() {
-        return {
-          resolve: {
-            noExternal: ['vike-react-zustand'],
-          },
-        }
-      },
+        handler() {
+          return {
+            resolve: {
+              noExternal: ['vike-react-zustand'],
+            },
+          }
+        },
       },
     },
     {
       name: 'vike-react-zustand:transform',
       enforce: 'post',
       transform: {
-      handler(code, id) {
-        if (id.includes('node_modules') || !/[jt]sx?$/.test(id)) {
-          return
-        }
-        return transformCode(code, id)
-      },
+        handler(code, id) {
+          if (id.includes('node_modules') || !/[jt]sx?$/.test(id)) {
+            return
+          }
+          return transformCode(code, id)
+        },
       },
     },
   ]

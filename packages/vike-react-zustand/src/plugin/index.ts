@@ -23,10 +23,16 @@ function vikeReactZustand(): PluginInterop[] {
       name: 'vike-react-zustand:transform',
       enforce: 'post',
       transform: {
+        // Hook filter to only process JavaScript/TypeScript files and exclude node_modules
+        filter: {
+          id: {
+            include: /\.[jt]sx?$/,
+            exclude: /node_modules/,
+          },
+        },
         handler(code, id) {
-          if (id.includes('node_modules') || !/[jt]sx?$/.test(id)) {
-            return
-          }
+          // The filter above already handles the file type and node_modules check
+          // so we can remove the redundant checks here
           return transformCode(code, id)
         },
       },

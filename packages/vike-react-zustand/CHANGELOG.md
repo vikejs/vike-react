@@ -6,6 +6,14 @@
 * use hook filters ([#183](https://github.com/vikejs/vike-react/issues/183)) ([949b5c6](https://github.com/vikejs/vike-react/commit/949b5c678ee0923f26416ac3992e3b2f56da7907))
 
 
+### MINOR BREAKING CHANGES
+
+> [!NOTE]
+> We recommend ignoring `MINOR BREAKING CHANGES` unless this version breaks your app, see [Vike Versioning](https://vike.dev/versioning).
+
+* Update to Vite `6.3.0` or above
+
+
 
 ## [0.1.3](https://github.com/vikejs/vike-react/compare/vike-react-zustand@0.1.2...vike-react-zustand@0.1.3) (2025-08-18)
 

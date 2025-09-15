@@ -7,15 +7,6 @@ import React from 'react'
 function LoadingComponent() {
   return (
     <>
-      <style href="VikeReactLoading" precedence="low">
-        {`
-          @keyframes vike-react-loading {
-            to {
-              background-position-x: -200%;
-            }
-          }
-        `}
-      </style>
       <div
         style={{
           width: '100%',
@@ -28,6 +19,20 @@ function LoadingComponent() {
           aspectRatio: '2.5/1',
         }}
       />
+      <style
+        href="vike-react-loading"
+        // https://react.dev/reference/react-dom/components/style#special-rendering-behavior
+        // https://github.com/vikejs/vike-react/pull/184#discussion_r2348075206
+        precedence="default"
+      >
+        {`
+          @keyframes vike-react-loading {
+            to {
+              background-position-x: -200%;
+            }
+          }
+        `}
+      </style>
     </>
   )
 }

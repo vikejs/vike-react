@@ -5,7 +5,7 @@ import React, { useContext } from 'react'
 import { getGlobalObject } from '../utils/getGlobalObject.js'
 import type { PageContext } from 'vike/types'
 
-const globalObject = getGlobalObject('PageContextProvider.ts', {
+const globalObject = getGlobalObject('usePageContext.tsx', {
   reactContext: React.createContext<PageContext>(undefined as never),
 })
 

@@ -17,6 +17,7 @@ const globalObject = getGlobalObject<{
   onUncaughtErrorLocal?: (err: unknown) => void
 }>('onRenderClient.tsx', {})
 
+// TODO/now: update TS
 const onRenderClient: OnRenderClientAsync = async (
   pageContext: PageContextClient & PageContextInternal,
 ): ReturnType<OnRenderClientAsync> => {

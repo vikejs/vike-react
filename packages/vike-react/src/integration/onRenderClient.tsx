@@ -1,7 +1,7 @@
 // https://vike.dev/onRenderClient
 export { onRenderClient }
 
-import ReactDOM from 'react-dom/client'
+import ReactDOM, { type RootOptions } from 'react-dom/client'
 import { getHeadSetting } from './getHeadSetting.js'
 import type { OnRenderClientAsync, PageContextClient } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
@@ -10,11 +10,14 @@ import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { applyHeadSettings } from './applyHeadSettings.js'
 import { resolveReactOptions } from './resolveReactOptions.js'
 import { getGlobalObject } from '../utils/getGlobalObject.js'
+import { isObject } from '../utils/isObject.js'
 
 const globalObject = getGlobalObject<{
   root?: ReactDOM.Root
+  onUncaughtErrorLocal?: (err: unknown) => void
 }>('onRenderClient.tsx', {})
 
+// TODO/now: update TS
 const onRenderClient: OnRenderClientAsync = async (
   pageContext: PageContextClient & PageContextInternal,
 ): ReturnType<OnRenderClientAsync> => {
@@ -24,13 +27,13 @@ const onRenderClient: OnRenderClientAsync = async (
   // - Store hydration https://github.com/vikejs/vike-react/issues/110
   await callCumulativeHooks(pageContext.config.onBeforeRenderClient, pageContext)
 
-  const { page, renderPromise } = getPageElement(pageContext)
+  const { page, renderPromise, renderPromiseReject } = getPageElement(pageContext)
   pageContext.page = page
 
-  // TODO: implement this? So that, upon errors, onRenderClient() throws an error and Vike can render the error page. As of April 2024 it isn't released yet.
-  //  - https://react-dev-git-fork-rickhanlonii-rh-root-options-fbopensource.vercel.app/reference/react-dom/client/createRoot#show-a-dialog-for-uncaught-errors
-  //  - https://react-dev-git-fork-rickhanlonii-rh-root-options-fbopensource.vercel.app/reference/react-dom/client/hydrateRoot#show-a-dialog-for-uncaught-errors
-  const onUncaughtError = (_error: any, _errorInfo: any) => {}
+  // Local callback for current page
+  globalObject.onUncaughtErrorLocal = (err: unknown) => {
+    renderPromiseReject(err)
+  }
 
   const container = document.getElementById('root')!
   const { hydrateRootOptions, createRootOptions } = resolveReactOptions(pageContext)
@@ -40,17 +43,32 @@ const onRenderClient: OnRenderClientAsync = async (
     container.innerHTML !== ''
   ) {
     // First render while using SSR, i.e. [hydration](https://vike.dev/hydration)
-    globalObject.root = ReactDOM.hydrateRoot(container, page, hydrateRootOptions)
+    globalObject.root = ReactDOM.hydrateRoot(container, page, {
+      ...hydrateRootOptions,
+      // onUncaughtError is the right callback: https://gist.github.com/brillout/b9516e83a7a4517f4dbd0ef50e9dd716
+      onUncaughtError(...args) {
+        onUncaughtErrorGlobal.call(this, args, hydrateRootOptions)
+      },
+    })
   } else {
     if (!globalObject.root) {
       // First render without SSR
-      globalObject.root = ReactDOM.createRoot(container, createRootOptions)
+      globalObject.root = ReactDOM.createRoot(container, {
+        ...createRootOptions,
+        onUncaughtError(...args) {
+          onUncaughtErrorGlobal.call(this, args, createRootOptions)
+        },
+      })
     }
     globalObject.root.render(page)
   }
   pageContext.root = globalObject.root
 
-  await renderPromise
+  try {
+    await renderPromise
+  } finally {
+    delete globalObject.onUncaughtErrorLocal
+  }
 
   if (!pageContext.isHydration) {
     pageContext._headAlreadySet = true
@@ -67,4 +85,26 @@ function applyHead(pageContext: PageContextClient) {
   const title = getHeadSetting<string | null>('title', pageContext)
   const lang = getHeadSetting<string | null>('lang', pageContext)
   applyHeadSettings(title, lang)
+}
+
+// Global callback, attached once upon hydration.
+function onUncaughtErrorGlobal(
+  this: unknown,
+  args: OnUncaughtErrorArgs,
+  userOptions: { onUncaughtError?: OnUncaughtError } | undefined,
+) {
+  logUncaughtError(args)
+  const [error] = args
+  globalObject.onUncaughtErrorLocal?.(error)
+  userOptions?.onUncaughtError?.apply(this, args)
+}
+type OnUncaughtError = RootOptions['onUncaughtError']
+type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']>>
+
+async function logUncaughtError(args: OnUncaughtErrorArgs) {
+  const [error, errorInfo] = args
+  console.error('%o\n%s', error, `The above error occurred at:${errorInfo.componentStack}`)
+  // Used by Vike:
+  // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
+  if (isObject(error)) error.isAlreadyLogged = true
 }

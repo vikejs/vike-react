@@ -55,7 +55,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -87,14 +87,14 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
       react-streaming:
-        specifier: ^0.4.3
-        version: 0.4.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: ^0.4.4
+        version: 0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -115,7 +115,7 @@ importers:
         version: 19.1.1(react@19.1.1)
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -148,7 +148,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -187,7 +187,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -223,7 +223,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -240,8 +240,8 @@ importers:
   packages/vike-react:
     dependencies:
       react-streaming:
-        specifier: ^0.4.3
-        version: 0.4.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: ^0.4.4
+        version: 0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.9.4
@@ -272,7 +272,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vite:
         specifier: ^7.1.5
         version: 7.1.5(@types/node@24.0.8)
@@ -302,7 +302,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -344,8 +344,8 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
       react-streaming:
-        specifier: ^0.4.3
-        version: 0.4.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: ^0.4.4
+        version: 0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       rimraf:
         specifier: ^5.0.5
         version: 5.0.10
@@ -354,7 +354,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -387,7 +387,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -426,8 +426,8 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1
       react-streaming:
-        specifier: ^0.4.3
-        version: 0.4.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: ^0.4.4
+        version: 0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       rimraf:
         specifier: ^5.0.5
         version: 5.0.10
@@ -436,7 +436,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -473,7 +473,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -500,7 +500,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -530,7 +530,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -572,8 +572,8 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
       react-streaming:
-        specifier: ^0.4.3
-        version: 0.4.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: ^0.4.4
+        version: 0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       rimraf:
         specifier: ^5.0.5
         version: 5.0.10
@@ -582,7 +582,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        version: 0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -3086,8 +3086,8 @@ packages:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
     engines: {node: '>=0.10.0'}
 
-  react-streaming@0.4.3:
-    resolution: {integrity: sha512-IGlnbchegC8RCoP0E8hnQiT4fBC7r4KmeKcZFb1PoAA5Yzfr9C+9PZh6i8o+PVSJq5YCptVX4YZDHkNIDCsaIA==}
+  react-streaming@0.4.4:
+    resolution: {integrity: sha512-LH80931vMUL6SVStyWk30O2cNmrFRmaMlYWYkmsplJFVz1eK0/0ovMo4q3CozARgVNsgaLN3wz2ZfeQ4wdvN9Q==}
     peerDependencies:
       react: '>=19'
       react-dom: '>=19'
@@ -6571,10 +6571,10 @@ snapshots:
 
   react-refresh@0.17.0: {}
 
-  react-streaming@0.4.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+  react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
     dependencies:
       '@brillout/import': 0.2.6
-      '@brillout/json-serializer': 0.5.15
+      '@brillout/json-serializer': 0.5.17
       '@brillout/picocolors': 1.0.28
       isbot-fast: 1.2.0
       react: 19.1.1
@@ -6925,7 +6925,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vike@0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5):
+  vike@0.4.237(react-streaming@0.4.4(react@19.1.1))(vite@7.1.5):
     dependencies:
       '@brillout/import': 0.2.6
       '@brillout/json-serializer': 0.5.17
@@ -6944,7 +6944,7 @@ snapshots:
       source-map-support: 0.5.21
       tinyglobby: 0.2.14
     optionalDependencies:
-      react-streaming: 0.4.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react-streaming: 0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       vite: 7.1.5(@types/node@24.0.8)
 
   vite-node@3.2.4(@types/node@24.0.8):

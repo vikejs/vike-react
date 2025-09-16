@@ -44,6 +44,7 @@ const onRenderClient: OnRenderClientAsync = async (
     // First render while using SSR, i.e. [hydration](https://vike.dev/hydration)
     globalObject.root = ReactDOM.hydrateRoot(container, page, {
       ...hydrateRootOptions,
+      // onUncaughtError is the right callback: https://gist.github.com/brillout/b9516e83a7a4517f4dbd0ef50e9dd716
       onUncaughtError(...args) {
         onUncaughtErrorGlobal.call(this, args, hydrateRootOptions)
       },
@@ -83,7 +84,7 @@ function applyHead(pageContext: PageContextClient) {
   applyHeadSettings(title, lang)
 }
 
-// Global callback, attached once upon hydration
+// Global callback, attached once upon hydration.
 function onUncaughtErrorGlobal(
   this: unknown,
   args: OnUncaughtErrorArgs,

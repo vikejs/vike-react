@@ -6,7 +6,7 @@ import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { renderToStream } from 'react-streaming/server'
 import { dangerouslySkipEscape, escapeInject } from 'vike/server'
 import type { PageContextServer } from 'vike/types'
-import { VikeReactPageContextProvider } from '../hooks/usePageContext.js'
+import { VikeReactProvidePageContext } from '../hooks/usePageContext.js'
 import { getHeadSetting } from './getHeadSetting.js'
 import { getPageElement } from './getPageElement.js'
 import type { PageContextInternal } from '../types/PageContext.js'
@@ -154,9 +154,9 @@ function getHeadElementHtml(Head: NonNullable<Head>, pageContext: PageContextSer
     headElement = Head
   } else {
     headElement = (
-      <VikeReactPageContextProvider pageContext={pageContext}>
+      <VikeReactProvidePageContext pageContext={pageContext}>
         <Head />
-      </VikeReactPageContextProvider>
+      </VikeReactProvidePageContext>
     )
   }
   if (pageContext.config.reactStrictMode !== false) {

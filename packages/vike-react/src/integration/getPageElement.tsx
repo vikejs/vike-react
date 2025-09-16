@@ -2,7 +2,7 @@ export { getPageElement }
 
 import React, { Suspense, useEffect } from 'react'
 import type { PageContext } from 'vike/types'
-import { VikeReactPageContextProvider } from '../hooks/usePageContext.js'
+import { VikeReactProvidePageContext } from '../hooks/usePageContext.js'
 
 function getPageElement(pageContext: PageContext) {
   const {
@@ -27,7 +27,7 @@ function getPageElement(pageContext: PageContext) {
     page = addSuspense(page)
   })
 
-  page = <VikeReactPageContextProvider pageContext={pageContext}>{page}</VikeReactPageContextProvider>
+  page = <VikeReactProvidePageContext pageContext={pageContext}>{page}</VikeReactProvidePageContext>
 
   let renderPromiseResolve!: () => void
   let renderPromiseReject!: (err: unknown) => void

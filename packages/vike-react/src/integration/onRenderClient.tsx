@@ -43,18 +43,22 @@ const onRenderClient: OnRenderClientAsync = async (
     // First render while using SSR, i.e. [hydration](https://vike.dev/hydration)
     globalObject.root = ReactDOM.hydrateRoot(container, page, {
       ...hydrateRootOptions,
+      /*
       onUncaughtError(...args) {
         onUncaughtErrorGlobal.call(this, args, hydrateRootOptions)
       },
+      */
     })
   } else {
     if (!globalObject.root) {
       // First render without SSR
       globalObject.root = ReactDOM.createRoot(container, {
         ...createRootOptions,
+        /*
         onUncaughtError(...args) {
           onUncaughtErrorGlobal.call(this, args, createRootOptions)
         },
+        */
       })
     }
     globalObject.root.render(page)

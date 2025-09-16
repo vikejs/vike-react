@@ -9,8 +9,12 @@ import type { PageContextInternal } from '../types/PageContext.js'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { applyHeadSettings } from './applyHeadSettings.js'
 import { resolveReactOptions } from './resolveReactOptions.js'
+import { getGlobalObject } from '../utils/getGlobalObject.js'
 
-let root: ReactDOM.Root
+const globalObject = getGlobalObject<{
+  root?: ReactDOM.Root
+}>('onRenderClient.tsx', {})
+
 const onRenderClient: OnRenderClientAsync = async (
   pageContext: PageContextClient & PageContextInternal,
 ): ReturnType<OnRenderClientAsync> => {
@@ -36,15 +40,15 @@ const onRenderClient: OnRenderClientAsync = async (
     container.innerHTML !== ''
   ) {
     // First render while using SSR, i.e. [hydration](https://vike.dev/hydration)
-    root = ReactDOM.hydrateRoot(container, page, hydrateRootOptions)
+    globalObject.root = ReactDOM.hydrateRoot(container, page, hydrateRootOptions)
   } else {
-    if (!root) {
+    if (!globalObject.root) {
       // First render without SSR
-      root = ReactDOM.createRoot(container, createRootOptions)
+      globalObject.root = ReactDOM.createRoot(container, createRootOptions)
     }
-    root.render(page)
+    globalObject.root.render(page)
   }
-  pageContext.root = root
+  pageContext.root = globalObject.root
 
   await renderPromise
 

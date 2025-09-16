@@ -86,9 +86,9 @@ function onUncaughtErrorGlobal(
   args: OnUncaughtErrorParams,
   userOptions: { onUncaughtError?: OnUncaughtError } | undefined,
 ) {
+  logUncaughtError(args)
   const [error] = args
   globalObject.onUncaughtErrorLocal?.(error)
-  logUncaughtError(args)
   userOptions?.onUncaughtError?.apply(this, args)
 }
 type OnUncaughtError = RootOptions['onUncaughtError']
@@ -96,8 +96,5 @@ type OnUncaughtErrorParams = Parameters<NonNullable<RootOptions['onUncaughtError
 
 async function logUncaughtError(args: OnUncaughtErrorParams) {
   const [error, errorInfo] = args
-  await Promise.resolve()
-  queueMicrotask(() => {
-    console.error('%o\n%s', error, `The error above occurred at:${errorInfo.componentStack}`)
-  })
+  console.error('%o\n%s', error, `The above error occurred at:${errorInfo.componentStack}`)
 }

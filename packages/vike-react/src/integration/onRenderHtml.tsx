@@ -5,8 +5,8 @@ import React from 'react'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { renderToStream } from 'react-streaming/server'
 import { dangerouslySkipEscape, escapeInject } from 'vike/server'
-import type { OnRenderHtmlAsync, PageContextServer } from 'vike/types'
-import { PageContextProvider } from '../hooks/usePageContext.js'
+import type { PageContextServer } from 'vike/types'
+import { VikeReactProvidePageContext } from '../hooks/usePageContext.js'
 import { getHeadSetting } from './getHeadSetting.js'
 import { getPageElement } from './getPageElement.js'
 import type { PageContextInternal } from '../types/PageContext.js'
@@ -22,9 +22,9 @@ import { isType } from '../utils/isType.js'
 
 addEcosystemStamp()
 
-const onRenderHtml: OnRenderHtmlAsync = async (
+async function onRenderHtml(
   pageContext: PageContextServer & PageContextInternal,
-): ReturnType<OnRenderHtmlAsync> => {
+): Promise<ReturnType<typeof escapeInject>> {
   await renderPageToHtml(pageContext)
 
   const headHtml = getHeadHtml(pageContext)
@@ -87,7 +87,7 @@ async function renderPageToHtml(pageContext: PageContextServer) {
           : streamSetting.type === 'web',
         userAgent:
           pageContext.headers?.['user-agent'] ||
-          // TODO/eventually: remove old way of acccessing the User Agent header.
+          // TO-DO/eventually: remove old way of acccessing the User Agent header.
           // @ts-ignore
           pageContext.userAgent,
         disable:
@@ -154,9 +154,9 @@ function getHeadElementHtml(Head: NonNullable<Head>, pageContext: PageContextSer
     headElement = Head
   } else {
     headElement = (
-      <PageContextProvider pageContext={pageContext}>
+      <VikeReactProvidePageContext pageContext={pageContext}>
         <Head />
-      </PageContextProvider>
+      </VikeReactProvidePageContext>
     )
   }
   if (pageContext.config.reactStrictMode !== false) {
@@ -228,7 +228,7 @@ type StreamSetting = {
 function resolveStreamSetting(pageContext: PageContextServer): StreamSetting {
   const {
     stream,
-    // TODO/eventually: remove +streamIsRequired
+    // TO-DO/eventually: remove +streamIsRequired
     //  - Let's remove it once following last vike-react-{query,apollo} releases using +streamIsRequired can be considered old versions.
     //    - Last vike-react-query version that uses +streamIsRequired was 0.1.3
     //    - Last vike-react-apollo version that uses +streamIsRequired was 0.1.1

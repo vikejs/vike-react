@@ -109,7 +109,7 @@ const config = {
       cumulative: true,
       env: { client: true, server: true },
     },
-    // TODO/next-major: move to +react.js > strictMode ?
+    // TO-DO/next-major: move to +react.js > strictMode ?
     reactStrictMode: {
       env: { client: true, server: true },
     },

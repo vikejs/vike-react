@@ -1,10 +1,10 @@
 export default {
-  component: LoadingComponent,
+  component: VikeReactLoadingComponent,
 }
 
 import React from 'react'
 
-function LoadingComponent() {
+function VikeReactLoadingComponent() {
   return (
     <>
       <div

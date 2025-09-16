@@ -1,3 +1,12 @@
+## [0.1.4](https://github.com/vikejs/vike-react/compare/vike-react-apollo@0.1.3...vike-react-apollo@0.1.4) (2025-09-16)
+
+
+### Bug Fixes
+
+* react-streaming@^0.4.4 ([6420a27](https://github.com/vikejs/vike-react/commit/6420a277e86d0cf829de21f2a22fcf070f1075cd))
+
+
+
 ## [0.1.3](https://github.com/vikejs/vike-react/compare/vike-react-apollo@0.1.2...vike-react-apollo@0.1.3) (2025-07-01)
 
 

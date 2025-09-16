@@ -54,8 +54,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -93,8 +93,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -114,8 +114,8 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -147,8 +147,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -186,8 +186,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -222,8 +222,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../../packages/vike-react
@@ -271,8 +271,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vite:
         specifier: ^7.1.5
         version: 7.1.5(@types/node@24.0.8)
@@ -301,8 +301,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -353,8 +353,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -386,8 +386,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -435,8 +435,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -472,8 +472,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -499,8 +499,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -529,8 +529,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -581,8 +581,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
-        specifier: ^0.4.237
-        version: 0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
+        specifier: 0.4.240-commit-8ce2cbd
+        version: 0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5)
       vike-react:
         specifier: 0.6.5
         version: link:../vike-react
@@ -877,8 +877,8 @@ packages:
   '@brillout/json-serializer@0.5.15':
     resolution: {integrity: sha512-iLAyV1HNC3nG07ypBwCJohFrajY1HeZdfBBgGuRtMH/JPddgG9bPmoSI18A1RBx67vRmY6/8rgisjR5YfTvZHA==}
 
-  '@brillout/json-serializer@0.5.17':
-    resolution: {integrity: sha512-QDe1kMDj9qq+f/bmZKnKAeuVtqdqT1nc1nVrXotfJtUhh7Sqb369d/BKmHG7J/qOyQ87Y8P0Cl+GoZrhj9wQ6Q==}
+  '@brillout/json-serializer@0.5.21':
+    resolution: {integrity: sha512-pzzT4U4A9rk7eZpFjloRoMrGG2jnptwNGAhPIH7ZVjCMHd6TaJ29hrERPaY6Bp3Xdzu8JWlHI1o3x7PysxkaHQ==}
 
   '@brillout/part-regex@0.1.4':
     resolution: {integrity: sha512-PQy5LfRmIueEfGwhvMedsnj6KulDfxlfvUaTsUchBqA7nTge4C7taG/V6np2uCHVxxE4+cSmwM4COn9aNcMn7g==}
@@ -903,8 +903,8 @@ packages:
     peerDependencies:
       typescript: '>=4.0.0'
 
-  '@brillout/vite-plugin-server-entry@0.7.12':
-    resolution: {integrity: sha512-yh+tsIl2qpStgj1JofxC6tb1WoDYHGnth7XZtHou5baRkBE7DgmoCRIE+kw6S3511KwCMOcuBQSUszrYg5dLUw==}
+  '@brillout/vite-plugin-server-entry@0.7.15':
+    resolution: {integrity: sha512-0ClgcmjkhJoHbI6KhbjZlXMeA9qn/EPLXEVssjCE6IVYnVb4bTYuq635c44n7jV3GkjcgFHCQWBmNw0OAGiUvQ==}
 
   '@chakra-ui/react@3.13.0':
     resolution: {integrity: sha512-HqFXuVhiQCftQT5+/9F6w0aZufHgvaSr7jJoMP+BUxihF6uaSSW2YHy2eKK4a5SWNLMOnZHYQbUUrC3WSGcYxg==}
@@ -3447,13 +3447,13 @@ packages:
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
 
-  vike@0.4.237:
-    resolution: {integrity: sha512-+Fro/OPiu3X8LOKCQ640hGKcLr7luyi6euWwixsxE/ow9VFxpcU+i0IaUaVkcH7njvWLACay0lv45UkiyeP8TA==}
-    engines: {node: '>=18.0.0'}
+  vike@0.4.240-commit-8ce2cbd:
+    resolution: {integrity: sha512-xqiKPM53dUrqjPfdljJ2kYuXVLDoHMGrCOHeWLYubLhhEPsMqF0ZykT+LdLiSkYEfYhFNq0r7zfumDM4+PKBtg==}
+    engines: {node: '>=20.19.0'}
     hasBin: true
     peerDependencies:
       react-streaming: '>=0.3.42'
-      vite: '>=5.1.0'
+      vite: '>=6.3.0'
     peerDependenciesMeta:
       react-streaming:
         optional: true
@@ -4048,7 +4048,7 @@ snapshots:
 
   '@brillout/json-serializer@0.5.15': {}
 
-  '@brillout/json-serializer@0.5.17': {}
+  '@brillout/json-serializer@0.5.21': {}
 
   '@brillout/part-regex@0.1.4': {}
 
@@ -4087,7 +4087,7 @@ snapshots:
       source-map-support: 0.5.21
       typescript: 5.9.2
 
-  '@brillout/vite-plugin-server-entry@0.7.12':
+  '@brillout/vite-plugin-server-entry@0.7.15':
     dependencies:
       '@brillout/import': 0.2.6
       '@brillout/picocolors': 1.0.28
@@ -6925,13 +6925,13 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vike@0.4.237(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5):
+  vike@0.4.240-commit-8ce2cbd(react-streaming@0.4.3(react@19.1.1))(vite@7.1.5):
     dependencies:
       '@brillout/import': 0.2.6
-      '@brillout/json-serializer': 0.5.17
+      '@brillout/json-serializer': 0.5.21
       '@brillout/picocolors': 1.0.28
       '@brillout/require-shim': 0.1.2
-      '@brillout/vite-plugin-server-entry': 0.7.12
+      '@brillout/vite-plugin-server-entry': 0.7.15
       acorn: 8.14.1
       cac: 6.7.14
       es-module-lexer: 1.7.0
@@ -6942,7 +6942,7 @@ snapshots:
       semver: 7.7.1
       sirv: 3.0.1
       source-map-support: 0.5.21
-      tinyglobby: 0.2.14
+      tinyglobby: 0.2.15
     optionalDependencies:
       react-streaming: 0.4.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       vite: 7.1.5(@types/node@24.0.8)

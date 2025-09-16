@@ -29,7 +29,7 @@
     "rimraf": "^5.0.5",
     "styled-jsx": "^5.1.6",
     "typescript": "^5.9.2",
-    "vike": "^0.4.237",
+    "vike": "0.4.240-commit-8ce2cbd",
     "vike-react": "0.6.5",
     "vite": "^7.1.5"
   },

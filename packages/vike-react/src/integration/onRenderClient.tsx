@@ -19,6 +19,7 @@ const globalObject = getGlobalObject<{
 const onRenderClient: OnRenderClientAsync = async (
   pageContext: PageContextClient & PageContextInternal,
 ): ReturnType<OnRenderClientAsync> => {
+  console.log('onRenderClient()')
   pageContext._headAlreadySet = pageContext.isHydration
 
   // Use case:
@@ -30,6 +31,7 @@ const onRenderClient: OnRenderClientAsync = async (
 
   // Local callback for current page
   globalObject.onUncaughtError = (error, errorInfo) => {
+    console.log('reject')
     renderPromiseReject(error)
   }
   // Global callback, attached once at hydration
@@ -69,7 +71,13 @@ const onRenderClient: OnRenderClientAsync = async (
   }
   pageContext.root = globalObject.root
 
-  await renderPromise
+  console.log('renderPromise before')
+  try {
+    await renderPromise
+  } catch (err) {
+    console.log('renderPromise err', err)
+  }
+  console.log('renderPromise after')
 
   if (!pageContext.isHydration) {
     pageContext._headAlreadySet = true

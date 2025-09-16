@@ -98,5 +98,7 @@ type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']
 async function logUncaughtError(args: OnUncaughtErrorArgs) {
   const [error, errorInfo] = args
   console.error('%o\n%s', error, `The above error occurred at:${errorInfo.componentStack}`)
+  // Used by Vike:
+  // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
   if (isObject(error)) error.isAlreadyLogged = true
 }

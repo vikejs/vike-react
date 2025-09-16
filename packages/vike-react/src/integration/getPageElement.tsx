@@ -30,7 +30,7 @@ function getPageElement(pageContext: PageContext) {
   page = <PageContextProvider pageContext={pageContext}>{page}</PageContextProvider>
 
   let renderPromiseResolve!: () => void
-  let renderPromiseReject!: () => void
+  let renderPromiseReject!: (err: unknown) => void
   let renderPromise = new Promise<void>((resolve, reject) => {
     renderPromiseResolve = resolve
     renderPromiseReject = reject

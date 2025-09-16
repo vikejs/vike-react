@@ -30,7 +30,7 @@ const onRenderClient: OnRenderClientAsync = async (
 
   // Local callback for current page
   globalObject.onUncaughtError = (error, errorInfo) => {
-    renderPromiseReject()
+    renderPromiseReject(error)
   }
   // Global callback, attached once at hydration
   const onUncaughtError: RootOptions['onUncaughtError'] = (error, errorInfo) => {

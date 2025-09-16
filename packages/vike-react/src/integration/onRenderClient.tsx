@@ -81,7 +81,7 @@ function applyHead(pageContext: PageContextClient) {
   applyHeadSettings(title, lang)
 }
 
-// Global callback, attached once at hydration
+// Global callback, attached once upon hydration
 function onUncaughtErrorGlobal(
   this: any,
   args: OnUncaughtErrorParams,

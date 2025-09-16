@@ -83,7 +83,7 @@ function applyHead(pageContext: PageContextClient) {
 
 // Global callback, attached once upon hydration
 function onUncaughtErrorGlobal(
-  this: any,
+  this: unknown,
   args: OnUncaughtErrorParams,
   userOptions: { onUncaughtError?: OnUncaughtError } | undefined,
 ) {

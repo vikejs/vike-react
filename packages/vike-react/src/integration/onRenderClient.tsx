@@ -64,6 +64,8 @@ const onRenderClient: OnRenderClientAsync = async (
 
   await renderPromise
 
+  delete globalObject.onUncaughtErrorLocal
+
   if (!pageContext.isHydration) {
     pageContext._headAlreadySet = true
     applyHead(pageContext)

@@ -6,7 +6,6 @@ import image from '../../assets/logo-new.svg'
 import { Config } from 'vike-react/Config'
 
 function Page() {
-  if (!import.meta.env.SSR) throw Error ('eri')
   // Will be printed on the server and in the browser:
   console.log('Rendering the landing page')
 

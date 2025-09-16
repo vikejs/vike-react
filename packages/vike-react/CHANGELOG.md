@@ -1,3 +1,15 @@
+## [0.6.6](https://github.com/vikejs/vike-react/compare/vike-react@0.6.5...vike-react@0.6.6) (2025-09-16)
+
+
+### Bug Fixes
+
+* ensure root is singleton ([b91ddb5](https://github.com/vikejs/vike-react/commit/b91ddb545069a9f7d2f8e8a76095ee48c0f87018))
+* improve React error handling ([#186](https://github.com/vikejs/vike-react/issues/186)) ([a2baf4b](https://github.com/vikejs/vike-react/commit/a2baf4b37ec8c56e929cac61d333e3d2f8d66e4b))
+* react-streaming@^0.4.4 ([6420a27](https://github.com/vikejs/vike-react/commit/6420a277e86d0cf829de21f2a22fcf070f1075cd))
+* use `<style>` instead `.css` for `+Loading` ([#184](https://github.com/vikejs/vike-react/issues/184)) ([b8ba930](https://github.com/vikejs/vike-react/commit/b8ba930b5a3ef1728dac0c90743704396f5dae0d))
+
+
+
 ## [0.6.5](https://github.com/vikejs/vike-react/compare/vike-react@0.6.4...vike-react@0.6.5) (2025-07-18)
 
 

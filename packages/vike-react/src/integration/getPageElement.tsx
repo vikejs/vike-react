@@ -36,7 +36,7 @@ function getPageElement(pageContext: PageContext) {
     renderPromiseReject = reject
   })
   page = (
-    <VikeReactProviderRenderPromise renderPromiseResolve={renderPromiseResolve}>{page}</VikeReactProviderRenderPromise>
+    <VikeReactProvideRenderPromise renderPromiseResolve={renderPromiseResolve}>{page}</VikeReactProvideRenderPromise>
   )
 
   if (pageContext.config.reactStrictMode !== false) {
@@ -46,7 +46,7 @@ function getPageElement(pageContext: PageContext) {
   return { page, renderPromise, renderPromiseReject }
 }
 
-function VikeReactProviderRenderPromise({
+function VikeReactProvideRenderPromise({
   children,
   renderPromiseResolve,
 }: { children: React.ReactNode; renderPromiseResolve: () => void }) {

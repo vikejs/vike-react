@@ -27,6 +27,7 @@ function getPageElement(pageContext: PageContext) {
     page = addSuspense(page)
   })
 
+  // TODO/now rename
   page = <PageContextProvider pageContext={pageContext}>{page}</PageContextProvider>
 
   let renderPromiseResolve!: () => void
@@ -35,6 +36,7 @@ function getPageElement(pageContext: PageContext) {
     renderPromiseResolve = resolve
     renderPromiseReject = reject
   })
+  // TODO/now rename
   page = <RenderPromiseProvider renderPromiseResolve={renderPromiseResolve}>{page}</RenderPromiseProvider>
 
   if (pageContext.config.reactStrictMode !== false) {

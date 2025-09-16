@@ -13,7 +13,7 @@ import { getGlobalObject } from '../utils/getGlobalObject.js'
 
 const globalObject = getGlobalObject<{
   root?: ReactDOM.Root
-  onUncaughtError?: RootOptions['onUncaughtError']
+  onUncaughtErrorLocal?: (err: unknown) => void
 }>('onRenderClient.tsx', {})
 
 const onRenderClient: OnRenderClientAsync = async (
@@ -29,14 +29,8 @@ const onRenderClient: OnRenderClientAsync = async (
   pageContext.page = page
 
   // Local callback for current page
-  globalObject.onUncaughtError = (error, errorInfo) => {
-    renderPromiseReject(error)
-  }
-  // Global callback, attached once at hydration
-  const onUncaughtError: RootOptions['onUncaughtError'] = (error, errorInfo) => {
-    console.log('error', error)
-    console.log('errorInfo', errorInfo)
-    globalObject.onUncaughtError?.(error, errorInfo)
+  globalObject.onUncaughtErrorLocal = (err: unknown) => {
+    renderPromiseReject(err)
   }
 
   const container = document.getElementById('root')!
@@ -49,9 +43,8 @@ const onRenderClient: OnRenderClientAsync = async (
     // First render while using SSR, i.e. [hydration](https://vike.dev/hydration)
     globalObject.root = ReactDOM.hydrateRoot(container, page, {
       ...hydrateRootOptions,
-      onUncaughtError(error, errorInfo) {
-        onUncaughtError(error, errorInfo)
-        hydrateRootOptions?.onUncaughtError?.(error, errorInfo)
+      onUncaughtError(...args) {
+        onUncaughtErrorGlobal.call(this, args, hydrateRootOptions)
       },
     })
   } else {
@@ -59,9 +52,8 @@ const onRenderClient: OnRenderClientAsync = async (
       // First render without SSR
       globalObject.root = ReactDOM.createRoot(container, {
         ...createRootOptions,
-        onUncaughtError(error, errorInfo) {
-          onUncaughtError(error, errorInfo)
-          createRootOptions?.onUncaughtError?.(error, errorInfo)
+        onUncaughtError(...args) {
+          onUncaughtErrorGlobal.call(this, args, createRootOptions)
         },
       })
     }
@@ -86,4 +78,24 @@ function applyHead(pageContext: PageContextClient) {
   const title = getHeadSetting<string | null>('title', pageContext)
   const lang = getHeadSetting<string | null>('lang', pageContext)
   applyHeadSettings(title, lang)
+}
+
+// Global callback, attached once at hydration
+function onUncaughtErrorGlobal(
+  this: any,
+  args: OnUncaughtErrorParams,
+  userOptions: { onUncaughtError?: OnUncaughtError } | undefined,
+) {
+  logUncaughtError(args)
+  const [error] = args
+  globalObject.onUncaughtErrorLocal?.(error)
+  userOptions?.onUncaughtError?.apply(this, args)
+}
+type OnUncaughtError = RootOptions['onUncaughtError']
+type OnUncaughtErrorParams = Parameters<NonNullable<RootOptions['onUncaughtError']>>
+
+function logUncaughtError(args: OnUncaughtErrorParams) {
+  const [error, errorInfo] = args
+  console.log('error', error)
+  console.log('errorInfo', errorInfo)
 }

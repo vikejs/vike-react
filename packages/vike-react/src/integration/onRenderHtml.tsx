@@ -74,10 +74,11 @@ async function renderPageToHtml(pageContext: PageContextServer) {
 
   if (pageContext.page) {
     const streamSetting = resolveStreamSetting(pageContext)
-    if (!streamSetting.enable && !streamSetting.require) {
+    if (!streamSetting.enable && !streamSetting.require && false) {
       const pageHtmlString = renderToString(pageContext.page, renderToStringOptions)
       pageContext.pageHtmlString = pageHtmlString
     } else {
+      console.log('renderToStream()')
       const pageHtmlStream = await renderToStream(pageContext.page, {
         webStream: !streamSetting.type
           ? /* Let react-streaming decide which stream type to use.
@@ -90,15 +91,6 @@ async function renderPageToHtml(pageContext: PageContextServer) {
           // TODO/eventually: remove old way of acccessing the User Agent header.
           // @ts-ignore
           pageContext.userAgent,
-        disable:
-          // +stream.require is true  => default +stream.enable is true
-          // +stream.require is false => default +stream.enable is false
-          streamSetting.enable === false
-            ? true
-            : /* Don't override disabling when bot is detected.
-              false,
-              */
-              undefined,
       })
       pageContext.pageHtmlStream = pageHtmlStream
     }

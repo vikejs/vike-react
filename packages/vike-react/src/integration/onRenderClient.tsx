@@ -3,7 +3,7 @@ export { onRenderClient }
 
 import ReactDOM, { type RootOptions } from 'react-dom/client'
 import { getHeadSetting } from './getHeadSetting.js'
-import type { OnRenderClientAsync, PageContextClient } from 'vike/types'
+import type { PageContextClient } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
 import type { PageContextInternal } from '../types/PageContext.js'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
@@ -17,10 +17,7 @@ const globalObject = getGlobalObject<{
   onUncaughtErrorLocal?: (err: unknown) => void
 }>('onRenderClient.tsx', {})
 
-// TODO/now: update TS
-const onRenderClient: OnRenderClientAsync = async (
-  pageContext: PageContextClient & PageContextInternal,
-): ReturnType<OnRenderClientAsync> => {
+async function onRenderClient(pageContext: PageContextClient & PageContextInternal) {
   pageContext._headAlreadySet = pageContext.isHydration
 
   // Use case:

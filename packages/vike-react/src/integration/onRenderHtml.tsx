@@ -5,7 +5,7 @@ import React from 'react'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { renderToStream } from 'react-streaming/server'
 import { dangerouslySkipEscape, escapeInject } from 'vike/server'
-import type { OnRenderHtmlAsync, PageContextServer } from 'vike/types'
+import type { PageContextServer } from 'vike/types'
 import { PageContextProvider } from '../hooks/usePageContext.js'
 import { getHeadSetting } from './getHeadSetting.js'
 import { getPageElement } from './getPageElement.js'
@@ -22,9 +22,9 @@ import { isType } from '../utils/isType.js'
 
 addEcosystemStamp()
 
-const onRenderHtml: OnRenderHtmlAsync = async (
+async function onRenderHtml(
   pageContext: PageContextServer & PageContextInternal,
-): ReturnType<OnRenderHtmlAsync> => {
+): Promise<ReturnType<typeof escapeInject>> {
   await renderPageToHtml(pageContext)
 
   const headHtml = getHeadHtml(pageContext)

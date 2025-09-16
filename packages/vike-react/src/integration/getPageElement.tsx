@@ -27,7 +27,6 @@ function getPageElement(pageContext: PageContext) {
     page = addSuspense(page)
   })
 
-  // TODO/now rename
   page = <VikeReactPageContextProvider pageContext={pageContext}>{page}</VikeReactPageContextProvider>
 
   let renderPromiseResolve!: () => void
@@ -36,7 +35,6 @@ function getPageElement(pageContext: PageContext) {
     renderPromiseResolve = resolve
     renderPromiseReject = reject
   })
-  // TODO/now rename
   page = (
     <VikeContextRenderPromiseProvider renderPromiseResolve={renderPromiseResolve}>
       {page}

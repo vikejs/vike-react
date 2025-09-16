@@ -52,7 +52,7 @@
     "rimraf": "^5.0.5",
     "typescript": "^5.9.2",
     "vike": "^0.4.237",
-    "vite": "^7.1.2"
+    "vite": "^7.1.5"
   },
   "typesVersions": {
     "*": {

@@ -1,7 +1,7 @@
 // https://vike.dev/onRenderClient
 export { onRenderClient }
 
-import ReactDOM, { type RootOptions } from 'react-dom/client'
+import ReactDOM from 'react-dom/client'
 import { getHeadSetting } from './getHeadSetting.js'
 import type { OnRenderClientAsync, PageContextClient } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
@@ -19,7 +19,6 @@ const onRenderClient: OnRenderClientAsync = async (
   pageContext: PageContextClient & PageContextInternal,
 ): ReturnType<OnRenderClientAsync> => {
   pageContext._headAlreadySet = pageContext.isHydration
-  console.log('=========== onRenderClient()')
 
   // Use case:
   // - Store hydration https://github.com/vikejs/vike-react/issues/110

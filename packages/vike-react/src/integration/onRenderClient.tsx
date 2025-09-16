@@ -11,7 +11,6 @@ import { applyHeadSettings } from './applyHeadSettings.js'
 import { resolveReactOptions } from './resolveReactOptions.js'
 import { getGlobalObject } from '../utils/getGlobalObject.js'
 import { isObject } from '../utils/isObject.js'
-import { assert } from '../utils/assert.js'
 
 const globalObject = getGlobalObject<{
   root?: ReactDOM.Root
@@ -31,7 +30,6 @@ const onRenderClient: OnRenderClientAsync = async (
   pageContext.page = page
 
   // Local callback for current page
-  assert(!globalObject.onUncaughtErrorLocal) // no concurrent rendering
   globalObject.onUncaughtErrorLocal = (err: unknown) => {
     renderPromiseReject(err)
   }
@@ -65,9 +63,11 @@ const onRenderClient: OnRenderClientAsync = async (
   }
   pageContext.root = globalObject.root
 
-  await renderPromise
-
-  delete globalObject.onUncaughtErrorLocal
+  try {
+    await renderPromise
+  } finally {
+    delete globalObject.onUncaughtErrorLocal
+  }
 
   if (!pageContext.isHydration) {
     pageContext._headAlreadySet = true

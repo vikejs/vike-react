@@ -84,7 +84,7 @@ function applyHead(pageContext: PageContextClient) {
 // Global callback, attached once upon hydration
 function onUncaughtErrorGlobal(
   this: unknown,
-  args: OnUncaughtErrorParams,
+  args: OnUncaughtErrorArgs,
   userOptions: { onUncaughtError?: OnUncaughtError } | undefined,
 ) {
   logUncaughtError(args)
@@ -93,9 +93,9 @@ function onUncaughtErrorGlobal(
   userOptions?.onUncaughtError?.apply(this, args)
 }
 type OnUncaughtError = RootOptions['onUncaughtError']
-type OnUncaughtErrorParams = Parameters<NonNullable<RootOptions['onUncaughtError']>>
+type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']>>
 
-async function logUncaughtError(args: OnUncaughtErrorParams) {
+async function logUncaughtError(args: OnUncaughtErrorArgs) {
   const [error, errorInfo] = args
   console.error('%o\n%s', error, `The above error occurred at:${errorInfo.componentStack}`)
   if (isObject(error)) error.isAlreadyLogged = true

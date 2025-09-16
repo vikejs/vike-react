@@ -35,7 +35,7 @@
     "typescript": "^5.9.2",
     "vike": "0.4.240-commit-8ce2cbd",
     "vike-react": "0.6.5",
-    "react-streaming": "^0.4.4",
+    "react-streaming": "^0.4.3",
     "vite": "^7.1.5",
     "zustand": "^5.0.3"
   },

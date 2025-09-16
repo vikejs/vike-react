@@ -30,8 +30,10 @@ function getPageElement(pageContext: PageContext) {
   page = <PageContextProvider pageContext={pageContext}>{page}</PageContextProvider>
 
   let renderPromiseResolve!: () => void
-  let renderPromise = new Promise<void>((resolve) => {
+  let renderPromiseReject!: () => void
+  let renderPromise = new Promise<void>((resolve, reject) => {
     renderPromiseResolve = resolve
+    renderPromiseReject = reject
   })
   page = <RenderPromiseProvider renderPromiseResolve={renderPromiseResolve}>{page}</RenderPromiseProvider>
 
@@ -39,7 +41,7 @@ function getPageElement(pageContext: PageContext) {
     page = <React.StrictMode>{page}</React.StrictMode>
   }
 
-  return { page, renderPromise }
+  return { page, renderPromise, renderPromiseReject }
 }
 
 function RenderPromiseProvider({

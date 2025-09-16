@@ -10,6 +10,7 @@ import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { applyHeadSettings } from './applyHeadSettings.js'
 import { resolveReactOptions } from './resolveReactOptions.js'
 import { getGlobalObject } from '../utils/getGlobalObject.js'
+import { isObject } from '../utils/isObject.js'
 
 const globalObject = getGlobalObject<{
   root?: ReactDOM.Root
@@ -97,4 +98,5 @@ type OnUncaughtErrorParams = Parameters<NonNullable<RootOptions['onUncaughtError
 async function logUncaughtError(args: OnUncaughtErrorParams) {
   const [error, errorInfo] = args
   console.error('%o\n%s', error, `The above error occurred at:${errorInfo.componentStack}`)
+  if (isObject(error)) error.isAlreadyLogged = true
 }

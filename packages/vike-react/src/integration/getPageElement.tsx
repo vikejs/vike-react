@@ -4,7 +4,7 @@ import React, { Suspense, useEffect } from 'react'
 import type { PageContext } from 'vike/types'
 import { PageContextProvider } from '../hooks/usePageContext.js'
 
-function getPageElement(pageContext: PageContext): { page: React.JSX.Element; renderPromise: Promise<void> } {
+function getPageElement(pageContext: PageContext) {
   const {
     Page,
     config: { Loading },
@@ -30,7 +30,9 @@ function getPageElement(pageContext: PageContext): { page: React.JSX.Element; re
   page = <PageContextProvider pageContext={pageContext}>{page}</PageContextProvider>
 
   let renderPromiseResolve!: () => void
-  let renderPromise = new Promise<void>((r) => (renderPromiseResolve = r))
+  let renderPromise = new Promise<void>((resolve) => {
+    renderPromiseResolve = resolve
+  })
   page = <RenderPromiseProvider renderPromiseResolve={renderPromiseResolve}>{page}</RenderPromiseProvider>
 
   if (pageContext.config.reactStrictMode !== false) {

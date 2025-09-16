@@ -5,7 +5,7 @@ import React, { CSSProperties, ReactElement } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 
 function FallbackErrorBoundary({ children }: { children: ReactElement }) {
-  /* TODO: either remove this or properly check whether env is DEV:
+  /* TO-DO/eventually: either remove this or properly check whether env is DEV:
    *  - Safe check against process.env.NODE_ENV for server-side
    *  - Safe check against import.meta.env.DEV for client-side
    */
@@ -30,7 +30,7 @@ function Fallback({ resetErrorBoundary, error }: FallbackProps) {
         Try again
       </button>
       {
-        /* TODO: either remove this or properly check whether env is DEV:
+        /* TO-DO/eventually: either remove this or properly check whether env is DEV:
          *  - Safe check against process.env.NODE_ENV for server-side
          *  - Safe check against import.meta.env.DEV for client-side
          */

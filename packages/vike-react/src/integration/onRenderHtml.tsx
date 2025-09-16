@@ -87,7 +87,7 @@ async function renderPageToHtml(pageContext: PageContextServer) {
           : streamSetting.type === 'web',
         userAgent:
           pageContext.headers?.['user-agent'] ||
-          // TODO/eventually: remove old way of acccessing the User Agent header.
+          // TO-DO/eventually: remove old way of acccessing the User Agent header.
           // @ts-ignore
           pageContext.userAgent,
         disable:
@@ -228,7 +228,7 @@ type StreamSetting = {
 function resolveStreamSetting(pageContext: PageContextServer): StreamSetting {
   const {
     stream,
-    // TODO/eventually: remove +streamIsRequired
+    // TO-DO/eventually: remove +streamIsRequired
     //  - Let's remove it once following last vike-react-{query,apollo} releases using +streamIsRequired can be considered old versions.
     //    - Last vike-react-query version that uses +streamIsRequired was 0.1.3
     //    - Last vike-react-apollo version that uses +streamIsRequired was 0.1.1

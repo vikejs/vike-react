@@ -8,6 +8,7 @@
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.2",
+    "hono": "^4.9.8",
     "node-fetch": "^3.3.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -15,6 +16,7 @@
     "typescript": "^5.9.2",
     "vike": "^0.4.237",
     "vike-react": "0.6.6",
+    "vike-server": "^1.0.23",
     "vite": "^7.1.5"
   },
   "type": "module"

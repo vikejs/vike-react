@@ -4,5 +4,4 @@ import { UserConfig } from 'vite'
 
 export default {
   plugins: [react(), vike()],
-  build: { minify: false }
 } satisfies UserConfig

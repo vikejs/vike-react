@@ -10,7 +10,6 @@ import image from '../../../assets/logo-new.svg'
 const data = async () => {
   const config = useConfig()
 
-  await sleep(3 * 1000)
   const response = await fetch('https://brillout.github.io/star-wars/api/films.json')
   const moviesData = (await response.json()) as MovieDetails[]
 
@@ -33,8 +32,4 @@ function minimize(movies: MovieDetails[]): Movie[] {
     const { title, release_date, id } = movie
     return { title, release_date, id }
   })
-}
-
-function sleep(milliseconds: number): Promise<void> {
-  return new Promise((r) => setTimeout(r, milliseconds))
 }

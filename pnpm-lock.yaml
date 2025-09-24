@@ -28,19 +28,19 @@ importers:
     dependencies:
       '@apollo/client':
         specifier: ^3.10.8
-        version: 3.13.5(@types/react@19.1.10)(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 3.13.5(@types/react@19.1.13)(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@apollo/client-react-streaming':
         specifier: ^0.11.2
-        version: 0.11.11(@apollo/client@3.13.5(@types/react@19.1.10)(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 0.11.11(@apollo/client@3.13.5(@types/react@19.1.13)(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@types/react':
-        specifier: ^19.1.10
-        version: 19.1.10
+        specifier: ^19.1.13
+        version: 19.1.13
       '@types/react-dom':
-        specifier: ^19.1.7
-        version: 19.1.7(@types/react@19.1.10)
+        specifier: ^19.1.9
+        version: 19.1.9(@types/react@19.1.13)
       '@vitejs/plugin-react':
-        specifier: ^5.0.2
-        version: 5.0.2(vite@7.1.5(@types/node@24.0.8))
+        specifier: ^5.0.3
+        version: 5.0.3(vite@7.1.7(@types/node@24.0.8))
       graphql:
         specifier: ^16.9.0
         version: 16.10.0
@@ -55,7 +55,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.240
-        version: 0.4.240(react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.5(@types/node@24.0.8))
+        version: 0.4.240(react-streaming@0.4.4(react@19.1.1))(vite@7.1.7)
       vike-react:
         specifier: 0.6.6
         version: link:../../packages/vike-react
@@ -63,8 +63,8 @@ importers:
         specifier: 0.1.4
         version: link:../../packages/vike-react-apollo
       vite:
-        specifier: ^7.1.5
-        version: 7.1.5(@types/node@24.0.8)
+        specifier: ^7.1.7
+        version: 7.1.7(@types/node@24.0.8)
 
   examples/full:
     dependencies:
@@ -105,8 +105,8 @@ importers:
   examples/minimal:
     dependencies:
       '@vitejs/plugin-react':
-        specifier: ^5.0.2
-        version: 5.0.2(vite@7.1.5(@types/node@24.0.8))
+        specifier: ^5.0.3
+        version: 5.0.3(vite@7.1.7(@types/node@24.0.8))
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -115,13 +115,13 @@ importers:
         version: 19.1.1(react@19.1.1)
       vike:
         specifier: ^0.4.240
-        version: 0.4.240(react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.5(@types/node@24.0.8))
+        version: 0.4.240(react-streaming@0.4.4(react@19.1.1))(vite@7.1.7)
       vike-react:
         specifier: 0.6.6
         version: link:../../packages/vike-react
       vite:
-        specifier: ^7.1.5
-        version: 7.1.5(@types/node@24.0.8)
+        specifier: ^7.1.7
+        version: 7.1.7(@types/node@24.0.8)
 
   examples/query:
     dependencies:
@@ -129,14 +129,14 @@ importers:
         specifier: ^5.20.1
         version: 5.69.0(react@19.1.1)
       '@types/react':
-        specifier: ^19.1.10
-        version: 19.1.10
+        specifier: ^19.1.13
+        version: 19.1.13
       '@types/react-dom':
-        specifier: ^19.1.7
-        version: 19.1.7(@types/react@19.1.10)
+        specifier: ^19.1.9
+        version: 19.1.9(@types/react@19.1.13)
       '@vitejs/plugin-react':
-        specifier: ^5.0.2
-        version: 5.0.2(vite@7.1.5(@types/node@24.0.8))
+        specifier: ^5.0.3
+        version: 5.0.3(vite@7.1.7(@types/node@24.0.8))
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -148,7 +148,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.240
-        version: 0.4.240(react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.5(@types/node@24.0.8))
+        version: 0.4.240(react-streaming@0.4.4(react@19.1.1))(vite@7.1.7)
       vike-react:
         specifier: 0.6.6
         version: link:../../packages/vike-react
@@ -156,23 +156,23 @@ importers:
         specifier: 0.1.6
         version: link:../../packages/vike-react-query
       vite:
-        specifier: ^7.1.5
-        version: 7.1.5(@types/node@24.0.8)
+        specifier: ^7.1.7
+        version: 7.1.7(@types/node@24.0.8)
 
   examples/redux:
     dependencies:
       '@reduxjs/toolkit':
         specifier: ^2.8.2
-        version: 2.8.2(react-redux@9.2.0(@types/react@19.1.10)(react@19.1.1)(redux@5.0.1))(react@19.1.1)
+        version: 2.8.2(react-redux@9.2.0(@types/react@19.1.13)(react@19.1.1)(redux@5.0.1))(react@19.1.1)
       '@types/react':
-        specifier: ^19.1.10
-        version: 19.1.10
+        specifier: ^19.1.13
+        version: 19.1.13
       '@types/react-dom':
-        specifier: ^19.1.7
-        version: 19.1.7(@types/react@19.1.10)
+        specifier: ^19.1.9
+        version: 19.1.9(@types/react@19.1.13)
       '@vitejs/plugin-react':
-        specifier: ^5.0.2
-        version: 5.0.2(vite@7.1.5(@types/node@24.0.8))
+        specifier: ^5.0.3
+        version: 5.0.3(vite@7.1.7(@types/node@24.0.8))
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -181,13 +181,13 @@ importers:
         version: 19.1.1(react@19.1.1)
       react-redux:
         specifier: ^9.2.0
-        version: 9.2.0(@types/react@19.1.10)(react@19.1.1)(redux@5.0.1)
+        version: 9.2.0(@types/react@19.1.13)(react@19.1.1)(redux@5.0.1)
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
         specifier: ^0.4.240
-        version: 0.4.240(react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.5(@types/node@24.0.8))
+        version: 0.4.240(react-streaming@0.4.4(react@19.1.1))(vite@7.1.7)
       vike-react:
         specifier: 0.6.6
         version: link:../../packages/vike-react
@@ -195,20 +195,20 @@ importers:
         specifier: 0.1.1
         version: link:../../packages/vike-react-redux
       vite:
-        specifier: ^7.1.5
-        version: 7.1.5(@types/node@24.0.8)
+        specifier: ^7.1.7
+        version: 7.1.7(@types/node@24.0.8)
 
   examples/zustand:
     dependencies:
       '@types/react':
-        specifier: ^19.1.10
-        version: 19.1.10
+        specifier: ^19.1.13
+        version: 19.1.13
       '@types/react-dom':
-        specifier: ^19.1.7
-        version: 19.1.7(@types/react@19.1.10)
+        specifier: ^19.1.9
+        version: 19.1.9(@types/react@19.1.13)
       '@vitejs/plugin-react':
-        specifier: ^5.0.2
-        version: 5.0.2(vite@7.1.5(@types/node@24.0.8))
+        specifier: ^5.0.3
+        version: 5.0.3(vite@7.1.7(@types/node@24.0.8))
       immer:
         specifier: ^10.0.3
         version: 10.1.1
@@ -223,7 +223,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.240
-        version: 0.4.240(react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.5(@types/node@24.0.8))
+        version: 0.4.240(react-streaming@0.4.4(react@19.1.1))(vite@7.1.7)
       vike-react:
         specifier: 0.6.6
         version: link:../../packages/vike-react
@@ -231,11 +231,11 @@ importers:
         specifier: 0.1.5
         version: link:../../packages/vike-react-zustand
       vite:
-        specifier: ^7.1.5
-        version: 7.1.5(@types/node@24.0.8)
+        specifier: ^7.1.7
+        version: 7.1.7(@types/node@24.0.8)
       zustand:
         specifier: ^5.0.3
-        version: 5.0.3(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1))
+        version: 5.0.3(@types/react@19.1.13)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1))
 
   packages/vike-react:
     dependencies:
@@ -253,11 +253,11 @@ importers:
         specifier: ^24.0.8
         version: 24.0.8
       '@types/react':
-        specifier: ^19.1.10
-        version: 19.1.10
+        specifier: ^19.1.13
+        version: 19.1.13
       '@types/react-dom':
-        specifier: ^19.1.7
-        version: 19.1.7(@types/react@19.1.10)
+        specifier: ^19.1.9
+        version: 19.1.9(@types/react@19.1.13)
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -272,10 +272,10 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.240
-        version: 0.4.240(react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.5(@types/node@24.0.8))
+        version: 0.4.240(react-streaming@0.4.4(react@19.1.1))(vite@7.1.7)
       vite:
-        specifier: ^7.1.5
-        version: 7.1.5(@types/node@24.0.8)
+        specifier: ^7.1.7
+        version: 7.1.7(@types/node@24.0.8)
 
   packages/vike-react-antd:
     devDependencies:
@@ -286,8 +286,8 @@ importers:
         specifier: ^0.4.8
         version: 0.4.8(conventional-commits-filter@5.0.0)
       '@types/react':
-        specifier: ^19.1.10
-        version: 19.1.10
+        specifier: ^19.1.13
+        version: 19.1.13
       antd:
         specifier: ^5.22.5
         version: 5.24.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -302,13 +302,13 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.240
-        version: 0.4.240(react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.5(@types/node@24.0.8))
+        version: 0.4.240(react-streaming@0.4.4(react@19.1.1))(vite@7.1.7)
       vike-react:
         specifier: 0.6.6
         version: link:../vike-react
       vite:
-        specifier: ^7.1.5
-        version: 7.1.5(@types/node@24.0.8)
+        specifier: ^7.1.7
+        version: 7.1.7(@types/node@24.0.8)
 
   packages/vike-react-apollo:
     dependencies:
@@ -318,10 +318,10 @@ importers:
     devDependencies:
       '@apollo/client':
         specifier: ^3.10.8
-        version: 3.13.5(@types/react@19.1.10)(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 3.13.5(@types/react@19.1.13)(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@apollo/client-react-streaming':
         specifier: ^0.11.2
-        version: 0.11.11(@apollo/client@3.13.5(@types/react@19.1.10)(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 0.11.11(@apollo/client@3.13.5(@types/react@19.1.13)(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@brillout/release-me':
         specifier: ^0.4.8
         version: 0.4.8(conventional-commits-filter@5.0.0)
@@ -329,11 +329,11 @@ importers:
         specifier: ^24.0.8
         version: 24.0.8
       '@types/react':
-        specifier: ^19.1.10
-        version: 19.1.10
+        specifier: ^19.1.13
+        version: 19.1.13
       '@types/react-dom':
-        specifier: ^19.1.7
-        version: 19.1.7(@types/react@19.1.10)
+        specifier: ^19.1.9
+        version: 19.1.9(@types/react@19.1.13)
       graphql:
         specifier: ^16.9.0
         version: 16.10.0
@@ -354,13 +354,13 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.240
-        version: 0.4.240(react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.5(@types/node@24.0.8))
+        version: 0.4.240(react-streaming@0.4.4(react@19.1.1))(vite@7.1.7)
       vike-react:
         specifier: 0.6.6
         version: link:../vike-react
       vite:
-        specifier: ^7.1.5
-        version: 7.1.5(@types/node@24.0.8)
+        specifier: ^7.1.7
+        version: 7.1.7(@types/node@24.0.8)
 
   packages/vike-react-chakra:
     devDependencies:
@@ -369,13 +369,13 @@ importers:
         version: 0.4.8(conventional-commits-filter@5.0.0)
       '@chakra-ui/react':
         specifier: ^3.0.2
-        version: 3.13.0(@emotion/react@11.14.0(@types/react@19.1.10)(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 3.13.0(@emotion/react@11.14.0(@types/react@19.1.13)(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@emotion/react':
         specifier: ^11.13.3
-        version: 11.14.0(@types/react@19.1.10)(react@19.1.1)
+        version: 11.14.0(@types/react@19.1.13)(react@19.1.1)
       '@types/react':
-        specifier: ^19.1.10
-        version: 19.1.10
+        specifier: ^19.1.13
+        version: 19.1.13
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -387,13 +387,13 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.240
-        version: 0.4.240(react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.5(@types/node@24.0.8))
+        version: 0.4.240(react-streaming@0.4.4(react@19.1.1))(vite@7.1.7)
       vike-react:
         specifier: 0.6.6
         version: link:../vike-react
       vite:
-        specifier: ^7.1.5
-        version: 7.1.5(@types/node@24.0.8)
+        specifier: ^7.1.7
+        version: 7.1.7(@types/node@24.0.8)
 
   packages/vike-react-query:
     dependencies:
@@ -412,13 +412,13 @@ importers:
         version: 5.69.0(react@19.1.1)
       '@testing-library/react':
         specifier: ^14.2.1
-        version: 14.3.1(@types/react@19.1.10)(react@19.1.1)
+        version: 14.3.1(@types/react@19.1.13)(react@19.1.1)
       '@types/node':
         specifier: ^24.0.8
         version: 24.0.8
       '@types/react':
-        specifier: ^19.1.10
-        version: 19.1.10
+        specifier: ^19.1.13
+        version: 19.1.13
       jsdom:
         specifier: ^24.0.0
         version: 24.1.3
@@ -436,13 +436,13 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.240
-        version: 0.4.240(react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.5(@types/node@24.0.8))
+        version: 0.4.240(react-streaming@0.4.4(react@19.1.1))(vite@7.1.7)
       vike-react:
         specifier: 0.6.6
         version: link:../vike-react
       vite:
-        specifier: ^7.1.5
-        version: 7.1.5(@types/node@24.0.8)
+        specifier: ^7.1.7
+        version: 7.1.7(@types/node@24.0.8)
       vitest:
         specifier: ^3.2.4
         version: 3.2.4(@types/node@24.0.8)(jsdom@24.1.3)
@@ -451,17 +451,17 @@ importers:
     dependencies:
       react-redux:
         specifier: '>=9'
-        version: 9.2.0(@types/react@19.1.10)(react@19.1.1)(redux@5.0.1)
+        version: 9.2.0(@types/react@19.1.13)(react@19.1.1)(redux@5.0.1)
     devDependencies:
       '@brillout/release-me':
         specifier: ^0.4.8
         version: 0.4.8(conventional-commits-filter@5.0.0)
       '@reduxjs/toolkit':
         specifier: ^2.8.2
-        version: 2.8.2(react-redux@9.2.0(@types/react@19.1.10)(react@19.1.1)(redux@5.0.1))(react@19.1.1)
+        version: 2.8.2(react-redux@9.2.0(@types/react@19.1.13)(react@19.1.1)(redux@5.0.1))(react@19.1.1)
       '@types/react':
-        specifier: ^19.1.10
-        version: 19.1.10
+        specifier: ^19.1.13
+        version: 19.1.13
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -484,8 +484,8 @@ importers:
         specifier: ^0.4.8
         version: 0.4.8(conventional-commits-filter@5.0.0)
       '@types/react':
-        specifier: ^19.1.10
-        version: 19.1.10
+        specifier: ^19.1.13
+        version: 19.1.13
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -500,13 +500,13 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.240
-        version: 0.4.240(react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.5(@types/node@24.0.8))
+        version: 0.4.240(react-streaming@0.4.4(react@19.1.1))(vite@7.1.7)
       vike-react:
         specifier: 0.6.6
         version: link:../vike-react
       vite:
-        specifier: ^7.1.5
-        version: 7.1.5(@types/node@24.0.8)
+        specifier: ^7.1.7
+        version: 7.1.7(@types/node@24.0.8)
 
   packages/vike-react-styled-jsx:
     devDependencies:
@@ -514,8 +514,8 @@ importers:
         specifier: ^0.4.8
         version: 0.4.8(conventional-commits-filter@5.0.0)
       '@types/react':
-        specifier: ^19.1.10
-        version: 19.1.10
+        specifier: ^19.1.13
+        version: 19.1.13
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -530,13 +530,13 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.240
-        version: 0.4.240(react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.5(@types/node@24.0.8))
+        version: 0.4.240(react-streaming@0.4.4(react@19.1.1))(vite@7.1.7)
       vike-react:
         specifier: 0.6.6
         version: link:../vike-react
       vite:
-        specifier: ^7.1.5
-        version: 7.1.5(@types/node@24.0.8)
+        specifier: ^7.1.7
+        version: 7.1.7(@types/node@24.0.8)
 
   packages/vike-react-zustand:
     dependencies:
@@ -560,11 +560,11 @@ importers:
         specifier: ^24.0.8
         version: 24.0.8
       '@types/react':
-        specifier: ^19.1.10
-        version: 19.1.10
+        specifier: ^19.1.13
+        version: 19.1.13
       '@types/react-dom':
-        specifier: ^19.1.7
-        version: 19.1.7(@types/react@19.1.10)
+        specifier: ^19.1.9
+        version: 19.1.9(@types/react@19.1.13)
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -582,16 +582,16 @@ importers:
         version: 5.9.2
       vike:
         specifier: ^0.4.240
-        version: 0.4.240(react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.5(@types/node@24.0.8))
+        version: 0.4.240(react-streaming@0.4.4(react@19.1.1))(vite@7.1.7)
       vike-react:
         specifier: 0.6.6
         version: link:../vike-react
       vite:
-        specifier: ^7.1.5
-        version: 7.1.5(@types/node@24.0.8)
+        specifier: ^7.1.7
+        version: 7.1.7(@types/node@24.0.8)
       zustand:
         specifier: ^5.0.3
-        version: 5.0.3(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1))
+        version: 5.0.3(@types/react@19.1.13)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1))
 
 packages:
 
@@ -688,10 +688,6 @@ packages:
     resolution: {integrity: sha512-vMqyb7XCDMPvJFFOaT9kxtiRh42GwlZEg1/uIgtZshS5a/8OaduUfCi7kynKgc3Tw/6Uo2D+db9qBttghhmxwQ==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/core@7.28.3':
-    resolution: {integrity: sha512-yDBHV9kQNcr2/sUr9jghVyz9C3Y5G2zUM2H2lo+9mKv4sFgbA8s8Z9t8D1jiTkGoO/NoIfKMyKWr4s6CN23ZwQ==}
-    engines: {node: '>=6.9.0'}
-
   '@babel/core@7.28.4':
     resolution: {integrity: sha512-2BCOP7TN8M+gVDj7/ht3hsaO/B/n5oDbiAyyvnRlNOs+u1o+JWNYTQrmpuNp1/Wq2gcFrI01JAW+paEKDMx/CA==}
     engines: {node: '>=6.9.0'}
@@ -766,10 +762,6 @@ packages:
 
   '@babel/helpers@7.26.10':
     resolution: {integrity: sha512-UPYc3SauzZ3JGgj87GgZ89JVdC5dj0AoetR5Bw6wj4niittNyFh6+eOGonYvJ1ao6B8lEa3Q3klS7ADZ53bc5g==}
-    engines: {node: '>=6.9.0'}
-
-  '@babel/helpers@7.28.3':
-    resolution: {integrity: sha512-PTNtvUQihsAsDHMOP5pfobP8C6CM4JWXmP8DrEIt46c3r2bf87Ua1zoqevsMo9g+tWDwgWrFP5EIxuBx5RudAw==}
     engines: {node: '>=6.9.0'}
 
   '@babel/helpers@7.28.4':
@@ -1469,9 +1461,6 @@ packages:
       react-redux:
         optional: true
 
-  '@rolldown/pluginutils@1.0.0-beta.34':
-    resolution: {integrity: sha512-LyAREkZHP5pMom7c24meKmJCdhf2hEyvam2q0unr3or9ydwDL+DJ8chTF6Av/RFPb3rH8UFBdMzO5MxTZW97oA==}
-
   '@rolldown/pluginutils@1.0.0-beta.35':
     resolution: {integrity: sha512-slYrCpoxJUqzFDDNlvrOYRazQUNRvWPjXA17dAOISY3rDMxX6k8K4cj2H+hEYMHF81HO3uNd5rHVigAWRM5dSg==}
 
@@ -1655,18 +1644,10 @@ packages:
     peerDependencies:
       '@types/react': ^18.0.0
 
-  '@types/react-dom@19.1.7':
-    resolution: {integrity: sha512-i5ZzwYpqjmrKenzkoLM2Ibzt6mAsM7pxB6BCIouEVVmgiqaMj1TjaK7hnA36hbW5aZv20kx7Lw6hWzPWg0Rurw==}
-    peerDependencies:
-      '@types/react': ^19.0.0
-
   '@types/react-dom@19.1.9':
     resolution: {integrity: sha512-qXRuZaOsAdXKFyOhRBg6Lqqc0yay13vN7KrIg4L7N4aaHN68ma9OK3NE1BoDFgFOTfM7zg+3/8+2n8rLUH3OKQ==}
     peerDependencies:
       '@types/react': ^19.0.0
-
-  '@types/react@19.1.10':
-    resolution: {integrity: sha512-EhBeSYX0Y6ye8pNebpKrwFJq7BoQ8J5SO6NlvNwwHjSj6adXJViPQrKlsyPw7hLBLvckEMO1yxeGdR82YBBlDg==}
 
   '@types/react@19.1.13':
     resolution: {integrity: sha512-hHkbU/eoO3EG5/MZkuFSKmYqPbSVk5byPFa3e7y/8TybHiLMACgI8seVYlicwk7H5K/rI2px9xrQp/C+AUDTiQ==}
@@ -1676,12 +1657,6 @@ packages:
 
   '@types/use-sync-external-store@0.0.6':
     resolution: {integrity: sha512-zFDAD+tlpf2r4asuHEj0XH6pY6i0g5NeAHPn+15wk3BV6JA69eERFXC1gyGThDkVa1zCyKr5jox1+2LbV/AMLg==}
-
-  '@vitejs/plugin-react@5.0.2':
-    resolution: {integrity: sha512-tmyFgixPZCx2+e6VO9TNITWcCQl8+Nl/E8YbAyPVv85QCc7/A3JrdfG2A8gIzvVhWuzMOVrFW1aReaNxrI6tbw==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    peerDependencies:
-      vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
 
   '@vitejs/plugin-react@5.0.3':
     resolution: {integrity: sha512-PFVHhosKkofGH0Yzrw1BipSedTH68BFF8ZWy1kfUpCtJcouXXY0+racG8sExw7hw0HoX36813ga5o3LTWZ4FUg==}
@@ -3509,46 +3484,6 @@ packages:
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
 
-  vite@7.1.5:
-    resolution: {integrity: sha512-4cKBO9wR75r0BeIWWWId9XK9Lj6La5X846Zw9dFfzMRw38IlTk2iCcUt6hsyiDRcPidc55ZParFYDXi0nXOeLQ==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': ^20.19.0 || >=22.12.0
-      jiti: '>=1.21.0'
-      less: ^4.0.0
-      lightningcss: ^1.21.0
-      sass: ^1.70.0
-      sass-embedded: ^1.70.0
-      stylus: '>=0.54.8'
-      sugarss: ^5.0.0
-      terser: ^5.16.0
-      tsx: ^4.8.1
-      yaml: ^2.4.2
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      jiti:
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      sass-embedded:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-      tsx:
-        optional: true
-      yaml:
-        optional: true
-
   vite@7.1.7:
     resolution: {integrity: sha512-VbA8ScMvAISJNJVbRDTJdCwqQoAareR/wutevKanhR2/1EkoXVZVkkORaYm/tNVCjP/UDTKtcw3bAkwOUdedmA==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -3783,16 +3718,16 @@ snapshots:
       resize-observer-polyfill: 1.5.1
       throttle-debounce: 5.0.2
 
-  '@apollo/client-react-streaming@0.11.11(@apollo/client@3.13.5(@types/react@19.1.10)(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@apollo/client-react-streaming@0.11.11(@apollo/client@3.13.5(@types/react@19.1.13)(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
-      '@apollo/client': 3.13.5(@types/react@19.1.10)(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@apollo/client': 3.13.5(@types/react@19.1.13)(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@wry/equality': 0.5.7
       graphql: 16.10.0
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
       ts-invariant: 0.10.3
 
-  '@apollo/client@3.13.5(@types/react@19.1.10)(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@apollo/client@3.13.5(@types/react@19.1.13)(graphql@16.10.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.10.0)
       '@wry/caches': 1.0.1
@@ -3803,7 +3738,7 @@ snapshots:
       hoist-non-react-statics: 3.3.2
       optimism: 0.18.1
       prop-types: 15.8.1
-      rehackt: 0.1.0(@types/react@19.1.10)(react@19.1.1)
+      rehackt: 0.1.0(@types/react@19.1.13)(react@19.1.1)
       symbol-observable: 4.0.0
       ts-invariant: 0.10.3
       tslib: 2.8.1
@@ -3915,26 +3850,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/core@7.28.3':
-    dependencies:
-      '@ampproject/remapping': 2.3.0
-      '@babel/code-frame': 7.27.1
-      '@babel/generator': 7.28.3
-      '@babel/helper-compilation-targets': 7.27.2
-      '@babel/helper-module-transforms': 7.28.3(@babel/core@7.28.3)
-      '@babel/helpers': 7.28.3
-      '@babel/parser': 7.28.3
-      '@babel/template': 7.27.2
-      '@babel/traverse': 7.28.3
-      '@babel/types': 7.28.2
-      convert-source-map: 2.0.0
-      debug: 4.4.1
-      gensync: 1.0.0-beta.2
-      json5: 2.2.3
-      semver: 6.3.1
-    transitivePeerDependencies:
-      - supports-color
-
   '@babel/core@7.28.4':
     dependencies:
       '@babel/code-frame': 7.27.1
@@ -4012,15 +3927,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/helper-module-transforms@7.28.3(@babel/core@7.28.3)':
-    dependencies:
-      '@babel/core': 7.28.3
-      '@babel/helper-module-imports': 7.27.1
-      '@babel/helper-validator-identifier': 7.27.1
-      '@babel/traverse': 7.28.3
-    transitivePeerDependencies:
-      - supports-color
-
   '@babel/helper-module-transforms@7.28.3(@babel/core@7.28.4)':
     dependencies:
       '@babel/core': 7.28.4
@@ -4049,11 +3955,6 @@ snapshots:
       '@babel/template': 7.26.9
       '@babel/types': 7.26.10
 
-  '@babel/helpers@7.28.3':
-    dependencies:
-      '@babel/template': 7.27.2
-      '@babel/types': 7.28.2
-
   '@babel/helpers@7.28.4':
     dependencies:
       '@babel/template': 7.27.2
@@ -4071,19 +3972,9 @@ snapshots:
     dependencies:
       '@babel/types': 7.28.4
 
-  '@babel/plugin-transform-react-jsx-self@7.27.1(@babel/core@7.28.3)':
-    dependencies:
-      '@babel/core': 7.28.3
-      '@babel/helper-plugin-utils': 7.27.1
-
   '@babel/plugin-transform-react-jsx-self@7.27.1(@babel/core@7.28.4)':
     dependencies:
       '@babel/core': 7.28.4
-      '@babel/helper-plugin-utils': 7.27.1
-
-  '@babel/plugin-transform-react-jsx-source@7.27.1(@babel/core@7.28.3)':
-    dependencies:
-      '@babel/core': 7.28.3
       '@babel/helper-plugin-utils': 7.27.1
 
   '@babel/plugin-transform-react-jsx-source@7.27.1(@babel/core@7.28.4)':
@@ -4243,11 +4134,11 @@ snapshots:
       '@brillout/import': 0.2.6
       '@brillout/picocolors': 1.0.28
 
-  '@chakra-ui/react@3.13.0(@emotion/react@11.14.0(@types/react@19.1.10)(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@chakra-ui/react@3.13.0(@emotion/react@11.14.0(@types/react@19.1.13)(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@ark-ui/react': 4.9.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@emotion/is-prop-valid': 1.3.1
-      '@emotion/react': 11.14.0(@types/react@19.1.10)(react@19.1.1)
+      '@emotion/react': 11.14.0(@types/react@19.1.13)(react@19.1.1)
       '@emotion/serialize': 1.3.3
       '@emotion/use-insertion-effect-with-fallbacks': 1.2.0(react@19.1.1)
       '@emotion/utils': 1.4.2
@@ -4326,7 +4217,7 @@ snapshots:
 
   '@emotion/memoize@0.9.0': {}
 
-  '@emotion/react@11.14.0(@types/react@19.1.10)(react@19.1.1)':
+  '@emotion/react@11.14.0(@types/react@19.1.13)(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.26.10
       '@emotion/babel-plugin': 11.13.5
@@ -4338,7 +4229,7 @@ snapshots:
       hoist-non-react-statics: 3.3.2
       react: 19.1.1
     optionalDependencies:
-      '@types/react': 19.1.10
+      '@types/react': 19.1.13
     transitivePeerDependencies:
       - supports-color
 
@@ -4665,7 +4556,7 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
-  '@reduxjs/toolkit@2.8.2(react-redux@9.2.0(@types/react@19.1.10)(react@19.1.1)(redux@5.0.1))(react@19.1.1)':
+  '@reduxjs/toolkit@2.8.2(react-redux@9.2.0(@types/react@19.1.13)(react@19.1.1)(redux@5.0.1))(react@19.1.1)':
     dependencies:
       '@standard-schema/spec': 1.0.0
       '@standard-schema/utils': 0.3.0
@@ -4675,9 +4566,7 @@ snapshots:
       reselect: 5.1.1
     optionalDependencies:
       react: 19.1.1
-      react-redux: 9.2.0(@types/react@19.1.10)(react@19.1.1)(redux@5.0.1)
-
-  '@rolldown/pluginutils@1.0.0-beta.34': {}
+      react-redux: 9.2.0(@types/react@19.1.13)(react@19.1.1)(redux@5.0.1)
 
   '@rolldown/pluginutils@1.0.0-beta.35': {}
 
@@ -4776,11 +4665,11 @@ snapshots:
       lz-string: 1.5.0
       pretty-format: 27.5.1
 
-  '@testing-library/react@14.3.1(@types/react@19.1.10)(react@19.1.1)':
+  '@testing-library/react@14.3.1(@types/react@19.1.13)(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.26.10
       '@testing-library/dom': 9.3.4
-      '@types/react-dom': 18.3.5(@types/react@19.1.10)
+      '@types/react-dom': 18.3.5(@types/react@19.1.13)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -4830,21 +4719,13 @@ snapshots:
 
   '@types/parse-json@4.0.2': {}
 
-  '@types/react-dom@18.3.5(@types/react@19.1.10)':
+  '@types/react-dom@18.3.5(@types/react@19.1.13)':
     dependencies:
-      '@types/react': 19.1.10
-
-  '@types/react-dom@19.1.7(@types/react@19.1.10)':
-    dependencies:
-      '@types/react': 19.1.10
+      '@types/react': 19.1.13
 
   '@types/react-dom@19.1.9(@types/react@19.1.13)':
     dependencies:
       '@types/react': 19.1.13
-
-  '@types/react@19.1.10':
-    dependencies:
-      csstype: 3.1.3
 
   '@types/react@19.1.13':
     dependencies:
@@ -4853,18 +4734,6 @@ snapshots:
   '@types/stylis@4.2.5': {}
 
   '@types/use-sync-external-store@0.0.6': {}
-
-  '@vitejs/plugin-react@5.0.2(vite@7.1.5(@types/node@24.0.8))':
-    dependencies:
-      '@babel/core': 7.28.3
-      '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.3)
-      '@babel/plugin-transform-react-jsx-source': 7.27.1(@babel/core@7.28.3)
-      '@rolldown/pluginutils': 1.0.0-beta.34
-      '@types/babel__core': 7.20.5
-      react-refresh: 0.17.0
-      vite: 7.1.5(@types/node@24.0.8)
-    transitivePeerDependencies:
-      - supports-color
 
   '@vitejs/plugin-react@5.0.3(vite@7.1.7(@types/node@24.0.8))':
     dependencies:
@@ -6738,13 +6607,13 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-redux@9.2.0(@types/react@19.1.10)(react@19.1.1)(redux@5.0.1):
+  react-redux@9.2.0(@types/react@19.1.13)(react@19.1.1)(redux@5.0.1):
     dependencies:
       '@types/use-sync-external-store': 0.0.6
       react: 19.1.1
       use-sync-external-store: 1.4.0(react@19.1.1)
     optionalDependencies:
-      '@types/react': 19.1.10
+      '@types/react': 19.1.13
       redux: 5.0.1
 
   react-refresh@0.17.0: {}
@@ -6777,9 +6646,9 @@ snapshots:
       gopd: 1.2.0
       set-function-name: 2.0.2
 
-  rehackt@0.1.0(@types/react@19.1.10)(react@19.1.1):
+  rehackt@0.1.0(@types/react@19.1.13)(react@19.1.1):
     optionalDependencies:
-      '@types/react': 19.1.10
+      '@types/react': 19.1.13
       react: 19.1.1
 
   requires-port@1.0.0: {}
@@ -7103,28 +6972,6 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vike@0.4.240(react-streaming@0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.5(@types/node@24.0.8)):
-    dependencies:
-      '@brillout/import': 0.2.6
-      '@brillout/json-serializer': 0.5.21
-      '@brillout/picocolors': 1.0.28
-      '@brillout/require-shim': 0.1.2
-      '@brillout/vite-plugin-server-entry': 0.7.15
-      acorn: 8.14.1
-      cac: 6.7.14
-      es-module-lexer: 1.7.0
-      esbuild: 0.25.1
-      json5: 2.2.3
-      magic-string: 0.30.17
-      picomatch: 4.0.3
-      semver: 7.7.1
-      sirv: 3.0.1
-      source-map-support: 0.5.21
-      tinyglobby: 0.2.15
-    optionalDependencies:
-      react-streaming: 0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      vite: 7.1.5(@types/node@24.0.8)
-
   vike@0.4.240(react-streaming@0.4.4(react@19.1.1))(vite@7.1.7):
     dependencies:
       '@brillout/import': 0.2.6
@@ -7167,18 +7014,6 @@ snapshots:
       - terser
       - tsx
       - yaml
-
-  vite@7.1.5(@types/node@24.0.8):
-    dependencies:
-      esbuild: 0.25.1
-      fdir: 6.5.0(picomatch@4.0.3)
-      picomatch: 4.0.3
-      postcss: 8.5.6
-      rollup: 4.46.2
-      tinyglobby: 0.2.15
-    optionalDependencies:
-      '@types/node': 24.0.8
-      fsevents: 2.3.3
 
   vite@7.1.7(@types/node@24.0.8):
     dependencies:
@@ -7319,9 +7154,9 @@ snapshots:
 
   zen-observable@0.8.15: {}
 
-  zustand@5.0.3(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)):
+  zustand@5.0.3(@types/react@19.1.13)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)):
     optionalDependencies:
-      '@types/react': 19.1.10
+      '@types/react': 19.1.13
       immer: 10.1.1
       react: 19.1.1
       use-sync-external-store: 1.4.0(react@19.1.1)

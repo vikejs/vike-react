@@ -26,14 +26,14 @@
   "devDependencies": {
     "@ant-design/cssinjs": "^1.22.1",
     "@brillout/release-me": "^0.4.8",
-    "@types/react": "^19.1.10",
+    "@types/react": "^19.1.13",
     "antd": "^5.22.5",
     "react": "^19.1.1",
     "rimraf": "^5.0.5",
     "typescript": "^5.9.2",
     "vike": "^0.4.240",
     "vike-react": "0.6.6",
-    "vite": "^7.1.5"
+    "vite": "^7.1.7"
   },
   "typesVersions": {
     "*": {

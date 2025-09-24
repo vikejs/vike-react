@@ -7,9 +7,9 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
-    "@types/react": "^19.1.10",
-    "@types/react-dom": "^19.1.7",
-    "@vitejs/plugin-react": "^5.0.2",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-redux": "^9.2.0",
@@ -17,7 +17,7 @@
     "vike": "^0.4.240",
     "vike-react": "0.6.6",
     "vike-react-redux": "0.1.1",
-    "vite": "^7.1.5"
+    "vite": "^7.1.7"
   },
   "type": "module"
 }

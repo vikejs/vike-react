@@ -17,5 +17,5 @@ const config = {
   // https://vike.dev/extends
   extends: [vikeReact, vikeServer],
 
-  server: 'server.ts'
+  server: 'server.ts',
 } satisfies Config

@@ -27,7 +27,7 @@
   "devDependencies": {
     "@brillout/release-me": "^0.4.8",
     "@reduxjs/toolkit": "^2.8.2",
-    "@types/react": "^19.1.10",
+    "@types/react": "^19.1.13",
     "react": "^19.1.1",
     "rimraf": "^5.0.5",
     "typescript": "^5.9.2",

@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "vike dev",
     "build": "vike build",
-    "preview": "vike build && vike preview"
+    "preview": "vike build && node ./dist/server/index.js"
   },
   "dependencies": {
     "@types/react": "^19.1.10",

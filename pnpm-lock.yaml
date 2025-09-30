@@ -87,14 +87,14 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
       react-streaming:
-        specifier: 0.4.4-commit-c3235b6
-        version: 0.4.4-commit-c3235b6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 0.4.4-commit-d033973
+        version: 0.4.4-commit-d033973(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
       vike:
         specifier: 0.4.241-commit-206146b
-        version: 0.4.241-commit-206146b(react-streaming@0.4.4-commit-c3235b6(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.7(@types/node@24.0.8))
+        version: 0.4.241-commit-206146b(react-streaming@0.4.4-commit-d033973(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.7(@types/node@24.0.8))
       vike-react:
         specifier: 0.6.6
         version: link:../../packages/vike-react
@@ -240,8 +240,8 @@ importers:
   packages/vike-react:
     dependencies:
       react-streaming:
-        specifier: 0.4.4-commit-c3235b6
-        version: 0.4.4-commit-c3235b6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 0.4.4-commit-d033973
+        version: 0.4.4-commit-d033973(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.9.4
@@ -272,7 +272,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: 0.4.241-commit-206146b
-        version: 0.4.241-commit-206146b(react-streaming@0.4.4-commit-c3235b6(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.7(@types/node@24.0.8))
+        version: 0.4.241-commit-206146b(react-streaming@0.4.4-commit-d033973(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.7(@types/node@24.0.8))
       vite:
         specifier: ^7.1.7
         version: 7.1.7(@types/node@24.0.8)
@@ -344,8 +344,8 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
       react-streaming:
-        specifier: 0.4.4-commit-c3235b6
-        version: 0.4.4-commit-c3235b6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 0.4.4-commit-d033973
+        version: 0.4.4-commit-d033973(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       rimraf:
         specifier: ^5.0.5
         version: 5.0.10
@@ -354,7 +354,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: 0.4.241-commit-206146b
-        version: 0.4.241-commit-206146b(react-streaming@0.4.4-commit-c3235b6(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.7(@types/node@24.0.8))
+        version: 0.4.241-commit-206146b(react-streaming@0.4.4-commit-d033973(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.7(@types/node@24.0.8))
       vike-react:
         specifier: 0.6.6
         version: link:../vike-react
@@ -426,8 +426,8 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1
       react-streaming:
-        specifier: 0.4.4-commit-c3235b6
-        version: 0.4.4-commit-c3235b6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 0.4.4-commit-d033973
+        version: 0.4.4-commit-d033973(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       rimraf:
         specifier: ^5.0.5
         version: 5.0.10
@@ -436,7 +436,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: 0.4.241-commit-206146b
-        version: 0.4.241-commit-206146b(react-streaming@0.4.4-commit-c3235b6(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.7(@types/node@24.0.8))
+        version: 0.4.241-commit-206146b(react-streaming@0.4.4-commit-d033973(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.7(@types/node@24.0.8))
       vike-react:
         specifier: 0.6.6
         version: link:../vike-react
@@ -572,8 +572,8 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
       react-streaming:
-        specifier: 0.4.4-commit-c3235b6
-        version: 0.4.4-commit-c3235b6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 0.4.4-commit-d033973
+        version: 0.4.4-commit-d033973(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       rimraf:
         specifier: ^5.0.5
         version: 5.0.10
@@ -582,7 +582,7 @@ importers:
         version: 5.9.2
       vike:
         specifier: 0.4.241-commit-206146b
-        version: 0.4.241-commit-206146b(react-streaming@0.4.4-commit-c3235b6(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.7(@types/node@24.0.8))
+        version: 0.4.241-commit-206146b(react-streaming@0.4.4-commit-d033973(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.7(@types/node@24.0.8))
       vike-react:
         specifier: 0.6.6
         version: link:../vike-react
@@ -3108,8 +3108,8 @@ packages:
       react: '>=19'
       react-dom: '>=19'
 
-  react-streaming@0.4.4-commit-c3235b6:
-    resolution: {integrity: sha512-I1VHgEdeiSeMpLo6YR9uFoK+aGYfxMNw4aBX0KzixldnKnsHQsOyQJJsYPcWfCLMQQGgqVnZd71OYemxaHhF0Q==}
+  react-streaming@0.4.4-commit-d033973:
+    resolution: {integrity: sha512-1WCNUxGGc9HszcYpBWHOJqGh81lm7521ztbTPOC6d0+fIumHH9Rh2LJ+McE+mzgufu+OpBm8EcExFfhkgoCqig==}
     peerDependencies:
       react: '>=19'
       react-dom: '>=19'
@@ -6629,7 +6629,7 @@ snapshots:
       react-dom: 19.1.1(react@19.1.1)
     optional: true
 
-  react-streaming@0.4.4-commit-c3235b6(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+  react-streaming@0.4.4-commit-d033973(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
     dependencies:
       '@brillout/import': 0.2.6
       '@brillout/json-serializer': 0.5.21
@@ -7005,7 +7005,7 @@ snapshots:
       react-streaming: 0.4.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       vite: 7.1.7(@types/node@24.0.8)
 
-  vike@0.4.241-commit-206146b(react-streaming@0.4.4-commit-c3235b6(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.7(@types/node@24.0.8)):
+  vike@0.4.241-commit-206146b(react-streaming@0.4.4-commit-d033973(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.7(@types/node@24.0.8)):
     dependencies:
       '@brillout/import': 0.2.6
       '@brillout/json-serializer': 0.5.21
@@ -7024,7 +7024,7 @@ snapshots:
       source-map-support: 0.5.21
       tinyglobby: 0.2.15
     optionalDependencies:
-      react-streaming: 0.4.4-commit-c3235b6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react-streaming: 0.4.4-commit-d033973(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       vite: 7.1.7(@types/node@24.0.8)
 
   vite-node@3.2.4(@types/node@24.0.8):

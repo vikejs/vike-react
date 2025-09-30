@@ -113,6 +113,8 @@ type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']
 type ErrorInfo = { componentStack?: string }
 function fixErrStack(errOriginal: unknown, errorInfo?: ErrorInfo) {
   if (!errorInfo?.componentStack || !isObject(errOriginal)) return errOriginal
+  const { stack } = errOriginal
+  const stackFixed = String(stack)
   // const errFixed = { ...errOriginal }
   const errFixed = structuredClone(errOriginal)
   const errMsg = String(errOriginal.message || '').trim()

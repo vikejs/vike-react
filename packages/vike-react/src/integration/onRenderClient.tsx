@@ -104,13 +104,13 @@ type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']
 type ErrorInfo = { componentStack?: string }
 function fixErrStack(errOriginal: unknown, errorInfo?: ErrorInfo) {
   if (!errorInfo?.componentStack || !isObject(errOriginal)) return errOriginal
-  const stackOriginalLines = String(errOriginal.stack).split('\n')
-  const cutoff = stackOriginalLines.findIndex((l) => l.includes('node_modules') && l.includes('react'))
+  const errOiginalStackLines = String(errOriginal.stack).split('\n')
+  const cutoff = errOiginalStackLines.findIndex((l) => l.includes('node_modules') && l.includes('react'))
   if (cutoff === -1) return errOriginal
   const stackFixed = [
-    ...stackOriginalLines.slice(0, cutoff),
+    ...errOiginalStackLines.slice(0, cutoff),
     ...errorInfo.componentStack.split('\n').filter(Boolean),
-    ...stackOriginalLines.slice(cutoff),
+    ...errOiginalStackLines.slice(cutoff),
   ].join('\n')
   const errFixed = structuredClone(errOriginal)
   errFixed.stack = stackFixed

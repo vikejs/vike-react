@@ -107,6 +107,7 @@ function fixErrStack(errOriginal: unknown, errorInfo?: ErrorInfo) {
   const errOiginalStackLines = String(errOriginal.stack).split('\n')
   const cutoff = errOiginalStackLines.findIndex((l) => l.includes('node_modules') && l.includes('react'))
   if (cutoff === -1) return errOriginal
+
   const stackFixed = [
     ...errOiginalStackLines.slice(0, cutoff),
     ...errorInfo.componentStack.split('\n').filter(Boolean),
@@ -121,5 +122,6 @@ function fixErrStack(errOriginal: unknown, errorInfo?: ErrorInfo) {
     configurable: false,
     writable: false,
   })
+
   return errFixed
 }

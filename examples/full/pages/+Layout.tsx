@@ -1,14 +1,19 @@
 export { Layout }
 
 import './style.css'
-import React from 'react'
+import React, { useEffect } from 'react'
 import logoUrl from '../assets/logo.svg'
 import { Link } from '../components/Link'
 
 function Layout({ children }: { children: React.ReactNode }) {
-  //*
+  /*
   if (!import.meta.env.SSR) throw new Error('Some Failure')
   //*/
+  useEffect(() => {
+    //*
+    throw new Error('Some Effect Failure')
+    //*/
+  })
   return (
     <div
       style={{

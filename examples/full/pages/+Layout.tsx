@@ -10,7 +10,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   if (!import.meta.env.SSR) throw new Error('Some Failure')
   //*/
   useEffect(() => {
-    //*
+    /*
     throw new Error('Some Effect Failure')
     //*/
   })

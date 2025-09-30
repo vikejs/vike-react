@@ -92,6 +92,7 @@ function onUncaughtErrorGlobal(
 ) {
   const [errorOriginal, errorInfo, ...rest] = args
   const errorFixed = getErrorFixed(errorOriginal, errorInfo)
+  console.error(errorFixed)
   // Used by Vike:
   // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
   if (isObject(errorFixed)) errorFixed.isAlreadyLogged = true

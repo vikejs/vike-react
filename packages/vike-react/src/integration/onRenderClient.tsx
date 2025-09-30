@@ -90,38 +90,38 @@ function onUncaughtErrorGlobal(
   args: OnUncaughtErrorArgs,
   userOptions: { onUncaughtError?: OnUncaughtError } | undefined,
 ) {
-  const [errOriginal, errorInfo, ...rest] = args
-  const errFixed = fixErrStack(errOriginal, errorInfo)
+  const [errorOriginal, errorInfo, ...rest] = args
+  const errorFixed = getErrorFixed(errorOriginal, errorInfo)
   // Used by Vike:
   // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
-  if (isObject(errFixed)) errFixed.isAlreadyLogged = true
-  globalObject.onUncaughtErrorLocal?.(errFixed)
-  userOptions?.onUncaughtError?.apply(this, [errFixed, errorInfo, ...rest])
+  if (isObject(errorFixed)) errorFixed.isAlreadyLogged = true
+  globalObject.onUncaughtErrorLocal?.(errorFixed)
+  userOptions?.onUncaughtError?.apply(this, [errorFixed, errorInfo, ...rest])
 }
 type OnUncaughtError = RootOptions['onUncaughtError']
 type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']>>
 
 type ErrorInfo = { componentStack?: string }
-function fixErrStack(errOriginal: unknown, errorInfo?: ErrorInfo) {
-  if (!errorInfo?.componentStack || !isObject(errOriginal)) return errOriginal
-  const errOiginalStackLines = String(errOriginal.stack).split('\n')
-  const cutoff = errOiginalStackLines.findIndex((l) => l.includes('node_modules') && l.includes('react'))
-  if (cutoff === -1) return errOriginal
+function getErrorFixed(errorOriginal: unknown, errorInfo?: ErrorInfo) {
+  if (!errorInfo?.componentStack || !isObject(errorOriginal)) return errorOriginal
+  const errorOiginalStackLines = String(errorOriginal.stack).split('\n')
+  const cutoff = errorOiginalStackLines.findIndex((l) => l.includes('node_modules') && l.includes('react'))
+  if (cutoff === -1) return errorOriginal
 
   const stackFixed = [
-    ...errOiginalStackLines.slice(0, cutoff),
+    ...errorOiginalStackLines.slice(0, cutoff),
     ...errorInfo.componentStack.split('\n').filter(Boolean),
-    ...errOiginalStackLines.slice(cutoff),
+    ...errorOiginalStackLines.slice(cutoff),
   ].join('\n')
-  const errFixed = structuredClone(errOriginal)
-  errFixed.stack = stackFixed
+  const errorFixed = structuredClone(errorOriginal)
+  errorFixed.stack = stackFixed
   // https://gist.github.com/brillout/066293a687ab7cf695e62ad867bc6a9c
-  Object.defineProperty(errFixed, 'getOriginalError', {
-    value: () => errOriginal,
+  Object.defineProperty(errorFixed, 'getOriginalError', {
+    value: () => errorOriginal,
     enumerable: true,
     configurable: false,
     writable: false,
   })
 
-  return errFixed
+  return errorFixed
 }

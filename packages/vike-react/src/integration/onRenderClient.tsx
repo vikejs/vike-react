@@ -101,6 +101,7 @@ function onUncaughtErrorGlobal(
 type OnUncaughtError = RootOptions['onUncaughtError']
 type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']>>
 
+// Inject componentStack to the error's stack trace
 type ErrorInfo = { componentStack?: string }
 function getErrorFixed(errorOriginal: unknown, errorInfo?: ErrorInfo) {
   if (!errorInfo?.componentStack || !isObject(errorOriginal)) return errorOriginal

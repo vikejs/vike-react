@@ -92,16 +92,6 @@ function onUncaughtErrorGlobal(
 ) {
   const [errOriginal, errorInfo] = args
   const errFixed = fixErrStack(errOriginal, errorInfo)
-  //*
-  console.error('errOriginal', errOriginal)
-  console.error('errFixed', errFixed)
-  /*/
-  console.error(errFixed)
-  //*/
-  // @ts-ignore
-  window.errFixed = errFixed
-  // @ts-ignore
-  window.errOriginal = errOriginal
   // Used by Vike:
   // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
   if (isObject(errFixed)) errFixed.isAlreadyLogged = true
@@ -117,19 +107,11 @@ function fixErrStack(errOriginal: unknown, errorInfo?: ErrorInfo) {
   const stackOriginalLines = String(errOriginal.stack).split('\n')
   const cutoff = stackOriginalLines.findIndex((l) => l.includes('node_modules') && l.includes('react'))
   if (cutoff === -1) return errOriginal
-  const stackFixed2 = [
-    ...stackOriginalLines.slice(0, cutoff),
-    errorInfo.componentStack,
-    ...stackOriginalLines.slice(cutoff),
-  ]
-  console.log('errorInfo.componentStack', errorInfo.componentStack)
-  console.log('stackFixed2', stackFixed2)
   const stackFixed = [
     ...stackOriginalLines.slice(0, cutoff),
     ...errorInfo.componentStack.split('\n').filter(Boolean),
     ...stackOriginalLines.slice(cutoff),
   ].join('\n')
-  // console.log('stackFixed', stackFixed)
   const errFixed = structuredClone(errOriginal)
   errFixed.stack = stackFixed
   // https://gist.github.com/brillout/066293a687ab7cf695e62ad867bc6a9c

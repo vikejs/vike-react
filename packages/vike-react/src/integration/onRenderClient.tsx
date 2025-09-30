@@ -115,19 +115,19 @@ type ErrorInfo = { componentStack?: string }
 function fixErrStack(errOriginal: unknown, errorInfo?: ErrorInfo) {
   if (!errorInfo?.componentStack || !isObject(errOriginal)) return errOriginal
   const stackOriginalLines = String(errOriginal.stack).split('\n')
-  const cutoff = stackOriginalLines.findIndex(l => l.includes('node_modules') && l.includes('react'))
+  const cutoff = stackOriginalLines.findIndex((l) => l.includes('node_modules') && l.includes('react'))
   if (cutoff === -1) return errOriginal
   const stackFixed2 = [
     ...stackOriginalLines.slice(0, cutoff),
     errorInfo.componentStack,
-    ...stackOriginalLines.slice(cutoff)
+    ...stackOriginalLines.slice(cutoff),
   ]
   console.log('errorInfo.componentStack', errorInfo.componentStack)
   console.log('stackFixed2', stackFixed2)
   const stackFixed = [
     ...stackOriginalLines.slice(0, cutoff),
     ...errorInfo.componentStack.split('\n').filter(Boolean),
-    ...stackOriginalLines.slice(cutoff)
+    ...stackOriginalLines.slice(cutoff),
   ].join('\n')
   // console.log('stackFixed', stackFixed)
   const errFixed = structuredClone(errOriginal)

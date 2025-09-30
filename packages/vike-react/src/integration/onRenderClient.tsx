@@ -113,20 +113,22 @@ type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']
 type ErrorInfo = { componentStack?: string }
 function fixErrStack(errOriginal: unknown, errorInfo?: ErrorInfo) {
   if (!errorInfo?.componentStack || !isObject(errOriginal)) return errOriginal
-  const { stack } = errOriginal
-  const stackFixed = String(stack)
-  // const errFixed = { ...errOriginal }
+  const stackOriginalLines = String(errOriginal.stack).split('\n')
+  const cutoff = stackOriginalLines.findIndex(l => l.includes('node_modules') && l.includes('react'))
+  if (cutoff === -1) return errOriginal
+  const stackFixed = [
+    ...stackOriginalLines.slice(0, cutoff),
+    errorInfo.componentStack,
+    ...stackOriginalLines.slice(cutoff)
+  ].join('\n')
   const errFixed = structuredClone(errOriginal)
-  const errMsg = String(errOriginal.message || '').trim()
-  errFixed.stack = `${errMsg}\n${errorInfo.componentStack}`
+  errFixed.stack = stackFixed
   // https://gist.github.com/brillout/066293a687ab7cf695e62ad867bc6a9c
-  //*
   Object.defineProperty(errFixed, 'getOriginalError', {
     value: () => errOriginal,
     enumerable: true,
     configurable: false,
     writable: false,
   })
-  //*/
   return errFixed
 }

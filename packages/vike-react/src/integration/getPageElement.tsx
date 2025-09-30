@@ -46,6 +46,7 @@ function getPageElement(pageContext: PageContext) {
   return { page, renderPromise, renderPromiseReject }
 }
 
+// TODO rename?
 function VikeReactProvideRenderPromise({
   children,
   renderPromiseResolve,

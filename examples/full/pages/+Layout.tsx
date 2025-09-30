@@ -6,6 +6,9 @@ import logoUrl from '../assets/logo.svg'
 import { Link } from '../components/Link'
 
 function Layout({ children }: { children: React.ReactNode }) {
+  /*
+  if (!import.meta.env.SSR) throw new Error('Some Failure')
+  //*/
   return (
     <div
       style={{

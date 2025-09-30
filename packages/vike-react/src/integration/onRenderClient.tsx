@@ -90,18 +90,30 @@ function onUncaughtErrorGlobal(
   args: OnUncaughtErrorArgs,
   userOptions: { onUncaughtError?: OnUncaughtError } | undefined,
 ) {
-  logUncaughtError(args)
-  const [error] = args
-  globalObject.onUncaughtErrorLocal?.(error)
+  const [errOriginal, errorInfo] = args
+  const errFixed = fixErrStack(errOriginal, errorInfo)
+  console.error(errFixed)
+  // Used by Vike:
+  // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
+  if (isObject(errFixed)) errFixed.isAlreadyLogged = true
+  globalObject.onUncaughtErrorLocal?.(errFixed)
   userOptions?.onUncaughtError?.apply(this, args)
 }
 type OnUncaughtError = RootOptions['onUncaughtError']
 type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']>>
 
-async function logUncaughtError(args: OnUncaughtErrorArgs) {
-  const [error, errorInfo] = args
-  console.error('%o\n%s', error, `The above error occurred at:${errorInfo.componentStack}`)
-  // Used by Vike:
-  // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
-  if (isObject(error)) error.isAlreadyLogged = true
+type ErrorInfo = { componentStack?: string }
+function fixErrStack(errOriginal: unknown, errorInfo?: ErrorInfo) {
+  if (!errorInfo?.componentStack || !isObject(errOriginal)) return errOriginal
+  const errFixed = { ...errOriginal }
+  const errMsg = String(errOriginal.message || '').trim()
+  errFixed.stack = `${errMsg}\n${errorInfo.componentStack}`
+  // https://gist.github.com/brillout/066293a687ab7cf695e62ad867bc6a9c
+  Object.defineProperty(errFixed, 'getOriginalError', {
+    value: () => errFixed,
+    enumerable: true,
+    configurable: false,
+    writable: false,
+  })
+  return errFixed
 }

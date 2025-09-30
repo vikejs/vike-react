@@ -39,7 +39,7 @@
     "react-streaming": "0.4.4-commit-c3235b6",
     "rimraf": "^5.0.5",
     "typescript": "^5.9.2",
-    "vike": "^0.4.241",
+    "vike": "0.4.241-commit-206146b",
     "vike-react": "0.6.6",
     "vite": "^7.1.7"
   },

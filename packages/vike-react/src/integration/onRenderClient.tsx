@@ -90,13 +90,13 @@ function onUncaughtErrorGlobal(
   args: OnUncaughtErrorArgs,
   userOptions: { onUncaughtError?: OnUncaughtError } | undefined,
 ) {
-  const [errOriginal, errorInfo] = args
+  const [errOriginal, errorInfo, ...rest] = args
   const errFixed = fixErrStack(errOriginal, errorInfo)
   // Used by Vike:
   // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
   if (isObject(errFixed)) errFixed.isAlreadyLogged = true
   globalObject.onUncaughtErrorLocal?.(errFixed)
-  userOptions?.onUncaughtError?.apply(this, args)
+  userOptions?.onUncaughtError?.apply(this, [errFixed, errorInfo, ...rest])
 }
 type OnUncaughtError = RootOptions['onUncaughtError']
 type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']>>

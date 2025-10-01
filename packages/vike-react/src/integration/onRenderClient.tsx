@@ -91,40 +91,40 @@ function onUncaughtErrorGlobal(
   userOptions: { onUncaughtError?: OnUncaughtError } | undefined,
 ) {
   const [errorOriginal, errorInfo, ...rest] = args
-  const errorFixed = getErrorFixed(errorOriginal, errorInfo)
-  console.error(errorFixed)
+  const errorEnhanced = getErrorEnhanced(errorOriginal, errorInfo)
+  console.error(errorEnhanced)
   // Used by Vike:
   // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
-  if (isObject(errorFixed)) errorFixed.isAlreadyLogged = true
-  globalObject.onUncaughtErrorLocal?.(errorFixed)
-  userOptions?.onUncaughtError?.apply(this, [errorFixed, errorInfo, ...rest])
+  if (isObject(errorEnhanced)) errorEnhanced.isAlreadyLogged = true
+  globalObject.onUncaughtErrorLocal?.(errorEnhanced)
+  userOptions?.onUncaughtError?.apply(this, [errorEnhanced, errorInfo, ...rest])
 }
 type OnUncaughtError = RootOptions['onUncaughtError']
 type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']>>
 
 // Inject componentStack to the error's stack trace
 type ErrorInfo = { componentStack?: string }
-function getErrorFixed(errorOriginal: unknown, errorInfo?: ErrorInfo) {
+function getErrorEnhanced(errorOriginal: unknown, errorInfo?: ErrorInfo) {
   if (!errorInfo?.componentStack || !isObject(errorOriginal)) return errorOriginal
   const errorOiginalStackLines = String(errorOriginal.stack).split('\n')
   const cutoff = errorOiginalStackLines.findIndex((l) => l.includes('node_modules') && l.includes('react'))
   if (cutoff === -1) return errorOriginal
 
-  const stackFixed = [
+  const stackEnhanced = [
     ...errorOiginalStackLines.slice(0, cutoff),
     ...errorInfo.componentStack.split('\n').filter(Boolean),
     ...errorOiginalStackLines.slice(cutoff),
   ].join('\n')
-  const errorFixed = structuredClone(errorOriginal)
-  errorFixed.stack = stackFixed
+  const errorEnhanced = structuredClone(errorOriginal)
+  errorEnhanced.stack = stackEnhanced
 
   // https://gist.github.com/brillout/066293a687ab7cf695e62ad867bc6a9c
-  Object.defineProperty(errorFixed, 'getOriginalError', {
+  Object.defineProperty(errorEnhanced, 'getOriginalError', {
     value: () => errorOriginal,
     enumerable: true,
     configurable: false,
     writable: false,
   })
 
-  return errorFixed
+  return errorEnhanced
 }

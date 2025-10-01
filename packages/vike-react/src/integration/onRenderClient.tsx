@@ -90,18 +90,49 @@ function onUncaughtErrorGlobal(
   args: OnUncaughtErrorArgs,
   userOptions: { onUncaughtError?: OnUncaughtError } | undefined,
 ) {
-  logUncaughtError(args)
-  const [error] = args
-  globalObject.onUncaughtErrorLocal?.(error)
-  userOptions?.onUncaughtError?.apply(this, args)
+  const [errorOriginal, errorInfo] = args
+  const errorEnhanced = getErrorEnhanced(errorOriginal, errorInfo)
+  console.error(errorEnhanced)
+  // Used by Vike:
+  // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
+  if (isObject(errorEnhanced)) errorEnhanced.isAlreadyLogged = true
+  globalObject.onUncaughtErrorLocal?.(errorEnhanced)
+  userOptions?.onUncaughtError?.call(this, errorEnhanced, errorInfo)
 }
 type OnUncaughtError = RootOptions['onUncaughtError']
 type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']>>
 
-async function logUncaughtError(args: OnUncaughtErrorArgs) {
-  const [error, errorInfo] = args
-  console.error('%o\n%s', error, `The above error occurred at:${errorInfo.componentStack}`)
-  // Used by Vike:
-  // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
-  if (isObject(error)) error.isAlreadyLogged = true
+// Inject componentStack to the error's stack trace
+type ErrorInfo = { componentStack?: string }
+function getErrorEnhanced(errorOriginal: unknown, errorInfo?: ErrorInfo) {
+  if (!errorInfo?.componentStack || !isObject(errorOriginal)) return errorOriginal
+  const errorOiginalStackLines = String(errorOriginal.stack).split('\n')
+  const cutoff = errorOiginalStackLines.findIndex((l) => l.includes('node_modules') && l.includes('react'))
+  if (cutoff === -1) return errorOriginal
+
+  const stackEnhanced = [
+    ...errorOiginalStackLines.slice(0, cutoff),
+    ...errorInfo.componentStack.split('\n').filter(Boolean),
+    ...errorOiginalStackLines.slice(cutoff),
+  ].join('\n')
+  const errorEnhanced = structuredClone(errorOriginal)
+  errorEnhanced.stack = stackEnhanced
+
+  // https://gist.github.com/brillout/066293a687ab7cf695e62ad867bc6a9c
+  Object.defineProperty(errorEnhanced, 'getOriginalError', {
+    value: () => errorOriginal,
+    enumerable: true,
+    configurable: false,
+    writable: false,
+  })
+  /* Not needed. Let's skip this to save client-side KBs.
+  Object.defineProperty(errorOriginal, 'getEnhancedError', {
+    value: () => errorEnhanced,
+    enumerable: true,
+    configurable: false,
+    writable: false,
+  })
+  //*/
+
+  return errorEnhanced
 }

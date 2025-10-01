@@ -14,7 +14,7 @@
     "react-streaming": "^0.4.5",
     "typescript": "^5.9.2",
     "vike": "^0.4.241",
-    "vike-react": "0.6.6",
+    "vike-react": "0.6.7",
     "vite": "^7.1.7"
   },
   "type": "module"

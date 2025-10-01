@@ -117,6 +117,7 @@ function getErrorFixed(errorOriginal: unknown, errorInfo?: ErrorInfo) {
   ].join('\n')
   const errorFixed = structuredClone(errorOriginal)
   errorFixed.stack = stackFixed
+
   // https://gist.github.com/brillout/066293a687ab7cf695e62ad867bc6a9c
   Object.defineProperty(errorFixed, 'getOriginalError', {
     value: () => errorOriginal,

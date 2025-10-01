@@ -11,7 +11,7 @@
     "node-fetch": "^3.3.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-streaming": "0.4.4-commit-d033973",
+    "react-streaming": "0.4.4-commit-c3235b6",
     "typescript": "^5.9.2",
     "vike": "0.4.241-commit-206146b",
     "vike-react": "0.6.6",

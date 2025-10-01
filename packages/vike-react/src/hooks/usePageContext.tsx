@@ -1,6 +1,5 @@
 export { usePageContext }
-// TODO rename VikeReactProvide VikeReactProvider
-export { VikeReactProvidePageContext }
+export { VikeReactProviderPageContext }
 
 import React, { useContext } from 'react'
 import { getGlobalObject } from '../utils/getGlobalObject.js'
@@ -10,7 +9,7 @@ const globalObject = getGlobalObject('usePageContext.tsx', {
   reactContext: React.createContext<PageContext>(undefined as never),
 })
 
-function VikeReactProvidePageContext({
+function VikeReactProviderPageContext({
   pageContext,
   children,
 }: { pageContext: PageContext; children: React.ReactNode }) {

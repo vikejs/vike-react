@@ -27,7 +27,7 @@
     "./__internal/integration/Loading": "./dist/integration/Loading.js"
   },
   "dependencies": {
-    "react-streaming": "0.4.4-commit-c3235b6"
+    "react-streaming": "^0.4.4"
   },
   "peerDependencies": {
     "react": ">=19",

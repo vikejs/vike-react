@@ -31,15 +31,38 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
         document.getElementsByClassName("_rqd_")
       ).forEach((e) => e.remove())};_rqc_()</script>`,
     )
+
+    const seen = new Set<string>()
+
     client.getQueryCache().subscribe((event) => {
-      if (['added', 'updated'].includes(event.type) && event.query.state.status === 'success')
-        stream.injectToStream(
-          `<script class="_rqd_">_rqd_.push(${uneval(
-            dehydrate(client, {
-              shouldDehydrateQuery: (query) => query.queryHash === event.query.queryHash,
-            }),
-          )});_rqc_()</script>`,
-        )
+      if (stream.hasStreamEnded() || event.query.state.status !== 'success') return
+
+      let shouldSend = false
+
+      // Only send once for queries already in cache but always send for `updated` events
+      switch (event.type) {
+        case 'added':
+        case 'observerAdded':
+        case 'observerResultsUpdated':
+          if (!seen.has(event.query.queryHash)) {
+            seen.add(event.query.queryHash)
+            shouldSend = true
+          }
+          break
+        case 'updated':
+          shouldSend = true
+          break
+      }
+
+      if (!shouldSend) return
+
+      stream.injectToStream(
+        `<script class="_rqd_">_rqd_.push(${uneval(
+          dehydrate(client, {
+            shouldDehydrateQuery: (query) => query.queryHash === event.query.queryHash,
+          }),
+        )});_rqc_()</script>`,
+      )
     })
   }
 

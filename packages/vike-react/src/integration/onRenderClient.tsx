@@ -125,7 +125,6 @@ function getErrorEnhanced(errorOriginal: unknown, errorInfo?: ErrorInfo) {
     configurable: false,
     writable: false,
   })
-
   /* Not needed. Let's skip this to save client-side KBs.
   Object.defineProperty(errorOriginal, 'getEnhancedError', {
     value: () => errorEnhanced,

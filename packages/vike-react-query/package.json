@@ -37,7 +37,7 @@
     "rimraf": "^5.0.5",
     "typescript": "^5.9.2",
     "vike": "^0.4.241",
-    "vike-react": "0.6.7",
+    "vike-react": "0.6.8",
     "vite": "^7.1.7",
     "vitest": "^3.2.4"
   },

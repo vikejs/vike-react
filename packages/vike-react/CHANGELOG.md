@@ -1,3 +1,12 @@
+## [0.6.8](https://github.com/vikejs/vike-react/compare/vike-react@0.6.7...vike-react@0.6.8) (2025-10-06)
+
+
+### Bug Fixes
+
+* react-streaming@^0.4.6 ([fdd3ec1](https://github.com/vikejs/vike-react/commit/fdd3ec142b9fa96391c57d3402d61188c98300b4))
+
+
+
 ## [0.6.7](https://github.com/vikejs/vike-react/compare/vike-react@0.6.6...vike-react@0.6.7) (2025-10-01)
 
 

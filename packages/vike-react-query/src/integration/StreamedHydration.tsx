@@ -1,7 +1,7 @@
 export { StreamedHydration }
 
 import type { QueryClient } from '@tanstack/react-query'
-import { dehydrate, hydrate, DehydratedState } from '@tanstack/react-query'
+import { dehydrate, hydrate, type DehydratedState } from '@tanstack/react-query'
 import { uneval } from 'devalue'
 import type { ReactNode } from 'react'
 import { useStream } from 'react-streaming'
@@ -32,24 +32,26 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
       ).forEach((e) => e.remove())};_rqc_()</script>`,
     )
 
-    const seen = new Set<string>()
+    const alreadySent = new Set<string>()
 
     client.getQueryCache().subscribe((event) => {
       if (stream.hasStreamEnded() || event.query.state.status !== 'success') return
 
       let shouldSend = false
 
-      // Only send once for queries already in cache but always send for `updated` events
       switch (event.type) {
         case 'added':
+        // Also `observerAdded` and `observerResultsUpdated` for queries pre-fetched before subscription.
+        // https://github.com/vikejs/vike-react/pull/192
         case 'observerAdded':
         case 'observerResultsUpdated':
-          if (!seen.has(event.query.queryHash)) {
-            seen.add(event.query.queryHash)
+          if (!alreadySent.has(event.query.queryHash)) {
+            alreadySent.add(event.query.queryHash)
             shouldSend = true
           }
           break
         case 'updated':
+          // Always send on `updated` events (even if already sent once), since updates may change the query data.
           shouldSend = true
           break
       }

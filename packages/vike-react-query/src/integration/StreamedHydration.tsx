@@ -1,7 +1,7 @@
 export { StreamedHydration }
 
 import type { QueryClient } from '@tanstack/react-query'
-import { dehydrate, hydrate, DehydratedState } from '@tanstack/react-query'
+import { dehydrate, hydrate, type DehydratedState } from '@tanstack/react-query'
 import { uneval } from 'devalue'
 import type { ReactNode } from 'react'
 import { useStream } from 'react-streaming'
@@ -31,15 +31,38 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
         document.getElementsByClassName("_rqd_")
       ).forEach((e) => e.remove())};_rqc_()</script>`,
     )
+
+    const alreadySent = new Set<string>()
+
     client.getQueryCache().subscribe((event) => {
-      if (['added', 'updated'].includes(event.type) && event.query.state.status === 'success')
-        stream.injectToStream(
-          `<script class="_rqd_">_rqd_.push(${uneval(
-            dehydrate(client, {
-              shouldDehydrateQuery: (query) => query.queryHash === event.query.queryHash,
-            }),
-          )});_rqc_()</script>`,
-        )
+      if (stream.hasStreamEnded() || event.query.state.status !== 'success') return
+
+      let shouldSend = false
+      switch (event.type) {
+        case 'added':
+        // Also `observerAdded` and `observerResultsUpdated` for queries pre-fetched before subscription.
+        // https://github.com/vikejs/vike-react/pull/192
+        case 'observerAdded':
+        case 'observerResultsUpdated':
+          if (!alreadySent.has(event.query.queryHash)) {
+            alreadySent.add(event.query.queryHash)
+            shouldSend = true
+          }
+          break
+        case 'updated':
+          // Always send on `updated` events (even if already sent once), since updates may change the query data.
+          shouldSend = true
+          break
+      }
+      if (!shouldSend) return
+
+      stream.injectToStream(
+        `<script class="_rqd_">_rqd_.push(${uneval(
+          dehydrate(client, {
+            shouldDehydrateQuery: (query) => query.queryHash === event.query.queryHash,
+          }),
+        )});_rqc_()</script>`,
+      )
     })
   }
 

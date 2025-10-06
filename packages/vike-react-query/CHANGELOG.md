@@ -1,3 +1,17 @@
+## [0.1.8](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.7...vike-react-query@0.1.8) (2025-10-06)
+
+
+### Bug Fixes
+
+* unsubscribe query cache ([#193](https://github.com/vikejs/vike-react/issues/193)) ([2913ebe](https://github.com/vikejs/vike-react/commit/2913ebe284c8312f7d941c8c9730cd7a72c25524))
+
+
+### BREAKING CHANGES
+
+* update vike-react to `0.6.8` or above
+
+
+
 ## [0.1.7](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.6...vike-react-query@0.1.7) (2025-10-06)
 
 

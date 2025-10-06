@@ -64,7 +64,7 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
         )});_rqc_()</script>`,
       )
     })
-    stream.streamEnd.then(() => {
+    stream.streamEnd.finally(() => {
       unsubscribe()
     })
   }

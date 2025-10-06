@@ -38,7 +38,6 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
       if (stream.hasStreamEnded() || event.query.state.status !== 'success') return
 
       let shouldSend = false
-
       switch (event.type) {
         case 'added':
         // Also `observerAdded` and `observerResultsUpdated` for queries pre-fetched before subscription.
@@ -55,7 +54,6 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
           shouldSend = true
           break
       }
-
       if (!shouldSend) return
 
       stream.injectToStream(

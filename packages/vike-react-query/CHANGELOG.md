@@ -1,3 +1,12 @@
+## [0.1.7](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.6...vike-react-query@0.1.7) (2025-10-06)
+
+
+### Bug Fixes
+
+* also send pre-fetched queries to client ([#192](https://github.com/vikejs/vike-react/issues/192)) ([953930c](https://github.com/vikejs/vike-react/commit/953930cecd3baa1ec2ac5f0f8408e1151c915506))
+
+
+
 ## [0.1.6](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.5...vike-react-query@0.1.6) (2025-09-16)
 
 

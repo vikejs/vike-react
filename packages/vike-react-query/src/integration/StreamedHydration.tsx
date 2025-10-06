@@ -34,7 +34,7 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
 
     const alreadySent = new Set<string>()
 
-    client.getQueryCache().subscribe((event) => {
+    const unsubscribe = client.getQueryCache().subscribe((event) => {
       if (stream.hasStreamEnded() || event.query.state.status !== 'success') return
 
       let shouldSend = false
@@ -63,6 +63,9 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
           }),
         )});_rqc_()</script>`,
       )
+    })
+    stream.streamEnd.then(() => {
+      unsubscribe()
     })
   }
 

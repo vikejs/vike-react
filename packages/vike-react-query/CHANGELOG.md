@@ -1,3 +1,12 @@
+## [0.1.9](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.8...vike-react-query@0.1.9) (2025-10-06)
+
+
+### Bug Fixes
+
+* also unsubscribe upon stream failure ([c3555ee](https://github.com/vikejs/vike-react/commit/c3555eefda8d2ff62f9b1a10fe434590cb11758a))
+
+
+
 ## [0.1.8](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.7...vike-react-query@0.1.8) (2025-10-06)
 
 

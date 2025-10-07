@@ -2,6 +2,7 @@ export { StreamedHydration }
 
 import type { QueryClient } from '@tanstack/react-query'
 import { dehydrate, hydrate, type DehydratedState } from '@tanstack/react-query'
+import { assert } from '../utils/assert.js'
 import { uneval } from 'devalue'
 import type { ReactNode } from 'react'
 import { useStream } from 'react-streaming'
@@ -64,9 +65,14 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
         )});_rqc_()</script>`,
       )
     })
-    stream.streamEnd.finally(() => {
+
+    // Unsubscribe
+    stream.streamEnd.then(() => {
       unsubscribe()
     })
+    // Properly handling rejection is complex, but luckily streamEnd never rejects
+    // https://github.com/brillout/promise-forwarding
+    stream.streamEnd.catch(() => assert(false)) // streamEnd never rejects
   }
 
   if (!isSSR && Array.isArray(window._rqd_)) {

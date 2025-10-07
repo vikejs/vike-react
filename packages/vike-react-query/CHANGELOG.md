@@ -1,3 +1,22 @@
+## [0.1.10](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.9...vike-react-query@0.1.10) (2025-10-07)
+
+
+### Bug Fixes
+
+* improve DX in dev ([899dcf1](https://github.com/vikejs/vike-react/commit/899dcf1d3bbeb13e0996856e2ec01e24150ace03))
+
+
+### Performance Improvements
+
+* remove server code from client-side bundles ([a51d68d](https://github.com/vikejs/vike-react/commit/a51d68d07727cafb0b4031d67babb9be37e362ef))
+
+
+### BREAKING CHANGES
+
+* Update Vike to `0.4.242` or above
+
+
+
 ## [0.1.9](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.8...vike-react-query@0.1.9) (2025-10-06)
 
 

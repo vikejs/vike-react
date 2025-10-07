@@ -8,6 +8,7 @@ import 'vike-react/config' // Needed for merging vike-react's Vike.Config such a
 const config = {
   name: 'vike-react-query',
   require: {
+    vike: '>=0.4.242',
     'vike-react': '>=0.6.4',
   },
   queryClientConfig: undefined,

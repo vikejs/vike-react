@@ -15,7 +15,10 @@
 * unsubscribe query cache ([#193](https://github.com/vikejs/vike-react/issues/193)) ([2913ebe](https://github.com/vikejs/vike-react/commit/2913ebe284c8312f7d941c8c9730cd7a72c25524))
 
 
-### BREAKING CHANGES
+### MINOR BREAKING CHANGES
+
+> [!NOTE]
+> We recommend ignoring `MINOR BREAKING CHANGES` unless this version breaks your app, see [Vike Versioning](https://vike.dev/versioning).
 
 * update vike-react to `0.6.8` or above
 

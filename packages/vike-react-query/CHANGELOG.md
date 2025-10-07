@@ -11,7 +11,10 @@
 * remove server code from client-side bundles ([a51d68d](https://github.com/vikejs/vike-react/commit/a51d68d07727cafb0b4031d67babb9be37e362ef))
 
 
-### BREAKING CHANGES
+### MINOR BREAKING CHANGES
+
+> [!NOTE]
+> We recommend ignoring `MINOR BREAKING CHANGES` unless this version breaks your app, see [Vike Versioning](https://vike.dev/versioning).
 
 * Update Vike to `0.4.242` or above
 

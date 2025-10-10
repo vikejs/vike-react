@@ -31,11 +31,24 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   })
   test('DOM', async () => {
     await page.goto(getServerUrl() + '/')
-    const body = await page.textContent('body')
-    // Playwright seems to await the HTML stream
-    expect(body).not.toContain(loading)
-    expect(body).toContain(content)
+    const getBody = async () => await page.textContent('body')
+    const isLoading = async () => {
+      const body = await getBody()
+      expect(body).toContain(loading)
+      /* Playwright seems to await the HTML stream?
+      expect(body).not.toContain(content)
+      */
+    }
+    const isLoaded = async () => {
+      const body = await getBody()
+      expect(body).toContain(content)
+      expect(body).not.toContain(loading)
+    }
+    await isLoading()
     await testCounter()
+    await isLoading()
+    // expect(await getBody()).not.toContain(content)
+    await autoRetry(isLoaded)
   })
 }
 

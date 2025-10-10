@@ -1,3 +1,13 @@
+## [0.6.9](https://github.com/vikejs/vike-react/compare/vike-react@0.6.8...vike-react@0.6.9) (2025-10-10)
+
+
+### Bug Fixes
+
+* improve component stack injection ([5c7b6c2](https://github.com/vikejs/vike-react/commit/5c7b6c2b37d744b6978b5d86f87f2d1bc0d0ed04))
+* react-streaming@^0.4.10 ([092271b](https://github.com/vikejs/vike-react/commit/092271b6be472b724ca056dc2b5b989a83e8f421))
+
+
+
 ## [0.6.8](https://github.com/vikejs/vike-react/compare/vike-react@0.6.7...vike-react@0.6.8) (2025-10-06)
 
 

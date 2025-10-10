@@ -28,7 +28,7 @@
     "@brillout/release-me": "^0.4.8",
     "@reduxjs/toolkit": "^2.8.2",
     "@types/react": "^19.1.13",
-    "react": "^19.1.1",
+    "react": "^19.2.0",
     "rimraf": "^5.0.5",
     "typescript": "^5.9.2",
     "vike": "^0.4.242",

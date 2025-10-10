@@ -33,7 +33,7 @@
     "@types/node": "^24.0.8",
     "@types/react": "^19.1.13",
     "jsdom": "^24.0.0",
-    "react": "^19.1.1",
+    "react": "^19.2.0",
     "react-streaming": "^0.4.10",
     "rimraf": "^5.0.5",
     "typescript": "^5.9.2",

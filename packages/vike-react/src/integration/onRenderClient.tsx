@@ -106,14 +106,31 @@ type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']
 type ErrorInfo = { componentStack?: string }
 function getErrorEnhanced(errorOriginal: unknown, errorInfo?: ErrorInfo) {
   if (!errorInfo?.componentStack || !isObject(errorOriginal)) return errorOriginal
-  const errorOiginalStackLines = String(errorOriginal.stack).split('\n')
-  const cutoff = errorOiginalStackLines.findIndex((l) => l.includes('node_modules') && l.includes('react'))
+  const errorStackLines = String(errorOriginal.stack).split('\n')
+
+  // Inject the component stack right before the React stack trace (potentially *after* some vike-react or react-streaming strack trace, e.g. if react-streaming's useAsync() throws an error).
+  // Perfect cutoff (as of react@19.2.0), but can easily break upon React internal refactoring
+  let cutoff = errorStackLines.findIndex((l) => l.includes('react_stack_bottom_frame'))
+  if (cutoff === -1) {
+    // Ideally, we should inject the component stack right before the React stack trace, and *after* any vike-react or react-streaming strack trace.
+    // But we cannot (easily) do that on the client-side, because Vite pre-bundles React, vike-react, and react-streaming inside a single bundle:
+    // ```console
+    // # This is React code, but it's included inside the vike-react pre-optimized bundle
+    // Object.react_stack_bottom_frame (http://localhost:3000/node_modules/.vite/deps/vike-react___internal_integration_onRenderClient.js)
+    //  ```
+    cutoff = errorStackLines.findIndex((l) => l.includes('node_modules') && l.includes('react'))
+  }
   if (cutoff === -1) return errorOriginal
 
+  const errorStackLinesBegin = errorStackLines.slice(0, cutoff)
+  const errorStackLinesEnd = errorStackLines.slice(cutoff)
+  const componentStackLines = errorInfo.componentStack.split('\n').filter(Boolean)
+  if (componentStackLines[0] === errorStackLinesBegin.at(-1)) componentStackLines.shift()
   const stackEnhanced = [
-    ...errorOiginalStackLines.slice(0, cutoff),
-    ...errorInfo.componentStack.split('\n').filter(Boolean),
-    ...errorOiginalStackLines.slice(cutoff),
+    //
+    ...errorStackLinesBegin,
+    ...componentStackLines,
+    ...errorStackLinesEnd,
   ].join('\n')
   const errorEnhanced = structuredClone(errorOriginal)
   errorEnhanced.stack = stackEnhanced

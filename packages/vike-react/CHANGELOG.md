@@ -1,3 +1,17 @@
+## [0.6.10](https://github.com/vikejs/vike-react/compare/vike-react@0.6.9...vike-react@0.6.10) (2025-10-21)
+
+
+### Bug Fixes
+
+* react-streaming@^0.4.11 ([29b4c5b](https://github.com/vikejs/vike-react/commit/29b4c5bbd2800e6f0e0fab2e2687f53e5c4d82e6))
+
+
+### BREAKING CHANGES
+
+* If your app is CJS then update Node.js to v23 or above (or v22 with the `--experimental-require-module` flag) in order to [be able to `require(esm)`](https://nodejs.org/en/blog/announcements/v22-release-announce#support-requireing-synchronous-esm-graphs) . If your app is ESM then you can keep using older Node.js versions.
+
+
+
 ## [0.6.9](https://github.com/vikejs/vike-react/compare/vike-react@0.6.8...vike-react@0.6.9) (2025-10-10)
 
 

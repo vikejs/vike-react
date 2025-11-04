@@ -213,18 +213,14 @@ function addEcosystemStamp() {
 }
 
 async function getHtmlInjections(pageContext: PageContextServer) {
-  const headHtmlBegin = dangerouslySkipEscape(
-    (await callCumulativeHooks(pageContext.config.headHtmlBegin, pageContext)).join(''),
-  )
-  const headHtmlEnd = dangerouslySkipEscape(
-    (await callCumulativeHooks(pageContext.config.headHtmlEnd, pageContext)).join(''),
-  )
-  const bodyHtmlBegin = dangerouslySkipEscape(
-    (await callCumulativeHooks(pageContext.config.bodyHtmlBegin, pageContext)).join(''),
-  )
-  const bodyHtmlEnd = dangerouslySkipEscape(
-    (await callCumulativeHooks(pageContext.config.bodyHtmlEnd, pageContext)).join(''),
-  )
+  const { config } = pageContext
+  // run these in Promise.all
+  const [headHtmlBegin, headHtmlEnd, bodyHtmlBegin, bodyHtmlEnd] = await Promise.all([
+    dangerouslySkipEscape((await callCumulativeHooks(config.headHtmlBegin, pageContext)).join('')),
+    dangerouslySkipEscape((await callCumulativeHooks(config.headHtmlEnd, pageContext)).join('')),
+    dangerouslySkipEscape((await callCumulativeHooks(config.bodyHtmlBegin, pageContext)).join('')),
+    dangerouslySkipEscape((await callCumulativeHooks(config.bodyHtmlEnd, pageContext)).join('')),
+  ])
   return { bodyHtmlBegin, bodyHtmlEnd, headHtmlBegin, headHtmlEnd }
 }
 

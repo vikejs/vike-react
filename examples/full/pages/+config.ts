@@ -15,4 +15,6 @@ const config = {
   viewport: 999,
   // https://vike.dev/extends
   extends: vikeReact,
+  bodyHtmlEnd: '<div id="bodyHtmlEnd-test"></div>',
+  headHtmlEnd: '<meta name="headHtmlEnd-test" content="test" />',
 } satisfies Config

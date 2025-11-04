@@ -29,7 +29,7 @@ async function onRenderHtml(
 
   const headHtml = getHeadHtml(pageContext)
 
-  const { bodyHtmlBegin, bodyHtmlEnd } = await getBodyHtmlBoundary(pageContext)
+  const { headHtmlBegin, headHtmlEnd, bodyHtmlBegin, bodyHtmlEnd } = await getHtmlInjections(pageContext)
 
   const { htmlAttributesString, bodyAttributesString } = getTagAttributes(pageContext)
 
@@ -53,7 +53,9 @@ async function onRenderHtml(
     <html${dangerouslySkipEscape(htmlAttributesString)}>
       <head>
         <meta charset="UTF-8" />
+        ${headHtmlBegin}
         ${headHtml}
+        ${headHtmlEnd}
       </head>
       <body${dangerouslySkipEscape(bodyAttributesString)}>
         ${bodyHtmlBegin}
@@ -210,14 +212,16 @@ function addEcosystemStamp() {
     {}
 }
 
-async function getBodyHtmlBoundary(pageContext: PageContextServer) {
-  const bodyHtmlBegin = dangerouslySkipEscape(
-    (await callCumulativeHooks(pageContext.config.bodyHtmlBegin, pageContext)).join(''),
-  )
-  const bodyHtmlEnd = dangerouslySkipEscape(
-    (await callCumulativeHooks(pageContext.config.bodyHtmlEnd, pageContext)).join(''),
-  )
-  return { bodyHtmlBegin, bodyHtmlEnd }
+async function getHtmlInjections(pageContext: PageContextServer) {
+  const { config } = pageContext
+  // run these in Promise.all
+  const [headHtmlBegin, headHtmlEnd, bodyHtmlBegin, bodyHtmlEnd] = await Promise.all([
+    dangerouslySkipEscape((await callCumulativeHooks(config.headHtmlBegin, pageContext)).join('')),
+    dangerouslySkipEscape((await callCumulativeHooks(config.headHtmlEnd, pageContext)).join('')),
+    dangerouslySkipEscape((await callCumulativeHooks(config.bodyHtmlBegin, pageContext)).join('')),
+    dangerouslySkipEscape((await callCumulativeHooks(config.bodyHtmlEnd, pageContext)).join('')),
+  ])
+  return { bodyHtmlBegin, bodyHtmlEnd, headHtmlBegin, headHtmlEnd }
 }
 
 type StreamSetting = {

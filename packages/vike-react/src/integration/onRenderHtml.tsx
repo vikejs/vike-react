@@ -29,7 +29,7 @@ async function onRenderHtml(
 
   const headHtml = getHeadHtml(pageContext)
 
-  const { headHtmlBegin, headHtmlEnd, bodyHtmlBegin, bodyHtmlEnd } = await getHtmlBoundaries(pageContext)
+  const { headHtmlBegin, headHtmlEnd, bodyHtmlBegin, bodyHtmlEnd } = await getHtmlInjections(pageContext)
 
   const { htmlAttributesString, bodyAttributesString } = getTagAttributes(pageContext)
 
@@ -212,7 +212,7 @@ function addEcosystemStamp() {
     {}
 }
 
-async function getHtmlBoundaries(pageContext: PageContextServer) {
+async function getHtmlInjections(pageContext: PageContextServer) {
   const headHtmlBegin = dangerouslySkipEscape(
     (await callCumulativeHooks(pageContext.config.headHtmlBegin, pageContext)).join(''),
   )

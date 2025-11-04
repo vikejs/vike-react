@@ -68,6 +68,16 @@ const config = {
       cumulative: true,
       global: true,
     },
+    headHtmlBegin: {
+      env: { server: true },
+      cumulative: true,
+      global: true,
+    },
+    headHtmlEnd: {
+      env: { server: true },
+      cumulative: true,
+      global: true,
+    },
     htmlAttributes: {
       env: { server: true },
       global: true,

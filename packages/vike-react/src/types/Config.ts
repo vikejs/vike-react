@@ -122,28 +122,28 @@ declare global {
        *
        * https://vike.dev/bodyHtmlBegin
        */
-      bodyHtmlBegin?: HtmlBoundary
+      bodyHtmlBegin?: HtmlInjection
 
       /**
        * Raw HTML injected at the end of `<body>`.
        *
        * https://vike.dev/bodyHtmlEnd
        */
-      bodyHtmlEnd?: HtmlBoundary
+      bodyHtmlEnd?: HtmlInjection
 
       /**
        * Raw HTML injected at the start of `<head>`.
        *
        * https://vike.dev/headHtmlBegin
        */
-      headHtmlBegin?: HtmlBoundary
+      headHtmlBegin?: HtmlInjection
 
       /**
        * Raw HTML injected at the end of `<head>`.
        *
        * https://vike.dev/headHtmlEnd
        */
-      headHtmlEnd?: HtmlBoundary
+      headHtmlEnd?: HtmlInjection
 
       /**
        * Add tag attributes such as `<html class="dark">`.
@@ -262,10 +262,10 @@ declare global {
       Wrapper?: Wrapper[]
       Layout?: Layout[]
       Head?: Head[]
-      bodyHtmlBegin?: HtmlBoundary[]
-      bodyHtmlEnd?: HtmlBoundary[]
-      headHtmlBegin?: HtmlBoundary[]
-      headHtmlEnd?: HtmlBoundary[]
+      bodyHtmlBegin?: HtmlInjection[]
+      bodyHtmlEnd?: HtmlInjection[]
+      headHtmlBegin?: HtmlInjection[]
+      headHtmlEnd?: HtmlInjection[]
       bodyAttributes?: TagAttributes[]
       htmlAttributes?: TagAttributes[]
       onBeforeRenderHtml?: Function[]
@@ -283,7 +283,7 @@ declare global {
 // - https://github.com/Microsoft/TypeScript/issues/983
 type PageContext_ = PageContext
 
-type HtmlBoundary = string | ((pageContext: PageContext) => string)
+type HtmlInjection = string | ((pageContext: PageContext) => string)
 
 export type Head = React.ReactNode | (() => React.ReactNode)
 type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode

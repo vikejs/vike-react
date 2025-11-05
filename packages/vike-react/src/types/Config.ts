@@ -1,6 +1,6 @@
 import type { ImportString, PageContext } from 'vike/types'
 import type { TagAttributes } from '../utils/getTagAttributesString.js'
-import type { Viewport } from '../integration/onRenderHtml.js'
+import type { Viewport, HtmlInjection } from '../integration/onRenderHtml.js'
 import type { ConfigsCumulative } from '../hooks/useConfig/configsCumulative.js'
 import type React from 'react'
 import type { HydrationOptions, RootOptions } from 'react-dom/client'
@@ -282,8 +282,6 @@ declare global {
 // - https://stackoverflow.com/questions/46559021/typescript-use-of-global-type-inside-namespace-with-same-type
 // - https://github.com/Microsoft/TypeScript/issues/983
 type PageContext_ = PageContext
-
-type HtmlInjection = string | ((pageContext: PageContext) => string)
 
 export type Head = React.ReactNode | (() => React.ReactNode)
 type Wrapper = (props: { children: React.ReactNode }) => React.ReactNode

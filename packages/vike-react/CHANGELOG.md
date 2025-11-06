@@ -1,3 +1,12 @@
+## [0.6.11](https://github.com/vikejs/vike-react/compare/vike-react@0.6.10...vike-react@0.6.11) (2025-11-06)
+
+
+### Features
+
+* +headHtmlBegin / +headHtmlEnd ([#195](https://github.com/vikejs/vike-react/issues/195)) ([4b8bded](https://github.com/vikejs/vike-react/commit/4b8bded5351be65300c19856ca6d15ad3e404a8a))
+
+
+
 ## [0.6.10](https://github.com/vikejs/vike-react/compare/vike-react@0.6.9...vike-react@0.6.10) (2025-10-21)
 
 

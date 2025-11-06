@@ -30,7 +30,7 @@
     "styled-jsx": "^5.1.6",
     "typescript": "^5.9.2",
     "vike": "^0.4.242",
-    "vike-react": "0.6.10",
+    "vike-react": "0.6.11",
     "vite": "^7.1.7"
   },
   "typesVersions": {

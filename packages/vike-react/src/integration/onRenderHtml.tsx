@@ -34,7 +34,7 @@ async function onRenderHtml(
   const { htmlAttributesString, bodyAttributesString } = getTagAttributes(pageContext)
 
   // Not needed on the client-side, thus we remove it to save KBs sent to the client
-  delete pageContext._configFromHook
+  delete pageContext._configViaHook
 
   // pageContext.{pageHtmlString,pageHtmlStream} is set by renderPageToHtml() and can be overridden by user at onAfterRenderHtml()
   let pageHtmlStringOrStream: string | ReturnType<typeof dangerouslySkipEscape> | PageHtmlStream =
@@ -133,7 +133,7 @@ function getHeadHtml(pageContext: PageContextServer & PageContextInternal) {
       // Added by +Head
       ...(pageContext.config.Head ?? []),
       // Added by useConfig()
-      ...(pageContext._configFromHook?.Head ?? []),
+      ...(pageContext._configViaHook?.Head ?? []),
     ]
       .filter((Head) => Head !== null && Head !== undefined)
       .map((Head) => getHeadElementHtml(Head, pageContext))

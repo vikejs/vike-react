@@ -20,7 +20,7 @@ const config = {
 
   // @eject-remove end
   passToClient: [
-    '_configViaComponent',
+    '_configViaHook',
     // https://github.com/vikejs/vike-react/issues/25
     process.env.NODE_ENV !== 'production' && '$$typeof',
   ].filter(isNotFalse),

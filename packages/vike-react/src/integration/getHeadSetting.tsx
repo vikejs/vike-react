@@ -14,19 +14,19 @@ function getHeadSetting<T>(
   pageContext: PageContext & PageContextInternal,
 ): undefined | T {
   // Set by useConfig()
-  const valFromUseConfig = pageContext._configViaHook?.[configName]
+  const valFromHook = pageContext._configViaHook?.[configName]
   // Set by +configName.js
   const valFromConfig = pageContext.config[configName]
 
   const getCallable = (val: unknown) => (isCallable(val) ? val(pageContext) : val)
   if (!includes(configsCumulative, configName)) {
-    if (valFromUseConfig !== undefined) return valFromUseConfig as any
+    if (valFromHook !== undefined) return valFromHook as any
     return getCallable(valFromConfig) as any
   } else {
     return [
       //
       ...((valFromConfig as any) ?? []).map(getCallable),
-      ...((valFromUseConfig as any) ?? []),
+      ...((valFromHook as any) ?? []),
     ] as any
   }
 }

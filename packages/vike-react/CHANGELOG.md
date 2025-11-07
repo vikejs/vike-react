@@ -1,3 +1,12 @@
+## [0.6.12](https://github.com/vikejs/vike-react/compare/vike-react@0.6.11...vike-react@0.6.12) (2025-11-07)
+
+
+### Bug Fixes
+
+* rename ConfigFromHook => ConfigViaHook ([#197](https://github.com/vikejs/vike-react/issues/197)) ([b357ecc](https://github.com/vikejs/vike-react/commit/b357ecc14eeaafb2bfc31923995b22e899211bf7))
+
+
+
 ## [0.6.11](https://github.com/vikejs/vike-react/compare/vike-react@0.6.10...vike-react@0.6.11) (2025-11-06)
 
 

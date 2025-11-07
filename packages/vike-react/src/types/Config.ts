@@ -292,11 +292,11 @@ type Loading = { component?: () => React.ReactNode; layout?: () => React.ReactNo
 type PickWithoutGetter<T, K extends keyof T> = {
   [P in K]: Exclude<T[P], Function>
 }
-export type ConfigFromHook = PickWithoutGetter<
+export type ConfigViaComponent = PickWithoutGetter<
   Vike.Config,
   'Head' | 'title' | 'description' | 'image' | 'favicon' | 'lang' | 'viewport' | 'bodyAttributes' | 'htmlAttributes'
 >
-export type ConfigFromHookResolved = Omit<ConfigFromHook, ConfigsCumulative> &
+export type ConfigViaComponentResolved = Omit<ConfigViaComponent, ConfigsCumulative> &
   Pick<Vike.ConfigResolved, ConfigsCumulative>
 
 export type ReactOptions = {

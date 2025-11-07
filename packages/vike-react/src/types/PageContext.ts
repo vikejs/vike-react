@@ -1,6 +1,6 @@
 import type React from 'react'
 import type ReactDOM from 'react-dom/client'
-import type { ConfigFromHookResolved } from './Config.js'
+import type { ConfigViaComponentResolved } from './Config.js'
 import type { PageHtmlStream } from '../integration/onRenderHtml.js'
 
 // https://vike.dev/pageContext#typescript
@@ -24,6 +24,6 @@ declare global {
 
 // Internal pageContext properties
 export type PageContextInternal = {
-  _configFromHook?: ConfigFromHookResolved
+  _configViaComponent?: ConfigViaComponentResolved
   _headAlreadySet?: boolean
 }

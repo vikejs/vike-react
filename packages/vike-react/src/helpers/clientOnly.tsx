@@ -14,11 +14,7 @@ import React, {
 function clientOnly<T extends ComponentType<any>>(
   load: () => Promise<{ default: T } | T>,
 ): ComponentType<ComponentProps<T> & { fallback?: ReactNode }> {
-  // Client side: always bundled by Vite, import.meta.env.SSR === false
-  // Server side: may or may not be bundled by Vite, import.meta.env.SSR === true || import.meta.env === undefined
-  //@ts-expect-error
-  import.meta.env ??= { SSR: true }
-  if (import.meta.env.SSR) {
+  if (!globalThis.__VIKE__IS_CLIENT) {
     return (props) => <>{props.fallback}</>
   } else {
     const Component = lazy(() =>

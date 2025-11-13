@@ -23,19 +23,7 @@ type PluginInterop = Record<string, unknown> & { name: string }
 function vikeReactZustand(): PluginInterop[] {
   const plugins: Plugin[] = [
     {
-      name: 'vike-react-zustand:config',
-      configEnvironment: {
-        handler() {
-          return {
-            resolve: {
-              noExternal: ['vike-react-zustand'],
-            },
-          }
-        },
-      },
-    },
-    {
-      name: 'vike-react-zustand:transform',
+      name: 'vike-react-zustand',
       enforce: 'post',
       transform: {
         filter: filterRolldown,

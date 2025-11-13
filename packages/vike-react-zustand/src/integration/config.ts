@@ -5,6 +5,7 @@ import 'vike-react/config' // Needed for merging vike-react's Vike.Config such a
 export default {
   name: 'vike-react-zustand',
   require: {
+    vike: '>=0.4.242',
     'vike-react': '>=0.4.13',
   },
   stream: { require: true },

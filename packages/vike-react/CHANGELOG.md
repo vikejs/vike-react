@@ -1,3 +1,17 @@
+## [0.6.13](https://github.com/vikejs/vike-react/compare/vike-react@0.6.12...vike-react@0.6.13) (2025-11-13)
+
+
+### Bug Fixes
+
+* more robust usage of globalThis.__VIKE__IS_CLIENT instead of import.meta.env.SSR ([d694642](https://github.com/vikejs/vike-react/commit/d694642ea585e70ff0aa28c7a3b1125eb063b0a5))
+
+
+### BREAKING CHANGES
+
+* Update Vike to `0.4.242` or above
+
+
+
 ## [0.6.12](https://github.com/vikejs/vike-react/compare/vike-react@0.6.11...vike-react@0.6.12) (2025-11-07)
 
 

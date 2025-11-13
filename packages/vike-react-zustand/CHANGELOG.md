@@ -6,7 +6,10 @@
 * don't require noExternal by using globalThis.__VIKE__IS_CLIENT ([#198](https://github.com/vikejs/vike-react/issues/198)) ([93eef0d](https://github.com/vikejs/vike-react/commit/93eef0d259ef7a5e68ac6db24c20209d2ff0eade))
 
 
-### BREAKING CHANGES
+### MINOR BREAKING CHANGES
+
+> [!NOTE]
+> We recommend ignoring `MINOR BREAKING CHANGES` unless this version breaks your app, see [Vike Versioning](https://vike.dev/versioning).
 
 * Update Vike to `0.4.242` or above
 

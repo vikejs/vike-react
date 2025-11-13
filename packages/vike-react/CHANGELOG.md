@@ -6,7 +6,10 @@
 * more robust usage of globalThis.__VIKE__IS_CLIENT instead of import.meta.env.SSR ([d694642](https://github.com/vikejs/vike-react/commit/d694642ea585e70ff0aa28c7a3b1125eb063b0a5))
 
 
-### BREAKING CHANGES
+### MINOR BREAKING CHANGES
+
+> [!NOTE]
+> We recommend ignoring `MINOR BREAKING CHANGES` unless this version breaks your app, see [Vike Versioning](https://vike.dev/versioning).
 
 * Update Vike to `0.4.242` or above
 

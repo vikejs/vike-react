@@ -12,7 +12,7 @@ import { sanitizeForSerialization } from './utils/sanitizeForSerialization.js'
 import { assignDeep } from './utils/assignDeep.js'
 
 // Client-side cache (not used in SSR)
-const clientCache = import.meta.env.SSR
+const clientCache = !globalThis.__VIKE__IS_CLIENT
   ? null
   : getGlobalObject('getOrCreateStore.ts', {
       initializers: {} as Record<string, StateCreator<any, [], []>>,
@@ -32,7 +32,7 @@ function getOrCreateStore<T>({
 }): CreateStoreReturn<T> {
   try {
     setPageContext(pageContext)
-    if (import.meta.env.SSR) {
+    if (!globalThis.__VIKE__IS_CLIENT) {
       pageContext._vikeReactZustandStoresServer ??= {}
       let store = pageContext._vikeReactZustandStoresServer[key] as CreateStoreReturn<T>
       if (store) return store

@@ -1,0 +1,73 @@
+{
+  "name": "vike-react-sentry",
+  "version": "0.1.0",
+  "homepage": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-sentry#readme",
+  "type": "module",
+  "exports": {
+    "./config": "./dist/integration/+config.js",
+    "./plugin": "./dist/plugin/index.js",
+    "./__internal/integration/Head": "./dist/integration/Head.js",
+    "./__internal/integration/onCreateGlobalContext": "./dist/integration/onCreateGlobalContext.js",
+    "./__internal/integration/client": "./dist/integration/client.js",
+    "./__internal/integration/onError": "./dist/integration/onError.js"
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "rimraf dist/ && tsc",
+    "release": "release-me patch",
+    "release:minor": "release-me minor",
+    "release:commit": "release-me commit"
+  },
+  "peerDependencies": {
+    "@sentry/react": ">=10.0.0",
+    "@sentry/node": ">=10.0.0",
+    "@sentry/vite-plugin": ">=4.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "vike-react": ">=0.6.4"
+  },
+  "devDependencies": {
+    "@brillout/release-me": "^0.4.8",
+    "@sentry/react": "^10.22.0",
+    "@sentry/node": "^10.22.0",
+    "@sentry/vite-plugin": "^4.6.0",
+    "@types/node": "^24.0.8",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@universal-middleware/core": "^0.4.13",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.9.2",
+    "vike": "^0.4.242",
+    "vike-react": "0.6.10",
+    "vite": "^7.1.7"
+  },
+  "dependencies": {
+    "@universal-middleware/core": "^0.4.13"
+  },
+  "typesVersions": {
+    "*": {
+      "config": [
+        "dist/integration/+config.d.ts"
+      ],
+      "plugin": [
+        "dist/plugin/index.d.ts"
+      ],
+      "__internal/integration/onCreateGlobalContext": [
+        "dist/integration/onCreateGlobalContext.d.ts"
+      ],
+      "__internal/integration/client": [
+        "dist/integration/client.d.ts"
+      ],
+      "__internal/integration/onError": [
+        "dist/integration/onError.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "MIT"
+}
+

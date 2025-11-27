@@ -7,7 +7,10 @@
     "./config": "./dist/integration/+config.js",
     "./plugin": "./dist/plugin/index.js",
     "./__internal/integration/Head": "./dist/integration/Head.js",
-    "./__internal/integration/onCreateGlobalContext": "./dist/integration/onCreateGlobalContext.js",
+    "./__internal/integration/onCreateGlobalContext": {
+      "browser": "./dist/integration/onCreateGlobalContext-client.js",
+      "default": "./dist/integration/onCreateGlobalContext-server.js"
+    },
     "./__internal/integration/client": "./dist/integration/client.js",
     "./__internal/integration/onError": "./dist/integration/onError.js"
   },
@@ -39,7 +42,7 @@
     "react-dom": "^19.2.0",
     "rimraf": "^5.0.5",
     "typescript": "^5.9.2",
-    "vike": "^0.4.242",
+    "vike": "^0.4.247",
     "vike-react": "0.6.10",
     "vite": "^7.1.7"
   },
@@ -70,4 +73,3 @@
   ],
   "license": "MIT"
 }
-

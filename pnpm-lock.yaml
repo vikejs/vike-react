@@ -18,8 +18,8 @@ importers:
         specifier: ^0.1.15
         version: 0.1.15(typescript@5.9.3)
       playwright:
-        specifier: ^1.45.0
-        version: 1.51.1
+        specifier: ^1.57.0
+        version: 1.57.0
       prettier:
         specifier: ^3.2.5
         version: 3.5.3
@@ -2662,8 +2662,13 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.51.1:
-    resolution: {integrity: sha512-kkx+MB2KQRkyxjYPc3a0wLZZoDczmppyGJIvQ43l+aZihkaVvmu/21kiyaHeHjiFxjxNNFnUncKmcGIyOojsaw==}
+  playwright-core@1.57.0:
+    resolution: {integrity: sha512-agTcKlMw/mjBWOnD6kFZttAAGHgi/Nw0CZ2o6JqWSbMlI219lAFLZZCyqByTsvVAJq5XA5H8cA6PrvBRpBWEuQ==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.57.0:
+    resolution: {integrity: sha512-ilYQj1s8sr2ppEJ2YVadYBN0Mb3mdo9J0wQ+UuDhzYqURwSoW4n1Xs5vs7ORwgDGmyEh33tRMeS8KhdkMoLXQw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -5934,9 +5939,11 @@ snapshots:
 
   playwright-core@1.51.1: {}
 
-  playwright@1.51.1:
+  playwright-core@1.57.0: {}
+
+  playwright@1.57.0:
     dependencies:
-      playwright-core: 1.51.1
+      playwright-core: 1.57.0
     optionalDependencies:
       fsevents: 2.3.2
 

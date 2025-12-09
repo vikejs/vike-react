@@ -11,6 +11,7 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
 **Table of Contents**
 
 [Installation](#installation)  
+[Basic usage](#basic-usage)  
 [Example](#example)  
 [Settings](#settings)  
 [Populate store with `+data`](#populate-store-with-data)  
@@ -35,7 +36,15 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
      extends: [vikeReact, vikeReactRedux]
    }
    ```
-3. Create `+redux.js` file:
+
+> [!NOTE]
+> The `vike-react-redux` extension requires [`vike-react`](https://vike.dev/vike-react).
+
+<br/>
+
+## Basic usage
+
+1. Create `+redux.js` file:
    ```js
     // pages/+redux.js
     // Environemnt: client, server
@@ -73,7 +82,7 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
    export const useAppSelector = useSelector.withTypes<RootState>()
    export const useAppStore = useStore.withTypes<AppStore>()
    ```
-4. You can now use Redux at any of your components.
+2. You can now use Redux at any of your components.
    ```tsx
    // components/Counter.tsx
 

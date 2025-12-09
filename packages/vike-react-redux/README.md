@@ -6,6 +6,10 @@
 
 Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://vike.dev/vike-react) app.
 
+<br/>
+
+**Table of Contents**
+
 [Installation](#installation)  
 [Example](#example)  
 [Settings](#settings)  

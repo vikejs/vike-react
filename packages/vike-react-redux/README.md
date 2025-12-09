@@ -17,7 +17,7 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
 [Populate store with `+data`](#populate-store-with-data)  
 [Version history](#version-history)  
 [How it works](#how-it-works)  
-[See Also](#see-also)  
+[See also](#see-also)  
 
 <br/>
 

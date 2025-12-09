@@ -14,6 +14,10 @@ Features:
 - Fallback upon loading and/or error
 - [Caching](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
 
+<br/>
+
+**Table of Contents**
+
 [Installation](#installation)  
 [Basic usage](#basic-usage)  
 [Example](#example)  

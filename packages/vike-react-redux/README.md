@@ -11,7 +11,7 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
 [Settings](#settings)  
 [Populate store with `+data`](#populate-store-with-data)  
 [Version history](#version-history)  
-[What it does](#what-it-does)  
+[How it works](#how-it-works)  
 [See Also](#see-also)  
 
 <br/>
@@ -162,7 +162,7 @@ See [CHANGELOG.md](https://github.com/vikejs/vike-react/blob/main/packages/vike-
 
 <br/>
 
-## What it does
+## How it works
 
 `vike-react-redux` does the following:
  - Initializes the store. (Using [`+onCreatePageContext.server`](https://vike.dev/onCreatePageContext), [`+onAfterRenderHtml.server`](https://vike.dev/onAfterRenderHtml), and [`+onBeforeRenderClient.client`](https://vike.dev/onBeforeRenderClient).)

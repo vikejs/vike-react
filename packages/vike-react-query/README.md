@@ -14,10 +14,6 @@ Features:
 - Fallback upon loading and/or error
 - [Caching](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
 
-<br/>
-
-**Table of Contents**
-
 [Installation](#installation)  
 [Basic usage](#basic-usage)  
 [Example](#example)  
@@ -26,8 +22,8 @@ Features:
 [Error Handling](#error-handling)  
 [Settings](#settings)  
 [Usage with Telefunc](#usage-with-telefunc)  
-[How it works](#how-it-works)  
 [Version history](#version-history)  
+[How it works](#how-it-works)  
 [See also](#see-also)  
 
 <br/>
@@ -449,6 +445,12 @@ const Movies = withFallback(
 
 <br/>
 
+## Version history
+
+See [CHANGELOG.md](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-query/CHANGELOG.md).
+
+<br/>
+
 ## How it works
 
 On the server side (during SSR), the component is rendered to HTML and its data is loaded. On the client side, the component is just [hydrated](https://vike.dev/hydration): the data fetched on the server is passed to the client and reused.
@@ -457,12 +459,6 @@ Upon page navigation (and rendering the first page if [SSR is disabled](https://
 
 > [!NOTE]
 > Behind the scenes `vike-react-query` integrates TanStack Query into [`react-streaming`](https://github.com/brillout/react-streaming#readme).
-
-<br/>
-
-## Version history
-
-See [CHANGELOG.md](https://github.com/vikejs/vike-react/blob/main/packages/vike-react-query/CHANGELOG.md).
 
 <br/>
 

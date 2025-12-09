@@ -4,7 +4,7 @@
 
 # `vike-react-query`
 
-Enables your React components to fetch data using [TanStack Query](https://tanstack.com/query/latest).
+Enables your SSR React components to fetch data using [TanStack Query](https://tanstack.com/query/latest).
 
 Powered by [`react-streaming`](https://github.com/brillout/react-streaming#readme).
 
@@ -19,7 +19,7 @@ Features:
 You can completely stop using Vike's [`+data` hook](https://vike.dev/data) — or use both: `+data` for some pages, and `vike-react-query` for others.
 
 > [!NOTE]
-> If you don't want to stop using Vike's `+data` hook, then **you don't need `vike-react-query`** — you can use TanStack Query without any Vike integration.
+> If you don't use [SSR](https://vike.dev/ssr) (i.e. SPA/SSG with [pre-rendering](https://vike.dev/pre-rendering)), then **you don't need `vike-react-query`** — you can use TanStack Query without any Vike integration.
 
 <br/>
 

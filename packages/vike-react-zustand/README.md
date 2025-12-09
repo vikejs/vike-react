@@ -7,7 +7,7 @@
 Integrates [Zustand](https://zustand-demo.pmnd.rs/) state management into your [`vike-react`](https://vike.dev/vike-react) app with SSR support.
 
 > [!NOTE]
-> If you don't use any of your Zustand store during [Server-Side Rendering](https://vike.dev/ssr), then **you don't need `vike-react-zustand`** — you can use Zustand without any Vike integration.
+> If you don't use any of your Zustand store during [SSR](https://vike.dev/ssr), then **you don't need `vike-react-zustand`** — you can use Zustand without any Vike integration.
 >
 > The `vike-react-zustand` extension is about enabling you to use stores with SSR. See [How it works](#how-it-works).
 

@@ -140,7 +140,7 @@ function onData(pageContext: PageContext & { data?: Data }) {
 
   // Saving KBs: we don't need pageContext.data (we use the store instead)
   // - If we don't delete pageContext.data then Vike sends pageContext.data to the client-side
-  // - This optimization only works if the page is SSR'd: if the page is pre-rendered then don't do this
+  // - This optimization only works with SSR: if the page is pre-rendered then don't do this
   delete pageContext.data
 }
 ```
@@ -148,9 +148,9 @@ function onData(pageContext: PageContext & { data?: Data }) {
 See To-Do List example at [examples/redux/](https://github.com/vikejs/vike-react/tree/main/examples/redux).
 
 > [!NOTE]
-> During [SSR](https://vike.dev/ssr), `+onData` is called only on the server. That's because the store state is sent to the client, so that when the page hydrates, the client has the exact same state as the server — preventing [hydration mismatches](https://vike.dev/hydration-mismatch).
+> During [SSR](https://vike.dev/ssr), `+onData` is called only on the server — the store's initial state (set by `initializeTodos()`) is automatically sent to the client, so you don't need to populate the store again on the client.
 >
-> As a result, the store doesn't need to be populated on the client: it's already populated on the server and then sent to the client.
+> This approach prevents [hydration mismatches](https://vike.dev/hydration-mismatch), as it ensures the client has the exact same initial state as the server during SSR.
 >
 > See also: [What it does](#what-it-does).
 

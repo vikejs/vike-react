@@ -11,6 +11,6 @@ function onData(pageContext: PageContext & { data?: Data }) {
 
   // Saving KBs: we don't need pageContext.data (we use the store instead)
   // - If we don't delete pageContext.data then Vike sends pageContext.data to the client-side
-  // - This optimization only works if the page is SSR'd: if the page is pre-rendered then don't do this
+  // - This optimization only works with SSR: if the page is pre-rendered then don't do this
   if (!pageContext.isPrerendering) delete pageContext.data
 }

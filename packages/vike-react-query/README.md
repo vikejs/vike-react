@@ -9,10 +9,17 @@ Enables your React components to fetch data using [TanStack Query](https://tanst
 Powered by [`react-streaming`](https://github.com/brillout/react-streaming#readme).
 
 Features:
-- [Progressive Rendering](https://vike.dev/streaming#progressive-rendering)
-- [SSR benefits](https://github.com/brillout/react-streaming#ssr)
+- Data is fetched at the component level (unlike [`+data`](https://vike.dev/data), which fetches at the page level)
+- The rest of the page is eagerly rendered while the component waits for its data (see [Progressive Rendering](https://vike.dev/streaming#progressive-rendering))
+- All TanStack Query niceties
+- All [SSR benefits](https://github.com/brillout/react-streaming#ssr)
 - Fallback upon loading and/or error
 - [Caching](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery)
+
+You can completely stop using Vike's [`+data` hook](https://vike.dev/data) — or use both: `+data` for some pages, and `vike-react-query` for others.
+
+> [!NOTE]
+> If you don't want to stop using Vike's `+data` hook, then you **don't need `vike-react-query`** — you can use TanStack Query without any Vike integration.
 
 <br/>
 
@@ -78,13 +85,6 @@ const Movie = ({ id }) => {
 
 > [!NOTE]
 > Even though [`useSuspenseQuery()`](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQuery) is imported from `@tanstack/react-query`, you need to install `vike-react-query` for it to work. (The `useSuspenseQuery()` hook requires an [HTML stream](https://vike.dev/streaming) integration.)
-
-Benefits:
- - Data is fetched at the component level (unlike [`+data`](https://vike.dev/data), which fetches at the page level).
- - The rest of the page is eagerly rendered while the component waits for its data (see [Progressive Rendering](https://vike.dev/streaming#progressive-rendering)).
- - All the niceties of TanStack Query.
-
-You can completely stop using Vike's [`+data` hook](https://vike.dev/data) — or use both: `+data` for some pages, and `vike-react-query` for others.
 
 <br/>
 

@@ -107,7 +107,7 @@ Integrates [Redux](https://react-redux.js.org) into your [`vike-react`](https://
 
 ## Example
 
-See [examples/redux](https://github.com/vikejs/vike-react/tree/main/examples/redux).
+See [examples/redux/](https://github.com/vikejs/vike-react/tree/main/examples/redux).
 
 <br/>
 

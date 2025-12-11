@@ -1,3 +1,13 @@
+## [0.6.14](https://github.com/vikejs/vike-react/compare/vike-react@0.6.13...vike-react@0.6.14) (2025-12-11)
+
+
+### Bug Fixes
+
+* react-streaming@^0.4.14 ([80fde43](https://github.com/vikejs/vike-react/commit/80fde437bfab666e5b4a0a30386300363bd99939))
+* use new getBetterErrorLight design ([0367843](https://github.com/vikejs/vike-react/commit/0367843eae1289430413bea69018997c582326c7))
+
+
+
 ## [0.6.13](https://github.com/vikejs/vike-react/compare/vike-react@0.6.12...vike-react@0.6.13) (2025-11-13)
 
 

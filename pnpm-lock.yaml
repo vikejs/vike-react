@@ -55,9 +55,9 @@ importers:
         version: 5.9.3
       vike:
         specifier: ^0.4.242
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vike-react:
-        specifier: 0.6.13
+        specifier: 0.6.14
         version: link:../../packages/vike-react
       vike-react-apollo:
         specifier: 0.1.4
@@ -94,9 +94,9 @@ importers:
         version: 5.9.3
       vike:
         specifier: ^0.4.247
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vike-react:
-        specifier: 0.6.13
+        specifier: 0.6.14
         version: link:../../packages/vike-react
       vite:
         specifier: ^7.2.6
@@ -115,9 +115,9 @@ importers:
         version: 19.2.1(react@19.2.1)
       vike:
         specifier: ^0.4.242
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vike-react:
-        specifier: 0.6.13
+        specifier: 0.6.14
         version: link:../../packages/vike-react
       vite:
         specifier: ^7.1.7
@@ -148,9 +148,9 @@ importers:
         version: 5.9.3
       vike:
         specifier: ^0.4.242
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vike-react:
-        specifier: 0.6.13
+        specifier: 0.6.14
         version: link:../../packages/vike-react
       vike-react-query:
         specifier: 0.1.10
@@ -187,9 +187,9 @@ importers:
         version: 5.9.3
       vike:
         specifier: ^0.4.242
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vike-react:
-        specifier: 0.6.13
+        specifier: 0.6.14
         version: link:../../packages/vike-react
       vike-react-redux:
         specifier: 0.1.1
@@ -223,9 +223,9 @@ importers:
         version: 5.9.3
       vike:
         specifier: ^0.4.242
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vike-react:
-        specifier: 0.6.13
+        specifier: 0.6.14
         version: link:../../packages/vike-react
       vike-react-zustand:
         specifier: 0.1.6
@@ -272,7 +272,7 @@ importers:
         version: 5.9.3
       vike:
         specifier: ^0.4.242
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vite:
         specifier: ^7.1.7
         version: 7.2.6(@types/node@24.0.8)
@@ -302,9 +302,9 @@ importers:
         version: 5.9.3
       vike:
         specifier: ^0.4.242
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vike-react:
-        specifier: 0.6.13
+        specifier: 0.6.14
         version: link:../vike-react
       vite:
         specifier: ^7.1.7
@@ -354,9 +354,9 @@ importers:
         version: 5.9.3
       vike:
         specifier: ^0.4.242
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vike-react:
-        specifier: 0.6.13
+        specifier: 0.6.14
         version: link:../vike-react
       vite:
         specifier: ^7.1.7
@@ -387,9 +387,9 @@ importers:
         version: 5.9.3
       vike:
         specifier: ^0.4.242
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vike-react:
-        specifier: 0.6.13
+        specifier: 0.6.14
         version: link:../vike-react
       vite:
         specifier: ^7.1.7
@@ -436,9 +436,9 @@ importers:
         version: 5.9.3
       vike:
         specifier: ^0.4.242
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vike-react:
-        specifier: 0.6.13
+        specifier: 0.6.14
         version: link:../vike-react
       vite:
         specifier: ^7.1.7
@@ -473,9 +473,9 @@ importers:
         version: 5.9.3
       vike:
         specifier: ^0.4.242
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vike-react:
-        specifier: 0.6.13
+        specifier: 0.6.14
         version: link:../vike-react
 
   packages/vike-react-styled-components:
@@ -500,9 +500,9 @@ importers:
         version: 5.9.3
       vike:
         specifier: ^0.4.242
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vike-react:
-        specifier: 0.6.13
+        specifier: 0.6.14
         version: link:../vike-react
       vite:
         specifier: ^7.1.7
@@ -530,9 +530,9 @@ importers:
         version: 5.9.3
       vike:
         specifier: ^0.4.242
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vike-react:
-        specifier: 0.6.13
+        specifier: 0.6.14
         version: link:../vike-react
       vite:
         specifier: ^7.1.7
@@ -582,9 +582,9 @@ importers:
         version: 5.9.3
       vike:
         specifier: ^0.4.242
-        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6)
+        version: 0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8))
       vike-react:
-        specifier: 0.6.13
+        specifier: 0.6.14
         version: link:../vike-react
       vite:
         specifier: ^7.1.7
@@ -6669,7 +6669,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vike@0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6):
+  vike@0.4.247(react-streaming@0.4.14(react@19.2.1))(vite@7.2.6(@types/node@24.0.8)):
     dependencies:
       '@brillout/import': 0.2.6
       '@brillout/json-serializer': 0.5.21

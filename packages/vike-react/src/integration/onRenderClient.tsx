@@ -11,6 +11,7 @@ import { applyHeadSettings } from './applyHeadSettings.js'
 import { resolveReactOptions } from './resolveReactOptions.js'
 import { getGlobalObject } from '../utils/getGlobalObject.js'
 import { isObject } from '../utils/isObject.js'
+import { getBetterErrorLight } from '../utils/getBetterErrorLight.js'
 
 const globalObject = getGlobalObject<{
   root?: ReactDOM.Root
@@ -91,7 +92,7 @@ function onUncaughtErrorGlobal(
   userOptions: { onUncaughtError?: OnUncaughtError } | undefined,
 ) {
   const [errorOriginal, errorInfo] = args
-  const errorEnhanced = getErrorEnhanced(errorOriginal, errorInfo)
+  const errorEnhanced = getErrorWithComponentStack(errorOriginal, errorInfo)
   console.error(errorEnhanced)
   // Used by Vike:
   // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
@@ -104,7 +105,7 @@ type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']
 
 // Inject componentStack to the error's stack trace
 type ErrorInfo = { componentStack?: string }
-function getErrorEnhanced(errorOriginal: unknown, errorInfo?: ErrorInfo) {
+function getErrorWithComponentStack(errorOriginal: unknown, errorInfo?: ErrorInfo) {
   if (!errorInfo?.componentStack || !isObject(errorOriginal)) return errorOriginal
   const errorStackLines = String(errorOriginal.stack).split('\n')
 
@@ -132,20 +133,7 @@ function getErrorEnhanced(errorOriginal: unknown, errorInfo?: ErrorInfo) {
     ...componentStackLines,
     ...errorStackLinesEnd,
   ].join('\n')
-  const errorEnhanced = structuredClone(errorOriginal)
-  errorEnhanced.stack = stackEnhanced
 
-  // https://gist.github.com/brillout/066293a687ab7cf695e62ad867bc6a9c
-  Object.defineProperty(errorEnhanced, 'getOriginalError', {
-    value: () => errorOriginal,
-    enumerable: true,
-  })
-  /* Not needed. Let's skip this to save client-side KBs.
-  Object.defineProperty(errorOriginal, 'getEnhancedError', {
-    value: () => errorEnhanced,
-    enumerable: true,
-  })
-  //*/
-
-  return errorEnhanced
+  const errorBetter = getBetterErrorLight(errorOriginal, { stack: stackEnhanced })
+  return errorBetter
 }

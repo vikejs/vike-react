@@ -34,7 +34,7 @@
     "@types/react": "^19.1.13",
     "jsdom": "^24.0.0",
     "react": "^19.2.1",
-    "react-streaming": "^0.4.11",
+    "react-streaming": "^0.4.14",
     "rimraf": "^5.0.5",
     "typescript": "^5.9.2",
     "vike": "^0.4.242",

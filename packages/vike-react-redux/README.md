@@ -178,7 +178,7 @@ See [CHANGELOG.md](https://github.com/vikejs/vike-react/blob/main/packages/vike-
 ## How it works
 
 `vike-react-redux` does the following:
- - Initializes the store. (Using [`+onCreatePageContext.server`](https://vike.dev/onCreatePageContext), [`+onAfterRenderHtml.server`](https://vike.dev/onAfterRenderHtml), and [`+onBeforeRenderClient.client`](https://vike.dev/onBeforeRenderClient).)
+ - Initializes the store. (Using [`+onCreatePageContext.ssr`](https://vike.dev/onCreatePageContext), [`+onAfterRenderHtml.server`](https://vike.dev/onAfterRenderHtml), and [`+onBeforeRenderClient.client`](https://vike.dev/onBeforeRenderClient).)
  - Installs Redux's [`<Provider>`](https://react-redux.js.org/api/provider).
  - Passes the initial state (`pageContext.redux.ssrState`) used during [SSR](https://vike.dev/ssr) to the client. (To ensure that the same state is used for hydration, preventing hydration mismatches.)
 

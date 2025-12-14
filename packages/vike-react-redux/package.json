@@ -5,7 +5,7 @@
   "type": "module",
   "exports": {
     "./config": "./dist/config.js",
-    "./__internal/onCreatePageContext": "./dist/onCreatePageContext.server.js",
+    "./__internal/onCreatePageContext": "./dist/onCreatePageContext.ssr.js",
     "./__internal/onAfterRenderHtml": "./dist/onAfterRenderHtml.server.js",
     "./__internal/onBeforeRenderClient": "./dist/onBeforeRenderClient.client.js",
     "./__internal/Wrapper": "./dist/Wrapper.js"
@@ -43,7 +43,7 @@
         "dist/onAfterRenderHtml.d.ts"
       ],
       "__internal/onCreatePageContext": [
-        "dist/onCreatePageContext.server.d.ts"
+        "dist/onCreatePageContext.ssr.d.ts"
       ],
       "__internal/onBeforeRenderClient": [
         "dist/onBeforeRenderClient.d.ts"

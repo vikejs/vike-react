@@ -6,7 +6,7 @@ import type { Store } from '@reduxjs/toolkit'
 const config = {
   name: 'vike-react-redux',
   require: {
-    vike: '>=0.4.248',
+    vike: '>=0.4.249',
     'vike-react': '>=0.6.3',
   },
 

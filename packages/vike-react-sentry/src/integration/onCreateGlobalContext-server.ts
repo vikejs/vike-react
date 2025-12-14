@@ -14,8 +14,6 @@ async function onCreateGlobalContext(globalContext: { config: PageContext['confi
       ...server,
     }
 
-    // This has to run before server entry is imported
-    // https://docs.sentry.io/platforms/javascript/guides/node/install/esm-without-import/
     SentryNode.init(finalConfig)
   }
 }

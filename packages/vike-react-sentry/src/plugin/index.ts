@@ -1,6 +1,7 @@
 export { vikeReactSentry }
 
 import { sentryVitePlugin } from '@sentry/vite-plugin'
+import { serverProductionEntryPlugin } from '@brillout/vite-plugin-server-entry/plugin'
 import { getVikeConfig } from 'vike/plugin'
 import type { Plugin } from 'vite'
 import type { SentryConfig } from '../integration/+config.js'
@@ -33,6 +34,29 @@ const vikeReactSentry = async () => {
     const sentryPlugins = sentryVitePlugin(vitePluginOptions)
     plugins.push(...sentryPlugins)
   }
+
+  // Add server production entry plugin to inject Sentry instrumentation
+  // This preloads OpenTelemetry instrumentation before any other server code is imported,
+  // which is required for ESM instrumentation (e.g., to instrument database drivers, HTTP clients, etc.)
+  // https://docs.sentry.io/platforms/javascript/guides/node/install/esm-without-import/
+  //
+  // We use preloadOpenTelemetry() to set up instrumentation hooks without initializing Sentry.
+  // The actual Sentry.init() with config will be called later via onCreateGlobalContext.
+  plugins.push(
+    ...serverProductionEntryPlugin({
+      getServerProductionEntry: () => {
+        return `
+// vike-react-sentry: Preload OpenTelemetry instrumentation for ESM
+// This runs before the main server entry to enable monkey-patching of libraries
+// The actual Sentry.init() with config will be called later via onCreateGlobalContext
+// https://docs.sentry.io/platforms/javascript/guides/node/install/esm-without-import/
+import { preloadOpenTelemetry } from '@sentry/node';
+preloadOpenTelemetry();
+`
+      },
+      libraryName: 'vike-react-sentry',
+    }),
+  )
 
   return plugins
 }

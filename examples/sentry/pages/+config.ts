@@ -12,7 +12,7 @@ const config = {
   
   // Photon configuration
   photon: {
-    server: 'server/index.ts'
+    server: '../server/index.ts'
   },
   
   // Sentry configuration

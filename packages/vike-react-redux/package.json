@@ -5,7 +5,7 @@
   "type": "module",
   "exports": {
     "./config": "./dist/config.js",
-    "./__internal/onCreatePageContext": "./dist/onCreatePageContext.server.js",
+    "./__internal/onCreatePageContext": "./dist/onCreatePageContext.ssr.js",
     "./__internal/onAfterRenderHtml": "./dist/onAfterRenderHtml.server.js",
     "./__internal/onBeforeRenderClient": "./dist/onBeforeRenderClient.client.js",
     "./__internal/Wrapper": "./dist/Wrapper.js"
@@ -21,7 +21,7 @@
   "peerDependencies": {
     "react-redux": ">=9",
     "react": ">=18",
-    "vike": ">=0.4.230",
+    "vike": ">=0.4.249",
     "vike-react": ">=0.6.3"
   },
   "devDependencies": {
@@ -43,7 +43,7 @@
         "dist/onAfterRenderHtml.d.ts"
       ],
       "__internal/onCreatePageContext": [
-        "dist/onCreatePageContext.server.d.ts"
+        "dist/onCreatePageContext.ssr.d.ts"
       ],
       "__internal/onBeforeRenderClient": [
         "dist/onBeforeRenderClient.d.ts"

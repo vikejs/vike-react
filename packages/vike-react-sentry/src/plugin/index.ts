@@ -1,15 +1,12 @@
-export { vikeReactSentry }
+export { getViteConfig }
 
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { serverProductionEntryPlugin } from '@brillout/vite-plugin-server-entry/plugin'
 import { getVikeConfig } from 'vike/plugin'
-import type { Plugin } from 'vite'
+import type { Plugin, InlineConfig } from 'vite'
 import type { SentryConfig } from '../integration/+config.js'
 
-// Return `PluginInterop` instead of `Plugin` to avoid type mismatch upon different Vite versions
-const vikeReactSentry = async () => {
-  const plugins: Plugin[] = []
-
+async function getViteConfig(): Promise<InlineConfig> {
   // Wait for vike config to be available
   await new Promise((resolve) => setTimeout(resolve, 100))
 
@@ -29,6 +26,8 @@ const vikeReactSentry = async () => {
       },
     }
   }
+
+  const plugins: Plugin[] = []
 
   if (vitePluginOptions) {
     const sentryPlugins = sentryVitePlugin(vitePluginOptions)
@@ -51,5 +50,13 @@ preloadOpenTelemetry();
     }),
   )
 
-  return plugins
+  return {
+    plugins,
+    // Enable sourcemaps for Sentry if vitePlugin is configured
+    ...(vitePluginOptions && {
+      build: {
+        sourcemap: true,
+      },
+    }),
+  }
 }

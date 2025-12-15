@@ -39,8 +39,7 @@ const config = {
     // Vite plugin configuration for sourcemap uploads (optional)
     // Uncomment and configure for production builds
     // vitePlugin: {
-    //   org: 'your-sentry-org',
-    //   project: 'your-sentry-project',
+    //   project: 'your-project-name',
     //   authToken: process.env.SENTRY_AUTH_TOKEN,
     // }
   }

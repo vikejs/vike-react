@@ -4,7 +4,7 @@ import type { Config } from 'vike/types'
 import type * as SentryReact from '@sentry/react'
 import type * as SentryNode from '@sentry/node'
 import type { SentryVitePluginOptions } from '@sentry/vite-plugin'
-import { vikeReactSentry} from '../plugin/index.js'
+import { getViteConfig } from '../plugin/index.js'
 
 import 'vike-react/config'
 
@@ -26,9 +26,7 @@ const config = {
       global: true
     },
   },
-  vite: {
-    plugins: [vikeReactSentry()],
-  },
+  vite: getViteConfig,
 } satisfies Config
 
 export interface SentryCommonOptions {

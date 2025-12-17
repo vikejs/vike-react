@@ -3,7 +3,6 @@ export { clientOnly }
 import React, {
   Suspense,
   forwardRef,
-  lazy,
   useEffect,
   useState,
   type ComponentProps,
@@ -22,23 +21,27 @@ function clientOnly<T extends ComponentType<any>>(
   if (!globalThis.__VIKE__IS_CLIENT) {
     return (props) => <>{props.fallback}</>
   } else {
-    const Component = lazy(() =>
-      load()
-        .then((LoadedComponent) => ('default' in LoadedComponent ? LoadedComponent : { default: LoadedComponent }))
-        .catch((error) => {
-          console.error('Component loading failed:', error)
-          return { default: (() => <p>Error loading component.</p>) as any }
-        }),
-    )
 
     return forwardRef((props, ref) => {
       const [mounted, setMounted] = useState(false)
+      const [Component, setComp] = useState<T>()
       useEffect(() => {
+    load()
+        .then((LoadedComponent) => {
+          const p = ('default' in LoadedComponent ? LoadedComponent : { default: LoadedComponent })
+      setComp(p.default)
+        })
+        .catch((error) => {
+          console.error('Component loading failed:', error)
+          return { default: (() => <p>Error loading component.</p>) as any }
+        })
         setMounted(true)
       }, [])
-      if (!mounted) {
+      console.log('Component', Component)
+      if (!mounted || !Component) {
         return <>{props.fallback}</>
       }
+
       const { fallback, ...rest } = props
       return (
         <Suspense fallback={<>{props.fallback}</>}>

@@ -3,9 +3,8 @@ export { clientOnly }
 import React, { forwardRef, useEffect, useState, type ComponentProps, type ComponentType, type ReactNode } from 'react'
 import { getGlobalObject } from '../utils/getGlobalObject.js'
 
-// TODO/ai use globalObject.components to cache
 const globalObject = getGlobalObject('ClientOnly.tsx', {
-  components: WeakMap<any, any>,
+  components: new WeakMap<any, any>(),
 })
 
 /**
@@ -20,9 +19,14 @@ function clientOnly<T extends ComponentType<any>>(
     return (props) => <>{props.fallback}</>
   }
 
+  if (globalObject.components.has(load)) {
+    return globalObject.components.get(load)
+  }
+
   const ClientOnly = forwardRef<any, ComponentProps<T> & { fallback?: ReactNode }>((props, ref) => {
     const { fallback, ...rest } = props
     const [Component, setComponent] = useState<T | null>(null)
+    const hydrated = useHydrated()
 
     useEffect(() => {
       let cancelled = false
@@ -41,7 +45,7 @@ function clientOnly<T extends ComponentType<any>>(
       }
     }, [])
 
-    if (!Component) {
+    if (!hydrated || !Component) {
       return <>{fallback}</>
     }
 
@@ -50,11 +54,12 @@ function clientOnly<T extends ComponentType<any>>(
 
   ClientOnly.displayName = 'ClientOnly'
 
+  globalObject.components.set(load, ClientOnly)
+
   // @ts-ignore
   return ClientOnly
 }
 
-// TODO/ai use this instead of useEffect
 function useHydrated(): boolean {
   return React.useSyncExternalStore(
     subscribeDummy,

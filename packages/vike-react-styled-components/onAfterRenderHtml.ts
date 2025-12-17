@@ -1,6 +1,5 @@
 export { onAfterRenderHtml }
 
-import React from 'react'
 import { useConfig } from 'vike-react/useConfig'
 import type { PageContext } from 'vike/types'
 

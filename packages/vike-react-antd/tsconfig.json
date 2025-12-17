@@ -1,16 +1,28 @@
 {
+  "include": ["./"],
+  "exclude": ["**/*.spec.ts"],
   "compilerOptions": {
-    "declaration": true,
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "jsx": "react",
-    "outDir": "./dist/",
+    // Misc
     "skipLibCheck": true,
-    "types": ["vike-react"],
+    "noErrorTruncation": true,
     // Strictness
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "noImplicitAny": true
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    // Resolution
+    "esModuleInterop": true,
+    "moduleResolution": "Node16",
+    // Libs
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "types": ["vike-react"],
+    // Output
+    "target": "ES2020",
+    "module": "Node16",
+    "outDir": "./dist/",
+    "rootDir": "./",
+    "declaration": true,
+    // React
+    "jsx": "react"
   }
 }

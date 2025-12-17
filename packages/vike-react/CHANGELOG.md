@@ -1,3 +1,12 @@
+## [0.6.16](https://github.com/vikejs/vike-react/compare/vike-react@0.6.15...vike-react@0.6.16) (2025-12-17)
+
+
+### Bug Fixes
+
+* improve build (update `tsconfig.json`) ([90f8baa](https://github.com/vikejs/vike-react/commit/90f8baaae0fa7fd417628b054045a309f7c5bba3))
+
+
+
 ## [0.6.15](https://github.com/vikejs/vike-react/compare/vike-react@0.6.14...vike-react@0.6.15) (2025-12-15)
 
 

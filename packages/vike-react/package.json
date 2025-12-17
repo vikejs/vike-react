@@ -1,6 +1,6 @@
 {
   "name": "vike-react",
-  "version": "0.6.14",
+  "version": "0.6.15",
   "repository": "https://github.com/vikejs/vike-react",
   "type": "module",
   "exports": {
@@ -27,7 +27,7 @@
     "./__internal/integration/Loading": "./dist/integration/Loading.js"
   },
   "dependencies": {
-    "react-streaming": "^0.4.14"
+    "react-streaming": "^0.4.15"
   },
   "peerDependencies": {
     "react": ">=19",
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@brillout/release-me": "^0.4.11",
+    "@brillout/release-me": "^0.4.12",
     "@types/node": "^24.0.8",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
@@ -52,7 +52,7 @@
     "rimraf": "^5.0.5",
     "typescript": "^5.9.2",
     "vike": "^0.4.249",
-    "vite": "^7.1.7"
+    "vite": "^7.3.0"
   },
   "typesVersions": {
     "*": {

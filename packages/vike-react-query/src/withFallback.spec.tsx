@@ -56,7 +56,7 @@ const ComponentThatSuspends2 = withFallback(
 )
 
 const ComponentThatThrows = withFallback(
-  ({ count, onMount }: { count?: number; onMount?: () => void; onErrorFallbackMount?: () => void }) => {
+  ({ onMount }: { count?: number; onMount?: () => void; onErrorFallbackMount?: () => void }) => {
     useEffect(() => {
       onMount?.()
     }, [])
@@ -74,7 +74,7 @@ const ComponentThatThrows = withFallback(
 )
 
 const ComponentThatThrows2 = withFallback(
-  ({ count, onMount }: { count?: number; onMount?: () => void; onErrorFallbackMount?: () => void }) => {
+  ({ onMount }: { count?: number; onMount?: () => void; onErrorFallbackMount?: () => void }) => {
     useEffect(() => {
       onMount?.()
     }, [])

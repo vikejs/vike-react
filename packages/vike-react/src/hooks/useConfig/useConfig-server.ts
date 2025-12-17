@@ -17,7 +17,7 @@ import { configsCumulative } from './configsCumulative.js'
  */
 function useConfig(): (config: ConfigViaHook) => void {
   // Vike hook
-  let pageContext = getPageContext() as PageContext & PageContextInternal
+  let pageContext = getPageContext({ asyncHook: false }) as PageContext & PageContextInternal
   if (pageContext) return (config: ConfigViaHook) => setPageContextConfigViaHook(config, pageContext)
 
   // Component

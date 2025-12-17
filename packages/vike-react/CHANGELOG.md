@@ -1,3 +1,15 @@
+## [0.6.15](https://github.com/vikejs/vike-react/compare/vike-react@0.6.14...vike-react@0.6.15) (2025-12-15)
+
+
+### Bug Fixes
+
+* add JSDocs to `clientOnly()` ([3977176](https://github.com/vikejs/vike-react/commit/3977176cebfa3e9a8d12a2a68a3c46f4f90e5660))
+* ensure getPageContext() doesn't use async hooks ([48a6b2f](https://github.com/vikejs/vike-react/commit/48a6b2f1cf047352755c55092e1931709e3be830))
+* fix error manipulation ([abcdf8c](https://github.com/vikejs/vike-react/commit/abcdf8c97774ac36210c0ecf132372a4e1d83b42))
+* react-streaming@^0.4.15 ([141485e](https://github.com/vikejs/vike-react/commit/141485e74c942f364d84c8c0d3f5a2eebb9fb304))
+
+
+
 ## [0.6.14](https://github.com/vikejs/vike-react/compare/vike-react@0.6.13...vike-react@0.6.14) (2025-12-11)
 
 

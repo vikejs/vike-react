@@ -2,18 +2,17 @@ export { onCreateGlobalContext }
 
 import * as SentryNode from '@sentry/node'
 import type { PageContext } from 'vike/types'
+import { resolveDsn } from '../utils/resolveDsn.js'
+import { assignDeep } from '../utils/assignDeep.js'
 
 async function onCreateGlobalContext(globalContext: { config: PageContext['config'] }): Promise<void> {
-  const sentryConfig = globalContext.config.sentry
-  if (!sentryConfig) return
-  if (sentryConfig.server && !SentryNode.getClient()) {
-    const { client, vitePlugin, server, ...commonOptions } = sentryConfig
-
-    const finalConfig = {
-      ...commonOptions,
-      ...server,
-    }
-
-    SentryNode.init(finalConfig)
+  if (!globalContext.config.sentry?.length) return
+  const serverConfig = globalContext.config.sentry.reverse().reduce((acc, curr) => assignDeep(acc, curr), {})
+  if (!serverConfig) return
+  if (!SentryNode.getClient()) {
+    SentryNode.init({
+      ...serverConfig,
+      dsn: resolveDsn(serverConfig.dsn),
+    })
   }
 }

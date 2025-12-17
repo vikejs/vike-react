@@ -6,6 +6,7 @@
   "exports": {
     "./config": "./dist/integration/+config.js",
     "./plugin": "./dist/plugin/index.js",
+    "./types": "./dist/types.js",
     "./__internal/integration/Head": "./dist/integration/Head.js",
     "./__internal/integration/onCreateGlobalContext": {
       "browser": "./dist/integration/onCreateGlobalContext-client.js",
@@ -58,6 +59,9 @@
       ],
       "plugin": [
         "dist/plugin/index.d.ts"
+      ],
+      "types": [
+        "dist/types.d.ts"
       ],
       "__internal/integration/onCreateGlobalContext": [
         "dist/integration/onCreateGlobalContext.d.ts"

@@ -8,18 +8,12 @@ import React, {
   type ComponentType,
   type ReactNode,
 } from 'react'
-import {getGlobalObject} from '../utils/getGlobalObject.js'
+import { getGlobalObject } from '../utils/getGlobalObject.js'
 
-// TODO/ai use globalObject.components to cache
 const globalObject = getGlobalObject('ClientOnly.tsx', {
-  components: WeakMap<any, any>
+  components: new WeakMap<any, any>()
 })
 
-/**
- * Load and render a component only on the client-side.
- *
- * https://vike.dev/clientOnly
- */
 function clientOnly<T extends ComponentType<any>>(
   load: () => Promise<{ default: T } | T>,
 ): ComponentType<ComponentProps<T> & { fallback?: ReactNode }> {
@@ -27,7 +21,7 @@ function clientOnly<T extends ComponentType<any>>(
     return (props) => <>{props.fallback}</>
   }
 
-  const ClientOnly = forwardRef<any, ComponentProps<T> & { fallback?: ReactNode }>(
+  const ClientOnly = forwardRef<InstanceType<T>, ComponentProps<T> & { fallback?: ReactNode }>(
     (props, ref) => {
       const { fallback, ...rest } = props
       const [Component, setComponent] = useState<T | null>(null)
@@ -35,14 +29,20 @@ function clientOnly<T extends ComponentType<any>>(
       useEffect(() => {
         let cancelled = false
 
+        if (globalObject.components.has(load)) {
+          setComponent(globalObject.components.get(load))
+          return
+        }
+
         load()
           .then((mod) => {
             const C = 'default' in mod ? mod.default : mod
-            if (!cancelled) setComponent(() => C)
+            if (!cancelled) {
+              globalObject.components.set(load, C)
+              setComponent(() => C)
+            }
           })
-          .catch((err) => {
-            console.error('Component loading failed:', err)
-          })
+          .catch((err) => console.error('Component loading failed:', err))
 
         return () => {
           cancelled = true
@@ -58,19 +58,12 @@ function clientOnly<T extends ComponentType<any>>(
   )
 
   ClientOnly.displayName = 'ClientOnly'
-
-  // @ts-ignore
   return ClientOnly
 }
 
-// TODO/ai use this instead of useEffect
-function useHydrated(): boolean {
-  return React.useSyncExternalStore(
-    subscribeDummy,
-    () => true,
-    () => false,
-  );
+function useHydrated() {
+  const [hydrated, setHydrated] = useState(false)
+  useEffect(() => setHydrated(true), [])
+  return hydrated
 }
-function subscribeDummy() {
-  return () => {};
-}
+

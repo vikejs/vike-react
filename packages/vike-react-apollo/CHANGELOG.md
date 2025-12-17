@@ -1,3 +1,12 @@
+## [0.1.5](https://github.com/vikejs/vike-react/compare/vike-react-apollo@0.1.4...vike-react-apollo@0.1.5) (2025-12-17)
+
+
+### Bug Fixes
+
+* improve build (update `tsconfig.json`) ([90f8baa](https://github.com/vikejs/vike-react/commit/90f8baaae0fa7fd417628b054045a309f7c5bba3))
+
+
+
 ## [0.1.4](https://github.com/vikejs/vike-react/compare/vike-react-apollo@0.1.3...vike-react-apollo@0.1.4) (2025-09-16)
 
 

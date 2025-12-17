@@ -4,7 +4,16 @@ List of `AGENTS.md` files:
 1. This file (project preferences)
 2. `~/.config/AGENTS.md` (user preferences)
 
-# Agent instructions
+# CRITICAL AGENT INSTRUCTIONS - MUST FOLLOW
 
-1. When starting an agentic session, say "I've successfully read [list-of-AGENTS.md-files]" and list all instructions.
-2. After completing a task and if you made changes, run `$ pnpm run -w format`.
+## STEP 1: ALWAYS START HERE (BEFORE ANY TASK)
+**MANDATORY:** When starting ANY agentic session, you MUST:
+1. Read both AGENTS.md files (this file + ~/.config/AGENTS.md)
+2. Say "I've successfully read [list-of-AGENTS.md-files]"
+3. List ALL instructions from both files
+4. Then proceed with the task
+
+## STEP 2: AFTER MAKING CHANGES
+**MANDATORY:** After completing a task and if you made changes:
+1. Run `$ pnpm run -w format`
+2. Follow user preferences from ~/.config/AGENTS.md for commits and notifications

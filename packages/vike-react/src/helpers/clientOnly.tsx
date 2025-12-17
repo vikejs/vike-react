@@ -1,7 +1,6 @@
 export { clientOnly }
 
 import React, {
-  Suspense,
   forwardRef,
   useEffect,
   useState,
@@ -20,35 +19,41 @@ function clientOnly<T extends ComponentType<any>>(
 ): ComponentType<ComponentProps<T> & { fallback?: ReactNode }> {
   if (!globalThis.__VIKE__IS_CLIENT) {
     return (props) => <>{props.fallback}</>
-  } else {
+  }
 
-    return forwardRef((props, ref) => {
-      const [mounted, setMounted] = useState(false)
-      const [Component, setComp] = useState<T>()
+  const ClientOnly = forwardRef<any, ComponentProps<T> & { fallback?: ReactNode }>(
+    (props, ref) => {
+      const { fallback, ...rest } = props
+      const [Component, setComponent] = useState<T | null>(null)
+
       useEffect(() => {
-    load()
-        .then((LoadedComponent) => {
-          const p = ('default' in LoadedComponent ? LoadedComponent : { default: LoadedComponent })
-      setComp(p.default)
-        })
-        .catch((error) => {
-          console.error('Component loading failed:', error)
-          return { default: (() => <p>Error loading component.</p>) as any }
-        })
-        setMounted(true)
+        let cancelled = false
+
+        load()
+          .then((mod) => {
+            const C = 'default' in mod ? mod.default : mod
+            if (!cancelled) setComponent(() => C)
+          })
+          .catch((err) => {
+            console.error('Component loading failed:', err)
+          })
+
+        return () => {
+          cancelled = true
+        }
       }, [])
-      console.log('Component', Component)
-      if (!mounted || !Component) {
-        return <>{props.fallback}</>
+
+      if (!Component) {
+        return <>{fallback}</>
       }
 
-      const { fallback, ...rest } = props
-      return (
-        <Suspense fallback={<>{props.fallback}</>}>
-          {/* @ts-ignore */}
-          <Component {...rest} ref={ref} />
-        </Suspense>
-      )
-    }) as ComponentType<ComponentProps<T> & { fallback?: ReactNode }>
-  }
+      return <Component {...(rest as any)} ref={ref} />
+    },
+  )
+
+  ClientOnly.displayName = 'ClientOnly'
+
+  // @ts-ignore
+  return ClientOnly
 }
+

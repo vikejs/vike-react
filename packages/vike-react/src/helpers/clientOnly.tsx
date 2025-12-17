@@ -1,18 +1,11 @@
 export { clientOnly }
 
-import React, {
-  forwardRef,
-  useEffect,
-  useState,
-  type ComponentProps,
-  type ComponentType,
-  type ReactNode,
-} from 'react'
-import {getGlobalObject} from '../utils/getGlobalObject.js'
+import React, { forwardRef, useEffect, useState, type ComponentProps, type ComponentType, type ReactNode } from 'react'
+import { getGlobalObject } from '../utils/getGlobalObject.js'
 
 // TODO/ai use globalObject.components to cache
 const globalObject = getGlobalObject('ClientOnly.tsx', {
-  components: WeakMap<any, any>
+  components: WeakMap<any, any>,
 })
 
 /**
@@ -27,35 +20,33 @@ function clientOnly<T extends ComponentType<any>>(
     return (props) => <>{props.fallback}</>
   }
 
-  const ClientOnly = forwardRef<any, ComponentProps<T> & { fallback?: ReactNode }>(
-    (props, ref) => {
-      const { fallback, ...rest } = props
-      const [Component, setComponent] = useState<T | null>(null)
+  const ClientOnly = forwardRef<any, ComponentProps<T> & { fallback?: ReactNode }>((props, ref) => {
+    const { fallback, ...rest } = props
+    const [Component, setComponent] = useState<T | null>(null)
 
-      useEffect(() => {
-        let cancelled = false
+    useEffect(() => {
+      let cancelled = false
 
-        load()
-          .then((mod) => {
-            const C = 'default' in mod ? mod.default : mod
-            if (!cancelled) setComponent(() => C)
-          })
-          .catch((err) => {
-            console.error('Component loading failed:', err)
-          })
+      load()
+        .then((mod) => {
+          const C = 'default' in mod ? mod.default : mod
+          if (!cancelled) setComponent(() => C)
+        })
+        .catch((err) => {
+          console.error('Component loading failed:', err)
+        })
 
-        return () => {
-          cancelled = true
-        }
-      }, [])
-
-      if (!Component) {
-        return <>{fallback}</>
+      return () => {
+        cancelled = true
       }
+    }, [])
 
-      return <Component {...(rest as any)} ref={ref} />
-    },
-  )
+    if (!Component) {
+      return <>{fallback}</>
+    }
+
+    return <Component {...(rest as any)} ref={ref} />
+  })
 
   ClientOnly.displayName = 'ClientOnly'
 
@@ -69,8 +60,8 @@ function useHydrated(): boolean {
     subscribeDummy,
     () => true,
     () => false,
-  );
+  )
 }
 function subscribeDummy() {
-  return () => {};
+  return () => {}
 }

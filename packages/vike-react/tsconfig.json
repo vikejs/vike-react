@@ -15,10 +15,11 @@
     // Output
     "declaration": true,
     "noEmitOnError": false,
-    "rootDir": "./src",
+    "rootDir": "./src/",
     // Misc
     "esModuleInterop": true,
     "skipLibCheck": true,
     "jsx": "react"
-  }
+  },
+  "include": ["./src"]
 }

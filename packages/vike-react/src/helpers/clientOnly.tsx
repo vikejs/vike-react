@@ -31,20 +31,14 @@ function clientOnly<T extends ComponentType<any>>(
     const hydrated = useHydrated()
 
     useEffect(() => {
-      let cancelled = false
-
       load()
         .then((mod) => {
           const C = 'default' in mod ? mod.default : mod
-          if (!cancelled) setComponent(() => C)
+          setComponent(() => C)
         })
         .catch((err) => {
           console.error('Component loading failed:', err)
         })
-
-      return () => {
-        cancelled = true
-      }
     }, [])
 
     if (!hydrated || !Component) {

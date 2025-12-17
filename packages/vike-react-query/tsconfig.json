@@ -1,4 +1,6 @@
 {
+  "include": ["./src"],
+  "exclude": ["**/*.spec.ts"],
   "compilerOptions": {
     // Misc
     "skipLibCheck": true,
@@ -9,8 +11,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     // Resolution
-    "moduleResolution": "Node16",
     "esModuleInterop": true,
+    "moduleResolution": "Node16",
     // Libs
     "lib": ["DOM", "DOM.Iterable", "ES2021"],
     "types": ["vite/client"],
@@ -22,7 +24,5 @@
     "declaration": true,
     // React
     "jsx": "react"
-  },
-  "exclude": ["**/*.spec.ts"],
-  "include": ["./src"]
+  }
 }

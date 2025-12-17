@@ -1,6 +1,8 @@
+// TODO/ai simplify everything
+
 export { clientOnly }
 
-import React, { lazy, Suspense, type ComponentProps, type ComponentType, type ReactNode } from 'react'
+import React, { forwardRef, useEffect, useState, type ComponentProps, type ComponentType, type ReactNode } from 'react'
 import { getGlobalObject } from '../utils/getGlobalObject.js'
 
 const globalObject = getGlobalObject('ClientOnly.tsx', {
@@ -23,24 +25,50 @@ function clientOnly<T extends ComponentType<any>>(
     return globalObject.components.get(load)
   }
 
-  const LazyComponent = lazy(() =>
-    load().then((mod) => ({
-      default: 'default' in mod ? mod.default : mod,
-    })),
-  )
-
-  const ClientOnly = (props: ComponentProps<T> & { fallback?: ReactNode }) => {
+  const ClientOnly = forwardRef<any, ComponentProps<T> & { fallback?: ReactNode }>((props, ref) => {
     const { fallback, ...rest } = props
-    return (
-      <Suspense fallback={<>{fallback}</>}>
-        <LazyComponent {...(rest as any)} />
-      </Suspense>
-    )
-  }
+    const [Component, setComponent] = useState<T | null>(null)
+    const hydrated = useHydrated()
+
+    useEffect(() => {
+      let cancelled = false
+
+      load()
+        .then((mod) => {
+          const C = 'default' in mod ? mod.default : mod
+          if (!cancelled) setComponent(() => C)
+        })
+        .catch((err) => {
+          console.error('Component loading failed:', err)
+        })
+
+      return () => {
+        cancelled = true
+      }
+    }, [])
+
+    if (!hydrated || !Component) {
+      return <>{fallback}</>
+    }
+
+    return <Component {...(rest as any)} ref={ref} />
+  })
 
   ClientOnly.displayName = 'ClientOnly'
 
   globalObject.components.set(load, ClientOnly)
 
+  // @ts-ignore
   return ClientOnly
+}
+
+function useHydrated(): boolean {
+  return React.useSyncExternalStore(
+    subscribeDummy,
+    () => true,
+    () => false,
+  )
+}
+function subscribeDummy() {
+  return () => {}
 }

@@ -1,3 +1,5 @@
+// TODO/ai simplify everything
+
 export { clientOnly }
 
 import React, { forwardRef, useEffect, useState, type ComponentProps, type ComponentType, type ReactNode } from 'react'

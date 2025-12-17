@@ -4,7 +4,7 @@ import type { Config } from 'vike/types'
 import { getViteConfig } from '../plugin/index.js'
 import 'vike-react/config'
 import { SentryOptions } from '../types.js'
-import { SentryVitePluginOptions } from '@sentry/vite-plugin'
+import type { SentryVitePluginOptions } from '@sentry/vite-plugin'
 
 const config = {
   name: 'vike-react-sentry',
@@ -24,6 +24,15 @@ const config = {
       global: true,
       cumulative: true,
     },
+    sentryVite: {
+      env: {
+        server: false,
+        client: false,
+        config: true,
+      },
+      global: true,
+      cumulative: false,
+    },
   },
   vite: getViteConfig,
 } satisfies Config
@@ -31,11 +40,13 @@ const config = {
 declare global {
   namespace Vike {
     interface Config {
-      sentry?: SentryOptions
+      sentry?: SentryOptions | ((globalContext: GlobalContext) => SentryOptions)
+      sentryVite?: SentryVitePluginOptions
     }
 
     interface ConfigResolved {
-      sentry?: SentryOptions[]
+      sentry?: (SentryOptions | ((globalContext: GlobalContext) => SentryOptions))[]
+      sentryVite?: SentryVitePluginOptions
     }
   }
 }

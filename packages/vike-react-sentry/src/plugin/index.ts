@@ -6,6 +6,7 @@ import { getVikeConfig } from 'vike/plugin'
 import type { Plugin, InlineConfig } from 'vite'
 import { assertUsage } from '../utils/assert.js'
 import { assignDeep } from '../utils/assignDeep.js'
+import { SentryOptions } from '../types.js'
 
 // Cache for auto-detected project info to avoid multiple API calls (global to survive module reloads)
 declare global {
@@ -21,18 +22,26 @@ async function getViteConfig(): Promise<InlineConfig> {
       globalThis.__vike_react_sentry_vite_options_promise ??= (async () => {
         const vikeConfig = getVikeConfig()
         const sentryConfigRaw = vikeConfig.config.sentry || []
-        const sentryConfig = sentryConfigRaw.toReversed().reduce((acc, curr) => assignDeep(acc, curr), {})
-        const effectiveDsn = sentryConfig.dsn || process.env['PUBLIC_ENV__SENTRY_DSN']
+
+        const sentryConfig = sentryConfigRaw.toReversed().reduce((acc, curr) => {
+          if (typeof curr === 'function') {
+            // skip function configs as we don't have access to globalContext here
+            curr = {}
+          }
+          return assignDeep(acc, curr)
+        }, {}) as SentryOptions
+
         assertUsage(
           !process.env['SENTRY_DSN'],
           'SENTRY_DSN is not supported. Use PUBLIC_ENV__SENTRY_DSN instead, or set dsn in your sentry config.',
         )
+        const effectiveDsn = sentryConfig.dsn || process.env['PUBLIC_ENV__SENTRY_DSN']
         assertUsage(
           effectiveDsn,
           'Sentry DSN is required. Set PUBLIC_ENV__SENTRY_DSN env var, or set dsn in your sentry config.',
         )
 
-        let vitePluginOptions = sentryConfig.vite
+        let vitePluginOptions = vikeConfig.config.sentryVite
         // Resolve env fallbacks for vitePlugin options (effect doesn't have access to .env file vars)
         if (vitePluginOptions || process.env['SENTRY_AUTH_TOKEN']) {
           vitePluginOptions = {
@@ -88,18 +97,6 @@ async function getViteConfig(): Promise<InlineConfig> {
     const sentryPlugins = sentryVitePlugin(vitePluginOptions)
     plugins.push(...sentryPlugins)
   }
-
-  plugins.push({
-    name: 'vike-react-sentry:remove-sensitive-info',
-    buildStart(options) {
-      const vikeConfig = getVikeConfig()
-      const sentryConfigRaw = vikeConfig.config.sentry || []
-      // Remove sensitive info from serialized config
-      for (const e of sentryConfigRaw) {
-        delete e.vite
-      }
-    },
-  })
 
   plugins.push(
     ...serverProductionEntryPlugin({

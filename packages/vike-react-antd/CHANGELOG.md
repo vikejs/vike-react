@@ -1,3 +1,13 @@
+## [1.0.4](https://github.com/vikejs/vike-react/compare/vike-react-antd@1.0.3...vike-react-antd@1.0.4) (2025-12-17)
+
+
+### Bug Fixes
+
+* improve build (update `tsconfig.json`) ([90f8baa](https://github.com/vikejs/vike-react/commit/90f8baaae0fa7fd417628b054045a309f7c5bba3))
+* improve build (use an `src/` directory) ([#204](https://github.com/vikejs/vike-react/issues/204)) ([f559b3f](https://github.com/vikejs/vike-react/commit/f559b3f0fd009a4e528950ad7f13ba1551b5f7b9))
+
+
+
 ## [1.0.3](https://github.com/vikejs/vike-react/compare/vike-react-antd@1.0.2...vike-react-antd@1.0.3) (2025-07-01)
 
 

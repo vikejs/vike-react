@@ -8,6 +8,12 @@ import React, {
   type ComponentType,
   type ReactNode,
 } from 'react'
+import {getGlobalObject} from '../utils/getGlobalObject.js'
+
+// TODO/ai use globalObject.components to cache
+const globalObject = getGlobalObject('ClientOnly.tsx', {
+  components: WeakMap<any, any>
+})
 
 /**
  * Load and render a component only on the client-side.
@@ -57,3 +63,14 @@ function clientOnly<T extends ComponentType<any>>(
   return ClientOnly
 }
 
+// TODO/ai use this instead of useEffect
+function useHydrated(): boolean {
+  return React.useSyncExternalStore(
+    subscribeDummy,
+    () => true,
+    () => false,
+  );
+}
+function subscribeDummy() {
+  return () => {};
+}

@@ -40,8 +40,11 @@ function getOrCreateStore<T>({
       const serverState = store.getInitialState()
       const transferableState = sanitizeForSerialization(serverState)
       assert(stream)
+      // Add CSP nonce attribute if configured
+      // No need to escape — pageContext.cspNonce is controlled by the developer, not by the website visitor
+      const nonceAttr = (pageContext as any).cspNonce ? ` nonce="${(pageContext as any).cspNonce}"` : ''
       stream.injectToStream(
-        `<script>if(!globalThis._vikeReactZustandState)globalThis._vikeReactZustandState={};globalThis._vikeReactZustandState['${key}']='${stringify(transferableState)}'</script>`,
+        `<script${nonceAttr}>if(!globalThis._vikeReactZustandState)globalThis._vikeReactZustandState={};globalThis._vikeReactZustandState['${key}']='${stringify(transferableState)}'</script>`,
       )
       pageContext._vikeReactZustandStoresServer[key] = store
       return store

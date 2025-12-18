@@ -29,7 +29,7 @@ function useConfig(): (config: ConfigViaHook) => void {
     } else {
       assert(stream)
       // <head> already sent to the browser => send DOM-manipulating scripts during HTML streaming
-      apply(config, stream)
+      apply(config, stream, pageContext)
     }
   }
 }
@@ -57,10 +57,13 @@ function setPageContextConfigViaHook(config: ConfigViaHook, pageContext: PageCon
 }
 
 type Stream = NonNullable<ReturnType<typeof useStreamOptional>>
-function apply(config: ConfigViaHook, stream: Stream) {
+function apply(config: ConfigViaHook, stream: Stream, pageContext: PageContext) {
   const { title } = config
   if (title) {
-    const htmlSnippet = `<script>document.title = ${JSON.stringify(title)}</script>`
+    // Add CSP nonce attribute if configured
+    // No need to escape — pageContext.cspNonce is controlled by the developer, not by the website visitor
+    const nonceAttr = (pageContext as any).cspNonce ? ` nonce="${(pageContext as any).cspNonce}"` : ''
+    const htmlSnippet = `<script${nonceAttr}>document.title = ${JSON.stringify(title)}</script>`
     stream.injectToStream(htmlSnippet)
   }
 }

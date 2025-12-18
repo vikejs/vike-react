@@ -12,12 +12,15 @@ export const WrappedApolloProvider = WrapApolloProvider(
       const stream = useStream()
       const pageContext = usePageContext()
       if (globalThis.__VIKE__IS_CLIENT) {
+        // Apollo only calls useInsertHtml() on the server
+        assert(false as boolean) // `as boolean` to avoid TypeScript complaining
+        // Enable tree-shaking
         return () => {}
       }
       assert(!pageContext.isClientSide)
       assert(stream)
       return (callback: () => React.ReactNode) => {
-        const nonce = (pageContext as any).cspNonce
+        const nonce = pageContext.cspNonce
         stream.injectToStream(
           // https://github.com/apollographql/apollo-client-nextjs/issues/325
           (async () => {

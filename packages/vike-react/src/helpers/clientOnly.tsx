@@ -40,7 +40,7 @@ function clientOnly<T extends ComponentType<any>>(
         return () => {
           isMounted = false
         }
-      }, [load])
+      }, [])
 
       const { fallback, ...rest } = props
       return (

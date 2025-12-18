@@ -1,3 +1,12 @@
+## [0.6.17](https://github.com/vikejs/vike-react/compare/vike-react@0.6.16...vike-react@0.6.17) (2025-12-18)
+
+
+### Bug Fixes
+
+* support +csp.none (fix [#2971](https://github.com/vikejs/vike-react/issues/2971)) ([#207](https://github.com/vikejs/vike-react/issues/207)) ([577847f](https://github.com/vikejs/vike-react/commit/577847f08de170dfa9b012aeb4bffb4116703c39))
+
+
+
 ## [0.6.16](https://github.com/vikejs/vike-react/compare/vike-react@0.6.15...vike-react@0.6.16) (2025-12-17)
 
 

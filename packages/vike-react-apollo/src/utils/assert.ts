@@ -8,5 +8,5 @@ function assertUsage(condition: unknown, message: string): asserts condition {
 
 function assert(condition: unknown): asserts condition {
   if (condition) return
-  throw new Error('Assertion failed')
+  throw new Error('You stumbled upon a vike-react-apollo bug, reach out on GitHub.')
 }

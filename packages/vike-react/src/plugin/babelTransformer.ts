@@ -158,6 +158,16 @@ function getCalleeName(callee: t.Expression | t.V8IntrinsicIdentifier): string |
   return null
 }
 
+/**
+ * Check if an identifier matches an import condition
+ */
+function matchesImport(arg: t.Expression, parsed: ParsedImport, state: State): boolean {
+  if (!t.isIdentifier(arg)) return false
+  const imported = state.imports.get(arg.name)
+  if (!imported) return false
+  return imported.source === parsed.source && imported.exportName === parsed.exportName
+}
+
 // ============================================================================
 // Babel plugins
 // ============================================================================
@@ -246,19 +256,21 @@ function matchesCondition(
   condition: ArgCondition,
   state: State,
 ): boolean {
-  // String condition: match import
+  // String condition
   if (typeof condition === 'string') {
+    // Import condition: 'import:source:exportName'
     const parsed = parseImportString(condition)
-    if (!parsed) return false
+    if (parsed) {
+      return t.isExpression(arg) && matchesImport(arg, parsed, state)
+    }
 
-    if (!t.isIdentifier(arg)) return false
-    const imported = state.imports.get(arg.name)
-    if (!imported) return false
-
-    return imported.source === parsed.source && imported.exportName === parsed.exportName
+    // Plain string: match string literal or identifier name
+    if (t.isStringLiteral(arg)) return arg.value === condition
+    if (t.isIdentifier(arg)) return arg.name === condition
+    return false
   }
 
-  // Object condition: match prop value
+  // Object condition: match prop value inside an object argument
   if (!t.isObjectExpression(arg)) return false
 
   for (const prop of arg.properties) {

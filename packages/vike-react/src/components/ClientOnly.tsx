@@ -1,45 +1,29 @@
 export { ClientOnly }
 
-import React, { lazy, useEffect, useState, startTransition } from 'react'
-import type { ComponentType, ReactNode } from 'react'
+import React, { useSyncExternalStore } from 'react'
+import type { ReactNode } from 'react'
 
-function ClientOnly<T>({
-  load,
-  children,
-  fallback,
-  deps = [],
-}: {
-  load: () => Promise<{ default: React.ComponentType<T> } | React.ComponentType<T>>
-  children: (Component: React.ComponentType<T>) => ReactNode
-  fallback: ReactNode
-  deps?: Parameters<typeof useEffect>[1]
-}) {
-  // TO-DO/next-major: remove this file/export
-  console.warn('[vike-react][warning] <ClientOnly> is deprecated: use clientOnly() instead https://vike.dev/clientOnly')
+/**
+ * Render children only on the client-side.
+ *
+ * Strips the children prop on server-side to remove
+ * the component from the server bundle.
+ *
+ * https://vike.dev/ClientOnly
+ */
+function ClientOnly({ children, fallback }: { children: ReactNode; fallback?: ReactNode }) {
+  const hydrated = useHydrated()
+  return <>{hydrated ? children : fallback}</>
+}
 
-  const [Component, setComponent] = useState<ComponentType<unknown> | null>(null)
+function useHydrated(): boolean {
+  return useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false,
+  )
+}
 
-  useEffect(() => {
-    const loadComponent = () => {
-      const Component = lazy(() =>
-        load()
-          .then((LoadedComponent) => {
-            return {
-              default: () => children('default' in LoadedComponent ? LoadedComponent.default : LoadedComponent),
-            }
-          })
-          .catch((error) => {
-            console.error('Component loading failed:', error)
-            return { default: () => <p>Error loading component.</p> }
-          }),
-      )
-      setComponent(Component)
-    }
-
-    startTransition(() => {
-      loadComponent()
-    })
-  }, deps)
-
-  return Component ? <Component /> : fallback
+function subscribe() {
+  return () => {}
 }

@@ -3,6 +3,7 @@ export { config as default }
 import type { Config } from 'vike/types'
 import { ssrEffect } from './integration/ssrEffect.js'
 import { isNotFalse } from './utils/isNotFalse.js'
+import { vikeReactClientOnly } from './plugin/index.js'
 
 const config = {
   // @eject-remove start
@@ -17,6 +18,10 @@ const config = {
   onRenderHtml: 'import:vike-react/__internal/integration/onRenderHtml:onRenderHtml',
   // https://vike.dev/onRenderClient
   onRenderClient: 'import:vike-react/__internal/integration/onRenderClient:onRenderClient',
+
+  vite: {
+    plugins: [vikeReactClientOnly()],
+  },
 
   // @eject-remove end
   passToClient: [

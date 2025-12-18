@@ -20,11 +20,11 @@ export const WrappedApolloProvider = WrapApolloProvider(
       assert(!pageContext.isClientSide)
       assert(stream)
       return (callback: () => React.ReactNode) => {
-        const nonce = pageContext.cspNonce
         stream.injectToStream(
           // https://github.com/apollographql/apollo-client-nextjs/issues/325
           (async () => {
             let html = renderToString(await callback())
+            const nonce = pageContext.cspNonce
             if (nonce) {
               // No need to escape the injected HTML — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
               html = html.replace(/<script(\s|>)/g, `<script nonce="${nonce}"$1`)

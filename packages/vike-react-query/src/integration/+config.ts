@@ -37,5 +37,13 @@ declare global {
       queryClientConfig?: QueryClientConfig | ((pageContext: PageContext) => QueryClientConfig)
       FallbackErrorBoundary?: ((props: { children: ReactNode }) => ReactNode) | ImportString
     }
+    interface PageContext {
+      /**
+       * CSP nonce for inline scripts and styles.
+       * Can be set via pageContext.cspNonce or pageContext.nonce
+       */
+      cspNonce?: string
+      nonce?: string
+    }
   }
 }

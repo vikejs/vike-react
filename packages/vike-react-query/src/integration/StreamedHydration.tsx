@@ -28,7 +28,7 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
   if (!globalThis.__VIKE__IS_CLIENT) {
     assert(stream)
     // Access nonce from pageContext for CSP support
-    const nonce = (pageContext as any).cspNonce || (pageContext as any).nonce
+    const nonce = pageContext.cspNonce || pageContext.nonce
     const nonceAttr = nonce ? ` nonce="${nonce}"` : ''
 
     stream.injectToStream(

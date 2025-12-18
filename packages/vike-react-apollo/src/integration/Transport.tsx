@@ -9,20 +9,21 @@ export const WrappedApolloProvider = WrapApolloProvider(
   buildManualDataTransport({
     useInsertHtml() {
       const stream = useStream()
+      // TODO/ai this is brittle, prefer passing pageContext to <WrappedApolloProvider pageContext={pageContext} />
       const pageContext = usePageContext()
+      // TODO/ai use globalThis.__VIKE__IS_CLIENT (because Vike will tree-shake it and thus reduce client-side KBs) then use assert(!pageContext.isClientSide) to avoid the any below at `(pageContext as any)`
       if (!stream) {
         return () => {}
       }
       return (callback: () => React.ReactNode) => {
-        // No need to escape the injected HTML — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
         const nonce = (pageContext as any).cspNonce
         stream.injectToStream(
           // https://github.com/apollographql/apollo-client-nextjs/issues/325
           (async () => {
-            const html = renderToString(await callback())
-            // Add nonce to all script tags if CSP nonce is configured
+            let html = renderToString(await callback())
             if (nonce) {
-              return html.replace(/<script(\s|>)/g, `<script nonce="${nonce}"$1`)
+              // No need to escape the injected HTML — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
+              html = html.replace(/<script(\s|>)/g, `<script nonce="${nonce}"$1`)
             }
             return html
           })(),

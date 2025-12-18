@@ -33,6 +33,7 @@ function getOrCreateStore<T>({
   try {
     setPageContext(pageContext)
     if (!globalThis.__VIKE__IS_CLIENT) {
+      assert(!pageContext.isClientSide)
       pageContext._vikeReactZustandStoresServer ??= {}
       let store = pageContext._vikeReactZustandStoresServer[key] as CreateStoreReturn<T>
       if (store) return store
@@ -41,7 +42,7 @@ function getOrCreateStore<T>({
       const transferableState = sanitizeForSerialization(serverState)
       assert(stream)
       // No need to escape the injected HTML — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
-      const nonceAttr = (pageContext as any).cspNonce ? ` nonce="${(pageContext as any).cspNonce}"` : ''
+      const nonceAttr = pageContext.cspNonce ? ` nonce="${pageContext.cspNonce}"` : ''
       stream.injectToStream(
         `<script${nonceAttr}>if(!globalThis._vikeReactZustandState)globalThis._vikeReactZustandState={};globalThis._vikeReactZustandState['${key}']='${stringify(transferableState)}'</script>`,
       )

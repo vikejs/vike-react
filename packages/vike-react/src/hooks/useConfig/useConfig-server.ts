@@ -1,5 +1,5 @@
 export { useConfig }
-import type { PageContext } from 'vike/types'
+import type { PageContext, PageContextServer } from 'vike/types'
 import type { PageContextInternal } from '../../types/PageContext.js'
 import type { ConfigViaHook } from '../../types/Config.js'
 import { usePageContext } from '../usePageContext.js'
@@ -22,6 +22,7 @@ function useConfig(): (config: ConfigViaHook) => void {
 
   // Component
   pageContext = usePageContext()
+  assert(!pageContext.isClientSide)
   const stream = useStreamOptional()
   return (config: ConfigViaHook) => {
     if (!pageContext._headAlreadySet) {
@@ -57,11 +58,11 @@ function setPageContextConfigViaHook(config: ConfigViaHook, pageContext: PageCon
 }
 
 type Stream = NonNullable<ReturnType<typeof useStreamOptional>>
-function apply(config: ConfigViaHook, stream: Stream, pageContext: PageContext) {
+function apply(config: ConfigViaHook, stream: Stream, pageContext: PageContextServer) {
   const { title } = config
   if (title) {
     // No need to escape the injected HTML — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
-    const nonceAttr = (pageContext as any).cspNonce ? ` nonce="${(pageContext as any).cspNonce}"` : ''
+    const nonceAttr = pageContext.cspNonce ? ` nonce="${pageContext.cspNonce}"` : ''
     const htmlSnippet = `<script${nonceAttr}>document.title = ${JSON.stringify(title)}</script>`
     stream.injectToStream(htmlSnippet)
   }

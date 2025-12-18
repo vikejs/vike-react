@@ -40,10 +40,9 @@ declare global {
     interface PageContext {
       /**
        * CSP nonce for inline scripts and styles.
-       * Can be set via pageContext.cspNonce or pageContext.nonce
+       * Set via `renderPage({ cspNonce })` or `config.csp.nonce`
        */
-      cspNonce?: string
-      nonce?: string
+      cspNonce?: string | null
     }
   }
 }

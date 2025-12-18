@@ -29,7 +29,8 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
     assert(stream)
     // Access nonce from pageContext for CSP support
     const nonce = pageContext.cspNonce || pageContext.nonce
-    const nonceAttr = nonce ? ` nonce="${nonce}"` : ''
+    // Escape the nonce value to prevent XSS
+    const nonceAttr = nonce ? ` nonce="${escapeHtml(nonce)}"` : ''
 
     stream.injectToStream(
       `<script class="_rqd_"${nonceAttr}>_rqd_=[];_rqc_=()=>{Array.from(
@@ -89,4 +90,16 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
     window._rqd_ = { push: onEntry }
   }
   return children
+}
+
+/**
+ * Escape HTML special characters to prevent XSS
+ */
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
 }

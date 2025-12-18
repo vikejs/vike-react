@@ -23,18 +23,37 @@ const defaultOptions: TransformOptions = {
   rules: [
     // jsx/jsxs/jsxDEV: children is a prop in arg 1
     {
+      env: 'server',
       call: {
-        match: ['jsx', 'jsxs', 'jsxDEV'],
-        args: { 0: 'import:vike-react/ClientOnly:ClientOnly' },
+        match: {
+          function: [
+            'import:react/jsx-runtime:jsx',
+            'import:react/jsx-runtime:jsxs',
+            'import:react/jsx-dev-runtime:jsxDEV',
+          ],
+          args: { 0: 'import:vike-react/ClientOnly:ClientOnly' },
+        },
         remove: { arg: 1, prop: 'children' },
       },
     },
     // createElement: children are rest args starting at index 2
     {
+      env: 'server',
       call: {
-        match: 'createElement',
-        args: { 0: 'import:vike-react/ClientOnly:ClientOnly' },
+        match: {
+          function: 'import:react:createElement',
+          args: { 0: 'import:vike-react/ClientOnly:ClientOnly' },
+        },
         remove: { argsFrom: 2 },
+      },
+    },
+    {
+      env: 'server',
+      call: {
+        match: {
+          function: 'import:vike-react/useHydrated:useHydrated',
+        },
+        replace: { with: false },
       },
     },
   ],
@@ -57,7 +76,7 @@ function vikeReactClientOnly() {
         filter: filterRolldown,
         handler(code, id) {
           assert(filterFunction(id))
-          return transformCode(code, id, defaultOptions)
+          return transformCode({ code, id, env: this.environment.name, options: defaultOptions })
         },
       },
     },

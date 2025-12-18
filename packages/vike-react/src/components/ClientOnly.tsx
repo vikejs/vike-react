@@ -2,6 +2,8 @@ export { ClientOnly }
 
 import React, { useSyncExternalStore } from 'react'
 import type { ReactNode } from 'react'
+import { usePageContext } from '../hooks/usePageContext.js'
+import { assert } from '../utils/assert.js'
 
 /**
  * Render children only on the client-side.
@@ -12,6 +14,8 @@ import type { ReactNode } from 'react'
  * https://vike.dev/ClientOnly
  */
 function ClientOnly({ children, fallback }: { children: ReactNode; fallback?: ReactNode }) {
+  const pageContext = usePageContext()
+  if (!pageContext.isClientSide) assert(children === undefined)
   const hydrated = useHydrated()
   return <>{hydrated ? children : fallback}</>
 }

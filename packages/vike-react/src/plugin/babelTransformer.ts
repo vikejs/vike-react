@@ -16,6 +16,7 @@ export type ArgCondition = string | { prop: string; equals: unknown }
  * Target for replace operation.
  */
 export type ReplaceTarget =
+  | { with: unknown } // Replace the entire call expression
   | { arg: number; prop: string; with: unknown } // Replace a prop inside an object arg
   | { arg: number; with: unknown } // Replace entire argument
   | { argsFrom: number; with: unknown } // Replace all args from index onwards with a single value
@@ -33,10 +34,17 @@ export type RemoveTarget =
  */
 export type CallRule = {
   call: {
-    /** Function name(s) to match */
-    match: string | string[]
-    /** Conditions on arguments: index -> condition */
-    args?: Record<number, ArgCondition>
+    /** Match criteria */
+    match: {
+      /**
+       * Function name(s) to match.
+       * - Plain string: matches function name directly (e.g., 'jsx')
+       * - Import string: 'import:source:exportName' (e.g., 'import:react/jsx-runtime:jsx')
+       */
+      function: string | string[]
+      /** Conditions on arguments: index -> condition */
+      args?: Record<number, ArgCondition>
+    }
     /** Replace target (optional) */
     replace?: ReplaceTarget
     /** Remove target (optional) */
@@ -52,8 +60,10 @@ export type CallRule = {
  * // jsx/jsxs/jsxDEV: replace children prop with null
  * {
  *   call: {
- *     match: ['jsx', 'jsxs', 'jsxDEV'],
- *     args: { 0: 'import:vike-react/ClientOnly:ClientOnly' },
+ *     match: {
+ *       function: ['jsx', 'jsxs', 'jsxDEV'],
+ *       args: { 0: 'import:vike-react/ClientOnly:ClientOnly' }
+ *     },
  *     replace: { arg: 1, prop: 'children', with: null }
  *   }
  * }
@@ -62,13 +72,18 @@ export type CallRule = {
  * // createElement: remove all children (args from index 2)
  * {
  *   call: {
- *     match: 'createElement',
- *     args: { 0: 'import:vike-react/ClientOnly:ClientOnly' },
+ *     match: {
+ *       function: 'createElement',
+ *       args: { 0: 'import:vike-react/ClientOnly:ClientOnly' }
+ *     },
  *     remove: { argsFrom: 2 }
  *   }
  * }
  */
-export type ReplaceRule = CallRule // Can be extended: CallRule | VariableRule | ...
+export type ReplaceRule = CallRule & {
+  /** Environment filter: 'client' = client only, 'server' = everything except client */
+  env?: 'server' | 'client'
+} // Can be extended: CallRule | VariableRule | ...
 
 export type TransformOptions = {
   rules: ReplaceRule[]
@@ -93,11 +108,26 @@ type State = {
 // Main transformer
 // ============================================================================
 
-export async function transformCode(
-  code: string,
-  id: string,
-  options: TransformOptions,
-): Promise<TransformResult> {
+export type TransformInput = {
+  code: string
+  id: string
+  env: string
+  options: TransformOptions
+}
+
+export async function transformCode({ code, id, env, options }: TransformInput): Promise<TransformResult> {
+  // 'server' means "not client" (covers ssr, cloudflare, etc.)
+  const filteredRules = options.rules.filter((rule) => {
+    if (!rule.env) return true
+    if (rule.env === 'client') return env === 'client'
+    if (rule.env === 'server') return env !== 'client'
+    return false
+  })
+
+  if (filteredRules.length === 0) {
+    return null
+  }
+
   try {
     const state: State = {
       modified: false,
@@ -109,11 +139,7 @@ export async function transformCode(
       filename: id,
       ast: true,
       sourceMaps: true,
-      plugins: [
-        collectImportsPlugin(state),
-        applyRulesPlugin(state, options.rules),
-        removeUnreferencedPlugin(state),
-      ],
+      plugins: [collectImportsPlugin(state), applyRulesPlugin(state, filteredRules), removeUnreferencedPlugin(state)],
     })
 
     if (!result?.code || !state.modified) {
@@ -146,10 +172,9 @@ function valueToAst(value: unknown): t.Expression {
   if (typeof value === 'string') return t.stringLiteral(value)
   if (typeof value === 'number') return t.numericLiteral(value)
   if (typeof value === 'boolean') return t.booleanLiteral(value)
-  return t.callExpression(
-    t.memberExpression(t.identifier('JSON'), t.identifier('parse')),
-    [t.stringLiteral(JSON.stringify(value))],
-  )
+  return t.callExpression(t.memberExpression(t.identifier('JSON'), t.identifier('parse')), [
+    t.stringLiteral(JSON.stringify(value)),
+  ])
 }
 
 function getCalleeName(callee: t.Expression | t.V8IntrinsicIdentifier): string | null {
@@ -224,19 +249,16 @@ function applyRulesPlugin(state: State, rules: ReplaceRule[]): PluginItem {
 /**
  * Check if a call expression matches a rule
  */
-function matchesRule(
-  path: NodePath<t.CallExpression>,
-  rule: ReplaceRule,
-  calleeName: string,
-  state: State,
-): boolean {
+function matchesRule(path: NodePath<t.CallExpression>, rule: ReplaceRule, calleeName: string, state: State): boolean {
+  const { match } = rule.call
+
   // Check callee name
-  const callees = Array.isArray(rule.call.match) ? rule.call.match : [rule.call.match]
-  if (!callees.includes(calleeName)) return false
+  const functions = Array.isArray(match.function) ? match.function : [match.function]
+  if (!matchesCallee(path.node.callee, calleeName, functions, state)) return false
 
   // Check argument conditions
-  if (rule.call.args) {
-    for (const [indexStr, condition] of Object.entries(rule.call.args)) {
+  if (match.args) {
+    for (const [indexStr, condition] of Object.entries(match.args)) {
       const index = Number(indexStr)
       const arg = path.node.arguments[index]
       if (!arg) return false
@@ -246,6 +268,48 @@ function matchesRule(
   }
 
   return true
+}
+
+/**
+ * Check if callee matches any of the function patterns
+ */
+function matchesCallee(
+  callee: t.Expression | t.V8IntrinsicIdentifier,
+  calleeName: string,
+  functions: string[],
+  state: State,
+): boolean {
+  for (const fn of functions) {
+    const parsed = parseImportString(fn)
+
+    if (parsed) {
+      // Import string: check if callee is an imported identifier
+      if (t.isIdentifier(callee)) {
+        const imported = state.imports.get(callee.name)
+        if (imported && imported.source === parsed.source && imported.exportName === parsed.exportName) {
+          return true
+        }
+      }
+      // Import string: check member expression like React.createElement
+      // where React is the default import and createElement is the method
+      if (t.isMemberExpression(callee) && t.isIdentifier(callee.object) && t.isIdentifier(callee.property)) {
+        const imported = state.imports.get(callee.object.name)
+        if (
+          imported &&
+          imported.source === parsed.source &&
+          imported.exportName === 'default' &&
+          callee.property.name === parsed.exportName
+        ) {
+          return true
+        }
+      }
+    } else {
+      // Plain string: match function name directly
+      if (calleeName === fn) return true
+    }
+  }
+
+  return false
 }
 
 /**
@@ -294,8 +358,14 @@ function matchesCondition(
  * Apply a replacement to a call expression
  */
 function applyReplace(path: NodePath<t.CallExpression>, replace: ReplaceTarget, state: State): void {
+  // Replace the entire call expression
+  if (!('arg' in replace) && !('argsFrom' in replace)) {
+    path.replaceWith(valueToAst(replace.with))
+    state.modified = true
+    return
+  }
   // Replace a prop inside an object argument
-  if ('prop' in replace) {
+  if ('arg' in replace && 'prop' in replace) {
     const arg = path.node.arguments[replace.arg]
     if (!t.isObjectExpression(arg)) return
 
@@ -318,10 +388,7 @@ function applyReplace(path: NodePath<t.CallExpression>, replace: ReplaceTarget, 
   // Replace all args from index onwards with a single value
   else if ('argsFrom' in replace) {
     if (path.node.arguments.length > replace.argsFrom) {
-      path.node.arguments = [
-        ...path.node.arguments.slice(0, replace.argsFrom),
-        valueToAst(replace.with),
-      ]
+      path.node.arguments = [...path.node.arguments.slice(0, replace.argsFrom), valueToAst(replace.with)]
       state.modified = true
     }
   }

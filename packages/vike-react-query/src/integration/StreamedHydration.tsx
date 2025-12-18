@@ -6,6 +6,7 @@ import { assert } from '../utils/assert.js'
 import { uneval } from 'devalue'
 import type { ReactNode } from 'react'
 import { useStream } from 'react-streaming'
+import { usePageContext } from 'vike-react/usePageContext'
 
 declare global {
   interface Window {
@@ -22,11 +23,16 @@ declare global {
  */
 function StreamedHydration({ client, children }: { client: QueryClient; children: ReactNode }) {
   const stream = useStream()
+  const pageContext = usePageContext()
 
   if (!globalThis.__VIKE__IS_CLIENT) {
     assert(stream)
+    // Access nonce from pageContext for CSP support
+    const nonce = (pageContext as any).cspNonce || (pageContext as any).nonce
+    const nonceAttr = nonce ? ` nonce="${nonce}"` : ''
+
     stream.injectToStream(
-      `<script class="_rqd_">_rqd_=[];_rqc_=()=>{Array.from(
+      `<script class="_rqd_"${nonceAttr}>_rqd_=[];_rqc_=()=>{Array.from(
         document.getElementsByClassName("_rqd_")
       ).forEach((e) => e.remove())};_rqc_()</script>`,
     )
@@ -56,7 +62,7 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
       if (!shouldSend) return
 
       stream.injectToStream(
-        `<script class="_rqd_">_rqd_.push(${uneval(
+        `<script class="_rqd_"${nonceAttr}>_rqd_.push(${uneval(
           dehydrate(client, {
             shouldDehydrateQuery: (query) => query.queryHash === event.query.queryHash,
           }),

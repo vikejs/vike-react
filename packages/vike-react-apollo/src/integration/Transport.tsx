@@ -14,8 +14,7 @@ export const WrappedApolloProvider = WrapApolloProvider(
         return () => {}
       }
       return (callback: () => React.ReactNode) => {
-        // Add CSP nonce attribute if configured
-        // No need to escape — pageContext.cspNonce is controlled by the developer, not by the website visitor
+        // No need to escape the injected HTML — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
         const nonce = (pageContext as any).cspNonce
         stream.injectToStream(
           // https://github.com/apollographql/apollo-client-nextjs/issues/325

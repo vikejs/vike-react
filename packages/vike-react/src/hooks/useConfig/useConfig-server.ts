@@ -60,8 +60,7 @@ type Stream = NonNullable<ReturnType<typeof useStreamOptional>>
 function apply(config: ConfigViaHook, stream: Stream, pageContext: PageContext) {
   const { title } = config
   if (title) {
-    // Add CSP nonce attribute if configured
-    // No need to escape — pageContext.cspNonce is controlled by the developer, not by the website visitor
+    // No need to escape the injected HTML — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
     const nonceAttr = (pageContext as any).cspNonce ? ` nonce="${(pageContext as any).cspNonce}"` : ''
     const htmlSnippet = `<script${nonceAttr}>document.title = ${JSON.stringify(title)}</script>`
     stream.injectToStream(htmlSnippet)

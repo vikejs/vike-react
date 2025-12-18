@@ -24,17 +24,22 @@ function clientOnly<T extends ComponentType<any>>(
       const [LoadedComponent, setLoadedComponent] = useState<React.ComponentType<any> | null>(null)
 
       useLayoutEffect(() => {
+        let isMounted = true
         ;(async () => {
           try {
             const Component = await load()
-            const LoadedComponent = 'default' in Component ? Component.default : Component
-            setLoadedComponent(() => LoadedComponent)
+            if (!isMounted) return
+            const ResolvedComponent = 'default' in Component ? Component.default : Component
+            setLoadedComponent(() => ResolvedComponent)
           } catch (error) {
-            console.error('Component loading failed:', error)
+            if (!isMounted) return
             setLoadedComponent(() => ErrorComponent)
           }
         })()
-      }, [])
+        return () => {
+          isMounted = false
+        }
+      }, [load])
 
       const { fallback, ...rest } = props
       return (

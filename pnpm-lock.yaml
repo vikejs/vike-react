@@ -242,12 +242,6 @@ importers:
       '@babel/core':
         specifier: ^7.24.0
         version: 7.28.5
-      '@babel/plugin-syntax-jsx':
-        specifier: ^7.24.0
-        version: 7.27.1(@babel/core@7.28.5)
-      '@babel/plugin-syntax-typescript':
-        specifier: ^7.24.0
-        version: 7.27.1(@babel/core@7.28.5)
       '@babel/types':
         specifier: ^7.24.0
         version: 7.28.5
@@ -740,18 +734,6 @@ packages:
     resolution: {integrity: sha512-KKBU1VGYR7ORr3At5HAtUQ+TV3SzRCXmA/8OdDZiLDBIZxVyzXuztPjfLd3BV1PRAQGCMWWSHYhL0F8d5uHBDQ==}
     engines: {node: '>=6.0.0'}
     hasBin: true
-
-  '@babel/plugin-syntax-jsx@7.27.1':
-    resolution: {integrity: sha512-y8YTNIeKoyhGd9O0Jiyzyyqk8gdjnumGTQPsz0xOZOQ2RmkVJeZ1vmmfIvFEKqucBG6axJGBZDE/7iI5suUI/w==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-
-  '@babel/plugin-syntax-typescript@7.27.1':
-    resolution: {integrity: sha512-xfYCBMxveHrRMnAWl1ZlPXOZjzkN82THFvLhQhFXFt81Z5HnN+EtUkZhv/zcKpmT3fzmWZB0ywiBrbC3vogbwQ==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
 
   '@babel/plugin-transform-react-jsx-self@7.27.1':
     resolution: {integrity: sha512-6UzkCs+ejGdZ5mFFC/OCUrv028ab2fp1znZmCZjAOBKiBK2jXD1O+BPSfX8X2qjJ75fZBMSnQn3Rq2mrBJK2mw==}
@@ -3942,16 +3924,6 @@ snapshots:
   '@babel/parser@7.28.5':
     dependencies:
       '@babel/types': 7.28.5
-
-  '@babel/plugin-syntax-jsx@7.27.1(@babel/core@7.28.5)':
-    dependencies:
-      '@babel/core': 7.28.5
-      '@babel/helper-plugin-utils': 7.27.1
-
-  '@babel/plugin-syntax-typescript@7.27.1(@babel/core@7.28.5)':
-    dependencies:
-      '@babel/core': 7.28.5
-      '@babel/helper-plugin-utils': 7.27.1
 
   '@babel/plugin-transform-react-jsx-self@7.27.1(@babel/core@7.28.5)':
     dependencies:

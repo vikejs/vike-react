@@ -28,8 +28,6 @@
   },
   "dependencies": {
     "@babel/core": "^7.24.0",
-    "@babel/plugin-syntax-jsx": "^7.24.0",
-    "@babel/plugin-syntax-typescript": "^7.24.0",
     "@babel/types": "^7.24.0",
     "react-streaming": "^0.4.15"
   },

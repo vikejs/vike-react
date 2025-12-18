@@ -49,7 +49,7 @@ Features:
    # Required for source map upload: Sentry Auth Token
    # Create at https://sentry.io/settings/account/api/auth-tokens/
    # Required scopes: project:read, project:releases, project:write
-   SENTRY_AUTH_TOKEN=sntrys_xxxxx
+   SENTRY_AUTH_TOKEN=sntryu_xxxxx
    ```
 
 > [!NOTE]

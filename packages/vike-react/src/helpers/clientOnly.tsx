@@ -21,7 +21,7 @@ function clientOnly<T extends ComponentType<any>>(
     return (props) => <>{props.fallback}</>
   } else {
     return forwardRef((props, ref) => {
-      const [LoadedComponent, setLoadedComponent] = useState<React.ComponentType<any> | null>(null)
+      const [LoadedComponent, setLoadedComponent] = useState<ComponentType<any> | null>(null)
 
       useLayoutEffect(() => {
         let isMounted = true

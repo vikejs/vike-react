@@ -1,10 +1,8 @@
 export { clientOnly }
 
 import React, {
-  Suspense,
   forwardRef,
-  lazy,
-  useEffect,
+  useLayoutEffect,
   useState,
   type ComponentProps,
   type ComponentType,
@@ -22,30 +20,32 @@ function clientOnly<T extends ComponentType<any>>(
   if (!globalThis.__VIKE__IS_CLIENT) {
     return (props) => <>{props.fallback}</>
   } else {
-    const Component = lazy(() =>
-      load()
-        .then((LoadedComponent) => ('default' in LoadedComponent ? LoadedComponent : { default: LoadedComponent }))
-        .catch((error) => {
-          console.error('Component loading failed:', error)
-          return { default: (() => <p>Error loading component.</p>) as any }
-        }),
-    )
-
     return forwardRef((props, ref) => {
-      const [mounted, setMounted] = useState(false)
-      useEffect(() => {
-        setMounted(true)
+      const [LoadedComponent, setLoadedComponent] = useState<React.ComponentType<any> | null>(null)
+
+      useLayoutEffect(() => {
+        ;(async () => {
+          try {
+            const Component = await load()
+            const LoadedComponent = 'default' in Component ? Component.default : Component
+            setLoadedComponent(() => LoadedComponent)
+          } catch (error) {
+            setLoadedComponent(() => ErrorComponent)
+          }
+        })()
       }, [])
-      if (!mounted) {
-        return <>{props.fallback}</>
-      }
+
       const { fallback, ...rest } = props
       return (
-        <Suspense fallback={<>{props.fallback}</>}>
-          {/* @ts-ignore */}
-          <Component {...rest} ref={ref} />
-        </Suspense>
+        <>
+          {!LoadedComponent && <>{props.fallback}</>}
+          {LoadedComponent && <LoadedComponent {...rest} ref={ref} />}
+        </>
       )
     }) as ComponentType<ComponentProps<T> & { fallback?: ReactNode }>
   }
+}
+
+function ErrorComponent() {
+  return <p>Error loading component.</p>
 }

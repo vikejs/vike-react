@@ -21,12 +21,9 @@ function Head() {
   // - traceparent: W3C Trace Context header (only if propagateTraceparent is enabled)
   return (
     <>
-      {traceData['sentry-trace'] && (
-        <meta name="sentry-trace" content={traceData['sentry-trace']} />
-      )}
+      {traceData['sentry-trace'] && <meta name="sentry-trace" content={traceData['sentry-trace']} />}
       {traceData.baggage && <meta name="baggage" content={traceData.baggage} />}
       {traceData.traceparent && <meta name="traceparent" content={traceData.traceparent} />}
     </>
   )
 }
-

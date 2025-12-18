@@ -5,4 +5,3 @@ function assertUsage(condition: unknown, message: string): asserts condition {
     throw new Error(`[vike-react-sentry] ${message}`)
   }
 }
-

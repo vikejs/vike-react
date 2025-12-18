@@ -9,4 +9,3 @@ function onError(error: unknown): void {
     Sentry.captureException(error)
   }
 }
-

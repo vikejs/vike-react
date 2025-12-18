@@ -1,7 +1,6 @@
 console.log('This will only run on the client side.')
 import React from 'react'
 
-
 export default function ClientOnlyComponent() {
   return (
     <div>

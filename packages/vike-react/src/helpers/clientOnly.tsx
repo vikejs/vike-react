@@ -30,6 +30,7 @@ function clientOnly<T extends ComponentType<any>>(
             const LoadedComponent = 'default' in Component ? Component.default : Component
             setLoadedComponent(() => LoadedComponent)
           } catch (error) {
+            console.error('Component loading failed:', error)
             setLoadedComponent(() => ErrorComponent)
           }
         })()

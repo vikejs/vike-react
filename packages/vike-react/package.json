@@ -27,8 +27,8 @@
     "./__internal/integration/Loading": "./dist/integration/Loading.js"
   },
   "dependencies": {
-    "@babel/core": "^7.24.0",
-    "@babel/types": "^7.24.0",
+    "@babel/core": "^7.28.5",
+    "@babel/types": "^7.28.5",
     "react-streaming": "^0.4.15"
   },
   "peerDependencies": {

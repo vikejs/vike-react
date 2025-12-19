@@ -240,10 +240,10 @@ importers:
   packages/vike-react:
     dependencies:
       '@babel/core':
-        specifier: ^7.24.0
+        specifier: ^7.28.5
         version: 7.28.5
       '@babel/types':
-        specifier: ^7.24.0
+        specifier: ^7.28.5
         version: 7.28.5
       react-streaming:
         specifier: ^0.4.15

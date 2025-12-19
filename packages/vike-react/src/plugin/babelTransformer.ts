@@ -9,8 +9,14 @@ import * as t from '@babel/types'
  * Condition to match an argument value.
  * - string starting with 'import:' matches an imported identifier
  * - { prop, equals } matches a property value inside an object argument
+ * - { call, args } matches a call expression with specific arguments
+ * - { member, object, property } matches a member expression like $setup["ClientOnly"]
  */
-export type ArgCondition = string | { prop: string; equals: unknown }
+export type ArgCondition =
+  | string
+  | { prop: string; equals: unknown }
+  | { call: string; args?: Record<number, ArgCondition> }
+  | { member: true; object: string; property: string | ArgCondition }
 
 /**
  * Target for replace operation.
@@ -77,6 +83,23 @@ export type CallRule = {
  *       args: { 0: 'import:vike-react/ClientOnly:ClientOnly' }
  *     },
  *     remove: { argsFrom: 2 }
+ *   }
+ * }
+ *
+ * @example
+ * // ssrRenderComponent: match nested call expression and remove default slot
+ * {
+ *   call: {
+ *     match: {
+ *       function: 'import:vue/server-renderer:ssrRenderComponent',
+ *       args: {
+ *         0: {
+ *           call: 'import:vue:unref',
+ *           args: { 0: 'import:vike-vue/ClientOnly:ClientOnly' }
+ *         }
+ *       }
+ *     },
+ *     remove: { arg: 2, prop: 'default' }
  *   }
  * }
  */
@@ -332,6 +355,63 @@ function matchesCondition(
     if (t.isStringLiteral(arg)) return arg.value === condition
     if (t.isIdentifier(arg)) return arg.name === condition
     return false
+  }
+
+  // Call expression condition: match call with specific arguments
+  if ('call' in condition) {
+    if (!t.isCallExpression(arg)) return false
+
+    const calleeName = getCalleeName(arg.callee)
+    if (!calleeName) return false
+
+    // Check if callee matches
+    const parsed = parseImportString(condition.call)
+    if (parsed) {
+      // Import string: check if callee is an imported identifier
+      if (!t.isIdentifier(arg.callee)) return false
+      const imported = state.imports.get(arg.callee.name)
+      if (!imported || imported.source !== parsed.source || imported.exportName !== parsed.exportName) {
+        return false
+      }
+    } else {
+      // Plain string: match function name directly
+      if (calleeName !== condition.call) return false
+    }
+
+    // Check argument conditions
+    if (condition.args) {
+      for (const [indexStr, argCondition] of Object.entries(condition.args)) {
+        const index = Number(indexStr)
+        const nestedArg = arg.arguments[index]
+        if (!nestedArg) return false
+        if (!matchesCondition(nestedArg, argCondition, state)) return false
+      }
+    }
+
+    return true
+  }
+
+  // Member expression condition: match $setup["ClientOnly"]
+  if ('member' in condition) {
+    if (!t.isMemberExpression(arg)) return false
+
+    // Check object
+    if (!t.isIdentifier(arg.object) || arg.object.name !== condition.object) return false
+
+    // Check property
+    if (typeof condition.property === 'string') {
+      // Simple string property
+      if (t.isIdentifier(arg.property) && !arg.computed) {
+        return arg.property.name === condition.property
+      }
+      if (t.isStringLiteral(arg.property) && arg.computed) {
+        return arg.property.value === condition.property
+      }
+      return false
+    } else {
+      // Nested condition on property (for future extensibility)
+      return false
+    }
   }
 
   // Object condition: match prop value inside an object argument

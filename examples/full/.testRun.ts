@@ -2,6 +2,8 @@ export { testRun }
 import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, partRegex, expectLog } from '@brillout/test-e2e'
 import assert from 'node:assert'
 
+// TODO/ai add https://github.com/vikejs/vike-vue/blob/8181617d7f27550498390d820b62aad3ddb33862/examples/full/.testRun.ts#L282-L300
+
 let isProd: boolean
 
 const titleDefault = 'My Vike + React App'

@@ -1,8 +1,10 @@
 export { clientOnly }
 
 import React, {
+  Suspense,
   forwardRef,
-  useLayoutEffect,
+  lazy,
+  useEffect,
   useState,
   type ComponentProps,
   type ComponentType,
@@ -20,39 +22,30 @@ function clientOnly<T extends ComponentType<any>>(
   if (!globalThis.__VIKE__IS_CLIENT) {
     return (props) => <>{props.fallback}</>
   } else {
+    const Component = lazy(() =>
+      load()
+        .then((LoadedComponent) => ('default' in LoadedComponent ? LoadedComponent : { default: LoadedComponent }))
+        .catch((error) => {
+          console.error('Component loading failed:', error)
+          return { default: (() => <p>Error loading component.</p>) as any }
+        }),
+    )
+
     return forwardRef((props, ref) => {
-      const [LoadedComponent, setLoadedComponent] = useState<ComponentType<any> | null>(null)
-
-      useLayoutEffect(() => {
-        let isMounted = true
-        ;(async () => {
-          try {
-            const Component = await load()
-            if (!isMounted) return
-            const ResolvedComponent = 'default' in Component ? Component.default : Component
-            setLoadedComponent(() => ResolvedComponent)
-          } catch (error) {
-            console.error('Component loading failed:', error)
-            if (!isMounted) return
-            setLoadedComponent(() => ErrorComponent)
-          }
-        })()
-        return () => {
-          isMounted = false
-        }
+      const [mounted, setMounted] = useState(false)
+      useEffect(() => {
+        setMounted(true)
       }, [])
-
+      if (!mounted) {
+        return <>{props.fallback}</>
+      }
       const { fallback, ...rest } = props
       return (
-        <>
-          {!LoadedComponent && <>{props.fallback}</>}
-          {LoadedComponent && <LoadedComponent {...rest} ref={ref} />}
-        </>
+        <Suspense fallback={<>{props.fallback}</>}>
+          {/* @ts-ignore */}
+          <Component {...rest} ref={ref} />
+        </Suspense>
       )
     }) as ComponentType<ComponentProps<T> & { fallback?: ReactNode }>
   }
-}
-
-function ErrorComponent() {
-  return <p>Error loading component.</p>
 }

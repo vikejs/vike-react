@@ -1,3 +1,12 @@
+## [0.1.12](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.11...vike-react-query@0.1.12) (2025-12-18)
+
+
+### Bug Fixes
+
+* support +csp.none (fix [#2971](https://github.com/vikejs/vike-react/issues/2971)) ([#207](https://github.com/vikejs/vike-react/issues/207)) ([577847f](https://github.com/vikejs/vike-react/commit/577847f08de170dfa9b012aeb4bffb4116703c39))
+
+
+
 ## [0.1.11](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.10...vike-react-query@0.1.11) (2025-12-17)
 
 

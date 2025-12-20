@@ -1,6 +1,6 @@
 {
   "name": "vike-react",
-  "version": "0.6.16",
+  "version": "0.6.17",
   "repository": "https://github.com/vikejs/vike-react",
   "type": "module",
   "exports": {

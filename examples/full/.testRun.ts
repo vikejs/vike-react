@@ -37,7 +37,13 @@ const pages = {
 } as const
 
 function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
-  run(cmd)
+  run(cmd, {
+    // [13:43:30.872][/][pnpm run preview][stderr] [plugin vite:reporter] (!) /home/rom/code/vike-react/examples/full/components/ClientOnlyComponent.tsx is dynamically imported by /home/rom/code/vike-react/examples/full/pages/client-only/+Page.tsx but also statically imported by /home/rom/code/vike-react/examples/full/pages/client-only/+Page.tsx, dynamic import will not move module into another chunk.
+    tolerateError: ({ logText }) =>
+      logText.includes('vite:reporter') &&
+      logText.includes('is dynamically imported') &&
+      logText.includes('but also statically imported'),
+  })
   isProd = cmd !== 'pnpm run dev'
   testPages()
   testPageNavigation_betweenWithSSRAndWithout()

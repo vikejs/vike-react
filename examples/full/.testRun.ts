@@ -2,8 +2,6 @@ export { testRun }
 import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, partRegex, expectLog } from '@brillout/test-e2e'
 import assert from 'node:assert'
 
-// TODO/ai add https://github.com/vikejs/vike-vue/blob/8181617d7f27550498390d820b62aad3ddb33862/examples/full/.testRun.ts#L282-L300
-
 let isProd: boolean
 
 const titleDefault = 'My Vike + React App'
@@ -52,6 +50,7 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   testPageNavigation_titleUpdate()
   testUseConfig()
   testReactSetting()
+  testClientOnly()
 }
 
 function testPageNavigation_betweenWithSSRAndWithout() {
@@ -264,5 +263,25 @@ function testReactSetting() {
     await testCounter()
     expectLog('some-id-server-prefix', { filter: (log) => log.logSource === 'stdout' })
     expectLog('some-id-client-prefix', { filter: (log) => log.logSource === 'Browser Log' })
+  })
+}
+
+function testClientOnly() {
+  const url = '/client-only'
+  const htmlLoading = 'Loading client-only component...'
+  const htmlClientOnly = 'Only loaded in the browser'
+
+  test(url + ' - <ClientOnly> component (HTML)', async () => {
+    const html = await fetchHtml(url)
+    expect(html).toContain(htmlLoading)
+    expect(html).not.toContain(htmlClientOnly)
+  })
+
+  test(url + ' - <ClientOnly> component (Hydration)', async () => {
+    await page.goto(getServerUrl() + url)
+    await testCounter()
+    const body = await page.textContent('body')
+    expect(body).toContain(htmlClientOnly)
+    expect(body).not.toContain(htmlLoading)
   })
 }

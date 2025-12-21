@@ -33,6 +33,7 @@ const config = {
   staticReplace: [
     {
       env: 'server',
+      filter: 'vike-react/ClientOnly',
       type: 'call',
       match: {
         function: [
@@ -46,6 +47,7 @@ const config = {
     },
     {
       env: 'server',
+      filter: 'vike-react/ClientOnly',
       type: 'call',
       match: {
         function: 'import:react:createElement',
@@ -55,6 +57,7 @@ const config = {
     },
     {
       env: 'server',
+      filter: 'vike-react/useHydrated',
       type: 'call',
       match: {
         function: 'import:vike-react/useHydrated:useHydrated',

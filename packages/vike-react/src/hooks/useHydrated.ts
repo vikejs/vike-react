@@ -12,7 +12,7 @@ import { useSyncExternalStore } from 'react'
  *
  * Example: Disable a button that needs JS to work.
  * ```tsx
- * let hydrated = useHydrated();
+ * const hydrated = useHydrated()
  * return (
  *   <button type="button" disabled={!hydrated} onClick={doSomethingCustom}>
  *     Click me
@@ -22,12 +22,12 @@ import { useSyncExternalStore } from 'react'
  */
 function useHydrated(): boolean {
   return useSyncExternalStore(
-    subscribe,
+    subscribeDummy,
     () => true,
     () => false,
   )
 }
 
-function subscribe() {
+function subscribeDummy() {
   return () => {}
 }

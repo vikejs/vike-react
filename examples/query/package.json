@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "DEBUG=vike:staticReplace vike dev",
+    "dev": "vike dev",
     "preview": "vike build && vike preview"
   },
   "dependencies": {

@@ -35,8 +35,8 @@ const config = {
   hydrationCanBeAborted: true,
 
   // Remove <ClientOnly> children on server
-  ///*
   staticReplace: [
+    /*
     {
       env: 'server',
       type: 'call',
@@ -50,6 +50,7 @@ const config = {
       },
       remove: { arg: 1, prop: 'children' },
     },
+    */
     {
       env: 'server',
       type: 'call',
@@ -68,7 +69,6 @@ const config = {
       replace: { with: false },
     },
   ],
-  //*/
 
   // https://vike.dev/meta
   meta: {

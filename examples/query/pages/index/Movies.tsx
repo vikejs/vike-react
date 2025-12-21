@@ -42,7 +42,7 @@ const Movies = withFallback(() => {
 
 async function getStarWarsMovies(): Promise<MovieDetails[]> {
   // Simulate slow network
-  await sleep(4000)
+  await sleep(2000)
 
   const response = await fetch('https://star-wars.brillout.com/api/films.json')
   let movies: MovieDetails[] = ((await response.json()) as any).results

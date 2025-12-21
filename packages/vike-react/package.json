@@ -27,8 +27,6 @@
     "./__internal/integration/Loading": "./dist/integration/Loading.js"
   },
   "dependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/types": "^7.28.5",
     "react-streaming": "^0.4.15"
   },
   "peerDependencies": {
@@ -46,7 +44,6 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@brillout/release-me": "^0.4.12",
-    "@types/babel__core": "^7.20.5",
     "@types/node": "^24.0.8",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
@@ -54,7 +51,7 @@
     "react-dom": "^19.2.1",
     "rimraf": "^5.0.5",
     "typescript": "^5.9.2",
-    "vike": "0.4.249-commit-92f1383",
+    "vike": "0.4.249-commit-d781796",
     "vite": "^7.3.0"
   },
   "typesVersions": {

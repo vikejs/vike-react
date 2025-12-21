@@ -6,6 +6,7 @@
   "exports": {
     "./usePageContext": "./dist/hooks/usePageContext.js",
     "./useData": "./dist/hooks/useData.js",
+    "./useHydrated": "./dist/hooks/useHydrated.js",
     "./useConfig": {
       "browser": "./dist/hooks/useConfig/useConfig-client.js",
       "default": "./dist/hooks/useConfig/useConfig-server.js"

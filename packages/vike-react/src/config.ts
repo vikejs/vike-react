@@ -3,7 +3,6 @@ export { config as default }
 import type { Config } from 'vike/types'
 import { ssrEffect } from './integration/ssrEffect.js'
 import { isNotFalse } from './utils/isNotFalse.js'
-import { vikeReactClientOnly } from './plugin/index.js'
 
 const config = {
   // @eject-remove start
@@ -19,10 +18,6 @@ const config = {
   // https://vike.dev/onRenderClient
   onRenderClient: 'import:vike-react/__internal/integration/onRenderClient:onRenderClient',
 
-  vite: {
-    plugins: [vikeReactClientOnly()],
-  },
-
   // @eject-remove end
   passToClient: [
     '_configViaHook',
@@ -33,6 +28,40 @@ const config = {
   // https://vike.dev/clientRouting
   clientRouting: true,
   hydrationCanBeAborted: true,
+
+  // Remove <ClientOnly> children on server
+  staticReplace: [
+    {
+      env: 'server',
+      type: 'call',
+      match: {
+        function: [
+          'import:react/jsx-runtime:jsx',
+          'import:react/jsx-runtime:jsxs',
+          'import:react/jsx-dev-runtime:jsxDEV',
+        ],
+        args: { 0: 'import:vike-react/ClientOnly:ClientOnly' },
+      },
+      remove: { arg: 1, prop: 'children' },
+    },
+    {
+      env: 'server',
+      type: 'call',
+      match: {
+        function: 'import:react:createElement',
+        args: { 0: 'import:vike-react/ClientOnly:ClientOnly' },
+      },
+      remove: { argsFrom: 2 },
+    },
+    {
+      env: 'server',
+      type: 'call',
+      match: {
+        function: 'import:vike-react/useHydrated:useHydrated',
+      },
+      replace: { with: false },
+    },
+  ],
 
   // https://vike.dev/meta
   meta: {

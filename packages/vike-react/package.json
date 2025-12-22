@@ -63,6 +63,9 @@
       "usePageContext": [
         "./dist/hooks/usePageContext.d.ts"
       ],
+      "useHydrated": [
+        "./dist/hooks/useHydrated.d.ts"
+      ],
       "useConfig": [
         "./dist/hooks/useConfig/useConfig-server.d.ts"
       ],

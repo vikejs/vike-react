@@ -10,11 +10,13 @@ import { useSyncExternalStore } from 'react'
  * first render and true from then on. Even if a new component renders it will
  * always start with true.
  *
+ * https://vike.dev/useHydrated
+ *
  * Example: Disable a button that needs JS to work.
  * ```tsx
  * const hydrated = useHydrated()
  * return (
- *   <button type="button" disabled={!hydrated} onClick={doSomethingCustom}>
+ *   <button type="button" disabled={!hydrated} onClick={doSomething}>
  *     Click me
  *   </button>
  * );

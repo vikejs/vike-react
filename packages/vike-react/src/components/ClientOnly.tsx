@@ -9,8 +9,7 @@ import { assert } from '../utils/assert.js'
 /**
  * Render children only on the client-side.
  *
- * Strips the children prop on server-side to remove
- * the component from the server bundle.
+ * Children are completely removed and never loaded on the server.
  *
  * https://vike.dev/ClientOnly
  */

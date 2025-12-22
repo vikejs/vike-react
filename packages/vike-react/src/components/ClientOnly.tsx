@@ -15,7 +15,11 @@ import { assert } from '../utils/assert.js'
  */
 function ClientOnly({ children, fallback }: { children: ReactNode; fallback?: ReactNode }) {
   const pageContext = usePageContext()
+
+  // Assert tree-shaking: children should be removed on the server-side
   if (!pageContext.isClientSide) assert(children === undefined)
+
   const hydrated = useHydrated()
+
   return <>{hydrated ? children : fallback}</>
 }

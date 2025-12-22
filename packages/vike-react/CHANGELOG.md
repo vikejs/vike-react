@@ -1,3 +1,12 @@
+## [0.6.18](https://github.com/vikejs/vike-react/compare/vike-react@0.6.17...vike-react@0.6.18) (2025-12-22)
+
+
+### Features
+
+* <ClientOnly> & `useHydrated()` ([#206](https://github.com/vikejs/vike-react/issues/206)) ([bd41fca](https://github.com/vikejs/vike-react/commit/bd41fcaf12c5834a2e9151fd2d5e543d2e438f19))
+
+
+
 ## [0.6.17](https://github.com/vikejs/vike-react/compare/vike-react@0.6.16...vike-react@0.6.17) (2025-12-18)
 
 

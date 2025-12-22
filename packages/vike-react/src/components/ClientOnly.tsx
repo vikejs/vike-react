@@ -1,45 +1,25 @@
 export { ClientOnly }
 
-import React, { lazy, useEffect, useState, startTransition } from 'react'
-import type { ComponentType, ReactNode } from 'react'
+import React from 'react'
+import type { ReactNode } from 'react'
+import { usePageContext } from '../hooks/usePageContext.js'
+import { useHydrated } from '../hooks/useHydrated.js'
+import { assert } from '../utils/assert.js'
 
-function ClientOnly<T>({
-  load,
-  children,
-  fallback,
-  deps = [],
-}: {
-  load: () => Promise<{ default: React.ComponentType<T> } | React.ComponentType<T>>
-  children: (Component: React.ComponentType<T>) => ReactNode
-  fallback: ReactNode
-  deps?: Parameters<typeof useEffect>[1]
-}) {
-  // TO-DO/next-major: remove this file/export
-  console.warn('[vike-react][warning] <ClientOnly> is deprecated: use clientOnly() instead https://vike.dev/clientOnly')
+/**
+ * Render children only on the client-side.
+ *
+ * Children are completely removed and never loaded on the server.
+ *
+ * https://vike.dev/ClientOnly
+ */
+function ClientOnly({ children, fallback }: { children: ReactNode; fallback?: ReactNode }) {
+  const pageContext = usePageContext()
 
-  const [Component, setComponent] = useState<ComponentType<unknown> | null>(null)
+  // Assert tree-shaking: children should be statically removed on the server-side
+  if (!pageContext.isClientSide) assert(children === undefined)
 
-  useEffect(() => {
-    const loadComponent = () => {
-      const Component = lazy(() =>
-        load()
-          .then((LoadedComponent) => {
-            return {
-              default: () => children('default' in LoadedComponent ? LoadedComponent.default : LoadedComponent),
-            }
-          })
-          .catch((error) => {
-            console.error('Component loading failed:', error)
-            return { default: () => <p>Error loading component.</p> }
-          }),
-      )
-      setComponent(Component)
-    }
+  const hydrated = useHydrated()
 
-    startTransition(() => {
-      loadComponent()
-    })
-  }, deps)
-
-  return Component ? <Component /> : fallback
+  return <>{hydrated ? children : fallback}</>
 }

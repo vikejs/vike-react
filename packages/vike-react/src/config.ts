@@ -8,7 +8,7 @@ const config = {
   // @eject-remove start
   name: 'vike-react',
   require: {
-    vike: '>=0.4.242',
+    vike: '>=0.4.250',
   },
 
   Loading: 'import:vike-react/__internal/integration/Loading:default',
@@ -28,6 +28,43 @@ const config = {
   // https://vike.dev/clientRouting
   clientRouting: true,
   hydrationCanBeAborted: true,
+
+  // Remove <ClientOnly> children on server
+  staticReplace: [
+    {
+      env: 'server',
+      filter: 'vike-react/ClientOnly',
+      type: 'call',
+      match: {
+        function: [
+          'import:react/jsx-runtime:jsx',
+          'import:react/jsx-runtime:jsxs',
+          'import:react/jsx-dev-runtime:jsxDEV',
+        ],
+        args: { 0: 'import:vike-react/ClientOnly:ClientOnly' },
+      },
+      remove: { arg: 1, prop: 'children' },
+    },
+    {
+      env: 'server',
+      filter: 'vike-react/ClientOnly',
+      type: 'call',
+      match: {
+        function: 'import:react:createElement',
+        args: { 0: 'import:vike-react/ClientOnly:ClientOnly' },
+      },
+      remove: { argsFrom: 2 },
+    },
+    {
+      env: 'server',
+      filter: 'vike-react/useHydrated',
+      type: 'call',
+      match: {
+        function: 'import:vike-react/useHydrated:useHydrated',
+      },
+      replace: { with: false },
+    },
+  ],
 
   // https://vike.dev/meta
   meta: {

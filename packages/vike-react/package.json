@@ -6,6 +6,7 @@
   "exports": {
     "./usePageContext": "./dist/hooks/usePageContext.js",
     "./useData": "./dist/hooks/useData.js",
+    "./useHydrated": "./dist/hooks/useHydrated.js",
     "./useConfig": {
       "browser": "./dist/hooks/useConfig/useConfig-client.js",
       "default": "./dist/hooks/useConfig/useConfig-server.js"
@@ -32,7 +33,7 @@
   "peerDependencies": {
     "react": ">=19",
     "react-dom": ">=19",
-    "vike": ">=0.4.242"
+    "vike": ">=0.4.250"
   },
   "scripts": {
     "dev": "tsc --watch",
@@ -61,6 +62,9 @@
       ],
       "usePageContext": [
         "./dist/hooks/usePageContext.d.ts"
+      ],
+      "useHydrated": [
+        "./dist/hooks/useHydrated.d.ts"
       ],
       "useConfig": [
         "./dist/hooks/useConfig/useConfig-server.d.ts"

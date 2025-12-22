@@ -37,13 +37,20 @@ const pages = {
 } as const
 
 function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
-  run(cmd)
+  run(cmd, {
+    // [13:43:30.872][/][pnpm run preview][stderr] [plugin vite:reporter] (!) /home/rom/code/vike-react/examples/full/components/ClientOnlyComponent.tsx is dynamically imported by /home/rom/code/vike-react/examples/full/pages/client-only/+Page.tsx but also statically imported by /home/rom/code/vike-react/examples/full/pages/client-only/+Page.tsx, dynamic import will not move module into another chunk.
+    tolerateError: ({ logText }) =>
+      logText.includes('vite:reporter') &&
+      logText.includes('is dynamically imported') &&
+      logText.includes('but also statically imported'),
+  })
   isProd = cmd !== 'pnpm run dev'
   testPages()
   testPageNavigation_betweenWithSSRAndWithout()
   testPageNavigation_titleUpdate()
   testUseConfig()
   testReactSetting()
+  testClientOnly()
 }
 
 function testPageNavigation_betweenWithSSRAndWithout() {
@@ -256,5 +263,25 @@ function testReactSetting() {
     await testCounter()
     expectLog('some-id-server-prefix', { filter: (log) => log.logSource === 'stdout' })
     expectLog('some-id-client-prefix', { filter: (log) => log.logSource === 'Browser Log' })
+  })
+}
+
+function testClientOnly() {
+  const url = '/client-only'
+  const textLoading = 'Loading client-only component...'
+  const textLoaded = 'Only loaded in the browser'
+
+  test(url + ' - <ClientOnly> component (HTML)', async () => {
+    const html = await fetchHtml(url)
+    expect(html).toContain(textLoading)
+    expect(html).not.toContain(textLoaded)
+  })
+
+  test(url + ' - <ClientOnly> component (Hydration)', async () => {
+    await page.goto(getServerUrl() + url)
+    await testCounter()
+    const body = await page.textContent('body')
+    expect(body).toContain(textLoaded)
+    expect(body).not.toContain(textLoading)
   })
 }

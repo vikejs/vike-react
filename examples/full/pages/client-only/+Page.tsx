@@ -3,8 +3,10 @@ export default Page
 import React from 'react'
 import { Counter } from '../../components/Counter'
 import { clientOnly } from 'vike-react/clientOnly'
+import { ClientOnly } from 'vike-react/ClientOnly'
+import ClientOnlyComponent from '../../components/ClientOnlyComponent'
 
-const ClientOnlyComponent = clientOnly(() => import('../../components/ClientOnlyComponent'))
+const ClientOnlyComponentLazy = clientOnly(() => import('../../components/ClientOnlyComponent'))
 
 function Page() {
   return (
@@ -16,8 +18,12 @@ function Page() {
         <li>
           Interactive. <Counter />
         </li>
+        <ClientOnly fallback={<li>Loading client-only component...</li>}>
+          <ClientOnlyComponent />
+          <div>This is a test</div>
+        </ClientOnly>
       </ul>
-      <ClientOnlyComponent fallback="Loading the ClientOnlyComponent..." />
+      <ClientOnlyComponentLazy fallback="Loading the ClientOnlyComponent..." />
     </>
   )
 }

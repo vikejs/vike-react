@@ -269,19 +269,19 @@ function testReactSetting() {
 function testClientOnly() {
   const url = '/client-only'
   const htmlLoading = 'Loading client-only component...'
-  const htmlClientOnly = 'Only loaded in the browser'
+  const textLoaded = 'Only loaded in the browser'
 
   test(url + ' - <ClientOnly> component (HTML)', async () => {
     const html = await fetchHtml(url)
     expect(html).toContain(htmlLoading)
-    expect(html).not.toContain(htmlClientOnly)
+    expect(html).not.toContain(textLoaded)
   })
 
   test(url + ' - <ClientOnly> component (Hydration)', async () => {
     await page.goto(getServerUrl() + url)
     await testCounter()
     const body = await page.textContent('body')
-    expect(body).toContain(htmlClientOnly)
+    expect(body).toContain(textLoaded)
     expect(body).not.toContain(htmlLoading)
   })
 }

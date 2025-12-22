@@ -5,9 +5,9 @@ import { useHydrated } from 'vike-react/useHydrated'
 
 function Counter() {
   const [count, setCount] = useState(0)
-  const isHydrated = useHydrated()
+  const hydrated = useHydrated()
   return (
-    <button disabled={!isHydrated} onClick={() => setCount((count) => count + 1)}>
+    <button disabled={!hydrated} onClick={() => setCount((count) => count + 1)}>
       Counter {count}
     </button>
   )

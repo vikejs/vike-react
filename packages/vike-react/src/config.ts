@@ -8,7 +8,7 @@ const config = {
   // @eject-remove start
   name: 'vike-react',
   require: {
-    vike: '>=0.4.242',
+    vike: '>=0.4.250',
   },
 
   Loading: 'import:vike-react/__internal/integration/Loading:default',

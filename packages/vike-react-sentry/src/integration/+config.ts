@@ -14,6 +14,7 @@ const config = {
   Head: 'import:vike-react-sentry/__internal/integration/Head:Head',
   onCreateGlobalContext: 'import:vike-react-sentry/__internal/integration/onCreateGlobalContext:onCreateGlobalContext',
   onError: 'import:vike-react-sentry/__internal/integration/onError:onError',
+  onHookCall: 'import:vike-react-sentry/__internal/integration/onHookCall:onHookCall',
   meta: {
     sentry: {
       env: {

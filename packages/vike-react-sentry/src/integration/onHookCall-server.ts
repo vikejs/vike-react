@@ -1,0 +1,62 @@
+import { Config } from 'vike/types'
+import * as Sentry from '@sentry/node'
+import { markErrorAsSeen } from '../utils/error.js'
+
+/**
+ * Vike onHookCall configuration for Sentry integration.
+ * Provides automatic tracing and error capture for all Vike hooks.
+ */
+export const onHookCall: Config['onHookCall'] = async (hook, pageContext) => {
+  if (!Sentry.getClient() || hook.name === 'onError') {
+    return hook.call()
+  }
+
+  // Extract useful context for Sentry
+  const url = pageContext?.urlOriginal ?? 'unknown'
+  const pageId = pageContext?.pageId ?? 'unknown'
+  const routeParams = pageContext?.routeParams ?? {}
+
+  // withScope ensures any error captured during hook execution has Vike context
+  return Sentry.withScope((scope) => {
+    scope.setTag('vike.hook', hook.name)
+    scope.setTag('vike.page', pageId)
+    scope.setContext('vike', {
+      hook: hook.name,
+      filePath: hook.filePath,
+      pageId,
+      url,
+      routeParams,
+    })
+
+    return Sentry.startSpan(
+      {
+        name: hook.name,
+        op: 'vike.hook',
+        attributes: {
+          'vike.hook.name': hook.name,
+          'vike.hook.file': hook.filePath,
+          'vike.page.id': pageId,
+          'vike.url': url,
+          ...Object.entries(routeParams).reduce(
+            (acc, [key, value]) => ({
+              ...acc,
+              [`vike.route.${key}`]: value,
+            }),
+            {},
+          ),
+        },
+      },
+      async (span) => {
+        try {
+          await hook.call()
+        } catch (error) {
+          markErrorAsSeen(error)
+          span.setStatus({
+            code: 2,
+          })
+          Sentry.captureException(error)
+        }
+      },
+    )
+  })
+}

@@ -62,6 +62,7 @@ Features:
 That's it! With the configuration above, `vike-react-sentry` will automatically:
 - Initialize Sentry on both client and server
 - Track errors and exceptions
+- Instrument Vike hooks using [onHookCall](https://vike.dev/onHookCall)
 - Enable browser tracing for performance monitoring
 - Upload source maps during production builds (when `SENTRY_AUTH_TOKEN` is set)
 

@@ -1,3 +1,12 @@
+## [0.1.9](https://github.com/vikejs/vike-react/compare/vike-react-zustand@0.1.8...vike-react-zustand@0.1.9) (2026-01-07)
+
+
+### Bug Fixes
+
+* improve rolldown filter ([#210](https://github.com/vikejs/vike-react/issues/210)) ([c59fbcf](https://github.com/vikejs/vike-react/commit/c59fbcf2f2f02757828000e234c8ac5f5c1f0972))
+
+
+
 ## [0.1.8](https://github.com/vikejs/vike-react/compare/vike-react-zustand@0.1.7...vike-react-zustand@0.1.8) (2025-12-18)
 
 

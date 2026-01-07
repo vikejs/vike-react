@@ -11,6 +11,10 @@ const filterRolldown = {
     include: skipNonJsFiles,
     exclude: `**${skipNodeModules}**`,
   },
+  code: {
+    // Coarsely detect `import { create } from 'vike-react-zustand'`
+    include: ['vike-react-zustand', 'create'],
+  },
 }
 const filterFunction = (id: string) => {
   if (id.includes(skipNodeModules)) return false

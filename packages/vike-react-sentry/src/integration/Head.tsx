@@ -18,7 +18,7 @@ function Head() {
   // Fields may include:
   // - sentry-trace: Sentry's proprietary trace header
   // - baggage: Dynamic sampling context
-  // - traceparent: W3C Trace Context header (only if propagateTraceparent is enabled)
+  // - traceparent: W3C Trace Context header
   return (
     <>
       {traceData['sentry-trace'] && <meta name="sentry-trace" content={traceData['sentry-trace']} />}

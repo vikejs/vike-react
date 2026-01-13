@@ -18,7 +18,7 @@ async function onCreateGlobalContext(globalContext: GlobalContextClient): Promis
   if (!clientConfig) return
   if (!SentryReact.getClient()) {
     SentryReact.init({
-      integrations: [SentryReact.browserTracingIntegration()],
+      integrations: [SentryReact.browserTracingIntegration(), SentryReact.replayIntegration()],
       ...clientConfig,
       dsn: resolveDsn(clientConfig.dsn),
     })

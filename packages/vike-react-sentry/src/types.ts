@@ -14,4 +14,6 @@ export type SentryOptions = Pick<
   | 'enabled'
   | 'maxBreadcrumbs'
   | 'sendDefaultPii'
+  | 'replaysSessionSampleRate'
+  | 'replaysOnErrorSampleRate'
 >

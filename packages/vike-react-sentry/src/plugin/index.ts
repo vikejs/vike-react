@@ -24,13 +24,15 @@ async function getViteConfig(): Promise<InlineConfig> {
         const sentryConfigRaw = vikeConfig.config.sentry || []
 
         const sentryConfig = sentryConfigRaw.toReversed().reduce((acc, curr) => {
+          // skip function configs
           if (typeof curr === 'function') {
-            // skip function configs as we don't have access to globalContext here
             curr = {}
           }
           return assignDeep(acc, curr)
         }, {}) as SentryOptions
 
+        // Assumes the client and server uses the same DSN
+        // If different DSNs are needed, we can enable SENTRY_DSN later
         assertUsage(
           !process.env['SENTRY_DSN'],
           'SENTRY_DSN is not supported. Use PUBLIC_ENV__SENTRY_DSN instead, or set dsn in your sentry config.',

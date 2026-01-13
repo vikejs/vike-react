@@ -105,7 +105,6 @@ async function getViteConfig(): Promise<InlineConfig> {
       getServerProductionEntry: () => {
         return `
 // vike-react-sentry: Preload OpenTelemetry instrumentation for ESM
-// This runs before the main server entry to enable monkey-patching of libraries
 // The actual Sentry.init() with config will be called later via onCreateGlobalContext
 // https://docs.sentry.io/platforms/javascript/guides/node/install/esm-without-import/
 import { preloadOpenTelemetry } from '@sentry/node';

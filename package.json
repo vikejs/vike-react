@@ -31,10 +31,5 @@
     "playwright-chromium": "^1.57.0",
     "prettier": "^3.2.5"
   },
-  "packageManager": "pnpm@9.4.0",
-  "pnpm": {
-    "overrides": {
-      "vike": "0.4.250-commit-6161324"
-    }
-  }
+  "packageManager": "pnpm@9.4.0"
 }

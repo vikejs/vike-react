@@ -8,14 +8,10 @@
     "./plugin": "./dist/plugin/index.js",
     "./types": "./dist/types.js",
     "./__internal/integration/Head": "./dist/integration/Head.js",
-    "./__internal/integration/onCreateGlobalContext": {
-      "browser": "./dist/integration/onCreateGlobalContext-client.js",
-      "default": "./dist/integration/onCreateGlobalContext-server.js"
-    },
-    "./__internal/integration/onHookCall": {
-      "browser": "./dist/integration/onHookCall-client.js",
-      "default": "./dist/integration/onHookCall-server.js"
-    },
+    "./__internal/integration/onCreateGlobalContext.server": "./dist/integration/onCreateGlobalContext.server.js",
+    "./__internal/integration/onCreateGlobalContext.client": "./dist/integration/onCreateGlobalContext.client.js",
+    "./__internal/integration/onHookCall.server": "./dist/integration/onHookCall.server.js",
+    "./__internal/integration/onHookCall.client": "./dist/integration/onHookCall.client.js",
     "./__internal/integration/client": "./dist/integration/client.js",
     "./__internal/integration/onError": "./dist/integration/onError.js"
   },

@@ -12,9 +12,15 @@ const config = {
     'vike-react': '>=0.6.4',
   },
   Head: 'import:vike-react-sentry/__internal/integration/Head:Head',
-  onCreateGlobalContext: 'import:vike-react-sentry/__internal/integration/onCreateGlobalContext:onCreateGlobalContext',
+  onCreateGlobalContext: [
+    'import:vike-react-sentry/__internal/integration/onCreateGlobalContext.server:onCreateGlobalContext',
+    'import:vike-react-sentry/__internal/integration/onCreateGlobalContext.client:onCreateGlobalContext',
+  ],
   onError: 'import:vike-react-sentry/__internal/integration/onError:onError',
-  onHookCall: 'import:vike-react-sentry/__internal/integration/onHookCall:onHookCall',
+  onHookCall: [
+    'import:vike-react-sentry/__internal/integration/onHookCall.server:onHookCall',
+    'import:vike-react-sentry/__internal/integration/onHookCall.client:onHookCall',
+  ],
   meta: {
     sentry: {
       env: {

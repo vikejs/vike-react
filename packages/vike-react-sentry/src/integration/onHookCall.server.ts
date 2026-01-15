@@ -1,6 +1,6 @@
 import { Config } from 'vike/types'
 import * as Sentry from '@sentry/node'
-import { markErrorAsSeen } from '../utils/error.js'
+import { hasRecentErrors, markErrorAsSeen } from '../utils/error.js'
 
 /**
  * Vike onHookCall configuration for Sentry integration.
@@ -14,7 +14,6 @@ export const onHookCall: Config['onHookCall'] = async (hook, pageContext) => {
   // Extract useful context for Sentry
   const url = pageContext?.urlOriginal ?? 'unknown'
   const pageId = pageContext?.pageId ?? 'unknown'
-  const routeParams = pageContext?.routeParams ?? {}
 
   // withScope ensures any error captured during hook execution has Vike context
   return Sentry.withScope((scope) => {
@@ -25,7 +24,6 @@ export const onHookCall: Config['onHookCall'] = async (hook, pageContext) => {
       filePath: hook.filePath,
       pageId,
       url,
-      routeParams,
     })
 
     return Sentry.startSpan(
@@ -37,13 +35,7 @@ export const onHookCall: Config['onHookCall'] = async (hook, pageContext) => {
           'vike.hook.file': hook.filePath,
           'vike.page.id': pageId,
           'vike.url': url,
-          ...Object.entries(routeParams).reduce(
-            (acc, [key, value]) => ({
-              ...acc,
-              [`vike.route.${key}`]: value,
-            }),
-            {},
-          ),
+          hasRecentErrors: hasRecentErrors(),
         },
       },
       async (span) => {

@@ -3,7 +3,7 @@ import * as Sentry from '@sentry/node'
 import { hasRecentErrors, markErrorAsSeen } from '../utils/error.js'
 
 /**
- * Vike onHookCall configuration for Sentry integration.
+ * Vike onHookCall configuration for Sentry integration (server-side).
  * Provides automatic tracing and error capture for all Vike hooks.
  */
 export const onHookCall: Config['onHookCall'] = async (hook, pageContext) => {

@@ -1,3 +1,30 @@
+## [0.6.18](https://github.com/vikejs/vike-react/compare/vike-react@0.6.17...vike-react@0.6.18) (2025-12-22)
+
+
+### Features
+
+* <ClientOnly> & `useHydrated()` ([#206](https://github.com/vikejs/vike-react/issues/206)) ([bd41fca](https://github.com/vikejs/vike-react/commit/bd41fcaf12c5834a2e9151fd2d5e543d2e438f19))
+
+
+
+## [0.6.17](https://github.com/vikejs/vike-react/compare/vike-react@0.6.16...vike-react@0.6.17) (2025-12-18)
+
+
+### Bug Fixes
+
+* support +csp.none (fix [#2971](https://github.com/vikejs/vike-react/issues/2971)) ([#207](https://github.com/vikejs/vike-react/issues/207)) ([577847f](https://github.com/vikejs/vike-react/commit/577847f08de170dfa9b012aeb4bffb4116703c39))
+
+
+
+## [0.6.16](https://github.com/vikejs/vike-react/compare/vike-react@0.6.15...vike-react@0.6.16) (2025-12-17)
+
+
+### Bug Fixes
+
+* improve build (update `tsconfig.json`) ([90f8baa](https://github.com/vikejs/vike-react/commit/90f8baaae0fa7fd417628b054045a309f7c5bba3))
+
+
+
 ## [0.6.15](https://github.com/vikejs/vike-react/compare/vike-react@0.6.14...vike-react@0.6.15) (2025-12-15)
 
 

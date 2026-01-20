@@ -1,6 +1,6 @@
 {
   "name": "vike-react-query",
-  "version": "0.1.10",
+  "version": "0.1.12",
   "homepage": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-query#readme",
   "type": "module",
   "main": "dist/index.js",
@@ -37,8 +37,8 @@
     "react-streaming": "^0.4.15",
     "rimraf": "^5.0.5",
     "typescript": "^5.9.2",
-    "vike": "^0.4.249",
-    "vike-react": "0.6.15",
+    "vike": "^0.4.252",
+    "vike-react": "0.6.18",
     "vite": "^7.3.0",
     "vitest": "^3.2.4"
   },

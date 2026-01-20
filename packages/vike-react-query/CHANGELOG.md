@@ -1,3 +1,21 @@
+## [0.1.12](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.11...vike-react-query@0.1.12) (2025-12-18)
+
+
+### Bug Fixes
+
+* support +csp.none (fix [#2971](https://github.com/vikejs/vike-react/issues/2971)) ([#207](https://github.com/vikejs/vike-react/issues/207)) ([577847f](https://github.com/vikejs/vike-react/commit/577847f08de170dfa9b012aeb4bffb4116703c39))
+
+
+
+## [0.1.11](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.10...vike-react-query@0.1.11) (2025-12-17)
+
+
+### Bug Fixes
+
+* improve build (update `tsconfig.json`) ([90f8baa](https://github.com/vikejs/vike-react/commit/90f8baaae0fa7fd417628b054045a309f7c5bba3))
+
+
+
 ## [0.1.10](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.9...vike-react-query@0.1.10) (2025-10-07)
 
 

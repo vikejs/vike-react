@@ -1,5 +1,6 @@
 import React from 'react'
 
+if (!isBrowser()) throw new Error("ClientOnlyComponent shouldn't be loaded on the server")
 const location = window.document.location
 
 export default function ClientOnlyComponent() {
@@ -12,4 +13,8 @@ export default function ClientOnlyComponent() {
       <div>window.location.href: {location.href}</div>
     </div>
   )
+}
+
+function isBrowser() {
+  return typeof window !== 'undefined' && typeof window.scrollY === 'number'
 }

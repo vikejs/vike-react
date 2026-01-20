@@ -1,3 +1,30 @@
+## [0.1.9](https://github.com/vikejs/vike-react/compare/vike-react-zustand@0.1.8...vike-react-zustand@0.1.9) (2026-01-07)
+
+
+### Bug Fixes
+
+* improve rolldown filter ([#210](https://github.com/vikejs/vike-react/issues/210)) ([c59fbcf](https://github.com/vikejs/vike-react/commit/c59fbcf2f2f02757828000e234c8ac5f5c1f0972))
+
+
+
+## [0.1.8](https://github.com/vikejs/vike-react/compare/vike-react-zustand@0.1.7...vike-react-zustand@0.1.8) (2025-12-18)
+
+
+### Bug Fixes
+
+* support +csp.none (fix [#2971](https://github.com/vikejs/vike-react/issues/2971)) ([#207](https://github.com/vikejs/vike-react/issues/207)) ([577847f](https://github.com/vikejs/vike-react/commit/577847f08de170dfa9b012aeb4bffb4116703c39))
+
+
+
+## [0.1.7](https://github.com/vikejs/vike-react/compare/vike-react-zustand@0.1.6...vike-react-zustand@0.1.7) (2025-12-17)
+
+
+### Bug Fixes
+
+* improve build (update `tsconfig.json`) ([90f8baa](https://github.com/vikejs/vike-react/commit/90f8baaae0fa7fd417628b054045a309f7c5bba3))
+
+
+
 ## [0.1.6](https://github.com/vikejs/vike-react/compare/vike-react-zustand@0.1.5...vike-react-zustand@0.1.6) (2025-11-13)
 
 

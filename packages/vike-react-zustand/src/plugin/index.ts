@@ -5,11 +5,15 @@ import { transformCode } from './babelTransformer.js'
 import { assert } from '../utils/assert.js'
 
 const skipNonJsFiles = /\.[jt]sx?$/
-const skipNodeModules = 'node_modules'
+const skipNodeModules = '/node_modules/'
 const filterRolldown = {
   id: {
     include: skipNonJsFiles,
-    exclude: `**/${skipNodeModules}/**`,
+    exclude: `**${skipNodeModules}**`,
+  },
+  code: {
+    // Coarsely detect `import { create } from 'vike-react-zustand'`
+    include: ['vike-react-zustand', 'create'],
   },
 }
 const filterFunction = (id: string) => {

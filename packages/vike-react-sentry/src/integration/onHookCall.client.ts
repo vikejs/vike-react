@@ -1,12 +1,13 @@
-import { Config } from 'vike/types'
 import * as Sentry from '@sentry/react'
 import { markErrorAsSeen, recordError, hasRecentErrors } from '../utils/error.js'
+import type { Config, PageContextClient } from 'vike/types'
+type Hook = Parameters<Extract<Config['onHookCall'], Function>>[0]
 
 /**
  * Vike onHookCall configuration for Sentry integration (client-side).
  * Provides automatic tracing and error capture for all Vike hooks.
  */
-export const onHookCall: Config['onHookCall'] = async (hook, pageContext) => {
+export async function onHookCall(hook: Hook, pageContext: PageContextClient) {
   if (!Sentry.getClient() || hook.name === 'onError') {
     return hook.call()
   }

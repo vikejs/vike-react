@@ -34,7 +34,7 @@
   "packageManager": "pnpm@9.4.0",
   "pnpm": {
     "overrides": {
-      "vike": "0.4.252-commit-7f781cf"
+      "vike": "0.4.252-commit-3c0065c"
     }
   }
 }

@@ -8,14 +8,17 @@
     "./useData": "./dist/hooks/useData.js",
     "./useHydrated": "./dist/hooks/useHydrated.js",
     "./useConfig": {
+      "worker": "./dist/hooks/useConfig/useConfig-server.js",
       "browser": "./dist/hooks/useConfig/useConfig-client.js",
       "default": "./dist/hooks/useConfig/useConfig-server.js"
     },
     "./Config": {
+      "worker": "./dist/components/Config/Config-server.js",
       "browser": "./dist/components/Config/Config-client.js",
       "default": "./dist/components/Config/Config-server.js"
     },
     "./Head": {
+      "worker": "./dist/components/Head/Head-server.js",
       "browser": "./dist/components/Head/Head-client.js",
       "default": "./dist/components/Head/Head-server.js"
     },

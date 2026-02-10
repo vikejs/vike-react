@@ -141,30 +141,40 @@ Sentry SDK configuration options shared between client and server:
 
 ```ts
 interface SentryOptions {
-  dsn?: string              // Sentry DSN (can also use PUBLIC_ENV__SENTRY_DSN env var)
-  environment?: string      // Environment name (e.g., 'production', 'staging')
-  release?: string          // Release version
-  debug?: boolean           // Enable debug mode
-  sampleRate?: number       // Error sample rate (0.0 to 1.0)
-  tracesSampleRate?: number // Transaction sample rate (0.0 to 1.0)
-  enabled?: boolean         // Enable/disable Sentry
-  maxBreadcrumbs?: number   // Maximum number of breadcrumbs
-  sendDefaultPii?: boolean  // Send default PII data
+  dsn?: string                       // Sentry DSN (can also use PUBLIC_ENV__SENTRY_DSN env var)
+  environment?: string               // Environment name (e.g., 'production', 'staging')
+  release?: string                   // Release version
+  debug?: boolean                    // Enable debug mode
+  sampleRate?: number                // Error sample rate (0.0 to 1.0)
+  tracesSampleRate?: number          // Transaction sample rate (0.0 to 1.0)
+  enabled?: boolean                  // Enable/disable Sentry
+  maxBreadcrumbs?: number            // Maximum number of breadcrumbs
+  sendDefaultPii?: boolean           // Send default PII data
+  replaysSessionSampleRate?: number  // Session replay sample rate (0.0 to 1.0, client only)
+  replaysOnErrorSampleRate?: number  // Replay-on-error sample rate (0.0 to 1.0, client only)
 }
 ```
 
 ### `sentryVite`
 
-Sentry Vite plugin configuration for source map upload. This is automatically configured when `SENTRY_AUTH_TOKEN` is set, but can be customized:
+Sentry Vite plugin configuration for source map upload. This is automatically configured when `SENTRY_AUTH_TOKEN` is set via `.env`, but can be customized:
+
+```bash
+# .env
+SENTRY_AUTH_TOKEN=sntryu_xxxxx  # Required for source map upload
+SENTRY_ORG=your-org             # Optional, auto-detected from DSN
+SENTRY_PROJECT=your-project     # Optional, auto-detected from DSN
+```
+
+You can also override options in `+config.js` if needed:
 
 ```js
 // pages/+config.js
 
 export default {
   sentryVite: {
-    authToken: process.env.SENTRY_AUTH_TOKEN,  // Auto-detected from env
-    org: 'your-org',                           // Auto-detected from DSN
-    project: 'your-project',                   // Auto-detected from DSN
+    org: 'your-org',
+    project: 'your-project',
     // ... other @sentry/vite-plugin options
   }
 }
@@ -181,7 +191,7 @@ export default {
 | `SENTRY_AUTH_TOKEN` | Auth token for source map upload. Create at [Sentry Auth Tokens](https://sentry.io/settings/auth-tokens/). Required scopes: `project:read`, `project:releases`, `project:write`. |
 | `SENTRY_ORG` | Organization slug (optional, auto-detected from DSN). |
 | `SENTRY_PROJECT` | Project slug (optional, auto-detected from DSN). |
-| `SENTRY_URL` | Custom Sentry URL for self-hosted instances. |
+| `SENTRY_URL` | Custom Sentry URL for the Vite plugin (source map upload). Auto-detected from DSN. Only needed to override for self-hosted instances. |
 
 <br/>
 

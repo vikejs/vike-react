@@ -5,7 +5,7 @@ import { serverProductionEntryPlugin } from '@brillout/vite-plugin-server-entry/
 import { getVikeConfig } from 'vike/plugin'
 import type { Plugin, InlineConfig } from 'vite'
 import { assertUsage, assertWarning } from '../utils/assert.js'
-import { SentryOptions } from '../types.js'
+import type { SentryOptions } from '../types.js'
 
 declare global {
   var __vike_react_sentry_vite_options_promise: Promise<SentryVitePluginOptions | undefined> | undefined

@@ -4,7 +4,7 @@ import { sentryVitePlugin, SentryVitePluginOptions } from '@sentry/vite-plugin'
 import { serverProductionEntryPlugin } from '@brillout/vite-plugin-server-entry/plugin'
 import { getVikeConfig } from 'vike/plugin'
 import type { Plugin, InlineConfig } from 'vite'
-import { assertUsage } from '../utils/assert.js'
+import { assertUsage, assertWarning } from '../utils/assert.js'
 import { SentryOptions } from '../types.js'
 
 declare global {
@@ -187,7 +187,11 @@ async function getProjectInfoFromApi(
       projectSlug: project.slug,
       orgSlug: project.organization.slug,
     }
-  } catch {
+  } catch (err) {
+    assertWarning(
+      false,
+      `Failed to auto-detect Sentry project info from API (url: ${effectiveUrl}, projectId: ${projectId}): ${err}`,
+    )
     return null
   }
 }

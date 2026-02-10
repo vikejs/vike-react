@@ -1,14 +1,13 @@
 # Vike + React + Sentry Example
 
-This example demonstrates how to integrate Sentry error tracking with a Vike + React application.
+This example demonstrates how to integrate Sentry error tracking with a Vike + React application using [`vike-react-sentry`](https://github.com/vikejs/vike-react/tree/main/packages/vike-react-sentry).
 
 ## Features
 
-- ✅ Client-side error tracking
-- ✅ Server-side error tracking
-- ✅ Automatic error boundaries
-- ✅ Distributed tracing (server → client)
-- ✅ Source map uploads for production debugging
+- Client-side error tracking
+- Server-side error tracking
+- Performance monitoring and tracing
+- Source map uploads for production debugging
 
 ## Setup
 
@@ -18,7 +17,11 @@ This example demonstrates how to integrate Sentry error tracking with a Vike + R
 pnpm install
 ```
 
-2. Configure Sentry DSN in `pages/+config.ts`
+2. Copy `.env.example` to `.env` and fill in your Sentry DSN:
+
+```bash
+cp .env.example .env
+```
 
 3. Run development server:
 
@@ -26,7 +29,7 @@ pnpm install
 pnpm dev
 ```
 
-4. Build for production:
+4. Build for production (source maps are uploaded when `SENTRY_AUTH_TOKEN` is set):
 
 ```bash
 pnpm build
@@ -35,26 +38,25 @@ pnpm prod
 
 ## Configuration
 
-Edit `pages/+config.ts` to configure Sentry options:
+The Sentry DSN and auth token are configured via environment variables in `.env`:
 
-```typescript
-sentry: {
-  dsn: 'YOUR_SENTRY_DSN',
-  environment: 'production',
-  client: {
-    // Client-specific options
-  },
-  server: {
-    // Server-specific options
-  },
-  vitePlugin: {
-    // Sourcemap upload options
-    org: 'your-org',
-    project: 'your-project',
-    authToken: process.env.SENTRY_AUTH_TOKEN
+```bash
+PUBLIC_ENV__SENTRY_DSN=https://xxxxx@xxxxx.ingest.sentry.io/xxxxx
+SENTRY_AUTH_TOKEN=sntryu_xxxxx
+```
+
+You can optionally customize Sentry SDK options in `pages/+config.ts`:
+
+```ts
+export default {
+  sentry: {
+    tracesSampleRate: 1.0,
+    debug: true,
   }
 }
 ```
+
+See the [`vike-react-sentry` README](https://github.com/vikejs/vike-react/tree/main/packages/vike-react-sentry) for all available options.
 
 ## Learn More
 

@@ -115,9 +115,7 @@ async function resolveVitePluginOptions(): Promise<SentryVitePluginOptions | und
 }
 
 /** Resolve env var fallbacks for vite plugin auth/org/project/url. */
-function resolveEnvFallbacks(
-  options: SentryVitePluginOptions | undefined,
-): SentryVitePluginOptions | undefined {
+function resolveEnvFallbacks(options: SentryVitePluginOptions | undefined): SentryVitePluginOptions | undefined {
   const authToken = options?.authToken || process.env['SENTRY_AUTH_TOKEN']
   if (!authToken) return options
   return {
@@ -130,10 +128,7 @@ function resolveEnvFallbacks(
 }
 
 /** Auto-detect project and org slug from Sentry API when not explicitly configured. */
-async function autoDetectProjectInfo(
-  options: SentryVitePluginOptions,
-  dsn: string,
-): Promise<SentryVitePluginOptions> {
+async function autoDetectProjectInfo(options: SentryVitePluginOptions, dsn: string): Promise<SentryVitePluginOptions> {
   if (options.project || options.org) return options
   const authToken = options.authToken
   const projectId = getProjectIdFromDsn(dsn)

@@ -5,10 +5,8 @@ import { serverProductionEntryPlugin } from '@brillout/vite-plugin-server-entry/
 import { getVikeConfig } from 'vike/plugin'
 import type { Plugin, InlineConfig } from 'vite'
 import { assertUsage } from '../utils/assert.js'
-import { assignDeep } from '../utils/assignDeep.js'
 import { SentryOptions } from '../types.js'
 
-// Cache for auto-detected project info to avoid multiple API calls (global to survive module reloads)
 declare global {
   var __vike_react_sentry_vite_options_promise: Promise<SentryVitePluginOptions | undefined> | undefined
 }
@@ -19,73 +17,7 @@ async function getViteConfig(): Promise<InlineConfig> {
     enforce: 'post',
     name: 'vike-react-sentry:config-resolver',
     configResolved() {
-      globalThis.__vike_react_sentry_vite_options_promise ??= (async () => {
-        const vikeConfig = getVikeConfig()
-        const sentryConfigRaw = vikeConfig.config.sentry || []
-
-        const sentryConfig = sentryConfigRaw.toReversed().reduce((acc, curr) => {
-          // skip function configs
-          if (typeof curr === 'function') {
-            curr = {}
-          }
-          return assignDeep(acc, curr)
-        }, {}) as SentryOptions
-
-        // Assumes the client and server uses the same DSN
-        // If different DSNs are needed, we can enable SENTRY_DSN later
-        assertUsage(
-          !process.env['SENTRY_DSN'],
-          'SENTRY_DSN is not supported. Use PUBLIC_ENV__SENTRY_DSN instead, or set dsn in your sentry config.',
-        )
-        const effectiveDsn = sentryConfig.dsn || process.env['PUBLIC_ENV__SENTRY_DSN']
-        assertUsage(
-          effectiveDsn,
-          'Sentry DSN is required. Set PUBLIC_ENV__SENTRY_DSN env var, or set dsn in your sentry config.',
-        )
-
-        let vitePluginOptions = vikeConfig.config.sentryVite
-        // Resolve env fallbacks for vitePlugin options (effect doesn't have access to .env file vars)
-        if (vitePluginOptions || process.env['SENTRY_AUTH_TOKEN']) {
-          vitePluginOptions = {
-            ...vitePluginOptions,
-            authToken: vitePluginOptions?.authToken || process.env['SENTRY_AUTH_TOKEN'],
-            org: vitePluginOptions?.org || process.env['SENTRY_ORG'],
-            project: vitePluginOptions?.project || process.env['SENTRY_PROJECT'],
-            url: vitePluginOptions?.url || process.env['SENTRY_URL'],
-          }
-        }
-
-        if (vitePluginOptions && sentryConfig.release) {
-          vitePluginOptions = {
-            ...vitePluginOptions,
-            release: {
-              name: sentryConfig.release,
-              ...vitePluginOptions.release,
-            },
-          }
-        }
-
-        // Auto-detect project and org slug from DSN if not provided
-        if (vitePluginOptions && !vitePluginOptions.project && !vitePluginOptions.org) {
-          const authToken = vitePluginOptions.authToken
-          const sentryUrl = vitePluginOptions.url
-          const projectId = getProjectIdFromDsn(effectiveDsn)
-
-          if (authToken && projectId) {
-            const projectInfo = await getProjectInfoFromApi(authToken, projectId, effectiveDsn, sentryUrl)
-            if (projectInfo) {
-              vitePluginOptions = {
-                ...vitePluginOptions,
-                project: projectInfo.projectSlug,
-                org: projectInfo.orgSlug,
-              }
-            }
-          }
-        }
-
-        // Cache resolved config globally to make it accessible in onCreateGlobalContext
-        return vitePluginOptions
-      })()
+      globalThis.__vike_react_sentry_vite_options_promise ??= resolveVitePluginOptions()
     },
   })
 
@@ -132,6 +64,89 @@ preloadOpenTelemetry();
 function getProjectIdFromDsn(dsn: string): string | undefined {
   const match = dsn.match(/\/(\d+)$/)
   return match?.[1]
+}
+
+/** Find the first defined value for a sentry config key. */
+function findSentryConfig<K extends keyof SentryOptions>(
+  configs: (SentryOptions | Function)[],
+  key: K,
+): SentryOptions[K] | undefined {
+  return configs.find((c): c is SentryOptions => typeof c !== 'function' && !!c[key])?.[key]
+}
+
+/** Resolve the effective DSN from sentry configs and env vars. */
+function resolveDsn(configs: (SentryOptions | Function)[]): string {
+  const dsn = findSentryConfig(configs, 'dsn') || process.env['PUBLIC_ENV__SENTRY_DSN']
+  // Assumes the client and server uses the same DSN
+  // If different DSNs are needed, we can enable SENTRY_DSN later
+  assertUsage(
+    !process.env['SENTRY_DSN'],
+    'SENTRY_DSN is not supported. Use PUBLIC_ENV__SENTRY_DSN instead, or set dsn in your sentry config.',
+  )
+  assertUsage(dsn, 'Sentry DSN is required. Set PUBLIC_ENV__SENTRY_DSN env var, or set dsn in the sentry config.')
+  return dsn
+}
+
+/** Resolve vite plugin options from sentry config, env vars, and API auto-detection. */
+async function resolveVitePluginOptions(): Promise<SentryVitePluginOptions | undefined> {
+  const vikeConfig = getVikeConfig()
+  const sentryConfigRaw = vikeConfig.config.sentry || []
+
+  const dsn = resolveDsn(sentryConfigRaw)
+  const release = findSentryConfig(sentryConfigRaw, 'release')
+
+  let options = resolveEnvFallbacks(vikeConfig.config.sentryVite)
+
+  if (options && release) {
+    options = {
+      ...options,
+      release: {
+        name: release,
+        ...options.release,
+      },
+    }
+  }
+
+  if (options) {
+    options = await autoDetectProjectInfo(options, dsn)
+  }
+
+  return options
+}
+
+/** Resolve env var fallbacks for vite plugin auth/org/project/url. */
+function resolveEnvFallbacks(
+  options: SentryVitePluginOptions | undefined,
+): SentryVitePluginOptions | undefined {
+  const authToken = options?.authToken || process.env['SENTRY_AUTH_TOKEN']
+  if (!authToken) return options
+  return {
+    ...options,
+    authToken,
+    org: options?.org || process.env['SENTRY_ORG'],
+    project: options?.project || process.env['SENTRY_PROJECT'],
+    url: options?.url || process.env['SENTRY_URL'],
+  }
+}
+
+/** Auto-detect project and org slug from Sentry API when not explicitly configured. */
+async function autoDetectProjectInfo(
+  options: SentryVitePluginOptions,
+  dsn: string,
+): Promise<SentryVitePluginOptions> {
+  if (options.project || options.org) return options
+  const authToken = options.authToken
+  const projectId = getProjectIdFromDsn(dsn)
+  if (!authToken || !projectId) return options
+
+  const projectInfo = await getProjectInfoFromApi(authToken, projectId, dsn, options.url)
+  if (!projectInfo) return options
+
+  return {
+    ...options,
+    project: projectInfo.projectSlug,
+    org: projectInfo.orgSlug,
+  }
 }
 
 /**

@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/react'
-import { markErrorAsSeen, recordError, hasRecentErrors } from '../utils/error.js'
+import { markErrorAsCaptured } from '../utils/error.js'
 import type { Config, PageContextClient } from 'vike/types'
 type Hook = Parameters<Extract<Config['onHookCall'], Function>>[0]
 
@@ -36,19 +36,17 @@ export async function onHookCall(hook: Hook, pageContext: PageContextClient) {
           'vike.hook.file': hook.filePath,
           'vike.page.id': pageId,
           'vike.url': url,
-          hasRecentErrors: hasRecentErrors(),
         },
       },
       async (span) => {
         try {
           await hook.call()
         } catch (error) {
-          markErrorAsSeen(error)
-          recordError()
           span.setStatus({
             code: 2,
           })
           Sentry.captureException(error)
+          markErrorAsCaptured(error)
         }
       },
     )

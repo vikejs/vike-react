@@ -1,2 +1,1 @@
 export const TRACE_DEFAULT_SAMPLE_RATE = 0.2
-export const TRACE_DEFAULT_SAMPLE_RATE_ERROR = 1.0

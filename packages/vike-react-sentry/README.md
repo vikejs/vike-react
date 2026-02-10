@@ -4,6 +4,9 @@
 
 # `vike-react-sentry`
 
+> [!WARNING]
+> This extension is in **alpha**. It has only been tested with **Node.js** servers so far. Other runtimes (Cloudflare, Deno, Bun, etc.) are not yet supported.
+
 Integrates [Sentry](https://sentry.io) error tracking and performance monitoring into your [`vike-react`](https://vike.dev/vike-react) app.
 
 Features:

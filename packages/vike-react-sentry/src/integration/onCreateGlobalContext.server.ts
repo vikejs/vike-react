@@ -2,8 +2,8 @@ export { onCreateGlobalContext }
 
 import * as SentryNode from '@sentry/node'
 import type { GlobalContextServer } from 'vike/types'
-import { SentryOptions } from '../types.js'
-import { SentryNodeOptions } from '../types.js'
+import type { SentryOptions } from '../types.js'
+import type { SentryNodeOptions } from '../types.js'
 import { resolveDsn } from '../utils/resolveDsn.js'
 import { TRACE_DEFAULT_SAMPLE_RATE } from './constants.js'
 

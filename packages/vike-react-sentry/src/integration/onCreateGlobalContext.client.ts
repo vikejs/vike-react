@@ -2,8 +2,8 @@ export { onCreateGlobalContext }
 
 import * as SentryReact from '@sentry/react'
 import type { GlobalContextClient } from 'vike/types'
-import { SentryOptions } from '../types.js'
-import { SentryReactOptions } from '../types.js'
+import type { SentryOptions } from '../types.js'
+import type { SentryReactOptions } from '../types.js'
 import { resolveDsn } from '../utils/resolveDsn.js'
 import { TRACE_DEFAULT_SAMPLE_RATE } from './constants.js'
 

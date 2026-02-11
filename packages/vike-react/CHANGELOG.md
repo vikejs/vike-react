@@ -1,3 +1,21 @@
+## [0.6.20](https://github.com/vikejs/vike-react/compare/vike-react@0.6.19...vike-react@0.6.20) (2026-02-03)
+
+
+### Bug Fixes
+
+* fix support for Cloudflare Workers (fix photon-js/photon[#64](https://github.com/vikejs/vike-react/issues/64)) ([0eaa5d8](https://github.com/vikejs/vike-react/commit/0eaa5d80190d2ea8c8a663a6285143e914503cac))
+
+
+
+## [0.6.19](https://github.com/vikejs/vike-react/compare/vike-react@0.6.18...vike-react@0.6.19) (2026-01-25)
+
+
+### Bug Fixes
+
+* add clientOnly() deprecation warning ([#211](https://github.com/vikejs/vike-react/issues/211)) ([55f5c7c](https://github.com/vikejs/vike-react/commit/55f5c7c664897a265733c9e3a336c0f174278321))
+
+
+
 ## [0.6.18](https://github.com/vikejs/vike-react/compare/vike-react@0.6.17...vike-react@0.6.18) (2025-12-22)
 
 

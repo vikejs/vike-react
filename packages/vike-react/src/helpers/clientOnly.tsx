@@ -1,4 +1,3 @@
-// TODO/soon: add deprecation warning in favor of <ClientOnly>
 // TO-DO/breaking-change: remove it
 
 export { clientOnly }
@@ -13,6 +12,7 @@ import React, {
   type ComponentType,
   type ReactNode,
 } from 'react'
+import { assertWarning } from '../utils/assert.js'
 
 /**
  * Load and render a component only on the client-side.
@@ -22,6 +22,8 @@ import React, {
 function clientOnly<T extends ComponentType<any>>(
   load: () => Promise<{ default: T } | T>,
 ): ComponentType<ComponentProps<T> & { fallback?: ReactNode }> {
+  assertWarning(false, 'clientOnly() is deprecated — use <ClientOnly> https://vike.dev/ClientOnly')
+
   if (!globalThis.__VIKE__IS_CLIENT) {
     return (props) => <>{props.fallback}</>
   } else {

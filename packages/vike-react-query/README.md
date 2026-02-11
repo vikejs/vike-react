@@ -226,7 +226,7 @@ function Movies() {
 ```
 
 > [!NOTE]
-> The `<meta name="description">` tag is only shown to bots. See the explanation at [Vike Docs > `useConfig` > HTML Streaming](https://vike.dev/useConfig#html-streaming).
+> The `<meta name="description">` tag is only shown to bots. See the explanation at [Vike > `useConfig` > HTML Streaming](https://vike.dev/useConfig#html-streaming).
 
 <br/>
 
@@ -285,7 +285,7 @@ export default (pageContext) => ({
 ```
 
 > [!NOTE]
-> You can apply settings to all pages, a group of pages, or only one page. See [Vike Docs > Config > Inheritance](https://vike.dev/config#inheritance).
+> You can apply settings to all pages, a group of pages, or only one page. See [Vike > Config > Inheritance](https://vike.dev/config#inheritance).
 
 <br/>
 

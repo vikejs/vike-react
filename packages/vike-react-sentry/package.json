@@ -14,7 +14,6 @@
   },
   "exports": {
     "./config": "./dist/integration/+config.js",
-    "./plugin": "./dist/plugin/index.js",
     "./types": "./dist/types.js",
     "./__internal/integration/Head": "./dist/integration/Head.js",
     "./__internal/integration/onCreateGlobalContext.server": "./dist/integration/onCreateGlobalContext.server.js",
@@ -50,9 +49,6 @@
     "*": {
       "config": [
         "dist/integration/+config.d.ts"
-      ],
-      "plugin": [
-        "dist/plugin/index.d.ts"
       ],
       "types": [
         "dist/types.d.ts"

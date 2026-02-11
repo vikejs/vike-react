@@ -1,10 +1,10 @@
 export { config as default }
 
-import type { Config } from 'vike/types'
 import { getViteConfig } from '../plugin/index.js'
-import 'vike-react/config'
-import { SentryOptions } from '../types.js'
+import type { Config } from 'vike/types'
+import type { SentryOptions } from '../types.js'
 import type { SentryVitePluginOptions } from '@sentry/vite-plugin'
+import 'vike-react/config' // Needed for merging vike-react's Vike.Config
 
 const config = {
   name: 'vike-react-sentry',

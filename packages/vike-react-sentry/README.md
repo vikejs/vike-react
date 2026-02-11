@@ -83,12 +83,18 @@ Sentry SDK configuration options.
 
 // Shared configuration (client & server)
 
-export default (globalContext) => ({
-  tracesSampleRate: 1.0,  // Capture 100% of transactions for tracing
-  debug: true,            // Enable debug mode during development
-  environment: globalContext.isProduction ? 'production' : 'development',
-})
+export default async () => {
+  const globalContext = await getGlobalContext()
+  return {
+    tracesSampleRate: 1.0,  // Capture 100% of transactions for tracing
+    debug: true,            // Enable debug mode during development
+    environment: globalContext.isProduction ? 'production' : 'development',
+  }
+)
 ```
+
+> [!NOTE]
+> See also: [Vike > `getGlobalContext()`](https://vike.dev/getGlobalContext)
 
 ```js
 // pages/+sentry.client.js
@@ -96,11 +102,11 @@ export default (globalContext) => ({
 
 // Client-only configuration
 
-export default (globalContext) => ({
+export default {
   integrations: [
     // Add custom browser integrations here
   ],
-})
+}
 ```
 
 ```js
@@ -109,11 +115,11 @@ export default (globalContext) => ({
 
 // Server-only configuration
 
-export default (globalContext) => ({
+export default () => {
   integrations: [
     // Add custom Node.js integrations here
   ],
-})
+}
 ```
 
 > [!NOTE]

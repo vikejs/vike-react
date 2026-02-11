@@ -556,6 +556,9 @@ importers:
       '@types/react':
         specifier: ^19.1.13
         version: 19.2.7
+      react:
+        specifier: ^19.2.0
+        version: 19.2.1
       rimraf:
         specifier: ^5.0.5
         version: 5.0.10

@@ -3,9 +3,8 @@ export { assert }
 export { assertWarning }
 
 function assertUsage(condition: unknown, message: string): asserts condition {
-  if (!condition) {
-    throw new Error(`[vike-react-sentry] ${message}`)
-  }
+  if (condition) return
+  throw new Error(`[vike-react-sentry] ${message}`)
 }
 
 function assert(condition: unknown): asserts condition {
@@ -14,7 +13,6 @@ function assert(condition: unknown): asserts condition {
 }
 
 function assertWarning(condition: unknown, message: string): void {
-  if (!condition) {
-    console.warn(`[vike-react-sentry][Warning] ${message}`)
-  }
+  if (condition) return
+  console.warn(`[vike-react-sentry][Warning] ${message}`)
 }

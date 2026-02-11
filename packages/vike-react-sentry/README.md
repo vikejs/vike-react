@@ -20,7 +20,6 @@ Features:
 **Table of Contents**
 
 [Installation](#installation)  
-[Basic usage](#basic-usage)  
 [Example](#example)  
 [Customization](#customization)  
 [Settings](#settings)  
@@ -46,10 +45,10 @@ Features:
    ```
 3. Add environment variables to your `.env` file:
    ```bash
-   # Required: Your Sentry DSN (public, safe to expose to the browser)
+   # Required: Your Sentry DSN (can be public and exposed to the browser)
    PUBLIC_ENV__SENTRY_DSN=https://xxxxx@xxxxx.ingest.sentry.io/xxxxx
 
-   # Required for source map upload: Sentry Auth Token
+   # Required for source map upload: Sentry Auth Token (must be kept private)
    # Create at https://sentry.io/settings/account/api/auth-tokens/
    # Required scopes: project:read, project:releases, project:write
    SENTRY_AUTH_TOKEN=sntryu_xxxxx
@@ -58,14 +57,10 @@ Features:
 > [!NOTE]
 > The `vike-react-sentry` extension requires [`vike-react`](https://vike.dev/vike-react).
 
-<br/>
-
-## Basic usage
-
 That's it! With the configuration above, `vike-react-sentry` will automatically:
 - Initialize Sentry on both client and server
 - Track errors and exceptions
-- Instrument Vike hooks using [onHookCall](https://vike.dev/onHookCall)
+- Instrument Vike hooks using [+onHookCall](https://vike.dev/onHookCall)
 - Enable browser tracing for performance monitoring
 - Upload source maps during production builds (when `SENTRY_AUTH_TOKEN` is set)
 
@@ -86,61 +81,57 @@ export default {
 
 ## Example
 
-See [examples/sentry](https://github.com/vikejs/vike-react/tree/main/examples/sentry) for a full working example.
+See [examples/sentry](https://github.com/vikejs/vike-react/tree/main/examples/sentry).
 
 <br/>
 
-## Customization
+## Settings
 
-For advanced customization, you can create Sentry configuration files:
+### `+sentry`
 
-### `+sentry.js` (shared configuration)
+Sentry SDK configuration options.
 
 ```js
 // pages/+sentry.js
 // Environment: client, server
 
+// Shared configuration (both client and server)
+
 export default (globalContext) => ({
-  tracesSampleRate: 1.0,
+  tracesSampleRate: 1.0,  // Capture 100% of transactions for tracing
+  debug: true,            // Enable debug mode during development
   environment: globalContext.isProduction ? 'production' : 'development',
 })
 ```
-
-### `+sentry.client.js` (client-only configuration)
 
 ```js
 // pages/+sentry.client.js
 // Environment: client
 
+// Client-only configuration
+
 export default (globalContext) => ({
-  // Client-specific integrations
   integrations: [
     // Add custom browser integrations here
   ],
 })
 ```
 
-### `+sentry.server.js` (server-only configuration)
-
 ```js
 // pages/+sentry.server.js
 // Environment: server
 
+// Server-only configuration
+
 export default (globalContext) => ({
-  // Server-specific integrations
   integrations: [
     // Add custom Node.js integrations here
   ],
 })
 ```
 
-<br/>
-
-## Settings
-
-### `sentry`
-
-Sentry SDK configuration options shared between client and server:
+> [!NOTE]
+> See also: [Vike Docs > File Environment (.server.js, .client.js, ...)](https://vike.dev/file-env)
 
 ```ts
 interface SentryOptions {
@@ -158,9 +149,11 @@ interface SentryOptions {
 }
 ```
 
-### `sentryVite`
+### `+sentryVite`
 
-Sentry Vite plugin configuration for source map upload. This is automatically configured when `SENTRY_AUTH_TOKEN` is set via `.env`, but can be customized:
+Sentry Vite plugin configuration for source map upload.
+
+It's automatically configured when `SENTRY_AUTH_TOKEN` is set via `.env`, but can be customized:
 
 ```bash
 # .env
@@ -169,7 +162,7 @@ SENTRY_ORG=your-org             # Optional, auto-detected from DSN
 SENTRY_PROJECT=your-project     # Optional, auto-detected from DSN
 ```
 
-You can also override options in `+config.js` if needed:
+You can also override options via `+sentryVite.js` if needed:
 
 ```js
 // pages/+config.js
@@ -209,5 +202,6 @@ See [CHANGELOG.md](https://github.com/vikejs/vike-react/blob/main/packages/vike-
 - [Sentry Documentation](https://docs.sentry.io/)
 - [Sentry React SDK](https://docs.sentry.io/platforms/javascript/guides/react/)
 - [Sentry Node SDK](https://docs.sentry.io/platforms/javascript/guides/node/)
-- [Vike Documentation](https://vike.dev)
-- [`vike-react`](https://github.com/vikejs/vike-react/tree/main/packages/vike-react#readme)
+- [Vike Docs > Error Tracking](https://vike.dev/error-tracking)
+- [Vike Docs > `+onError()` hook](https://vike.dev/onError)
+- [Vike Docs > `+onHookCall()` hook](https://vike.dev/onHookCall)

@@ -2,7 +2,6 @@
 export { data }
 export type Data = Awaited<ReturnType<typeof data>>
 
-import fetch from 'node-fetch'
 import { useConfig } from 'vike-react/useConfig'
 import type { Movie, MovieDetails } from '../types'
 import image from '../../../assets/logo-new.svg'

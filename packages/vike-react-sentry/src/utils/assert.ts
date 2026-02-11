@@ -9,7 +9,7 @@ function assertUsage(condition: unknown, message: string): asserts condition {
 
 function assert(condition: unknown): asserts condition {
   if (condition) return
-  throw new Error('You stumbled upon a vike-react-sentry bug, reach out on GitHub.')
+  throw new Error('[vike-react-sentry] You stumbled upon a bug, reach out on GitHub.')
 }
 
 function assertWarning(condition: unknown, message: string): void {

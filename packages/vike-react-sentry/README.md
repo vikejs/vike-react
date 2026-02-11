@@ -7,7 +7,7 @@
 > [!WARNING]
 > This extension is in **alpha**. It has only been tested with **Node.js** servers so far. Other runtimes (Cloudflare, Deno, Bun, etc.) are not yet supported.
 
-Integrates [Sentry](https://sentry.io) error tracking and performance monitoring into your [`vike-react`](https://vike.dev/vike-react) app.
+Add [Sentry](https://sentry.io) error tracking and performance monitoring to your [`vike-react`](https://vike.dev/vike-react) app.
 
 Features:
 - Browser and server error tracking
@@ -59,22 +59,9 @@ Features:
 That's it! With the configuration above, `vike-react-sentry` will automatically:
 - Initialize Sentry on both client and server
 - Track errors and exceptions
-- Instrument Vike hooks using [+onHookCall](https://vike.dev/onHookCall)
+- Instrument Vike hooks using [`+onHookCall()`](https://vike.dev/onHookCall)
 - Enable browser tracing for performance monitoring
 - Upload source maps during production builds (when `SENTRY_AUTH_TOKEN` is set)
-
-You can optionally configure Sentry options in your `+config.js`:
-
-```js
-// pages/+config.js
-
-export default {
-  sentry: {
-    tracesSampleRate: 1.0,  // Capture 100% of transactions for tracing
-    debug: true,            // Enable debug mode during development
-  }
-}
-```
 
 <br/>
 
@@ -94,7 +81,7 @@ Sentry SDK configuration options.
 // pages/+sentry.js
 // Environment: client, server
 
-// Shared configuration (both client and server)
+// Shared configuration (client & server)
 
 export default (globalContext) => ({
   tracesSampleRate: 1.0,  // Capture 100% of transactions for tracing
@@ -130,7 +117,7 @@ export default (globalContext) => ({
 ```
 
 > [!NOTE]
-> See also: [Vike Docs > File Environment (.server.js, .client.js, ...)](https://vike.dev/file-env)
+> See also: [Vike Docs > File Environment (`.server.js`, `.client.js`, ...)](https://vike.dev/file-env)
 
 ```ts
 interface SentryOptions {

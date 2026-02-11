@@ -77,62 +77,43 @@ See [examples/sentry](https://github.com/vikejs/vike-react/tree/main/examples/se
 
 Sentry SDK configuration options.
 
-**Example 1: Using `getGlobalContext()` for dynamic configuration**
-
 ```js
-// pages/+sentry.server.js
-// Environment: server
+// pages/+sentry.js
+// Environment: client, server
 
-import { getGlobalContext } from 'vike/server'
+// Shared configuration (client & server)
 
-export default async () => {
-  const globalContext = await getGlobalContext()
-  return {
-    tracesSampleRate: 1.0,  // Capture 100% of transactions for tracing
-    debug: true,            // Enable debug mode during development
-    environment: globalContext.isProduction ? 'production' : 'development',
-  }
-}
+export default (globalContext) => ({
+  tracesSampleRate: 1.0,  // Capture 100% of transactions for tracing
+  debug: true,            // Enable debug mode during development
+  environment: globalContext.isProduction ? 'production' : 'development',
+})
 ```
 
 ```js
 // pages/+sentry.client.js
 // Environment: client
 
-import { getGlobalContext } from 'vike/client'
+// Client-only configuration
 
-export default async () => {
-  const globalContext = await getGlobalContext()
-  return {
-    tracesSampleRate: 1.0,
-    debug: true,
-    environment: globalContext.isProduction ? 'production' : 'development',
-  }
-}
-```
-
-**Example 2: Static configuration**
-
-```js
-// pages/+sentry.client.js
-// Environment: client
-
-export default {
+export default (globalContext) => ({
   integrations: [
     // Add custom browser integrations here
   ],
-}
+})
 ```
 
 ```js
 // pages/+sentry.server.js
 // Environment: server
 
-export default {
+// Server-only configuration
+
+export default (globalContext) => ({
   integrations: [
     // Add custom Node.js integrations here
   ],
-}
+})
 ```
 
 > [!NOTE]

@@ -123,7 +123,7 @@ export default () => {
 ```
 
 > [!NOTE]
-> See also: [Vike Docs > File Environment (`.server.js`, `.client.js`, ...)](https://vike.dev/file-env)
+> See also: [Vike > File Environment (`.server.js`, `.client.js`, ...)](https://vike.dev/file-env)
 
 ```ts
 interface SentryOptions {
@@ -194,6 +194,6 @@ See [CHANGELOG.md](https://github.com/vikejs/vike-react/blob/main/packages/vike-
 - [Sentry Documentation](https://docs.sentry.io/)
 - [Sentry React SDK](https://docs.sentry.io/platforms/javascript/guides/react/)
 - [Sentry Node SDK](https://docs.sentry.io/platforms/javascript/guides/node/)
-- [Vike Docs > Error Tracking](https://vike.dev/error-tracking)
-- [Vike Docs > `+onError()` hook](https://vike.dev/onError)
-- [Vike Docs > `+onHookCall()` hook](https://vike.dev/onHookCall)
+- [Vike > Error Tracking](https://vike.dev/error-tracking)
+- [Vike > `+onError()` hook](https://vike.dev/onError)
+- [Vike > `+onHookCall()` hook](https://vike.dev/onHookCall)

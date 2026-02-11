@@ -533,13 +533,14 @@ importers:
         version: 7.3.0(@types/node@24.0.8)
 
   packages/vike-react-sentry:
+    dependencies:
+      '@brillout/vite-plugin-server-entry':
+        specifier: ^0.7.0
+        version: 0.7.17
     devDependencies:
       '@brillout/release-me':
         specifier: ^0.4.8
         version: 0.4.12(conventional-commits-filter@5.0.0)
-      '@brillout/vite-plugin-server-entry':
-        specifier: ^0.7.15
-        version: 0.7.17
       '@sentry/node':
         specifier: ^10.22.0
         version: 10.35.0

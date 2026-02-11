@@ -11,7 +11,7 @@ async function onCreateGlobalContext(globalContext: GlobalContextClient): Promis
   const sentryConfigs = globalContext.config.sentry || []
 
   const clientConfig: SentryOptions = {}
-  for (const curr of sentryConfigs.reverse()) {
+  for (const curr of [...sentryConfigs].reverse()) {
     const resolvedConfig = typeof curr === 'function' ? await curr() : curr
     Object.assign(clientConfig, resolvedConfig)
   }

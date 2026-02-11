@@ -48,12 +48,12 @@ const config = {
 declare global {
   namespace Vike {
     interface Config {
-      sentry?: SentryOptions | ((globalContext: GlobalContext) => SentryOptions)
+      sentry?: SentryOptions | (() => SentryOptions | Promise<SentryOptions>)
       sentryVite?: SentryVitePluginOptions
     }
 
     interface ConfigResolved {
-      sentry?: (SentryOptions | ((globalContext: GlobalContext) => SentryOptions))[]
+      sentry?: (SentryOptions | (() => SentryOptions | Promise<SentryOptions>))[]
       sentryVite?: SentryVitePluginOptions
     }
   }

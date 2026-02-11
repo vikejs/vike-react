@@ -8,12 +8,13 @@ import { resolveDsn } from '../utils/resolveDsn.js'
 import { TRACE_DEFAULT_SAMPLE_RATE } from './constants.js'
 
 async function onCreateGlobalContext(globalContext: GlobalContextClient): Promise<void> {
-  const clientConfig = (globalContext.config.sentry || []).reverse().reduce((acc, curr) => {
-    if (typeof curr === 'function') {
-      curr = curr(globalContext)
-    }
-    return { ...acc, ...curr }
-  }, {}) as SentryOptions
+  const sentryConfigs = globalContext.config.sentry || []
+
+  const clientConfig: SentryOptions = {}
+  for (const curr of [...sentryConfigs].reverse()) {
+    const resolvedConfig = typeof curr === 'function' ? await curr() : curr
+    Object.assign(clientConfig, resolvedConfig)
+  }
 
   if (!SentryReact.getClient()) {
     SentryReact.init(resolveSentryClientSettings(clientConfig))

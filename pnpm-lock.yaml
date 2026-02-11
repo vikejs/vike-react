@@ -234,7 +234,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.3
       vike:
-        specifier: ^0.4.252
+        specifier: ^0.4.253
         version: 0.4.253(react-streaming@0.4.15(react@19.2.1))(vite@7.3.0(@types/node@24.0.8))
       vike-photon:
         specifier: ^0.1.20
@@ -575,7 +575,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.3
       vike:
-        specifier: ^0.4.252
+        specifier: ^0.4.253
         version: 0.4.253(react-streaming@0.4.15(react@19.2.1))(vite@7.3.0(@types/node@24.0.8))
       vike-react:
         specifier: 0.6.10
@@ -630,7 +630,7 @@ importers:
         version: 5.0.10
       styled-jsx:
         specifier: ^5.1.6
-        version: 5.1.6(@babel/core@7.28.5)(react@19.2.1)
+        version: 5.1.6(react@19.2.1)
       typescript:
         specifier: ^5.9.2
         version: 5.9.3
@@ -8457,12 +8457,10 @@ snapshots:
       stylis: 4.3.2
       tslib: 2.6.2
 
-  styled-jsx@5.1.6(@babel/core@7.28.5)(react@19.2.1):
+  styled-jsx@5.1.6(react@19.2.1):
     dependencies:
       client-only: 0.0.1
       react: 19.2.1
-    optionalDependencies:
-      '@babel/core': 7.28.5
 
   stylis@4.2.0: {}
 

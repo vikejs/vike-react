@@ -212,5 +212,5 @@ The extension handles all the complexities of state transfer between server and 
 
 ## See also
 
-- [Vike Docs > State Management](https://vike.dev/store)
+- [Vike > State Management](https://vike.dev/store)
 - [Zustand Documentation](https://docs.pmnd.rs/zustand)

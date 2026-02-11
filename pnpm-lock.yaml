@@ -533,10 +533,6 @@ importers:
         version: 7.3.0(@types/node@24.0.8)
 
   packages/vike-react-sentry:
-    dependencies:
-      '@universal-middleware/core':
-        specifier: ^0.4.13
-        version: 0.4.15(hono@4.11.4)(srvx@0.9.8)
     devDependencies:
       '@brillout/release-me':
         specifier: ^0.4.8

@@ -13,8 +13,8 @@ export async function onHookCall(hook: Hook, pageContext: PageContextClient) {
   }
 
   // Extract useful context for Sentry
-  const url = pageContext?.urlOriginal ?? 'unknown'
-  const pageId = pageContext?.pageId ?? 'unknown'
+  const url = pageContext?.urlOriginal ?? 'NOT-DEFINED'
+  const pageId = pageContext?.pageId ?? 'NOT-DEFINED'
 
   // withScope ensures any error captured during hook execution has Vike context
   return Sentry.withScope((scope) => {

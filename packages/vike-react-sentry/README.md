@@ -21,7 +21,6 @@ Features:
 
 [Installation](#installation)  
 [Example](#example)  
-[Customization](#customization)  
 [Settings](#settings)  
 [Version history](#version-history)  
 [See also](#see-also)  

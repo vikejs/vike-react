@@ -1,5 +1,4 @@
 import * as Sentry from '@sentry/node'
-import { markErrorAsCaptured } from '../utils/error.js'
 import type { Config, PageContextServer } from 'vike/types'
 type Hook = Parameters<Extract<Config['onHookCall'], Function>>[0]
 
@@ -46,7 +45,6 @@ export async function onHookCall(hook: Hook, pageContext: PageContextServer) {
             code: 2,
           })
           Sentry.captureException(error)
-          markErrorAsCaptured(error)
         }
       },
     )

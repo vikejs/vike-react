@@ -84,6 +84,9 @@ export default {
 )
 ```
 
+> [!NOTE]
+> See also: [Vike > Config Files](https://vike.dev/config)
+
 You can return a function and access [`globalContext`](https://vike.dev/globalContext):
 
 ```js

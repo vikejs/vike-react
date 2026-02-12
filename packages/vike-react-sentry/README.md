@@ -84,6 +84,9 @@ export default {
 }
 ```
 
+> [!NOTE]
+> See also: [Vike > Config Files](https://vike.dev/config)
+
 ```ts
 interface SentryOptions {
   dsn?: string                       // Sentry DSN (can also use PUBLIC_ENV__SENTRY_DSN env var)
@@ -99,9 +102,6 @@ interface SentryOptions {
   replaysOnErrorSampleRate?: number  // Replay-on-error sample rate (0.0 to 1.0, client only)
 }
 ```
-
-> [!NOTE]
-> See also: [Vike > Config Files](https://vike.dev/config)
 
 You can return a function and access [`globalContext`](https://vike.dev/globalContext):
 

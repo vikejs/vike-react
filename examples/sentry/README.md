@@ -51,7 +51,7 @@ You can optionally customize Sentry SDK options in `pages/+config.ts`:
 export default {
   sentry: {
     tracesSampleRate: 1.0,
-    debug: true,
+    debug: true
   }
 }
 ```

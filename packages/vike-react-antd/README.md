@@ -65,7 +65,7 @@ const px2rem = px2remTransformer({
 const antd: Omit<StyleProviderProps, "children" | "cache"> = {
   hashPriority: "high",
   layer: true,
-  transformers: [legacyLogicalPropertiesTransformer, px2rem],
+  transformers: [legacyLogicalPropertiesTransformer, px2rem]
 }
 ```
 

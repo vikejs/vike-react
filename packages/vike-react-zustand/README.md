@@ -62,7 +62,7 @@ interface Store {
 
 export const useStore = create<Store>()((set) => ({
   counter: 0,
-  increment: () => set((state) => ({ counter: state.counter + 1 })),
+  increment: () => set((state) => ({ counter: state.counter + 1 }))
 }))
 ```
 
@@ -182,9 +182,9 @@ export const useTodoStore = create<TodoStore>()(
         set((state) => {
           state.todoItems.push(todo)
         })
-      },
-    })),
-  ),
+      }
+    }))
+  )
 )
 ```
 

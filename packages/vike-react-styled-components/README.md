@@ -93,8 +93,8 @@ import type { IStyleSheetManager } from "styled-components"
 
 const styledComponents = {
   styleSheetManager: {
-    enableVendorPrefixes: true,
-  } as Omit<IStyleSheetManager, "sheet" | "children">,
+    enableVendorPrefixes: true
+  } as Omit<IStyleSheetManager, "sheet" | "children">
 }
 ```
 

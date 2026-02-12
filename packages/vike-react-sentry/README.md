@@ -84,6 +84,22 @@ export default {
 }
 ```
 
+```ts
+interface SentryOptions {
+  dsn?: string                       // Sentry DSN (can also use PUBLIC_ENV__SENTRY_DSN env var)
+  environment?: string               // Environment name (e.g., 'production', 'staging')
+  release?: string                   // Release version
+  debug?: boolean                    // Enable debug mode
+  sampleRate?: number                // Error sample rate (0.0 to 1.0)
+  tracesSampleRate?: number          // Transaction sample rate (0.0 to 1.0)
+  enabled?: boolean                  // Enable/disable Sentry
+  maxBreadcrumbs?: number            // Maximum number of breadcrumbs
+  sendDefaultPii?: boolean           // Send default PII data
+  replaysSessionSampleRate?: number  // Session replay sample rate (0.0 to 1.0, client only)
+  replaysOnErrorSampleRate?: number  // Replay-on-error sample rate (0.0 to 1.0, client only)
+}
+```
+
 > [!NOTE]
 > See also: [Vike > Config Files](https://vike.dev/config)
 
@@ -108,7 +124,7 @@ export default async () => {
 > [!NOTE]
 > See also: [Vike > `getGlobalContext()`](https://vike.dev/getGlobalContext)
 
-You can define settings only on the client- or server-side:
+You can define settings only for the client- or server-side:
 
 ```js
 // pages/+sentry.client.js
@@ -138,22 +154,6 @@ export default () => {
 
 > [!NOTE]
 > See also: [Vike > File Environment (`.server.js`, `.client.js`, ...)](https://vike.dev/file-env)
-
-```ts
-interface SentryOptions {
-  dsn?: string                       // Sentry DSN (can also use PUBLIC_ENV__SENTRY_DSN env var)
-  environment?: string               // Environment name (e.g., 'production', 'staging')
-  release?: string                   // Release version
-  debug?: boolean                    // Enable debug mode
-  sampleRate?: number                // Error sample rate (0.0 to 1.0)
-  tracesSampleRate?: number          // Transaction sample rate (0.0 to 1.0)
-  enabled?: boolean                  // Enable/disable Sentry
-  maxBreadcrumbs?: number            // Maximum number of breadcrumbs
-  sendDefaultPii?: boolean           // Send default PII data
-  replaysSessionSampleRate?: number  // Session replay sample rate (0.0 to 1.0, client only)
-  replaysOnErrorSampleRate?: number  // Replay-on-error sample rate (0.0 to 1.0, client only)
-}
-```
 
 ### `+sentryVite`
 

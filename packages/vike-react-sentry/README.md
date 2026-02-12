@@ -80,8 +80,8 @@ Sentry SDK configuration options.
 
 export default {
   tracesSampleRate: 1.0,
-  debug: true,
-)
+  debug: true
+}
 ```
 
 > [!NOTE]
@@ -100,9 +100,9 @@ export default async () => {
   return {
     tracesSampleRate: 1.0,
     debug: true,
-    environment: globalContext.isProduction ? 'production' : 'development',
+    environment: globalContext.isProduction ? 'production' : 'development'
   }
-)
+}
 ```
 
 > [!NOTE]
@@ -119,7 +119,7 @@ You can define settings only on the client- or server-side:
 export default {
   integrations: [
     // Add custom browser integrations here
-  ],
+  ]
 }
 ```
 
@@ -132,7 +132,7 @@ export default {
 export default () => {
   integrations: [
     // Add custom Node.js integrations here
-  ],
+  ]
 }
 ```
 

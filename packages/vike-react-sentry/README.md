@@ -79,6 +79,7 @@ Sentry SDK configuration options.
 // Environment: client, server
 
 // Shared configuration (client & server)
+
 import { getGlobalContext } from 'vike'
 
 export default async () => {

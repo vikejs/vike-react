@@ -2,10 +2,10 @@ export default Page
 
 import React from 'react'
 import type { Data } from './+data'
-import { useData } from 'vike-react/useData'
+import { useDataState } from 'vike-react/useDataState'
 
 function Page() {
-  const movie = useData<Data>()
+  const [movie] = useDataState<Data>()
   return (
     <>
       <h1>{movie.title}</h1>

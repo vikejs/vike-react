@@ -5,9 +5,7 @@ import { usePageContext } from './usePageContext.js'
 /**
  * Access `pageContext.data` from any React component.
  *
- * See
- * - https://vike.dev/data
- * - https://vike.dev/pageContext-anywhere
+ * https://vike.dev/useData
  */
 function useData<Data>(): Data {
   const data = usePageContext()?.data

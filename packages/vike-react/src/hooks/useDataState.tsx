@@ -4,11 +4,9 @@ import { type Dispatch, type SetStateAction, useState } from 'react'
 import { usePageContext } from './usePageContext.js'
 
 /**
- * Access `pageContext.data` from any React component, and create a state with `pageContext.data` as initial data.
+ * Access `pageContext.data` from any React component, and create a state with `pageContext.data` as initial state.
  *
- * See
- * - https://vike.dev/data
- * - https://vike.dev/pageContext-anywhere
+ * https://vike.dev/useData
  */
 function useDataState<Data>(): [Data, Dispatch<SetStateAction<Data>>] {
   const pageContext = usePageContext() as any;

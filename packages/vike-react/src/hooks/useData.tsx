@@ -3,7 +3,7 @@ export { useData }
 import { usePageContext } from './usePageContext.js'
 
 /**
- * Access `pageContext.data` from any React component, and create a store with `pageContext.data` as initial data.
+ * Access `pageContext.data` from any React component.
  *
  * See
  * - https://vike.dev/data

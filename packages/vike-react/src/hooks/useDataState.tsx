@@ -4,7 +4,7 @@ import { type Dispatch, type SetStateAction, useState } from 'react'
 import { usePageContext } from './usePageContext.js'
 
 /**
- * Access `pageContext.data` from any React component, and create a store with `pageContext.data` as initial data.
+ * Access `pageContext.data` from any React component, and create a state with `pageContext.data` as initial data.
  *
  * See
  * - https://vike.dev/data

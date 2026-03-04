@@ -303,4 +303,12 @@ export type ReactOptions = {
   hydrateRootOptions?: HydrationOptions
   createRootOptions?: RootOptions
   renderToStringOptions?: ServerOptions
+  /**
+   * Called when a `<Suspense>` boundary fails during SSR streaming.
+   *
+   * Useful for error tracking (e.g. Sentry).
+   *
+   * https://vike.dev/react-setting
+   */
+  onBoundaryError?: (err: unknown) => void
 }

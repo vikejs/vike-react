@@ -12,12 +12,23 @@ function resolveReactOptions(pageContext: PageContext) {
     if (!optionList) return
     objectEntries(optionList).forEach(([fnName, options]) => {
       if (!options) return
+      if (isCallable(options)) {
+        const valPrevious = optionsAcc[fnName] as Function | undefined
+        // @ts-ignore
+        optionsAcc[fnName] = (...args: unknown[]) => {
+          valPrevious?.(...args)
+          ;(options as Function)(...args)
+        }
+        return
+      }
+      // @ts-ignore
       optionsAcc[fnName] ??= {}
       objectEntries(options).forEach(([key, val]) => {
         if (!isCallable(val)) {
           // @ts-ignore
           optionsAcc[fnName][key] ??= val
         } else {
+          // @ts-ignore
           const valPrevious = optionsAcc[fnName]![key] as any as Function | undefined
           // @ts-ignore
           optionsAcc[fnName][key] = (...args: unknown[]) => {

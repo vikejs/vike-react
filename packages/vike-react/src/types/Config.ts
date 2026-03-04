@@ -300,6 +300,7 @@ export type ConfigViaHook = PickWithoutGetter<
 export type ConfigViaHookResolved = Omit<ConfigViaHook, ConfigsCumulative> &
   Pick<Vike.ConfigResolved, ConfigsCumulative>
 
+// TODO/ai add JSDocs with links to each prop
 export type ReactOptions = {
   hydrateRootOptions?: HydrationOptions
   createRootOptions?: RootOptions
@@ -307,6 +308,7 @@ export type ReactOptions = {
   /**
    * Options passed to `react-streaming`'s `renderToStream()` during SSR streaming.
    *
+   * https://github.com/brillout/react-streaming#options
    * https://vike.dev/react-setting
    */
   renderToStreamOptions?: RenderToStreamOptions

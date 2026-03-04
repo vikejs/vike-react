@@ -5,6 +5,7 @@ import type { ConfigsCumulative } from '../hooks/useConfig/configsCumulative.js'
 import type React from 'react'
 import type { HydrationOptions, RootOptions } from 'react-dom/client'
 import type { ServerOptions } from 'react-dom/server'
+import type { RenderToStreamOptions } from 'react-streaming/server'
 
 // https://vike.dev/meta#typescript
 declare global {
@@ -308,13 +309,5 @@ export type ReactOptions = {
    *
    * https://vike.dev/react-setting
    */
-  renderToStreamOptions?: {
-    /**
-     * Called when a Suspense boundary catches an error during SSR streaming (i.e. the fallback UI is shown instead of throwing).
-     * Useful for reporting boundary errors to error monitoring platforms such as Sentry.
-     *
-     * https://vike.dev/react-setting
-     */
-    onBoundaryError?: (err: unknown) => void
-  }
+  renderToStreamOptions?: Omit<RenderToStreamOptions, 'webStream' | 'disable' | 'userAgent'>
 }

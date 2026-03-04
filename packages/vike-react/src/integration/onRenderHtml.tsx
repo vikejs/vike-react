@@ -72,7 +72,7 @@ async function renderPageToHtml(pageContext: PageContextServer) {
   // https://github.com/vikejs/vike-react/issues/87#issuecomment-2488742744
   await callCumulativeHooks(pageContext.config.onBeforeRenderHtml, pageContext)
 
-  const { renderToStringOptions, onBoundaryError } = resolveReactOptions(pageContext)
+  const { renderToStringOptions } = resolveReactOptions(pageContext)
 
   if (pageContext.page) {
     const streamSetting = resolveStreamSetting(pageContext)
@@ -101,7 +101,6 @@ async function renderPageToHtml(pageContext: PageContextServer) {
               false,
               */
               undefined,
-        onBoundaryError,
       })
       pageContext.pageHtmlStream = pageHtmlStream
     }

@@ -303,4 +303,18 @@ export type ReactOptions = {
   hydrateRootOptions?: HydrationOptions
   createRootOptions?: RootOptions
   renderToStringOptions?: ServerOptions
+  /**
+   * Options passed to `react-streaming`'s `renderToStream()` during SSR streaming.
+   *
+   * https://vike.dev/react-setting
+   */
+  renderToStreamOptions?: {
+    /**
+     * Called when a Suspense boundary catches an error during SSR streaming (i.e. the fallback UI is shown instead of throwing).
+     * Useful for reporting boundary errors to error monitoring platforms such as Sentry.
+     *
+     * https://vike.dev/react-setting
+     */
+    onBoundaryError?: (err: unknown) => void
+  }
 }

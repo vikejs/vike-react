@@ -22,6 +22,7 @@ function resolveReactOptions(pageContext: PageContext) {
           // @ts-ignore
           optionsAcc[fnName][key] = (...args: unknown[]) => {
             valPrevious?.(...args)
+            // @ts-ignore
             val(...args)
           }
         }

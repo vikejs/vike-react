@@ -309,5 +309,5 @@ export type ReactOptions = {
    *
    * https://vike.dev/react-setting
    */
-  renderToStreamOptions?: Omit<RenderToStreamOptions, 'webStream' | 'disable' | 'userAgent'>
+  renderToStreamOptions?: RenderToStreamOptions
 }

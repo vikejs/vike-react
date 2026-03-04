@@ -5,6 +5,7 @@ import type { ConfigsCumulative } from '../hooks/useConfig/configsCumulative.js'
 import type React from 'react'
 import type { HydrationOptions, RootOptions } from 'react-dom/client'
 import type { ServerOptions } from 'react-dom/server'
+import type { RenderToStreamOptions } from 'react-streaming/server'
 
 // https://vike.dev/meta#typescript
 declare global {
@@ -300,7 +301,32 @@ export type ConfigViaHookResolved = Omit<ConfigViaHook, ConfigsCumulative> &
   Pick<Vike.ConfigResolved, ConfigsCumulative>
 
 export type ReactOptions = {
+  /**
+   * Options passed to React's `hydrateRoot()`.
+   *
+   * https://react.dev/reference/react-dom/client/hydrateRoot
+   * https://vike.dev/react-setting
+   */
   hydrateRootOptions?: HydrationOptions
+  /**
+   * Options passed to React's `createRoot()`.
+   *
+   * https://react.dev/reference/react-dom/client/createRoot
+   * https://vike.dev/react-setting
+   */
   createRootOptions?: RootOptions
+  /**
+   * Options passed to React's `renderToString()`.
+   *
+   * https://react.dev/reference/react-dom/server/renderToString
+   * https://vike.dev/react-setting
+   */
   renderToStringOptions?: ServerOptions
+  /**
+   * Options passed to `react-streaming`'s `renderToStream()` during SSR streaming.
+   *
+   * https://github.com/brillout/react-streaming#options
+   * https://vike.dev/react-setting
+   */
+  renderToStreamOptions?: RenderToStreamOptions
 }

@@ -81,7 +81,6 @@ async function renderPageToHtml(pageContext: PageContextServer) {
       pageContext.pageHtmlString = pageHtmlString
     } else {
       const pageHtmlStream = await renderToStream(pageContext.page, {
-        ...renderToStreamOptions,
         webStream: !streamSetting.type
           ? /* Let react-streaming decide which stream type to use.
             false
@@ -102,6 +101,7 @@ async function renderPageToHtml(pageContext: PageContextServer) {
               false,
               */
               undefined,
+        ...renderToStreamOptions,
       })
       pageContext.pageHtmlStream = pageHtmlStream
     }

@@ -31,7 +31,7 @@
     "release:commit": "release-me commit"
   },
   "devDependencies": {
-    "@brillout/release-me": "^0.4.8",
+    "@brillout/release-me": "^0.4.13",
     "@brillout/vite-plugin-server-entry": "^0.7.15",
     "@sentry/react": "^10.22.0",
     "@sentry/node": "^10.22.0",

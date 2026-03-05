@@ -1,3 +1,12 @@
+## [0.6.21](https://github.com/vikejs/vike-react/compare/vike-react@0.6.20...vike-react@0.6.21) (2026-03-05)
+
+
+### Features
+
+* +react.renderToStreamOptions (closes vikejs/vike[#3137](https://github.com/vikejs/vike-react/issues/3137)) ([#215](https://github.com/vikejs/vike-react/issues/215)) ([542502a](https://github.com/vikejs/vike-react/commit/542502ab35b10024d19f3b5d376ac6cb09534267))
+
+
+
 ## [0.6.20](https://github.com/vikejs/vike-react/compare/vike-react@0.6.19...vike-react@0.6.20) (2026-02-03)
 
 

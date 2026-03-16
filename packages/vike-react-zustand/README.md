@@ -4,7 +4,7 @@
 
 # `vike-react-zustand`
 
-Integrates [Zustand](https://zustand-demo.pmnd.rs/) state management into your [`vike-react`](https://vike.dev/vike-react) app with SSR support.
+Integrates [Zustand](https://zustand-demo.pmnd.rs) state management into your [`vike-react`](https://vike.dev/vike-react) app with SSR support.
 
 > [!NOTE]
 > If you don't use any of your Zustand store during [SSR](https://vike.dev/ssr), then **you don't need `vike-react-zustand`** — you can use Zustand without any Vike integration.
@@ -67,9 +67,9 @@ export const useStore = create<Store>()((set) => ({
 ```
 
 > [!NOTE]
-> The API is the same as [Zustand's `create()`](https://zustand.docs.pmnd.rs/apis/create#reference).
+> The API is the same as [Zustand's `create()`](https://zustand.docs.pmnd.rs/reference/apis/create#reference).
 >
-> (Extra parentheses `()` are required only when using TypeScript, as explained [here](https://zustand.docs.pmnd.rs/guides/typescript#basic-usage).)
+> (Extra parentheses `()` are required only when using TypeScript, as explained [here](https://zustand.docs.pmnd.rs/learn/guides/advanced-typescript#basic-usage).)
 
 Use the store in your components:
 
@@ -122,7 +122,7 @@ const nextStateCreatorFn = withPageContext((pageContext) => stateCreatorFn)
 
 ## `useStoreVanilla()`
 
-Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, you can use `useStoreVanilla` to directly access the [vanilla store](https://zustand.docs.pmnd.rs/apis/create-store).
+Sometimes you need to access state in a non-reactive way or act upon the store. For these cases, you can use `useStoreVanilla` to directly access the [vanilla store](https://zustand.docs.pmnd.rs/reference/apis/create-store).
 
 ```tsx
 import { useStoreVanilla } from 'vike-react-zustand'

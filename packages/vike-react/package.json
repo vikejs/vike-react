@@ -6,6 +6,7 @@
   "exports": {
     "./usePageContext": "./dist/hooks/usePageContext.js",
     "./useData": "./dist/hooks/useData.js",
+    "./useDataState": "./dist/hooks/useDataState.js",
     "./useHydrated": "./dist/hooks/useHydrated.js",
     "./useConfig": {
       "worker": "./dist/hooks/useConfig/useConfig-server.js",
@@ -62,6 +63,9 @@
     "*": {
       "useData": [
         "./dist/hooks/useData.d.ts"
+      ],
+      "useDataState": [
+        "./dist/hooks/useDataState.d.ts"
       ],
       "usePageContext": [
         "./dist/hooks/usePageContext.d.ts"

@@ -23,7 +23,6 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     tolerateError: ({ logText }) =>
       logText.includes('This is a test error sent to Sentry!') ||
       logText.includes('This is an async error sent to Sentry!') ||
-      logText.includes('vike-photon is deprecated') ||
       logText.includes('[sentry-vite-plugin]'),
   })
 

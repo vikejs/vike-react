@@ -2005,8 +2005,8 @@ packages:
     peerDependencies:
       vite: '>=7.1'
 
-  '@universal-deploy/node@0.1.5':
-    resolution: {integrity: sha512-Zys7cnZSrhmy7iaXphIAC/CbdE92GY73BONtmXaLmVYk89AxKpsad4rNJ5a2v+/VnkVxdPme7dttsu610imRDQ==}
+  '@universal-deploy/node@0.1.6':
+    resolution: {integrity: sha512-VcYUNiE596Mbm0fCX1TWK6fAXgJgOz4Msa+PORxZCPZrTLw+qDABeE031XWSfQ8bAF9d/DXtGywIA/RAi8oCXg==}
     peerDependencies:
       vite: '>=7.1'
     peerDependenciesMeta:
@@ -5382,9 +5382,10 @@ snapshots:
     transitivePeerDependencies:
       - srvx
 
-  '@universal-deploy/node@0.1.5(vite@7.3.0(@types/node@24.0.8))':
+  '@universal-deploy/node@0.1.6(vite@7.3.0(@types/node@24.0.8))':
     dependencies:
       '@universal-deploy/store': 0.2.1(srvx@0.11.15)
+      magic-string: 0.30.21
       srvx: 0.11.15
     optionalDependencies:
       vite: 7.3.0(@types/node@24.0.8)
@@ -5398,7 +5399,7 @@ snapshots:
   '@universal-deploy/vite@0.1.7(hono@4.12.14)(srvx@0.11.15)(vite@7.3.0(@types/node@24.0.8))':
     dependencies:
       '@universal-deploy/netlify': 0.2.2(srvx@0.11.15)(vite@7.3.0(@types/node@24.0.8))
-      '@universal-deploy/node': 0.1.5(vite@7.3.0(@types/node@24.0.8))
+      '@universal-deploy/node': 0.1.6(vite@7.3.0(@types/node@24.0.8))
       '@universal-deploy/store': 0.2.1(srvx@0.11.15)
       '@universal-middleware/express': 0.4.26(hono@4.12.14)(srvx@0.11.15)
       magic-string: 0.30.21

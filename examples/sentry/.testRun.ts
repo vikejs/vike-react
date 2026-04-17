@@ -17,8 +17,10 @@ function setupEnv() {
 }
 
 function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
+  const isProd = cmd !== 'pnpm run dev'
   setupEnv()
   run(cmd, {
+    serverIsReadyMessage: isProd ? 'Listening on' : undefined,
     // We intentionally throw errors to test Sentry error reporting
     tolerateError: ({ logText }) =>
       logText.includes('This is a test error sent to Sentry!') ||

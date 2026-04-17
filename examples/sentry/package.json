@@ -5,8 +5,6 @@
     "prod": "vike build && node ./dist/server/index.mjs"
   },
   "dependencies": {
-    "@photonjs/hono": "^0.1.12",
-    "@photonjs/runtime": "^0.1.17",
     "@sentry/react": "^10.22.0",
     "@sentry/node": "^10.22.0",
     "@sentry/vite-plugin": "^4.6.0",
@@ -18,7 +16,6 @@
     "react-dom": "^19.2.0",
     "typescript": "^5.9.2",
     "vike": "^0.4.258",
-    "vike-photon": "^0.1.26",
     "vike-react": "0.6.21",
     "vike-react-sentry": "0.1.0",
     "vite": "^7.3.0"

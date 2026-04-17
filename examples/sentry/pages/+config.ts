@@ -7,5 +7,5 @@ import vikeReactSentry from 'vike-react-sentry/config'
 const config = {
   title: 'Vike + React + Sentry Example',
   extends: [vikeReact, vikeReactSentry],
-  server: true
+  server: true,
 } satisfies Config

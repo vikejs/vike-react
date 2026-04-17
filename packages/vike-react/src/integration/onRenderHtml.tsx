@@ -238,6 +238,7 @@ type StreamSetting = {
 function resolveStreamSetting(pageContext: PageContextServer): StreamSetting {
   const {
     stream,
+    server,
     // TO-DO/eventually: remove +streamIsRequired
     //  - Let's remove it once following last vike-react-{query,apollo} releases using +streamIsRequired can be considered old versions.
     //    - Last vike-react-query version that uses +streamIsRequired was 0.1.3
@@ -274,5 +275,11 @@ function resolveStreamSetting(pageContext: PageContextServer): StreamSetting {
       isType<never>(setting)
       throw new Error(`Unexpected +stream value ${setting}`)
     })
+
+  // If `+server` is defined, we expect a Web Response
+  if (server && streamSetting.enable && !streamSetting.type) {
+    streamSetting.type = 'web'
+  }
+
   return streamSetting
 }

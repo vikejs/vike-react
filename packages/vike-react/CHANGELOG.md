@@ -1,3 +1,12 @@
+## [0.6.22](https://github.com/vikejs/vike-react/compare/vike-react@0.6.21...vike-react@0.6.22) (2026-05-12)
+
+
+### Bug Fixes
+
+* default to Web stream when `+server` is enabled ([#216](https://github.com/vikejs/vike-react/issues/216)) ([4b0e7d1](https://github.com/vikejs/vike-react/commit/4b0e7d10228b1f26ed9c718cbdb2e1fb6e5e988d))
+
+
+
 ## [0.6.21](https://github.com/vikejs/vike-react/compare/vike-react@0.6.20...vike-react@0.6.21) (2026-03-05)
 
 

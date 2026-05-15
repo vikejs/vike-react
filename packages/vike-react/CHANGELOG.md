@@ -1,3 +1,12 @@
+## [0.6.23](https://github.com/vikejs/vike-react/compare/vike-react@0.6.22...vike-react@0.6.23) (2026-05-15)
+
+
+### Bug Fixes
+
+* support `exactOptionalPropertyTypes` (fix vikejs/vike[#3251](https://github.com/vikejs/vike-react/issues/3251)) ([#219](https://github.com/vikejs/vike-react/issues/219)) ([ee9648f](https://github.com/vikejs/vike-react/commit/ee9648ff5a2410eb4220b46b6793ab0f0f318a18))
+
+
+
 ## [0.6.22](https://github.com/vikejs/vike-react/compare/vike-react@0.6.21...vike-react@0.6.22) (2026-05-12)
 
 

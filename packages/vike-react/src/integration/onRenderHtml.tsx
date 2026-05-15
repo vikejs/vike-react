@@ -80,15 +80,15 @@ async function renderPageToHtml(pageContext: PageContextServer) {
       const pageHtmlString = renderToString(pageContext.page, renderToStringOptions)
       pageContext.pageHtmlString = pageHtmlString
     } else {
+      // Properties are set conditionally (instead of being assigned `undefined`) to satisfy `exactOptionalPropertyTypes`.
+      const options: RenderToStreamOptions = {}
+      // When streamSetting.type is null: let react-streaming decide the stream type
+      if (streamSetting.type) options.webStream = streamSetting.type === 'web'
       const userAgent =
         pageContext.headers?.['user-agent'] ||
         // TO-DO/eventually: remove old way of acccessing the User Agent header.
         // @ts-ignore
         pageContext.userAgent
-      // Properties are set conditionally (instead of being assigned `undefined`) to satisfy `exactOptionalPropertyTypes`.
-      const options: RenderToStreamOptions = {}
-      // When streamSetting.type is null: let react-streaming decide the stream type
-      if (streamSetting.type) options.webStream = streamSetting.type === 'web'
       if (userAgent) options.userAgent = userAgent
       // +stream.require is true  => default +stream.enable is true
       // +stream.require is false => default +stream.enable is false

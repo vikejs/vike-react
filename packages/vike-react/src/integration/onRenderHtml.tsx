@@ -80,22 +80,10 @@ async function renderPageToHtml(pageContext: PageContextServer) {
       const pageHtmlString = renderToString(pageContext.page, renderToStringOptions)
       pageContext.pageHtmlString = pageHtmlString
     } else {
-      // TODO/ai move code in new function getRenderToStreamOptions()
-      // Properties are set conditionally (instead of being assigned `undefined`) to satisfy `exactOptionalPropertyTypes`.
-      const options: RenderToStreamOptions = {}
-      // When streamSetting.type is null: let react-streaming decide the stream type
-      if (streamSetting.type) options.webStream = streamSetting.type === 'web'
-      const userAgent =
-        pageContext.headers?.['user-agent'] ||
-        // TO-DO/eventually: remove old way of acccessing the User Agent header.
-        // @ts-ignore
-        pageContext.userAgent
-      if (userAgent) options.userAgent = userAgent
-      // +stream.require is true  => default +stream.enable is true
-      // +stream.require is false => default +stream.enable is false
-      // Don't override disabling when a bot is detected.
-      if (streamSetting.enable === false) options.disable = true
-      const pageHtmlStream = await renderToStream(pageContext.page, { ...options, ...renderToStreamOptions })
+      const pageHtmlStream = await renderToStream(
+        pageContext.page,
+        getRenderToStreamOptions(pageContext, streamSetting, renderToStreamOptions),
+      )
       pageContext.pageHtmlStream = pageHtmlStream
     }
   }
@@ -227,6 +215,27 @@ type StreamSetting = {
   type: 'node' | 'web' | null
   enable: boolean | null
   require: boolean
+}
+function getRenderToStreamOptions(
+  pageContext: PageContextServer,
+  streamSetting: StreamSetting,
+  renderToStreamOptions: RenderToStreamOptions | undefined,
+): RenderToStreamOptions {
+  // Properties are set conditionally (instead of being assigned `undefined`) to satisfy `exactOptionalPropertyTypes`.
+  const options: RenderToStreamOptions = {}
+  // When streamSetting.type is null: let react-streaming decide the stream type
+  if (streamSetting.type) options.webStream = streamSetting.type === 'web'
+  const userAgent =
+    pageContext.headers?.['user-agent'] ||
+    // TO-DO/eventually: remove old way of acccessing the User Agent header.
+    // @ts-ignore
+    pageContext.userAgent
+  if (userAgent) options.userAgent = userAgent
+  // +stream.require is true  => default +stream.enable is true
+  // +stream.require is false => default +stream.enable is false
+  // Don't override disabling when a bot is detected.
+  if (streamSetting.enable === false) options.disable = true
+  return { ...options, ...renderToStreamOptions }
 }
 function resolveStreamSetting(pageContext: PageContextServer): StreamSetting {
   const {

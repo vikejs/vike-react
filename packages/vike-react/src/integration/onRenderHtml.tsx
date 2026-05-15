@@ -80,38 +80,21 @@ async function renderPageToHtml(pageContext: PageContextServer) {
       const pageHtmlString = renderToString(pageContext.page, renderToStringOptions)
       pageContext.pageHtmlString = pageHtmlString
     } else {
-      const renderOptions: RenderToStreamOptions = {
-        ...renderToStreamOptions,
-        ...(!streamSetting.type
-          ? {}
-          : {
-              webStream: streamSetting.type === 'web',
-            }),
-        ...((
-          pageContext.headers?.['user-agent'] ||
-          // TO-DO/eventually: remove old way of acccessing the User Agent header.
-          // @ts-ignore
-          pageContext.userAgent
-        )
-          ? {
-              userAgent:
-                pageContext.headers?.['user-agent'] ||
-                // TO-DO/eventually: remove old way of acccessing the User Agent header.
-                // @ts-ignore
-                pageContext.userAgent,
-            }
-          : {}),
-        ...(
-          // +stream.require is true  => default +stream.enable is true
-          // +stream.require is false => default +stream.enable is false
-          streamSetting.enable === false
-            ? { disable: true }
-            : /* Don't override disabling when bot is detected.
-              false,
-              */
-              {}
-        ),
-      }
+      const userAgent =
+        pageContext.headers?.['user-agent'] ||
+        // TO-DO/eventually: remove old way of acccessing the User Agent header.
+        // @ts-ignore
+        pageContext.userAgent
+      // Properties are set conditionally (instead of being assigned `undefined`) to satisfy `exactOptionalPropertyTypes`.
+      const renderOptions: RenderToStreamOptions = {}
+      // When streamSetting.type is null: let react-streaming decide the stream type
+      if (streamSetting.type) renderOptions.webStream = streamSetting.type === 'web'
+      if (userAgent) renderOptions.userAgent = userAgent
+      // +stream.require is true  => default +stream.enable is true
+      // +stream.require is false => default +stream.enable is false
+      // Don't override disabling when a bot is detected.
+      if (streamSetting.enable === false) renderOptions.disable = true
+      Object.assign(renderOptions, renderToStreamOptions)
       const pageHtmlStream = await renderToStream(pageContext.page, renderOptions)
       pageContext.pageHtmlStream = pageHtmlStream
     }

@@ -80,6 +80,7 @@ async function renderPageToHtml(pageContext: PageContextServer) {
       const pageHtmlString = renderToString(pageContext.page, renderToStringOptions)
       pageContext.pageHtmlString = pageHtmlString
     } else {
+      // TODO/ai move code in new function getRenderToStreamOptions()
       // Properties are set conditionally (instead of being assigned `undefined`) to satisfy `exactOptionalPropertyTypes`.
       const options: RenderToStreamOptions = {}
       // When streamSetting.type is null: let react-streaming decide the stream type

@@ -221,7 +221,6 @@ function getRenderToStreamOptions(
   streamSetting: StreamSetting,
   renderToStreamOptions: RenderToStreamOptions | undefined,
 ): RenderToStreamOptions {
-  // Properties are set conditionally (instead of being assigned `undefined`) to satisfy `exactOptionalPropertyTypes`.
   const options: RenderToStreamOptions = {}
   // When streamSetting.type is null: let react-streaming decide the stream type
   if (streamSetting.type) options.webStream = streamSetting.type === 'web'

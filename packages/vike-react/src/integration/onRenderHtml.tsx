@@ -211,30 +211,41 @@ async function getHtmlInjections(pageContext: PageContextServer) {
   return { bodyHtmlBegin, bodyHtmlEnd, headHtmlBegin, headHtmlEnd }
 }
 
-type StreamSetting = {
-  type: 'node' | 'web' | null
-  enable: boolean | null
-  require: boolean
-}
 function getRenderToStreamOptions(
   pageContext: PageContextServer,
   streamSetting: StreamSetting,
   renderToStreamOptions: RenderToStreamOptions | undefined,
 ): RenderToStreamOptions {
   const options: RenderToStreamOptions = {}
-  // When streamSetting.type is null: let react-streaming decide the stream type
-  if (streamSetting.type) options.webStream = streamSetting.type === 'web'
+
+  if (streamSetting.type) {
+    options.webStream = streamSetting.type === 'web'
+  } else {
+    // Let react-streaming decide the stream type
+  }
+
   const userAgent =
     pageContext.headers?.['user-agent'] ||
     // TO-DO/eventually: remove old way of acccessing the User Agent header.
     // @ts-ignore
     pageContext.userAgent
   if (userAgent) options.userAgent = userAgent
+
   // +stream.require is true  => default +stream.enable is true
   // +stream.require is false => default +stream.enable is false
-  // Don't override disabling when a bot is detected.
-  if (streamSetting.enable === false) options.disable = true
+  if (streamSetting.enable === false) {
+    options.disable = true
+  } else {
+    // Let react-streaming disable streaming when it detects a bot
+  }
+
   return { ...options, ...renderToStreamOptions }
+}
+
+type StreamSetting = {
+  type: 'node' | 'web' | null
+  enable: boolean | null
+  require: boolean
 }
 function resolveStreamSetting(pageContext: PageContextServer): StreamSetting {
   const {

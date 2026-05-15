@@ -86,16 +86,15 @@ async function renderPageToHtml(pageContext: PageContextServer) {
         // @ts-ignore
         pageContext.userAgent
       // Properties are set conditionally (instead of being assigned `undefined`) to satisfy `exactOptionalPropertyTypes`.
-      const renderOptions: RenderToStreamOptions = {}
+      const options: RenderToStreamOptions = {}
       // When streamSetting.type is null: let react-streaming decide the stream type
-      if (streamSetting.type) renderOptions.webStream = streamSetting.type === 'web'
-      if (userAgent) renderOptions.userAgent = userAgent
+      if (streamSetting.type) options.webStream = streamSetting.type === 'web'
+      if (userAgent) options.userAgent = userAgent
       // +stream.require is true  => default +stream.enable is true
       // +stream.require is false => default +stream.enable is false
       // Don't override disabling when a bot is detected.
-      if (streamSetting.enable === false) renderOptions.disable = true
-      Object.assign(renderOptions, renderToStreamOptions)
-      const pageHtmlStream = await renderToStream(pageContext.page, renderOptions)
+      if (streamSetting.enable === false) options.disable = true
+      const pageHtmlStream = await renderToStream(pageContext.page, { ...options, ...renderToStreamOptions })
       pageContext.pageHtmlStream = pageHtmlStream
     }
   }

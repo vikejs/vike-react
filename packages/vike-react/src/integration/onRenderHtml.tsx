@@ -3,7 +3,7 @@ export { onRenderHtml }
 
 import React from 'react'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
-import { renderToStream } from 'react-streaming/server'
+import { renderToStream, type RenderToStreamOptions } from 'react-streaming/server'
 import { dangerouslySkipEscape, escapeInject } from 'vike/server'
 import type { PageContextServer } from 'vike/types'
 import { VikeReactProviderPageContext } from '../hooks/usePageContext.js'
@@ -80,29 +80,10 @@ async function renderPageToHtml(pageContext: PageContextServer) {
       const pageHtmlString = renderToString(pageContext.page, renderToStringOptions)
       pageContext.pageHtmlString = pageHtmlString
     } else {
-      const pageHtmlStream = await renderToStream(pageContext.page, {
-        webStream: !streamSetting.type
-          ? /* Let react-streaming decide which stream type to use.
-            false
-            */
-            undefined
-          : streamSetting.type === 'web',
-        userAgent:
-          pageContext.headers?.['user-agent'] ||
-          // TO-DO/eventually: remove old way of acccessing the User Agent header.
-          // @ts-ignore
-          pageContext.userAgent,
-        disable:
-          // +stream.require is true  => default +stream.enable is true
-          // +stream.require is false => default +stream.enable is false
-          streamSetting.enable === false
-            ? true
-            : /* Don't override disabling when bot is detected.
-              false,
-              */
-              undefined,
-        ...renderToStreamOptions,
-      })
+      const pageHtmlStream = await renderToStream(
+        pageContext.page,
+        getRenderToStreamOptions(pageContext, streamSetting, renderToStreamOptions),
+      )
       pageContext.pageHtmlStream = pageHtmlStream
     }
   }
@@ -228,6 +209,37 @@ async function getHtmlInjections(pageContext: PageContextServer) {
     renderHooks(config.bodyHtmlEnd),
   ])
   return { bodyHtmlBegin, bodyHtmlEnd, headHtmlBegin, headHtmlEnd }
+}
+
+function getRenderToStreamOptions(
+  pageContext: PageContextServer,
+  streamSetting: StreamSetting,
+  renderToStreamOptions: RenderToStreamOptions | undefined,
+): RenderToStreamOptions {
+  const options: RenderToStreamOptions = {}
+
+  if (streamSetting.type) {
+    options.webStream = streamSetting.type === 'web'
+  } else {
+    // Let react-streaming decide the stream type
+  }
+
+  const userAgent =
+    pageContext.headers?.['user-agent'] ||
+    // TO-DO/eventually: remove old way of acccessing the User Agent header.
+    // @ts-ignore
+    pageContext.userAgent
+  if (userAgent) options.userAgent = userAgent
+
+  // +stream.require is true  => default +stream.enable is true
+  // +stream.require is false => default +stream.enable is false
+  if (streamSetting.enable === false) {
+    options.disable = true
+  } else {
+    // Let react-streaming disable streaming when it detects a bot
+  }
+
+  return { ...options, ...renderToStreamOptions }
 }
 
 type StreamSetting = {

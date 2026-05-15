@@ -10,6 +10,7 @@
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
     // Resolution
     "esModuleInterop": true,
     "moduleResolution": "Node16",

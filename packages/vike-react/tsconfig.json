@@ -10,6 +10,7 @@
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    // Test `exactOptionalPropertyTypes` support — https://github.com/vikejs/vike/issues/3251
     "exactOptionalPropertyTypes": true,
     // Resolution
     "esModuleInterop": true,

@@ -440,8 +440,8 @@ importers:
   packages/vike-react-query:
     dependencies:
       devalue:
-        specifier: ^4.3.2
-        version: 4.3.3
+        specifier: ^5.6.4
+        version: 5.8.1
       react-error-boundary:
         specifier: ^4.0.12
         version: 4.1.2(react@19.2.1)
@@ -2578,8 +2578,8 @@ packages:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
     engines: {node: '>=6'}
 
-  devalue@4.3.3:
-    resolution: {integrity: sha512-UH8EL6H2ifcY8TbD2QsxwCC/pr5xSwPvv85LrLXVihmHVC3T3YqTCIwnR5ak0yO1KYqlxrPVOA/JVZJYPy2ATg==}
+  devalue@5.8.1:
+    resolution: {integrity: sha512-4CXDYRBGqN+57wVJkuXBYmpAVUSg3L6JAQa/DFqm238G73E1wuyc/JhGQJzN7vUf/CMphYau2zXbfWzDR5aTEw==}
 
   dom-accessibility-api@0.5.16:
     resolution: {integrity: sha512-X7BJ2yElsnOJ30pZF4uIIDfBEVgF4XEBxL9Bxhy6dnrm5hkzqmsWHGTiHqRiITNhMyFLyAiWndIJP7Z1NTteDg==}
@@ -6284,7 +6284,7 @@ snapshots:
 
   dequal@2.0.3: {}
 
-  devalue@4.3.3: {}
+  devalue@5.8.1: {}
 
   dom-accessibility-api@0.5.16: {}
 

@@ -647,8 +647,8 @@ importers:
         specifier: ^7.24.0
         version: 7.28.5
       '@brillout/json-serializer':
-        specifier: ^0.5.15
-        version: 0.5.22
+        specifier: ^0.5.25
+        version: 0.5.25
     devDependencies:
       '@brillout/release-me':
         specifier: ^0.4.13
@@ -918,6 +918,9 @@ packages:
 
   '@brillout/json-serializer@0.5.23':
     resolution: {integrity: sha512-nM7okvu4UaoxYshKB+903s3/UpIBdkJl++iDT3gOLnHaSqY6HbhAXTsUTxrroAAcIt6RKQfShaKjCBlzR2A1Gg==}
+
+  '@brillout/json-serializer@0.5.25':
+    resolution: {integrity: sha512-/Ahv1XIHAYyROWfyOQZxbxmkvM3ef3aMPPzEC0EfkyZUFb88y/nFFwCFvYUjE20MGoF8/9Z1jIy7ihkpkE+maw==}
 
   '@brillout/part-regex@0.1.4':
     resolution: {integrity: sha512-PQy5LfRmIueEfGwhvMedsnj6KulDfxlfvUaTsUchBqA7nTge4C7taG/V6np2uCHVxxE4+cSmwM4COn9aNcMn7g==}
@@ -4318,6 +4321,8 @@ snapshots:
   '@brillout/json-serializer@0.5.22': {}
 
   '@brillout/json-serializer@0.5.23': {}
+
+  '@brillout/json-serializer@0.5.25': {}
 
   '@brillout/part-regex@0.1.4': {}
 

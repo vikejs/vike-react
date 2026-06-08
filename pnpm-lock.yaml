@@ -150,7 +150,7 @@ importers:
         specifier: 0.6.24
         version: link:../../packages/vike-react
       vike-react-query:
-        specifier: 0.1.12
+        specifier: 0.1.13
         version: link:../../packages/vike-react-query
       vite:
         specifier: ^7.3.0

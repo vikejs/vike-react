@@ -69,7 +69,9 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
       )
       // `serialized` is already escaped by serialize() (htmlScriptSafe), so it contains no `<` and can't break out of
       // the <script> tag; JSON.stringify() embeds it as a JS string literal that evaluates back to `serialized`.
-      stream.injectToStream(`<script class="_rqd_"${nonceAttr}>_rqd_.push(${JSON.stringify(serialized)});_rqc_()</script>`)
+      stream.injectToStream(
+        `<script class="_rqd_"${nonceAttr}>_rqd_.push(${JSON.stringify(serialized)});_rqc_()</script>`,
+      )
     })
 
     // Unsubscribe

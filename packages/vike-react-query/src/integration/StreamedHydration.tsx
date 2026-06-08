@@ -67,8 +67,10 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
           shouldDehydrateQuery: (query) => query.queryHash === event.query.queryHash,
         }),
       )
-      // We escape `<` so that the serialized data can't break out of the injected <script> tag (e.g. `</script>`).
-      const script = JSON.stringify(serialized).replaceAll('<', '\\u003c')
+      // Escape the serialized state before injecting it into the <script> tag (JS reverses both escapes on eval):
+      // - `<` so the data can't break out of the tag (e.g. `</script>`)
+      // - `/` so that search engines don't crawl URLs contained in the state (like Vike, see https://github.com/vikejs/vike/pull/2603)
+      const script = JSON.stringify(serialized).replaceAll('<', '\\u003c').replaceAll('/', '\\/')
       stream.injectToStream(`<script class="_rqd_"${nonceAttr}>_rqd_.push(${script});_rqc_()</script>`)
     })
 

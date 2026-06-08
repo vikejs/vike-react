@@ -1,3 +1,14 @@
+## [0.6.24](https://github.com/vikejs/vike-react/compare/vike-react@0.6.23...vike-react@0.6.24) (2026-06-08)
+
+
+### Bug Fixes
+
+* improve npm landing page ([eabef9f](https://github.com/vikejs/vike-react/commit/eabef9f942247068e84c3e3b81be308341a72edf))
+* react-streaming@^0.4.18 ([f6c1688](https://github.com/vikejs/vike-react/commit/f6c168805b69606fa9ba896483d357195b478092))
+* react-streaming@^0.4.19 ([bbac1a7](https://github.com/vikejs/vike-react/commit/bbac1a7f1ffba9c428d4777dac91e17f22db3537))
+
+
+
 ## [0.6.23](https://github.com/vikejs/vike-react/compare/vike-react@0.6.22...vike-react@0.6.23) (2026-05-15)
 
 

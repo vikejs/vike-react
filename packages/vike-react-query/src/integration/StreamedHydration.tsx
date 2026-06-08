@@ -67,10 +67,12 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
           shouldDehydrateQuery: (query) => query.queryHash === event.query.queryHash,
         }),
       )
-      // `serialized` is already escaped by serialize() (htmlScriptSafe), so it contains no `<` and can't break out of
-      // the <script> tag; JSON.stringify() embeds it as a JS string literal that evaluates back to `serialized`.
+      // Inject the data as an inert <script type="application/json"> block, immediately followed by a static <script>
+      // that reads it back via its `previousElementSibling`. The arbitrary data thus lives only in the inert block,
+      // never inside an executable <script>. Both are injected together so the pairing is obvious.
       stream.injectToStream(
-        `<script class="_rqd_"${nonceAttr}>_rqd_.push(${JSON.stringify(serialized)});_rqc_()</script>`,
+        `<script type="application/json" class="_rqd_">${serialized}</script>` +
+          `<script class="_rqd_"${nonceAttr}>_rqd_.push(document.currentScript.previousElementSibling.textContent);_rqc_()</script>`,
       )
     })
 

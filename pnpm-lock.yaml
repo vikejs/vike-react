@@ -439,9 +439,9 @@ importers:
 
   packages/vike-react-query:
     dependencies:
-      devalue:
-        specifier: ^4.3.2
-        version: 4.3.3
+      '@brillout/json-serializer':
+        specifier: ^0.5.25
+        version: 0.5.25
       react-error-boundary:
         specifier: ^4.0.12
         version: 4.1.2(react@19.2.1)
@@ -2577,9 +2577,6 @@ packages:
   dequal@2.0.3:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
     engines: {node: '>=6'}
-
-  devalue@4.3.3:
-    resolution: {integrity: sha512-UH8EL6H2ifcY8TbD2QsxwCC/pr5xSwPvv85LrLXVihmHVC3T3YqTCIwnR5ak0yO1KYqlxrPVOA/JVZJYPy2ATg==}
 
   dom-accessibility-api@0.5.16:
     resolution: {integrity: sha512-X7BJ2yElsnOJ30pZF4uIIDfBEVgF4XEBxL9Bxhy6dnrm5hkzqmsWHGTiHqRiITNhMyFLyAiWndIJP7Z1NTteDg==}
@@ -6283,8 +6280,6 @@ snapshots:
   delayed-stream@1.0.0: {}
 
   dequal@2.0.3: {}
-
-  devalue@4.3.3: {}
 
   dom-accessibility-api@0.5.16: {}
 

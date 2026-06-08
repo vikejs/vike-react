@@ -1,4 +1,9 @@
 packages:
   - 'packages/*'
   - 'examples/*'
+allowBuilds:
+  '@biomejs/biome': true
+  '@sentry/cli': true
+  esbuild: true
+  playwright-chromium: true
 minimumReleaseAge: 0

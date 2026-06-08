@@ -95,9 +95,6 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
   return children
 }
 
-// `htmlScriptSafe` makes @brillout/json-serializer escape `<` (so a `</script>` in the data can't break out of the
-// <script> tag — XSS, reproduction: https://jsfiddle.net/wy6zgn37/) and `/` (so search engines don't crawl URLs in
-// the state). parse() transparently decodes both.
 function serialize(state: DehydratedState): string {
   return stringify(state, { forbidReactElements: true, htmlScriptSafe: true })
 }

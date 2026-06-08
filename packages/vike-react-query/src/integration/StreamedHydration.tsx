@@ -69,7 +69,7 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
       )
       stream.injectToStream(
         [
-          `<script type="application/json" class="_rqd_"${nonceAttr}>${serialized}</script>`,
+          `<script class="_rqd_" type="application/json"${nonceAttr}>${serialized}</script>`,
           `<script class="_rqd_"${nonceAttr}>_rqd_.push(document.currentScript.previousElementSibling.textContent);_rqc_()</script>`,
         ].join(''),
       )

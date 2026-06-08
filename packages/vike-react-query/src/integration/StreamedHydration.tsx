@@ -67,9 +67,9 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
           shouldDehydrateQuery: (query) => query.queryHash === event.query.queryHash,
         }),
       )
-      stream.injectToStream(
-        `<script class="_rqd_"${nonceAttr}>_rqd_.push(${JSON.stringify(serialized)});_rqc_()</script>`,
-      )
+      // We escape `<` so that the serialized data can't break out of the injected <script> tag (e.g. `</script>`).
+      const script = JSON.stringify(serialized).replaceAll('<', '\\u003c')
+      stream.injectToStream(`<script class="_rqd_"${nonceAttr}>_rqd_.push(${script});_rqc_()</script>`)
     })
 
     // Unsubscribe
@@ -93,17 +93,9 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
   return children
 }
 
-// We escape `/` so that the serialized string can't break out of the injected <script> tag (like Vike does).
 function serialize(state: DehydratedState): string {
-  return stringify(state, {
-    forbidReactElements: true,
-    replacer: (_key, value) =>
-      typeof value === 'string' ? { replacement: value.replaceAll('/', '\\/'), resolved: false } : undefined,
-  })
+  return stringify(state, { forbidReactElements: true })
 }
 function deserialize(serialized: string): DehydratedState {
-  return parse(serialized, {
-    reviver: (_key, value) =>
-      typeof value === 'string' ? { replacement: value.replaceAll('\\/', '/'), resolved: false } : undefined,
-  }) as DehydratedState
+  return parse(serialized) as DehydratedState
 }

@@ -44,7 +44,7 @@ function getOrCreateStore<T>({
       // No need to escape the injected HTML — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
       const nonceAttr = pageContext.cspNonce ? ` nonce="${pageContext.cspNonce}"` : ''
       stream.injectToStream(
-        `<script${nonceAttr}>if(!globalThis._vikeReactZustandState)globalThis._vikeReactZustandState={};globalThis._vikeReactZustandState['${key}']='${stringify(transferableState)}'</script>`,
+        `<script${nonceAttr}>if(!globalThis._vikeReactZustandState)globalThis._vikeReactZustandState={};globalThis._vikeReactZustandState['${key}']='${stringify(transferableState, { htmlScriptSafe: true })}'</script>`,
       )
       pageContext._vikeReactZustandStoresServer[key] = store
       return store

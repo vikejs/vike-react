@@ -6,11 +6,6 @@
 * update @brillout/json-serializer ([#223](https://github.com/vikejs/vike-react/issues/223)) ([5ea9386](https://github.com/vikejs/vike-react/commit/5ea9386e2dc0de1222cd8d3fd25166d19c41931f))
 
 
-### Features
-
-* +react.renderToStreamOptions (closes vikejs/vike[#3137](https://github.com/vikejs/vike-react/issues/3137)) ([#215](https://github.com/vikejs/vike-react/issues/215)) ([542502a](https://github.com/vikejs/vike-react/commit/542502ab35b10024d19f3b5d376ac6cb09534267))
-
-
 
 ## [0.1.9](https://github.com/vikejs/vike-react/compare/vike-react-zustand@0.1.8...vike-react-zustand@0.1.9) (2026-01-07)
 

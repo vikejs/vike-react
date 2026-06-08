@@ -6,11 +6,6 @@
 * use `@brillout/json-serializer` instead of `devalue` ([#220](https://github.com/vikejs/vike-react/issues/220)) ([#222](https://github.com/vikejs/vike-react/issues/222)) ([0a29197](https://github.com/vikejs/vike-react/commit/0a29197c5cf0651a9f32b2bfbf2d07e1a92df1a9))
 
 
-### Features
-
-* +react.renderToStreamOptions (closes vikejs/vike[#3137](https://github.com/vikejs/vike-react/issues/3137)) ([#215](https://github.com/vikejs/vike-react/issues/215)) ([542502a](https://github.com/vikejs/vike-react/commit/542502ab35b10024d19f3b5d376ac6cb09534267))
-
-
 
 ## [0.1.12](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.11...vike-react-query@0.1.12) (2025-12-18)
 

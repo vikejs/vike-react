@@ -93,7 +93,6 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
   return children
 }
 
-// We use @brillout/json-serializer instead of devalue (https://github.com/vikejs/vike-react/pull/220).
 // We escape `/` so that the serialized string can't break out of the injected <script> tag (like Vike does).
 function serialize(state: DehydratedState): string {
   return stringify(state, {

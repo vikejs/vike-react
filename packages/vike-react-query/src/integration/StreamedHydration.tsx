@@ -11,8 +11,10 @@ import { usePageContext } from 'vike-react/usePageContext'
 
 declare global {
   interface Window {
-    _rqd_?: { push: (entry: string) => void } | string[]
-    _rqc_?: () => void
+    // Queue of serialized dehydrated states (the textContent of the streamed <script type="application/json"> blocks).
+    _rqd_?: string[]
+    // Consumes a streamed block: reads the <script type="application/json"> preceding the given trigger <script>.
+    _rqc_?: (trigger: HTMLScriptElement) => void
   }
 }
 
@@ -32,10 +34,11 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
     // No need to escape the injected HTML — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
     const nonceAttr = pageContext.cspNonce ? ` nonce="${pageContext.cspNonce}"` : ''
 
+    // Bootstrap: until the client runtime takes over, `_rqc_()` reads each streamed block and queues it into `_rqd_`.
+    // This <script> contains no user data (the data lives in the inert <script type="application/json"> blocks below),
+    // so it can't be an injection vector.
     stream.injectToStream(
-      `<script class="_rqd_"${nonceAttr}>_rqd_=[];_rqc_=()=>{Array.from(
-        document.getElementsByClassName("_rqd_")
-      ).forEach((e) => e.remove())};_rqc_()</script>`,
+      `<script${nonceAttr}>_rqd_=[];_rqc_=(s)=>{var b=s.previousElementSibling;_rqd_.push(b.textContent);b.remove();s.remove()};document.currentScript.remove()</script>`,
     )
 
     const alreadySent = new Set<string>()
@@ -67,11 +70,13 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
           shouldDehydrateQuery: (query) => query.queryHash === event.query.queryHash,
         }),
       )
-      // Escape the serialized state before injecting it into the <script> tag (JS reverses both escapes on eval):
-      // - `<` so the data can't break out of the tag (e.g. `</script>`)
-      // - `/` so that search engines don't crawl URLs contained in the state (like Vike, see https://github.com/vikejs/vike/pull/2603)
-      const script = JSON.stringify(serialized).replaceAll('<', '\\u003c').replaceAll('/', '\\/')
-      stream.injectToStream(`<script class="_rqd_"${nonceAttr}>_rqd_.push(${script});_rqc_()</script>`)
+      // Inject the data as an inert <script type="application/json"> block, then a fully static <script> that reads it
+      // synchronously (via `document.currentScript.previousElementSibling`). Arbitrary data thus stays confined to the
+      // inert block (escaped by serialize()) and never ends up inside an executable <script>.
+      stream.injectToStream(
+        `<script type="application/json">${serialized}</script>` +
+          `<script${nonceAttr}>_rqc_(document.currentScript)</script>`,
+      )
     })
 
     // Unsubscribe
@@ -84,19 +89,30 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
   }
 
   if (globalThis.__VIKE__IS_CLIENT && Array.isArray(window._rqd_)) {
-    const onEntry = (entry: string) => {
-      hydrate(client, deserialize(entry))
+    const onEntry = (serialized: string) => hydrate(client, deserialize(serialized))
+    // Hydrate the blocks streamed before the client runtime took over.
+    window._rqd_.forEach(onEntry)
+    window._rqd_ = undefined
+    // Hydrate live for blocks streamed afterwards.
+    window._rqc_ = (trigger) => {
+      const block = trigger.previousElementSibling
+      assert(block)
+      const json = block.textContent
+      assert(json)
+      onEntry(json)
+      block.remove()
+      trigger.remove()
     }
-    for (const entry of window._rqd_) {
-      onEntry(entry)
-    }
-    window._rqd_ = { push: onEntry }
   }
   return children
 }
 
+// We use @brillout/json-serializer to serialize the dehydrated state into the inert <script type="application/json">
+// block. We escape, in the JSON itself (both are valid JSON escapes that parse() decodes):
+// - `<` so the data can't break out of the <script> block (e.g. `</script>`)
+// - `/` so that search engines don't crawl URLs contained in the state (like Vike, see https://github.com/vikejs/vike/pull/2603)
 function serialize(state: DehydratedState): string {
-  return stringify(state, { forbidReactElements: true })
+  return stringify(state, { forbidReactElements: true }).replaceAll('<', '\\u003c').replaceAll('/', '\\/')
 }
 function deserialize(serialized: string): DehydratedState {
   return parse(serialized) as DehydratedState

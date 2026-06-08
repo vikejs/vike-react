@@ -60,7 +60,7 @@ importers:
         specifier: 0.6.24
         version: link:../../packages/vike-react
       vike-react-apollo:
-        specifier: 0.1.6
+        specifier: 0.1.7
         version: link:../../packages/vike-react-apollo
       vite:
         specifier: ^7.3.0

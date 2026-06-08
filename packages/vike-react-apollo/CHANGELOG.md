@@ -1,3 +1,12 @@
+## [0.1.7](https://github.com/vikejs/vike-react/compare/vike-react-apollo@0.1.6...vike-react-apollo@0.1.7) (2026-06-08)
+
+
+### Features
+
+* +react.renderToStreamOptions (closes vikejs/vike[#3137](https://github.com/vikejs/vike-react/issues/3137)) ([#215](https://github.com/vikejs/vike-react/issues/215)) ([542502a](https://github.com/vikejs/vike-react/commit/542502ab35b10024d19f3b5d376ac6cb09534267))
+
+
+
 ## [0.1.6](https://github.com/vikejs/vike-react/compare/vike-react-apollo@0.1.5...vike-react-apollo@0.1.6) (2025-12-18)
 
 

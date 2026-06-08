@@ -31,7 +31,7 @@
     "./__internal/integration/Loading": "./dist/integration/Loading.js"
   },
   "dependencies": {
-    "react-streaming": "^0.4.16"
+    "react-streaming": "^0.4.18"
   },
   "peerDependencies": {
     "react": ">=19",

@@ -107,12 +107,11 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
   return children
 }
 
-// We use @brillout/json-serializer to serialize the dehydrated state into the inert <script type="application/json">
-// block. We escape, in the JSON itself (both are valid JSON escapes that parse() decodes):
-// - `<` so the data can't break out of the <script> block (e.g. `</script>`), reproduction: https://jsfiddle.net/wy6zgn37/
-// - `/` so that search engines don't crawl URLs contained in the state (like Vike, see https://github.com/vikejs/vike/pull/2603)
+// `htmlScriptSafe` makes @brillout/json-serializer escape `<` (so a `</script>` in the data can't break out of the
+// inert <script type="application/json"> block — XSS, reproduction: https://jsfiddle.net/wy6zgn37/) and `/` (so search
+// engines don't crawl URLs contained in the state). parse() transparently decodes both.
 function serialize(state: DehydratedState): string {
-  return stringify(state, { forbidReactElements: true }).replaceAll('<', '\\u003c').replaceAll('/', '\\/')
+  return stringify(state, { forbidReactElements: true, htmlScriptSafe: true })
 }
 function deserialize(serialized: string): DehydratedState {
   return parse(serialized) as DehydratedState

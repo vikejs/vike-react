@@ -11,10 +11,8 @@ import { usePageContext } from 'vike-react/usePageContext'
 
 declare global {
   interface Window {
-    // Queue of serialized dehydrated states (the textContent of the streamed <script type="application/json"> blocks).
-    _rqd_?: string[]
-    // Consumes a streamed block: reads the <script type="application/json"> preceding the given trigger <script>.
-    _rqc_?: (trigger: HTMLScriptElement) => void
+    _rqd_?: { push: (entry: string) => void } | string[]
+    _rqc_?: () => void
   }
 }
 
@@ -34,11 +32,10 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
     // No need to escape the injected HTML — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
     const nonceAttr = pageContext.cspNonce ? ` nonce="${pageContext.cspNonce}"` : ''
 
-    // Bootstrap: until the client runtime takes over, `_rqc_()` reads each streamed block and queues it into `_rqd_`.
-    // This <script> contains no user data (the data lives in the inert <script type="application/json"> blocks below),
-    // so it can't be an injection vector.
     stream.injectToStream(
-      `<script${nonceAttr}>_rqd_=[];_rqc_=(s)=>{var b=s.previousElementSibling;_rqd_.push(b.textContent);b.remove();s.remove()};document.currentScript.remove()</script>`,
+      `<script class="_rqd_"${nonceAttr}>_rqd_=[];_rqc_=()=>{Array.from(
+        document.getElementsByClassName("_rqd_")
+      ).forEach((e) => e.remove())};_rqc_()</script>`,
     )
 
     const alreadySent = new Set<string>()
@@ -70,13 +67,9 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
           shouldDehydrateQuery: (query) => query.queryHash === event.query.queryHash,
         }),
       )
-      // Inject the data as an inert <script type="application/json"> block, then a fully static <script> that reads it
-      // synchronously (via `document.currentScript.previousElementSibling`). Arbitrary data thus stays confined to the
-      // inert block (escaped by serialize()) and never ends up inside an executable <script>.
-      stream.injectToStream(
-        `<script type="application/json">${serialized}</script>` +
-          `<script${nonceAttr}>_rqc_(document.currentScript)</script>`,
-      )
+      // `serialized` is already escaped by serialize() (htmlScriptSafe), so it contains no `<` and can't break out of
+      // the <script> tag; JSON.stringify() embeds it as a JS string literal that evaluates back to `serialized`.
+      stream.injectToStream(`<script class="_rqd_"${nonceAttr}>_rqd_.push(${JSON.stringify(serialized)});_rqc_()</script>`)
     })
 
     // Unsubscribe
@@ -89,27 +82,20 @@ function StreamedHydration({ client, children }: { client: QueryClient; children
   }
 
   if (globalThis.__VIKE__IS_CLIENT && Array.isArray(window._rqd_)) {
-    const onEntry = (serialized: string) => hydrate(client, deserialize(serialized))
-    // Hydrate the blocks streamed before the client runtime took over.
-    window._rqd_.forEach(onEntry)
-    window._rqd_ = undefined
-    // Hydrate live for blocks streamed afterwards.
-    window._rqc_ = (trigger) => {
-      const block = trigger.previousElementSibling
-      assert(block)
-      const json = block.textContent
-      assert(json)
-      onEntry(json)
-      block.remove()
-      trigger.remove()
+    const onEntry = (entry: string) => {
+      hydrate(client, deserialize(entry))
     }
+    for (const entry of window._rqd_) {
+      onEntry(entry)
+    }
+    window._rqd_ = { push: onEntry }
   }
   return children
 }
 
 // `htmlScriptSafe` makes @brillout/json-serializer escape `<` (so a `</script>` in the data can't break out of the
-// inert <script type="application/json"> block — XSS, reproduction: https://jsfiddle.net/wy6zgn37/) and `/` (so search
-// engines don't crawl URLs contained in the state). parse() transparently decodes both.
+// <script> tag — XSS, reproduction: https://jsfiddle.net/wy6zgn37/) and `/` (so search engines don't crawl URLs in
+// the state). parse() transparently decodes both.
 function serialize(state: DehydratedState): string {
   return stringify(state, { forbidReactElements: true, htmlScriptSafe: true })
 }

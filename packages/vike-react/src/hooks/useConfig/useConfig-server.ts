@@ -9,6 +9,7 @@ import { objectKeys } from '../../utils/objectKeys.js'
 import { includes } from '../../utils/includes.js'
 import { assert } from '../../utils/assert.js'
 import { configsCumulative } from './configsCumulative.js'
+import { configsClientSide } from './configsClientSide.js'
 
 /**
  * Set configurations inside components and Vike hooks.
@@ -35,12 +36,11 @@ function useConfig(): (config: ConfigViaHook) => void {
   }
 }
 
-const configsClientSide = ['title']
 function setPageContextConfigViaHook(config: ConfigViaHook, pageContext: PageContext & PageContextInternal) {
   pageContext._configViaHook ??= {}
   objectKeys(config).forEach((configName) => {
     // Skip HTML only configs which the client-side doesn't need, saving KBs sent to the client as well as avoiding serialization errors.
-    if (pageContext.isClientSideNavigation && !configsClientSide.includes(configName)) return
+    if (pageContext.isClientSideNavigation && !includes(configsClientSide, configName)) return
 
     if (!includes(configsCumulative, configName)) {
       // Overridable config

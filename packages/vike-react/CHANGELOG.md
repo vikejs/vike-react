@@ -1,3 +1,12 @@
+## [0.6.25](https://github.com/vikejs/vike-react/compare/vike-react@0.6.24...vike-react@0.6.25) (2026-06-26)
+
+
+### Bug Fixes
+
+* preserve client-side useConfig() settings in server-side pageContext (vikejs/vike-vue[#233](https://github.com/vikejs/vike-react/issues/233)) ([#224](https://github.com/vikejs/vike-react/issues/224)) ([9692842](https://github.com/vikejs/vike-react/commit/96928427683ba579b8d5e29c25d63ad3880f033c))
+
+
+
 ## [0.6.24](https://github.com/vikejs/vike-react/compare/vike-react@0.6.23...vike-react@0.6.24) (2026-06-08)
 
 

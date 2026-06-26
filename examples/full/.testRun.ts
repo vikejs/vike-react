@@ -222,9 +222,6 @@ function testUseConfig() {
   })
   // The <title> set via useConfig() inside a server-side +data() hook must be applied upon
   // client-side navigation. https://github.com/vikejs/vike-vue/issues/233
-  // We start from /star-wars (instead of /) on purpose: a full page load of / would change how many
-  // times / is server-rendered, and testReactSetting() below depends on that count (its identifier
-  // prefix flips on every / render because of the in-place `+stream` `.reverse()` in resolveStreamSetting()).
   test('useConfig() in +data() upon client-side navigation', async () => {
     await page.goto(getServerUrl() + '/star-wars')
     await expectTitle('6 Star Wars Movies')

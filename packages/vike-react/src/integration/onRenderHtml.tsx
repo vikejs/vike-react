@@ -16,6 +16,9 @@ import { getTagAttributesString, type TagAttributes } from '../utils/getTagAttri
 import { assert } from '../utils/assert.js'
 import { callCumulativeHooks } from '../utils/callCumulativeHooks.js'
 import { resolveReactOptions } from './resolveReactOptions.js'
+import { configsClientSide } from '../hooks/useConfig/configsClientSide.js'
+import { objectKeys } from '../utils/objectKeys.js'
+import { includes } from '../utils/includes.js'
 import { isNotNullish } from '../utils/isNotNullish.js'
 import { isObject } from '../utils/isObject.js'
 import { isType } from '../utils/isType.js'
@@ -33,8 +36,9 @@ async function onRenderHtml(
 
   const { htmlAttributesString, bodyAttributesString } = getTagAttributes(pageContext)
 
-  // Not needed on the client-side, thus we remove it to save KBs sent to the client
-  delete pageContext._configViaHook
+  // Keep only what the client-side applies upon navigation, and remove the rest (HTML-only and/or
+  // non-serializable values such as <Head> components).
+  removeServerOnlyConfigViaHook(pageContext)
 
   // pageContext.{pageHtmlString,pageHtmlStream} is set by renderPageToHtml() and can be overridden by user at onAfterRenderHtml()
   let pageHtmlStringOrStream: string | ReturnType<typeof dangerouslySkipEscape> | PageHtmlStream =
@@ -90,6 +94,16 @@ async function renderPageToHtml(pageContext: PageContextServer) {
 
   // https://github.com/vikejs/vike/discussions/1804#discussioncomment-10394481
   await callCumulativeHooks(pageContext.config.onAfterRenderHtml, pageContext)
+}
+
+function removeServerOnlyConfigViaHook(pageContext: PageContextInternal) {
+  const configViaHook = pageContext._configViaHook
+  if (!configViaHook) return
+  objectKeys(configViaHook).forEach((configName) => {
+    if (!includes(configsClientSide, configName)) delete configViaHook[configName]
+  })
+  // Remove it altogether if there isn't anything left, saving KBs sent to the client
+  if (objectKeys(configViaHook).length === 0) delete pageContext._configViaHook
 }
 
 function getHeadHtml(pageContext: PageContextServer & PageContextInternal) {

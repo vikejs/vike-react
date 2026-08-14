@@ -41,10 +41,14 @@ function getOrCreateStore<T>({
       const serverState = store.getInitialState()
       const transferableState = sanitizeForSerialization(serverState)
       assert(stream)
-      // No need to escape the injected HTML — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
+      // No need to escape the injected nonce attribute — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
       const nonceAttr = pageContext.cspNonce ? ` nonce="${pageContext.cspNonce}"` : ''
+      // The state is embedded as the textContent of an inert <script type="application/json"> (never parsed as JavaScript) instead of inside an executable JavaScript string literal, so no JavaScript-string escaping is needed: the only sensitive character is `<` (so that the HTML parser never encounters `</script>` nor `<!--` inside the block) and `htmlScriptSafe` escapes it. The adjacent registrar <script> runs synchronously at parse time and reads its own data block via `previousElementSibling` (both tags are injected together, so they're always adjacent). See https://github.com/vikejs/vike/issues/3463
+      // `key` is developer-controlled (a build-time hash or an explicit `create('key')` argument), never website-visitor data, so interpolating it into the registrar carries no XSS risk.
+      const serialized = stringify(transferableState, { htmlScriptSafe: true })
       stream.injectToStream(
-        `<script${nonceAttr}>if(!globalThis._vikeReactZustandState)globalThis._vikeReactZustandState={};globalThis._vikeReactZustandState['${key}']='${stringify(transferableState, { htmlScriptSafe: true })}'</script>`,
+        `<script type="application/json">${serialized}</script>` +
+          `<script${nonceAttr}>if(!globalThis._vikeReactZustandState)globalThis._vikeReactZustandState={};globalThis._vikeReactZustandState['${key}']=document.currentScript.previousElementSibling.textContent</script>`,
       )
       pageContext._vikeReactZustandStoresServer[key] = store
       return store

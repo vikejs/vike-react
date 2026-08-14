@@ -1,3 +1,12 @@
+## [0.1.11](https://github.com/vikejs/vike-react/compare/vike-react-zustand@0.1.10...vike-react-zustand@0.1.11) (2026-08-14)
+
+
+### Bug Fixes
+
+* further escape JS expressions ([#227](https://github.com/vikejs/vike-react/issues/227)) ([b82c383](https://github.com/vikejs/vike-react/commit/b82c3833e6c250603868efb2c8f0fd2f038c1738))
+
+
+
 ## [0.1.10](https://github.com/vikejs/vike-react/compare/vike-react-zustand@0.1.9...vike-react-zustand@0.1.10) (2026-06-08)
 
 

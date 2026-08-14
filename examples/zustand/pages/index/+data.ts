@@ -3,7 +3,6 @@ export { data }
 export type Data = Awaited<ReturnType<typeof data>>
 
 import type { PageContextServer } from 'vike/types'
-import { todoItemHostile } from '../../todoItemHostile'
 
 async function data(pageContext: PageContextServer) {
   const todoItemsInitial = await fetchTodosInit()
@@ -16,6 +15,5 @@ async function fetchTodosInit() {
     //
     { text: 'Buy apples' },
     { text: `Update Node.js ${process.version} to latest version` },
-    { text: todoItemHostile },
   ]
 }

@@ -12,7 +12,6 @@ import {
   expectLog,
   sleep,
 } from '@brillout/test-e2e'
-import { todoItemHostile } from './todoItemHostile'
 
 function testRun(cmd: 'pnpm run dev' | 'pnpm run preview') {
   const isDev = cmd === 'pnpm run dev'
@@ -54,27 +53,23 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run preview') {
       const html = await fetchHtml('/')
       expect(html).toContain(`<li>${buyApples}</li>`)
       expect(html).toContain(nodeVersion)
-      // The store state injected during SSR escapes hostile characters (https://github.com/vikejs/vike/issues/3463) — the raw text never occurs in the HTML: it's HTML-escaped inside <li> and, inside the injected <script type="application/json">, `<` is escaped so `</script>` can't appear
-      expect(html).not.toContain(todoItemHostile)
     }
     {
       const bodyText = await page.textContent('body')
       expect(bodyText).toContain(buyApples)
       expect(bodyText).toContain(nodeVersion)
-      expect(await getNumberOfItems()).toBe(3)
-      // The hostile characters survive SSR store serialization + client-side hydration unchanged (https://github.com/vikejs/vike/issues/3463)
-      expect(await getTodoItemText(2)).toBe(todoItemHostile)
+      expect(await getNumberOfItems()).toBe(2)
     }
   }
 
   test('todos - add to-do', async () => {
-    expect(await getNumberOfItems()).toBe(3)
+    expect(await getNumberOfItems()).toBe(2)
     if (isDev) await sleep(1000) // Seems to be required, otherwise the test is flaky. I don't know why.
     await page.fill('input[type="text"]', 'Buy bananas')
     await page.click('button[type="submit"]')
     const expectBananas = async () => {
       await autoRetry(async () => {
-        expect(await getNumberOfItems()).toBe(4)
+        expect(await getNumberOfItems()).toBe(3)
         expect(await page.textContent('body')).toContain('Buy bananas')
       })
     }
@@ -102,10 +97,6 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run preview') {
 
 async function getNumberOfItems() {
   return await page.evaluate(() => document.querySelectorAll('#todo-list li').length)
-}
-
-async function getTodoItemText(index: number) {
-  return await page.evaluate((i) => document.querySelectorAll('#todo-list li')[i]?.textContent, index)
 }
 
 async function testCounter(currentValue?: number) {

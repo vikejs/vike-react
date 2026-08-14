@@ -8,7 +8,7 @@ import { useStreamOptional } from 'react-streaming'
 import { objectKeys } from '../../utils/objectKeys.js'
 import { includes } from '../../utils/includes.js'
 import { assert } from '../../utils/assert.js'
-import { escapeForHtmlScript } from '../../utils/escapeForHtmlScript.js'
+import { escapeJavaScriptExpression } from '../../utils/escapeJavaScriptExpression.js'
 import { configsCumulative } from './configsCumulative.js'
 import { configsClientSide } from './configsClientSide.js'
 
@@ -65,7 +65,7 @@ function apply(config: ConfigViaHook, stream: Stream, pageContext: PageContextSe
     // No need to escape the injected nonce attribute — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
     const nonceAttr = pageContext.cspNonce ? ` nonce="${pageContext.cspNonce}"` : ''
     // `document.title = <title>` runs as JavaScript => escape the JSON string literal so it can't break out of the inline <script> (https://github.com/vikejs/vike/issues/3463)
-    const titleJs = escapeForHtmlScript(JSON.stringify(title))
+    const titleJs = escapeJavaScriptExpression(JSON.stringify(title))
     const htmlSnippet = `<script${nonceAttr}>document.title = ${titleJs}</script>`
     stream.injectToStream(htmlSnippet)
   }

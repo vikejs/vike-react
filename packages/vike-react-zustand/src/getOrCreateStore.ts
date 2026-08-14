@@ -7,6 +7,7 @@ import type { PageContext } from 'vike/types'
 import { create as createZustand, StateCreator } from 'zustand'
 import { setPageContext } from './context.js'
 import { assert } from './utils/assert.js'
+import { escapeForJsSingleQuotedString } from './utils/escapeForJsSingleQuotedString.js'
 import { getGlobalObject } from './utils/getGlobalObject.js'
 import { sanitizeForSerialization } from './utils/sanitizeForSerialization.js'
 import { assignDeep } from './utils/assignDeep.js'
@@ -41,10 +42,13 @@ function getOrCreateStore<T>({
       const serverState = store.getInitialState()
       const transferableState = sanitizeForSerialization(serverState)
       assert(stream)
-      // No need to escape the injected HTML — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
+      // No need to escape the injected nonce attribute — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
       const nonceAttr = pageContext.cspNonce ? ` nonce="${pageContext.cspNonce}"` : ''
+      // The key and state are embedded inside single-quoted JavaScript string literals => they must be escaped — see escapeForJsSingleQuotedString() (https://github.com/vikejs/vike/issues/3463)
+      const keyEscaped = escapeForJsSingleQuotedString(key)
+      const stateEscaped = escapeForJsSingleQuotedString(stringify(transferableState, { htmlScriptSafe: true }))
       stream.injectToStream(
-        `<script${nonceAttr}>if(!globalThis._vikeReactZustandState)globalThis._vikeReactZustandState={};globalThis._vikeReactZustandState['${key}']='${stringify(transferableState, { htmlScriptSafe: true })}'</script>`,
+        `<script${nonceAttr}>if(!globalThis._vikeReactZustandState)globalThis._vikeReactZustandState={};globalThis._vikeReactZustandState['${keyEscaped}']='${stateEscaped}'</script>`,
       )
       pageContext._vikeReactZustandStoresServer[key] = store
       return store

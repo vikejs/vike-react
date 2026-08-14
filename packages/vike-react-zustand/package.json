@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "rimraf dist/ && tsc",
+    "test:units": "vitest run",
     "release": "release-me patch",
     "release:minor": "release-me minor",
     "release:commit": "release-me commit"
@@ -38,6 +39,7 @@
     "vike-react": "0.6.25",
     "react-streaming": "^0.4.19",
     "vite": "^7.3.0",
+    "vitest": "^3.2.4",
     "zustand": "^5.0.3"
   },
   "dependencies": {

@@ -43,9 +43,8 @@ function getOrCreateStore<T>({
       assert(stream)
       // No need to escape the injected nonce attribute — see https://github.com/vikejs/vike/blob/36201ddad5f5b527b244b24d548014ec86c204e4/packages/vike/src/server/runtime/renderPageServer/csp.ts#L45
       const nonceAttr = pageContext.cspNonce ? ` nonce="${pageContext.cspNonce}"` : ''
-      const serialized = stringify(transferableState, { htmlScriptSafe: true })
       stream.injectToStream(
-        `<script type="application/json">${serialized}</script>` +
+        `<script type="application/json">${stringify(transferableState, { htmlScriptSafe: true })}</script>` +
           `<script${nonceAttr}>if(!globalThis._vikeReactZustandState)globalThis._vikeReactZustandState={};globalThis._vikeReactZustandState['${key}']=document.currentScript.previousElementSibling.textContent</script>`,
       )
       pageContext._vikeReactZustandStoresServer[key] = store

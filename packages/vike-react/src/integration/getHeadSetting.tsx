@@ -23,9 +23,13 @@ function getHeadSetting<T>(
     if (valFromHook !== undefined) return valFromHook as any
     return getCallable(valFromConfig) as any
   } else {
+    // Sorted by increasing precedence: the values set by Vike extensions come first, then the app's values (the most
+    // specific one last), then the values set by useConfig(). Merging the list in order (e.g. with Object.assign())
+    // thus yields the value with the highest precedence.
     return [
-      //
-      ...((valFromConfig as any) ?? []).map(getCallable),
+      // pageContext.config[configName] is sorted by decreasing precedence (the most specific value first, the values set
+      // by Vike extensions last) => we reverse it. (We copy the list first: pageContext.config is shared.)
+      ...[...((valFromConfig as any) ?? [])].reverse().map(getCallable),
       ...((valFromHook as any) ?? []),
     ] as any
   }

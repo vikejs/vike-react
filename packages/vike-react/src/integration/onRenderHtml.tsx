@@ -34,7 +34,7 @@ async function onRenderHtml(
 
   const { headHtmlBegin, headHtmlEnd, bodyHtmlBegin, bodyHtmlEnd } = await getHtmlInjections(pageContext)
 
-  const { htmlAttributesString, bodyAttributesString } = getTagAttributes(pageContext)
+  const { htmlAttributesString, bodyAttributesString, rootAttributesString } = getTagAttributes(pageContext)
 
   // Keep only what the client-side applies upon navigation, and remove the rest (HTML-only and/or
   // non-serializable values such as <Head> components). https://github.com/vikejs/vike-vue/issues/233
@@ -63,7 +63,7 @@ async function onRenderHtml(
       </head>
       <body${dangerouslySkipEscape(bodyAttributesString)}>
         ${bodyHtmlBegin}
-        <div id="root">${pageHtmlStringOrStream}</div>
+        <div${dangerouslySkipEscape(rootAttributesString)}>${pageHtmlStringOrStream}</div>
         ${bodyHtmlEnd}
       </body>
     </html>`
@@ -170,11 +170,14 @@ function getTagAttributes(pageContext: PageContextServer) {
 
   const bodyAttributes = mergeTagAttributesList(getHeadSetting<TagAttributes[]>('bodyAttributes', pageContext))
   const htmlAttributes = mergeTagAttributesList(getHeadSetting<TagAttributes[]>('htmlAttributes', pageContext))
+  const rootAttributes = mergeTagAttributesList(getHeadSetting<TagAttributes[]>('rootAttributes', pageContext))
 
   const bodyAttributesString = getTagAttributesString(bodyAttributes)
   const htmlAttributesString = getTagAttributesString({ ...htmlAttributes, lang: lang ?? htmlAttributes.lang })
+  // The root element's `id` is used by onRenderClient(): it's the user's responsibility not to override it.
+  const rootAttributesString = getTagAttributesString({ id: 'root', ...rootAttributes })
 
-  return { htmlAttributesString, bodyAttributesString }
+  return { htmlAttributesString, bodyAttributesString, rootAttributesString }
 }
 function mergeTagAttributesList(tagAttributesList: TagAttributes[] = []) {
   const tagAttributes: TagAttributes = {}

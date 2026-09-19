@@ -125,6 +125,11 @@ const config = {
       global: true,
       cumulative: true, // for Vike extensions
     },
+    rootAttributes: {
+      env: { server: true },
+      global: true,
+      cumulative: true, // for Vike extensions
+    },
     ssr: {
       env: { config: true },
       effect: ssrEffect,

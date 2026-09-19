@@ -161,6 +161,13 @@ declare global {
       bodyAttributes?: TagAttributes | ((pageContext: PageContextServer) => TagAttributes | undefined)
 
       /**
+       * Add tag attributes to the root element such as `<div id="root" role="none">`.
+       *
+       * https://vike.dev/rootAttributes
+       */
+      rootAttributes?: TagAttributes | ((pageContext: PageContextServer) => TagAttributes | undefined)
+
+      /**
        * If `true`, the page is rendered twice: on the server-side (to HTML) and on the client-side (hydration).
        *
        * If `false`, the page is rendered only once in the browser.
@@ -269,6 +276,7 @@ declare global {
       headHtmlEnd?: HtmlInjection[]
       bodyAttributes?: TagAttributes[]
       htmlAttributes?: TagAttributes[]
+      rootAttributes?: TagAttributes[]
       onBeforeRenderHtml?: Function[]
       onAfterRenderHtml?: Function[]
       onBeforeRenderClient?: Function[]
@@ -295,7 +303,16 @@ type PickWithoutGetter<T, K extends keyof T> = {
 }
 export type ConfigViaHook = PickWithoutGetter<
   Vike.Config,
-  'Head' | 'title' | 'description' | 'image' | 'favicon' | 'lang' | 'viewport' | 'bodyAttributes' | 'htmlAttributes'
+  | 'Head'
+  | 'title'
+  | 'description'
+  | 'image'
+  | 'favicon'
+  | 'lang'
+  | 'viewport'
+  | 'bodyAttributes'
+  | 'htmlAttributes'
+  | 'rootAttributes'
 >
 export type ConfigViaHookResolved = Omit<ConfigViaHook, ConfigsCumulative> &
   Pick<Vike.ConfigResolved, ConfigsCumulative>

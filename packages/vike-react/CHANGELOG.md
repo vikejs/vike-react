@@ -1,3 +1,17 @@
+## [0.6.27](https://github.com/vikejs/vike-react/compare/vike-react@0.6.26...vike-react@0.6.27) (2026-09-19)
+
+
+### Bug Fixes
+
+* let the app's `htmlAttributes`/`bodyAttributes` take precedence over the ones set by Vike extensions ([#228](https://github.com/vikejs/vike-react/issues/228)) ([42eb633](https://github.com/vikejs/vike-react/commit/42eb6331789c2dee70f0edc2f92429bce3d4bdde))
+
+
+### Features
+
+* new setting +rootAttributes ([#229](https://github.com/vikejs/vike-react/issues/229)) ([48c8fad](https://github.com/vikejs/vike-react/commit/48c8fad27b281da0065ea39eedd1545a69d79d1e))
+
+
+
 ## [0.6.26](https://github.com/vikejs/vike-react/compare/vike-react@0.6.25...vike-react@0.6.26) (2026-08-14)
 
 

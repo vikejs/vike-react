@@ -5,6 +5,8 @@ import assert from 'node:assert'
 let isProd: boolean
 
 const titleDefault = 'My Vike + React App'
+// Set by <Config description> inside the <Image> component of /images
+const descriptionImages = 'Logo created by Romuald Brillout'
 const pages = {
   '/': {
     title: titleDefault,
@@ -30,6 +32,7 @@ const pages = {
   },
   '/without-ssr': {
     title: 'No SSR',
+    description: 'Page rendered only in the browser',
     text: 'This page is rendered only in the browser',
     counter: true,
     noSSR: true,
@@ -48,6 +51,7 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   testPages()
   testPageNavigation_betweenWithSSRAndWithout()
   testPageNavigation_titleUpdate()
+  testPageNavigation_descriptionUpdate()
   testUseConfig()
   testReactSetting()
   testClientOnly()
@@ -123,6 +127,38 @@ async function expectTitle(title: string) {
   await autoRetry(async () => {
     const titleActual = await page.evaluate(() => window.document.title)
     expect(titleActual).toBe(title)
+  })
+}
+
+// The description tags are updated upon client-side navigation. https://github.com/vikejs/vike/issues/3524
+function testPageNavigation_descriptionUpdate() {
+  test('description update client-side page navigation', async () => {
+    await page.goto(getServerUrl() + '/')
+    await testCounter()
+    await expectDescription(null)
+    // Set by +description
+    await page.click('a:has-text("Without SSR")')
+    await testCounter()
+    await expectDescription(pages['/without-ssr'].description)
+    // Set by useConfig() inside +data()
+    await page.click('a[href="/star-wars"]')
+    await expectDescription(pages['/star-wars'].description)
+    // Set by <Config> inside UI components
+    await page.click('a:has-text("useConfig()")')
+    await testCounter()
+    await expectDescription(descriptionImages)
+    await page.click('a:has-text("Without SSR")')
+    await testCounter()
+    await expectDescription(pages['/without-ssr'].description)
+    await ensureWasClientSideRouted('/pages/index')
+  })
+}
+async function expectDescription(description: string | null) {
+  await autoRetry(async () => {
+    const getContent = (selector: string) =>
+      page.evaluate((selector) => document.querySelector(selector)?.getAttribute('content') ?? null, selector)
+    expect(await getContent('meta[name="description"]')).toBe(description)
+    expect(await getContent('meta[property="og:description"]')).toBe(description)
   })
 }
 
@@ -202,6 +238,8 @@ function testUseConfig() {
   test('useConfig() HTML', async () => {
     const html = await fetchHtml('/images')
     expect(getTitle(html)).toBe(titleImages)
+    expect(html).toContain(`<meta name="description" content="${descriptionImages}" />`)
+    expect(html).toContain(`<meta property="og:description" content="${descriptionImages}" />`)
     expect(html).toMatch(
       partRegex`<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"${getAssetUrl(
         'logo-new.svg',

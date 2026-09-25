@@ -31,7 +31,7 @@ function Image({ src, author }: { src: string; author: string }) {
   return (
     <>
       <img src={src} height={48} style={{ verticalAlign: 'middle', marginLeft: 10 }} />
-      <Config title={`Image created by ${author}`} />
+      <Config title={`Image created by ${author}`} description={`Logo created by ${author}`} />
       <Head>
         <script
           type="application/ld+json"

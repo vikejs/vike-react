@@ -69,7 +69,7 @@ declare global {
        *
        * https://vike.dev/description
        */
-      description?: string | null | ((pageContext: PageContextServer) => string | null | undefined)
+      description?: string | null | ((pageContext: PageContext_) => string | null | undefined)
 
       /**
        * Set the page's preview image upon URL sharing.

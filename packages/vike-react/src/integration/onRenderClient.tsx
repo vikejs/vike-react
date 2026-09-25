@@ -82,7 +82,8 @@ async function onRenderClient(pageContext: PageContextClient & PageContextIntern
 function applyHead(pageContext: PageContextClient) {
   const title = getHeadSetting<string | null>('title', pageContext)
   const lang = getHeadSetting<string | null>('lang', pageContext)
-  applyHeadSettings(title, lang)
+  const description = getHeadSetting<string | null>('description', pageContext)
+  applyHeadSettings(title, lang, description)
 }
 
 // Global callback, attached once upon hydration.

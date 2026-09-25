@@ -197,8 +197,11 @@ async function testCounter() {
 }
 
 function testUseConfig() {
+  // Set by <Config title> inside the <Image> component, overriding the title set by useConfig() inside +data()
+  const titleImages = 'Image created by Romuald Brillout'
   test('useConfig() HTML', async () => {
     const html = await fetchHtml('/images')
+    expect(getTitle(html)).toBe(titleImages)
     expect(html).toMatch(
       partRegex`<script type="application/ld+json">{"@context":"https://schema.org/","contentUrl":{"src":"${getAssetUrl(
         'logo-new.svg',
@@ -219,6 +222,7 @@ function testUseConfig() {
     await ensureWasClientSideRouted('/pages/index')
     await page.goto(getServerUrl() + '/images')
     await testCounter()
+    await expectTitle(titleImages)
   })
   // The <title> set via useConfig() inside a server-side +data() hook must be applied upon
   // client-side navigation. https://github.com/vikejs/vike-vue/issues/233
@@ -229,6 +233,20 @@ function testUseConfig() {
     await page.click('a:has-text("Return of the Jedi")')
     await expectTitle('Return of the Jedi')
     await ensureWasClientSideRouted('/pages/star-wars/index')
+  })
+  // useConfig() inside UI components has precedence over useConfig() inside Vike hooks and over +title, also upon
+  // client-side navigation. https://github.com/vikejs/vike/issues/3525
+  test('useConfig() in UI components upon client-side navigation', async () => {
+    await page.goto(getServerUrl() + '/')
+    await testCounter()
+    await expectTitle(titleDefault)
+    await page.click('a:has-text("useConfig()")')
+    await testCounter()
+    await expectTitle(titleImages)
+    await page.click('a:has-text("Welcome")')
+    await testCounter()
+    await expectTitle(titleDefault)
+    await ensureWasClientSideRouted('/pages/index')
   })
 }
 

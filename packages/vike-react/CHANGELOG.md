@@ -1,3 +1,17 @@
+## [0.6.29](https://github.com/vikejs/vike-react/compare/vike-react@0.6.28...vike-react@0.6.29) (2026-09-25)
+
+
+### Bug Fixes
+
+* update the description tags upon client-side navigation (vikejs/vike[#3524](https://github.com/vikejs/vike-react/issues/3524)) ([#231](https://github.com/vikejs/vike-react/issues/231)) ([6e89374](https://github.com/vikejs/vike-react/commit/6e893749f2430e570c50076c5829d90115138ee3))
+
+
+### BREAKING CHANGES
+
+* +description is loaded on the client-side and rendered upon client-side navigation
+
+
+
 ## [0.6.28](https://github.com/vikejs/vike-react/compare/vike-react@0.6.27...vike-react@0.6.28) (2026-09-25)
 
 

@@ -1,3 +1,13 @@
+## [0.6.28](https://github.com/vikejs/vike-react/compare/vike-react@0.6.27...vike-react@0.6.28) (2026-09-25)
+
+
+### Bug Fixes
+
+* don't mutate pageContext.config.stream ([aeb5903](https://github.com/vikejs/vike-react/commit/aeb59033c2ba4562cc675202034001b083353eeb))
+* let useConfig() inside UI components take precedence upon client-side navigation (vikejs/vike[#3525](https://github.com/vikejs/vike-react/issues/3525)) ([#230](https://github.com/vikejs/vike-react/issues/230)) ([e339dbc](https://github.com/vikejs/vike-react/commit/e339dbc9034eb1fcaddf7e001deace8fb1b8fa02))
+
+
+
 ## [0.6.27](https://github.com/vikejs/vike-react/compare/vike-react@0.6.26...vike-react@0.6.27) (2026-09-19)
 
 

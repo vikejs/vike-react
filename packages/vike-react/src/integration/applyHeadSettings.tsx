@@ -8,7 +8,10 @@ type Value = string | null | undefined
 //     - If he doesn't have a default then he can use `null` to opt into Vike's defaults
 
 function applyHeadSettings(title: Value, lang: Value, description: Value) {
-  if (title !== undefined) document.title = title || ''
+  if (title !== undefined) {
+    document.title = title || ''
+    setMetaTag('property', 'og:title', title)
+  }
   if (lang !== undefined) document.documentElement.lang = lang || 'en'
   if (description !== undefined) {
     setMetaTag('name', 'description', description)

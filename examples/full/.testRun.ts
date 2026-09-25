@@ -127,6 +127,7 @@ async function expectTitle(title: string) {
   await autoRetry(async () => {
     const titleActual = await page.evaluate(() => window.document.title)
     expect(titleActual).toBe(title)
+    expect(await getMetaContent('meta[property="og:title"]')).toBe(title)
   })
 }
 
@@ -155,11 +156,12 @@ function testPageNavigation_descriptionUpdate() {
 }
 async function expectDescription(description: string | null) {
   await autoRetry(async () => {
-    const getContent = (selector: string) =>
-      page.evaluate((selector) => document.querySelector(selector)?.getAttribute('content') ?? null, selector)
-    expect(await getContent('meta[name="description"]')).toBe(description)
-    expect(await getContent('meta[property="og:description"]')).toBe(description)
+    expect(await getMetaContent('meta[name="description"]')).toBe(description)
+    expect(await getMetaContent('meta[property="og:description"]')).toBe(description)
   })
+}
+async function getMetaContent(selector: string) {
+  return await page.evaluate((selector) => document.querySelector(selector)?.getAttribute('content') ?? null, selector)
 }
 
 function testPages() {

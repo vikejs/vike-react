@@ -2,6 +2,7 @@ export { Page }
 
 import React from 'react'
 import { Head } from 'vike-react/Head'
+import { Config } from 'vike-react/Config'
 import logoOld from '../../assets/logo.svg'
 import logoNew from '../../assets/logo-new.svg'
 import { Counter } from '../../components/Counter'
@@ -30,6 +31,7 @@ function Image({ src, author }: { src: string; author: string }) {
   return (
     <>
       <img src={src} height={48} style={{ verticalAlign: 'middle', marginLeft: 10 }} />
+      <Config title={`Image created by ${author}`} />
       <Head>
         <script
           type="application/ld+json"

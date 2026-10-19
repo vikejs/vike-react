@@ -1,3 +1,12 @@
+## [0.6.30](https://github.com/vikejs/vike-react/compare/vike-react@0.6.29...vike-react@0.6.30) (2026-10-19)
+
+
+### Bug Fixes
+
+* escape HTML attribute values set by +htmlAttributes, +bodyAttributes and +lang ([#233](https://github.com/vikejs/vike-react/issues/233)) ([5ba2859](https://github.com/vikejs/vike-react/commit/5ba2859686fa77f6479d57cac7120f0f5fc2c8e9))
+
+
+
 ## [0.6.29](https://github.com/vikejs/vike-react/compare/vike-react@0.6.28...vike-react@0.6.29) (2026-09-25)
 
 

@@ -27,7 +27,9 @@ function getPageElement(pageContext: PageContext) {
     page = addSuspense(page)
   })
 
-  page = <VikeReactProviderPageContext pageContext={pageContext}>{page}</VikeReactProviderPageContext>
+  // Called, not rendered: React's dev performance track reads every key of a component's previous props, and pageContext throws upon reading a key Vike couldn't serialize
+  // TODO: remove once the react peer dependency requires a React release that includes https://github.com/react/react/pull/36867
+  page = VikeReactProviderPageContext({ pageContext, children: page })
 
   let renderPromiseResolve!: () => void
   let renderPromiseReject!: (err: unknown) => void

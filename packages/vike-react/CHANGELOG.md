@@ -1,3 +1,12 @@
+## [0.6.31](https://github.com/vikejs/vike-react/compare/vike-react@0.6.30...vike-react@0.6.31) (2026-10-20)
+
+
+### Bug Fixes
+
+* don't crash upon client-side navigation in dev if pageContext holds a value that can't be serialized ([#234](https://github.com/vikejs/vike-react/issues/234)) ([cf12497](https://github.com/vikejs/vike-react/commit/cf1249731ad385fdfd5aba9f208e7cd92ecfe024))
+
+
+
 ## [0.6.30](https://github.com/vikejs/vike-react/compare/vike-react@0.6.29...vike-react@0.6.30) (2026-10-19)
 
 

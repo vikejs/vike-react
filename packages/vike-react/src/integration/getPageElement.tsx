@@ -27,9 +27,11 @@ function getPageElement(pageContext: PageContext) {
     page = addSuspense(page)
   })
 
-  // Workaround: called, not rendered. Because rendering it might throw an error upon client-side navigation in development. (React's dev performance track reads every key of a component's previous props, and pageContext throws upon reading a key Vike couldn't serialize.)
-  // https://github.com/vikejs/vike-react/pull/234
-  // TO-DO/eventually: remove this workaround after https://github.com/react/react/pull/36867 is merged
+  // Workaround: called, not rendered.
+  // - Because rendering it might throw an error upon client-side navigation in development (if pageContext holds a value that can't be serialized)
+  //   - React's dev performance track reads every key of a component's previous props, and pageContext throws upon reading a key Vike couldn't serialize
+  // - https://github.com/vikejs/vike-react/pull/234
+  // - TO-DO/eventually: remove this workaround after https://github.com/react/react/pull/36867 is merged
   page = VikeReactProviderPageContext({ pageContext, children: page })
   // page = <VikeReactProviderPageContext pageContext={pageContext}>{page}</VikeReactProviderPageContext>
 

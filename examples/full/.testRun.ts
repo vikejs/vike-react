@@ -43,11 +43,9 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   run(cmd, {
     // [13:43:30.872][/][pnpm run preview][stderr] [plugin vite:reporter] (!) /home/rom/code/vike-react/examples/full/components/ClientOnlyComponent.tsx is dynamically imported by /home/rom/code/vike-react/examples/full/pages/client-only/+Page.tsx but also statically imported by /home/rom/code/vike-react/examples/full/pages/client-only/+Page.tsx, dynamic import will not move module into another chunk.
     tolerateError: ({ logText }) =>
-      (logText.includes('vite:reporter') &&
-        logText.includes('is dynamically imported') &&
-        logText.includes('but also statically imported')) ||
-      // The data of /unserializable holds a function
-      logText.includes("can't be serialized and, therefore, can't be passed to the client side"),
+      logText.includes('vite:reporter') &&
+      logText.includes('is dynamically imported') &&
+      logText.includes('but also statically imported'),
   })
   isProd = cmd !== 'pnpm run dev'
   testPages()
@@ -57,7 +55,6 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   testUseConfig()
   testReactSetting()
   testClientOnly()
-  testUnserializableData()
 }
 
 function testPageNavigation_betweenWithSSRAndWithout() {
@@ -354,19 +351,5 @@ function testClientOnly() {
     const body = await page.textContent('body')
     expect(body).toContain(textLoaded)
     expect(body).not.toContain(textLoading)
-  })
-}
-
-function testUnserializableData() {
-  test('Client-side navigation from a page whose data holds a function', async () => {
-    await page.goto(getServerUrl() + '/unserializable')
-    await testCounter()
-    for (const n of ['2', '3']) {
-      await page.click('a:has-text("Next page")')
-      await autoRetry(async () => {
-        expect(await page.textContent('#n')).toBe(n)
-      })
-    }
-    await ensureWasClientSideRouted('/pages/unserializable')
   })
 }

@@ -1,0 +1,1 @@
+- When opening a PR for vike-react, check whether it makes sense to also open a PR for [vike-vue](https://github.com/vikejs/vike-vue) and [vike-solid](https://github.com/vikejs/vike-solid)

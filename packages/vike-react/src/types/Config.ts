@@ -197,7 +197,7 @@ declare global {
             /**
              * Whether Server-Side Rendering (SSR) must use a stream. (Some tool integrations require it.)
              *
-             * Setting +stream to `{ require: true, disable: true }` means that SSR is done using a stream but, from the user's perspective, HTML Streaming is disabled: the stream is awaited, converted to a string, and the full HTML is sent at once.
+             * Setting +stream to `{ require: true, enable: false }` means that SSR is done using a stream but, from the user's perspective, HTML Streaming is disabled: the stream is awaited, converted to a string, and the full HTML is sent at once.
              *
              * https://vike.dev/stream
              */

@@ -1,3 +1,5 @@
+'use client'
+
 export { Wrapper }
 
 import React, { type ReactNode } from 'react'

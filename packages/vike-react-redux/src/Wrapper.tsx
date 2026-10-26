@@ -1,3 +1,5 @@
+'use client'
+
 export { Wrapper }
 
 import React from 'react'

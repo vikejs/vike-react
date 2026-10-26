@@ -1,3 +1,5 @@
+'use client'
+
 export { Wrapper }
 
 import { QueryClient, QueryClientProvider, type QueryClientConfig } from '@tanstack/react-query'

@@ -63,10 +63,16 @@ async function onRenderClient(pageContext: PageContextClient & PageContextIntern
   pageContext.root = globalObject.root
 
   try {
-    await renderPromise
+    await new Promise((resolve, reject) => {
+      renderPromise.then(resolve, reject)
+      // https://vike.dev/onRenderClient#abort
+      pageContext.abortSignal?.addEventListener('abort', resolve)
+      if (pageContext.abortSignal?.aborted) resolve(undefined)
+    })
   } finally {
     delete globalObject.onUncaughtErrorLocal
   }
+  if (pageContext.abortSignal?.aborted) return
 
   if (!pageContext.isHydration) {
     pageContext._headAlreadySet = true

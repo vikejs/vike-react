@@ -72,7 +72,8 @@ async function onRenderClient(pageContext: PageContextClient & PageContextIntern
   } finally {
     delete globalObject.onUncaughtErrorLocal
   }
-  if (pageContext.abortSignal?.aborted) return
+  // The user navigated away => skip the page's head and onAfterRenderClient(), but keep the hydration's call that testing tools wait for
+  if (pageContext.abortSignal?.aborted && !pageContext.isHydration) return
 
   if (!pageContext.isHydration) {
     pageContext._headAlreadySet = true

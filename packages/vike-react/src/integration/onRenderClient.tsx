@@ -62,11 +62,11 @@ async function onRenderClient(pageContext: PageContextClient & PageContextIntern
   }
   pageContext.root = globalObject.root
 
-  const renderPromiseOrAbort = new Promise((resolve, reject) => {
+  const renderPromiseOrAbort = new Promise<void>((resolve, reject) => {
     renderPromise.then(resolve, reject)
     // https://vike.dev/onRenderClient#abort
-    pageContext.abortSignal?.addEventListener('abort', resolve)
-    if (pageContext.abortSignal?.aborted) resolve(undefined)
+    pageContext.abortSignal?.addEventListener('abort', () => resolve())
+    if (pageContext.abortSignal?.aborted) resolve()
   })
 
   try {

@@ -74,7 +74,8 @@ async function onRenderClient(pageContext: PageContextClient & PageContextIntern
   } finally {
     delete globalObject.onUncaughtErrorLocal
   }
-  // The user navigated away => skip the page's head and onAfterRenderClient(), but keep the hydration's call that testing tools wait for
+
+  // The user navigated away => skip the page's head and +onAfterRenderClient but keep the hydration's call that testing tools wait for
   if (pageContext.abortSignal?.aborted && !pageContext.isHydration) return
 
   if (!pageContext.isHydration) {

@@ -1,3 +1,13 @@
+## [0.6.32](https://github.com/vikejs/vike-react/compare/vike-react@0.6.31...vike-react@0.6.32) (2026-10-28)
+
+
+### Bug Fixes
+
+* +stream JSDoc example uses `enable: false` instead of the nonexistent `disable` ([#235](https://github.com/vikejs/vike-react/issues/235)) ([0597b00](https://github.com/vikejs/vike-react/commit/0597b00fd28758a47da5f61eedb8d48d498d94b1))
+* let onRenderClient() finish once the user navigates to another page (vikejs/vike[#3641](https://github.com/vikejs/vike-react/issues/3641)) ([#236](https://github.com/vikejs/vike-react/issues/236)) ([55aab6d](https://github.com/vikejs/vike-react/commit/55aab6d08895699acc62af134c46dc67a589cffa))
+
+
+
 ## [0.6.31](https://github.com/vikejs/vike-react/compare/vike-react@0.6.30...vike-react@0.6.31) (2026-10-20)
 
 

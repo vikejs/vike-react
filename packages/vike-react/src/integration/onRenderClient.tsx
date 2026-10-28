@@ -62,11 +62,21 @@ async function onRenderClient(pageContext: PageContextClient & PageContextIntern
   }
   pageContext.root = globalObject.root
 
+  const renderPromiseOrAbort = new Promise<void>((resolve, reject) => {
+    renderPromise.then(resolve, reject)
+    // https://vike.dev/onRenderClient#abort
+    if (pageContext.abortSignal?.aborted) resolve()
+    else pageContext.abortSignal?.addEventListener('abort', () => resolve())
+  })
+
   try {
-    await renderPromise
+    await renderPromiseOrAbort
   } finally {
     delete globalObject.onUncaughtErrorLocal
   }
+
+  // The user navigated away => skip the page's head and +onAfterRenderClient but keep the hydration's call that testing tools wait for
+  if (pageContext.abortSignal?.aborted && !pageContext.isHydration) return
 
   if (!pageContext.isHydration) {
     pageContext._headAlreadySet = true

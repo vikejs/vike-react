@@ -26,4 +26,6 @@ declare global {
 export type PageContextInternal = {
   _configViaHook?: ConfigViaHookResolved
   _headAlreadySet?: boolean
+  // TO-DO/eventually: remove once vike-react depends on a Vike release with https://github.com/vikejs/vike/pull/3641
+  abortSignal?: AbortSignal
 }

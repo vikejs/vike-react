@@ -1,3 +1,12 @@
+## [0.1.4](https://github.com/vikejs/vike-react/compare/vike-react-redux@0.1.3...vike-react-redux@0.1.4) (2026-10-28)
+
+
+### Bug Fixes
+
+* `Wrapper` is a client component, so it works with React Server Components (vike-react-rsc) ([#239](https://github.com/vikejs/vike-react/issues/239)) ([ceb6989](https://github.com/vikejs/vike-react/commit/ceb6989e10f0f3f48a16fed08e49aa5118ff2640))
+
+
+
 ## [0.1.3](https://github.com/vikejs/vike-react/compare/vike-react-redux@0.1.2...vike-react-redux@0.1.3) (2025-12-17)
 
 
@@ -27,6 +36,3 @@
 
 
 # 0.1.0 (2025-05-20)
-
-
-

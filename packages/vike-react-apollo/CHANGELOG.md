@@ -1,3 +1,12 @@
+## [0.1.8](https://github.com/vikejs/vike-react/compare/vike-react-apollo@0.1.7...vike-react-apollo@0.1.8) (2026-10-28)
+
+
+### Bug Fixes
+
+* `Wrapper` is a client component, so it works with React Server Components (vike-react-rsc) ([#238](https://github.com/vikejs/vike-react/issues/238)) ([56ed2c8](https://github.com/vikejs/vike-react/commit/56ed2c8dd07a53ab89ec837fc0fbf9ea445c1503))
+
+
+
 ## [0.1.7](https://github.com/vikejs/vike-react/compare/vike-react-apollo@0.1.6...vike-react-apollo@0.1.7) (2026-06-08)
 
 
@@ -62,6 +71,3 @@
 ### Features
 
 * add vike-react-apollo ([#134](https://github.com/vikejs/vike-react/issues/134)) ([95bc323](https://github.com/vikejs/vike-react/commit/95bc323c696091bae908c72e38a010f27eff22e0))
-
-
-

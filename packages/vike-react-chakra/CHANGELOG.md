@@ -1,3 +1,12 @@
+## [1.0.4](https://github.com/vikejs/vike-react/compare/vike-react-chakra@1.0.3...vike-react-chakra@1.0.4) (2026-10-28)
+
+
+### Bug Fixes
+
+* `Wrapper` is a client component, so it works with React Server Components (vike-react-rsc) ([#240](https://github.com/vikejs/vike-react/issues/240)) ([8531f96](https://github.com/vikejs/vike-react/commit/8531f967302dcc4ab8c5001ed0f86c6f1786e329))
+
+
+
 ## [1.0.3](https://github.com/vikejs/vike-react/compare/vike-react-chakra@1.0.2...vike-react-chakra@1.0.3) (2025-12-17)
 
 
@@ -32,6 +41,3 @@
 ### Features
 
 * new extension vike-react-chakra ([#151](https://github.com/vikejs/vike-react/issues/151)) ([0850332](https://github.com/vikejs/vike-react/pull/151/commits/0850332bcc570145b6d548fe1add73427788b0bd))
-
-
-

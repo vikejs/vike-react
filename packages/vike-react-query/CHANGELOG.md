@@ -1,3 +1,12 @@
+## [0.1.14](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.13...vike-react-query@0.1.14) (2026-10-28)
+
+
+### Bug Fixes
+
+* `Wrapper` is a client component, so it works with React Server Components (vike-react-rsc) ([#237](https://github.com/vikejs/vike-react/issues/237)) ([b53d8e8](https://github.com/vikejs/vike-react/commit/b53d8e8b6040fbbda0db509b6c2658dfda8344fe))
+
+
+
 ## [0.1.13](https://github.com/vikejs/vike-react/compare/vike-react-query@0.1.12...vike-react-query@0.1.13) (2026-06-08)
 
 

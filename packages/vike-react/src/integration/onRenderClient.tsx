@@ -103,8 +103,8 @@ function onUncaughtErrorGlobal(
   userOptions: { onUncaughtError?: OnUncaughtError } | undefined,
 ) {
   const [errorOriginal, errorInfo] = args
-  const errorEnhanced = getErrorWithComponentStack(errorOriginal, errorInfo)
-  console.error(errorEnhanced)
+  const { error: errorEnhanced, componentStackToLog } = getErrorWithComponentStack(errorOriginal, errorInfo)
+  console.error(...(componentStackToLog ? [errorEnhanced, componentStackToLog] : [errorEnhanced]))
   // Used by Vike:
   // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
   if (isObject(errorEnhanced)) errorEnhanced.isAlreadyLogged = true
@@ -115,10 +115,16 @@ type OnUncaughtError = RootOptions['onUncaughtError']
 type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']>>
 type OnUncaughtErrorInfo = OnUncaughtErrorArgs[1]
 
-// Inject componentStack to the error's stack trace
+// Inject componentStack to the error's stack trace, or else return it as componentStackToLog, to log beside the error
 // - Server counterpart: https://github.com/brillout/react-streaming/blob/e0a6210957e65dad2c92877ad075ebac4713d8fa/src/server/renderToStream/common.ts#L93
-function getErrorWithComponentStack(errorOriginal: unknown, errorInfo?: OnUncaughtErrorInfo) {
-  if (!errorInfo?.componentStack || !isObject(errorOriginal)) return errorOriginal
+function getErrorWithComponentStack(
+  errorOriginal: unknown,
+  errorInfo?: OnUncaughtErrorInfo,
+): { error: unknown; componentStackToLog?: string } {
+  if (!errorInfo?.componentStack) return { error: errorOriginal }
+  // A thrown value without a stack, e.g. a string
+  if (!isObject(errorOriginal) || typeof errorOriginal.stack !== 'string')
+    return { error: errorOriginal, componentStackToLog: errorInfo.componentStack }
   const errorStackLines = String(errorOriginal.stack).split('\n')
 
   // Inject the component stack right before the React stack trace (potentially *after* some vike-react or react-streaming strack trace, e.g. if react-streaming's useAsync() throws an error).
@@ -133,7 +139,8 @@ function getErrorWithComponentStack(errorOriginal: unknown, errorInfo?: OnUncaug
     //  ```
     cutoff = errorStackLines.findIndex((l) => l.includes('node_modules') && l.includes('react'))
   }
-  if (cutoff === -1) return errorOriginal
+  // A production build has neither: the component stack goes at the end
+  if (cutoff === -1) cutoff = errorStackLines.length
 
   const errorStackLinesBegin = errorStackLines.slice(0, cutoff)
   const errorStackLinesEnd = errorStackLines.slice(cutoff)
@@ -146,6 +153,11 @@ function getErrorWithComponentStack(errorOriginal: unknown, errorInfo?: OnUncaug
     ...errorStackLinesEnd,
   ].join('\n')
 
-  const errorBetter = getBetterErrorLight(errorOriginal, { stack: stackEnhanced })
-  return errorBetter
+  try {
+    const errorBetter = getBetterErrorLight(errorOriginal, { stack: stackEnhanced })
+    return { error: errorBetter }
+  } catch {
+    // A stack that can't be set, e.g. a getter's
+    return { error: errorOriginal, componentStackToLog: errorInfo.componentStack }
+  }
 }

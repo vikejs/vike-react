@@ -55,6 +55,7 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   testUseConfig()
   testReactSetting()
   testClientOnly()
+  testHeadNodes()
 }
 
 function testPageNavigation_betweenWithSSRAndWithout() {
@@ -351,5 +352,16 @@ function testClientOnly() {
     const body = await page.textContent('body')
     expect(body).toContain(textLoaded)
     expect(body).not.toContain(textLoading)
+  })
+}
+
+function testHeadNodes() {
+  test('+Head that is false or an iterable', async () => {
+    const html = await fetchHtml('/head-nodes/conditional')
+    expect(html).toContain('<meta name="iterable-head" content="An iterable +Head"/>')
+  })
+  test('+Head that is a React.memo() component', async () => {
+    const html = await fetchHtml('/head-nodes/memo')
+    expect(html).toContain('<meta name="memo-head" content="A React.memo() +Head"/>')
   })
 }

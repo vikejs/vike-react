@@ -107,7 +107,7 @@ function onUncaughtErrorGlobal(
   console.error(...(componentStackToLog ? [errorEnhanced, componentStackToLog] : [errorEnhanced]))
   // Used by Vike:
   // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
-  if (isObject(errorEnhanced)) errorEnhanced.isAlreadyLogged = true
+  if (isObject(errorEnhanced) && Object.isExtensible(errorEnhanced)) errorEnhanced.isAlreadyLogged = true
   globalObject.onUncaughtErrorLocal?.(errorEnhanced)
   userOptions?.onUncaughtError?.call(this, errorEnhanced, errorInfo)
 }

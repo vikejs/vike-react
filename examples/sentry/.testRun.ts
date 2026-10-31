@@ -395,6 +395,8 @@ function testRunWithServerDsn() {
   test('SENTRY_DSN makes the build fail', () => {
     setupEnv(`SENTRY_DSN=${ingest.dsn}\n`)
     const { status, stdout, stderr } = build()
+    // Lets the example's `pnpm run dev` start after the tests
+    setupEnv('')
     expect(status).not.toBe(0)
     expect(stdout + stderr).toContain('[vike-react-sentry] SENTRY_DSN is not supported')
   })

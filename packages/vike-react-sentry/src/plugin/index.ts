@@ -1,8 +1,9 @@
 export { getViteConfig }
 
 import { serverProductionEntryPlugin } from '@brillout/vite-plugin-server-entry/plugin'
-import type { InlineConfig } from 'vite'
+import { loadEnv, type InlineConfig } from 'vite'
 import { sourceMapsPlugin } from './sourceMaps.js'
+import { assertUsage } from '../utils/assert.js'
 
 function getViteConfig(): InlineConfig {
   return {
@@ -28,6 +29,17 @@ Sentry.preloadOpenTelemetry?.();
         libraryName: 'vike-react-sentry',
       }),
       sourceMapsPlugin(),
+      {
+        name: 'vike-react-sentry:dsn',
+        configResolved(config) {
+          // Vike adds .env values to process.env in its own configResolved(), which can run after this one
+          const env = loadEnv(config.mode, config.envDir, 'SENTRY_DSN')
+          assertUsage(
+            !env['SENTRY_DSN'],
+            'SENTRY_DSN is not supported: unset it, and set PUBLIC_ENV__SENTRY_DSN or dsn in +sentry instead.',
+          )
+        },
+      },
     ],
   }
 }

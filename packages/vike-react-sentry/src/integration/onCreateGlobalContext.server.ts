@@ -28,5 +28,7 @@ async function onCreateGlobalContext(globalContext: GlobalContextServer): Promis
           }),
     ),
     ...options,
+    // @sentry/node falls back to SENTRY_DSN, which isn't supported
+    dsn: options.dsn ?? '',
   })
 }

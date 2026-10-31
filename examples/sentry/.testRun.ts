@@ -4,6 +4,7 @@ export { testRunWithFactoryDsn }
 export { testRunWithServerDsn }
 
 import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, sleep } from '@brillout/test-e2e'
+import { spawnSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -18,8 +19,7 @@ function setupEnv(content: string) {
 
 function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
   const isProd = cmd !== 'pnpm run dev'
-  // SENTRY_DSN is read by @sentry/node: it must not break the build
-  setupEnv(`PUBLIC_ENV__SENTRY_DSN=${ingest.dsn}\nSENTRY_DSN=${ingest.dsn}\n`)
+  setupEnv(`PUBLIC_ENV__SENTRY_DSN=${ingest.dsn}\n`)
   run(cmd, {
     serverIsReadyMessage: isProd ? 'Listening on' : undefined,
     // We intentionally throw errors to test Sentry error reporting
@@ -401,21 +401,33 @@ function testRunWithFactoryDsn() {
 }
 
 function testRunWithServerDsn() {
-  // Only the production server's environment has the DSN, as the README says to set SENTRY_DSN
+  // Only the production server's environment has SENTRY_DSN: the build can't reject it
   setupEnv('')
+  expect(build().status).toBe(0)
   process.env.SENTRY_DSN = ingest.dsn
-  run('pnpm run prod', {
+  run('node ./dist/server/index.mjs', {
     serverIsReadyMessage: 'Listening on',
     tolerateError: ({ logText }) => logText.includes('DATA_ERR'),
   })
 
-  test("server error is sent to the DSN of the server's environment", async () => {
+  test("SENTRY_DSN of the server's environment is ignored", async () => {
     // The server has its copy; the test files after this one share this process
     delete process.env.SENTRY_DSN
     await fetch(getServerUrl() + '/data-error')
-    await expectErrorEvent('DATA_ERR')
-    expect(getErrorEvents('DATA_ERR')[0]!.side).toBe('server')
+    await sleep(2000)
+    expect(ingest.items.length).toBe(0)
   })
+
+  test('SENTRY_DSN makes the build fail', () => {
+    setupEnv(`SENTRY_DSN=${ingest.dsn}\n`)
+    const { status, stdout, stderr } = build()
+    expect(status).not.toBe(0)
+    expect(stdout + stderr).toContain('[vike-react-sentry] SENTRY_DSN is not supported')
+  })
+}
+
+function build() {
+  return spawnSync('pnpm', ['run', 'build'], { cwd: __dirname, shell: true, encoding: 'utf8' })
 }
 
 async function gotoHydrated(url: string) {

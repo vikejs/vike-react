@@ -7,7 +7,7 @@
 Add [Sentry](https://sentry.io) error tracking and performance monitoring to your [`vike-react`](https://vike.dev/vike-react) app.
 
 Features:
-- Browser and server error tracking
+- Browser and server error tracking, including React render errors
 - Performance monitoring and tracing
 - Automatic source map upload
 - Works out of the box with minimal configuration
@@ -19,6 +19,7 @@ Features:
 [Installation](#installation)  
 [Example](#example)  
 [Settings](#settings)  
+[Migration from 0.1](#migration-from-01)  
 [Version history](#version-history)  
 [See also](#see-also)  
 
@@ -41,7 +42,7 @@ Features:
    ```
 3. Add environment variables to your `.env` file:
    ```bash
-   # Required: Your Sentry DSN (can be public and exposed to the browser)
+   # Your Sentry DSN (can be public and exposed to the browser)
    PUBLIC_ENV__SENTRY_DSN=https://xxxxx@xxxxx.ingest.sentry.io/xxxxx
 
    # Required for source map upload: Sentry Auth Token (must be kept private)
@@ -51,14 +52,16 @@ Features:
    ```
 
 > [!NOTE]
-> The `vike-react-sentry` extension requires [`vike-react`](https://vike.dev/vike-react).
+> The `vike-react-sentry` extension requires [`vike-react`](https://vike.dev/vike-react), `vike` `>=0.4.253`, and the Sentry SDK version 10 or 11 (`@sentry/vite-plugin` 4 to 11).
 
 That's it! With the configuration above, `vike-react-sentry` will automatically:
 - Initialize Sentry on both client and server
-- Track errors and exceptions
+- Track errors thrown by Vike hooks and React components, on both client and server
 - Instrument Vike hooks using [`+onHookCall()`](https://vike.dev/onHookCall)
 - Enable browser tracing for performance monitoring
 - Upload source maps during production builds (when `SENTRY_AUTH_TOKEN` is set)
+
+Without a DSN, Sentry is disabled: nothing is sent and no trace tags are added to the HTML.
 
 <br/>
 
@@ -72,7 +75,7 @@ See [examples/sentry](https://github.com/vikejs/vike-react/tree/main/examples/se
 
 ### `+sentry`
 
-Sentry SDK configuration options.
+Sentry SDK configuration options: [`@sentry/react` options](https://docs.sentry.io/platforms/javascript/guides/react/configuration/options/) on the client-side and [`@sentry/node` options](https://docs.sentry.io/platforms/javascript/guides/node/configuration/options/) on the server-side.
 
 ```js
 // pages/+sentry.js
@@ -87,42 +90,39 @@ export default {
 > [!NOTE]
 > See also: [Vike > Config Files](https://vike.dev/config)
 
-```ts
-interface SentryOptions {
-  dsn?: string                       // Sentry DSN (can also use PUBLIC_ENV__SENTRY_DSN env var)
-  environment?: string               // Environment name (e.g., 'production', 'staging')
-  release?: string                   // Release version
-  debug?: boolean                    // Enable debug mode
-  sampleRate?: number                // Error sample rate (0.0 to 1.0)
-  tracesSampleRate?: number          // Transaction sample rate (0.0 to 1.0)
-  enabled?: boolean                  // Enable/disable Sentry
-  maxBreadcrumbs?: number            // Maximum number of breadcrumbs
-  sendDefaultPii?: boolean           // Send default PII data
-  replaysSessionSampleRate?: number  // Session replay sample rate (0.0 to 1.0, client only)
-  replaysOnErrorSampleRate?: number  // Replay-on-error sample rate (0.0 to 1.0, client only)
+Defaults set by `vike-react-sentry`:
+
+```js
+{
+  dsn: import.meta.env.PUBLIC_ENV__SENTRY_DSN,
+  environment: import.meta.env.MODE,
+  tracesSampleRate: 0.2,
+  // Client-side only
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1.0
 }
 ```
 
-You can return a function and access [`globalContext`](https://vike.dev/globalContext):
+On the server-side, `@sentry/node` also reads the `SENTRY_DSN` environment variable if `dsn` is missing.
+
+You can export a function, which receives [`globalContext`](https://vike.dev/globalContext):
 
 ```js
 // pages/+sentry.js
 // Environment: client, server
 
-import { getGlobalContext } from 'vike'
-
-export default async () => {
-  const globalContext = await getGlobalContext()
+export default (globalContext) => {
   return {
     tracesSampleRate: 1.0,
-    debug: true,
-    environment: globalContext.isProduction ? 'production' : 'development'
+    initialScope: {
+      tags: { side: globalContext.isClientSide ? 'client' : 'server' }
+    }
   }
 }
 ```
 
 > [!NOTE]
-> See also: [Vike > `getGlobalContext()`](https://vike.dev/getGlobalContext)
+> See also: [Vike > `globalContext`](https://vike.dev/globalContext)
 
 You can define settings only for the client- or server-side:
 
@@ -130,11 +130,12 @@ You can define settings only for the client- or server-side:
 // pages/+sentry.client.js
 // Environment: client
 
-// Client-only configuration
+import * as Sentry from '@sentry/react'
 
 export default {
   integrations: [
-    // Add custom browser integrations here
+    // Added to the default integrations (the SDK's ones, browserTracingIntegration() and replayIntegration())
+    Sentry.httpClientIntegration()
   ]
 }
 ```
@@ -143,17 +144,30 @@ export default {
 // pages/+sentry.server.js
 // Environment: server
 
-// Server-only configuration
-
-export default () => {
+export default {
   integrations: [
-    // Add custom Node.js integrations here
+    // Added to the default integrations of @sentry/node
   ]
+}
+```
+
+To remove a default integration, use the function form of `integrations`:
+
+```js
+// pages/+sentry.client.js
+// Environment: client
+
+export default {
+  integrations: (integrations) => integrations.filter((integration) => integration.name !== 'Replay')
 }
 ```
 
 > [!NOTE]
 > See also: [Vike > File Environment (`.server.js`, `.client.js`, ...)](https://vike.dev/file-env)
+
+`+sentry` is applied once: after changing it, reload the page (client-side) or restart the development server (server-side).
+
+`vike-react-sentry` initializes the server-side SDK when Vike creates the global context. If you initialize Sentry yourself before that (for example in an [instrument file preloaded with `node --import`](https://docs.sentry.io/platforms/javascript/guides/node/install/esm/)), then `vike-react-sentry` uses your initialization and doesn't apply `+sentry` on the server-side.
 
 ### `+sentryVite`
 
@@ -164,11 +178,11 @@ It's automatically configured when `SENTRY_AUTH_TOKEN` is set via `.env`, but ca
 ```bash
 # .env
 SENTRY_AUTH_TOKEN=sntryu_xxxxx  # Required for source map upload
-SENTRY_ORG=your-org             # Optional, auto-detected from DSN
-SENTRY_PROJECT=your-project     # Optional, auto-detected from DSN
+SENTRY_ORG=your-org             # Optional, auto-detected from PUBLIC_ENV__SENTRY_DSN
+SENTRY_PROJECT=your-project     # Optional, auto-detected from PUBLIC_ENV__SENTRY_DSN
 ```
 
-You can also override options via `+sentryVite.js` if needed:
+You can also override options in `+config.js`:
 
 ```js
 // pages/+config.js
@@ -183,17 +197,29 @@ export default {
 ```
 
 > [!NOTE]
-> When using a **personal auth token** with `SENTRY_AUTH_TOKEN`, `org` and `project` are automatically detected from your DSN using the Sentry API. Organization-scoped tokens don't support the required API permissions, so you'll need to set `SENTRY_PROJECT` manually if using those.
+> When using a **personal auth token** with `SENTRY_AUTH_TOKEN`, `org` and `project` are automatically detected from `PUBLIC_ENV__SENTRY_DSN` using the Sentry API. Organization-scoped tokens don't support the required API permissions, so you'll need to set `SENTRY_PROJECT` manually if using those.
 
 ### Environment Variables
 
 | Variable | Description |
 |----------|-------------|
-| `PUBLIC_ENV__SENTRY_DSN` | Your Sentry DSN (required). Public and safe for browser. |
-| `SENTRY_AUTH_TOKEN` | Auth token for source map upload. Create at [Sentry Auth Tokens](https://sentry.io/settings/auth-tokens/). Required scopes: `project:read`, `project:releases`, `project:write`. |
-| `SENTRY_ORG` | Organization slug (optional, auto-detected from DSN). |
-| `SENTRY_PROJECT` | Project slug (optional, auto-detected from DSN). |
-| `SENTRY_URL` | Custom Sentry URL for the Vite plugin (source map upload). Auto-detected from DSN. Only needed to override for self-hosted instances. |
+| `PUBLIC_ENV__SENTRY_DSN` | Your Sentry DSN. Public and safe for browser. |
+| `SENTRY_DSN` | DSN used on the server-side only, if `PUBLIC_ENV__SENTRY_DSN` isn't set. |
+| `SENTRY_AUTH_TOKEN` | Auth token for source map upload. Create at [Sentry Auth Tokens](https://sentry.io/settings/account/api/auth-tokens/). Required scopes: `project:read`, `project:releases`, `project:write`. |
+| `SENTRY_ORG` | Organization slug (optional, auto-detected from `PUBLIC_ENV__SENTRY_DSN`). |
+| `SENTRY_PROJECT` | Project slug (optional, auto-detected from `PUBLIC_ENV__SENTRY_DSN`). |
+| `SENTRY_URL` | Custom Sentry URL for source map upload and auto-detection. Only needed for self-hosted instances. |
+| `SENTRY_RELEASE` | Release name of the uploaded source maps (optional, detected from Git by default). |
+
+<br/>
+
+## Migration from 0.1
+
+- `+sentry` is no longer loaded at build-time, so its `release` no longer names the source map upload, and its `dsn` no longer drives the `org`/`project` auto-detection. Set the upload release with `SENTRY_RELEASE` or `+sentryVite: { release: { name } }`. Stack traces are matched by debug ID either way. For auto-detection, put the DSN in `PUBLIC_ENV__SENTRY_DSN`, or set `SENTRY_ORG` and `SENTRY_PROJECT`.
+- A `+sentry` function now receives `globalContext`. Use it instead of `await getGlobalContext()`, which hangs there.
+- `integrations` set in `+sentry` are now added to the default integrations instead of replacing them. To drop a default integration, use the function form: `integrations: (integrations) => integrations.filter((integration) => integration.name !== 'Replay')`.
+- Tracing is now enabled by default at `tracesSampleRate: 0.2`, as documented: a typo kept it disabled. To keep tracing disabled, set `tracesSampleRate: 0` in `+sentry.js`.
+- Server-side errors are now sent once, by [`+onError()`](https://vike.dev/onError), with `mechanism.type: 'auto.function.vike'` and `handled: false`. `throw redirect()`, `throw render()` and `throw abort()` are no longer sent. Update alert rules that match the previous events.
 
 <br/>
 

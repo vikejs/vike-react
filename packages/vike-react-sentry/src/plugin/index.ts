@@ -16,8 +16,9 @@ function getViteConfig(): InlineConfig {
 // vike-react-sentry: Preload OpenTelemetry instrumentation for ESM
 // The actual Sentry.init() with config will be called later via onCreateGlobalContext
 // https://docs.sentry.io/platforms/javascript/guides/node/install/esm-without-import/
-import { preloadOpenTelemetry } from '@sentry/node';
-preloadOpenTelemetry();
+// @sentry/node 11 has no preloadOpenTelemetry(): its instrumentation is channel-based and needs no preload
+import * as Sentry from '@sentry/node';
+Sentry.preloadOpenTelemetry?.();
 `
         },
         libraryName: 'vike-react-sentry',

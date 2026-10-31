@@ -64,16 +64,18 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
   })
 
   test('no hook transactions for prefetched links', async () => {
-    await page.setExtraHTTPHeaders(getSampledTraceHeaders().headers)
+    const getClientSegments = () => ingest.spans.filter((span) => span.side === 'client' && span.isSegment)
+    const { headers, traceId } = getSampledTraceHeaders()
+    await page.setExtraHTTPHeaders(headers)
     await gotoHydrated('/links')
     await page.setExtraHTTPHeaders({})
     await autoRetry(
       async () => {
-        expect(getTransactions('client').some((t) => t.payload.transaction === '/links')).toBe(true)
+        expect(getClientSegments().some((span) => span.traceId === traceId && span.op === 'pageload')).toBe(true)
       },
       { timeout: 10 * 1000 },
     )
-    const transactionsBefore = getTransactions('client').length
+    const segmentsBefore = getClientSegments().length
     for (let i = 0; i < 3; i++) {
       for (const deltaY of [3000, -3000]) {
         await page.mouse.wheel(0, deltaY)
@@ -81,8 +83,8 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       }
     }
     await sleep(2000)
-    expect(getTransactions('client').length).toBe(transactionsBefore)
-    expect(ingest.items.filter((item) => item.payload?.contexts?.trace?.op === 'vike.hook').length).toBe(0)
+    expect(getClientSegments().length).toBe(segmentsBefore)
+    expect(ingest.spans.filter((span) => span.isSegment && span.op === 'vike.hook').length).toBe(0)
   })
 
   test('one server transaction per page load', async () => {
@@ -91,24 +93,23 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     await gotoHydrated('/')
     await page.setExtraHTTPHeaders({})
     await sleep(2000)
-    const transactions = getTransactions('server').filter((t) => t.payload.contexts.trace.trace_id === traceId)
-    expect(transactions.map((t) => t.payload.transaction).join(', ')).toBe('GET /')
+    const segments = ingest.spans.filter((span) => span.side === 'server' && span.isSegment && span.traceId === traceId)
+    expect(segments.length).toBe(1)
   })
 
   test('no span for +route functions', async () => {
     const { headers, traceId } = getSampledTraceHeaders()
     await fetch(getServerUrl() + '/item/1', { headers })
-    const transaction = await autoRetry(
+    const getSpans = () => ingest.spans.filter((span) => span.traceId === traceId)
+    const getSpanNames = () => getSpans().map((span) => span.name)
+    await autoRetry(
       async () => {
-        const transaction = getTransactions('server').find((t) => t.payload.contexts.trace.trace_id === traceId)
-        expect(transaction).toBeTruthy()
-        return transaction!
+        expect(getSpans().some((span) => span.isSegment && span.op === 'http.server')).toBe(true)
+        expect(getSpanNames()).toContain('onBeforeRoute')
       },
       { timeout: 10 * 1000 },
     )
-    const spanNames = transaction.payload.spans.map((span: { description: string }) => span.description)
-    expect(spanNames).toContain('onBeforeRoute')
-    expect(spanNames).not.toContain('route')
+    expect(getSpanNames()).not.toContain('route')
   })
 
   test('hook error is sent to Sentry once', async () => {
@@ -220,10 +221,6 @@ async function expectErrorEvent(message: string) {
     },
     { timeout: 10 * 1000 },
   )
-}
-
-function getTransactions(side: 'client' | 'server') {
-  return ingest.items.filter((item) => item.type === 'transaction' && item.side === side)
 }
 
 // Lets the test's request be traced regardless of tracesSampleRate

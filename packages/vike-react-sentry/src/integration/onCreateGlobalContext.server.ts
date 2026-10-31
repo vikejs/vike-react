@@ -7,7 +7,7 @@ import { resolveSentryOptions } from './sentryOptions.js'
 async function onCreateGlobalContext(globalContext: GlobalContextServer): Promise<void> {
   // Vike calls it again upon HMR
   if (SentryNode.getClient()) return
-  const options = await resolveSentryOptions(globalContext)
+  const options = await resolveSentryOptions<SentryNode.NodeOptions>(globalContext)
   SentryNode.init({
     // The user's `integrations` are added to these
     defaultIntegrations: SentryNode.getDefaultIntegrations(options).map((integration) =>

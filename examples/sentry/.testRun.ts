@@ -7,7 +7,7 @@ import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, sleep } fr
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { startIngest } from './.ingest'
+import { startIngest, type Item } from './.ingest'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ingest = await startIngest()
@@ -28,6 +28,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('This is an async error sent to Sentry!') ||
       logText.includes('This is a render error sent to Sentry!') ||
       logText.includes('DATA_ERR') ||
+      logText.includes('window is not defined') ||
       logText.includes('DATA_STRING') ||
       logText.includes('ROUTE_ERR') ||
       logText.includes('BOUNDARY_CAUGHT') ||
@@ -37,7 +38,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('The thrown value is') ||
       // Vike's (>= 0.4.268) logs about the errors above
       logText.includes('Following error was thrown by the ') ||
-      /HTTP response ← \/data-(error|string) 500/.test(logText) ||
+      /HTTP response ← \/data-(error|string|window) 500/.test(logText) ||
       // The test's font request of a non-font file
       logText.includes('Failed to decode downloaded font: ' + getServerUrl() + '/sentry-env.ts?font') ||
       logText.includes('OTS parsing error'),
@@ -217,13 +218,14 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     expect(events.length).toBe(1)
     expect(events[0]!.payload.tags['vike.hook']).toBe('data')
     expect(events[0]!.payload.tags.side).toBe('server')
-    // Not Vike's log line about it
-    const exception = events[0]!.payload.exception.values.at(-1)
-    expect(exception.value).toBe('DATA_ERR')
-    expect(exception.type).toBe('Error')
-    const frames = exception.stacktrace?.frames ?? []
-    expect(frames.length > 0).toBe(true)
-    if (!isProd) expect(frames.at(-1).filename).toMatch(/\/pages\/data-error\/\+data\.ts$/)
+    expectThrownError(events[0]!, 'Error', 'DATA_ERR', '/pages/data-error/+data.ts', isProd)
+  })
+
+  test('hook error that Vike adds a hint to is sent as thrown', async () => {
+    await fetch(getServerUrl() + '/data-window')
+    await expectErrorEvent('window is not defined')
+    const event = getErrorEvents('window is not defined')[0]!
+    expectThrownError(event, 'ReferenceError', 'window is not defined', '/pages/data-window/+data.ts', isProd)
   })
 
   test('an event sent by a server hook has its hook and page tags', async () => {
@@ -402,6 +404,17 @@ function getSampledTraceHeaders() {
   const traceId = crypto.randomUUID().replaceAll('-', '')
   const spanId = traceId.slice(0, 16)
   return { traceId, headers: { 'sentry-trace': `${traceId}-${spanId}-1` } }
+}
+
+// Not Vike's log line or hint about it, and with its stack trace
+function expectThrownError(event: Item, type: string, value: string, file: string, isProd: boolean) {
+  const exception = event.payload.exception.values.at(-1)
+  expect(exception.type).toBe(type)
+  expect(exception.value).toBe(value)
+  const frames = exception.stacktrace?.frames ?? []
+  expect(frames.length > 0).toBe(true)
+  // The production build bundles the file
+  if (!isProd) expect(frames.at(-1).filename.endsWith(file)).toBe(true)
 }
 
 function getHydrationEvents() {

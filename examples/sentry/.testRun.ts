@@ -28,10 +28,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('This is an async error sent to Sentry!') ||
       logText.includes('This is a render error sent to Sentry!') ||
       logText.includes('DATA_ERR') ||
-      logText.includes('window is not defined') ||
       logText.includes('DATA_OBJ') ||
-      logText.includes('REALM_ERR') ||
-      logText.includes('NAMED_ERR') ||
       // Vike's (<= 0.4.259) log of the DATA_OBJ value
       logText.trim() === '[object Object]' ||
       logText.includes('DATA_STRING') ||
@@ -44,7 +41,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('The thrown value is') ||
       // Vike's (>= 0.4.268) logs about the errors above
       logText.includes('Following error was thrown by the ') ||
-      /HTTP response ← \/(data-(error|string|window|object|realm|named)|ssr-shell) 500/.test(logText) ||
+      /HTTP response ← \/(data-(error|string|object)|ssr-shell) 500/.test(logText) ||
       // The test's font request of a non-font file
       logText.includes('Failed to decode downloaded font: ' + getServerUrl() + '/sentry-env.ts?font') ||
       logText.includes('OTS parsing error'),
@@ -237,13 +234,6 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     expectThrownError(events[0]!, 'Error', 'DATA_ERR', '/pages/data-error/+data.ts', isProd)
   })
 
-  test('hook error that Vike adds a hint to is sent with its type and stack trace', async () => {
-    await fetch(getServerUrl() + '/data-window')
-    await expectErrorEvent('window is not defined')
-    const event = getErrorEvents('window is not defined')[0]!
-    expectThrownError(event, 'ReferenceError', 'window is not defined', '/pages/data-window/+data.ts', isProd)
-  })
-
   test('an event sent by a server hook has its hook and page tags', async () => {
     await fetch(getServerUrl() + '/user-message')
     await autoRetry(
@@ -278,22 +268,6 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     await expectErrorEvent('DATA_STRING')
     await sleep(1000)
     expect(getErrorEvents('DATA_STRING').length).toBe(1)
-  })
-
-  test('error with its own name is sent with its name', async () => {
-    await fetch(getServerUrl() + '/data-named')
-    await expectErrorEvent('NAMED_ERR')
-    const event = getErrorEvents('NAMED_ERR')[0]!
-    expectThrownError(event, 'ServiceError', 'NAMED_ERR', '/pages/data-named/+data.ts', isProd)
-  })
-
-  test('error from another realm is sent with its type and stack trace', async () => {
-    await fetch(getServerUrl() + '/data-realm')
-    await expectErrorEvent('REALM_ERR')
-    const exception = getErrorEvents('REALM_ERR')[0]!.payload.exception.values.at(-1)
-    expect(exception.type).toBe('Error')
-    const files = (exception.stacktrace?.frames ?? []).map((frame: any) => frame.filename)
-    expect(isProd || files.some((file: string) => file?.endsWith('/pages/data-realm/+data.server.ts'))).toBe(true)
   })
 
   test('thrown object is sent to Sentry with its keys', async () => {

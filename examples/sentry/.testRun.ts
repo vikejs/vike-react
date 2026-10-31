@@ -136,6 +136,10 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     expect(event.release).toBe('vike-react-sentry-example@0.0.0')
     // Set by the +sentry factory, from its globalContext argument
     expect(event.tags.side).toBe('client')
+    // The integration added by +sentry.client.ts and the extension's default ones
+    expect(event.sdk.integrations).toContain('HttpClient')
+    expect(event.sdk.integrations).toContain('BrowserTracing')
+    expect(event.sdk.integrations).toContain('Replay')
   })
 
   test('async error is sent to Sentry', async () => {

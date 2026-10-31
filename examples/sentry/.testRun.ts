@@ -58,6 +58,44 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     expect(getErrorEvents('AbortRender').length).toBe(0)
   })
 
+  test('no hook transactions for prefetched links', async () => {
+    await page.setExtraHTTPHeaders(getSampledTraceHeaders().headers)
+    await gotoHydrated('/links')
+    await page.setExtraHTTPHeaders({})
+    await autoRetry(
+      async () => {
+        expect(getTransactions('client').some((t) => t.payload.transaction === '/links')).toBe(true)
+      },
+      { timeout: 10 * 1000 },
+    )
+    const transactionsBefore = getTransactions('client').length
+    for (let i = 0; i < 3; i++) {
+      for (const deltaY of [3000, -3000]) {
+        await page.mouse.wheel(0, deltaY)
+        await sleep(300)
+      }
+    }
+    await sleep(2000)
+    expect(getTransactions('client').length).toBe(transactionsBefore)
+    expect(ingest.items.filter((item) => item.payload?.contexts?.trace?.op === 'vike.hook').length).toBe(0)
+  })
+
+  test('no span for +route functions', async () => {
+    const { headers, traceId } = getSampledTraceHeaders()
+    await fetch(getServerUrl() + '/item/1', { headers })
+    const transaction = await autoRetry(
+      async () => {
+        const transaction = getTransactions('server').find((t) => t.payload.contexts.trace.trace_id === traceId)
+        expect(transaction).toBeTruthy()
+        return transaction!
+      },
+      { timeout: 10 * 1000 },
+    )
+    const spanNames = transaction.payload.spans.map((span: { description: string }) => span.description)
+    expect(spanNames).toContain('onBeforeRoute')
+    expect(spanNames).not.toContain('route')
+  })
+
   test('sync error is sent to Sentry', async () => {
     await gotoHydrated('/')
     await page.locator('button', { hasText: 'Throw Sync Error' }).click()
@@ -128,6 +166,17 @@ async function expectErrorEvent(message: string) {
     },
     { timeout: 10 * 1000 },
   )
+}
+
+function getTransactions(side: 'client' | 'server') {
+  return ingest.items.filter((item) => item.type === 'transaction' && item.side === side)
+}
+
+// Lets the test's request be traced regardless of tracesSampleRate
+function getSampledTraceHeaders() {
+  const traceId = crypto.randomUUID().replaceAll('-', '')
+  const spanId = traceId.slice(0, 16)
+  return { traceId, headers: { 'sentry-trace': `${traceId}-${spanId}-1` } }
 }
 
 function getErrorEvents(message: string) {

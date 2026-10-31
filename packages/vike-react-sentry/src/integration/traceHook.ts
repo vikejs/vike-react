@@ -9,8 +9,17 @@ type Hook = Parameters<Extract<Config['onHookCall'], Function>>[0]
 
 /** Traces a Vike hook call and captures its error. */
 async function traceHook(Sentry: Sentry, hook: Hook, pageContext: PageContext | null) {
-  if (!Sentry.isEnabled() || hook.name === 'onError') {
-    return hook.call()
+  if (
+    !Sentry.isEnabled() ||
+    hook.name === 'onError' ||
+    // +route functions run for every link Vike prefetches
+    hook.name === 'route' ||
+    // Set by Vike while prefetching a link (vike > 0.4.268)
+    (pageContext as { isPrefetch?: boolean } | null)?.isPrefetch
+  ) {
+    // Vike keeps the hook's result and error, and (vike <= 0.4.268) logs whatever +onHookCall rejects with
+    hook.call()
+    return
   }
 
   // Extract useful context for Sentry
@@ -32,6 +41,8 @@ async function traceHook(Sentry: Sentry, hook: Hook, pageContext: PageContext | 
       {
         name: hook.name,
         op: 'vike.hook',
+        // Hooks running outside a page view (e.g. prefetching) would each become a transaction
+        onlyIfParent: true,
         attributes: {
           'vike.hook.name': hook.name,
           'vike.hook.file': hook.filePath,

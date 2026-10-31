@@ -28,6 +28,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('This is a render error sent to Sentry!') ||
       logText.includes('DATA_ERR') ||
       logText.includes('DATA_STRING') ||
+      logText.includes('ROUTE_ERR') ||
       // Vike's logs about the DATA_STRING value
       logText.includes('The thrown value is') ||
       // The test's font request of a non-font file
@@ -142,6 +143,17 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       { timeout: 10 * 1000 },
     )
     expect(getSpanNames()).not.toContain('route')
+  })
+
+  test('+route error upon client-side navigation is sent to Sentry', async () => {
+    await gotoHydrated('/links')
+    await page.locator('a', { hasText: 'Route error' }).click()
+    await autoRetry(
+      async () => {
+        expect(getErrorEvents('ROUTE_ERR').filter((event) => event.side === 'client').length > 0).toBe(true)
+      },
+      { timeout: 10 * 1000 },
+    )
   })
 
   test('hook error is sent to Sentry once', async () => {

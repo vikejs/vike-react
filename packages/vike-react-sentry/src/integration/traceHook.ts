@@ -20,16 +20,16 @@ async function traceHook(Sentry: Sentry, hook: Hook, pageContext: PageContext | 
   await Sentry.withScope(async (scope) => {
     scope.update(getHookScope(hook, pageContext))
 
-    if (
-      // +route functions run for every link Vike prefetches
-      hook.name === 'route' ||
-      // Set by Vike while prefetching a link (vike > 0.4.268)
-      (pageContext as { isPrefetch?: boolean } | null)?.isPrefetch
-    ) {
+    // Set by Vike while prefetching a link (vike > 0.4.268)
+    const isPrefetch = !!(pageContext as { isPrefetch?: boolean } | null)?.isPrefetch
+    // +route functions run for every link Vike prefetches: they get no span
+    if (hook.name === 'route' || isPrefetch) {
       try {
         await hook.call()
-      } catch {
-        // Vike keeps the hook's error
+      } catch (error) {
+        // Vike ignores a prefetch's error, and routes again upon navigation
+        if (isPrefetch || isVikeControlFlow(error)) return
+        onHookError(error, hook, pageContext)
       }
       return
     }

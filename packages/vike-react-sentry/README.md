@@ -219,7 +219,7 @@ export default {
 - A `+sentry` function now receives `globalContext`. Use it instead of `await getGlobalContext()`, which hangs there.
 - `integrations` set in `+sentry` are now added to the default integrations instead of replacing them. To drop a default integration, use the function form: `integrations: (integrations) => integrations.filter((integration) => integration.name !== 'Replay')`.
 - Tracing is now enabled by default at `tracesSampleRate: 0.2`, as documented: a typo kept it disabled. To keep tracing disabled, set `tracesSampleRate: 0` in `+sentry.js`.
-- Server-side errors are now sent once, by [`+onError()`](https://vike.dev/onError), with `mechanism.type: 'auto.function.vike'` and `handled: false`. `throw redirect()`, `throw render()` and `throw abort()` are no longer sent. Update alert rules that match the previous events.
+- Errors thrown by server hooks are now sent once, by [`+onError()`](https://vike.dev/onError), with `mechanism.type: 'auto.function.vike'` and `handled: false`. `throw redirect()`, `throw render()` and `throw abort()` are no longer sent. Update alert rules that match the previous events.
 
 <br/>
 

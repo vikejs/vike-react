@@ -1,5 +1,6 @@
 export { testRun }
 export { testRunWithoutDsn }
+export { testRunWithFactoryDsn }
 
 import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, sleep } from '@brillout/test-e2e'
 import fs from 'node:fs'
@@ -224,6 +225,29 @@ function testRunWithoutDsn() {
     await page.locator('button', { hasText: 'Throw Sync Error' }).click()
     await sleep(2000)
     expect(ingest.items.length).toBe(0)
+  })
+}
+
+function testRunWithFactoryDsn() {
+  // Only +sentry returns the DSN: neither the build nor the server may need it from the environment
+  setupEnv(`PUBLIC_ENV__FACTORY_DSN=${ingest.dsn}\n`)
+  run('pnpm run prod', {
+    serverIsReadyMessage: 'Listening on',
+    tolerateError: ({ logText }) =>
+      logText.includes('This is a test error sent to Sentry!') || logText.includes('DATA_ERR'),
+  })
+
+  test('server error is sent to the DSN of +sentry', async () => {
+    await fetch(getServerUrl() + '/data-error')
+    await expectErrorEvent('DATA_ERR')
+    expect(getErrorEvents('DATA_ERR')[0]!.side).toBe('server')
+  })
+
+  test('browser error is sent to the DSN of +sentry', async () => {
+    await gotoHydrated('/')
+    await page.locator('button', { hasText: 'Throw Sync Error' }).click()
+    await expectErrorEvent('This is a test error sent to Sentry!')
+    expect(getErrorEvents('This is a test error sent to Sentry!')[0]!.side).toBe('client')
   })
 }
 

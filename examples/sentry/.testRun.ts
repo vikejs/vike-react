@@ -23,7 +23,11 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     // We intentionally throw errors to test Sentry error reporting
     tolerateError: ({ logText }) =>
       logText.includes('This is a test error sent to Sentry!') ||
-      logText.includes('This is an async error sent to Sentry!'),
+      logText.includes('This is an async error sent to Sentry!') ||
+      logText.includes('DATA_ERR') ||
+      logText.includes('DATA_STRING') ||
+      // Vike's logs about the DATA_STRING value
+      logText.includes('The thrown value is'),
   })
 
   test('page content is rendered to HTML', async () => {
@@ -104,6 +108,22 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     const spanNames = transaction.payload.spans.map((span: { description: string }) => span.description)
     expect(spanNames).toContain('onBeforeRoute')
     expect(spanNames).not.toContain('route')
+  })
+
+  test('hook error is sent to Sentry once', async () => {
+    await fetch(getServerUrl() + '/data-error')
+    await expectErrorEvent('DATA_ERR')
+    await sleep(1000)
+    const events = getErrorEvents('DATA_ERR')
+    expect(events.length).toBe(1)
+    expect(events[0]!.payload.tags['vike.hook']).toBe('data')
+  })
+
+  test('thrown string is sent to Sentry once', async () => {
+    await fetch(getServerUrl() + '/data-string')
+    await expectErrorEvent('DATA_STRING')
+    await sleep(1000)
+    expect(getErrorEvents('DATA_STRING').length).toBe(1)
   })
 
   test('sync error is sent to Sentry', async () => {

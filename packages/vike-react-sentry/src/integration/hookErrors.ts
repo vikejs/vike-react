@@ -19,18 +19,18 @@ function rememberHook(error: unknown, hook: Hook): void {
 }
 
 /**
- * What the hook threw, and the hook: an error with the message it was thrown with and its current stack frames, or
- * a thrown string (or other non-object) as is.
+ * What the hook threw, as it threw it, and the hook. For an Error: the message it was thrown with and its current
+ * stack frames. For anything else: the copy Vike (>= 0.4.268, in development) keeps from before it changed the value
+ * (it adds a message and stack to a thrown object, and wraps a thrown string in an Error of its own), else the value.
  */
 function recallThrow(error: unknown): { error: unknown; hook?: Hook } {
   const thrown = typeof error === 'object' && error !== null ? thrownErrors.get(error) : undefined
-  if (!thrown) {
-    // Vike (>= 0.4.268, in development) passes an error of its own for a thrown non-object, and keeps the value
+  if (!(error instanceof Error) || thrown?.message === undefined) {
     const getOriginalError = (error as { getOriginalError?: unknown } | null)?.getOriginalError
     const original: unknown = typeof getOriginalError === 'function' ? getOriginalError() : error
-    return { error: typeof original === 'object' && original !== null ? error : original }
+    // Vike's copy of an Error loses its stack, an accessor
+    return { error: original instanceof Error ? error : original, hook: thrown?.hook }
   }
-  if (!(error instanceof Error) || thrown.message === undefined) return { error, hook: thrown.hook }
   const frames = (error.stack ?? '').split('\n').filter((line) => /^\s+at /.test(line))
   const errorAsThrown: Error = Object.create(Object.getPrototypeOf(error), Object.getOwnPropertyDescriptors(error))
   Object.defineProperties(errorAsThrown, {

@@ -29,6 +29,9 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('This is a render error sent to Sentry!') ||
       logText.includes('DATA_ERR') ||
       logText.includes('window is not defined') ||
+      logText.includes('DATA_OBJ') ||
+      // Vike's (<= 0.4.259) log of the DATA_OBJ value
+      logText.trim() === '[object Object]' ||
       logText.includes('DATA_STRING') ||
       logText.includes('ROUTE_ERR') ||
       logText.includes('BOUNDARY_CAUGHT') ||
@@ -38,7 +41,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('The thrown value is') ||
       // Vike's (>= 0.4.268) logs about the errors above
       logText.includes('Following error was thrown by the ') ||
-      /HTTP response ← \/data-(error|string|window) 500/.test(logText) ||
+      /HTTP response ← \/data-(error|string|window|object) 500/.test(logText) ||
       // The test's font request of a non-font file
       logText.includes('Failed to decode downloaded font: ' + getServerUrl() + '/sentry-env.ts?font') ||
       logText.includes('OTS parsing error'),
@@ -262,6 +265,21 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     await expectErrorEvent('DATA_STRING')
     await sleep(1000)
     expect(getErrorEvents('DATA_STRING').length).toBe(1)
+  })
+
+  test('thrown object is sent to Sentry as thrown', async () => {
+    await fetch(getServerUrl() + '/data-object')
+    const getEvents = () =>
+      ingest.items.filter((item) => item.type === 'event' && item.payload.tags?.['vike.page'] === '/pages/data-object')
+    await autoRetry(
+      async () => {
+        expect(getEvents().length).toBe(1)
+      },
+      { timeout: 10 * 1000 },
+    )
+    const { payload } = getEvents()[0]!
+    expect(payload.exception.values.at(-1).value).toBe('Object captured as exception with keys: code')
+    expect(JSON.stringify(payload.extra.__serialized__)).toBe('{"code":"DATA_OBJ"}')
   })
 
   test('sync error is sent to Sentry', async () => {

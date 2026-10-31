@@ -433,7 +433,7 @@ async function expectErrorEvent(message: string) {
   )
 }
 
-// Lets the test's request be traced regardless of tracesSampleRate
+// Gives the test's request its own trace ID, to find its spans by
 function getSampledTraceHeaders() {
   const traceId = crypto.randomUUID().replaceAll('-', '')
   const spanId = traceId.slice(0, 16)

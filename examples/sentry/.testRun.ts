@@ -80,6 +80,9 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
   test('redirect() is not sent to Sentry', async () => {
     const response = await fetch(getServerUrl() + '/guarded', { redirect: 'manual' })
     expect(response.status).toBe(302)
+    // Thrown while streaming, it also reaches React's error callback
+    const streamed = await fetch(getServerUrl() + '/ssr-redirect', { redirect: 'manual' })
+    expect(streamed.status).toBe(302)
     await gotoHydrated('/')
     await page.evaluate(() => {
       const link = document.createElement('a')

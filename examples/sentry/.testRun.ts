@@ -1,7 +1,7 @@
 export { testRun }
 export { testRunWithoutDsn }
 
-import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry } from '@brillout/test-e2e'
+import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, sleep } from '@brillout/test-e2e'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -42,6 +42,22 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     await testCounter()
   })
 
+  test('redirect() is not sent to Sentry', async () => {
+    const response = await fetch(getServerUrl() + '/guarded', { redirect: 'manual' })
+    expect(response.status).toBe(302)
+    await gotoHydrated('/')
+    await page.evaluate(() => {
+      const link = document.createElement('a')
+      link.href = '/guarded'
+      link.textContent = 'Guarded'
+      document.body.append(link)
+    })
+    await page.locator('a', { hasText: 'Guarded' }).click()
+    await page.waitForURL(getServerUrl() + '/')
+    await sleep(2000)
+    expect(getErrorEvents('AbortRender').length).toBe(0)
+  })
+
   test('sync error is sent to Sentry', async () => {
     await gotoHydrated('/')
     await page.locator('button', { hasText: 'Throw Sync Error' }).click()
@@ -73,7 +89,7 @@ function testRunWithoutDsn() {
     await page.goto(getServerUrl() + '/')
     await testCounter()
     await page.locator('button', { hasText: 'Throw Sync Error' }).click()
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    await sleep(2000)
     expect(ingest.items.length).toBe(0)
   })
 }

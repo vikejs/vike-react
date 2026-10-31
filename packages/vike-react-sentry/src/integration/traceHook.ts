@@ -2,6 +2,7 @@ export { traceHook }
 
 import type * as SentryReact from '@sentry/react'
 import type { Config, PageContext } from 'vike/types'
+import { isVikeControlFlow } from '../utils/isVikeControlFlow.js'
 
 type Sentry = Pick<typeof SentryReact, 'isEnabled' | 'withScope' | 'startSpan' | 'captureException'>
 type Hook = Parameters<Extract<Config['onHookCall'], Function>>[0]
@@ -42,9 +43,8 @@ async function traceHook(Sentry: Sentry, hook: Hook, pageContext: PageContext | 
         try {
           await hook.call()
         } catch (error) {
-          span.setStatus({
-            code: 2,
-          })
+          if (isVikeControlFlow(error)) return
+          span.setStatus({ code: 2, message: 'internal_error' })
           Sentry.captureException(error)
         }
       },

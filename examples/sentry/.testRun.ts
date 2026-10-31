@@ -179,11 +179,18 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
   })
 
   test('+route error upon client-side navigation is sent to Sentry', async () => {
+    const getClientEvents = () => getErrorEvents('ROUTE_ERR').filter((event) => event.side === 'client')
     await gotoHydrated('/links')
+    // Prefetching the link also runs the +route function (and, on vike <= 0.4.268, sends its error): let it settle
+    let eventsBefore: number
+    do {
+      eventsBefore = getClientEvents().length
+      await sleep(1500)
+    } while (getClientEvents().length !== eventsBefore)
     await page.locator('a', { hasText: 'Route error' }).click()
     await autoRetry(
       async () => {
-        expect(getErrorEvents('ROUTE_ERR').filter((event) => event.side === 'client').length > 0).toBe(true)
+        expect(getClientEvents().length > eventsBefore).toBe(true)
       },
       { timeout: 10 * 1000 },
     )

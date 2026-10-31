@@ -19,7 +19,6 @@ Features:
 [Installation](#installation)  
 [Example](#example)  
 [Settings](#settings)  
-[Migration from 0.1](#migration-from-01)  
 [Version history](#version-history)  
 [See also](#see-also)  
 
@@ -102,6 +101,8 @@ Defaults set by `vike-react-sentry`:
   replaysOnErrorSampleRate: 1.0
 }
 ```
+
+To disable tracing, set `tracesSampleRate: undefined`.
 
 `SENTRY_DSN` isn't supported: it makes `vike dev` and `vike build` fail, so use `PUBLIC_ENV__SENTRY_DSN` instead.
 
@@ -209,16 +210,6 @@ export default {
 | `SENTRY_PROJECT` | Project slug (optional, auto-detected from `PUBLIC_ENV__SENTRY_DSN`). |
 | `SENTRY_URL` | Custom Sentry URL for source map upload and auto-detection. Only needed for self-hosted instances. |
 | `SENTRY_RELEASE` | Release name of the uploaded source maps (optional, detected from Git by default). |
-
-<br/>
-
-## Migration from 0.1
-
-- `+sentry` is no longer loaded at build-time, so its `release` no longer names the source map upload, and its `dsn` no longer drives the `org`/`project` auto-detection. Set the upload release with `SENTRY_RELEASE` or `+sentryVite: { release: { name } }`. Stack traces are matched by debug ID either way. For auto-detection, put the DSN in `PUBLIC_ENV__SENTRY_DSN`, or set `SENTRY_ORG` and `SENTRY_PROJECT`.
-- A `+sentry` function now receives `globalContext`. Use it instead of `await getGlobalContext()`, which hangs there.
-- `integrations` set in `+sentry` are now added to the default integrations instead of replacing them. To drop a default integration, use the function form: `integrations: (integrations) => integrations.filter((integration) => integration.name !== 'Replay')`.
-- Tracing is now enabled by default at `tracesSampleRate: 0.2`, as documented: a typo kept it disabled. To keep tracing disabled, set `tracesSampleRate: undefined` in `+sentry.js`.
-- Errors thrown by server hooks are now sent once, by [`+onError()`](https://vike.dev/onError), with `mechanism.type: 'auto.function.vike'` and `handled: false`. `throw redirect()`, `throw render()` and `throw abort()` are no longer sent. Update alert rules that match the previous events.
 
 <br/>
 

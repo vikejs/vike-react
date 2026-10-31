@@ -80,6 +80,16 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     expect(ingest.items.filter((item) => item.payload?.contexts?.trace?.op === 'vike.hook').length).toBe(0)
   })
 
+  test('one server transaction per page load', async () => {
+    const { headers, traceId } = getSampledTraceHeaders()
+    await page.setExtraHTTPHeaders(headers)
+    await gotoHydrated('/')
+    await page.setExtraHTTPHeaders({})
+    await sleep(2000)
+    const transactions = getTransactions('server').filter((t) => t.payload.contexts.trace.trace_id === traceId)
+    expect(transactions.map((t) => t.payload.transaction).join(', ')).toBe('GET /')
+  })
+
   test('no span for +route functions', async () => {
     const { headers, traceId } = getSampledTraceHeaders()
     await fetch(getServerUrl() + '/item/1', { headers })

@@ -17,8 +17,23 @@ async function onCreateGlobalContext(globalContext: GlobalContextServer): Promis
   }
 
   if (!SentryNode.getClient()) {
-    SentryNode.init(resolveSentryServerSettings(serverConfig))
+    const options = resolveSentryServerSettings(serverConfig)
+    SentryNode.init({ defaultIntegrations: getDefaultIntegrations(options), ...options })
   }
+}
+
+function getDefaultIntegrations(options: SentryNodeOptions) {
+  return SentryNode.getDefaultIntegrations(options).map((integration) =>
+    integration.name !== 'Http'
+      ? integration
+      : SentryNode.httpIntegration({
+          // The dev server also serves the app's modules: they aren't page requests
+          ignoreIncomingRequests: (_urlPath, request) => {
+            const destination = request.headers['sec-fetch-dest']
+            return import.meta.env.DEV && (destination === 'script' || destination === 'style')
+          },
+        }),
+  )
 }
 
 const resolveSentryServerSettings = (serverConfig: SentryNodeOptions): SentryNodeOptions => ({

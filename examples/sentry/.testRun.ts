@@ -4,16 +4,13 @@ import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry } from '@br
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { startIngest } from './.ingest'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const TEST_DSN = 'https://8de66fe8dda3a86d986df8ee3aa09f72@o4510438936412161.ingest.de.sentry.io/4510438941655120'
+const ingest = await startIngest()
 
 function setupEnv() {
-  const envPath = path.join(__dirname, '.env')
-  const examplePath = path.join(__dirname, '.env.example')
-  let content = fs.readFileSync(examplePath, 'utf-8')
-  content = content.replace('your-dsn-url', TEST_DSN)
-  fs.writeFileSync(envPath, content)
+  fs.writeFileSync(path.join(__dirname, '.env'), `PUBLIC_ENV__SENTRY_DSN=${ingest.dsn}\n`)
 }
 
 function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
@@ -24,8 +21,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     // We intentionally throw errors to test Sentry error reporting
     tolerateError: ({ logText }) =>
       logText.includes('This is a test error sent to Sentry!') ||
-      logText.includes('This is an async error sent to Sentry!') ||
-      logText.includes('[sentry-vite-plugin]'),
+      logText.includes('This is an async error sent to Sentry!'),
   })
 
   test('page content is rendered to HTML', async () => {
@@ -40,14 +36,21 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
   })
 
   test('sync error is sent to Sentry', async () => {
-    await page.goto(getServerUrl() + '/')
-    await testSentryRequest('Throw Sync Error', 'This is a test error sent to Sentry!')
+    await gotoHydrated('/')
+    await page.locator('button', { hasText: 'Throw Sync Error' }).click()
+    await expectErrorEvent('This is a test error sent to Sentry!')
   })
 
   test('async error is sent to Sentry', async () => {
-    await page.goto(getServerUrl() + '/')
-    await testSentryRequest('Throw Async Error', 'This is an async error sent to Sentry!')
+    await gotoHydrated('/')
+    await page.locator('button', { hasText: 'Throw Async Error' }).click()
+    await expectErrorEvent('This is an async error sent to Sentry!')
   })
+}
+
+async function gotoHydrated(url: string) {
+  await page.goto(getServerUrl() + url)
+  await page.waitForFunction(() => !!(window as any)._vike?.fullyRenderedUrl)
 }
 
 async function testCounter() {
@@ -72,27 +75,17 @@ async function testCounter() {
   )
 }
 
-async function testSentryRequest(buttonText: string, expectedMessage: string) {
-  const sentryBodies: string[] = []
-
-  // Listen for Sentry envelope requests
-  const listener = (req: { url: () => string; method: () => string; postData: () => string | null }) => {
-    if (req.url().includes('sentry.io') && req.method() === 'POST') {
-      sentryBodies.push(req.postData() || '')
-    }
-  }
-  page.on('request', listener)
-
-  const btn = page.locator('button', { hasText: buttonText })
-  await btn.click()
-
+async function expectErrorEvent(message: string) {
   await autoRetry(
     async () => {
-      const match = sentryBodies.find((body) => body.includes(expectedMessage))
-      expect(match).toBeTruthy()
+      expect(getErrorEvents(message).length).toBe(1)
     },
     { timeout: 10 * 1000 },
   )
+}
 
-  page.removeListener('request', listener)
+function getErrorEvents(message: string) {
+  return ingest.items.filter(
+    (item) => item.type === 'event' && item.payload.exception?.values?.some((v: any) => v.value === message),
+  )
 }

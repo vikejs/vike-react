@@ -29,6 +29,9 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('DATA_ERR') ||
       logText.includes('DATA_STRING') ||
       logText.includes('ROUTE_ERR') ||
+      logText.includes('BOUNDARY_CAUGHT') ||
+      logText.includes('Hydration failed') ||
+      logText.includes('Minified React error #418') ||
       // Vike's logs about the DATA_STRING value
       logText.includes('The thrown value is') ||
       // The test's font request of a non-font file
@@ -174,6 +177,32 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       },
       { timeout: 10 * 1000 },
     )
+  })
+
+  test("React's caught and recoverable errors are logged and sent to Sentry once", async () => {
+    const errorLogs: string[] = []
+    const onConsole = (message: { type(): string; text(): string }) => {
+      if (message.type() === 'error') errorLogs.push(message.text())
+    }
+    page.on('console', onConsole)
+    await gotoHydrated('/hydration-mismatch')
+    await gotoHydrated('/error-boundary')
+    await page.locator('button', { hasText: 'Throw Caught Error' }).click()
+    await page.locator('p', { hasText: 'Error caught' }).waitFor()
+    await expectErrorEvent('BOUNDARY_CAUGHT')
+    await autoRetry(
+      async () => {
+        expect(getHydrationEvents().length).toBe(1)
+      },
+      { timeout: 10 * 1000 },
+    )
+    await sleep(1000)
+    page.off('console', onConsole)
+    expect(getErrorEvents('BOUNDARY_CAUGHT').length).toBe(1)
+    expect(getHydrationEvents().length).toBe(1)
+    // Once each: nothing else logs them
+    expect(errorLogs.filter((log) => log.includes('BOUNDARY_CAUGHT')).length).toBe(1)
+    expect(errorLogs.filter((log) => /Hydration failed|Minified React error #418/.test(log)).length).toBe(1)
   })
 
   test('hook error is sent to Sentry once', async () => {
@@ -344,6 +373,14 @@ function getSampledTraceHeaders() {
   const traceId = crypto.randomUUID().replaceAll('-', '')
   const spanId = traceId.slice(0, 16)
   return { traceId, headers: { 'sentry-trace': `${traceId}-${spanId}-1` } }
+}
+
+function getHydrationEvents() {
+  return ingest.items.filter(
+    (item) =>
+      item.type === 'event' &&
+      item.payload.exception?.values?.some((v: any) => /Hydration failed|Minified React error #418/.test(v.value)),
+  )
 }
 
 function getMessageEvents(message: string) {

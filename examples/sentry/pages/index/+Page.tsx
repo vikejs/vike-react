@@ -1,6 +1,7 @@
 export { Page }
 
 import { useState } from 'react'
+import logo from './logo.svg'
 
 function Page() {
   const [count, setCount] = useState(0)
@@ -21,6 +22,7 @@ function Page() {
 
   return (
     <div style={{ padding: '20px', fontFamily: 'system-ui' }}>
+      <img src={logo} alt="Logo" width={32} height={32} />
       <h1>Vike + React + Sentry Example</h1>
 
       <p>This example demonstrates Sentry error tracking integration with Vike.</p>

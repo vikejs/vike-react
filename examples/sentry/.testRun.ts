@@ -29,7 +29,10 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('DATA_ERR') ||
       logText.includes('DATA_STRING') ||
       // Vike's logs about the DATA_STRING value
-      logText.includes('The thrown value is'),
+      logText.includes('The thrown value is') ||
+      // The test's font request of a non-font file
+      logText.includes('Failed to decode downloaded font: ' + getServerUrl() + '/sentry-env.ts?font') ||
+      logText.includes('OTS parsing error'),
   })
 
   test('page content is rendered to HTML', async () => {
@@ -102,11 +105,28 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
   test('one server transaction per page load', async () => {
     const { headers, traceId } = getSampledTraceHeaders()
     await page.setExtraHTTPHeaders(headers)
+    // Loads the page's modules and its <img>
     await gotoHydrated('/')
+    if (!isProd) {
+      // Subresources whose path isn't in @sentry/node's list of static asset extensions
+      await page.evaluate(async () => {
+        new Worker('/sentry-env.ts', { type: 'module' })
+        await new FontFace('Font', 'url(/sentry-env.ts?font)').load().catch(() => {})
+      })
+      await sleep(1000)
+    }
     await page.setExtraHTTPHeaders({})
+    // A fetch() of the app's server is traced
+    const fetchTrace = getSampledTraceHeaders()
+    await page.evaluate(
+      (headers) => fetch('/index.pageContext.json', { headers }).then((response) => response.text()),
+      fetchTrace.headers,
+    )
     await sleep(2000)
-    const segments = ingest.spans.filter((span) => span.side === 'server' && span.isSegment && span.traceId === traceId)
-    expect(segments.length).toBe(1)
+    const getServerSegments = (traceId: string) =>
+      ingest.spans.filter((span) => span.side === 'server' && span.isSegment && span.traceId === traceId)
+    expect(getServerSegments(traceId).length).toBe(1)
+    expect(getServerSegments(fetchTrace.traceId).length).toBe(1)
   })
 
   test('no span for +route functions', async () => {

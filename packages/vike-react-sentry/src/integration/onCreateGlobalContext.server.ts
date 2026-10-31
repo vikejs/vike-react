@@ -14,10 +14,16 @@ async function onCreateGlobalContext(globalContext: GlobalContextServer): Promis
       integration.name !== 'Http'
         ? integration
         : SentryNode.httpIntegration({
-            // The dev server also serves the app's modules: they aren't page requests
+            // The dev server also serves the app's modules and assets. Browsers send `sec-fetch-dest`: `document`,
+            // `iframe` or `frame` for a page view, `empty` for fetch() and XHR (e.g. pageContext.json), and any other
+            // value for a subresource (script, style, image, font, worker, manifest, ...), which isn't traced in dev.
             ignoreIncomingRequests: (_urlPath, request) => {
               const destination = request.headers['sec-fetch-dest']
-              return import.meta.env.DEV && (destination === 'script' || destination === 'style')
+              return (
+                import.meta.env.DEV &&
+                typeof destination === 'string' &&
+                !['document', 'iframe', 'frame', 'empty'].includes(destination)
+              )
             },
           }),
     ),

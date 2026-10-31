@@ -41,6 +41,17 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     expect(html).toMatch(/<meta name="baggage" content="[^"]*sentry-sample_rate=0\.2/)
   })
 
+  // Must be the first page load: with a cold cache, Vite reloads the page when it finds a dependency late
+  test('first page load is not reloaded', async () => {
+    let loads = 0
+    const onLoad = () => loads++
+    page.on('load', onLoad)
+    await gotoHydrated('/')
+    await sleep(3000)
+    page.off('load', onLoad)
+    expect(loads).toBe(1)
+  })
+
   test('page is rendered to the DOM and interactive', async () => {
     await page.goto(getServerUrl() + '/')
     expect(await page.textContent('h1')).toBe('Vike + React + Sentry Example')

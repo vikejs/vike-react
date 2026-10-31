@@ -13,10 +13,7 @@ function captureHookError(
   hook?: Hook,
   pageContext?: PageContext | null,
 ): void {
-  Sentry.captureException(error, {
-    mechanism: { type: 'auto.function.vike', handled: false },
-    captureContext: getHookScope(hook, pageContext),
-  })
+  Sentry.captureException(error, { captureContext: getHookScope(hook, pageContext) })
 }
 
 function getHookScope(

@@ -133,6 +133,35 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     expect(events[0]!.payload.tags.side).toBe('server')
   })
 
+  test('an event sent by a server hook has its hook and page tags', async () => {
+    await fetch(getServerUrl() + '/user-message')
+    await autoRetry(
+      async () => {
+        expect(getMessageEvents('USER_MESSAGE').length).toBe(1)
+      },
+      { timeout: 10 * 1000 },
+    )
+    await sleep(1000)
+    const events = getMessageEvents('USER_MESSAGE')
+    expect(events.length).toBe(1)
+    expect(events[0]!.payload.tags['vike.hook']).toBe('data')
+    expect(events[0]!.payload.tags['vike.page']).toBe('/pages/user-message')
+  })
+
+  test('an event sent by a client hook has its hook and page tags', async () => {
+    await gotoHydrated('/user-message')
+    await autoRetry(
+      async () => {
+        expect(getMessageEvents('USER_MESSAGE_CLIENT').length).toBe(1)
+      },
+      { timeout: 10 * 1000 },
+    )
+    const event = getMessageEvents('USER_MESSAGE_CLIENT')[0]!
+    expect(event.side).toBe('client')
+    expect(event.payload.tags['vike.hook']).toBe('onBeforeRender')
+    expect(event.payload.tags['vike.page']).toBe('/pages/user-message')
+  })
+
   test('thrown string is sent to Sentry once', async () => {
     await fetch(getServerUrl() + '/data-string')
     await expectErrorEvent('DATA_STRING')
@@ -239,6 +268,10 @@ function getSampledTraceHeaders() {
   const traceId = crypto.randomUUID().replaceAll('-', '')
   const spanId = traceId.slice(0, 16)
   return { traceId, headers: { 'sentry-trace': `${traceId}-${spanId}-1` } }
+}
+
+function getMessageEvents(message: string) {
+  return ingest.items.filter((item) => item.type === 'event' && item.payload.message === message)
 }
 
 function getErrorEvents(message: string) {

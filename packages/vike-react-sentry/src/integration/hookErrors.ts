@@ -1,6 +1,7 @@
 export { rememberHook }
 export { recallHook }
 export { captureHookError }
+export { getHookScope }
 export type { Hook }
 
 import type * as SentryReact from '@sentry/react'
@@ -27,16 +28,23 @@ function captureHookError(
 ): void {
   Sentry.captureException(error, {
     mechanism: { type: 'auto.function.vike', handled: false },
-    captureContext: {
-      tags: { 'vike.hook': hook?.name, 'vike.page': pageContext?.pageId ?? undefined },
-      contexts: {
-        vike: {
-          hook: hook?.name,
-          filePath: hook?.filePath,
-          pageId: pageContext?.pageId,
-          urlPathname: pageContext?.urlPathname,
-        },
+    captureContext: getHookScope(hook, pageContext),
+  })
+}
+
+function getHookScope(
+  hook?: Hook,
+  pageContext?: PageContext | null,
+): { tags: Record<string, string | undefined>; contexts: Record<string, Record<string, unknown>> } {
+  return {
+    tags: { 'vike.hook': hook?.name, 'vike.page': pageContext?.pageId ?? undefined },
+    contexts: {
+      vike: {
+        hook: hook?.name,
+        filePath: hook?.filePath,
+        pageId: pageContext?.pageId,
+        urlPathname: pageContext?.urlPathname,
       },
     },
-  })
+  }
 }

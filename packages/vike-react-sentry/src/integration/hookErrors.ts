@@ -15,7 +15,7 @@ const thrownErrors = new WeakMap<object, { hook: Hook; message: string | undefin
 
 function rememberHook(error: unknown, hook: Hook): void {
   if (typeof error !== 'object' || error === null) return
-  thrownErrors.set(error, { hook, message: error instanceof Error ? error.message : undefined })
+  thrownErrors.set(error, { hook, message: isError(error) ? error.message : undefined })
 }
 
 /**
@@ -25,15 +25,19 @@ function rememberHook(error: unknown, hook: Hook): void {
  */
 function recallThrow(error: unknown): { error: unknown; hook?: Hook } {
   const thrown = typeof error === 'object' && error !== null ? thrownErrors.get(error) : undefined
-  if (!(error instanceof Error) || thrown?.message === undefined) {
+  if (!isError(error) || thrown?.message === undefined) {
     const getOriginalError = (error as { getOriginalError?: unknown } | null)?.getOriginalError
     const original: unknown = typeof getOriginalError === 'function' ? getOriginalError() : error
     // Vike's copy of an Error loses its stack, an accessor
-    return { error: original instanceof Error ? error : original, hook: thrown?.hook }
+    const isCopyOfError = isError(error) && typeof original === 'object' && original !== null
+    return { error: isCopyOfError ? error : original, hook: thrown?.hook }
   }
   const frames = (error.stack ?? '').split('\n').filter((line) => /^\s+at /.test(line))
-  const errorAsThrown: Error = Object.create(Object.getPrototypeOf(error), Object.getOwnPropertyDescriptors(error))
+  // Sentry tells a copy is an error by `instanceof Error`, which an error from another realm fails
+  const prototype = error instanceof Error ? Object.getPrototypeOf(error) : Error.prototype
+  const errorAsThrown: Error = Object.create(prototype, Object.getOwnPropertyDescriptors(error))
   Object.defineProperties(errorAsThrown, {
+    name: { value: error.name, writable: true, configurable: true },
     message: { value: thrown.message, writable: true, configurable: true },
     stack: { value: [`${error.name}: ${thrown.message}`, ...frames].join('\n'), writable: true, configurable: true },
   })
@@ -67,4 +71,15 @@ function getHookScope(
       },
     },
   }
+}
+
+// As Sentry tells errors: `instanceof Error` is false for an error from another realm (e.g. node:vm)
+function isError(value: unknown): value is Error {
+  const tag = Object.prototype.toString.call(value)
+  return (
+    value instanceof Error ||
+    tag === '[object Error]' ||
+    tag === '[object Exception]' ||
+    tag === '[object DOMException]'
+  )
 }

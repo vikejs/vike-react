@@ -43,7 +43,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('Following error was thrown by the ') ||
       /HTTP response ← \/(data-(error|string|object)|ssr-shell) 500/.test(logText) ||
       // The test's font request of a non-font file
-      logText.includes('Failed to decode downloaded font: ' + getServerUrl() + '/sentry-env.ts?font') ||
+      logText.includes('Failed to decode downloaded font: ' + getServerUrl() + '/pages/+sentry.ts?font') ||
       logText.includes('OTS parsing error'),
   })
 
@@ -145,8 +145,8 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     if (!isProd) {
       // Subresources whose path isn't in @sentry/node's list of static asset extensions
       await page.evaluate(async () => {
-        new Worker('/sentry-env.ts', { type: 'module' })
-        await new FontFace('Font', 'url(/sentry-env.ts?font)').load().catch(() => {})
+        new Worker('/pages/+sentry.ts', { type: 'module' })
+        await new FontFace('Font', 'url(/pages/+sentry.ts?font)').load().catch(() => {})
       })
       await sleep(1000)
     }
@@ -288,8 +288,6 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     await page.locator('button', { hasText: 'Throw Sync Error' }).click()
     await expectErrorEvent('This is a test error sent to Sentry!')
     const event = getErrorEvents('This is a test error sent to Sentry!')[0]!.payload
-    // Set by the +sentry factory, from a module that only Vite's resolve.alias can find
-    expect(event.release).toBe('vike-react-sentry-example@0.0.0')
     // Set by the +sentry factory, from its globalContext argument
     expect(event.tags.side).toBe('client')
     // The integration added by +sentry.client.ts and the extension's default ones
@@ -352,8 +350,8 @@ function testRunWithoutDsn() {
 }
 
 function testRunWithFactoryDsn() {
-  // Only +sentry returns the DSN: neither the build nor the server may need it from the environment
-  setupEnv(`PUBLIC_ENV__FACTORY_DSN=${ingest.dsn}\n`)
+  // Only +sentry returns the DSN: neither the build nor the server may need PUBLIC_ENV__SENTRY_DSN
+  setupEnv(`VITE_SENTRY_DSN=${ingest.dsn}\n`)
   run('pnpm run prod', {
     serverIsReadyMessage: 'Listening on',
     tolerateError: ({ logText }) =>

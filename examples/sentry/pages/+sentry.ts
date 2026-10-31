@@ -1,10 +1,9 @@
 export { sentry as default }
 
 import type { Config } from 'vike/types'
-import { dsn, release } from '#sentry-env'
 
 const sentry: Config['sentry'] = (globalContext) => ({
-  dsn,
-  release,
+  // Without it, vike-react-sentry reads PUBLIC_ENV__SENTRY_DSN
+  dsn: import.meta.env.VITE_SENTRY_DSN,
   initialScope: { tags: { side: globalContext.isClientSide ? 'client' : 'server' } },
 })

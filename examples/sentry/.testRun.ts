@@ -29,6 +29,11 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     expect(html).toContain('<h1>Vike + React + Sentry Example</h1>')
   })
 
+  test('tracing is enabled by default', async () => {
+    const html = await fetchHtml('/')
+    expect(html).toMatch(/<meta name="baggage" content="[^"]*sentry-sample_rate=0\.2/)
+  })
+
   test('page is rendered to the DOM and interactive', async () => {
     await page.goto(getServerUrl() + '/')
     expect(await page.textContent('h1')).toBe('Vike + React + Sentry Example')

@@ -21,13 +21,12 @@ async function onCreateGlobalContext(globalContext: GlobalContextClient): Promis
   }
 }
 
-const resolveSentryClientSettings = (clientConfig: SentryReactOptions) =>
-  ({
-    environment: clientConfig.environment || import.meta.env.MODE || 'production',
-    replaysSessionSampleRate: 0.1,
-    replaysOnErrorSampleRate: 1.0,
-    integrations: [SentryReact.browserTracingIntegration(), SentryReact.replayIntegration()],
-    dsn: resolveDsn(clientConfig.dsn),
-    traceSampleRate: clientConfig.tracesSampleRate ?? TRACE_DEFAULT_SAMPLE_RATE,
-    ...clientConfig,
-  }) as SentryReactOptions
+const resolveSentryClientSettings = (clientConfig: SentryReactOptions): SentryReactOptions => ({
+  environment: clientConfig.environment || import.meta.env.MODE || 'production',
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1.0,
+  integrations: [SentryReact.browserTracingIntegration(), SentryReact.replayIntegration()],
+  dsn: resolveDsn(clientConfig.dsn),
+  tracesSampleRate: clientConfig.tracesSampleRate ?? TRACE_DEFAULT_SAMPLE_RATE,
+  ...clientConfig,
+})

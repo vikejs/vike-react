@@ -21,10 +21,9 @@ async function onCreateGlobalContext(globalContext: GlobalContextServer): Promis
   }
 }
 
-const resolveSentryServerSettings = (serverConfig: SentryNodeOptions) =>
-  ({
-    environment: serverConfig.environment || import.meta.env.MODE || 'production',
-    dsn: resolveDsn(serverConfig.dsn),
-    traceSampleRate: serverConfig.tracesSampleRate ?? TRACE_DEFAULT_SAMPLE_RATE,
-    ...serverConfig,
-  }) as SentryNodeOptions
+const resolveSentryServerSettings = (serverConfig: SentryNodeOptions): SentryNodeOptions => ({
+  environment: serverConfig.environment || import.meta.env.MODE || 'production',
+  dsn: resolveDsn(serverConfig.dsn),
+  tracesSampleRate: serverConfig.tracesSampleRate ?? TRACE_DEFAULT_SAMPLE_RATE,
+  ...serverConfig,
+})

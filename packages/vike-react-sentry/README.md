@@ -103,7 +103,7 @@ Defaults set by `vike-react-sentry`:
 }
 ```
 
-On the server-side, `@sentry/node` also reads the `SENTRY_DSN` environment variable if `dsn` is missing.
+On the server-side, `@sentry/node` also reads the `SENTRY_DSN` environment variable if `dsn` is missing. It reads it from the server's environment when the server starts, so in production set it in that environment: a `.env` file is loaded by `vike dev` and `vike build`, not by your production server.
 
 You can export a function, which receives [`globalContext`](https://vike.dev/globalContext):
 
@@ -204,7 +204,7 @@ export default {
 | Variable | Description |
 |----------|-------------|
 | `PUBLIC_ENV__SENTRY_DSN` | Your Sentry DSN. Public and safe for browser. |
-| `SENTRY_DSN` | DSN used on the server-side only, if `PUBLIC_ENV__SENTRY_DSN` isn't set. |
+| `SENTRY_DSN` | DSN used on the server-side only, if `PUBLIC_ENV__SENTRY_DSN` isn't set. Read from the server's environment when the server starts: in production, set it there, not only in `.env`. |
 | `SENTRY_AUTH_TOKEN` | Auth token for source map upload. Create at [Sentry Auth Tokens](https://sentry.io/settings/account/api/auth-tokens/). Required scopes: `project:read`, `project:releases`, `project:write`. |
 | `SENTRY_ORG` | Organization slug (optional, auto-detected from `PUBLIC_ENV__SENTRY_DSN`). |
 | `SENTRY_PROJECT` | Project slug (optional, auto-detected from `PUBLIC_ENV__SENTRY_DSN`). |

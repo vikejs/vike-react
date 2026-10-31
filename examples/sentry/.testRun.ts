@@ -1,6 +1,7 @@
 export { testRun }
 export { testRunWithoutDsn }
 export { testRunWithFactoryDsn }
+export { testRunWithServerDsn }
 
 import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, sleep } from '@brillout/test-e2e'
 import fs from 'node:fs'
@@ -329,6 +330,24 @@ function testRunWithFactoryDsn() {
     await page.locator('button', { hasText: 'Throw Sync Error' }).click()
     await expectErrorEvent('This is a test error sent to Sentry!')
     expect(getErrorEvents('This is a test error sent to Sentry!')[0]!.side).toBe('client')
+  })
+}
+
+function testRunWithServerDsn() {
+  // Only the production server's environment has the DSN, as the README says to set SENTRY_DSN
+  setupEnv('')
+  process.env.SENTRY_DSN = ingest.dsn
+  run('pnpm run prod', {
+    serverIsReadyMessage: 'Listening on',
+    tolerateError: ({ logText }) => logText.includes('DATA_ERR'),
+  })
+
+  test("server error is sent to the DSN of the server's environment", async () => {
+    // The server has its copy; the test files after this one share this process
+    delete process.env.SENTRY_DSN
+    await fetch(getServerUrl() + '/data-error')
+    await expectErrorEvent('DATA_ERR')
+    expect(getErrorEvents('DATA_ERR')[0]!.side).toBe('server')
   })
 }
 

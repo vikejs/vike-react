@@ -92,6 +92,8 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       { timeout: 10 * 1000 },
     )
     const segmentsBefore = getClientSegments().length
+    const getHookSegments = () => ingest.spans.filter((span) => span.isSegment && span.op === 'vike.hook')
+    const hookSegmentsBefore = getHookSegments().length
     for (let i = 0; i < 3; i++) {
       for (const deltaY of [3000, -3000]) {
         await page.mouse.wheel(0, deltaY)
@@ -100,7 +102,25 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     }
     await sleep(2000)
     expect(getClientSegments().length).toBe(segmentsBefore)
-    expect(ingest.spans.filter((span) => span.isSegment && span.op === 'vike.hook').length).toBe(0)
+    expect(getHookSegments().length).toBe(hookSegmentsBefore)
+  })
+
+  test('client hook upon client-side navigation has a span', async () => {
+    const { headers, traceId } = getSampledTraceHeaders()
+    await page.setExtraHTTPHeaders(headers)
+    await gotoHydrated('/links')
+    await page.setExtraHTTPHeaders({})
+    // Lets the pageload span end
+    await sleep(2000)
+    await page.locator('a', { hasText: 'Navigation target' }).click()
+    await page.waitForURL(getServerUrl() + '/navigation-target')
+    await autoRetry(
+      async () => {
+        const spans = ingest.spans.filter((span) => span.side === 'client' && span.traceId === traceId)
+        expect(spans.some((span) => span.op === 'vike.hook' && span.name === 'onBeforeRender')).toBe(true)
+      },
+      { timeout: 10 * 1000 },
+    )
   })
 
   test('one server transaction per page load', async () => {

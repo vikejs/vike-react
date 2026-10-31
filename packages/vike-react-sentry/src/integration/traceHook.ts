@@ -38,8 +38,9 @@ async function traceHook(Sentry: Sentry, hook: Hook, pageContext: PageContext | 
       {
         name: hook.name,
         op: 'vike.hook',
-        // Hooks running outside a page view (e.g. prefetching) would each become a transaction
-        onlyIfParent: true,
+        // Prefetching a link runs it outside a page view: it would become a transaction per link. Other hooks get
+        // their own transaction when nothing is traced, e.g. client hooks of a navigation, which run before its span.
+        onlyIfParent: hook.name === 'onBeforeRoute',
         attributes: {
           'vike.hook.name': hook.name,
           'vike.hook.file': hook.filePath,

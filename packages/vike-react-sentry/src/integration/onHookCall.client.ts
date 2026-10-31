@@ -1,52 +1,10 @@
-import * as Sentry from '@sentry/react'
-import type { Config, PageContextClient } from 'vike/types'
-type Hook = Parameters<Extract<Config['onHookCall'], Function>>[0]
+export { onHookCall }
 
-/**
- * Vike onHookCall configuration for Sentry integration (client-side).
- * Provides automatic tracing and error capture for all Vike hooks.
- */
-export async function onHookCall(hook: Hook, pageContext: PageContextClient) {
-  if (!Sentry.getClient() || hook.name === 'onError') {
-    return hook.call()
-  }
+import * as SentryReact from '@sentry/react'
+import type { Config } from 'vike/types'
+import { captureHookError } from './hookErrors.js'
+import { traceHook } from './traceHook.js'
 
-  // Extract useful context for Sentry
-  const url = pageContext?.urlOriginal ?? 'NOT-DEFINED'
-  const pageId = pageContext?.pageId ?? 'NOT-DEFINED'
-
-  // withScope ensures any error captured during hook execution has Vike context
-  return Sentry.withScope((scope) => {
-    scope.setTag('vike.hook', hook.name)
-    scope.setTag('vike.page', pageId)
-    scope.setContext('vike', {
-      hook: hook.name,
-      filePath: hook.filePath,
-      pageId,
-      url,
-    })
-
-    return Sentry.startSpan(
-      {
-        name: hook.name,
-        op: 'vike.hook',
-        attributes: {
-          'vike.hook.name': hook.name,
-          'vike.hook.file': hook.filePath,
-          'vike.page.id': pageId,
-          'vike.url': url,
-        },
-      },
-      async (span) => {
-        try {
-          await hook.call()
-        } catch (error) {
-          span.setStatus({
-            code: 2,
-          })
-          Sentry.captureException(error)
-        }
-      },
-    )
-  })
-}
+// Vike has no client-side +onError
+const onHookCall: Config['onHookCall'] = (hook, pageContext) =>
+  traceHook(SentryReact, hook, pageContext, (error) => captureHookError(SentryReact, error, hook, pageContext))

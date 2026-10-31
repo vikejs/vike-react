@@ -52,6 +52,11 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     expect(html).toContain('<h1>Vike + React + Sentry Example</h1>')
   })
 
+  test('tracing is enabled by default', async () => {
+    const html = await fetchHtml('/')
+    expect(html).toMatch(/<meta name="baggage" content="[^"]*sentry-sample_rate=0\.2/)
+  })
+
   // Must be the first page load: with a cold cache, Vite reloads the page when it finds a dependency late
   test('first page load is not reloaded', async () => {
     let loads = 0
@@ -433,7 +438,7 @@ async function expectErrorEvent(message: string) {
   )
 }
 
-// Gives the test's request its own trace ID, to find its spans by
+// Lets the test's request be traced regardless of tracesSampleRate
 function getSampledTraceHeaders() {
   const traceId = crypto.randomUUID().replaceAll('-', '')
   const spanId = traceId.slice(0, 16)

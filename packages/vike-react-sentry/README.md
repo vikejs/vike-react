@@ -57,7 +57,7 @@ That's it! With the configuration above, `vike-react-sentry` will automatically:
 - Initialize Sentry on both client and server
 - Track errors thrown by Vike hooks and React components, on both client and server (on the server, an error React recovers from inside `<Suspense>` is tracked only with [HTML streaming](https://vike.dev/streaming))
 - Instrument Vike hooks using [`+onHookCall()`](https://vike.dev/onHookCall)
-- Enable browser tracing for performance monitoring (when `tracesSampleRate` is set)
+- Enable browser tracing for performance monitoring
 - Upload source maps during production builds (when `SENTRY_AUTH_TOKEN` is set)
 
 Without a DSN, Sentry is disabled: nothing is sent and no trace tags are added to the HTML.
@@ -95,11 +95,14 @@ Defaults set by `vike-react-sentry`:
 {
   dsn: import.meta.env.PUBLIC_ENV__SENTRY_DSN,
   environment: import.meta.env.MODE,
+  tracesSampleRate: 0.2,
   // Client-side only
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1.0
 }
 ```
+
+To disable tracing, set `tracesSampleRate: undefined`.
 
 `SENTRY_DSN` isn't supported: it makes `vike dev` and `vike build` fail, so use `PUBLIC_ENV__SENTRY_DSN` instead.
 

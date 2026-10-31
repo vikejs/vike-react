@@ -35,6 +35,9 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('Minified React error #418') ||
       // Vike's logs about the DATA_STRING value
       logText.includes('The thrown value is') ||
+      // Vike's (>= 0.4.268) logs about the errors above
+      logText.includes('Following error was thrown by the ') ||
+      /HTTP response ← \/data-(error|string) 500/.test(logText) ||
       // The test's font request of a non-font file
       logText.includes('Failed to decode downloaded font: ' + getServerUrl() + '/sentry-env.ts?font') ||
       logText.includes('OTS parsing error'),
@@ -214,6 +217,13 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     expect(events.length).toBe(1)
     expect(events[0]!.payload.tags['vike.hook']).toBe('data')
     expect(events[0]!.payload.tags.side).toBe('server')
+    // Not Vike's log line about it
+    const exception = events[0]!.payload.exception.values.at(-1)
+    expect(exception.value).toBe('DATA_ERR')
+    expect(exception.type).toBe('Error')
+    const frames = exception.stacktrace?.frames ?? []
+    expect(frames.length > 0).toBe(true)
+    if (!isProd) expect(frames.at(-1).filename).toMatch(/\/pages\/data-error\/\+data\.ts$/)
   })
 
   test('an event sent by a server hook has its hook and page tags', async () => {

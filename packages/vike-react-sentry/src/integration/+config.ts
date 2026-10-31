@@ -27,7 +27,6 @@ const config = {
       env: {
         server: true,
         client: true,
-        config: true,
       },
       global: true,
       cumulative: true,

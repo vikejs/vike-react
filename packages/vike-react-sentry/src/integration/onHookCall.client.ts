@@ -7,7 +7,7 @@ type Hook = Parameters<Extract<Config['onHookCall'], Function>>[0]
  * Provides automatic tracing and error capture for all Vike hooks.
  */
 export async function onHookCall(hook: Hook, pageContext: PageContextClient) {
-  if (!Sentry.getClient() || hook.name === 'onError') {
+  if (!Sentry.isEnabled() || hook.name === 'onError') {
     return hook.call()
   }
 

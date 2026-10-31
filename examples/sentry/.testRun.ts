@@ -1,4 +1,5 @@
 export { testRun }
+export { testRunWithoutDsn }
 
 import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry } from '@brillout/test-e2e'
 import fs from 'node:fs'
@@ -9,13 +10,14 @@ import { startIngest } from './.ingest'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ingest = await startIngest()
 
-function setupEnv() {
-  fs.writeFileSync(path.join(__dirname, '.env'), `PUBLIC_ENV__SENTRY_DSN=${ingest.dsn}\n`)
+function setupEnv(content: string) {
+  fs.writeFileSync(path.join(__dirname, '.env'), content)
 }
 
 function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
   const isProd = cmd !== 'pnpm run dev'
-  setupEnv()
+  // SENTRY_DSN is read by @sentry/node: it must not break the build
+  setupEnv(`PUBLIC_ENV__SENTRY_DSN=${ingest.dsn}\nSENTRY_DSN=${ingest.dsn}\n`)
   run(cmd, {
     serverIsReadyMessage: isProd ? 'Listening on' : undefined,
     // We intentionally throw errors to test Sentry error reporting
@@ -44,12 +46,35 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     await gotoHydrated('/')
     await page.locator('button', { hasText: 'Throw Sync Error' }).click()
     await expectErrorEvent('This is a test error sent to Sentry!')
+    // Set by the +sentry factory, from a module that only Vite's resolve.alias can find
+    expect(getErrorEvents('This is a test error sent to Sentry!')[0]!.payload.release).toBe(
+      'vike-react-sentry-example@0.0.0',
+    )
   })
 
   test('async error is sent to Sentry', async () => {
     await gotoHydrated('/')
     await page.locator('button', { hasText: 'Throw Async Error' }).click()
     await expectErrorEvent('This is an async error sent to Sentry!')
+  })
+}
+
+function testRunWithoutDsn() {
+  setupEnv('')
+  run('pnpm run prod', {
+    serverIsReadyMessage: 'Listening on',
+    tolerateError: ({ logText }) => logText.includes('This is a test error sent to Sentry!'),
+  })
+
+  test('page is rendered and nothing is sent to Sentry', async () => {
+    const html = await fetchHtml('/')
+    expect(html).toContain('<h1>Vike + React + Sentry Example</h1>')
+    expect(html).not.toContain('<meta name="sentry-trace"')
+    await page.goto(getServerUrl() + '/')
+    await testCounter()
+    await page.locator('button', { hasText: 'Throw Sync Error' }).click()
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+    expect(ingest.items.length).toBe(0)
   })
 }
 

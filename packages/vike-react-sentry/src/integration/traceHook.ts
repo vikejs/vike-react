@@ -6,7 +6,7 @@ import { getHookScope, type Hook } from './hookErrors.js'
 import { isVikeControlFlow } from '../utils/isVikeControlFlow.js'
 
 type Sentry = Pick<typeof SentryReact, 'isEnabled' | 'startSpan' | 'withScope'>
-type OnHookError = (error: unknown, hook: Hook, pageContext: PageContext | null) => void
+type OnHookError = (error: unknown) => void
 
 /** Traces a Vike hook call, and passes its error to `onHookError()`. */
 async function traceHook(Sentry: Sentry, hook: Hook, pageContext: PageContext | null, onHookError: OnHookError) {
@@ -29,7 +29,7 @@ async function traceHook(Sentry: Sentry, hook: Hook, pageContext: PageContext | 
       } catch (error) {
         // Vike ignores a prefetch's error, and routes again upon navigation
         if (isPrefetch || isVikeControlFlow(error)) return
-        onHookError(error, hook, pageContext)
+        onHookError(error)
       }
       return
     }
@@ -54,7 +54,7 @@ async function traceHook(Sentry: Sentry, hook: Hook, pageContext: PageContext | 
         } catch (error) {
           if (isVikeControlFlow(error)) return
           span.setStatus({ code: 2, message: 'internal_error' })
-          onHookError(error, hook, pageContext)
+          onHookError(error)
         }
       },
     )

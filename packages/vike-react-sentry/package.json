@@ -20,7 +20,9 @@
     "./__internal/integration/onCreateGlobalContext.client": "./dist/integration/onCreateGlobalContext.client.js",
     "./__internal/integration/onHookCall.server": "./dist/integration/onHookCall.server.js",
     "./__internal/integration/onHookCall.client": "./dist/integration/onHookCall.client.js",
-    "./__internal/integration/onError": "./dist/integration/onError.js"
+    "./__internal/integration/onError": "./dist/integration/onError.js",
+    "./__internal/integration/react.server": "./dist/integration/react.server.js",
+    "./__internal/integration/react.client": "./dist/integration/react.client.js"
   },
   "type": "module",
   "scripts": {

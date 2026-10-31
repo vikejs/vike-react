@@ -24,6 +24,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     tolerateError: ({ logText }) =>
       logText.includes('This is a test error sent to Sentry!') ||
       logText.includes('This is an async error sent to Sentry!') ||
+      logText.includes('This is a render error sent to Sentry!') ||
       logText.includes('DATA_ERR') ||
       logText.includes('DATA_STRING') ||
       // Vike's logs about the DATA_STRING value
@@ -140,6 +141,23 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     expect(event.sdk.integrations).toContain('HttpClient')
     expect(event.sdk.integrations).toContain('BrowserTracing')
     expect(event.sdk.integrations).toContain('Replay')
+  })
+
+  test('render error is sent to Sentry', async () => {
+    await gotoHydrated('/')
+    await page.locator('button', { hasText: 'Throw Render Error' }).click()
+    await expectErrorEvent('This is a render error sent to Sentry!')
+  })
+
+  test('SSR error inside a Suspense boundary is sent to Sentry', async () => {
+    const html = await fetchHtml('/ssr-boundary')
+    expect(html).toContain('SSR error inside a Suspense boundary')
+    await autoRetry(
+      async () => {
+        expect(getErrorEvents('SSR_BOUNDARY').filter((event) => event.side === 'server').length).toBe(1)
+      },
+      { timeout: 10 * 1000 },
+    )
   })
 
   test('async error is sent to Sentry', async () => {

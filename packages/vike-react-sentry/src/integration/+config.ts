@@ -1,7 +1,7 @@
 export { config as default }
 
 import { getViteConfig } from '../plugin/index.js'
-import type { Config } from 'vike/types'
+import type { Config, ImportString } from 'vike/types'
 import type { SentryOptions, SentryOptionsFactory } from '../types.js'
 import type { SentryVitePluginOptions } from '@sentry/vite-plugin'
 import 'vike-react/config' // Needed for merging vike-react's Vike.Config
@@ -22,6 +22,11 @@ const config = {
     'import:vike-react-sentry/__internal/integration/onHookCall.server:onHookCall',
     'import:vike-react-sentry/__internal/integration/onHookCall.client:onHookCall',
   ],
+  // Vike accepts one pointer import per environment, but vike-react's type of +react lists only one
+  react: [
+    'import:vike-react-sentry/__internal/integration/react.server:react',
+    'import:vike-react-sentry/__internal/integration/react.client:react',
+  ] as unknown as ImportString,
   meta: {
     sentry: {
       env: {

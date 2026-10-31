@@ -4,6 +4,11 @@ import { useState } from 'react'
 
 function Page() {
   const [count, setCount] = useState(0)
+  const [hasRenderError, setHasRenderError] = useState(false)
+
+  if (hasRenderError) {
+    throw new Error('This is a render error sent to Sentry!')
+  }
 
   const throwError = () => {
     throw new Error('This is a test error sent to Sentry!')
@@ -56,6 +61,20 @@ function Page() {
             }}
           >
             Throw Async Error
+          </button>
+
+          <button
+            onClick={() => setHasRenderError(true)}
+            style={{
+              padding: '10px',
+              backgroundColor: '#ffaa44',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+            }}
+          >
+            Throw Render Error
           </button>
         </div>
       </div>

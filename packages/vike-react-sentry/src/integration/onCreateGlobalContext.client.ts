@@ -2,7 +2,6 @@ export { onCreateGlobalContext }
 
 import * as SentryReact from '@sentry/react'
 import type { GlobalContextClient } from 'vike/types'
-import type { SentryOptions } from '../types.js'
 import type { SentryReactOptions } from '../types.js'
 import { resolveDsn } from '../utils/resolveDsn.js'
 import { TRACE_DEFAULT_SAMPLE_RATE } from './constants.js'
@@ -10,9 +9,9 @@ import { TRACE_DEFAULT_SAMPLE_RATE } from './constants.js'
 async function onCreateGlobalContext(globalContext: GlobalContextClient): Promise<void> {
   const sentryConfigs = globalContext.config.sentry || []
 
-  const clientConfig: SentryOptions = {}
+  const clientConfig: SentryReactOptions = {}
   for (const curr of [...sentryConfigs].reverse()) {
-    const resolvedConfig = typeof curr === 'function' ? await curr() : curr
+    const resolvedConfig = typeof curr === 'function' ? await curr(globalContext) : curr
     Object.assign(clientConfig, resolvedConfig)
   }
 

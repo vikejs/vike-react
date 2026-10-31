@@ -117,6 +117,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     const events = getErrorEvents('DATA_ERR')
     expect(events.length).toBe(1)
     expect(events[0]!.payload.tags['vike.hook']).toBe('data')
+    expect(events[0]!.payload.tags.side).toBe('server')
   })
 
   test('thrown string is sent to Sentry once', async () => {
@@ -130,10 +131,11 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     await gotoHydrated('/')
     await page.locator('button', { hasText: 'Throw Sync Error' }).click()
     await expectErrorEvent('This is a test error sent to Sentry!')
+    const event = getErrorEvents('This is a test error sent to Sentry!')[0]!.payload
     // Set by the +sentry factory, from a module that only Vite's resolve.alias can find
-    expect(getErrorEvents('This is a test error sent to Sentry!')[0]!.payload.release).toBe(
-      'vike-react-sentry-example@0.0.0',
-    )
+    expect(event.release).toBe('vike-react-sentry-example@0.0.0')
+    // Set by the +sentry factory, from its globalContext argument
+    expect(event.tags.side).toBe('client')
   })
 
   test('async error is sent to Sentry', async () => {

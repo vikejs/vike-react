@@ -2,7 +2,7 @@ export { config as default }
 
 import { getViteConfig } from '../plugin/index.js'
 import type { Config } from 'vike/types'
-import type { SentryOptions } from '../types.js'
+import type { SentryOptions, SentryOptionsFactory } from '../types.js'
 import type { SentryVitePluginOptions } from '@sentry/vite-plugin'
 import 'vike-react/config' // Needed for merging vike-react's Vike.Config
 
@@ -47,12 +47,12 @@ const config = {
 declare global {
   namespace Vike {
     interface Config {
-      sentry?: SentryOptions | (() => SentryOptions | Promise<SentryOptions>)
+      sentry?: SentryOptions | SentryOptionsFactory
       sentryVite?: SentryVitePluginOptions
     }
 
     interface ConfigResolved {
-      sentry?: (SentryOptions | (() => SentryOptions | Promise<SentryOptions>))[]
+      sentry?: (SentryOptions | SentryOptionsFactory)[]
       sentryVite?: SentryVitePluginOptions
     }
   }

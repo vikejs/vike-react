@@ -1,5 +1,6 @@
 export { rememberHook }
 export { recallThrow }
+export { isThrownByHook }
 export { captureHookError }
 export { getHookScope }
 export type { Hook }
@@ -16,6 +17,10 @@ const thrownErrors = new WeakMap<object, { hook: Hook; message: string | undefin
 function rememberHook(error: unknown, hook: Hook): void {
   if (typeof error !== 'object' || error === null) return
   thrownErrors.set(error, { hook, message: isError(error) ? error.message : undefined })
+}
+
+function isThrownByHook(error: unknown): boolean {
+  return typeof error === 'object' && error !== null && thrownErrors.has(error)
 }
 
 /**

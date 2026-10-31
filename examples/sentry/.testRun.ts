@@ -37,13 +37,14 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('DATA_STRING') ||
       logText.includes('ROUTE_ERR') ||
       logText.includes('BOUNDARY_CAUGHT') ||
+      logText.includes('SSR_SHELL') ||
       logText.includes('Hydration failed') ||
       logText.includes('Minified React error #418') ||
       // Vike's logs about the DATA_STRING value
       logText.includes('The thrown value is') ||
       // Vike's (>= 0.4.268) logs about the errors above
       logText.includes('Following error was thrown by the ') ||
-      /HTTP response ← \/data-(error|string|window|object|realm|named) 500/.test(logText) ||
+      /HTTP response ← \/(data-(error|string|window|object|realm|named)|ssr-shell) 500/.test(logText) ||
       // The test's font request of a non-font file
       logText.includes('Failed to decode downloaded font: ' + getServerUrl() + '/sentry-env.ts?font') ||
       logText.includes('OTS parsing error'),
@@ -337,6 +338,16 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       },
       { timeout: 10 * 1000 },
     )
+  })
+
+  test('SSR error outside a Suspense boundary is sent to Sentry once', async () => {
+    const response = await fetch(getServerUrl() + '/ssr-shell')
+    expect(response.status).toBe(500)
+    await expectErrorEvent('SSR_SHELL')
+    await sleep(1000)
+    const events = getErrorEvents('SSR_SHELL')
+    expect(events.length).toBe(1)
+    expect(events[0]!.payload.tags['vike.hook']).toBe('onRenderHtml')
   })
 
   test('async error is sent to Sentry', async () => {

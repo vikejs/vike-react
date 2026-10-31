@@ -31,6 +31,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('window is not defined') ||
       logText.includes('DATA_OBJ') ||
       logText.includes('REALM_ERR') ||
+      logText.includes('NAMED_ERR') ||
       // Vike's (<= 0.4.259) log of the DATA_OBJ value
       logText.trim() === '[object Object]' ||
       logText.includes('DATA_STRING') ||
@@ -42,7 +43,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('The thrown value is') ||
       // Vike's (>= 0.4.268) logs about the errors above
       logText.includes('Following error was thrown by the ') ||
-      /HTTP response ← \/data-(error|string|window|object|realm) 500/.test(logText) ||
+      /HTTP response ← \/data-(error|string|window|object|realm|named) 500/.test(logText) ||
       // The test's font request of a non-font file
       logText.includes('Failed to decode downloaded font: ' + getServerUrl() + '/sentry-env.ts?font') ||
       logText.includes('OTS parsing error'),
@@ -266,6 +267,13 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     await expectErrorEvent('DATA_STRING')
     await sleep(1000)
     expect(getErrorEvents('DATA_STRING').length).toBe(1)
+  })
+
+  test('error with its own name is sent as thrown', async () => {
+    await fetch(getServerUrl() + '/data-named')
+    await expectErrorEvent('NAMED_ERR')
+    const event = getErrorEvents('NAMED_ERR')[0]!
+    expectThrownError(event, 'ServiceError', 'NAMED_ERR', '/pages/data-named/+data.ts', isProd)
   })
 
   test('error from another realm is sent as thrown', async () => {

@@ -35,8 +35,9 @@ function recallThrow(error: unknown): { error: unknown; hook?: Hook } {
   const frames = (error.stack ?? '').split('\n').filter((line) => /^\s+at /.test(line))
   // Sentry tells a copy is an error by `instanceof Error`, which an error from another realm fails
   const prototype = error instanceof Error ? Object.getPrototypeOf(error) : Error.prototype
-  const errorAsThrown: Error = Object.create(prototype, Object.getOwnPropertyDescriptors(error))
-  Object.defineProperties(errorAsThrown, {
+  // One descriptor map: an own field of the error can be non-configurable (e.g. a `name` set with defineProperty())
+  const errorAsThrown: Error = Object.create(prototype, {
+    ...Object.getOwnPropertyDescriptors(error),
     name: { value: error.name, writable: true, configurable: true },
     message: { value: thrown.message, writable: true, configurable: true },
     stack: { value: [`${error.name}: ${thrown.message}`, ...frames].join('\n'), writable: true, configurable: true },

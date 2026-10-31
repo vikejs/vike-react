@@ -229,7 +229,6 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     await sleep(1000)
     const events = getErrorEvents('DATA_ERR')
     expect(events.length).toBe(1)
-    expect(events[0]!.payload.tags['vike.hook']).toBe('data')
     expect(events[0]!.payload.tags.side).toBe('server')
     expectThrownError(events[0]!, 'Error', 'DATA_ERR', '/pages/data-error/+data.ts', isProd)
   })
@@ -320,7 +319,6 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     await sleep(1000)
     const events = getErrorEvents('SSR_SHELL')
     expect(events.length).toBe(1)
-    expect(events[0]!.payload.tags['vike.hook']).toBe('onRenderHtml')
   })
 
   test('async error is sent to Sentry', async () => {

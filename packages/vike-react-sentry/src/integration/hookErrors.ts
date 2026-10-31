@@ -1,6 +1,3 @@
-export { rememberHook }
-export { recallHook }
-export { isThrownByHook }
 export { captureHookError }
 export { getHookScope }
 export type { Hook }
@@ -9,22 +6,6 @@ import type * as SentryReact from '@sentry/react'
 import type { Config, PageContext } from 'vike/types'
 
 type Hook = Parameters<Extract<Config['onHookCall'], Function>>[0]
-
-// Vike's +onError doesn't say which hook threw
-const thrownErrors = new WeakMap<object, Hook>()
-
-function rememberHook(error: unknown, hook: Hook): void {
-  if (typeof error !== 'object' || error === null) return
-  thrownErrors.set(error, hook)
-}
-
-function isThrownByHook(error: unknown): boolean {
-  return typeof error === 'object' && error !== null && thrownErrors.has(error)
-}
-
-function recallHook(error: unknown): Hook | undefined {
-  return typeof error === 'object' && error !== null ? thrownErrors.get(error) : undefined
-}
 
 function captureHookError(
   Sentry: Pick<typeof SentryReact, 'captureException'>,

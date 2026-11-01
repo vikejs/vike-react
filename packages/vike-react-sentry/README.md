@@ -49,6 +49,7 @@ Features:
    # Required scopes: project:read, project:releases, project:write
    SENTRY_AUTH_TOKEN=sntryu_xxxxx
    ```
+   The browser, the server and the source map upload all read `PUBLIC_ENV__SENTRY_DSN`. Set `dsn` in [`+sentry`](#sentry) only for a DSN known at runtime, and then also `SENTRY_ORG` and `SENTRY_PROJECT`: `vike build` fails when the source map upload can't find its Sentry project.
 
 > [!NOTE]
 > The `vike-react-sentry` extension requires [`vike-react`](https://vike.dev/vike-react), `vike` `>=0.4.253`, and the Sentry SDK version 10 or 11 (`@sentry/vite-plugin` 4 to 11).

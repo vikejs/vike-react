@@ -18,13 +18,16 @@ function sourceMapsPlugin(): Plugin {
       const env = loadEnv(mode, userConfig.envDir || userConfig.root || process.cwd(), ['SENTRY_', 'PUBLIC_ENV__'])
       const envOptions = resolveEnvFallbacks(getVikeConfig().config.sentryVite, env)
       if (!envOptions) return
-      const options = await autoDetectProjectInfo(envOptions, env['PUBLIC_ENV__SENTRY_DSN'])
+      const dsn = env['PUBLIC_ENV__SENTRY_DSN']
+      const options = await autoDetectProjectInfo(envOptions, dsn)
       // Without a project and an org, Sentry's plugin only warns and skips the upload; an organization token (sntrys_) carries its org
       assertUsage(
         options.disable ||
           options.sourcemaps?.disable ||
           (options.project && (options.org || envOptions.authToken.startsWith('sntrys_'))),
-        'The source map upload needs your Sentry org and project: set PUBLIC_ENV__SENTRY_DSN instead of dsn in +sentry (they are then fetched with SENTRY_AUTH_TOKEN), or set SENTRY_ORG and SENTRY_PROJECT.',
+        dsn
+          ? "The source map upload needs your Sentry org and project, and SENTRY_AUTH_TOKEN didn't fetch them for PUBLIC_ENV__SENTRY_DSN: set SENTRY_ORG and SENTRY_PROJECT, or check that the token can see the DSN's project."
+          : 'The source map upload needs your Sentry org and project: set PUBLIC_ENV__SENTRY_DSN instead of dsn in +sentry (they are then fetched with SENTRY_AUTH_TOKEN), or set SENTRY_ORG and SENTRY_PROJECT.',
       )
       sentryPlugins = sentryVitePlugin(options)
       return { build: { sourcemap: true } }

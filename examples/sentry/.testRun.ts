@@ -396,6 +396,15 @@ function testRunWithServerDsn() {
     expect(status).not.toBe(0)
     expect(stdout + stderr).toContain('[vike-react-sentry] SENTRY_DSN is not supported')
   })
+
+  test('SENTRY_AUTH_TOKEN with the DSN only in +sentry makes the build fail', () => {
+    // Without PUBLIC_ENV__SENTRY_DSN, the build sends no request to Sentry
+    setupEnv(`SENTRY_AUTH_TOKEN=sntryu_fake\nVITE_SENTRY_DSN=${ingest.dsn}\n`)
+    const { status, stdout, stderr } = build()
+    setupEnv('')
+    expect(status).not.toBe(0)
+    expect(stdout + stderr).toContain('[vike-react-sentry] The source map upload needs your Sentry org and project')
+  })
 }
 
 function build() {

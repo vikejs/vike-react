@@ -2,6 +2,8 @@
 export { onRenderClient }
 
 import ReactDOM, { type RootOptions } from 'react-dom/client'
+// @ts-expect-error TO-DO/soon: remove once the `vike` devDependency has handleError() https://github.com/vikejs/vike/issues/3726
+import { handleError } from 'vike/client/router'
 import { getHeadSetting } from './getHeadSetting.js'
 import type { PageContextClient } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
@@ -48,7 +50,7 @@ async function onRenderClient(pageContext: PageContextClient & PageContextIntern
       ...hydrateRootOptions,
       // onUncaughtError is the right callback: https://gist.github.com/brillout/b9516e83a7a4517f4dbd0ef50e9dd716
       onUncaughtError(...args) {
-        onUncaughtErrorGlobal.call(this, args, hydrateRootOptions, pageContext)
+        onUncaughtErrorGlobal.call(this, args, hydrateRootOptions)
       },
     })
   } else {
@@ -57,7 +59,7 @@ async function onRenderClient(pageContext: PageContextClient & PageContextIntern
       globalObject.root = ReactDOM.createRoot(container, {
         ...createRootOptions,
         onUncaughtError(...args) {
-          onUncaughtErrorGlobal.call(this, args, createRootOptions, pageContext)
+          onUncaughtErrorGlobal.call(this, args, createRootOptions)
         },
       })
     }
@@ -104,7 +106,6 @@ function onUncaughtErrorGlobal(
   this: unknown,
   args: OnUncaughtErrorArgs,
   userOptions: { onUncaughtError?: OnUncaughtError } | undefined,
-  pageContext: PageContextClient,
 ) {
   const [errorOriginal, errorInfo] = args
   const errorEnhanced = getErrorWithComponentStack(errorOriginal, errorInfo)
@@ -113,20 +114,13 @@ function onUncaughtErrorGlobal(
   // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
   if (isObject(errorEnhanced)) errorEnhanced.isAlreadyLogged = true
   if (globalObject.onUncaughtErrorLocal) globalObject.onUncaughtErrorLocal(errorEnhanced)
-  // No rendering awaits the error: React unmounted a page that already rendered => let Vike show the error page (Server Routing has no client router)
-  else if (pageContext.config.clientRouting !== false) handleErrorLazy(errorEnhanced)
+  // No rendering awaits the error: React unmounted a page that already rendered => let Vike show the error page
+  else handleError(errorEnhanced)
   userOptions?.onUncaughtError?.call(this, errorEnhanced, errorInfo)
 }
 type OnUncaughtError = RootOptions['onUncaughtError']
 type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']>>
 type OnUncaughtErrorInfo = OnUncaughtErrorArgs[1]
-
-// Imported lazily, so that a page using Server Routing doesn't load the client router
-async function handleErrorLazy(err: unknown) {
-  // @ts-expect-error TO-DO/soon: remove once the `vike` devDependency has handleError() https://github.com/vikejs/vike/issues/3726
-  const { handleError } = await import('vike/client/router')
-  await handleError(err)
-}
 
 // Inject componentStack to the error's stack trace
 // - Server counterpart: https://github.com/brillout/react-streaming/blob/e0a6210957e65dad2c92877ad075ebac4713d8fa/src/server/renderToStream/common.ts#L93

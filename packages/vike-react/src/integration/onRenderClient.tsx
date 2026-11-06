@@ -25,7 +25,10 @@ async function onRenderClient(pageContext: PageContextClient & PageContextIntern
   // - Store hydration https://github.com/vikejs/vike-react/issues/110
   await callCumulativeHooks(pageContext.config.onBeforeRenderClient, pageContext)
 
-  const { page, renderPromise, renderPromiseReject } = getPageElement(pageContext)
+  const { page, renderPromise, renderPromiseReject } = getPageElement(pageContext, () => {
+    // Not in the `finally` below: React reports an error thrown by a useEffect() of the page before the `finally` runs, while renderPromise is already resolved
+    delete globalObject.onUncaughtErrorLocal
+  })
   pageContext.page = page
 
   // Local callback for current page
@@ -45,7 +48,7 @@ async function onRenderClient(pageContext: PageContextClient & PageContextIntern
       ...hydrateRootOptions,
       // onUncaughtError is the right callback: https://gist.github.com/brillout/b9516e83a7a4517f4dbd0ef50e9dd716
       onUncaughtError(...args) {
-        onUncaughtErrorGlobal.call(this, args, hydrateRootOptions)
+        onUncaughtErrorGlobal.call(this, args, hydrateRootOptions, pageContext)
       },
     })
   } else {
@@ -54,7 +57,7 @@ async function onRenderClient(pageContext: PageContextClient & PageContextIntern
       globalObject.root = ReactDOM.createRoot(container, {
         ...createRootOptions,
         onUncaughtError(...args) {
-          onUncaughtErrorGlobal.call(this, args, createRootOptions)
+          onUncaughtErrorGlobal.call(this, args, createRootOptions, pageContext)
         },
       })
     }
@@ -101,6 +104,7 @@ function onUncaughtErrorGlobal(
   this: unknown,
   args: OnUncaughtErrorArgs,
   userOptions: { onUncaughtError?: OnUncaughtError } | undefined,
+  pageContext: PageContextClient,
 ) {
   const [errorOriginal, errorInfo] = args
   const errorEnhanced = getErrorWithComponentStack(errorOriginal, errorInfo)
@@ -108,12 +112,21 @@ function onUncaughtErrorGlobal(
   // Used by Vike:
   // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
   if (isObject(errorEnhanced)) errorEnhanced.isAlreadyLogged = true
-  globalObject.onUncaughtErrorLocal?.(errorEnhanced)
+  if (globalObject.onUncaughtErrorLocal) globalObject.onUncaughtErrorLocal(errorEnhanced)
+  // No rendering awaits the error: React unmounted a page that already rendered => let Vike show the error page (Server Routing has no client router)
+  else if (pageContext.config.clientRouting !== false) renderErrorLazy(errorEnhanced)
   userOptions?.onUncaughtError?.call(this, errorEnhanced, errorInfo)
 }
 type OnUncaughtError = RootOptions['onUncaughtError']
 type OnUncaughtErrorArgs = Parameters<NonNullable<RootOptions['onUncaughtError']>>
 type OnUncaughtErrorInfo = OnUncaughtErrorArgs[1]
+
+// Imported lazily, so that a page using Server Routing doesn't load the client router
+async function renderErrorLazy(err: unknown) {
+  // @ts-expect-error TO-DO/soon: remove once the `vike` devDependency has renderError() https://github.com/vikejs/vike/issues/3726
+  const { renderError } = await import('vike/client/router')
+  await renderError(err)
+}
 
 // Inject componentStack to the error's stack trace
 // - Server counterpart: https://github.com/brillout/react-streaming/blob/e0a6210957e65dad2c92877ad075ebac4713d8fa/src/server/renderToStream/common.ts#L93

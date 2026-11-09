@@ -73,13 +73,12 @@ function withFallback<T extends ComponentType<any>, P extends ComponentProps<T> 
       )
     }
 
-    if (Loading === undefined && pageContext.config.Loading?.component) {
-      Loading = pageContext.config.Loading.component
-    }
-    if (Loading !== false) {
+    // Resolved per render: the closure's `Loading` is shared by every page that renders this component
+    const Loading_ = Loading === undefined ? pageContext.config.Loading?.component : Loading
+    if (Loading_ !== false) {
       const originalElement = element
       element = (
-        <Suspense fallback={typeof Loading === 'function' ? <Loading {...componentProps} /> : Loading}>
+        <Suspense fallback={typeof Loading_ === 'function' ? <Loading_ {...componentProps} /> : Loading_}>
           {originalElement}
         </Suspense>
       )

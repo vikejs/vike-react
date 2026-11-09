@@ -3,7 +3,7 @@ export { react }
 import * as SentryReact from '@sentry/react'
 import type { Config } from 'vike/types'
 import { isVikeControlFlow } from '../utils/isVikeControlFlow.js'
-import { isAbortReason } from './abortReasons.js'
+import { isShownPageAbortError } from './shownPage.js'
 
 // These callbacks replace React's defaults, which log the error. (vike-react logs uncaught errors itself, and React's
 // default for recoverable errors, window.reportError(), would make Sentry's global handler send them a second time.)
@@ -25,7 +25,7 @@ function rootErrorHandler(log?: (error: unknown) => void): ReturnType<typeof Sen
   const sendError = SentryReact.reactErrorHandler(log)
   return (error, errorInfo) => {
     // Vike handles the redirect() or render() a component throws, and aborts the fetch() of the page the user leaves
-    if (isVikeControlFlow(error) || isAbortReason(error)) log?.(error)
+    if (isVikeControlFlow(error) || isShownPageAbortError(error)) log?.(error)
     else sendError(error, errorInfo)
   }
 }

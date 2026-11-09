@@ -4,6 +4,7 @@ import type * as SentryReact from '@sentry/react'
 import type { PageContext } from 'vike/types'
 import { getHookScope, type Hook } from './hookErrors.js'
 import { isVikeControlFlow } from '../utils/isVikeControlFlow.js'
+import { isAbortSignalError } from '../utils/isAbortSignalError.js'
 
 type Sentry = Pick<typeof SentryReact, 'isEnabled' | 'startSpan' | 'withScope'>
 type OnHookError = (error: unknown) => void
@@ -22,13 +23,15 @@ async function traceHook(Sentry: Sentry, hook: Hook, pageContext: PageContext | 
 
     // Set by Vike while prefetching a link (vike > 0.4.268)
     const isPrefetch = !!(pageContext as { isPrefetch?: boolean } | null)?.isPrefetch
+    // Fired by Vike when the user navigates away, or the client disconnects (vike >= 0.4.269)
+    const abortSignal = (pageContext as { abortSignal?: AbortSignal } | null)?.abortSignal
     // +route functions run for every link Vike prefetches: they get no span
     if (hook.name === 'route' || isPrefetch) {
       try {
         await hook.call()
       } catch (error) {
         // Vike ignores a prefetch's error, and routes again upon navigation
-        if (isPrefetch || isVikeControlFlow(error)) return
+        if (isPrefetch || isVikeControlFlow(error) || isAbortSignalError(error, abortSignal)) return
         onHookError(error)
       }
       return
@@ -52,7 +55,7 @@ async function traceHook(Sentry: Sentry, hook: Hook, pageContext: PageContext | 
         try {
           await hook.call()
         } catch (error) {
-          if (isVikeControlFlow(error)) return
+          if (isVikeControlFlow(error) || isAbortSignalError(error, abortSignal)) return
           span.setStatus({ code: 2, message: 'internal_error' })
           onHookError(error)
         }

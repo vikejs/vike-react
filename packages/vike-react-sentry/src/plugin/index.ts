@@ -11,7 +11,8 @@ function getViteConfig(): InlineConfig {
       noExternal: 'vike-react-sentry',
     },
     optimizeDeps: {
-      // When this extension is linked instead of installed, Vite finds @sentry/react only once the browser loads its client code, and reloads the page
+      // Vite sees this extension's client code only once the browser loads it, and pre-bundling a dependency then reloads the page
+      exclude: ['vike-react-sentry'],
       include: ['@sentry/react'],
     },
     plugins: [

@@ -1,6 +1,6 @@
 export { withFallback }
 
-import { ApolloConsumer } from '@apollo/client/index.js'
+import { useApolloClient } from '@apollo/client/react/index.js'
 import React, { ComponentProps, type ComponentType, isValidElement, type ReactNode, Suspense } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 import { usePageContext } from 'vike-react/usePageContext'
@@ -48,33 +48,28 @@ function withFallback<T extends ComponentType<any>, P extends ComponentProps<T> 
 
   const ComponentWithFallback = (componentProps: P) => {
     const pageContext = usePageContext()
+    const client = useApolloClient()
 
     let element = <Component {...componentProps} />
 
     if (Error) {
       const originalElement = element
       element = (
-        <ApolloConsumer>
-          {({ reFetchObservableQueries }) => {
-            return (
-              <ErrorBoundary
-                fallbackRender={({ error: originalError, resetErrorBoundary }) =>
-                  typeof Error === 'function' ? (
-                    <Error
-                      {...componentProps}
-                      retry={createRetry(resetErrorBoundary, reFetchObservableQueries)}
-                      error={createError(originalError)}
-                    />
-                  ) : (
-                    Error
-                  )
-                }
-              >
-                {originalElement}
-              </ErrorBoundary>
+        <ErrorBoundary
+          fallbackRender={({ error: originalError, resetErrorBoundary }) =>
+            typeof Error === 'function' ? (
+              <Error
+                {...componentProps}
+                retry={createRetry(resetErrorBoundary, () => client.reFetchObservableQueries())}
+                error={createError(originalError)}
+              />
+            ) : (
+              Error
             )
-          }}
-        </ApolloConsumer>
+          }
+        >
+          {originalElement}
+        </ErrorBoundary>
       )
     }
 

@@ -7,7 +7,7 @@
 Add [Sentry](https://sentry.io) error tracking and performance monitoring to your [`vike-react`](https://vike.dev/vike-react) app.
 
 Features:
-- Browser and server error tracking, including React render errors
+- Browser and server error tracking
 - Performance monitoring and tracing
 - Automatic source map upload
 - Works out of the box with minimal configuration
@@ -49,14 +49,13 @@ Features:
    # Required scopes: project:read, project:releases, project:write
    SENTRY_AUTH_TOKEN=sntryu_xxxxx
    ```
-   The browser, the server and the source map upload all read `PUBLIC_ENV__SENTRY_DSN`. Set `dsn` in [`+sentry`](#sentry) only for a DSN known at runtime, and then also `SENTRY_ORG` and `SENTRY_PROJECT` (only `SENTRY_PROJECT` with an organization token): `vike build` fails when the source map upload can't find its Sentry project.
 
 > [!NOTE]
-> The `vike-react-sentry` extension requires [`vike-react`](https://vike.dev/vike-react), `vike` `>=0.4.253`, and the Sentry SDK version 10 or 11 (`@sentry/vite-plugin` 4 to 11).
+> The `vike-react-sentry` extension requires [`vike-react`](https://vike.dev/vike-react).
 
 That's it! With the configuration above, `vike-react-sentry` will automatically:
 - Initialize Sentry on both client and server
-- Track errors thrown by Vike hooks and React components, on both client and server (on the server, an error React recovers from inside `<Suspense>` is tracked only with [HTML streaming](https://vike.dev/streaming))
+- Track errors and exceptions
 - Instrument Vike hooks using [`+onHookCall()`](https://vike.dev/onHookCall)
 - Enable browser tracing for performance monitoring
 - Upload source maps during production builds (when `SENTRY_AUTH_TOKEN` is set)

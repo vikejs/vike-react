@@ -5,9 +5,9 @@ import type { GlobalContextServer } from 'vike/types'
 import { resolveSentryOptions } from './sentryOptions.js'
 
 async function onCreateGlobalContext(globalContext: GlobalContextServer): Promise<void> {
-  // Vike calls it again upon HMR
-  if (SentryNode.getClient()) return
   const options = await resolveSentryOptions<SentryNode.NodeOptions>(globalContext)
+  // Vike calls it again upon HMR, and concurrently for each installed copy of vike-react-sentry (hence after the await)
+  if (SentryNode.getClient()) return
   SentryNode.init({
     // The user's `integrations` are added to these
     defaultIntegrations: SentryNode.getDefaultIntegrations(options).map((integration) =>

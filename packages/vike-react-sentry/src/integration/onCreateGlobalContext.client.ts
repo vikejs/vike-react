@@ -5,9 +5,9 @@ import type { GlobalContextClient } from 'vike/types'
 import { resolveSentryOptions } from './sentryOptions.js'
 
 async function onCreateGlobalContext(globalContext: GlobalContextClient): Promise<void> {
-  // Vike calls it again upon HMR
-  if (SentryReact.getClient()) return
   const options = await resolveSentryOptions<SentryReact.BrowserOptions>(globalContext)
+  // Vike calls it again upon HMR, and concurrently for each installed copy of vike-react-sentry (hence after the await)
+  if (SentryReact.getClient()) return
   // Sentry throws upon creating a second Replay instance
   const hasReplay =
     Array.isArray(options.integrations) && options.integrations.some((integration) => integration.name === 'Replay')

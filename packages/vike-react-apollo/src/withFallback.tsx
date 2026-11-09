@@ -1,6 +1,6 @@
 export { withFallback }
 
-import { ApolloConsumer } from '@apollo/client/index.js'
+import { useApolloClient } from '@apollo/client/react/index.js'
 import React, { ComponentProps, type ComponentType, isValidElement, type ReactNode, Suspense } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 import { usePageContext } from 'vike-react/usePageContext'
@@ -41,50 +41,44 @@ function withFallback<T extends ComponentType<any>, P extends ComponentProps<T> 
   if (options && typeof options === 'object' && ('Loading' in options || 'Error' in options)) {
     Loading = options.Loading
     Error = options.Error
-  } else if (typeof options !== 'object' || isValidElement(options)) {
+  } else if (typeof options !== 'object' || options === null || Array.isArray(options) || isValidElement(options)) {
     Loading = options
     Error = Error_
   }
 
   const ComponentWithFallback = (componentProps: P) => {
     const pageContext = usePageContext()
+    const client = useApolloClient()
 
     let element = <Component {...componentProps} />
 
     if (Error) {
       const originalElement = element
       element = (
-        <ApolloConsumer>
-          {({ reFetchObservableQueries }) => {
-            return (
-              <ErrorBoundary
-                fallbackRender={({ error: originalError, resetErrorBoundary }) =>
-                  typeof Error === 'function' ? (
-                    <Error
-                      {...componentProps}
-                      retry={createRetry(resetErrorBoundary, reFetchObservableQueries)}
-                      error={createError(originalError)}
-                    />
-                  ) : (
-                    Error
-                  )
-                }
-              >
-                {originalElement}
-              </ErrorBoundary>
+        <ErrorBoundary
+          fallbackRender={({ error: originalError, resetErrorBoundary }) =>
+            typeof Error === 'function' ? (
+              <Error
+                {...componentProps}
+                retry={createRetry(resetErrorBoundary, () => client.reFetchObservableQueries())}
+                error={createError(originalError)}
+              />
+            ) : (
+              Error
             )
-          }}
-        </ApolloConsumer>
+          }
+        >
+          {originalElement}
+        </ErrorBoundary>
       )
     }
 
-    if (Loading === undefined && pageContext.config.Loading?.component) {
-      Loading = pageContext.config.Loading.component
-    }
-    if (Loading !== false) {
+    // Resolved per render: the closure's `Loading` is shared by every page that renders this component
+    const Loading_ = Loading === undefined ? pageContext.config.Loading?.component : Loading
+    if (Loading_ !== false) {
       const originalElement = element
       element = (
-        <Suspense fallback={typeof Loading === 'function' ? <Loading {...componentProps} /> : Loading}>
+        <Suspense fallback={typeof Loading_ === 'function' ? <Loading_ {...componentProps} /> : Loading_}>
           {originalElement}
         </Suspense>
       )

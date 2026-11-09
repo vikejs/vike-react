@@ -50,9 +50,6 @@ importers:
       react-dom:
         specifier: ^19.2.1
         version: 19.2.1(react@19.2.1)
-      rxjs:
-        specifier: ^7.8.2
-        version: 7.8.2
       typescript:
         specifier: ^7.0.2
         version: 7.0.2
@@ -394,9 +391,6 @@ importers:
       rimraf:
         specifier: ^5.0.5
         version: 5.0.10
-      rxjs:
-        specifier: ^7.8.2
-        version: 7.8.2
       typescript:
         specifier: ^7.0.2
         version: 7.0.2

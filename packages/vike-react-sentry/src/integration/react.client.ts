@@ -3,7 +3,7 @@ export { react }
 import * as SentryReact from '@sentry/react'
 import type { Config } from 'vike/types'
 import { isVikeControlFlow } from '../utils/isVikeControlFlow.js'
-import { isShownPageAbortError } from './shownPage.js'
+import { isShownPageAbortError, setShownPage } from './shownPage.js'
 
 // These callbacks replace React's defaults, which log the error. (vike-react logs uncaught errors itself, and React's
 // default for recoverable errors, window.reportError(), would make Sentry's global handler send them a second time.)
@@ -16,9 +16,13 @@ const rootOptions = {
   onRecoverableError: rootErrorHandler(logError),
 }
 
-const react: Config['react'] = {
-  hydrateRootOptions: rootOptions,
-  createRootOptions: rootOptions,
+const react: Config['react'] = (pageContext) => {
+  // vike-react calls it on every render, right before giving React the page
+  setShownPage(pageContext)
+  return {
+    hydrateRootOptions: rootOptions,
+    createRootOptions: rootOptions,
+  }
 }
 
 function rootErrorHandler(log?: (error: unknown) => void): ReturnType<typeof SentryReact.reactErrorHandler> {

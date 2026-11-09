@@ -35,6 +35,8 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('ROUTE_ERR') ||
       logText.includes('BOUNDARY_CAUGHT') ||
       logText.includes('SSR_SHELL') ||
+      // vike-react's log of the redirect() /ssr-redirect throws upon client-side navigation
+      logText.startsWith('Error: AbortRender') ||
       logText.includes('Hydration failed') ||
       logText.includes('Minified React error #418') ||
       // Vike's logs about the DATA_STRING value
@@ -80,15 +82,18 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     // Thrown while streaming, it also reaches React's error callback
     const streamed = await fetch(getServerUrl() + '/ssr-redirect', { redirect: 'manual' })
     expect(streamed.status).toBe(302)
-    await gotoHydrated('/')
-    await page.evaluate(() => {
-      const link = document.createElement('a')
-      link.href = '/guarded'
-      link.textContent = 'Guarded'
-      document.body.append(link)
-    })
-    await page.locator('a', { hasText: 'Guarded' }).click()
-    await page.waitForURL(getServerUrl() + '/')
+    // Upon client-side navigation, the page's own redirect() reaches React's error callback
+    for (const url of ['/guarded', '/ssr-redirect']) {
+      await gotoHydrated('/links')
+      await page.evaluate((url) => {
+        const link = document.createElement('a')
+        link.href = url
+        link.textContent = 'Redirect'
+        document.body.append(link)
+      }, url)
+      await page.locator('a', { hasText: 'Redirect' }).click()
+      await page.waitForURL(getServerUrl() + '/')
+    }
     await sleep(2000)
     expect(getErrorEvents('AbortRender').length).toBe(0)
   })

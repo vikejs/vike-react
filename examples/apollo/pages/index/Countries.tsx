@@ -1,6 +1,7 @@
 export { Countries }
 
-import { gql, useSuspenseQuery } from '@apollo/client/index.js'
+import { gql } from '@apollo/client/index.js'
+import { useSuspenseQuery } from '@apollo/client/react/index.js'
 import React from 'react'
 import { withFallback } from 'vike-react-apollo'
 

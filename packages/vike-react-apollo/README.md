@@ -49,11 +49,12 @@ Features:
    ```js
    // +ApolloClient.js
 
+   import { HttpLink } from '@apollo/client/index.js'
    import { ApolloClient, InMemoryCache } from '@apollo/client-react-streaming'
 
    export default (pageContext) =>
       new ApolloClient({
-        uri: 'https://countries.trevorblades.com',
+        link: new HttpLink({ uri: 'https://countries.trevorblades.com' }),
         cache: new InMemoryCache()
       })
    ```
@@ -68,7 +69,8 @@ Features:
 ```jsx
 // Countries.jsx
 
-import { useSuspenseQuery, gql } from '@apollo/client/index.js'
+import { gql } from '@apollo/client/index.js'
+import { useSuspenseQuery } from '@apollo/client/react/index.js'
 
 const Countries = () => {
   const { data } = useSuspenseQuery(gql`
@@ -120,7 +122,8 @@ withFallback(Component, undefined, Error) // Define error fallback
 ```jsx
 // Country.jsx
 
-import { useSuspenseQuery, gql } from '@apollo/client/index.js'
+import { gql } from '@apollo/client/index.js'
+import { useSuspenseQuery } from '@apollo/client/react/index.js'
 import { withFallback } from 'vike-react-apollo'
 
 const Country = withFallback(

@@ -3,9 +3,14 @@ export { onCreateGlobalContext }
 import * as SentryNode from '@sentry/node'
 import type { GlobalContextServer } from 'vike/types'
 import { resolveSentryOptions } from './sentryOptions.js'
+import { assertUsage } from '../utils/assert.js'
 
 async function onCreateGlobalContext(globalContext: GlobalContextServer): Promise<void> {
   const options = await resolveSentryOptions<SentryNode.NodeOptions>(globalContext)
+  assertUsage(
+    options.dsn || options.enabled === false,
+    'Sentry DSN is required: set PUBLIC_ENV__SENTRY_DSN, or turn Sentry off with enabled: false in +sentry.',
+  )
   // Vike calls it again upon HMR, and concurrently for each installed copy of vike-react-sentry (hence after the await)
   if (SentryNode.getClient()) return
   SentryNode.init({

@@ -60,7 +60,7 @@ That's it! With the configuration above, `vike-react-sentry` will automatically:
 - Enable browser tracing for performance monitoring
 - Upload source maps during production builds (when `SENTRY_AUTH_TOKEN` is set)
 
-Without a DSN, Sentry is disabled: nothing is sent and no trace tags are added to the HTML.
+Without a DSN, the server throws an error at start, unless `+sentry` sets `enabled: false`.
 
 <br/>
 

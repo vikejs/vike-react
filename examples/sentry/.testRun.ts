@@ -1,9 +1,10 @@
 export { testRun }
 export { testRunWithoutDsn }
+export { testRunWithSentryOff }
 export { testRunWithFactoryDsn }
 export { testRunWithServerDsn }
 
-import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, sleep } from '@brillout/test-e2e'
+import { test, expect, run, fetchHtml, page, getServerUrl, autoRetry, sleep, expectLog } from '@brillout/test-e2e'
 import { spawnSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -337,9 +338,30 @@ function testRunWithoutDsn() {
   setupEnv('')
   run('pnpm run prod', {
     serverIsReadyMessage: 'Listening on',
+    tolerateError: ({ logText }) =>
+      logText.includes('[vike-react-sentry] Sentry DSN is required') ||
+      logText.includes('This is a test error sent to Sentry!'),
+  })
+
+  test('the server reports the missing DSN at start', () => {
+    expectLog('[vike-react-sentry] Sentry DSN is required', { allLogs: true })
+  })
+
+  testNothingIsSent()
+}
+
+function testRunWithSentryOff() {
+  // +sentry sets enabled: false
+  setupEnv('VITE_SENTRY_ENABLED=false\n')
+  run('pnpm run prod', {
+    serverIsReadyMessage: 'Listening on',
     tolerateError: ({ logText }) => logText.includes('This is a test error sent to Sentry!'),
   })
 
+  testNothingIsSent()
+}
+
+function testNothingIsSent() {
   test('page is rendered and nothing is sent to Sentry', async () => {
     const html = await fetchHtml('/')
     expect(html).toContain('<h1>Vike + React + Sentry Example</h1>')
@@ -382,7 +404,9 @@ function testRunWithServerDsn() {
   process.env.SENTRY_DSN = ingest.dsn
   run('node ./dist/server/index.mjs', {
     serverIsReadyMessage: 'Listening on',
-    tolerateError: ({ logText }) => logText.includes('DATA_ERR'),
+    tolerateError: ({ logText }) =>
+      // SENTRY_DSN isn't read
+      logText.includes('[vike-react-sentry] Sentry DSN is required') || logText.includes('DATA_ERR'),
   })
 
   test("SENTRY_DSN of the server's environment is ignored", async () => {

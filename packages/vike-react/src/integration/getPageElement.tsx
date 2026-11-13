@@ -4,7 +4,7 @@ import React, { Suspense, useEffect } from 'react'
 import type { PageContext } from 'vike/types'
 import { VikeReactProviderPageContext } from '../hooks/usePageContext.js'
 
-function getPageElement(pageContext: PageContext) {
+function getPageElement(pageContext: PageContext, onRendered?: () => void) {
   const {
     Page,
     config: { Loading },
@@ -38,7 +38,10 @@ function getPageElement(pageContext: PageContext) {
   let renderPromiseResolve!: () => void
   let renderPromiseReject!: (err: unknown) => void
   let renderPromise = new Promise<void>((resolve, reject) => {
-    renderPromiseResolve = resolve
+    renderPromiseResolve = () => {
+      onRendered?.()
+      resolve()
+    }
     renderPromiseReject = reject
   })
   page = (

@@ -36,7 +36,7 @@
   "peerDependencies": {
     "react": ">=19",
     "react-dom": ">=19",
-    "vike": ">=0.4.250"
+    "vike": ">=0.4.271"
   },
   "scripts": {
     "dev": "tsc --watch",

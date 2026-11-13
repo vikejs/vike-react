@@ -1,9 +1,11 @@
-import * as Sentry from '@sentry/node'
-import type { Config } from 'vike/types'
-import { assert } from '../utils/assert.js'
+export { onError }
 
-export const onError: Config['onError'] = (error) => {
-  if (!Sentry.getClient()) return
-  assert(error && typeof error === 'object')
-  Sentry.captureException(error)
+import * as SentryNode from '@sentry/node'
+import type { Config } from 'vike/types'
+import { captureHookError } from './hookErrors.js'
+
+// Vike calls it once per server error, after skipping redirect(), render() and abort()
+const onError: Config['onError'] = (error, pageContext) => {
+  if (!SentryNode.isEnabled()) return
+  captureHookError(SentryNode, error, undefined, pageContext)
 }

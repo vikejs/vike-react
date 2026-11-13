@@ -1,3 +1,12 @@
+## [0.1.9](https://github.com/vikejs/vike-react/compare/vike-react-apollo@0.1.8...vike-react-apollo@0.1.9) (2026-11-13)
+
+
+### Bug Fixes
+
+* support Apollo Client 4 (vikejs/vike[#3731](https://github.com/vikejs/vike-react/issues/3731)) ([#246](https://github.com/vikejs/vike-react/issues/246)) ([4d431d9](https://github.com/vikejs/vike-react/commit/4d431d9fa80a1d3c9841cc7c5147458fbcfd91d2))
+
+
+
 ## [0.1.8](https://github.com/vikejs/vike-react/compare/vike-react-apollo@0.1.7...vike-react-apollo@0.1.8) (2026-10-28)
 
 

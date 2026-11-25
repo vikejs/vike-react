@@ -27,6 +27,7 @@ function getHookScope(
         hook: hook?.name,
         filePath: hook?.filePath,
         pageId: pageContext?.pageId,
+        url: pageContext?.urlOriginal,
         urlPathname: pageContext?.urlPathname,
       },
     },

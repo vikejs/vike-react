@@ -9,7 +9,7 @@ import 'vike-react/config' // Needed for merging vike-react's Vike.Config
 const config = {
   name: 'vike-react-sentry',
   require: {
-    'vike-react': '>=0.6.4',
+    'vike-react': '>=0.6.21',
     vike: '>=0.4.253',
   },
   Head: 'import:vike-react-sentry/__internal/integration/Head:Head',

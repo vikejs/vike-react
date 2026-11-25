@@ -11,7 +11,7 @@
     "@sentry/vite-plugin": ">=4.0.0 <12",
     "react": ">=18.0.0",
     "vike": ">=0.4.253",
-    "vike-react": ">=0.6.4"
+    "vike-react": ">=0.6.21"
   },
   "exports": {
     "./config": "./dist/integration/+config.js",

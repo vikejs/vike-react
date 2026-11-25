@@ -4,5 +4,6 @@ import * as Sentry from '@sentry/react'
 import type { Config } from 'vike/types'
 
 const sentry: Config['sentry'] = {
-  integrations: [Sentry.httpClientIntegration(), Sentry.replayIntegration()],
+  // The function form, which receives the default integrations
+  integrations: (integrations) => [...integrations, Sentry.httpClientIntegration(), Sentry.replayIntegration()],
 }

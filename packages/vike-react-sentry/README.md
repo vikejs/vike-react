@@ -163,7 +163,7 @@ export default {
 }
 ```
 
-To remove all default integrations, including `browserTracingIntegration()`, set `defaultIntegrations: false`: only your `integrations` are then used.
+To remove all default integrations, including `browserTracingIntegration()`, set `defaultIntegrations: false`.
 
 To enable [Session Replay](https://docs.sentry.io/platforms/javascript/guides/react/session-replay/), add `replayIntegration()`: it records with the `replaysSessionSampleRate` and `replaysOnErrorSampleRate` above.
 

@@ -9,7 +9,7 @@ type Item = { type: string; side: 'client' | 'server'; payload: any }
 // A span of a transaction event (SDK v10) or a streamed span (SDK v11)
 type Span = { side: 'client' | 'server'; traceId: string; name: string; op: string | undefined; isSegment: boolean }
 
-// A local stand-in for Sentry's ingest endpoint, so that the tests don't send anything to sentry.io
+// A local stand-in for Sentry's ingest endpoint
 async function startIngest() {
   const items: Item[] = []
   const spans: Span[] = []

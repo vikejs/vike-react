@@ -163,6 +163,10 @@ export default {
 }
 ```
 
+Your own `Sentry.replayIntegration()` (for example with options), added in either form, replaces the default one.
+
+To remove all default integrations, including the ones of `vike-react-sentry`, set `defaultIntegrations: false`: only your `integrations` are then used.
+
 > [!NOTE]
 > See also: [Vike > File Environment (`.server.js`, `.client.js`, ...)](https://vike.dev/file-env)
 

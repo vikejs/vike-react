@@ -7,7 +7,7 @@ import { traceHook } from './traceHook.js'
 
 const onHookCall: Config['onHookCall'] = (hook, pageContext) =>
   traceHook(SentryNode, hook, pageContext, (error) => {
-    // Sentry marks an error as sent by adding a property to it, so +onError sends those it can't add one to
-    if (typeof error !== 'object' || error === null || !Object.isExtensible(error)) return
+    // Sentry marks an error as sent by adding a property to it, so +onError sends those that can't take one (a thrown string, a frozen object)
+    if (!Object.isExtensible(error)) return
     captureHookError(SentryNode, error, hook, pageContext)
   })

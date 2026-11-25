@@ -6,7 +6,7 @@ import * as Sentry from '@sentry/node'
 // Inject Sentry trace meta tags into the HTML head for distributed tracing
 // This allows the client-side SDK to continue the trace started on the server
 function Head() {
-  if (!Sentry.getClient()) {
+  if (!Sentry.isEnabled()) {
     return null
   }
 

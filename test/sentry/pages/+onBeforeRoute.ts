@@ -1,0 +1,3 @@
+export { onBeforeRoute }
+
+function onBeforeRoute() {}

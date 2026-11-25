@@ -1,6 +1,7 @@
 packages:
   - 'packages/*'
   - 'examples/*'
+  - 'test/*'
 allowBuilds:
   '@biomejs/biome': true
   '@sentry/cli': true

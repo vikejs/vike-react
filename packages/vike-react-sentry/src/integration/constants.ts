@@ -1,1 +1,0 @@
-export const TRACE_DEFAULT_SAMPLE_RATE = 0.2

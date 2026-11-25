@@ -295,7 +295,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     const event = getErrorEvents('This is a test error sent to Sentry!')[0]!.payload
     // Set by the +sentry factory, from its globalContext argument
     expect(event.tags.side).toBe('client')
-    // The integration added by +sentry.client.ts and the extension's default ones
+    // The integrations added by +sentry.client.ts and the extension's default one
     expect(event.sdk.integrations).toContain('HttpClient')
     expect(event.sdk.integrations).toContain('BrowserTracing')
     expect(event.sdk.integrations).toContain('Replay')
@@ -340,43 +340,6 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     await page.locator('button', { hasText: 'Throw Async Error' }).click()
     await expectErrorEvent('This is an async error sent to Sentry!')
   })
-
-  test('a Replay added by the integrations function replaces the default one', async () => {
-    expect((await getIntegrations('function-adds-replay')).filter((name) => name === 'Replay').length).toBe(1)
-    expect(await page.evaluate(() => (window as any).isOwnReplay())).toBe(true)
-  })
-
-  test('a Replay added by the integrations array replaces the default one', async () => {
-    expect((await getIntegrations('array-adds-replay')).filter((name) => name === 'Replay').length).toBe(1)
-    expect(await page.evaluate(() => (window as any).isOwnReplay())).toBe(true)
-  })
-
-  test('the integrations function removes the default Replay', async () => {
-    expect(await getIntegrations('function-removes-replay')).not.toContain('Replay')
-  })
-
-  test('defaultIntegrations replaces the default integrations', async () => {
-    const integrations = await getIntegrations('own-default-integrations')
-    // Neither the extension's nor the SDK's
-    expect(integrations).not.toContain('BrowserTracing')
-    expect(integrations).not.toContain('Dedupe')
-    expect(await page.evaluate(() => (window as any).isOwnReplay())).toBe(true)
-  })
-}
-
-// The integrations listed by the event of an error thrown on a page whose +sentry.client.ts uses another setting
-async function getIntegrations(setting: string): Promise<string[]> {
-  const message = 'This is a test error sent to Sentry!'
-  const eventsBefore = getErrorEvents(message).length
-  await gotoHydrated(`/?integrations=${setting}`)
-  await page.locator('button', { hasText: 'Throw Sync Error' }).click()
-  await autoRetry(
-    async () => {
-      expect(getErrorEvents(message).length).toBe(eventsBefore + 1)
-    },
-    { timeout: 10 * 1000 },
-  )
-  return getErrorEvents(message).at(-1)!.payload.sdk.integrations
 }
 
 function testRunWithoutDsn() {

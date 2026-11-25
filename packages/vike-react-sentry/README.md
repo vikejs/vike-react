@@ -135,7 +135,7 @@ import * as Sentry from '@sentry/react'
 
 export default {
   integrations: [
-    // Added to the default integrations (the SDK's ones, browserTracingIntegration() and replayIntegration())
+    // Added to the default integrations (the SDK's ones and browserTracingIntegration())
     Sentry.httpClientIntegration()
   ]
 }
@@ -159,13 +159,24 @@ To remove a default integration, use the function form of `integrations`:
 // Environment: client
 
 export default {
-  integrations: (integrations) => integrations.filter((integration) => integration.name !== 'Replay')
+  integrations: (integrations) => integrations.filter((integration) => integration.name !== 'BrowserTracing')
 }
 ```
 
-Your own `Sentry.replayIntegration()` (for example with options), added in either form, replaces the default one.
+To remove all default integrations, including `browserTracingIntegration()`, set `defaultIntegrations: false`: only your `integrations` are then used.
 
-To remove all default integrations, including the ones of `vike-react-sentry`, set `defaultIntegrations: false`: only your `integrations` are then used.
+To enable [Session Replay](https://docs.sentry.io/platforms/javascript/guides/react/session-replay/), add `replayIntegration()`: it records with the `replaysSessionSampleRate` and `replaysOnErrorSampleRate` above.
+
+```js
+// pages/+sentry.client.js
+// Environment: client
+
+import * as Sentry from '@sentry/react'
+
+export default {
+  integrations: [Sentry.replayIntegration()]
+}
+```
 
 > [!NOTE]
 > See also: [Vike > File Environment (`.server.js`, `.client.js`, ...)](https://vike.dev/file-env)

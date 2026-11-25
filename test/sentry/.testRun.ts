@@ -44,7 +44,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       logText.includes('The thrown value is') ||
       // Vike's (>= 0.4.268) logs about the errors above
       logText.includes('Following error was thrown by the ') ||
-      /HTTP response ← \/(data-(error|string|object)|ssr-shell) 500/.test(logText) ||
+      /HTTP response ← \/(data-(error|string|object)|ssr-shell(-string)?) 500/.test(logText) ||
       // The test's font request of a non-font file
       logText.includes('Failed to decode downloaded font: ' + getServerUrl() + '/pages/+sentry.ts?font') ||
       logText.includes('OTS parsing error'),
@@ -325,6 +325,14 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     await sleep(1000)
     const events = getErrorEvents('SSR_SHELL')
     expect(events.length).toBe(1)
+  })
+
+  test('SSR string thrown outside a Suspense boundary is sent to Sentry once', async () => {
+    const response = await fetch(getServerUrl() + '/ssr-shell-string')
+    expect(response.status).toBe(500)
+    await expectErrorEvent('SSR_SHELL_STRING')
+    await sleep(1000)
+    expect(getErrorEvents('SSR_SHELL_STRING').length).toBe(1)
   })
 
   test('async error is sent to Sentry', async () => {

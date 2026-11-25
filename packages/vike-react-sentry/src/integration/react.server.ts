@@ -12,7 +12,10 @@ const react: Config['react'] = (pageContext) => {
     renderToStreamOptions: {
       // React renders the boundary again on the client, so the error reaches no Vike hook
       onBoundaryError: (error) => {
-        // React also passes an error outside a boundary, which +onError has sent: Sentry skips an error it captured
+        // Workaround: skip a thrown string (or other primitive).
+        // - Because react-streaming also passes an error outside a boundary, which +onError sends, and Sentry can't mark a primitive as sent
+        // - TO-DO/eventually: remove this workaround after https://github.com/brillout/react-streaming/pull/69 is released
+        if (typeof error !== 'object' || error === null) return
         if (isVikeControlFlow(error) || isAbortSignalError(error, abortSignal)) return
         SentryNode.captureException(error)
       },

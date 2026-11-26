@@ -198,6 +198,8 @@ SENTRY_ORG=your-org             # Optional, auto-detected from PUBLIC_ENV__SENTR
 SENTRY_PROJECT=your-project     # Optional, auto-detected from PUBLIC_ENV__SENTRY_DSN
 ```
 
+At `vike build`, the plugin also gives client-side and server-side events a default release, which `release` in `+sentry` overrides. Without an auth token, the plugin doesn't run: to give events a release, set `release` in `+sentry`.
+
 You can also override options in `+config.js`:
 
 ```js

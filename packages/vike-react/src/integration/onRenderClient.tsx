@@ -2,6 +2,8 @@
 export { onRenderClient }
 
 import ReactDOM, { type RootOptions } from 'react-dom/client'
+// @ts-expect-error TO-DO/soon: remove once the `vike` devDependency has handleError() https://github.com/vikejs/vike/issues/3726
+import { handleError } from 'vike/client/router'
 import { getHeadSetting } from './getHeadSetting.js'
 import type { PageContextClient } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
@@ -25,7 +27,10 @@ async function onRenderClient(pageContext: PageContextClient & PageContextIntern
   // - Store hydration https://github.com/vikejs/vike-react/issues/110
   await callCumulativeHooks(pageContext.config.onBeforeRenderClient, pageContext)
 
-  const { page, renderPromise, renderPromiseReject } = getPageElement(pageContext)
+  const { page, renderPromise, renderPromiseReject } = getPageElement(pageContext, () => {
+    // Not in the `finally` below: React reports an error thrown by a useEffect() of the page before the `finally` runs, while renderPromise is already resolved
+    delete globalObject.onUncaughtErrorLocal
+  })
   pageContext.page = page
 
   // Local callback for current page
@@ -108,7 +113,9 @@ function onUncaughtErrorGlobal(
   // Used by Vike:
   // https://github.com/vikejs/vike/blob/8ce2cbda756892f0ff083256291515b5a45fe319/packages/vike/client/runtime-client-routing/renderPageClientSide.ts#L838-L844
   if (isObject(errorEnhanced)) errorEnhanced.isAlreadyLogged = true
-  globalObject.onUncaughtErrorLocal?.(errorEnhanced)
+  if (globalObject.onUncaughtErrorLocal) globalObject.onUncaughtErrorLocal(errorEnhanced)
+  // No rendering awaits the error: React unmounted a page that already rendered => let Vike show the error page
+  else handleError(errorEnhanced)
   userOptions?.onUncaughtError?.call(this, errorEnhanced, errorInfo)
 }
 type OnUncaughtError = RootOptions['onUncaughtError']

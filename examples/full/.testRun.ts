@@ -55,6 +55,7 @@ function testRun(cmd: `pnpm run ${'dev' | 'preview'}`) {
   testUseConfig()
   testReactSetting()
   testClientOnly()
+  testErrorAfterRender()
 }
 
 function testPageNavigation_betweenWithSSRAndWithout() {
@@ -352,4 +353,28 @@ function testClientOnly() {
     expect(body).toContain(textLoaded)
     expect(body).not.toContain(textLoading)
   })
+}
+
+function testErrorAfterRender() {
+  const url = '/error-after-render'
+
+  test(url + ' - a component throws after its page rendered', async () => {
+    await page.goto(getServerUrl() + url)
+    await testCounter()
+    await page.click('#throw')
+    await expectErrorPage('Thrown after the page rendered')
+  })
+
+  test(url + ' - an effect throws upon hydration', async () => {
+    await page.goto(getServerUrl() + url + '?effect')
+    await expectErrorPage('Thrown by an effect')
+  })
+}
+
+async function expectErrorPage(errorMessage: string) {
+  await autoRetry(async () => {
+    expect(await page.textContent('body')).toContain('Internal Error')
+  })
+  expect(page.url()).toContain('/error-after-render')
+  expectLog(errorMessage, { filter: (log) => log.logSource === 'Browser Error' })
 }

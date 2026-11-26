@@ -198,6 +198,8 @@ SENTRY_ORG=your-org             # Optional, auto-detected from PUBLIC_ENV__SENTR
 SENTRY_PROJECT=your-project     # Optional, auto-detected from PUBLIC_ENV__SENTRY_DSN
 ```
 
+The plugin also sets the release that client-side and server-side events carry. Without `SENTRY_AUTH_TOKEN`, the plugin doesn't run: to give events a release, set `release` in `+sentry`.
+
 You can also override options in `+config.js`:
 
 ```js

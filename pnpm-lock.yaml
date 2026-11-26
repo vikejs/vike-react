@@ -11,6 +11,9 @@ importers:
       '@biomejs/biome':
         specifier: ^1.9.4
         version: 1.9.4
+      '@brillout/release-me':
+        specifier: ^0.5.2
+        version: 0.5.2(conventional-commits-filter@5.0.0)
       '@brillout/test-e2e':
         specifier: ^0.6.20
         version: 0.6.20
@@ -288,9 +291,6 @@ importers:
       '@biomejs/biome':
         specifier: ^1.9.4
         version: 1.9.4
-      '@brillout/release-me':
-        specifier: ^0.4.18
-        version: 0.4.18(conventional-commits-filter@5.0.0)
       '@types/node':
         specifier: ^24.0.8
         version: 24.0.8
@@ -324,9 +324,6 @@ importers:
       '@ant-design/cssinjs':
         specifier: ^1.22.1
         version: 1.23.0(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
-      '@brillout/release-me':
-        specifier: ^0.4.18
-        version: 0.4.18(conventional-commits-filter@5.0.0)
       '@types/react':
         specifier: ^19.1.13
         version: 19.2.7
@@ -364,9 +361,6 @@ importers:
       '@apollo/client-react-streaming':
         specifier: ^0.14.5
         version: 0.14.5(@apollo/client@4.3.7(graphql@16.10.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rxjs@7.8.2))(@types/react@19.2.7)(graphql@16.10.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rxjs@7.8.2)
-      '@brillout/release-me':
-        specifier: ^0.4.18
-        version: 0.4.18(conventional-commits-filter@5.0.0)
       '@types/node':
         specifier: ^24.0.8
         version: 24.0.8
@@ -406,9 +400,6 @@ importers:
 
   packages/vike-react-chakra:
     devDependencies:
-      '@brillout/release-me':
-        specifier: ^0.4.18
-        version: 0.4.18(conventional-commits-filter@5.0.0)
       '@chakra-ui/react':
         specifier: ^3.0.2
         version: 3.13.0(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
@@ -446,9 +437,6 @@ importers:
         specifier: ^4.0.12
         version: 4.1.2(react@19.2.1)
     devDependencies:
-      '@brillout/release-me':
-        specifier: ^0.4.18
-        version: 0.4.18(conventional-commits-filter@5.0.0)
       '@tanstack/react-query':
         specifier: ^5.20.1
         version: 5.69.0(react@19.2.1)
@@ -501,9 +489,6 @@ importers:
         specifier: '>=9'
         version: 9.2.0(@types/react@19.2.7)(react@19.2.1)(redux@5.0.1)
     devDependencies:
-      '@brillout/release-me':
-        specifier: ^0.4.18
-        version: 0.4.18(conventional-commits-filter@5.0.0)
       '@reduxjs/toolkit':
         specifier: ^2.8.2
         version: 2.8.2(react-redux@9.2.0(@types/react@19.2.7)(react@19.2.1)(redux@5.0.1))(react@19.2.1)
@@ -538,9 +523,6 @@ importers:
         specifier: ^0.7.0
         version: 0.7.18
     devDependencies:
-      '@brillout/release-me':
-        specifier: ^0.4.18
-        version: 0.4.18(conventional-commits-filter@5.0.0)
       '@sentry/node':
         specifier: ^11.10.0
         version: 11.10.0(rollup@4.46.2)
@@ -577,9 +559,6 @@ importers:
 
   packages/vike-react-styled-components:
     devDependencies:
-      '@brillout/release-me':
-        specifier: ^0.4.18
-        version: 0.4.18(conventional-commits-filter@5.0.0)
       '@types/react':
         specifier: ^19.1.13
         version: 19.2.7
@@ -607,9 +586,6 @@ importers:
 
   packages/vike-react-styled-jsx:
     devDependencies:
-      '@brillout/release-me':
-        specifier: ^0.4.18
-        version: 0.4.18(conventional-commits-filter@5.0.0)
       '@types/react':
         specifier: ^19.1.13
         version: 19.2.7
@@ -650,9 +626,6 @@ importers:
         specifier: ^0.5.25
         version: 0.5.25
     devDependencies:
-      '@brillout/release-me':
-        specifier: ^0.4.18
-        version: 0.4.18(conventional-commits-filter@5.0.0)
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
@@ -963,8 +936,8 @@ packages:
   '@brillout/picocolors@1.0.30':
     resolution: {integrity: sha512-xJjdgyN1H0qh2nB2xlzazIipiDixuUd9oD5msh/Qv5bXJG9j8MSD/m4lREt6Z10ej6FF31b8vB4tdT7lDUbiyA==}
 
-  '@brillout/release-me@0.4.18':
-    resolution: {integrity: sha512-X+IQ4pFYYuBiVgUxNTx/wpFQ4b/JLFI2OkDxW6IlA10TeJOGYrDSst1xuEzi7FmHw8kEzd0zU79yF+8bO4dnFA==}
+  '@brillout/release-me@0.5.2':
+    resolution: {integrity: sha512-pnndlG4jU3VghSCI7e1y2ZOc+92rVESt8KNJGKvPkEckxb085DydxLSvHGnRhx1JthjjcszlN4Lih8afMrRWKQ==}
     hasBin: true
 
   '@brillout/test-e2e@0.6.20':
@@ -4488,7 +4461,7 @@ snapshots:
 
   '@brillout/picocolors@1.0.30': {}
 
-  '@brillout/release-me@0.4.18(conventional-commits-filter@5.0.0)':
+  '@brillout/release-me@0.5.2(conventional-commits-filter@5.0.0)':
     dependencies:
       '@brillout/picocolors': 1.0.30
       commander: 11.1.0

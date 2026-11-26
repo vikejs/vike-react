@@ -295,7 +295,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     const event = getErrorEvents('This is a test error sent to Sentry!')[0]!.payload
     // Set by the +sentry factory, from its globalContext argument
     expect(event.tags.side).toBe('client')
-    // The integration added by +sentry.client.ts and the extension's default ones
+    // The integrations added by +sentry.client.ts and the extension's default one
     expect(event.sdk.integrations).toContain('HttpClient')
     expect(event.sdk.integrations).toContain('BrowserTracing')
     expect(event.sdk.integrations).toContain('Replay')

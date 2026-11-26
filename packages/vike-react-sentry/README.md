@@ -135,7 +135,7 @@ import * as Sentry from '@sentry/react'
 
 export default {
   integrations: [
-    // Added to the default integrations (the SDK's ones, browserTracingIntegration() and replayIntegration())
+    // Added to the default integrations (the SDK's ones and browserTracingIntegration())
     Sentry.httpClientIntegration()
   ]
 }
@@ -159,7 +159,22 @@ To remove a default integration, use the function form of `integrations`:
 // Environment: client
 
 export default {
-  integrations: (integrations) => integrations.filter((integration) => integration.name !== 'Replay')
+  integrations: (integrations) => integrations.filter((integration) => integration.name !== 'BrowserTracing')
+}
+```
+
+To remove all default integrations, including `browserTracingIntegration()`, set `defaultIntegrations: false`.
+
+To enable [Session Replay](https://docs.sentry.io/platforms/javascript/guides/react/session-replay/), add `replayIntegration()`: it records with the `replaysSessionSampleRate` and `replaysOnErrorSampleRate` above.
+
+```js
+// pages/+sentry.client.js
+// Environment: client
+
+import * as Sentry from '@sentry/react'
+
+export default {
+  integrations: [Sentry.replayIntegration()]
 }
 ```
 

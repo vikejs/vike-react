@@ -104,7 +104,7 @@ Defaults set by `vike-react-sentry`:
 
 To disable tracing, set `tracesSampleRate: undefined`.
 
-`SENTRY_DSN` isn't supported: it makes `vike dev` and `vike build` fail, so use `PUBLIC_ENV__SENTRY_DSN` instead.
+Set the DSN with `PUBLIC_ENV__SENTRY_DSN` or with `dsn` in `+sentry`. `SENTRY_DSN` isn't supported, because only the server would read it, so `vike dev` and `vike build` stop with an error when it's set.
 
 You can export a function, which receives [`globalContext`](https://vike.dev/globalContext):
 

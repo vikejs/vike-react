@@ -1,6 +1,7 @@
 {
   "name": "vike-react-zustand",
   "version": "0.1.11",
+  "repository": "https://github.com/vikejs/vike-react",
   "homepage": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-zustand#readme",
   "type": "module",
   "main": "dist/index.js",

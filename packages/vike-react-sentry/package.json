@@ -1,6 +1,7 @@
 {
   "name": "vike-react-sentry",
   "version": "0.2.0",
+  "repository": "https://github.com/vikejs/vike-react",
   "homepage": "https://github.com/vikejs/vike-react/tree/main/packages/vike-react-sentry#readme",
   "dependencies": {
     "@brillout/vite-plugin-server-entry": "^0.7.0"

@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@brillout/release-me": "^0.5.6",
+    "@brillout/release-me": "^0.5.7",
     "@brillout/test-e2e": "^0.6.20",
     "@brillout/test-types": "^0.1.15",
     "playwright-chromium": "^1.65.1",

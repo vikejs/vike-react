@@ -236,6 +236,8 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     const events = getErrorEvents('DATA_ERR')
     expect(events.length).toBe(1)
     expect(events[0]!.payload.tags.side).toBe('server')
+    expect(events[0]!.payload.tags['vike.hook']).toBe('data')
+    expect(events[0]!.payload.contexts.vike.filePath).toBe('/pages/data-error/+data.ts')
     expectThrownError(events[0]!, 'Error', 'DATA_ERR', '/pages/data-error/+data.ts', isProd)
   })
 
@@ -286,6 +288,7 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
       { timeout: 10 * 1000 },
     )
     expect(getEvents()[0]!.payload.extra.__serialized__.code).toBe('DATA_OBJ')
+    expect(getEvents()[0]!.payload.tags['vike.hook']).toBe('data')
   })
 
   test('sync error is sent to Sentry', async () => {

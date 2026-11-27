@@ -7,7 +7,14 @@ import zlib from 'node:zlib'
 
 type Item = { type: string; side: 'client' | 'server'; payload: any }
 // A span of a transaction event (SDK v10) or a streamed span (SDK v11)
-type Span = { side: 'client' | 'server'; traceId: string; name: string; op: string | undefined; isSegment: boolean }
+type Span = {
+  side: 'client' | 'server'
+  traceId: string
+  name: string
+  op: string | undefined
+  isSegment: boolean
+  vikeUrl: string | undefined
+}
 
 // A local stand-in for Sentry's ingest endpoint
 async function startIngest() {
@@ -40,12 +47,19 @@ function getSpans(type: string, payload: any): Omit<Span, 'side'>[] {
   if (type === 'transaction') {
     const { trace } = payload.contexts
     return [
-      { traceId: trace.trace_id, name: payload.transaction, op: trace.op, isSegment: true },
+      {
+        traceId: trace.trace_id,
+        name: payload.transaction,
+        op: trace.op,
+        isSegment: true,
+        vikeUrl: trace.data?.['vike.url'],
+      },
       ...payload.spans.map((span: any) => ({
         traceId: span.trace_id,
         name: span.description,
         op: span.op,
         isSegment: false,
+        vikeUrl: span.data?.['vike.url'],
       })),
     ]
   }
@@ -56,6 +70,7 @@ function getSpans(type: string, payload: any): Omit<Span, 'side'>[] {
       name: span.name,
       op: span.attributes['sentry.op']?.value,
       isSegment: span.is_segment,
+      vikeUrl: span.attributes['vike.url']?.value,
     }))
   }
   return []

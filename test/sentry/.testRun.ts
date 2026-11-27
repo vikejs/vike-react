@@ -143,6 +143,22 @@ function testRun(cmd: 'pnpm run dev' | 'pnpm run prod') {
     )
   })
 
+  test('hook spans have the URL without its query string', async () => {
+    const { headers, traceId } = getSampledTraceHeaders()
+    await page.setExtraHTTPHeaders(headers)
+    await gotoHydrated('/navigation-target?token=SECRET_TOKEN')
+    await page.setExtraHTTPHeaders({})
+    const getHookSpans = () => ingest.spans.filter((span) => span.traceId === traceId && span.op === 'vike.hook')
+    await autoRetry(
+      async () => {
+        expect(getHookSpans().some((span) => span.side === 'server' && span.name === 'onBeforeRoute')).toBe(true)
+        expect(getHookSpans().some((span) => span.side === 'client' && span.name === 'onBeforeRender')).toBe(true)
+      },
+      { timeout: 10 * 1000 },
+    )
+    for (const span of getHookSpans()) expect(span.vikeUrl).toBe('/navigation-target')
+  })
+
   test('one server transaction per page load', async () => {
     const { headers, traceId } = getSampledTraceHeaders()
     await page.setExtraHTTPHeaders(headers)

@@ -48,7 +48,7 @@ async function traceHook(Sentry: Sentry, hook: Hook, pageContext: PageContext | 
           'vike.hook.name': hook.name,
           'vike.hook.file': hook.filePath,
           'vike.page.id': pageContext?.pageId ?? undefined,
-          'vike.url': pageContext?.urlOriginal,
+          'vike.url': pageContext?.urlPathname,
         },
       },
       async (span) => {
